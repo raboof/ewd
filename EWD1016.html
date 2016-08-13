@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+
+
+
+	
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+<title>E.W.Dijkstra Archive: A computing scientist's approach to a once-deep theorem of Sylvester's (EWD1016)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+	</head><body bgcolor="#ffffff"><div id="title"><h1>A computing scientist's approach to a once-deep theorem of Sylvester's</h1></div>
+		<div id="frame">
+			<div id="header">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd10xx/EWD1016.PDF" 
+           title="PDF scan of EWD 1016" target="_blank">EWD 1016</a>
+      </div>
+      <div id="content">
+				<p class="noindent"><u>A computing scientist's approach to a once-deep theorem of Sylvester's</u></p>
+				<p>Well, actually it wasn't Sylvester's theorem, it was only his
+conjecture &#x2014;dating from the year 1893&#x2014;, and it remained so for more
+than 40 years until T. Gallai (alias Grunwald) "finally succeeded,
+using a rather complicated argument" [Coxeter].  We shall derive
+(essentially) the simple argument of L.M. Kelly (1948).</p>
+				<p class="noindent"><b>Theorem</b> &nbsp;Consider a finite number of distinct points in the real Euclidean plane; these points are collinear or there exists a straight line through exactly 2 of them.</p>
+				<p>To see that this is truly a geometric theorem and not a combinatorial one, we slightly rephrase the setting. Let us assume for a moment that collinearity of points in the Euclidean plane is fully captured by</p>
+				<p class="noindent">
+				(i) any pair of points are collinear, and if two collinear triples have two points in common, their four points are collinear.
+</p>
+				<p class="noindent">Let us rephrase this: replace &quot;points&quot; by &quot;people&quot;, &quot;lines&quot; by &quot;clubs&quot; and &quot;collinear&quot; by &quot;club-sharing&quot; (i.e., belonging to the one and the same club). Club membership is postulated to satisfy the analogue of (i):</p>
+				<p class="noindent">(ii) any pair of people is club-sharing, and if two club-sharing triples have two people in common, their four people are club sharing.</p>
+				<p>The analogue of Sylvester's theorem would state for a finite
+population: all people belong to one and the same club or there exists
+a club with exactly 2 members.  Its falsity is shown by the following
+counterexample of 7 people &#x2014;numbered from 0 through 6&#x2014; with the
+following 7 clubs: {013}, {124}, {235}, {346}, {450}, {561}, and
+{602}.  Postulate (ii) is satisfied because each of the 21 pairs of
+people occurs in exactly 1 club.  Thus we have established that
+Sylvester's theorem is truly a geometrical one; let us now try to
+prove it.</p>
+				<p>Being computing scientists, we love constructive arguments, i.e. we
+like to show that something exists by designing an algorithm that
+computes such a thing.  We therefore propose to design an algorithm
+that computes a line that passes through exactly 2 of the points from
+a given finite, non-collinear set of distinct points.  (Legenda: from
+here on we no longer repeat that the points are distinct, nor that
+they belong to the given, non-collinear set.)</p>
+				<p>More precisely, we have to design an algorithm that operates on a variable <var>q</var> of type: line and that establishes the post-condition <var>R</var>, given by</p>
+				<p class="noindent"><var>R </var>: <var>q</var> passes through exactly 2 of the points.</p>
+				<p>The simplest idea is to initialize <var>q</var> by the line through 2 arbitrary points. (This is always possible because, the given set being non-collinear, there are at least 3 points.) If <var>q</var> goes through 3 or more points, it has to be changed, otherwise it can be accepted as final value. That is, with invariant <var>P</var> given by</p>
+				<p class="noindent"><var>P </var>: <var>q</var> passes through &#x2265; 2 points</p>
+				<p class="noindent">we propose as first approximation of our algorithm</p>
+				<blockquote>
+					<pre>  establish <var>P</var> by initialization of <var>q</var>
+; <u>do</u> <var>q</var> passes through &#x2265; 3 points &#x2192
+&nbsp;&nbsp;&nbsp;  change <var>q</var> under invariance of <var>P</var>
+  <u>od</u></pre>
+				</blockquote>
+				<p class="noindent">
+
+Because
+</p>
+				<p><var>P</var> &#x2227; &not; (<var>q</var> passes through &#x2265; 3 points) &nbsp;&nbsp;&#x21D2;&nbsp;&nbsp; <var>R</var></p>
+				<p class="noindent">we are done when the algorithm terminates.</p>
+				<p>Our remaining task is to ensure that it does terminate. To that end we have to exploit the finiteness of the given set and its non-collinearity. Because the exploitation of finiteness is absolutely standard, we first focus our attention on what we can conclude from the non-collinearity. From the latter we can draw <em>only one</em> conclusion in connection with <var>q</var>, viz. the existence of a point through which <var>q</var> does not pass. That is, we propose to introduce a variable <var>E</var> of type: point, and to strengthen <var>P</var> to <var>P</var><font size="-3">1</font></p>
+				<p class="noindent"><var>P</var><font size="-3">1</font>: q passes through &#x2265; 2 points &#x2227; 
+     q does not pass through E.</p>
+				<p class="noindent">The new approximation of our algorithm is</p>
+				<blockquote>
+					<pre>  establish <var>P</var><font size="-3">1</font> by initialization of <var>q</var> and <var>E</var>
+; <u>do</u>  <var>q</var> passes through &#x2265; 3 points &#x2192;
+&nbsp;&nbsp;{?} change <var>q</var> under invariance of <var>P</var><font size="-3">1</font>
+&nbsp; <u>od</u> </pre>
+				</blockquote>
+				<p class="noindent">(Ignore for a moment the assertion &quot;{?}&quot;; the important thing to realize is that with the feasibility of maintaining the stronger <var>P</var><font size="-3">1</font>, the non-collinearity of the given set has been exhausted.)</p>
+				<p>In the current stage of program design, our only option is a further refinement of the as yet rather nondeterministic
+				<p class="noindent">(0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;change <var>q</var> and <var>E</var> under the invariance of <var>P</var><font size="-3">1</font>&quot;</p>
+				<p class="noindent">Because we may have to reduce its nondeterminism lest the algorithm fails to terminate, let us investigate its freedom: what precondition {?} can we guarantee? We know of the existence of 4 points, viz. <var>E</var> and the three points on the current <var>q</var>. Because the new <var>q</var> has to pass through &#x2265; 2 points and has to differ from the old <var>q</var>, the new <var>q</var> passes through the old <var>E</var> and one of the 3 points on the old <var>q</var>; in each case, one of the remaining 2 points on the old <var>q</var> has to be chosen as the new <var>E</var>. In summary: for the new pair (<var>q</var>, <var>E&nbsp;</var>) we have 6 possibilities.</p>
+				<p>For the termination argument we need a variant function of the pair (<var>q</var>, <var>E&nbsp;</var>); because the number of points is finite, the number of pairs (<var>q</var>, <var>E&nbsp;</var>) satisfying <var>P</var><font size="-3">1</font> is finite, and any function of the pair (<var>q</var>, <var>E&nbsp;</var>) that decreases at each change will do.</p>
+
+<p>What is the simplest function of a line and a point (not on that
+line) that we can think of?  The Euclidean distance between the
+two!</p>
+
+<p>Let us investigate whether we can refine (0) so as to decrease the distance between <var>q</var> and <var>E</var>. Let us name the three points on the old <var>q</var>: <var>A</var>, <var>B</var>, <var>C</var>, so that <var>A</var> becomes the new <var>E</var>. With that convention, the refinement of (0) that decreases the distance of the pair (<var>q</var>, <var>E&nbsp;</var>) as much as possible is</p>
+
+  <p class="noindent">(1)&nbsp;&nbsp;&nbsp;&nbsp;<var>q</var>, <var>E</var> := of <var>BE</var> and <var>CE</var> the nearest to <var>A</var>, <var>A</var>.</p>
+				<p>Finally we derive a condition on <var>A</var> as our choice for the new <var>E</var> from the requirement that the variant function decreases. With</p>
+				<p><var>h</var> = distance between <var>E</var> and <var>q</var></p>
+				<p class="nospace"><var>b</var> = distance between <var>A</var> and <var>BE</var></p>
+				<p class="nospace"><var>c</var> = distance between <var>A</var> and <var>CE</var></p>
+				<p class="noindent">the required decrease of the variant function is expressed by</p>
+				<p class="noindent">(2)&nbsp;&nbsp;&nbsp;&nbsp;<var>b</var> <u>min</u> <var>c</var> &lt; <var>h</var></p>
+				<p><img src="EWD1016.jpg" alt="" width="50%" border="0"></p>
+				<p>
+
+In order to derive (2), we proceed as follows</p>
+				<p class="p0"><var>b</var> <u>min</u> <var>c</var> &nbsp;&lt;&nbsp; <var>h</var> </p>
+				<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ definition of <u>min</u> }</p>
+				<p class="p0"><var>b</var>&lt;<var>h&nbsp;</var> &#x2228;&nbsp; <var>c</var>&lt;<var>h</var></p>
+				<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ similar triangles, see figure }</p>
+				<p class="p0"><var>AB</var>&lt;<var>EB&nbsp;</var> &#x2228;&nbsp; <var>AC</var>&lt;<var>EC</var></p>
+				<p class="p1">&#x21d0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ monotonicity of + }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(See Note)</p>
+				<p class="p0"><var>AB</var>+<var>AC</var> &nbsp;&lt;&nbsp; <var>EB</var>+<var>EC</var></p>
+				<p class="p1">&#x21d0;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <var>P</var><font size="-3">1</font> &#x21d2;&nbsp;&nbsp; <var>BC</var> &lt; <var>EB</var>+<var>EC</var>, i.e. the strict triangle inequality }&nbsp;&nbsp;&nbsp;&nbsp;(See Note)</p>
+				<p class="p0"><var>AB</var>+<var>AC </var>&#x2264; <var>BC</var></p>
+				<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <var>AB</var>+<var>AC</var> &#x2264; <var>BC</var>, i.e. trianglular inequality }</p>
+				<p class="p0"><var>AB</var>+<var>AC </var>= <var>BC</var></p>
+				<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <var>AB</var>, <var>AC</var> and <var>BC</var> denote unsigned lengths }</p>
+				<p class="p0">on <var>q</var>, <var>A</var> lies between <var>B</var> and C.</p>
+				<p>Hence, with for <var>A</var> the point between the two others, (1) does the job. And this concludes our proof of Sylvester's theorem.</p>
+				<p class="noindent"><u>Note</u> Since steps that express equivalence don't
+destroy information, the others need some more justification.  We all
+know the monotonicity of &#x2265; , i.e. no one doubts</p>
+				<p><var>x</var>&#x2265;<var>x'</var> &#x2227; <var>y</var>&#x2265;<var>y'</var> &nbsp;&nbsp;&#x21d2; &nbsp;<var>x</var>+<var>y</var> &#x2265; <var>x'</var>+<var>y'</var>;</p>
+				<p class="noindent">
+
+its counterpositive yields the equivalent</p>
+				<p><var>x</var>&lt;<var>x'</var> &#x2228; <var>y</var>&lt;<var>y'</var> &nbsp;&nbsp;&#x21d0;&nbsp;&nbsp; <var>x</var>+<var>y</var> &lt; <var>x'</var>+<var>y'</var></p>
+				<p class="noindent">
+
+and that is what we used.</p>
+				<p>To justify the next step, a second look at our demonstrandum (2) suffices: since it is impossible to demonstrate (2) for <var>h</var>=0, we have to use once more that <var>q</var> does not pass through <var>E</var>. Since <var>E</var> occurs in this calculation in the combinations <var>EB</var> and <var>EC</var>, we translate this into the non-degeneracy of triangle <var>BEC</var>. The step eliminates <var>E</var> for the rest of the calculation. (End of Note.)</p>
+				<p>For the sake of completeness we point out that, after the choice of
+the variant function, we have made two silent choices.  We have chosen
+&#x2014;as usual&#x2014; to decrease the variant function; because of the finiteness, successfully increasing it would also have yielded a valid termination argument. With a huge <var>h</var> and <var>ABC</var> close together, however, the distance between <var>E</var> and <var>q</var> cannot be increased, which settles this silent choice. Moreover, we could have grouped our 6 cases differently, viz. by common new <var>q</var> instead of by common new <var>E</var>. We could have said &quot;Let us name the three points so that <var>AE</var> becomes the new <var>q</var>&quot; and instead of (1) we would have come up with</p>
+				<p><var>q</var>,<var>E</var> := <var>AE</var>, of <var>B</var> and <var>C</var> the nearest to <var>AE</var>.</p>
+				<p class="noindent">It does not work.</p>
+			</div>
+			<div id="content" align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					*</p>
+			</div>
+			<div id="content">
+				<p>A few methodological remarks are in order, because the theorem certainly deserves the name of a once-deep theorem: after 1933, when Karamata and Erd&ouml;s revived interest in the problem [Coxeter], it took another fifteen years before L. M. Kelly made essentially the above use of the Euclidean distance and found the simple argument.</p>
+				<p>It was very gratifying to see that, once the decision had been taken to tackle this problem as a programming task, the job of designing the program was all but standard. I have used this problem in oral examinations for a course on &quot;Mathematical Methodology&quot; for Computing Science graduates. Some needed more prompting or more time than others, but none of them needed any prompting to come up with the Euclidean distance between <var>q</var> and <var>E</var> as candidate for the variant function. They knew that the argument required a variant function and they all suggested the Euclidean distance without hesitation. And that was Kelly's great invention!</p>
+				<p>A fringe benefit of proving the theorem by designing a program is
+that it takes away the surprise that in such a non-metric context a
+metric concept such as the Euclidean distance enters the picture.  We
+all know that a monotonic function of an acceptable variant is again
+an acceptable variant and that the challenge always is to find a nice
+one.  It is very much like the freedom to chose the most convenient
+coordinate system.</p>
+				<p class="noindent"><u>Acknowledgement</u> That the distance from points to lines through other points could be used in the proof was told to me by Bernhard von Stengel; he told me to look at the shortest such distance. (End of Acknowledgement.)</p>
+			</div>
+			<div id="content" align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					
+					*</p>
+			</div>
+			<div id="content">
+				<p>For Sylvester's theorem to be true it is essential that the points
+are distinct.  (Consider a non-degenerate triangle with each vertex
+coinciding with a triple of points.)  Replace "any 2 points are
+distinct" by "through any 2 points passes only one straight line".
+The latter can be generalized to one dimension more "through any 3
+points passes only one plane", i.e. "no 3 points are collinear".  And
+now we are ready to generalize Sylvester's theorem to three
+dimensions.</p>
+				<p class="noindent"><b>Theorem</b> &nbsp;&nbsp;Consider in the real three-dimensional Euclidean space a finite number of points such that no 3 of them are collinear; these points are coplanar or there exists a plane through exactly 3 of them.</p>
+				<p>(In the three-dimensional case, just requiring that the points be
+distinct is not enough: consider two non-intersecting, nonparallel
+lines with 4 distinct points on each.)</p>
+				<p class="noindent"><b>Proof sketch</b> &nbsp;Select one of the points and a plane outside. Project, with the selected point as center, the remaining points on the selected plane, to which projection Sylvester's theorem is applied. (End of proof sketch.)</p>
+			</div>
+			<div id="content" align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					
+					*</p>
+			</div>
+			<div id="content">
+				<p>Coxeter mentions no more-dimensional generalization of Sylvester's
+theorem.  Maybe he did not think it sufficiently interesting.  Maybe
+he could not comfortably generalize because none of his formulations
+mentions explicitly that the points have to be distinct.</p>
+				<p>Coxeter's passage is interesting for historical reasons.  He quotes
+Sylvester's original statement of the problem:</p>
+				<blockquote>
+					<p class="noindent">Prove that it is not possible to arrange any finite number of real points so that a right line through every two of them shall pass [sic] through a third, unless they all lie in the same right line.</p>
+				</blockquote>
+				<p>Fortunately we don't formulate problems like that anymore. I could not read it and ended up looking up &quot;unless&quot; in the COD, which gave two interpretations &quot;if not&quot; (which boils down to &#x2228;) and &quot;except when&quot; (which boils down to &#x2262;). I felt excused. (Actually, Sylvester used &quot;unless&quot; in the meaning &#x2228;).</p>
+				<p>A few lines further, Coxeter gives credit to T. Motzkin (1951): </p>
+				<blockquote>
+					<p class="noindent">Sylvester's 'negative' statement was rephrased 'positively' by Motzkin:</p>
+					<blockquote>
+						<p class="noindent">If <var>n</var> points in the real plane are not on one straight line, then there exists a straight line containing exactly two of the points.</p>
+					</blockquote>
+				</blockquote>
+				<p>It is not quite clear for which achievement Motzkin receives credit.
+He replaces Sylvester's contorted</p>
+				<p>&not;(&#x2200; line: line passes &#x2265; 2: line passes &#x2265; 3 )</p>
+				<p class="noindent">thanks to de Morgan by</p>
+				<p>(&#x2203; line: line passes &#x2265; 2: line passes &lt; 3 )</p>
+				<p class="noindent">which can be simplified (arithmetically!) to</p>
+				<p>(&#x2203; line:: line passes = 2 )</p>
+				<p class="noindent">
+				
+
+which in the statement of the theorem is certainly a simplification.
+(But note that in the proof one immediately uses</p>
+				<p>line passes =2&nbsp;&nbsp; &#x2261; &nbsp;&nbsp;(line passes &#x2265; 2) &#x2227; &not;(line passes &#x2265; 3). )</p>
+				<p class="noindent">Or did Motzkin get credit for replacing Sylvester's disjunction by an implication? You never know with Coxeter. (I dislike in Motzkin's formulation, besides the dangling <var>n</var>, the implication: compared to Sylvester's disjunction, I consider that a step backwards. Please note that the implicative formulation introduced &#x2014;in &quot;<em>not</em> on a straight line&quot;&#x2014; a negation.)</p>
+				<p>Coxeter's section opens with a quotation from G.H. Hardy (1940):</p>
+				<blockquote>
+					<p class="noindent">Reductio ad absurdum, which Euclid loved so much, is one of a mathematician's finest weapons. It is a far finer gambit than any chess gambit: a chess player may offer the sacrifice of a pawn or even a piece, but a mathematician offers the game.</p>
+				</blockquote>
+				<p>No matter how hard I try, almost half a century later I am unable
+to give even a mild sensible interpretation to the above quotation of
+Hardy's, but, in 1961, Coxeter evidently felt he could: his proof
+gloriously ends with the now infamous "which is absurd".</p>
+				<p>(Coxeter focuses his attention on the pair (<var>q</var>, <var>E&nbsp;</var>) with minimum distance and derives a contradiction from the assumption that <var>q</var> passes through at least 3 points. The choice of the pair with minimum distance is overspecific: it is only a device to construct the avoidable contradiction. Tellingly, he concludes
+				<blockquote>
+					<p class="noindent">&quot;This completes the proof that there is always a line containing exactly two of the points. Of course, there may be more than one such line [...]&quot;.)</p>
+				</blockquote>
+				<p>Fascinating to analyze mathematical style from such a recent past!</p>
+				<p class="noindent"><u>Reference</u></p>
+				<p class="noindent">Coxeter, FRS, H.S.M., <i>Introduction to Geometry</i>, 2nd Ed., John Wiley &amp; Sons, Inc., New York etc., pp 65&#x2013;66.</p>
+			</div>
+			<div id="content" align="center">
+				<p class="noindent">Austin, 5 February 1988</p>
+			</div>
+			<div id="content">
+				<p class="noindent">prof. dr. Edsger W. Dijkstra<br>
+					
+						Department of Computer Sciences<br>
+					
+						The University of Texas at Austin<br>
+					
+						Austin, TX 78712-1188<br>
+					
+						USA</p>
+			</div>
+		</div>
+		<div align="left">
+			
+		</div>
+		<hr>
+		<font size="-1">transcribed by Xiaozhou (Steve) Li<br>
+			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="87">Sun, 9 Dec 2007</csobj></font>
+	</body></html>

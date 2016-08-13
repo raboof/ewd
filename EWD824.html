@@ -1,0 +1,90 @@
+<html>
+
+<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+<title>E.W. Dijkstra Archive: Linearization of a two-dimensional search (EWD 824)</title>
+<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+<meta content="Microsoft FrontPage 4.0" name="GENERATOR">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+</head>
+
+<body bgcolor="#ffffff"><div id="title"><h1>Linearization of a two-dimensional search</h1></div>
+
+<table align="left" border="0">
+  <tbody>
+    <tr>
+      <td>
+        <div align="right">
+          <p><font face="Verdana,Arial,Helvetica,sans-serif"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD824.PDF">EWD824</a>-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD824.PDF#page=1">0</a></font></p>
+        </div>
+        <p><u><font face="Verdana,Arial,Helvetica,sans-serif">Linearization of a
+        two-dimensional search</font></u></p>
+        <p><font face="Verdana,Arial,Helvetica,sans-serif">Let the integer pair
+        (<i>xi</i>, <i>yi</i>) be denoted by <i>Pi</i>. Let of a finite number
+        of such pairs all <i>xi</i> be distinct and let all <i>yi</i> be
+        distinct. Let the pairs be partially ordered by <i>Pi</i> &lt; <i>Pj</i>,
+        defined by</font></p>
+        <blockquote>
+          <font face="Verdana,Arial,Helvetica,sans-serif"><i>Pi</i> &lt; <i>Pj</i>&nbsp;
+          =&nbsp; <i>xi</i> &lt; <i>xj</i>&nbsp; &#8743; <i>yi</i> &lt; <i>yj</i></font>
+        </blockquote>
+        <p><font face="Verdana,Arial,Helvetica,sans-serif"><i>Pj</i> is a minimal element means </font>&#x00AC;<font face="Verdana,Arial,Helvetica,sans-serif">(<u>E</u> <i>i</i> :: <i>Pi</i> &lt; <i>Pj</i>),
+        and it is requested to find the minimal elements. We rewrite the
+        condition of minimality for <i>Pj</i></font></p>
+        <blockquote>
+          <font face="Verdana,Arial,Helvetica,sans-serif">&nbsp;&nbsp;&nbsp;&nbsp;</font>&#x00AC;<font face="Verdana,Arial,Helvetica,sans-serif">(<u>E</u>
+<i>i</i> :: <i>Pi</i> &lt; <i>Pj</i>)<br>
+								=&nbsp;&nbsp;</font>&#x00AC;<font face="Verdana,Arial,Helvetica,sans-serif">(<u>E</u> <i>i</i> : <i>xi</i> &lt; <i>xj</i> : <i>yi</i>
+          &lt; <i>yj</i>)<br>
+								
+          =&nbsp;&nbsp;(<u>A</u> <i>i</i> : <i>xi</i> &lt; <i>xj</i> : <i>yi</i>
+<font face="AppleGothic, arial unicode ms, arial">&#8805;</font> <i>yj</i>)</font></blockquote>
+        <p><font face="Verdana,Arial,Helvetica,sans-serif">Under the assumption
+        that the pairs have been numbered in the order of increasing <i>x</i>,
+        the above reduces to</font></p>
+        <blockquote>
+          <font face="Verdana,Arial,Helvetica,sans-serif">(<u>A</u> <i>i</i> : <i>i</i>
+          &lt; <i>j</i> : <i>yi</i> <font face="AppleGothic, arial unicode ms, arial">&#8805;</font>
+          <i>yj</i>)&nbsp;&nbsp;or&nbsp;&nbsp;</font><font face="Verdana,Arial,Helvetica,sans-serif">(<u>A</u>
+          <i>i</i> : <i>i</i> &lt; <i>j</i> : <i>yi</i> &gt; <i>yj</i>) .</font>
+        </blockquote>
+        <p><font face="Verdana,Arial,Helvetica,sans-serif">In other words:
+        scanning the <i>y</i>'s in the order of increasing <i>x</i> yields a new
+        minimal pair each time we encounter a <i>y</i> smaller than we have
+        encountered so far.</font></p>
+        <p><font face="Verdana,Arial,Helvetica,sans-serif">Since sorting can be
+        done in <i>N</i> </font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif"> log <i>N</i> steps, we have an <i>N</i> </font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif"> log <i>N</i>
+        algorithm. The solution is worth noting because I could not achieve that
+        result --to my great regret-- without destroying the symmetry between
+        the <i>x</i>'s and the <i>y</i>'s. The above was triggered by a
+        reconsideration of the longest upsequence problem.</font></p>
+        <p><font face="Verdana,Arial,Helvetica,sans-serif"><br>
+        </font></p>
+        <table border="0">
+          <tr>
+            <td valign="top"><font face="Verdana,Arial,Helvetica,sans-serif">Burroughs
+              Corporation<br>
+              12201 Technology Blvd.<br>
+              AUSTIN, Texas 78759<br>
+              USA</font></td>
+            <td width="80" valign="top"></td>
+            <td valign="top"><font face="Verdana,Arial,Helvetica,sans-serif">25
+              May 1982<br>
+              prof.dr. Edsger W. Dijkstra<br>
+              Burroughs Research Fellow</font></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <hr>
+        <font face="Verdana,Arial,Helvetica,sans-serif">Transcriber: Kevin Hely.<br>Last revised on <csobj format="MedDate" h="15" region="15" t="DateTime" w="109">Sat, 20 Sep 2003</csobj>.</font></td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"> 
+<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet"> 
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" /> 
+	<title>E.W.Dijkstra Archive: For the record: the Linear Search (EWD 930)</title> 
+	<link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+</head> 
+<body><div id="title"><h1>For the record: the Linear Search</h1></div> 
+	<div id="frame" align="right"> 
+		<div id="header" align="right"> 
+			<a href="http://www.cs.utexas.edu/%7eEWD/ewd09xx/EWD930.PDF" 
+			title="Link to the PDF version of EWD930">EWD930</a> 
+		</div> 
+	</div> 
+	
+	<div id="frame"> 
+		<div id="content" > 
+			<p class="noindent"><u>For the record: the Linear Search</u></p> 
+			
+			<p>Given a boolean sequence <var>b</var>&thinsp;(<var>i&thinsp;</var>: 0&le;<var>i</var>&thinsp;) which is not everywhere false. The program Linear Search determines the smallest natural value <var>x</var> such that <var>b</var>.<var>x</var>. More formally</p>
+		  <p>
+		  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+		    <tr>
+    <td colspan="3"><span class="noindent">|[ <var>b</var>&thinsp;(<var>i</var>&thinsp;: 0&le;<var>i&thinsp;</var>): <b>array</b> <b>of</b> bool {(<u>E</u><var>i</var>&thinsp;: 0&le;<var>i&thinsp;</var>: <var>b</var>.<var>i&thinsp;</var>)} </span></td>
+    </tr>
+  <tr>
+    <td width="4%"><span class="noindent">;&nbsp;</span></td>
+    <td colspan="2"><span class="noindent">|[ <var>x&thinsp;</var>: int</span></td>
+    </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td width="4%"><span class="noindent">; &nbsp;</span></td>
+    <td width="92%"><span class="noindent">Linear Search</span></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><span class="noindent">&nbsp;{R: <var>b</var>.<var>x</var> &#x2227; (<u>A</u><var>i</var>&thinsp;: 0&le;<var>i</var>&lt;<var>x&thinsp;</var>: &#x00AC; <var>b</var>.<var>i&thinsp;</var>) &#x2227; 0&le;<var>x</var>&thinsp;}</span></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><span class="noindent">]|</span></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><span class="noindent">]|</span></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table></p>
+
+<p class="noindent"><u>Legenda</u> In the outer block the constant environment is declared and what has been given about it is asserted. In the inner block the variable environment is declared and what has been given about it is asserted &mdash;when nothing has been given, as in this example, nothing is asserted&mdash;. The name of the program being specified is followed by the postcondition and the two blocks are closed. Note that variables only occur within their scope. The above is our preferred format for functional specifications. (End of Legenda.) </p>
+			
+		  <p class="noindent"><u>Aside</u> From reviews of my books I have learned that many reviewers are annoyed by my closing brackets such as the above "(End of Legenda)", but they never give a convincing reason why I should depart from this convention, which, I think, is not without merit. So I shall stick to it. (End of Aside.) <br /></p>
+			
+		  <p>The natural numbers being well-ordered, we conclude from the fact that equation <var>x</var>:<var>&thinsp;b</var>.<var>x</var> has natural solutions that <var>x</var>:&thinsp;<var>b</var>.<var>x</var> has a unique smallest solution, or, in other words, that <var>x</var>:&thinsp;R has a unique solution. Let <var>X</var> be the solution of <var>x</var>:&thinsp;R, i.e. let <var>X</var> be given by the fact that it satisfies </p>
+		  <p class="noindent"> <a name="(0)"></a>(0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>b</var>.<var>X </var>&#x2227; (<u>A</u><var>i&thinsp;</var>: 0&le;<var>i</var>&lt;<var>X</var>: &#x00AC; <var>b</var>.<var>i</var>&thinsp;) &#x2227; 0&le;<var>X</var>   ,		  </p>
+		  <p class="noindent">a definition that allows us to rephrase R as </p>
+			
+			<blockquote>      R: <var>x&thinsp;</var>:= <var>X</var>   . </blockquote>
+			
+			<p class="noindent">Our first approximation to Linear Search could be </p>
+			
+			<blockquote>      <var>x&thinsp;</var>:= <var>X</var> </blockquote>
+			
+			<p class="noindent">but as we have no closed expression for <var>X</var>, this approximation is much too crude.</p>
+			
+			<p>For our next approximation we look for an initialization followed by a repetition, such that the dependence on <var>b</var> is confined to the latter. Since 0&le;<var>X</var> is the only term in (<a href="#(0)">0</a>) in which <var>b</var> does not occur, this is then the only term we may use in justifying the initialization. That is, we are looking for an invariant that <br />
+			
+		  <ol style="list-style: lower-roman;">
+				<li> is a generalization of R</li>
+				<li> can be initialized on account of 0&le;<var>X</var></li>
+			</ol>
+			
+			I suggest as invariant P, given by </p>
+			
+			<p class="noindent">P:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <var>&nbsp;x</var>&le;<var>X</var></p>
+			
+			<p class="noindent">which leads to our second approximation</p>
+			
+			<blockquote>
+      {0&le;<var>X&thinsp;</var>} <var>x&thinsp;</var>:=0 {P}
+      ; <b>do</b> <var>x</var>&ne;<var>X</var> &#x2192; <var>x</var>:= <var>x</var>+1 <b>od</b> {R}</blockquote>
+			
+			<p class="noindent">for which <var>X</var>&ndash;<var>x</var> serves for the termination argument since  P &#x21D2; <var>X</var>&ndash;<var>x</var>&ge;0 , and <var>X</var>&ndash;<var>x</var> is decreased in each iteration.</p>
+			
+			<p class="noindent">Finally we deduce from P and (<a href="#(0)">0</a>) the lemma </p>
+			
+			<blockquote>      P &#x21D2; (<var>x</var>&ne;<var>X</var> &#x2261; &#x00AC; <var>b</var>.<var>x</var>)   ,</blockquote>
+			
+			<p class="noindent">which allows us to transform the second solution into our final solution for Linear Search:</p>
+			
+			<blockquote>
+      {0&le;<var>X</var>&thinsp;} <var>x</var>:=0 {P}
+      ; <b>do</b> <var>b</var>.<var>x</var> &#x2192; <var>x</var>:= <var>x</var>+1 <b>od</b> {R}</blockquote>
+	  
+            <br />
+	        <center>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*</center>
+	        <center>*</center>
+	  
+	        <p>The validity of the above solution is known &mdash;for more than a decade&mdash; as the Linear Search Theorem. It is a very simple theorem: it is as unsurprising as it is useful. In the folklore, it is known as "when looking for a minimum value satisfying some criterion, search in increasing order", but I would like to point out that we should be careful with such ellipses: instead of defining <var>x</var> as the minimum natural value <var>x</var> such that <var>b</var>.<var>x</var>, we could have defined it as the <em>maximum</em> value <var>x</var> such that (<u>A</u><var>i&thinsp;</var>: 0&le;<var>i</var>&lt;<var>x</var>&thinsp;: &#x00AC; <var>b</var>.<var>i</var>&thinsp;) .</p>
+	  
+	        <p>I recorded the above derivation because it differs from the one I gave formerly in that <var>X</var> &mdash;the final value of <var>x</var>&mdash; occurs explicitly in the whole argument. My former argument used for the invariant the (equivalent) formulation</p>
+	  
+	        <blockquote>      (<u>A</u><var>i&thinsp;</var>: 0&le;<var>i</var>&lt;<var>x</var>&thinsp;: &#x00AC; <var>b</var>.<var>i&thinsp;</var>) &#x2227; 0&le;<var>x</var>      ,</blockquote>
+	  
+	        <p class="noindent">obtained from R by omission of the first conjunct. It contained an explicit appeal to</p>
+	  
+	        <blockquote>      (<u>A</u><var>i&thinsp;</var>: 0&le;<var>i</var>&lt;<var>x</var>+1: &#x00AC; <var>b</var>.<var>i</var>&thinsp;) &#x2261; (<u>A</u><var>i&thinsp;</var>: 0&le;<var>i</var>&lt;<var>x&thinsp;</var>: &#x00AC; <var>b</var>.<var>i&thinsp;</var>) &#x2227; &#x00AC; <var>b</var>.<var>x</var></blockquote>
+      
+            <p class="noindent">and locked the stepping stone of our second approximation.</p>
+      
+            <p>I prefer the derivation given here, even though it might involve a little bit more formal labour had I proved the lemma explicitly. As the lemma is independent of the algorithm, the new version is a bit further disentangled. Hence my preference.</p>
+      
+            <p>I am endebted to W.H.J.Feijen for pointing out to me the existence of this alternative derivation.</p>
+		
+		    <div style="text-align:right;"> 
+			    <p>Austin, 1 Sep. 1985</p> 
+		    </div> 
+		
+		    <p class="noindent">prof. dr. Edsger W. Dijkstra<br> 
+			    Department of Computer Sciences<br> 
+			    The University of Texas at Austin<br> 
+			    Austin, TX 78712&ndash;1188<br> 
+			    United States of America
+		    </p> 
+        
+        </div>
+		
+		<hr /> 
+		
+		<!-- name and date --> 
+		<div id="footer"> 
+			<font size="-1"> 
+				transcribed by Ryan Suchocki<br /> 
+				revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="96"> 
+				<!-- #BeginDate format:En2 -->10-Apr-2016<!-- #EndDate --> 
+				</csobj> 
+			</font>
+		</div> 
+	</div> 
+</body> 
+</html> 
+
+ 

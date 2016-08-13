@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Advanced Course on Computer Systems Architecture.
+(Grenoble, December 1972). (EWD 356)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+	</head>
+  <body>
+    <div id="frame" align="right">
+			<div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd03xx/EWD356.pdf" 
+           title="Link to the PDF version of EWD356">EWD356</a>
+      </div>
+		</div>
+		<div id="frame">
+			<div id="content">
+			  <p class="noindent"><u>Advanced Course on Computer Systems Architecture.</u></U>
+(Grenoble, December 1972) 
+</P>
+<P class="noindent">Summary of the talks on &ldquo;Programming
+Methodology&rdquo; by Edsgar W.Dijkstra. 
+</P>
+<P>The talks will deal with five main subjects: 
+<p class="continue">1)&nbsp;&nbsp;On the Necessity of Correctness Proofs.
+  </p>
+<p class="continue">2)&nbsp;&nbsp;On the Mathematical Structure of Correctness Proofs. 
+  </p>
+<p class="continue">3)&nbsp;&nbsp;On the Feasibility of Correctness Proofs. 
+  </p>
+<p class="continue">4)&nbsp;&nbsp;On the Impact of Correctness Concerns on System Structure. 
+  </p>
+<p class="continue">5)&nbsp;&nbsp;On the lmpact of Correctness Concerns on the Process of Program Composition. 
+</p>
+</P>
+<P class="noindent">Ad 1. This is a very short section the moral of which
+can be summed up by the observation that program testing can be a
+very effective means for demonstrating the presence of bugs, but is a
+hopelessly inadequate method for showing their absence. As a result,
+correctness proofs remain as the only alternative by means of which
+we can hope to reach the required confidence level. 
+</P>
+<P class="noindent">Ad 2. For sequential programs an axiomatic definition
+of semantics will be proposed that can serve as a mathematical basis
+for correctness proofs. For the most practical tool, this experience
+will be carried over to co-operating sequential processes, with
+&ldquo;mutual exclusion&rdquo; as the logical corner stone. The
+problems of deadlock and of individual starvation are introduced as
+the parallel programming analogue of the termination problem. 
+</P>
+<P class="noindent">Ad 3. When &ldquo;in principle&rdquo; correctness
+proofs can be given, we still have the obligation to arrange matters
+in such a way that they can also be given in practice. This is no
+trivial obligation, because without special precautions, the
+necessary amount of manipulation &mdash;be it formal or informal, be
+it mechanized or done by hand&mdash; required for the correctness proofs
+will explode for all but the most simple systems. Abstraction will be
+presented as a method for arranging our thoughts in such a manner
+that the practical feasibility of correctness proofs is not
+unnecessarily impaired. It will become apparent that the purpose of
+abstraction is <em>not</em> to be vague, but to create a new semantic
+level at which we can be absolutely precise. It will also become
+apparent that, if the method is to be practical at all, the system
+write-up should reflect the abstractions in terms of which we can
+continue to understand what we are designing. 
+</P>
+<P class="noindent">Ad 4. The abstractions introduced serve to understand
+the possible <em>behaviour</em> of the system and therefore we must
+require that they admit a sufficiently truthful implementation. By
+way of illustration it will be shown how certain hardware features
+impair the achievable truthfulness to such an extent that we may
+question whether equipment with such properties admits intelligent
+use at all. Apart from truthfulness of the implementation we require a
+form of robustness, excluding the situation in which the data, on
+which individual basic assertions about system behaviour rely, are
+scattered all through the system. By way of illustration, hardware
+features violating this second requirement will also be given. 
+</P>
+<P class="noindent">Ad 5. The one impact of correctness concerns on the
+process of program composition is that our basic software has to
+satisfy requirements analogous to the ones that in the previous
+section we imposed upon hardware. Besides that we shall show some of
+the formal techniques by means of which the process of program
+composition can he aided very effectively, formal techniques that
+allow us to derive from the requirements a program satisfying the
+correctness proof (salvo errore et omissione) automatically. </P>
+</BODY>
+</HTML>

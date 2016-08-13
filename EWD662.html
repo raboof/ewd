@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: On the YELLOW Language submitted to the DoD. (EWD 662)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>On the YELLOW Language submitted to the DoD.</h1></div>
+	
+	    <div id="frame">
+			<div id="content">
+				<table width="100%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td>Team Identification 142-48</td>
+						<td>
+							<div align="right">
+								&nbsp;<a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD662.PDF" target="_blank">EWD662</a></div>
+						</td>
+					</tr>
+				</table>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<p class="noindent"><u>On the YELLOW Language submitted to the DoD.</u></p>
+				<p>Studying the Preliminary Design Phase Report and Language Specification was not a pleasure: I found the documentation poorly written and chaotic. Sometimes the English is just wrong, as in &quot;a record representation with two alternate (sic) formats&quot; (p.E-7; I refer the authors for instance to &quot;The Complete Plain Words&quot; by Sir Ernest Gowers). Sometimes a remark is just (p.F-8) amazing, such as &quot;The User Manual will be based on the structure and content (sic) of the language definition report&quot;. On what else could it be based? On the Bible? It is often very carelessly written, such as in the sample of &quot;errors&quot; that an implementation should detect (L-115); sometimes they state the violation of a rule, sometimes the rule violated, and we find in succession:</p>
+				<blockquote>
+					<p class="noindent">&quot;Illegal symbol.<br>
+						
+								Index type must be scalar.&quot;</p>
+				</blockquote>
+				<p class="noindent">a sloppiness I find intolerable for people claiming to design a language!</p>
+				<p>Another reason for finding the text unpleasant to read was that I found the text written &quot;down to the programmer&quot; (is that a correct expression?). I mean the following. Every tool is always designed with a model or picture of its users in mind &#x2014;in the same way as every text is written with some type of reader in mind&#x2014;. Trying to construct from the YELLOW text the programmer its authors have been aiming at, I &#x2014;as a programmer&#x2014; find the text pretty offensive, such as &quot;The Language Definition Report can be used as a reference by programmers, but most will find the User's Manual more helpful.&quot; (p.F-7) or &quot;... did not compensate (sic) for the severe changes in programming style that would result&quot; (p.D-30) or &quot;in view of the intended audience for the language [...] it would be too radical a step to entirely prohibit them&quot; (p.D-24) I very much doubt whether the attitude displayed is in accordance with the &quot;spirit of Ironman&quot; &#x2014;if such a thing exists!&#x2014; in which <em>I</em> read an honest effort to do justice to the intellectual challenge presented by the programming task. I found this shift towards greater recognition of the difficulty of programming one of the more refreshing aspects of the Revised Ironman Requirements, and in this respect the YELLOW Language seems to set the clock back by several years.</p>
+				<p>Upon closer inspection I found all sorts of unclarities (as is, in view of the above, only to be expected). I had a few problems with the example on the top of p.D-39, which defines the module template</p>
+				<blockquote>
+					<p class="noindent">TEMPLATE StackTemplate(i, R)</p>
+				</blockquote>
+				<p class="noindent">My first problem was that in the remaining text the formal parameter R does not occur. I have tried to remedy this by replacing (p.D-39, line + 6)</p>
+				<blockquote>
+					<p class="noindent">ARRAY(INTEGER[1..i] OF BOOLEAN);</p>
+				</blockquote>
+				<p class="noindent">by</p>
+				<blockquote>
+					<p class="noindent">ARRAY(INTEGER[1..i] OF R);</p>
+				</blockquote>
+				<p class="noindent">But this was not the end of the problems, for the text continues</p>
+				<blockquote>
+					<p class="noindent">&quot;Within the scope of this declaration, the user requiring a stack of up to 100 INTs need only write</p>
+					<blockquote>
+						<p class="noindent">INSTANCE StackTemplate(100,INT)&quot;</p>
+					</blockquote>
+				</blockquote>
+				<p class="noindent">The last line quoted, however, does not contain a new identifier, and I am at a loss when trying to see how the user can ever refer to the stack of up to 100 INTs he has just acquired.</p>
+			</div>
+			<div align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					
+							*</p>
+			</div>
+			<div align="left">
+				<p>My next complaint is a conditional one: it is under the proviso that I have understood the Language Report correctly. (The text is so rambling that I am not sure....) From the section on Arrays I quote (p.L-28):</p>
+				<blockquote>
+					<p class="noindent">&quot;Recall that the only representational qualifier appropriate to scalars and integers is range qualification; this range qualification specifies the bounds of an array and is therefore properly included in its type.&quot;</p>
+				</blockquote>
+				<p>Range qualification is <em>not</em> defined in The Language Report! The only illumination of the notion is given in the form of a single example (p.L-20):</p>
+				<blockquote>
+					<p class="noindent">&quot;For example,<br>
+						
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INTEGER [5..9]<br>
+						
+								represents the range of the integer values from 5 through 9.&quot;</p>
+				</blockquote>
+				<p>Appendix C (p.L-115) gives some more information: among &quot;the errors that a compiler for our language must detect&quot; we find</p>
+				<blockquote>
+					<p class="noindent">&quot;Low bound exceeds high bound.&quot;</p>
+				</blockquote>
+				<p>The three quoted sentences strongly suggest to me that the YELLOW Language requires that in the array declaration the low bound for each index does not exceed its high bound, and hence it is impossible to declare an empty array! (This interpretation is subject to doubt. On the one hand we find the quoted error among those &quot;a <i>compiler</i> for our language must detect&quot; and it is not mentioned under the sample of traps and exceptions &quot;for which compiled code and runtime systems must provide&quot; (p.L-116); on the other hand the text refers to &quot;Arrays whose index ranges are determined only on entry to the scope of their declaration (p.F-12).)</p>
+				<p>Now the exclusion of the empty array is absolutely silly. One of the great improvements of ALGOL 60 over FORTRAN at that time was that in FORTRAN's DO loop the repeatable statement had to be executed at least once, whereas in ALGOL 60's <b>for</b> statement zero executions of the repeatable statement was permissible. ALGOL 60 failed to introduce the same generality for arrays, but I find it unbelievable to see that 18 years later that same mistake is still fairly faithfully, and to see the empty set &#x2014;500 years after the introduction of the digit zero in the Western world&#x2014; still treated as a second class citizen. (For the pragmatists who are insensitive to the verdict of mathematical immaturity: to allow the empty array as well would have simplified the language and its implementation, as it would have reduced the number of error messages by one.)</p>
+			</div>
+			<div align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					
+							*</p>
+			</div>
+			<div align="left">
+				<p>In the section on Records (p.L-29) we read:</p>
+				<blockquote>
+					<p class="noindent">&quot;The type of a record is determined by the types, modifiability attributes, and selectors of its components.&quot;</p>
+				</blockquote>
+				<p class="noindent">Of course we must guess what is meant by &quot;determined&quot;, but if I read it in the usual fashion, I conclude that two records for which &quot;the types, modifiability attributes, and selectors of its components&quot; are the same, are thus of the same type. This to my taste rather unescapable conclusion, however, is in conflict with the text that follows &quot;We now define when two declared objects have the same type&quot; (p.L-39). On p.L-41 the variables H and I are stated to be of different type, the quoted sentence from p.L-29 would give them the same type (unless a highly unusual meaning is given to the word &quot;determined&quot;).</p>
+				<p>That whole introduction of types and representations strikes me as an unresolved mess. The algorithm as given on pages L-39/40 is too complicated and should already make one highly suspicious; the examples of p.L-41 fully confirm this impression. It is totally unclear to me how the gentlemen propose to use this facility. We now have the possibility of introducing variables of the same type but of different representations. Now note that parameter passing is explicitly controlled by types and <i>not</i> by representations! (Note, for instance, (p.L-61, my underlining): &quot;The REPLACES option, on the other hand, applies if the existing definition for a particular <u>type</u> n-tuple is to be made inapplicable in some scope.&quot; or, a few lines earlier: &quot;extend a routine to apply to a new n-tuple of argument <u>types</u>&quot;.) So the single procedure can get parameters of the same type but different representations. How is the procedure going to distinguish? Maybe I am missing something, but I am afraid that it won't work.</p>
+				<p>I have more problems with the examples on p.L-41. What is the purpose of the different types &quot;Foot_Type&quot; and &quot;Inch_Type&quot; and what are the consequences of the type difference thus introduced? With A and B having Foot_Type (not &quot;FOOT_TYPE&quot; as in the text) and F and G having Inch_Type, are we allowed to write A+F or A*F? I don't know, because on pages L-49/50 the requirements on the operands are &quot;the same numeric type&quot;, and eventually A, B, F and G are all INTEGER. If these expressions are not allowed, the language tries to introduce &quot;baby dimension analysis&quot; which is a silly endeavour (see <a href="EWD660.html">EWD660</a>); in this case it would be exceptionally silly, because the result of addition and multiplication is of the same numeric type, and in spite of the very strong interpretation of &quot;same numeric type&quot; an expression like A*A+B would be allowed. If expressions like A+F and A*F are allowed, however, what is the purpose of introducing &quot;Foot_Type&quot; and &quot;Inch_Type&quot; in the first place?</p>
+				<p>So here we are: they pretend to have made the YELLOW Language &quot;strongly typed&quot;, but if you try to find out what is exactly meant by it, you discover that their proposal is terribly ambiguous; and, what ever guess you make to remove the ambiguity, you end up with something rather nonsensical.</p>
+				<p>In retrospect I am puzzled by the difference in weight they have given to different fundamental requirements. Concerning the absence of side-effects they have gone further than Ironman &#x2014;I believe (p.D-33)&#x2014; but have thrown away the child with the bathwater. On the prevention of aliasing they don't seem to be very keen. They suggest that it is &quot;only an academic nicety&quot; (p.D-29) and state &#x2014;without source or other forms of support&#x2014; &quot;it appears that aliasing errors, while troublesome in theory, are extremely rare in practice.&quot; (p.D-29). (I think no one is worried by their frequency, but everyone should be worried by the havoc they may create when they do occur: the mere possibility of an aliasing error could easily lead to the development of extremely expensive debugging aids!) But they don't seem to care: on p.D-30 they refer to they &quot;untested benefits&quot; and the &quot;untested practical benefits&quot; of alias checking. This &quot;easy&quot; attitude towards alias checking is in strong contrast to the vigour with which they have made their language &quot;strongly typed&quot;. I am puzzled. Did they do so in the belief that the latter requirement was easier to meet in a meaningful way than the prevention of aliasing? I hardly dare to suppose such touching innocence....</p>
+			</div>
+			<div align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					
+							*</p>
+			</div>
+			<div align="left">
+				<p>When I studied the BLUE Language I was very much amazed how its authors ever could have made the mistake of introducing what they called &quot;a manifest expression&quot;. In the YELLOW Language I encounter again the same idea with the <i>same</i> term &quot;manifest&quot;. That cannot be an accident. Where has that term been introduced? PL/I? That would explain a lot.</p>
+			</div>
+			<div align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					
+							*</p>
+			</div>
+			<div align="left">
+				<p>I quote (p.D-44):</p>
+				<blockquote>
+					<p class="noindent">&quot;We decided that block structure of the program is semantically well defined, does not conflict with efficient compilation, can easily be understood, [...]&quot;.</p>
+				</blockquote>
+				<p class="noindent">The question, however, is whether the designers of the YELLOW Language have understood it, in particular in combination with</p>
+				<ol>
+					<li type="1">the introduction of a new type at &quot;scope entry time&quot;<br>
+						
+								&nbsp;
+
+					<li type="1">recursion.
+
+				</ol>
+				<p class="noindent">It means for an implementation that the number of co-existing different types is as unbounded as the depth of the recursion. The authors' awareness of this circumstance is not what I would call manifest. (See the extremely loose usage of the term &quot;unique&quot; in (p.L-15) &quot;The Language is strongly typed: every expression in a program has a unique type.)</p>
+			</div>
+			<div align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					
+							*</p>
+			</div>
+			<div align="left">
+				<p>To ease the evaluation of their design, the authors themselves have already enumerated its virtues as gauged in terms of compliance with the Revised Ironman Requirements, July 1977. If the scores mentioned (pages C-3/6) are honest, they score high for self-satisfaction. Particularly the score they gave their design for 1H. Formal Definition &#x2014;viz. &quot;Exact Compliance (with capital C! EWD) with the requirement, by means of the mechanism specified&quot;&#x2014; strikes me as hilarious.</p>
+				<p>An unsalvageable mess. I am full of sympathy for their consultants who were unable to prevent this.</p>
+				<p></p>
+				<table width="400" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td align="left" valign="top">Plataanstraat 5 <br>
+							
+									5671 AL NUENEN<br>
+							
+									The Netherlands</td>
+						<td align="left" valign="top">prof.dr.Edsger W.Dijkstra<br>
+							
+									Burroughs Research Fellow </td>
+					</tr>
+				</table>
+				<br>
+				<p><u></u></p>
+				<font size="-1">
+					<hr>
+					
+							transcribed by Tristram Brelstaff <br>
+					
+							revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="94">Tue, 18 Dec 2007</csobj></font></div>
+			<p></p>
+			<p></p>
+		
+		
+		
+		
+		
+		
+		
+		
+			
+		
+	</body>
+
+</html>

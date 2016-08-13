@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: Introducing a course on program design and presentation (EWD 1157)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>Introducing a course on program design and presentation</h1></div>
+	
+	    <div id="frame">
+			<div id="header">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd11xx/EWD1157.PDF" 
+           title="Link to the PDF version of EWD1157">EWD1157</a>
+      </div>
+			<div id="content">
+				<p class="noindent"><u>Introducing a course on program design and presentation</u></p>
+				<p>Historically, the nature of the programming challenge has been widely misunderstood and the difficulty has been grossly underestimated.</p>
+				<p>The first program fed into the first stored-program controlled computer &#x2014;the EDSAC in Cambridge, England&#x2014; was supposed to cause the machine to print a table of squares, which was duly printed. The second program, which was for table of prime numbers, was, however, wrong. Consequently, right from the beginning, the academic community had been warned and should know better than to belittle the programming challenge. It did know better and warned, but for decades its warnings have been suppressed and drowned out by the propaganda machines of the computer industry &#x2014;in particular IBM&#x2014; and of the Pentagon. For the protection of their interests, these organisations thought it vital to convince the general public that programming was no serious problem, that it required no intelligence and certainly no education. With the appropriate programming languages &#x2014;such as COBOL, PL/I, and ADA&#x2014; programming&#146;s problems would melt as snow in the sun.</p>
+				<p>Under these pressures it has been difficult to get Programming Methodology accepted as a topic of academic research and teaching. The barriers were a little less unsurmountable in those societies in which IBM and the Pentagon had less power; the fact that, in recent developments, both organizations have lost all of their surplus credibility (if not more) should in this respect assist American Departments of Computing Science in catching up.</p>
+			</div>
+			<div align="center">
+						<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+							*</p>
+					</div>
+			<div align="left">
+						<p>This course is given from the position that an academically educated computing scientist should be able to program at least an order of magnitude better than the average programmer or the hacker without formal training. Note that this is a direct consequence of my positions that (i) the programming challenge is of sufficiently high calibre to merit academic concern and that (ii) having absorbed an academic education or not should make a substantial difference. (Note that neither of these positions is necessarily shared by all my academic colleagues.)</p>
+						<p>There are at least three different ways in which the term &#147;computer program&#148; is used; since I shall use it in this course only in the last of these three senses, let me list them. They could be called the artistic, the legal, and scientific interpretation.</p>
+						<p>(i) <u>Artistic</u>. Here the program is an automaton created out of curiosity, with the intention of observing its behaviour when exercised. A program in this sense has the intellectual status of The American Flag &#x2014;&#147;Let us hoist it and look how many salute.&#148;&#x2014;. People in AI and in Experimental CS have a tendency to consider such &#147;artistic programs&#148; worthy objects of academic concern.</p>
+						<p>(ii) <u>Legal</u>. Here the user is not supposed really to know what he wants or needs, and the programmer is not supposed really to know what the user wants or needs. Consequently the programmer does not really know what he delivers, nor does the user really know what he gets. Here programs and their documentation have the intellectual status of the texts lawyers compose: of course you cannot expect these texts to be clear, unambiguous and free from contradictions, but if due care has been applied, you cannot complain. The major shortcoming of the legal interpretation &#x2014;which is the predominant one in today&#146;s software industry&#x2014; is that it precludes technical improvement of the product. People in Software Engineering &#x2014;should I say SE ?&#x2014; tend to adopt the legal interpretation.</p>
+						<p>(iii) <u>Scientific</u>. Here the program is viewed as a statement in a formal language, i.e., as a formula. When the program&#146;s specification has been stated in an equally formal language, the question of whether the program meets the specification is then a mathematical question. Here, the program is one of the triple: program, specification, and proof that the program meets the specification. Because such a triple is a sound and solid mathematical edifice, I had expected in my innocence that this view of programs would appeal to the mathematical community, but it does not, the reason being that the required proof style leaves no room for handwaving and the mathematical guild has developed no appreciation for such a style. We stick to this third interpretation of the term &#147;program&#148;: we are heading for programs that are part of the statement of proven theorems.</p>
+					</div>
+					<div align="center">
+						<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+							*</p>
+					</div>
+					<div align="left">
+						<p>The idea of mathematically proving the correctness of programs is now more than 30 years old. American Computing Science has tried to realize this in the form of &#147;program verification&#148; &#x2014;automated or not&#x2014; : given a program and its specification, prove that the former satisfies the latter, the idea being that the programmer (whom you cannot bother with mathematics) would provide the program, while the mathematician (whom you cannot bother with the tedious trivialities of programming) would provide the correctness proof. This ridiculous division of labour &#x2014;it is really putting the cart before the horse&#x2014; condemned the verification project to failure. The proper way of doing it is the other way round; given the specification, one designs the correctness proof and, as that design progresses, derives the program to which the proof is applicable, a method known as &#147;designing proof and program hand in hand&#148;. That this is a much more promising way of doing things than the &#147;a posteriori verification&#148; was well known and understood a quarter of a century ago, but victimized by IBM, the Pentagon, and its failing system of primary and secondary education, the USA has, alas, been unable to hear the message. Be it slowly, things seem to be changing, which could be a consequence of growing internationalization (with my apologies for this appalling noun).</p>
+						<p>I expect the main ingredients of this semesters course to be the following ones.</p>
+						<ul>
+							<li type="disc">A replacement of the (still!) traditional &#147;operational semantics&#148; by what is known as &#147;postulational semantics&#148;, as they provide a compact basis for correctness proofs without exploding case-analyses.							<li type="disc">The essentials of the predicate calculus, which I intend to present as a very simple and general, and thus powerful calculational tool for the actual construction of proofs and programs.
+							<li type="disc">The application of the above to the design and presentation of (far from trivial) sequential (and if time permits, parallel) programs.
+							<li type="disc">And, all the time, the critical consideration of decisions taken and conventions adopted.
+						</ul>
+					</div>
+					<div align="center">
+						<p>Austin, 25 August 1993</p>
+					</div>
+					<div align="left">
+						<p class="noindent">prof. dr. Edsger W. Dijkstra<br>
+							Department of Computer Sciences<br>
+							The University of Texas at Austin<br>
+							Austin, TX 78712-1188<br>
+							USA</p>
+					</div>
+			<div align="left">
+						<p><u></u></p>
+					</div>
+			<font size="-1">
+				<hr>
+				
+					transcribed by Mario B&eacute;land<br>
+				
+					revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="97">Mon, 31 Dec 2007</csobj></font>
+			<p></p>
+			<p></p>
+		
+		
+		
+		
+		
+		
+	</body>
+
+</html>

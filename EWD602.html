@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Comments on Arbeitsblatt 5 from o.Prof.Dr.F.L.Bauer (EWD 602)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>Comments on Arbeitsblatt 5 from o.Prof.Dr.F.L.Bauer</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD602.PDF"
+           title="Link to the PDF version of EWD602">EWD602</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+           <p><u>Comments on Arbeitsblatt 5 from o.Prof.Dr.F.L.Bauer.  </u></p>
+           <p class="noindent">
+             <center>
+             by Edsger W.Dijkstra and C.S.Scholten</center>
+  <p>For the integer function m(x, y) of the integer arguments x and y , given by
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+m(x,y) = (x &ge; y &rarr; x+1 &#x25af; x &lt; y &rarr; y-1)</td><td align=right>(1)
+</td>  </tr>  </table>
+it is required to prove that
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(x = y &rarr; y+1 &#x25af; x &ne; y &rarr; m(x, m(x-1, y+1))) = m(x, y)</td><td align=right>(2).
+</td>  </tr>  </table>
+<p class=noindent><b>Proof</b>. From (1) follows that the first alternative in the left-hand side of
+(2) may be replaced by x = y &rarr; m(x, y) ; the proof is complete when we show
+that the second alternative can be replaced by x &ne; y &rarr; m(x, y) . This letter
+replacement is allowed as we shall prove
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+m(x, m(x-1, y+1)) = m(x, y)</td><td align=right>(3)
+</td>  </tr>  </table>
+From (1) follows
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+X &ge; y &rArr; (m(x, x) = m(x, y))</td><td align=right>(4)
+</td>  </tr>  </table>
+From (1) it also follows that the only possible values of m(x-1, y+1) are
+x and y . If m(x-1, y+1) = y , (3) holds trivially. Otherwise we have
+m(x-1, y+1) &ne; y , which implies &mdash;on account of (1)&mdash;
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+m(x-1, y+1) = x and x-1 &ge; y+1 .</td><td align=right>(5)
+</td>  </tr>  </table>
+As (5) implies x &ge; y , we conclude by (4) and (5) that (3) then holds as
+well. (End of proof.)
+<p>The above proof has been given, because 33(!) lines of formal text, as
+dedicated to a proof of this theorem in said Arbeitsblatt 3, is to our tastes
+a bit unwieldy. We appreciate that the proof in said Arbeitsblatt 3 has been
+conducted in terms of a limited repertoire of operations that seem suitable
+for mechanization. When, however, the length of such proofs and their obvious
+tedium are presented &mdash;as is often the case&mdash; as conclusive evidence for the
+necessity of such mechanizations, it should be clear that at least the above
+example has failed to convince us of such necessity.
+<table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+NL-4565 NUENEN</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-01-24<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

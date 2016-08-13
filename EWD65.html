@@ -1,0 +1,114 @@
+<html>
+<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet"><title>E.W.Dijkstra Archive:  Over Jansen (EWD065)</title></head>
+<body><div id="title"><h1> Over Jansen</h1></div>
+		<div align="left">
+			<blockquote>
+				<table width="562" border="0" cellspacing="0" cellpadding="0" cool gridx="16" gridy="16" height="4466" showgridx showgridy usegridx usegridy>
+					<tr height="4465">
+						<td content csheight="4465" width="561" height="4465" valign="top" xpos="0">
+							<div align="right">
+								<a href="https://www.cs.utexas.edu/~EWD/ewd00xx/EWD65.PDF">EWD065</a></div>
+							<h1><u>Over Jansen.</u></h1>
+							20 September 1963 <u>X8 No. 25.</u>
+							<h2><u>1. De noodzaak van luisterbits.</u></h2>
+							<p>Een en ander zal gedemonstreerd worden aan een bandlezer.</p>
+							<h3><u>1.1. Communicatie tussen Jansen en de X8, vanuit de X8 bezien.</u></h3>
+							<p>Voor een bepaalde bandlezer neem ik de volgende conventies aan (zie X8, nr 22). Jansen is zich bewust van 6 elementen in de X8, die daar speciaal aan deze bandlezer zijn toegekend:<br>
+								Adres <var>f<sub>0</sub></var> voor de leegwijzer van het startmagazijn: <nobr><var>M</var>[<var>f<sub>0</sub></var>] = <var>f<sub>1</sub></var></nobr> of <nobr><var>f<sub>1</sub></var> + 2</nobr><br>
+								Adres <var>f<sub>1</sub></var>, dwz. het beginadres van het startmagazijn; ik neem de volgende structuur van het startmagazijn aan: <var>M</var>[<var>M</var>[<var>f<sub>0</sub></var>]] = heersende startinformatie<br>
+								<var>M</var>[<var>M</var>[<var>f<sub>0</sub></var> + 1] = heersend klassewoord<br>
+								Adres <var>f<sub>2</sub></var> voor startopdrachtenteller: <nobr>M[f<sub>2</sub>] = 0, 1 of 2.</nobr> Hiermee is geassocieerd de boolean Acflop F2: F2=(<nobr><var>M</var>[<var>f<sub>2</sub></var>]</nobr> positief)<br>
+								Adres <var>f<sub>3</sub></var> voor ingrepenteller: <nobr><nobr><var>M</var>[<var>f<sub>3</sub></var>]</nobr> = 0, 1 of 2.</nobr> Hiermee is geassocieerd de inflop F3: F3 = (<var>M</var>[<var>f<sub>4</sub></var>] positief)</p>
+							<p>De qualificaties &quot;acflop&quot; en &quot;Inflop&quot; als boven gegeven zijn &quot;X8-centrisch&quot;; in &quot;Jansen-centrische&quot; terminologie zouden de twee qualificaties net andersom zijn.</p>
+							<p>Startinformatie bevat door de lengte 9 bits en voor het adres 18 bits. Er is voorshands aangenomen, dat een speciale configuratie fungeert als een opdracht &quot;herstel OK-toestand&quot;. Deze veronderstelling is niet essentieel.</p>
+							<h3><u>1.2. Communicatie tussen Jansen en bandlezer, vanuit Jansen bezien.</u></h3>
+							<p>Ik neem aan, dat er voor de sybchronisatie[sic] tussen Jansen en de bandlezer twee flip-flops in het spel zijn, IF en VB.</p>
+							IF is &quot;jansencentrisch&quot; een ingreep-flipflop;<br>
+							8V is &quot;jansencentrisch&quot; een actieflipflop.
+							<p>Jansen zal <nobr>&quot;<var>V8</var> := <b>true</b>&quot;</nobr> slechts uitvoeren op momenten, dat <nobr><var>IF</var> = <b>false</b></nobr>; Jansen signaleert darmee, dat de bandlezer zijn volgende verrichting kan uitvoeren. Dit impliceert <nobr><var>V8</var> := <b>false</b></nobr> en na voltooing de terugmelding <nobr><var>IF</var> := <b>true</b></nobr>.</p>
+							<p>De naam <var>V8</var> is een afkorting van &quot;Vul 8&quot; omdat karaktertransport zal plaats vinden via een register, dat in een of ander pampflet een keer 8(and) genoemd is. Dit register is vulbaar door de bandlezer en uitleesbar door Jansen.</p>
+							<p>Als er nu geen OKF en STF waren, dan was het allemaal niet zo ingewikkeld: dan doet Jansen in wezen de cyclus: &quot;<var>P</var>(<var>IF</var>); lees 8 en zend door; <var>V</var>(<var>V8</var>)&quot;</p>
+							<p>Om nu OKF en STF in de beschouwing te betrekken (zoals ze in X8 nr 22 geinttroduceerd[sic] zijn) moet ik, dacht ik straks nog wat nadere veronderstellingen maken.<br>
+								Ik citeer:</p>
+							<blockquote>
+								&quot;Het drukken op de groene knop heeft tot gevolg: <var>STF</var> := <var>RK</var> &#x2228; <var>E8</var>; Zolang <var>E<sub>0</sub></var> = <b>true</b> wordt, desnoods bij herhaling: <b>if</b> &not; <var>STF</var> <b>then begin</b> <var>OKF</var> := <b>false</b>; <var>STF</var> := <b>true end</b> uitgevoerd.<br>
+								Herstel-OK betekent <nobr><var>OKF</var> := <b>true</b>; <b>if</b> <var>STF</var> <b>then</b> wacht.</nobr></blockquote>
+							<var>STF</var> en <var>OKF</var> zijn in deze beschrijving op enige houdende elementen. Met de rode knop <nobr>(<var>STF</var> := <b>true</b>)</nobr> zijn hiermee alle manieren gegeven, waarop deze twee flip-flops beinvloed kunnen worden. Ik meen voor Jansen een werkend schema te hebben, zonder dat <var>STF</var> tot Jansen hoeft door te dringen.
+							<p>Ik veronderstel, dat Jansen wel op elk gewenst moment <var>OKF</var> kan uitlezen, maar <em>niet</em> zelf <var>OKF</var> kan zetten. Dit is nl. niet nodig en misschien zelfs ongewenst.</p>
+							<p>Er zijn twee verschillende verrichtingen, die Jansen van de bandlezer kan vragen en ook inderdaad aan de bandlezer moet overlaten, omdat ze willekeurig lang kunnen duren:</p>
+							<ul>
+								<li>a) een volgend karakter, dwz. well iets niews in 8 en bandtransport
+								<li>b) herstel OK-toestand en <nobr>&quot;<b>if</b> <var>STF</var> <b>then wacht</b>&quot;</nobr>, niet iets nieuws in 8 en geen bandtransport.
+							</ul>
+							<p>Ik neem aan, dat er zich in de bandlezer een boolean HOK (Herstel OK) bevindt, die via de plug door <nobr>Jansen = <b>true</b></nobr> gezet kan worden als de OK toestand hersteld moet worden.</p>
+							<p>Als de bandlezer de passeeroperatie op V8 uitvoert, raadpleegt hij HOK: normaal is <nobr>HOK = <b>false</b></nobr>: dan wordt het volgende karakter in 8 afgeleverd en dit wordt door V(IF) afgerond; also daarentegen <nobr>HOK = <b>true</b></nobr>, dan doet de bandlezer het herstel van de OK-toestand: <var>OKF</var> := <b>true</b>; L: <b>if</b> <var>STF</var> <b>then goto</b> <var>L</var>; <var>HOK</var> := <b>false</b>; <var>V</var>(<var>IF</var>) HOK vertoont enige analogie met 8 inzoverre zetten en raadplegen in de tijd strict gescheiden zijn.</p>
+							<p>Opm 1. Als Jansen successvol de passeeroperatie op IF gedaan heeft, moet Jansen kunnen detecteren of er nu een nieuw karakter in 8 is gekomen of niet, dwz. of de vorige verrichting van de bandlezer herstel-OK was of niet. Jansen kan dit ontdekken door analyse van de vorige (Heersende zo je wilt) startopdracht. Ordelijker, lijker, sneller en waarscijnlijk[sic] iets duurder is het wanneer op de bandlezerplug uitleesbaar is, of er een nieuw karakter in 8 zit, maw. of <nobr>IF := <b>true</b></nobr> al dan niet uitgevoerd is op grond van een voltooide herstel-ok-opdracht.</p>
+							<p>Opm.2. Ook na voltooing van de herstel OK-opdracht moet Jansen de OKF uitlezen: er kan immers opnieuw storing zijn ontstaan.</p>
+							<p>Opm.3. Er is aangenomen, dat Jansen 1 maal per karakter cyclus kijkt, of de OKF nog wel <b>true</b> is; vlak na deze constatering kan Jansen dan nog om de volgende heptade vragen; het is de bedoeling, dat hij die dan nog krijgt, maw. dat er in de bandlezer geen blokkade zit, die dat verhindert. Jansen neemt dan verder de verantwoordelijkheid op zich, om niet om meer karakters te vragen, voordat de OK-toestand hersteld is.</p>
+							<h3><u>1.3. De programmering voor Jansen.</u></h3>
+							<p>Ik neem aan, dat de inviduele acties van Jansen zo kort duren, dat we hen in doofheid kunnen verrichten: als besloten is, dat een karakter van de bandlezer getransporteerd gaat worden, dan maakt Jansen die handeling eerts[sic] af, voordat hij gaat kijken of er ook iets anders te doen is.</p>
+							<p>Ik neem voorts, op financiele en organisatorische gronden aan, dat Jansen wel beschikt over een opdrachtenteller, maar niet over een levend geheugen, waarin een link kan worden opgeborgen. Interruptie in de ware zin des woords treden dus niet op. Omdat ik zo verder zo min mogelijk levend geheugen in Jansen wil veronderstellen, wordt de programmering voor Jansen een heel gebonden kunst.</p>
+							<p>Jansen kan tijdens een actie natuurlijk altijd het levend geheugen van de X8 raadplegen (zie 1.2. opm. 1). Ik stel echter, dat frequente raadpleging van het X8-geheugen in het scanproces, wat Jansen nu gaat doen, ongewenst is. Zolang Jansen wacht op werk, moet het geheugen van de X8 ongemoeid blijven.</p>
+							<p>He doel van deze notitie is, om er achter te komen, hoeveel &quot;levend geheugen&quot; bv. op flip-flops Jansen moet hebben, opdat uitmaken, wat de volgende actie zal zijn, een interne aangelegenheid van Jansen zal zijn. Mijn verwachting is, dat de programering voor de bandlezer als voorbeeld, de noodzaak voor luisterbits zal illustreren.</p>
+							<p>Ik ga nu, voorlopig met veronachtzaming van OKF ruwweg twee programmatjes voor Jansen maken. Bedenk hierbij, dat <nobr><var>M</var>[<var>f<sub>2</sub></var>]</nobr> en <nobr><var>M</var>[<var>f<sub>3</sub></var>]</nobr> -zie 1.1.- X8-centrisch Acflop en Inflop zijn, dat <var>IF</var> en <var>V8</var> Jansencentrisch Inflop en Acflop zijn.</p>
+							<p>De twee programma's zijn: a) &quot;<var>L</var>:<var>P</var>(<nobr><var>M</var>[<var>f<sub>2</sub></var>]</nobr>); <b>comment</b> wacht op Acflop van de X8;<br>
+								<var>V</var>(<var>V8</var>); <b>comment</b> start bandlezer;<br>
+								<var>L1</var>:<var>P</var>(<var>IF</var>); lees 8, berg en tel; <b>if</b> <var>telling</var> &#x2260; 0 <b>then</b><br>
+								<b>begin</b><var>V</var>(<var>V8</var>); <b>goto</b> <var>L1</var> <b>end</b>;<br>
+								<var>M</var>[<var>f<sub>0</sub></var>] := 2 &#x00D7; <var>f<sub>1</sub></var> + 2 - <var>M</var>[<var>f<sub>0</sub></var>]; <b>comment</b> opsteppen van leegwijzer;<br>
+								<var>V</var>(<nobr><var>M</var>[<var>f<sub>3</sub></var>]</nobr>); <b>comment</b> maak ingreep voor de X8; <b>goto</b> <var>L</var>&quot;<br>
+								<br>
+								en<br>
+								b)&quot;<var>L</var>: <var>P</var>(<nobr><var>M</var>[<var>f<sub>2</sub></var>]</nobr>);<br>
+								<var>L1</var>:<var>P</var>(<var>IF</var>); lees 8, berg en tel; <var>V</var>(<var>V8</var>); <b>if</b> telling &#x2260; 0 <b>then goto</b> <var>L1</var>; <var>M</var>[<var>f<sub>0</sub></var>]:= 2 &#x00D7; <var>f<sub>1</sub></var> + 2 - <var>M</var>[<var>f<sub>0</sub></var>]; goto <var>L</var>&quot;</p>
+							<p>Programma a) veronderstelt, dat de &quot;nuchtere toestand&quot; van de bandlezer is met lege 8; programma b) veronderstelt dan het 8-register vol. Hier zit weer zo'n willekeur als en <a href="https://www.cs.utexas.edu/~EWD/ewd00xx/EWD62.PDF">EWD62</a> gesignaleerd is. Zonder veel overtuiging kies ik voor programma a): ik kom hier straks nog op terug.</p>
+							<p>Nu wil ik echter tot uiting laten komen, dat Jansen geen echte ingreep heeft. Dit komt in de programmatjes daarin tot uiting, dat ik ze niet als cycli, maar als gestrekte stukjes schrijven kan, ingeleid door een P-operatie en afgesloten door een &quot;klaar&quot;, dwz. de sprong naar de distributeur, de scannerij, met vergeting van het feit, dat we op de plaats &quot;klaar&quot; een proces weer onderbroken hebben. In het inwendige van zo'n stukje mag dan geen P-operatie meer voorkomen.</p>
+							<p>Versie a) valt dan uiteen in twee losse stukken, waarvan de gewenste afwisseling door een luisterbit <var>LV</var> geregeld kan worden: &quot;<var>P</var>(<nobr><var>M</var>[<var>f<sub>2</sub></var>]</nobr>, <var>LV</var>); <var>V</var>(<var>V8</var>); klaar&quot; en<br>
+								&quot;<var>P</var>(<var>IF</var>); lees <var>B</var>, berg en tel; <b>if</b> <var>telling</var> &#x2260; 0 <b>then</b><br>
+								<var>V</var>(<var>V8</var>)<b>else</b><br>
+								<b>begin</b><var>M</var>[<var>f<sub>0</sub></var>]:= 2 &#x00D7; <var>f<sub>1</sub></var> + 2 - <var>M</var>[<var>f<sub>0</sub></var>]; <var>V</var>(<nobr><var>M</var>[<var>f<sub>3</sub></var>]</nobr>, <var>LV</var>) <b>end</b>;<br>
+								klaar&quot;</p>
+							<p>De laatste V-operatie maakt een ingreep voor de X8 en signaleert via <var>LV</var>, dat wat Jansen betreft, de volgende startopdracht geaccepteerd kan worden.</p>
+							<p>Ik kan me dit voorstellen, mits op de plug van de bandlezer voor <var>IF</var> en <var>V8</var> drie &quot;draadjes&quot; zitten, een uitlesesdraadje voor <var>IF</var>, een <b>false</b>-zet-draadje voor <var>IF</var> en een <b>true</b>-zetdraadje voor <var>V8</var>.</p>
+							<p>In deze conceptie mogen de laatste twee draadjes <em>niet</em> samenvallen. Doen ze dat wel, dan moeten we een programma maken in stijl b) en dat kost ons dan in Jansen een tweede luistervergunning, nl. om de terugmelding van bandlezer naar Jansen &quot;er is weer een volgend karakter&quot; in geval van nog niet ontstane interesse tijdelijk te kunnen negeren. Nl.: <var>P</var>(<nobr><var>M</var>[<var>f<sub>2</sub></var>]</nobr>, <var>LV<sub>1</sub></var>); <var>V</var>(<var>LV<sub>2</sub></var>); klaar&quot; en<br>
+								&quot;<var>P</var>(<var>IF</var>, <var>LV<sub>2</sub></var>); lees <var>B</var>, berg en tel; <var>V</var>(<var>VB</var>); <b>if</b> <var>telling</var> &#x2260; 0 <b>then</b> <var>V</var>(<var>LV<sub>2</sub></var>) <b>else</b><br>
+								<b>begin</b> <var>M</var>[<var>f<sub>0</sub></var>] := 2 &#x00D7; <var>f<sub>1</sub></var> + 2 - <var>M</var>[<var>f<sub>0</sub></var>]; <var>V</var>(<var>M</var>[<var>f<sub>3</sub></var>, <var>LV<sub>1</sub></var>) <b>end</b>; klaar&quot;</p>
+							<p>Vergelijking van deze twee programmatjes illustreert aardig, hoe we de flip-flop, die we bij de bandlezer kunnen uitsparen, er bij Jansen weer bijkrijgen.</p>
+							<p>We veronderstellen op het ogenblik dus een machanisme, dat de uitkomsten van logische producten scant en op gront van het =&nbsp;1 zijn naar een bepaald programmatje springt. Ik neem aan, dat daar de P-operatie voltooid wordt. In het laatste programma kan ik daar <nobr><var>IF</var>:= 0</nobr> uitvoeren (idnentiek aan <var>V</var>(<var>VB</var>)). In plaats van meteen ook <nobr><var>LV<sub>2</sub></var> := 0</nobr> (pardon, ik bedoel <nobr><var>LV<sub>2</sub></var> := <b>false</b></nobr>) uit te voeren, kan je de luisterbit laten staan en hem pas afzetten, als de telling op blijkt.</p>
+							<p>Nu het programma in versie a) met inbegrip van de OK-flipflop. Ik veronderstel dat er nu op de plug een uitleesdraadje voor OKF zit en een <b>true</b>-zetdraadje voor HOK. Om schrijfwerk (dwz. programmeruimte) te besparen, lopen de twee stukjes na enige tijd samen.</p>
+							<p>&quot;<var>P</var>(<nobr><var>M</var>[<var>f<sub>2</sub></var>]</nobr>, <var>LV</var>);<br>
+								<b>if</b> herstel OK-toestand in startmagazijn <b>then begin</b> <var>HOK</var>:= <b>true</b>; <var>V</var>(<var>V8</var>); klaar <b>end</b><br>
+								<b>else</b><br>
+								<var>L</var>: <b>begin</b> meldt OKF in klassewoord;<br>
+								<var>M</var>[<var>f<sub>0</sub></var>]:= 2 &#x00D7; <var>f<sub>1</sub></var> + 2 - <var>M</var>[<var>f<sub>0</sub></var>]; <var>V</var>(<nobr><var>M</var>[<var>f<sub>3</sub></var>]</nobr>, <var>LV</var>); klaar <b>end</b>&quot;<br>
+								<br>
+								en<br>
+								&quot;<var>P</var>(<var>IF</var>); <b>if</b> herstel OK-toestand <b>then goto</b> <var>L</var>;<br>
+								lees 8, berg en tel;<br>
+								<b>if</b> &not; <var>OKF</var> &#x2228; <var>telling</var> = 0 <b>then goto</b> <var>L</var>;<br>
+								<var>V</var>(<var>V8</var>); klaar&quot;.</p>
+							<p>Wij merken hierbij op:</p>
+							<ol>
+								<li>dat 1.2. opm.1. slaat op de test &quot;<b>if</b> herstel OK-toestand&quot; in de eerste regel van het tweede programma
+								<li>dat een analoog programma in versie b) ook vast wel te maken is
+								<li>dat het symbolisch afwerken in het geval van een groot startmagazijn niet Jansen gedurende lange tijd blokkeert
+								<li>dat we <nobr>&quot;<var>HOK</var> := <b>true</b>&quot;</nobr> op zichzelf al als start van de bandlezer kunnen beschouwen.
+								<li>dat we een <var>IF<sub>1</sub></var> en <var>IF<sub>2</sub></var> hadden kunnen invoeren, waarbij <nobr><var>IF<sub>1</sub></var>:= <b>true</b></nobr> een niew karakter aankondigt en <nobr><var>IF<sub>2</sub></var>:= <b>true</b></nobr> een voltooide herstelling van de OK-toestand, wat ik echter niet gedaan heb, om het aantal bits, dat gescand moet worden in de toestand &quot;klaar&quot; niet nodeloos te laten oplopen. Ik laat voorlopig nog in het midden, hoe deze scan plaatsvindt: als deze scan als cyclus uitgeprogrammeerd wordt, dan hangt de tijd die verstrijken kan tussen het <b>true</b> worden van een flip-flop (of logisch product) en het ogenblik, dat Jansen dit ontdekt, ook als Jansen niets anders te doen heeft, van de grootte van deze cyclus af.
+							</ol>
+							<p>In het geval van uitgeprogrammeerd scannen kunnen we &quot;klaar&quot; nog op minstens twee manieren programmeren: of als een sprong naar een vast punt, waar we de boolean condities op een vaste volgorde gaan onderzoeken, en als we niets vinden, dat gedaan kan worden, springen we weer naar het begin van deze lijst terug. Of: we onderzoeken de boolean voorwaarden cyclisch, maar als we een programmatje uitgevoerd hebben springen we midden in de scanketen, vlak onder de plaats, waar we hem verlaten hebben. Mengvormen zijn ook nog mogelijk, maar dan lijkt het me al ras heel moeilijk, om iets over maximale wachttijden etc. te weten te komen.</p>
+							<p>Ik heb wel idee, hoe ik hier enige gegevens over zou kunnen krijgen, of ik er binnenkort aan toe kom, is een tweede. Totzover lijkt me de moraal, dat het verwijderen van de plicht om link's te kunnen bergen tegen de prijs van extra luisterbits me een voordelig handeltje lijkt.</p>
+							<hr>
+							<p><font size="-1">transcribed by David J. Brantley<br>
+									latest revision <csobj format="MedDate" h="16" region="15" t="DateTime" w="90">Sat, 29 May 2004</csobj></font></p>
+						</td>
+						<td width="1" height="4465"><spacer type="block" width="1" height="4465"></td>
+					</tr>
+					<tr height="1" cntrlrow>
+						<td width="561" height="1"><spacer type="block" width="561" height="1"></td>
+						<td width="1" height="1"></td>
+					</tr>
+				</table>
+			</blockquote>
+		</div>
+	</body>
+</html>

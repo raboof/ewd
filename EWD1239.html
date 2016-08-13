@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<title>E.W.Dijkstra Archive: A first exploration of effective reasoning (EWD 1239)</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen" />
+		<style type="text/css"> .nowrap  { white-space:  nowrap; } </style>
+	</head>
+	<body><div id="title"><h1>A first exploration of effective reasoning</h1></div>
+		<div id="frame">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd12xx/EWD1239.PDF"
+					 title="Link to the PDF version of EWD1239">EWD 1239</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>A first exploration of effective reasoning</u></p>
+				<p>My youngest <i>Concise Oxford Dictionary</i> (7th edition, 1982) defines (pure) mathematics as &ldquo;abstract science of space, number, and quantity&rdquo;. A long time ago, this definition may have been adequate, but for at least a century this definition is much too restrictive: there are simply too many people considered mathematicians &#x2014;by themselves, by their colleagues, and by others&#x2014; whose professional minds are hardly occupied with space, number, or quantity. The topics today&rsquo;s mathematicians think about are, in fact, so varied that it is no longer realistic to characterize mathematics by its subject matter.</p>
+				<p>Yet, despite this variation of topics, the mathematician very quickly recognizes his fellow mathematician as such: there is a unity that is not reflected in the diversity of the topics. The unity that constitutes the core of mathematics is not so much the &ldquo;quod&rdquo; as the &ldquo;quo modo&rdquo;; it is the precision of the concepts, the shape of the arguments and the nature of the use of symbols and language that are characteristic for mathematics. And that is why today a much better definition of mathematics would be &ldquo;the art and science of effective reasoning&rdquo;, independent of what that reasoning is supposed to be about.</p>
+				<p>But in order to reason effectively, the very least we should be able to do is establishing whether two statements mean the same thing or whether two definitions are equivalent, and here we immediately run into trouble with our so-called &ldquo;natural languages&rdquo;, which (among other shortcomings) are not very well suited to precision. By human habit, our languages tend to become geared to the major purposes we want to use them for, and consequently they are excellent for being vague in, for telling jokes in, and for making love in; precision, however, is only rarely needed, and as soon as we try to be precise, as for instance in legal documents, the language used quickly becomes most unnatural.</p>
+				<p>Ambiguity is for instance caused by the unclarity as to how sentence components should be grouped together, the standard example being &ldquo;pretty little girls school&rdquo;, which admits five different parsing. (Does &ldquo;pretty&rdquo; qualify &ldquo;little&rdquo;, &ldquo;girls&rdquo;, or &ldquo;school&rdquo;? And is it about a little school or about little girls?)</p>
+				<p>A slightly more subtle example is provided by the two sentences:</p>
+				<p class="noindent" style="margin-left: 2em;">&ldquo;When Jack and Jill went up the hill, they picked 5 pounds of blueberries&rdquo;<br />
+					&ldquo;When Jack and Jill went up the hill, they walked 5 miles&rdquo;.</p>
+				<p class="noindent">I think that the first sentence permits the interpretation that Jack picked 2 pounds and Jill 3, but I am almost certain that the second sentence does <em>not</em> admit the analogous interpretation that Jack walked 2 miles and Jill 3.</p>
+				<p>Another source of difficulties, which I won&rsquo;t pursue here now, is that people sometimes don&rsquo;t distinguish between<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; &ldquo;If the sun shines, I don&rsquo;t wear my coat.&rdquo;<br />
+					and<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; &ldquo;If I don&rsquo;t wear my coat, the sun shines.&rdquo;</p>
+				<p>The above examples of linguistic problems should suffice at this stage; their only purpose was to convince the reader that for truly effective reasoning, natural language is an inadequate vehicle, and I hope they have done so. The moral of the story is that the development of mathematics is partly &#x2014;and perhaps for a major part!&#x2014; a linguistic exercise, viz. the design of languages adequate for definitions of and arguments about the artefact we would like to deal with.</p>
+				<p>A familiar example is provided by the names and notations for numbers as used in counting and arithmetic. Like the rest of natural languages, the names of numbers are originally not the product of careful design: the French name &ldquo;quatre-vingt-dix&rdquo; for 90 &#x2014;in which the first hyphen stands for a multiplication and the second one for an addition&#x2014; is one of the worst offenders I know, and I can only applaud the later introduction of the simplifications &ldquo;septante&rdquo;, &ldquo;octante&rdquo; and &ldquo;nonante&rdquo;. The English names became more systematic when &ldquo;four-and-twenty&rdquo; &#x2014;remember the blackbirds of the nursery song?&#x2014; was replaced by &ldquo;twenty-four&rdquo;.</p>
+				<p>Naming is one aspect, manipulation (in this case: calculation) is another case. Though I can read the individual numbers, I have problems reading a sentence like &ldquo;three hundred and twenty-eight plus one hundred twenty-three equals four hundred and fifty-one&rdquo;.</p>
+				<p>Roman numerals, whose general adoption prevented the rise of European science for 15 centuries, are all right for engraving on a building the year of its completion, but &ldquo;CCCXXVIII + CXXIII = CDLI&rdquo; is at least as bad as the natural language version. In Roman numerals, the rules for calculation are just too complicated (and if you don&rsquo;t believe that, just try multiplication and long division in Roman numerals).</p>
+				<p>The great breakthrough came with the invention of the positional number systems. The sentence &ldquo;328 + 123 = 451&rdquo; we can read and check because &#x2014;particularly in the case of more digits&#x2014; we can write the numbers on two successive lines:</p>
+				<table cellpadding="0" cellspacing="0" border="0" align="center" style="text-align: center; margin-top: 0.5em;">
+					<tr><td>3 2 8</td></tr>
+					<tr><td>1 2 3</td></tr>
+					<tr style="line-height: 0.3em;"><td>&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;</td><td>&nbsp; +</td></tr>
+					<tr><td>4 5 1</td></tr>
+				</table>
+				<p class="noindent">Manipulation is immensely simplified by the possibility of such a column-wise arrangement and the fact that the rules of digit-wise addition don&rsquo;t change while going from right to left. By an accident of history, I am also perfectly happy with the binary system</p>
+				<table cellpadding="0" cellspacing="0" border="0" align="center" style="text-align: right; margin-top: 0.5em;">
+					<tr><td>1010 01000</td></tr>
+					<tr><td>11 11011</td></tr>
+					<tr style="line-height: 0.3em;"><td>&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;</td><td>&nbsp; +</td></tr>
+					<tr><td>1110 00011</td><td></td><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ,</td></tr>
+				</table>
+				<p class="noindent">in which the rules for manipulation are even much simpler. (The binary addition table contains only 2²&nbsp;=&nbsp;4 entries:</p>
+				<p class="noindent" align="center" style="margin-top: 0.5em;">0+0 = 00 &nbsp; &nbsp; &nbsp; &nbsp; 0+1 = 01 &nbsp; &nbsp; &nbsp; &nbsp; 1+0 = 01 &nbsp; &nbsp; &nbsp; &nbsp; 1+1 = 10 &nbsp; &nbsp; ;</p>
+				<p class="noindent">the decimal addition table contains 10² = 100 entries, from 0+0 through 9+9, and as most designers of automatic computers quickly discovered, a factor of 25 is not something to be ignored.)</p>
+				<p>Another &ldquo;language&rdquo; most of us are familiar with is the one of the pictures we use in plane geometry, triangles, parallel lines and what have you. At first sight, that pictorial language seems completely adequate, for plane geometry is about things like triangles and parallel lines, isn&rsquo;t it? But at closer inspection there are serious problems.</p>
+				<p>Tale the following example. In connection with the theorem &ldquo;In an equilateral triangle, the medians coincide with the altitudes&rdquo;, one could very well encounter the following picture</p>
+				<p class="noindent" align="center"><img src="EWD1239_fig1.png" alt="EWD1239 figure 1" title="EWD1239 figure 1" /></p>
+				<p class="noindent">but we could equally well have had</p>
+				<p class="noindent" align="center"><img src="EWD1239_fig2.png" alt="EWD1239 figure 2" title="EWD1239 figure 2" /> &nbsp; &nbsp; &nbsp; &nbsp; or &nbsp; &nbsp; &nbsp; &nbsp; <img src="EWD1239_fig3.png" alt="EWD1239 figure 3" title="EWD1239 figure 3" /> &nbsp; &nbsp; &nbsp; &nbsp; ,</p>
+				<p class="noindent">i.e. there is the almost always tacit convention that the orientation and size of the picture don&rsquo;t matter. It is a little bit of a nuisance that we have to draw the picture in some size and in some orientation, and that in that sense our pictorial language forces us to be a little bit overspecific, but logical problems can be avoided by making the convention explicit that chosen size and orientation are &ldquo;arbitrary&rdquo;, are not to be considered &ldquo;essential features&rdquo; of the pictures.</p>
+				<p>So far, so good, but it is not good enough! Because an equilateral triangle is in 3 different ways isosceles, the above theorem is a rather direct consequence of the theorem &ldquo;In an isosceles triangle, the median from the top coincides with the altitude from the top.&rdquo; It is fully correct that this theorem says nothing about the top angle being 60° because the theorem holds for any top angle. Your geometry text will probably contain the picture</p>
+				<p class="noindent" align="center"><img src="EWD1239_fig4.png" alt="EWD1239 figure 4" title="EWD1239 figure 4" /></p>
+				<p class="noindent">but could have contained the rather different</p>
+				<p class="noindent" align="center"><img src="EWD1239_fig5.png" alt="EWD1239 figure 5" title="EWD1239 figure 5" /></p>
+				<p class="noindent">as well. Here is the problem: there is <em>no</em> picture of the <em>general</em> isosceles triangle in the sense that we cannot avoid choosing the top acute, right, or obtuse.</p>
+				<p>In the same sense there is no representative picture of the general triangle and the following example illustrates the damage that may do. There exists the theorem that the 3 angle-bisectors of a triangle are copunctual (i.e. go through a single point), e.g.</p>
+				<p class="noindent" align="center"><img src="EWD1239_fig6.png" alt="EWD1239 figure 6" title="EWD1239 figure 6" /> &nbsp; &nbsp; &nbsp; &nbsp; .</p>
+				<p class="noindent">Using the above theorem, it has been shown that the altitudes are copunctual:</p>
+				<p class="noindent" align="center"><img src="EWD1239_fig7.png" alt="EWD1239 figure 7" title="EWD1239 figure 7" /> &nbsp; &nbsp; &nbsp; &nbsp; .</p>
+				<p class="noindent">by showing that the altitudes of a triangle <var>ABC</var> &#x2014;i.e. <var>AD</var>, <var>BE</var>, and <var>CF</var>&#x2014; are the angle-bisectors of a triangle <var>DEF</var> (and hence copunctual). The argument, however, breaks down when triangle <var>ABC</var> has an obtuse angle; in that case the altitudes &#x2014;though still copunctual&#x2014; are <em>not</em> the angle-bisectors of triangle <var>DEF</var> (at least not in the traditional sense), and a separate argument is required. (Fortunately, the case distinction forced upon us by the pictorial argument can be avoided by the use of vector calculus, which allows a one-line argument which is independent of the absence or presence of an obtuse in triangle <var>ABC</var>. It relies upon the algebraic identity</p>
+				<p class="noindent" align="center"><var>a</var>&thinsp;·&thinsp;(<var>b&#x2212;c</var>) + <var>b</var>&thinsp;&middot;&thinsp;(<var>c&#x2212;a</var>) + <var>c</var>&thinsp;&middot;&thinsp;(<var>a&#x2212;b</var>) = 0 &nbsp; &nbsp; &nbsp;.)</p>
+				<p>The main problem with the role of pictures in traditional plane geometry is that each theorem is applicable to an infinite set of figures of great variation, whereas we can only display on or two of them by way of example, leaving to the reader the conceptualization of the general case.</p>
+				<p>Above, we have given two first examples &#x2014;one numerical, one geometrical&#x2014; showing how ease and efficiency of reasoning depend on the &ldquo;language&rdquo; used. Later, when we have a clearer picture of the arguments we would like to render, we can and will be more explicit about language characteristics that ease or hamper reasoning. We now turn in this introductory chapter to another aspect of effective reasoning, viz. the subject matter to which the reasoning is applied.</p>
+				<p>Effective reasoning requires great precision and that explains why I won&rsquo;t deal with, say, arguments about the nature of the influence of the early singing of folk tunes on the patriotic feelings of mostly rural girls: the concepts involved would be several orders of magnitude too vague to do something rigorous with. Mathematicians prefer to deal with &ldquo;simple&rdquo; concepts such as numbers and triangles, rather than with messy &ldquo;real-world&rdquo; concepts such as patriotic feelings. This preference is not a matter of cowardice or laziness; on the contrary, and the layman should respect this self-constraint as the mathematician&rsquo;s analogue of the professional discipline that prevents the competent architect from erecting a high-rise building on quicksand.</p>
+				<p>The following two examples serve to illustrate that even in such &ldquo;simple&rdquo; contexts, our concepts should be chosen with care; again we shall give a numerical and a geometrical example.</p>
+				<p>We all know the numbers that we use in counting: 1, 2, 3, 4, .... At the right-hand side &#x2014;the conceptually difficult one!&#x2014; there is no difference of opinion: the sequence of what the mathematicians call &ldquo;the natural numbers&rdquo; goes on without end, amen. The problem is at the other end: where should it start? Should the sequence start at zero: 0, 1, 2, 3, 4, ...., or should it start at two: 2, 3, 4, 5 ....&nbsp;? For the classical Greeks, for instance, &ldquo;two&rdquo; was the smallest number; &ldquo;one&rdquo; existed, but was <em>not</em> considered a number.</p>
+				<p class="noindent"><u>Remark</u> &nbsp; We are not that much different from the classical Greeks, for the sentence &ldquo;Among my well-established colleagues, a number are of a different opinion.&rdquo; strongly suggests more than one dissenter! Please note that &ldquo;number&rdquo; (nous, singular) is followed by &ldquo;are&rdquo; (verb, plural). (End of Remark.)</p>
+				<p>As the term &ldquo;multiplication&rdquo; still faithfully reflects, 1 could not occur as a factor of a product &#x2014;&ldquo;it would not <span class="nowrap">multiply&rdquo;&#x2014;,</span> nor could it be a divisor &#x2014;&ldquo;it would not divide, would <span class="nowrap">it?&rdquo;&#x2014;.</span> But the Greek exclusion of 1 from the natural numbers created problems for them.</p>
+				<p>For us, any pair of positive natural numbers has a greatest common divisor, e.g. for the pair (21,&thinsp;33), the greatest common divisor is 3, for the pair (21,&thinsp;34) it is 1.</p>
+				<p class="noindent"><u>Remark</u> &nbsp; &ldquo;greatest common divisor&rdquo; is both name and definition. The divisors of 21 are {1,&thinsp;3,&thinsp;7,&thinsp;21}, the divisors of 33 are {1,&thinsp;3,&thinsp;11,&thinsp;33}, their common divisors are {1,&thinsp;3}, of which 3 is the greatest. (End of Remark.)</p>
+				<p>There is an efficient algorithm that determines for any pair of natural numbers their greatest common divisor (efficient in the sense that it does not require the, in general, much more laborious factorization of the two numbers). The Greeks knew it: the algorithm is, in fact, known as &ldquo;Euclid&rsquo;s Algorithm&rdquo;. Euclid even proves the correctness of this algorithm, but has to give two different proofs, one for the case that &#x2014;such as with (21,&thinsp;33)&#x2014; the given numbers do have at least one common divisor, and a different proof that deals with the case &#x2014;such as with (21,&thinsp;34)&#x2014; that in Greek parlance the numbers have no common divisor. Admission of 1 as divisor completely obviates the proof duplication.</p>
+				<p class="noindent"><u>Aside</u> &nbsp; Definitions of concepts and formulations of theorems act in the modern parlance of the computing scientist as the interfaces between the modules of the argument. Computer scientists had to burn their figures a number of times before they finally understood the critical importance of well-chosen interfaces, and Euclid&rsquo;s work clearly predates that experience. (End of Aside.)</p>
+				<p>Let us now turn to a geometrical example. Consider the following figure:</p>
+				<p class="noindent" align="center"><img src="EWD1239_fig8.png" alt="EWD1239 figure 8" title="EWD1239 figure 8" /> &nbsp; &nbsp; &nbsp; .</p>
+				<p class="noindent">It contains 4 triangles, 3 smaller ones that make up the big one, more precisely, the sum of the areas of the 3 small ones equals the area of the big one. Denoting with <span class="unicode">&#x25B3;</span> the area, we have</p>
+				<p class="noindent" align="center"><span class="unicode">&#x25B3;</span><var>PBC</var> + <span class="unicode">&#x25B3;</span><var>APC</var> + <span class="unicode">&#x25B3;</span><var>ABP</var> = <span class="unicode">&#x25B3;</span><var>ABC</var> &nbsp; &nbsp; &nbsp; .</p>
+				<p class="noindent"><u>Remark</u> &nbsp; Please note that this is a very nice formula: it has such a nice structure that we can remember it. The three terms on the left are obtained by replacing in the right-hand term <span class="unicode">&#x25B3;</span><var>ABC</var> in turn <var>A</var>, <var>B</var>, and <var>C</var> with <var>P</var>. (End of Remark.)</p>
+				<p>We run, however, in trouble when <var>P</var> does not lie inside triangle <var>ABC</var>. Consider for instance the figure</p>
+				<p class="noindent" align="center"><img src="EWD1239_fig9.png" alt="EWD1239 figure 9" title="EWD1239 figure 9" /> &nbsp; &nbsp; &nbsp; ,</p>
+				<p class="noindent">where we would have</p>
+				<p class="noindent" align="center"><span class="unicode">&#x25B3;</span><var>PBC</var> + <span class="unicode">&#x25B3;</span><var>APC</var> &#x2212; <span class="unicode">&#x25B3;</span><var>ABP</var> = <span class="unicode">&#x25B3;</span><var>ABC</var> &nbsp; &nbsp; &nbsp; ,</p>
+				<p class="noindent">or the figure</p>
+				<p class="noindent" align="center"><img src="EWD1239_fig10.png" alt="EWD1239 figure 10" title="EWD1239 figure 10" /></p>
+				<p class="noindent">in which case we would have</p>
+				<p class="noindent" align="center"><span class="unicode">&#x25B3;</span><var>PBC</var> &#x2212; <span class="unicode">&#x25B3;</span><var>APC</var> &#x2212; <span class="unicode">&#x25B3;</span><var>ABP</var> = <span class="unicode">&#x25B3;</span><var>ABC</var> &nbsp; &nbsp; &nbsp; .</p>
+				<p>The beautiful symmetry of our original formula has been destroyed in the latter ones by the occurrence of one or two minus signs at the left-hand side. Can we repair this? Yes, we can. To begin with, we let the triangle&rsquo;s name define a direction of traversal of the triangle&rsquo;s sides, to be precise, for <span class="unicode">&#x25B3;</span><var>XYZ</var> this will be from <var>X</var> to <var>Y</var>, from <var>Y</var> to <var>Z</var>, and from <var>Z</var> to <var>X</var>:</p>
+				<p class="noindent" align="center"><span class="unicode">&#x25B3;</span><var>XYZ</var>: &nbsp; &nbsp; &nbsp; <img src="EWD1239_fig11.png" alt="EWD1239 figure 11" title="EWD1239 figure 11" style="vertical-align: middle;"/></p>
+				<p class="noindent">and similarly, naming the same triangle differently</p>
+				<p class="noindent" align="center"><span class="unicode">&#x25B3;</span><var>ZYX</var>: &nbsp; &nbsp; &nbsp; <img src="EWD1239_fig12.png" alt="EWD1239 figure 12" title="EWD1239 figure 12" style="vertical-align: middle;"/> &nbsp; &nbsp; &nbsp; .</p>
+				<p class="noindent">Studying our three formulae and the corresponding figures, we see that in the triangles as named, the triangles with a minus sign in front of them are the ones whose perimeters are traversed counterclockwise (or &ldquo;widdershins&rdquo;, if you prefer). And this observation suggests the remedy: we introduce a new concept, called the &ldquo;signed area&rdquo;, and denoted by <span class="unicode">&#x25EC;</span>, which is the usual area in the case of clockwise traversal, but is the negative area if the traversal is anti-clockwise.</p>
+				<p class="noindent"><u>Remark</u> &nbsp; Whether the traversal is clockwise, is undefined in the case of the degenerate triangle, i.e. a &ldquo;triangle&rdquo; with its vertices on a straight line, but in that case its area equals zero and its sign is irrelevant. Also, please note that the theorems</p>
+				<table cellpadding="0" cellspacing="0" border="0" align="center" style="margin-top: 0.5em;">
+					<tr><td><span class="unicode">&#x25EC;</span><var>XYZ</var> = &#x2212;</td><td><span class="unicode">&#x25EC;</span><var>ZYX</var></td></tr>
+					<tr><td><span class="unicode">&#x25EC;</span><var>XYZ</var> = </td><td><span class="unicode">&#x25EC;</span><var>YZX</var></td></tr>
+				</table>
+				<p class="noindent">hold independently of the sign of <span class="unicode">&#x25EC;</span><var>XYZ</var>, i.e.,</p>
+				<p class="noindent" align="center">for both &nbsp; &nbsp; &nbsp; &nbsp; 
+					<img src="EWD1239_fig13.png" alt="EWD1239 figure 13" title="EWD1239 figure 13" style="vertical-align: middle;"/>
+					&nbsp; &nbsp; &nbsp; &nbsp; and &nbsp; &nbsp; &nbsp; &nbsp; 
+					<img src="EWD1239_fig14.png" alt="EWD1239 figure 14" title="EWD1239 figure 14" style="vertical-align: middle;" /> &nbsp; &nbsp; &nbsp; .</p>
+				<p class="noindent">A picture may be worth a thousand words, a formula is worth a thousand pictures. (End of Remark.)</p>
+				<p>In terms of the signed area, all three formulae are now expressed by</p>
+				<p class="noindent" align="center"><span class="unicode">&#x25EC;</span><var>PBC</var> + <span class="unicode">&#x25EC;</span><var>APC</var> + <span class="unicode">&#x25EC;</span><var>ABP</var> = <span class="unicode">&#x25EC;</span><var>ABC</var> &nbsp; &nbsp; &nbsp; .</p>
+				<p class="noindent">The user of the concept of the signed area has to pay a price of not listing after <span class="unicode">&#x25EC;</span> the vertices in arbitrary order, but the concept is so much cleaner than the traditional area, that he should pay this price gladly. The traditional, unsigned area has the absolute value built in, and it is a clumsy concept because the absolute value is such an ugly function. The traditional unsigned area forces us to deal with different cases that should not have been  distinguished in the first place.</p>
+				<p>The above two examples of how an unfortunate choice of concepts can complicate the reasoning should suffice at this stage, as we now pay some attention to a last aspect of effective reasoning, viz. the structure of the argument.</p>
+				<p>The purpose of the argument is always to draw a conclusion, but we wish to do so in the most trustworthy manner conceivable and we wish to present the reasoning that led us to the conclusion as convincing as possible. Mankind knows of only one way to reach those goals: constructing the argument as a finite sequence of small, explicit steps from a modest repertoire.</p>
+				<p>It has to be a finite sequence so that the reader can check them the one after the other. The steps have to be small and explicit so that they can be checked without guesswork. Finally the repertoire of permissible steps has to be modest, firstly because it must be humanly possible to have it in our fingertips, and, secondly, because we have to accept all the steps in the repertoire as trustworthy.</p>
+				<p class="noindent"><u>Remark</u> &nbsp; It is the finite repertoire of permissible steps that defines the class of valid arguments, that defines what a &ldquo;proof&rdquo; is. If the repertoire is empty, we can argue nothing, hence are automatically protected from the mortal sin of concluding nonsense. The larger the repertoire, the weaker the corresponding notion of &ldquo;proof&rdquo;, and by the time the repertoire admits any step, we can conclude nonsense in a single step &#x2014;we can prove anything in a single step!&#x2014; and the notion of proof has become void. (End of Remark.)</p>
+				<p>Let me give here an informal illustration of a main reasoning step, known as &ldquo;substituting equals for equals&rdquo;. Suppose that we are invited to conclude</p>
+				<p class="noindent">(i) &nbsp; &nbsp; &nbsp; &nbsp; a fortnight is longer than a week.</p>
+				<p class="noindent">Well, we certainly cannot do that if we don&rsquo;t have the foggiest notion of what fortnights and weeks are &#x2014;coming from another country, we could have a very limited English <span class="nowrap">vocabulary&#x2014;,</span> i.e. something about fortnights and weeks has to be given. Let these givens be</p>
+				<p class="noindent">(ii) &nbsp; &nbsp; &nbsp; &nbsp; a fortnight is fourteen days</p>
+				<p class="noindent">(iii) &nbsp; &nbsp; &nbsp; &nbsp;a week is seven days &nbsp; &nbsp; &nbsp; .</p>
+				<p class="noindent">Thanks to (ii) and (iii) we can eliminate the technical/mysterious/unknown terms/concepts &ldquo;fortnight&rdquo; and &ldquo;week&rdquo; from our demonstrandum (i), which, thanks to (ii) and (iii) is equivalent to</p>
+				<p class="noindent">(iv) &nbsp; &nbsp; &nbsp; &nbsp; fourteen days is longer than seven days &nbsp; &nbsp; &nbsp; .</p>
+				<p class="noindent">We won&rsquo;t pursue this example: if (iv) is an axiom, we are done. The point was to show that (ii) and (iii) yield the equivalence of (i) and (iv).</p>
+				<p>Please notice that these manipulations have very little to do with the truth of the statements manipulated. I mean, (ii) and (iii) can be used as above, to yield the equivalence of (v) and (vi) with </p>
+				<p class="noindent">(v) &nbsp; &nbsp; &nbsp; &nbsp; a week is longer than a fortnight</p>
+				<p class="noindent">(vi) &nbsp; &nbsp; &nbsp; &nbsp;seven days is longer than fourteen days</p>
+				<p class="noindent">or to yield the equivalence of (vii) and (viii) with</p>
+				<p class="noindent">(vii) &nbsp; &nbsp; &nbsp; &nbsp; a fortnight is cheaper than a week</p>
+				<p class="noindent">(viii) &nbsp; &nbsp; &nbsp; &nbsp;fourteen days is cheaper than seven days.</p>
+				<p class="noindent">It does not matter that (i) and (iv) seem right, that (v) and (vi) seem wrong, and (vii) and (viii) seem neither: in the context of the established equivalences, &ldquo;is longer than&rdquo; and &ldquo;is cheaper than&rdquo; are unanalysed relations, and what they seem is totally irrelevant.</p>
+				<p>As we continue our explorations, the distinction between &ldquo;calculating&rdquo; and &ldquo;concluding&rdquo; will get more and more blurred. This is to be expected; asked about the product of 17 and 323, we can &ldquo;calculate&rdquo; that that product is 5491, we can also &ldquo;conclude&rdquo; that that product is 5491: we cannot do the one without the other. We shall not hesitate to refer to the transformation of</p>
+				<p class="noindent" align="center"><var>a</var>·(<var>b+c</var>)</p>
+				<p class="noindent">into</p>
+				<p class="noindent" align="center"><var>a</var>·<var>b</var> + <var>a</var>·<var>c</var></p>
+				<p class="noindent">as &ldquo;calculations&rdquo;, we shall not hesitate to regard decimal numbers such as 17, 323 and 5491 as &ldquo;formulae&rdquo;, thus including calculation in the more general notion of &ldquo;formula manipulation&rdquo;. This was largely a remark about terminology, our next remark, with which we close this chapter, will be regarded by some as more fundamental.</p>
+				<p>The final remark is that the reasoning we are discussing deals with validity, not with truth. We may build up a theory about pyrodions, which we can do provided pyrodions have been defined in a useful manner. In order to be able to reason about pyrodions, earlier generations would say that we would need to know how to interpret statements about pyrodions, but we &#x2014;as will become clear in subsequent chapters&#x2014; just need to know the properties of pyrodions, i.e. no more and no less than how we may manipulate formulae containing elements that denote pyrodions.</p>
+				<p>For the purpose of our reasoning, the pyrodions are what our postulates define them to be, and it is about those that we can design a, let us hope beautiful, Theory of Pyrodions. And now someone familiar with our Theory encounters things very similar to what he always thought pyrodions looked like, and he would like to apply our Theory to them. If so, it is <em>his</em> responsibility to establish that his things enjoy all the characteristic properties that have been postulated for our pyrodions. Another way of saying that our reasoning does not justify its own application, an observation that can create wonder that for any beautiful theory there seem to be Pyrodions all over the place.</p>
+				<p style="margin-right: 2em;" align="right">Nuenen, 18 July 1996</p>
+
+				<p class="noindent">
+					prof.dr. Edsger W.Dijkstra<br />
+					Department of Computer Sciences<br />
+					The University of Texas at Austin<br />
+					Austin, TX 78712-1188<br />
+					USA
+				</p>
+				<br />
+			</div>
+			<div>
+        <br/>
+      </div>
+		</div>
+		<hr />
+		<div id="footer">
+         transcribed by Corrado Cantelmi<br />
+          revised 
+          <!-- #BeginDate format:En2 -->26-Dec-2011<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

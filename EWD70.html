@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: Over stapeladministratie. II (EWD 70)</title>
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>Over stapeladministratie. II</h1></div>
+		<div align="right">
+			
+			&nbsp;&nbsp;<a href="https://www.cs.utexas.edu/~EWD/ewd00xx/EWD70.PDF" target="_blank">EWD 70</a></div>
+		<div align="left">
+			<p><u>Over stapeladministratie. II</u></p>
+				<p><u>0. Inleiding</u>.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ik had aanvankelijk gehoopt, dat we een min of meer volledig overzicht zouden krijgen over de in aanmerking komende mogelijkheden en dat we tevens de criteria zouden krijgen met behulp waarvan we tussen deze mogelijkheden zouden kunnen kiezen. Dit vlot echter niet zo erg, mijn geduld raakt wat op en ik wil wel eens een voorstel zien, dat in elk geval werkt en niet te gek is. Ik hoop dus nu de verdieping van ons inzicht op een andere manier te bereiken, nl. door critische beschouwing van een concreet voorstel. De rest van deze notitie is aan zulk een voorstel gewijd.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mijn eerste zorg zijn drie fundamentele problemen, te weten:<br>
+				
+				
+				a) abrupte blokverschuiving<br>
+				
+				b) stapelverschuiving<br>
+				
+				c) paginavrijgave voor zg. grote arrays.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Daarbij komt dan nog een practisch probleem aan de orde, nl. optimalisering van de red - en herstelprocedure in het geval van de zg. &quot;simpele impliciete subroutine&quot;.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Over de stapelverschuiving het volgende: behalve de lijstjes van de referentiepunten (de displays) hoeven we in de stapel geen absolute adressen op te nemen, die verwijzen naar punten in de stapel; deze laatste kunnen we altijd opbergen relatief t.o.v. het begin van de stapelbodem. (Of we het altijd zullen doen is een tweede: aangenomen dat stapelverschuivingen dingen zijn, die tot de zeldzaamheden behoren, krijgen we wellicht een sneller systeem, als we waar mogelijk met physische adressen werken.)</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Uit het bovenstaande volgt, dat het belangrijk is, dat in de stapel de referentielijstjes gevonden kunnen worden; het is hier, dat we onderscheid maken tussen een procedure (dwz. nieuw lijstje) en ingewikkelde impliciete subroutine (dwz. terugvallen op een oud lijstje). De simpele impliciete subroutine kunnen we hier dacht ik buiten beschouwing laten, omdat deze immers in doofheid uitgevoerd wordt.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ik ga nu stapelbeelden voorstellen om toe te voegen bij activering van een procedure, resp. ingewikkelde parameter.</p>
+				<p><u>1. Aanroep van een procedure</u>.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het is de bedoeling dat het volgende mechanisme gebruikt wordt zowel voor de formele als voor de nonformele procedure, zowel voor de type procedure als de non-type procedure. Het is de bedoeling dit mechanisme blindelings te volgen in het geval van de type procedure call als zelfstandig statement. (De type procedure zal zijn waarde in het F-register afleveren; bij terugkeer zal SW wijzen naar de stapeltop in de zin van Voorhoeve, dwz. naar de eerste vrije plaats in kerngeheugen. Negeren van dit resultaat is dan al heel eenvoudig!)</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ik veronderstel, dat we voor de formele plaatsen aan twee woorden genoeg hebben en dat ook de invariante representatie van het terugkeeradres aan twee woorden genoeg heeft. (Deze veronderstellingen zijn waarschijnlijk niet juist, maar dat is in dit verband niet essentieel.) Op de volgende pagina is het voorgesteld stapelbeeld gegeven.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Opm.1 Het &quot;centerpunt&quot; wordt dus door een statusvariabele &quot;<tt>d</tt>&quot; vastgehouden, die in het kader van deze introductie de waarde<tt> d&nbsp;=&nbsp;d[i] </tt>krijgt; de waarde aan call-kant - hier aangeduid</p>
+			<table width="603" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%"><tt>M[d &#150; 3 &#150; 2 * nf]<br>M[d &#150; 3 &#150; 2 * nf]</tt></td>
+					<td>&#x2511;<br>
+						&#x2502; formele plaatsen van de 1ste parameter<br>
+						&#x2519;</td>
+				</tr>
+				<tr>
+					<td width="35%"></td>
+					<td>&#x22EE;<br>
+						&#x22EE;</td>
+				</tr>
+				<tr>
+					<td width="35%"><tt>M[d &#150; 5]<br>M[d &#150; 4]</tt></td>
+					<td>&#x2511;<br>
+						<tt>&#x2502;</tt> formele plaatsen van nf-de parameter<br>
+						&#x2519;</td>
+				</tr>
+				<tr>
+					<td width="35%"><tt>M[d &#150; 3]<br>M[d &#150; 2]</tt></td>
+					<td>&#x2511;<br>
+						&#x2502; invariant terugkeeradres<br>
+						&#x2519;</td>
+				</tr>
+				<tr>
+					<td width="35%"><tt>M[d &#150; 1]</tt></td>
+					<td><tt>= nf</tt></td>
+				</tr>
+				<tr>
+					<td width="35%"><tt>M[d]</tt></td>
+					<td><tt>= d[i &#150; 1]</tt></td>
+				</tr>
+				<tr>
+					<td width="35%"><tt>M[d + 1]</tt></td>
+					<td><tt>= L[i] (=d + 3)</tt></td>
+				</tr>
+				<tr>
+					<td width="35%"><tt>M[d + 2]</tt></td>
+					<td><tt>= bn[i]</tt></td>
+				</tr>
+				<tr>
+					<td valign="top" width="35%"><tt>M[d + 3]</tt></td>
+					<td><tt>= 0</tt>-de referentiepunt<br>
+						&#x22EE;<br>
+						&#x22EE;</td>
+				</tr>
+			</table>
+			<p>met<tt> d[i&nbsp;&#150;&nbsp;1] </tt>- wordt hier gered. De index <tt>i</tt> onderscheidt in deze beschrijving de vigerende activeringen van procedures en ingewikkelde parameters. NB. De index <tt>i</tt> speelt alleen een rol in deze beschrijving, in het werkende systeem wordt deze niet bijgehouden, we voeren dus geen dynamische diepteteller in. Met &quot;<tt>bn[i]</tt>&quot; is gemeend de heersende blokhoogte als geintroduceerd in EWD69;<tt> L[i] </tt>is de alvast in de stapel neergezette heersende waarde van<tt> L</tt>.</p>
+			<table border="0" cellspacing="2" cellpadding="0">
+				<tr>
+					<td>Opm.2 Het stapelen van &quot;<tt>nf</tt>&quot; is strikt genomen overbodig, maar ik wou het toch maar doen:</td>
+				</tr>
+				<tr>
+					<td>
+						<table width="532" border="0" cellspacing="2" cellpadding="0">
+							<tr>
+								<td valign="top">a)&nbsp;&nbsp;</td>
+								<td>het maakt een dynamische controle op de juistheid van het aantal meegegeven parameters mogelijk</td>
+							</tr>
+							<tr>
+								<td valign="top">b)&nbsp;&nbsp;</td>
+								<td>het maakt het - desgewenst - mogelijk om (in de bibliotheek) procedures op te nemen met een variabel aantal parameters.</td>
+							</tr>
+							<tr>
+								<td valign="top">c)&nbsp;&nbsp;</td>
+								<td>het terugkeermechanisme hoeft van de procedure niet meer het gegeven mee te krijgen, hoeveel formele plaatsen vergeten kunnen worden.</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<p><u>2. Aanroep van een gecompliceerde parameter</u>.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dit genereert aan de top van de stapel</p>
+			<table width="558" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="35%"><tt>M[d &#150; 3]<br>M[d &#150; 2]</tt></td>
+					<td>&#x2511;<br>
+						&#x2502; invariant terugkeeradres<br>
+						<tt>&#x2519;</tt></td>
+				</tr>
+				<tr>
+					<td width="35%"><tt>M[d &#150; 1]</tt></td>
+					<td><tt>=</tt> negatieve value-address indicatie</td>
+				</tr>
+				<tr>
+					<td width="35%"><tt>M[d]</tt></td>
+					<td><tt>= d[i &#150; 1]</tt></td>
+				</tr>
+				<tr>
+					<td width="35%"><tt>M[d + 1]</tt></td>
+					<td><tt>= L[i] (= L[j] </tt>met<tt> j &lt; i)</tt></td>
+				</tr>
+			</table>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dit stapelbeeld beantwoordt aan de aanroep van de impliciete subroutine. De impliciete subroutine is eenvoudiger dan de volslagen procedure in zoverre er geen parameters aan worden meegegeven; hij is ingewikkelder omdat (nl. als de actuele parameter een geindiceerde variabele is) zijn aanroep ook als &quot;left-hand side&quot; van de assignment statement voor kan komen.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Voor deze laatste complicatie zijn ettelijke oplossingen. Het boven gegeven stapelbeeld beantwoordt aan de techniek, waarin het objectprogramma van de body zijn behoefte kenbaar maakt met behulp van &quot;Take formal address&quot; of &quot;Take formal value&quot;. Welke van deze twee aanroepen gegeven wordt, moet dan in de stapel opgeslagen worden.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Een alternatief is, dat het objectprogramma slechts zegt &quot;Go formal&quot; en dat de impliciete subroutine behalve zijn primitieve resultaat er bij aflevert de indicatie &quot;address&quot; resp. &quot;value&quot;. Het objectprogramma kan dan aan de call kant van de impliciete subroutine inlassen <br>
+				a) als linkerkant &quot;if value alarm&quot;<br>
+				b) als rechterkant &quot;if address, take value&quot;</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Een derde mogelijkheid is, om altijd &quot;value&quot; en &quot;address&quot; af te leveren en aan call kant het gewenste te selecteren. Hierbij doe je echter altijd te veel. (Dit is bovendien naar als de waarde nog ongedefinieerd is; ik zou niet graag door een parity fout gestraft worden.)</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De bovengenoemde beelden zijn gesuggereerd in de veronderstelling dat het teken van <tt>M[d&nbsp;&#150;&nbsp;1] </tt>steeds descriptief zou zijn voor de situatie procedure resp. impliciete subroutine. (Dit impliceert, dat een procedure zonder parameters van de call kant <tt>nf&nbsp;=&nbsp;+0</tt> mee moet krijgen; het onderscheid tussen &quot;value&quot; resp. &quot;address&quot; kan dan door <tt>&#150;0</tt> en <tt>&#150;1</tt> gemaakt worden.)</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In beide gevallen zouden we zonder de indicatie in<tt> M[d&nbsp;&#150;&nbsp;1] </tt>kunnen; het onderscheid tussen de twee stapelbeelden kunnen we ook maken door de testen of er een nieuwe referentielijst is ingewoerd, dwz. of<tt> M[d&nbsp;+&nbsp;1]&nbsp;=&nbsp;d&nbsp;+&nbsp;3 </tt>is of niet.</p>
+			<p><u>3. Simpele impliciete subroutine.</u></p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In dit geval hoeft alleen het terugkeeradres in de stapel opgenomen te worden. Het onderscheid tussen value en address bestaat niet, het is nl. altijd value. (De enkele variabele identifier als actuele parameter geeft nl. geen aanleiding tot een impliciete subroutine; het moet een echte expressie zijm. Hier is het feit, dat de indicering in de actuele parameter de impliciete subroutine per definitie ingewikkeld maakt een meevaller!)</p>
+			<p><u>4. Stapelverschuiving.</u></p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tijdens de simpele impliciete subroutine kan geen interruptie optreden en kan dus ook geen behoefte aan verschuiving optreden. In alle andere gevallen geeft de heersende waarde van de statusvariabele &quot;<tt>d</tt>&quot; ons de clou, hoe we verder moeten gaan. De referentielijsten kunnen we feilloos vinden en dus kunnen we de verschuiving bijwerken. De gestapelde <tt>L</tt>-waarden en de geketende <tt>d</tt>-waarden kunnen we eveneens feilloos vinden en ook hier kunnen we ons de luxe van physische adressen veroorloven. Dankzij de conventie van de gestapelde nf kunnen we ook alle formele plaatsen eenduidig vinden. Als we hier een goede layout voor kiezen, kunnen we ook hier misschien ons de luxe van physische adressen veroorloven. (Het is questieus of ons dat geen verdere ellende oplevert. We moeten niet de vergissing van de B5000 maken!)</p>
+				<p><u>5. Paginavrijgave.</u></p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zoals d inhaakt op de jongste schakel van de dynamische ketting, zo kunnen we een statusgrootheid e invoeren (eveneens per programma), die inhaakt op de jongste storage function van een groot array; storage functions van grote arrays ketenen we op de gebruikelijke manier.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In geval van blokverlating onderzoekt men, of hierdoor SW onder de heersende waarde van e gezakt is: zo ja, dan zakt men de ketting af, daarbij alle gepasseerde storage functions scannend voor vrij te geven pagina's. Hiermee gaat men door totdat e onder SW gezakt is.</p>
+		</div>
+		<hr>
+		<font size="-1">transcribed by Sam Samshuijzen<br>
+			
+			
+			revised <csobj format="MedDate" h="12" region="15" t="DateTime" w="89">Fri, 6 May 2005</csobj></font>
+	</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<title>E.W.Dijkstra Archive: On a class of graphs with modest diameter (EWD 987)</title>
+		<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen" />
+		<style type="text/css"> .nowrap  { white-space: nowrap; } </style>
+	</head>
+	<body><div id="title"><h1>On a class of graphs with modest diameter</h1></div>
+		<div id="frame">
+
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd09xx/EWD987.PDF"
+					 title="Link to the PDF version of EWD987">EWD 987</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>On a class of graphs with modest diameter</u></p>
+				<p>The diameter of a graph is defined as the minimum path length, measured in number of edges, that suffices to connect any two nodes. We confine ourselves to undirected graphs. (For the complete graph, the diameter equals 1, for a star it equals 2.)</p>
+				<p>For the <var>n</var>-dimensional &ldquo;cube&rdquo;, the diameter equals <var>n</var>, and so does the &ldquo;fan&rdquo; &mdash;number of edges meeting&mdash; of each node. Some time ago, Jan L.A. van de Snepscheut showed me how for <var>n</var>=3 the diameter could be reduced to 2 without changing the fan. Without proof he mentioned that under that constraint, the diameter could be almost halved (to <var>n</var>&nbsp;<b>div</b>&nbsp;2&nbsp;+&nbsp;1). Looking for a constructive proof of that statement, I found another class of graphs with diameter almost <var>n</var>/3, and a smaller number of edges (<sup>2</sup>/<sub>3</sub>); the maximum fan, however, is <var>n</var>+1. More precisely:<br />
+					&nbsp; &nbsp; &nbsp; for a graph of 2<sup><var>n</var></sup> nodes with <var>n</var> = 3·<var>k</var> + 2:<br />
+					&#x2022; &nbsp; &nbsp; the diameter is <var>k</var>+3<br />
+					&#x2022; &nbsp; &nbsp; half the nodes have a fan <var>n</var>+1<br />
+					&#x2022; &nbsp; &nbsp; half the nodes have a fan <var>k</var>+2 &nbsp; .</p>
+				<p>The remainder of this note is devoted to a description of my construction.</p>
+				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+				<p>As is to be expected, we identify our nodes by <var>n</var>-bit strings, parsed as a pair &mdash;called <span class="nowrap"><var>x</var>&#x2014;,</span> followed by <var>k</var> triples &mdash;called the <span class="nowrap"><var>y</var>&rsquo;s&#x2014;.</span> From now on we shall call our nodes &ldquo;strings&rdquo;.</p>
+				<p>We only introduce connections between two strings that either</p>
+				<table cellpadding="0" cellspacing="0" border="0">
+					<tr><td>(i)</td><td>only differ in their <var>x</var>, &nbsp; &nbsp; &nbsp; or</td></tr>
+					<tr><td>(ii)&nbsp;&nbsp;&nbsp;</td><td>only differ in a single <var>y</var>.</td></tr>
+				</table>
+				<p>The connection pattern for the 4 different <var>x</var>-values is given by</p>
+				<p class="noindent" align="center"><img src="EWD987_fig1.png" alt="EWD987 figure 1" title="EWD987 figure 1" /></p>
+				<p class="noindent">(The assignment of <var>x</var>-values to the four corners is immaterial; who wants to be specific may think of 00 at A, 11 at B, 01 and 10 each at a C-corner.) The important property of this graph is that each corner can be connected to each corner &mdash;i.e. including itself&mdash; by a path of length &#x2264;&nbsp;3 and containing A, B, and at least one C-corner. Depending on its <var>x</var>, a string is called an A-string, a B-string or a C-string.</p>
+				<p>A pair of different <var>y</var>-values is an A-pair, a B-pair or a C-pair according to their bit-wise sum: for three values of the bit-wise sum (say 001, 010, and 100) it is an A-pair, for three other values (say 011, 101, and 110) it is a B-pair and for the last value (say 111) it is a C-pair.</p>
+				<p>Two strings, differing only in one <var>y</var>, have the same <var>x</var>, are thus both X-strings (with X = A, B, C); they are connected if and only if the two differing <var>y</var>&rsquo;s form an X-pair.</p>
+				<p>The diameter of the resulting graph is <var>k</var>+3, as follows from the following algorithm for finding a path. Compare the <var>y</var>-components of the source string with the corresponding <var>y</var>-components of the target string. Wherever they differ, they form an A-pair, a B-pair, or a C-pair. In the worst case, they all occur. Choose in the <var>x</var>-graph a path from source <var>x</var> to target <var>x</var> containing nodes of all types needed: when the string is an X-string, all <var>y</var>&rsquo;s where we found an X-pair can be transformed into their final value.</p>
+				<p>The A- and B-strings &mdash;together half of them&mdash; have a fan of 3·<var>k</var>&nbsp;+&nbsp;3&nbsp;=&nbsp;<var>n</var>&nbsp;+&nbsp;1; the C-strings &mdash;the other half of them&mdash; have a fan <var>k</var>&nbsp;+&nbsp;2. The total number of edges is therefore <span class="nowrap">2<sup><var>n</var>-2</sup>·(<var>n</var> + <var>k</var> + 3).</span></p>
+				<p class="noindent"><u>Remark</u> &nbsp; We could have partitioned 7 bit-wise sums of two different <var>y</var>&rsquo;s differently, e.g. 2 A-pairs, 2 B-pairs, and 3 C-pairs. For A-strings and B-strings the fan would have been 2·<var>k</var>&nbsp;+&nbsp;3, for the C-strings 3·<var>k</var>&nbsp;+&nbsp;2&nbsp;=&nbsp;<var>n</var>. The total number of edges would have been <span class="nowrap">2<sup><var>n</var>-2</sup>·(<var>n</var> + 2·<var>k</var> + 3).</span> (End of Remark.)</p>
+				<p>Since the gain over the graphs mentioned by van de Snepscheut only materializes for larger <var>n</var>, and <var>n</var> occurs as exponent in the number of nodes, I do not expect my construction to be of any significance if nodes are machines. But it is nice to know that this construction exists, and it was fun to design it. (Describing it was just as hard as I had expected.)</p>
+				<p align="center">Austin, 6 October 1986</p>
+				<p class="noindent">
+					prof.dr. Edsger W.Dijkstra<br />
+					Department of Computer Sciences<br />
+					The University of Texas at Austin<br />
+					Austin, TX 78712&ndash;1188<br />
+					United States of America
+				</p>
+
+			</div>
+			<div>
+    <br/>
+  </div>
+		</div>
+		<hr />
+		<div id="footer">
+     transcribed by Corrado Cantelmi<br /> 
+     revised 
+     <!-- #BeginDate format:En2 -->15-Mar-2012<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

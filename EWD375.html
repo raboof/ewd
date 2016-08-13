@@ -1,0 +1,505 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: A non algebraic example of a constructive correctness proof (EWD 375)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+	</head>
+  <body><div id="title"><h1>A non algebraic example of a constructive correctness proof</h1></div>
+    <div id="frame" align="right">
+			<div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd03xx/EWD375.PDF" 
+           title="Link to the PDF version of EWD375">EWD375</a></div></div>
+		<div id="frame">
+			<div id="content">
+			  <p class="noindent"><u>A non algebraic example of a constructive correctness proof.</u></p>
+<p>We consider a text built from five types of characters, viz. digits,
+operators, &ldquo;(&rdquo;, &ldquo;)&rdquo; and &ldquo;;&rdquo;. The text can be read from left to right by  
+means of the primitive <code>move</code> which assigns to the variable named &ldquo;<var>x</var>&rdquo; the next
+character of the text. Initially the value of <var>x</var> is undefined, after the
+first execution of <code>move</code>, <var>x</var> equals the left-most character of the text. The
+text has infinite length and it is required to write a recognizer called &ldquo;<code>sent</code>&rdquo; that has to establish whether the text starts with a < <var>sent</var> > ,
+given by the following syntax.</p>
+<table width = "100%" border="0" align="right" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="left" valign="middle"><p class="p0">< <var>sent</var> > ::= < <var>exp</var> >;</p></td>
+    <td align="right" valign="bottom">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="left" valign="bottom"><p class="p0">< <var>exp</var> >  ::= < <var>term</var> > {< <var>operator</var> > < <var>term</var> >}</p></td>
+    <td align="right" valign="bottom">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="left" valign="bottom"><p class="p0">< <var>term</var> > ::= < <var>digit</var> > {< <var>digit</var> >} | (< <var>exp</var> >)&nbsp; <br />
+      &nbsp;
+    </p></td>
+    <td align="right" valign="top"><div align="right" class="p0">(1)</div></td>
+  </tr>
+</table>
+<p class="noindent"> Here { ..... } should be read as &ldquo;zero or more times the enclosed&rdquo;. An
+  alternative syntax would have been</p>
+<table width = "100%" border="0" align="right" cellpadding="0" cellspacing="0">
+  <tr>
+      <td align="left" valign="middle"><p class="p0">&lt; <var>sent</var> &gt; ::= &lt; <var>exp</var> &gt;;</p></td>
+      <td align="right" valign="bottom">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="left" valign="bottom"><p class="p0">&lt; <var>exp</var> &gt;  ::=  {&lt; <var>term</var> &gt;&lt; <var>operator</var> &gt;} &lt; <var>term</var> &gt;</p></td>
+      <td align="right" valign="bottom">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="left" valign="bottom"><p class="p0">&lt; <var>term</var> &gt; ::= {&lt; <var>digit</var> &gt;} &lt; <var>digit</var> &gt;  | (&lt; <var>exp</var> &gt;)<br />
+        &nbsp; 
+      </p></td>
+      <td align="right" valign="top"><div align="right" class="p0">(2)</div></td>
+    </tr>
+  </table>
+ </p>
+  <p class="p1">  We regard (1) and (2) as trivially equivalent.    </p>             
+  <p>
+      In order to carry out this investigation, the routine has at its
+disposal five boolean functions, defined when <var>x</var> has a value, viz. <code>digit</code>(<var>x</var>),
+<code>operator</code>(<var>x</var>), <code>open</code>(<var>x</var>), <code>close</code>(<var>x</var>) and <code>semi</code>(<var>x</var>), such that always exactly one of
+the five has the value <b>true</b>.
+<p>
+      The result of the investigation has to be recorded in the global
+boolean named &ldquo;<var>c</var>&rdquo; (short for: &ldquo;correct&rdquo;). In order to specify more rigorously
+the net effect to be established by a call on <code>sent</code>, we introduce the following
+notations.
+<p>
+      Let <var>S</var> be the non-empty string of characters read by <code>sent</code>; by definition
+      <var>x</var> then equals the right-most character of <var>S</var> and by <var>S</var> &#8722; <var>x</var> we denote the
+string of characters of <var>S</var> up to and excluding this right-most character.
+<p>
+      We now want to express two things: if a < <var>sent</var> > is found, <var>S</var> should
+equal that sentence; if, however, <code>sent</code> has established that the text does
+not start with a < <var>sent</var> >, no more characters than are needed for this
+conclusion should have been read. In view of our later needs, we introduce
+two new syntactic categories, viz. < <var>pbo sent</var> > and < <var>bo sent</var> >. Here
+< <var>pbo sent</var> > stands for &ldquo;proper begin of a sentence but not a complete
+sentence&rdquo;, i.e:. a string of characters not forming a sentence all by itself,
+but that still can be extended to form a correct sentence; < <var>bo sent</var> > ,
+being short for &ldquo;begin of sentence&rdquo;, is either a correct sentence all by
+itself, or allowing extension to a correct sentence. In other words
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><p class="p0">< <var>bo</var> <var>sent</var> > ::=  < <var>pbo</var> <var>sent</var> > | < <var>sent</var> ></p></td>
+      <td><div align="right">(3) </div></td>
+    </tr>
+  </table>
+  <p align="left" class="p1">  Similarly we introduce:</p>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><p class="p0">< <var>bo</var> <var>exp</var> > ::= < <var>pbo</var> <var>exp</var> > | < <var>exp</var> ></p></td>
+      <td><div align="right">
+        <p>(4)</p>
+      </div></td>
+    </tr>
+    <tr>
+      <td><p class="p0">< <var>bo</var> <var>term</var> ::= < <var>pbo</var> <var>term</var> > | < <var>term</var> ></p></td>
+      <td><div align="right">
+        <p>(5)</p>
+      </div></td>
+    </tr>
+  </table>
+  <p class="noindent">  Note: A < <var>pbo</var> <var>Y</var> > has <em>not</em> been defined as a string that by a non-empty
+            extension can be transformed into a < <var>Y</var> > : it has also been required not
+            to be a < <var>Y</var> > all by itself.
+  <p>
+      In terms of <var>S</var> and the notion < <var>pbo</var> <var>sent</var> > we now specify the desired
+net effect of <var>sent</var> by requiring that upon completion
+  <p>  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+       <tr>
+         <td width="31%" align="right"><var>S</var> &ndash; <var>x</var> = &lt; <var>pbo</var> <var>sent</var> &gt; <b>and</b></td>
+         <td width="69%">&nbsp;</td>
+    </tr>
+       <tr>
+         <td align="right"><var>S</var> &ne; &lt; <var>pbo</var> <var>sent</var> &gt; <b>and</b></td>
+         <td>&nbsp;</td>
+    </tr>
+       <tr>
+         <td align="right"><var>c</var> = [ <var>S</var> = &lt; <var>sent</var> &gt; ]</td>
+         <td align="right">(6)</td>
+    </tr>
+  </table>
+  <p>
+      The first of these terms is required to ensure that not too much has
+been read, the second guarantees that enough has been read and the final
+term defines the value of <var>c</var>. Note that specification (5) has been given
+without taking syntax (1) into account! <em>All</em> proper initial strings of <var>S</var> are
+of the syntactical category < <var>pbo</var> <var>sent</var> > : the empty string is, and as soon 
+as reading has progressed such that the first two terms are true, reading
+stops and <var>c</var> will get its proper value.
+<p>
+      In order to proceed with (6) in which that syntactic category
+< <var>pbo</var> <var>sent</var> > occurs, we derive from the first line of (1)  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><p class="p0">&lt; <var>pbo</var> <var>sent</var> &gt; ::= &lt; <var>bo</var> <var>exp</var>&gt;        &nbsp;
+      </p></td>
+      <td align="right">(7)</td>
+    </tr>
+  </table>
+  <p class="p1">where < <var>bo</var> <var>exp</var> > comprises all expressions and sequences that can be
+         extended to an expression.</p>
+  <p class="noindent">
+(Note: According to (4) it is not excluded that a proper initial string of
+an expression by itself is an expression!)
+<p>
+      Relation (7), together with the first line of the syntax (1) enables us
+to rewrite the desired net effect of <code>sent</code> as follows: upon termination of
+<code>sent</code> we require</p><p>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="29%" align="right"><var>S </var>&ndash; <var>x</var> = &lt; <var>bo</var> <var>exp</var> &gt; <b>and</b></td>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="right"><var>S</var> &ne; &lt; <var>bo</var> <var>exp</var> &gt; <b>and</b></td>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="right"><var>c</var> = [ <var>S</var> &ndash; <var>x</var> = &lt; <var>exp&nbsp;</var></td>
+      <td width="62%" align="right"><div align="left">&gt;&nbsp;<b>and</b> <code>semi</code>(<var>x</var>)]</div></td>
+      <td width="9%" align="right">(8)</td>
+    </tr>
+  </table></p>
+  <p>
+      The second line shows that the concept < <var>bo</var> <var>exp</var> > is related to the
+complete string <var>S</var>. As a result, when we wish to express <code>sent</code> in terms of
+a primitive <code>exp</code>, whose analysis has to embody the syntactical rules of an
+< <var>exp</var> > and that shall read a string <var>E</var>, then <var>E</var> and <var>S</var> should be identical.</p>
+<p>
+      In terms of a primitive <code>exp</code>, reading a string <var>E</var>, such that upon
+termination
+      <br />
+      &nbsp;
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="29%" align="right" class="p0"><var>E</var> &ndash; <var>x</var> = &lt; <var>bo</var> <var>exp</var> &gt; <b>and</b></td>
+    <td width="71%" colspan="2">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right" class="p0"><var>E</var> &ne; &lt; <var>bo</var> <var>exp</var> &gt; <b>and</b></td>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="right" class="p0"><var>c</var> = [ <var>E</var> &ndash; <var>x</var> = &lt; <var>exp </var></td>
+    <td align="right" class="p0"><div align="left">  &nbsp;&gt; ]</div></td>
+    <td align="right" class="p0">(9)</td>
+  </tr>
+</table>
+<p class="noindent">the body
+  &nbsp;
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p><b>proc</b> <code>sent</code>: <code>exp</code>; <var>c</var> := <var>c</var> <b>and</b> <code>semi</code>(<var>x</var>) <b>corp</b></p></td>
+    <td><div align="right">
+      <p>(10)</p>
+    </div></td>
+  </tr>
+</table>
+<p class="noindent">satisfies requirement (8). A formal proof of the correctness of (10) relies
+        on the axiom of assignment only: with post-condition (8) we derive on account
+        of (1) as the post-condition for its call of <code>exp</code>
+  <br />
+  &nbsp;
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="38%"><div align="right"><var>S</var> &ndash; <var>x</var> = &lt; <var>bo</var> <var>exp</var> &gt; <b>and</b></div></td>
+    <td width="62%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><div align="right"><var>S</var> &ne; &lt; <var>bo</var> <var>exp</var> &gt; <b>and</b></div></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><div align="right"><var>c</var> <b>and</b> <var>semi</var>(<var>x</var>) = [ <var>S</var> &ndash;</div></td>
+    <td><var>&nbsp;x</var> = &lt; <var>exp</var> &gt; <b>and</b></u> <var>semi</var>(<var>x</var>)]</td>
+  </tr>
+</table>
+<p class="noindent">which is obviously satisfied by <var>E</var> = <var>S</var> and specification (9). The equality
+        <var>E</var> = <var>S</var> is guaranteed when, prior to its call on <code>exp</code>, <code>sent</code> will not command
+        any <code>move</code>. It does not: it opens with <code>exp</code>.
+  <p>
+      Now we are left with the duty of constructing a recognizer <code>exp</code>, reading
+a string <var>E</var> given by the first two lines of (9) and assigning to <var>c</var> the value
+given by the last line of (9). Because (9) mentions the syntactic category
+< <var>bo</var> e<var>x</var>p >, we had better derive its syntactic definition, now from the
+second line of the syntax. Syntax (2) is the most convenient and we find
+&mdash;because <&nbsp;<var>operator</var> > is always a single character!&mdash;
+  &nbsp;  
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><p>&lt; <var>bo exp</var> &gt; ::= {&lt; <var>term</var> &gt;&lt; <var>operator</var> &gt;} &lt; <var>bo</var> <var>term</var> &gt;</p></td>
+      <td> <p align="right">(11)</p></td>
+    </tr>
+  </table>
+  <p> The braces &mdash;&ldquo;zero or more times&rdquo;&mdash; suggest a <b>while</b> loop and therefore
+    we must try to find a convenient invariant, implied by (9). It is certainly
+    necessary to maintain
+  <p><var>E</var> &ndash; <var>x</var> = < <var>bo</var> <var>exp</var> >
+  <p class="noindent">as this takes care of the requirement that not too much will be read. On
+      account of (11) we can then write
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><p><var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E</var> = {&lt; <var>term</var> &gt;&lt; <var>operator</var> &gt;} <var>T&prime;</var></p></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><p class="noindent">with <var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T&prime;</var> &ndash; <var>x</var> = &lt; <var>bo</var> <var>term</var> &gt;</p></td>
+      <td><div align="right">
+        <p class="noindent">(12)</p>
+      </div></td>
+    </tr>
+  </table>
+  <p>
+      Equation (11) tells us that the necessary and sufficient condition for
+        <var>E</var> = < <var>bo</var> <var>exp</var> > is in terms of <span class="noindent"><var>T&prime;</var></span>, as given by (12),
+  <p><var>T&prime;</var> = < <var>bo</var> <var>term</var> > <b>or</b> <var>T&prime;</var> = < <var>term</var> >< <var>operator</var> > .
+  <p class="noindent">The necessary and sufficient condition for <var>E</var> &ne; < <var>bo</var> <var>exp</var> > is therefore
+  <p><var>T&prime;</var> &ne; < <var>bo</var> <var>term</var> > <b>and </b><var>T&prime;</var> &ne; < <var>term</var> >< <var>operator</var> > 
+  <p class="noindent">or   
+  <p><var>T&prime;</var> &ne; < <var>bo</var> <var>term</var> > <b>and non</b> [ <var>T&prime;</var> &ndash; <var>x</var> = < <var>term</var> > <b>and</b> <code>operator</code>(<var>x</var>)]
+  <p class="noindent">Furthermore it follows from (12) and the syntax for < <var>exp </var>> that
+        <var>E</var> &ndash; <var>x</var> = < <var>exp</var> > (from the third line of (9)) is equivalent to
+  <var>T&prime;</var> &ndash; <var>x</var> = < <var>term</var> >. Therefore we can rewrite (9) as</p><p>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="43%"><div align="right"><span class="noindent"><var>Q</var> <b>and non</b> [ <var>c</var> <b>and</b> <code>operator</code>(<var>x</var>)]</span></div></td>
+      <td width="57%">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><span class="noindent">with <var>Q</var>: <var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E</var> &ndash; <var>x</var> = &lt; <var>bo</var> <var>exp</var> &gt; <b>and</b></span></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><div align="right"><span class="noindent"><var>T&prime;</var> &ndash; <var>x</var> = &lt; <var>bo</var> <var>term</var> &gt; <b>and</b></span></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><div align="right"><span class="noindent"><var>T&prime;</var> &ne; &lt; <var>bo</var> <var>term</var> &gt; <b>and</b></span></div></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td><div align="right"><span class="noindent"><var>c</var> = [ <var>T&prime;</var> &ndash; <var>x</var> =&lt; <var>term</var> &gt; ]</span></div></td>
+      <td><div align="right"><span class="noindent"> (13)</span></div></td>
+    </tr>
+  </table>
+  <p class="noindent">where we have combined in <var>Q</var> all assertions about the total text read by <code>exp</code>.
+  Now the invariance theorem for loops suggests a body for <code>exp</code> of the form  </p><table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p>establish <var>Q</var>: <b></b></p></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td><p class="nospace"><b>while</b> <var>c</var> <b>and</b> <code>operator</code>(<var>x</var>) <b>do</b> something without violating <var>Q</var> <b>od</b></p></td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+  <p>Analogous to (9) we try a primitive <code>term</code>, such that upon completion
+the string <var>T</var> read by it and <var>c</var> satisfy  </p>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="44%"><p align="right"><var>T</var> &ndash; <var>x</var> = &lt; <var>bo</var> <var>term</var> &gt; <b>and</b></p></td>
+      <td width="56%" colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td><p align="right" class="nospace"><var>T</var> &ne; &lt; <var>bo</var> <var>exp</var> &gt; <b>and</b></p></td>
+      <td colspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td><p align="right" class="nospace"><var>c</var> = [ <var>T</var> &ndash; <var>x</var> = &lt; <var>term</var></p></td>
+      <td><div align="left">&nbsp;&gt;]      </div></td>
+      <td><div align="right"><span class="nospace">(14)</span></div></td>
+    </tr>
+  </table>
+  <p>Relations (12), (13) and (14) suggest that we try to prove that</p>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td width="45%"><p><var>E</var> = {&lt; <var>term</var> &gt;&lt; <var>operator</var> &gt;}</p></td>
+      <td width="55%"><div align="right">
+        <p>(15)</p>
+      </div></td>
+    </tr>
+  </table>
+  <p class="noindent">is a sufficient precondition for <code>term</code> to ensure the postcondition <var>Q</var>. As
+            far as the effect on E of the primitive <code>term</code> is concerned, an execution
+            of <code>term</code> is equivalent to</p>
+  <p><var>E</var> := <var>E</var> + <var>T</var>
+  <p class="noindent">(where we have used the "+" for concatenation) or
+  <p><var>E</var> &ndash; <var>x</var> := <var>E</var> + <var>T</var> &ndash; <var>x</var>
+  <p class="noindent">The post-condition <var>E</var> &ndash; <var>x</var> = < <var>bo</var> <var>exp</var> > reduces thanks to the axiom of assignment
+            and (11) to the pre-condition
+  <p><var>E</var> + <var>T</var> &ndash; <var>x</var> = {< <var>term</var> >< <var>operator</var> >} < <var>bo</var> <var>term</var> > .
+  <p class="noindent">Because <var>T</var> &ndash; <var>x</var> = < <var>bo</var> <var>term</var> > , (15) is a sufficient precondition, allowing
+            the identification <var>T&prime;</var> = <var>T</var>, guaranteeing on account of (14) the last three
+            lines of <var>Q</var> as well. Because <var>E</var> = < empty > is a specific instance of (15),
+            the initialization of the loop &mdash;i.e. establishing <var>Q</var> to start with&mdash; can be
+            done by a single call on <code>term</code>. As repeatable statement <code>term</code> would be
+            acceptable, provided that we can show that
+  <p><var>Q</var> <b>and</b> <var>c</var> <b>and</b> <var>operator</var>(<var>x</var>)&nbsp;&rArr;&nbsp;relation (15)
+  <p>The left-hand implies
+  <p><var>E</var> &ndash; <var>x</var> = { < <var>term</var> >< <var>operator</var>>} <var>T&prime;</var> &ndash; <var>x</var> <b>and</b>
+            <var>T&prime;</var> &ndash; <var>x</var> = < <var>term</var> > <b>and</b>
+            <code>operator</code>(<var>x</var>)
+  <p class="noindent">and therefore (15) holds, but (15) was a sufficient pre-condition for <code>term</code>
+  not to violate <var>Q</var> and we have found the program   
+  <p><b>proc</b> <code>exp</code>:&nbsp;&nbsp;&nbsp; <code>term</code>; <b>while</b> <var>c</var> <b>and</b> <code>operator</code>(<var>x</var>) <b>do</b> <code>term</code> <b>od corp</b> .
+  <p>
+      We are left with the duty to construct a primitive <code>term</code> such that the
+string <var>T</var>, read by it, and <var>c</var> will satisfy (14) upon completion. In order to
+construct it, we derive from the third line of syntax (2) the syntactic rule</p>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><p>&lt; <var>bo</var>&nbsp;<var>term</var> &gt; ::= {&lt; <var>digit </var>&gt;} | (&lt; <var>bo</var> <var>exp</var> &gt; | (&lt; <var>exp</var> &gt;)</p></td>
+      <td><div align="right">(16)</div></td>
+    </tr>
+  </table>
+  <p class="noindent">and the primary duty of <code>term</code> is to establish a string <var>T</var> such that</p>
+  <p><var>T</var> &ndash; <var>x</var> = < <var>bo</var> <var>term</var> > <b>and</b>  
+  <p class="nospace"></u>
+    <var>&nbsp;&nbsp;&nbsp;T</var> &ne; < <var>bo</var> <var>term</var> >&nbsp;&nbsp;&nbsp; .
+  <p>According to the syntax (16) we have three cases
+  <p class="noindent">A)          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>T</var> &ndash; <var>x</var> = {< <var>digit</var> >}  </p>
+ In this case <var>x</var> &ne; < <var>digit</var> > on account of the requirement <var>T</var> &ne; < <var>bo</var> <var>term</var> > ,
+      and <var>c</var> is to get the value <b>true</b> when <var>T</var> &ndash; <var>x</var> &ne; < empty > .
+  <p class="noindent">B)          <var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T</var> &ndash; <var>x</var> = (< <var>bo</var> <var>exp</var> ></p>
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td><span class="noindent">or, with <var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;T</var> = ( <var>E</var></span></td>
+      <td><div align="right"><span class="noindent">(17)</span></div></td>
+    </tr>
+  </table>
+we then know that
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p><var>E</var> &ndash; <var>x</var> = &lt; <var>bo</var> <var>exp</var> &gt; <b>and</b> <var>E</var> &ne; &lt; <var>bo</var> <var>exp</var> &gt; . </p></td>
+    <td><div align="right">
+      <p class="noindent">(18)</p>
+    </div></td>
+  </tr>
+</table>
+<p class="noindent">But we know also   
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><p><b>non</b> [ <var>E</var> &ndash; <var>x</var> = &lt; <var>exp</var> &gt; <b>and</b> <code>close</code>(<var>x</var>)]</p></td>
+    <td><div align="right">
+      <p class="noindent">(19)</p>
+    </div></td>
+  </tr>
+</table>
+<p class="noindent">because otherwise <var>T</var> = < <var>bo</var> <var>term</var> > (3rd alternative) would have been true. In
+      this case <var>c</var> must get the value <b>false</b>, because from <var>T</var> &ndash; <var>x</var> = < <var>term</var> > would
+      follow <var>E</var> &ndash; <var>x</var> = < <var>exp</var> ) and this is incompatible with <var>E</var> &ndash; <var>x</var> = < <var>bo</var> <var>exp</var> >
+    because via mathematical induction it is easily proved that in an < <var>exp</var> >
+    the number of opening brackets equals the number of closing brackets while
+    in a < <var>bo</var> <var>exp</var> > the number of closing brackets does not exceed the number
+      of opening brackets.
+  <p class="noindent">C)          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>T</var> &ndash; <var>x</var> = (< <var>exp</var> >)
+  </p>
+In this case, regardless the value of <var>x</var>, <var>T</var> &ne; < <var>bo</var> <var>term</var> > holds and <var>c</var> must
+      get the value <b>true</b>.  With
+  <p><var>T</var> &ndash; <var>x</var> = ( <var>E</var> </p>
+  <p class="noindent">&mdash;in contrast to (17), covering case B&mdash; we have again relation (18) but also
+  </p>
+  <p><var>E</var> &ndash; <var>x</var> = < <var>exp</var> > <b>and</b> <code>close</code>(<var>x</var>). </p>
+  <p class="noindent">But this is exactly the negation of relation (19)! Thus we are led to the
+  following program (with comments inserted between braces) </p><p>
+  <table width="95%" border="0" align="right" cellpadding="0" cellspacing="0">
+    <tr>
+      <td width="13%" rowspan="7" valign="top"><b><code>proc</code></b> <code>term</code>:</td>
+      <td colspan="4"><code>move</code>;</td>
+    </tr>
+    <tr>
+      <td colspan="4"><b><code>if</code></b> <code>open</code>(<var>x</var>) </td>
+    </tr>
+    <tr>
+      <td width="1%" rowspan="5">&nbsp;</td>
+      <td width="4%" rowspan="5" valign="top"><b><code>then</code></b></td>
+      <td colspan="2"> {case B and case C} <code>exp</code>;</td>
+    </tr>
+    <tr>
+      <td colspan="2"><b><code>if</code></b> <var>c</var> <b><code>and</code></b> <code>close</code>(<var>x</var>)</td>
+    </tr>
+    <tr>
+      <td width="2%">&nbsp;</td>
+      <td width="80%"><b><code>then</code></b> {case C} <code>move</code></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><b><code>else</code></b> {case B} <var>c </var>:= <b><code>false</code></b></td>
+    </tr>
+    <tr>
+      <td colspan="2"><b><code>fi</code></b></td>
+    </tr>
+    <tr>
+      <td valign="top">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td valign="top"><b><code>else</code></b></td>
+      <td colspan="2">{case A} <var>c</var> := <code>digit</code>(<var>x</var>);</td>
+    </tr>
+    <tr>
+      <td valign="top">&nbsp;</td>
+      <td>&nbsp;</td>
+      <td valign="top">&nbsp;</td>
+      <td colspan="2"><b><code>while</code></b> <code>digit</code>(<var>x</var>) <b><code>do</code></b> <code>move</code> <b><code>od</code></b></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td colspan="4"><b><code>fi</code></b></td>
+    </tr>
+    <tr>
+      <td><b><code>corp</code></b></td>
+      <td colspan="4">&nbsp;</td>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+  <p class="noindent">
+  <p class="noindent">
+  <p class="noindent">
+  <p class="noindent">
+  <p class="noindent">
+  <p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+    *
+  <p class="noindent"><b>Conclusion</b>. The primary purpose of the above exercise was to demonstrate that
+    the applicability of the technique of developing correctness proof and program
+    hand in hand is not confined to simple programs dealing with algebraic relations
+    between integers but can also be applied to non-arithmetic data processing.
+    Some readers might argue that this example rather weakens my point, because
+    the essay is rather long compared to the length of the program. My answer to them
+    is the following:               
+  <p class="noindent">1) A program need not be long in order to be difficult to conceive and also,
+    unless one has produced absolutely insipid code, a final program is always a
+    a very compact product of one's intellectual labour.
+  <p class="noindent">2) We have not made strong assumptions about the reader&rsquo;s familiarity with
+      the theory of recursively defined syntaxes and therefore have derived explicitly
+      all we needed.
+  <p class="noindent">3) Anyone who thinks that he can make reliable programs without a sufficient
+    &ldquo;theory&rdquo; about the subject matter of the computations, fools himself.
+  <p>Finally, although the alert reader will have noticed it, it seems worthwhile 
+        to draw attention to the fact, that in all our reasoning in the above
+        exercise we have not given a single example of a sentence, nor of a non-sentence.
+  <p>  
+  <table width="90%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+      <td>Eindhoven, 18th May 1973</td>
+      <td><div align="right">Edsger W.Dijkstra</div></td>
+    </tr>
+  </table>
+  <hr />
+  <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-11-05<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

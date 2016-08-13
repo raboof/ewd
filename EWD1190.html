@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<title>E.W.Dijkstra Archive: Problem 10406 from The American Mathematical Monthly, Volume 101, Number 8 / October 1994 (EWD 1190)</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen" />
+		<link href="../formulas.css" rel="stylesheet" media="screen" />
+	</head>
+	<body><div id="title"><h1>Problem 10406 from The American Mathematical Monthly, Volume 101, Number 8 / October 1994</h1></div>
+		<div id="frame">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd11xx/EWD1190.PDF"
+					 title="Link to the PDF version of EWD1190">EWD 1190</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>Problem 10406 from <i>The American Mathematical Monthly</i>, Volume 101, Number 8 / October 1994</u><br />&nbsp;</p>
+
+<div style="background-color: #f8f8f8; padding: 0.5em; float: left;">
+
+				<p class="noindent" style="margin-top: 0;"><b>10406.</b> <i>Proposed by David C. Fisher, University of Colorado, Denver, CO, Karen L. Collins, Wesleyan University, Middleton, CT, and Lucia B. Krompart, Rochester, MI.</i></p>
+				<p>Show that a path on an <var>m</var> by <var>n</var> square grid which starts at the northwest corner, goes through each point exactly once, and ends at the southeast corner divides the grid into two equal halves: (a) those regions opening north or east; and (b) those regions opening south or west.</p>
+				<p class="noindent">(<b>10406</b>) A path meeting the conditions of the problem on a 5 by 8 grid is shown in figure 10406 below.</p>
+				<p class="noindent" align="center"><img src="EWD1190_fig1.png" alt="EDW1190 figure 1" title="EDW1190 figure 1" /></p>
+</div>
+	
+				<p>&nbsp;</p>
+				<p>We confine our attention to paths from NW to SE that do not necessarily go through each point; the off-path points are called <em>free</em>. Directing the paths from NW to SE, I identify (here without proof) the region(s) &ldquo;a&rdquo; with those to the left of the path, and the regions &ldquo;b&rdquo; with those to its right.</p>
+				<p>A path, along which turns to the left and turns to the right alternate, is a shortest path; we give a simple example (in the same 5 by 8 grid). </p>
+				<p class="noindent" align="center"><img src="EWD1190_fig2.png" alt="EDW1190 figure 2" title="EDW1190 figure 2" /></p>
+				<p>For the <var>m</var> by <var>n</var> grid with a shortest path we observe<br />
+					&#x2022; &nbsp; # points = <var>m</var> * <var>n</var><br />
+					&#x2022; &nbsp; # unit squares = (<var>m</var>&#x2212;1) * (<var>n</var>&#x2212;1)<br />
+					&#x2022; &nbsp; # edges on shortest path = (<var>m</var>&#x2212;1) + (<var>n</var>&#x2212;1)<br />
+					&#x2022; &nbsp; # points on shortest path = <var>m</var> + <var>n</var> &#x2212; 1<br />
+					&#x2022; &nbsp; # free points = (<var>m</var>*<var>n</var>) &#x2212; (<var>m</var>+<var>n</var>&#x2212;1) = (<var>m</var>&#x2212;1) * (<var>n</var>&#x2212;1)</p>
+				<p class="noindent">in short: the number of unit squares equals the number of free points. But we can go further: this equality holds for the separate regions! We can establish in the a-region a 1-1 correspondence between each unit square and its NE corner, and in the b-region between each unit square and its SW corner.</p>
+				<p>Introducing<br />
+					<var>Fa</var> and <var>Fb</var> : # free points in a-region(s) and b-region(s) respectively<br />
+					<var>Sa</var> and <var>Sb</var> : # unit squares in a-region(s) and b-region(s) respectively,<br />
+					we can now formulate</p>
+				<p class="noindent"><u>Lemma 0</u> &nbsp; In the case of a shortest path <var>Fa</var> = <var>Sa</var> <span class="unicode">&#x2227;</span> <var>Fb</var> = <var>Sb</var>.</p>
+				<p>The idea of the proof is to start with a given path that visits each point exactly once &mdash;i.e., <var>Fa </var>= 0 <span class="unicode">&#x2227;</span> <var>Fb</var> = 0&mdash;, and to transform it in a finite number of moves into a shortest path for which <var>Fa</var> = <var>Sa</var> <span class="unicode">&#x2227;</span> <var>Fb</var> = <var>Sb</var> holds. Initial and final state are then to be linked via an invariant that is maintained by each move.</p>
+				<p>For the move we consider that, as said, a path, along which turns to the left and turns to the right alternate, is a shortest path. Consequently, if the path is not of minimal length, it contains at least one pair of <em>successive</em> turns in the <em>same</em> direction. With those turns <var>k</var> edges apart it means that there exists a rectangle &mdash;a &ldquo;bar&rdquo;&mdash; of <var>k</var> (<var>k </var>&#x2265;1) unit squares such that 3 of its sides are formed by 1, <var>k</var>, 1 edges of the path, e.g. for <var>k</var> = 5:</p>
+				<p class="noindent" align="center" style="margin-top: 0;"><img src="EWD1190_fig3.png" alt="EDW1190 figure 3" title="EDW1190 figure 3" /></p>
+				<p class="noindent">We can &mdash;and will&mdash; always choose a rectangle such that the <span class="inlineformula"><var>k</var>&#x2212;1</span> interior points of the 4th side are free. The move shortens the path by 2 edges in the obvious way; in the same example, the above configuration is transformed into</p>
+				<p class="noindent" align="center" style="margin-top: 0;"><img src="EWD1190_fig4.png" alt="EDW1190 figure 4" title="EDW1190 figure 4" /></p>
+				<p>With <var>x</var>,<var>y</var> = <var>a</var>,<var>b</var> or <var>x</var>,<var>y</var> = <var>b</var>,<var>a</var>, we observe for the transformation by the move:</p>
+				<table cellspacing="0" cellpadding="0" border="0" align="center">
+					<tr>
+						<td>
+							<span class="unicode">&#x2206;</span><var> Sx</var> = &#x2212;<var>k</var><br />
+							<span class="unicode">&#x2206;</span> <var>Fx</var> = &#x2212;(<var>k</var>&#x2212;1)<br />
+							<span style="border-top: 1px solid;"><span class="unicode">&#x2206;</span> (<var>Sx</var>&#x2212;<var>Fx</var>) = &#x2212;1</span>
+						</td>
+						<td>
+							&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+						</td>
+						<td>
+							<span class="unicode">&#x2206;</span> <var>Sy</var> = +<var>k</var><br />
+							<span class="unicode">&#x2206;</span> <var>Fy</var> = +<var>k</var>+1<br />
+							<span style="border-top: 1px solid;"><span class="unicode">&#x2206;</span> (<var>Sy</var>&#x2212;<var>Fy</var>) = &#x2212;1</span>
+						</td>
+					</tr>
+				</table>
+				<p>The above transformation reduces at both sides of the path the difference <span class="inlineformula"><var>S</var>&#x2212;<var>F</var></span> by 1, and hence</p>
+				<p class="noindent" align="center">(<var>Sa</var>&#x2212;<var>Fa</var>) &#x2212; (<var>Sb</var>&#x2212;<var>Fb</var>) = <var>q</var> &nbsp; ,</p>
+				<p class="noindent">if initially true, is an invariant of our total transformation process (which obviously terminates since each move reduces the path by 2 edges).</p>
+				<p>From Lemma 0, which is applicable in the final state, we conclude <var>q</var> = 0. Therefore initially, with <var>Fa</var> = 0 <span class="unicode">&#x2227;</span> <var>Fb</var> = 0, we have <var>Sa</var>&#x2212;<var>Sb</var> = 0 or <var>Sa</var> = <var>Sb</var>. Quod erat demonstrandum.</p>
+				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+				<p>It took me several hours to design the move of the previous page; for quite a while I considered 2 unparameterized moves: the current one with <var>k</var> =1 and <img src="EWD1190_fig5.png" alt="EDW1190 figure 5" title="EDW1190 figure 5" />, which changes the shape of the path without shortening it. The mere fact that the second move complicates the termination argument should have made me reject it much faster.</p>
+				<p>I liked the problem.</p>
+				<p style="margin-right: 2em;" align="right">Austin, 17 October 1994</p>
+
+				<p class="noindent">
+					prof.dr. Edsger W.Dijkstra<br />
+					Department of Computer Sciences<br />
+					The University of Texas at Austin<br />
+					Austin, TX 78712-1188<br />
+					USA
+				</p>
+			</div>
+			<div>
+        <br/>
+      </div>
+		</div>
+		<hr />
+		<div id="footer">
+         transcribed by Corrado Cantelmi<br />
+          revised 
+          <!-- #BeginDate format:En2 -->24-Dec-2011<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

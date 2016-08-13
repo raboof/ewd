@@ -1,0 +1,146 @@
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">         
+      
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">         
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">        
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />        
+    <title>E.W.Dijkstra Archive: More mathematical folklore (EWD 738)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>  
+   </head>      
+  <body><div id="title"><h1>More mathematical folklore</h1></div>        
+    <div id="frame" align="right">  
+         <div id="header" align="right">      
+        <a href="https://www.cs.utexas.edu/~EWD/ewd07xx/EWD738.PDF"    
+           title="Link to the PDF version of EWD738">EWD738</a></div></div> 
+      <div id="frame">    
+         <div id="content">         
+        <hr />  
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing      
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its        
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>     
+<hr />
+           <p class="noindent">     
+      
+ 
+<p>More mathematical folklore.
+<table width=100%><tr><td valign=top width=10%>
+</td><td>"Fermat's general method, that of "infinite descent", is profoundly
+ingenious, but has the disadvantage that it is often extremely difficult
+to apply."
+<br>E.T.Bell in "The Development of Mathematics" (1945)
+</td>  </tr>  </table>
+<p>The purpose of this debunking note is to expose a few time-honoured
+mathematical concepts as mere artefacts of an unfortunate notation. The
+unfortunate notation writes <b>non</b> A &ge; C or <b>non</b> C &rArr; A instead of the
+symmetric disjunction A <b>or</b> C .
+<p class="noindent"><b>The indirect proof</b>.
+<p>Mathematicians call a proof of the theorem A &rArr; B "indirect" when,
+instead of proving A &ge; B "directly", one proves <b>non</b> B &rArr; <b>non</b> A . But
+you cannot prove the one without proving the other: both are equivalent to
+<b>non</b> A <b>or</b> B . The distinction is void.
+<p class="noindent"><b>The reductio ad absurdum.</b> 
+<p>With C <b>and non</b> C as the prototype of a contradiction &mdash;an "absurdity"&mdash;
+the reductio ad absurdum proceeds as follows. In order to prove A
+<table>
+<tr><td>0)</td><td>one proves </td><td><b>non</b> A &rArr; C</td></tr>
+<tr><td>1) </td><td>one proves </td><td><b>non</b> A &rArr; <b>non</b> C</td></tr>
+<tr><td>2) </td><td>one concludes </td><td><b>non</b> A &rArr; (C <b>and non</b> C) , hence A .</td></tr>
+</table>
+<p>But, apart from notation, the above proof must be equivalent to
+<table>
+<tr><td>0) </td><td>proving </td><td><b>non</b> C &rArr; A</td></tr>
+<tr><td>1) </td><td>proving </td><td>C &rArr; A</td></tr>
+<tr><td>2) </td><td>concluding </td><td>(C <b>or</b> <b>non</b> C) &rArr; A , hence A .</td></tr>
+</table>
+In so-called contrast to the first proof the latter one is called "a proof by
+case analysis"! The distinction is void. I prefer
+<table>
+<tr><td>0) </td><td>proving </td><td>A <b>or</b> C </td></tr>
+<tr><td>1) </td><td>proving </td><td>A <b>or</b> <b>non</b> C </td></tr>
+<tr><td>2) </td><td>concluding</td><td>A </td></tr>
+</table>
+                         
+<p class="noindent"><b>Mathematical induction</b>.
+<p>I was taught two patterns for mathematical induction.
+<br>Pattern 1:
+<table>
+<tr><td>1.0) </td><td> prove P(0)</td><td> ("the base")  </td></tr>
+<tr><td>1.1) </td><td> prove (<u>A</u> n: n &ge; 0: P(n) &rArr; P(n+1)) </td><td>("the induction step)</td></tr>
+<tr><td>1.2) </td><td> conclude (<u>A</u> n: n &ge; 0 P(n)) </td><td>  </td></tr>
+</table>
+Pattern 2:
+<table>
+<tr><td>2.1) </td><td> prove (<u>A</u> n: n &ge; 0 (A i: 0 &le; i &lt; n: P(i)) &rArr; P(n)) </td></tr>
+<tr><td>2.2) </td><td>conclude (<u>A</u> n: n &ge; 0: P(n))     </td></tr>
+</table>
+<p>The following are comments on the way in which I was introduced to them&mdash;
+a way that, I am afraid, is rather standard.
+<p>Pattern 1 , which regretfully is the better known one, was postulated
+and by renaming, substitution, and simplification pattern 2 was derived from
+it.
+<p>My first complaint is that no one pointed out to me that the two are
+<b>equivalent</b>, i.e. that by suitable renaming, substitution, and simplification
+the validity of pattern 1 can again be derived from the postulated validity
+of pattern 2.
+<p>My second complaint is that no one ever pointed out to me that the
+transition from pattern 1 to pattern 2 represents an obviously permissible
+strengthening of the induction hypothesis, thereby offering the opportunity
+for a simpler proof obligation.
+<p>My third complaint is that no one pointed out to me that for given P
+pattern 2 is in a sense canonical because the transition from 1 to 2 is
+idempotent. The moral of the story is that pattern 2 should always be
+preferred.
+<p>Fermat's "infinite descent" consists of proving (<u>A</u> n: n &ge; 0: P(n))
+by showing that the assumption <b>non</b> P(n) leads to the existence of a natural
+value i &lt; n , such that <b>non</b> P(i) , which then leads to a contradiction.
+<p>I quote from E.T.Bell again &mdash;but this time from his "Men of Mathematics"&mdash;
+                      
+"His own account is both concise and clear, so we shall give a free translation
+from his letter of August, 1659, to Carcavi.
+<p>"For a long time I was unable to apply my method to affirmative propositions,
+because the twist and the trick for getting at them is much more
+troublesome than that which I use for negative propositions. Thus, when I
+had to prove that every prime which exceeds a multiple of 4 by 1 is composed
+of two squares, I found myself in a fine torment. But at last a meditation
+repeated many times gave me the light I lacked, and now affirmative propositions
+submit to my method. The course of my reasoning in affirmative propositions
+is such: if an arbitrarily chosen prime of the form 4n+1 is not a
+sum of two squares, [I prove that] there will be another of the same nature,
+less than the one chosen, and [therefore] next a third still less, and so on.
+Making an infinite descent of all the numbers of this kind I arrive at the number
+5, the least of all the numbers of this kind [4n+1]. [By the proof mentioned
+and the preceding argument from it], it follows that 5 is not a sum
+of two squares. But it is. Therefore we must infer by a reductio ad absurdum
+that all primes of the form 4n+1 are sums of two squares." "
+<p>But what is Fermat's proof obligation? With
+<table width=100%><tr><td valign=top width=10%>
+</td><td>P(n): the n-th prime of the form 4k+1 is the sum of two squares
+</td>  </tr>  </table>
+he has to prove
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(<u>A</u> n: n &ge; 0 : <b>non</b> P(n) &rArr; (<u>E</u> i: 0 &le; i &lt; n: <b>non</b> P(i))),
+</td>  </tr>  </table>
+but this is <b>identical</b> to 2.1: both are
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(<u>A</u> n: n &ge; 0: (<u>E</u> i: 0 &le; i &lt; n: <b>non</b> P(i)) <b>or</b> P(n)).
+</td>  </tr>  </table>
+Hence Fermat's method of "infinite descent" is nothing but normal mathematical
+induction in its easiest form. It doesn't deserve a special name and E.T.Bell's
+appreciation of it as quoted at the beginning of this text is all rubbish.
+<p><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>1 May 1980
+</td></tr><tr><td valign=top>
+5671 AL NUENEN</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr><tr><td valign=top>
+The Netherlands</td><td>Burroughs Research Fellow
+</td>  </tr>  </table>
+
+<hr /> 
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />   
+    Last revision  
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">   
+      <!-- #BeginDate format:IS1 -->2015-03-16<!-- #EndDate -->  
+    </csobj> 
+  .</font></p>    
+  <p>&nbsp;</p>   
+</body></html> 

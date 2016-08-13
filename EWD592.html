@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: A small note on the additive composition of variant functions (EWD 592)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>A small note on the additive composition of variant functions</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd05xx/EWD592.PDF"
+           title="Link to the PDF version of EWD592">EWD592</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<p class=noindent><b>A small note on the additive composition of variant functions</b>.
+<p>This is only a small note, for its observation is nearly trivial. The
+note is made, however, because it describes a method of some generality, by
+which results can be derived that &mdash;as I have observed&mdash; tend to strike the
+reader as &ldquo;a trick&rdquo; if he has never seen the like and is unaware of the method
+behind it.
+<p>It deals with finding a variant function for a repetitive construct with
+more than one alternative:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      <b>do</b> B1 &rarr; S1 &#x25af; ... &#x25af; Bn &rarr; Sn <b>od</b> . </td> </tr>
+</table>
+The simple idea is to contruct the variant function t as the sum
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      t = t1 + ... + tn , </td> </tr>
+</table>
+where ti is decreased by at least one by the i-th guarded command and left
+constant by the others.
+<p>We shall illustrate it with an example of matching simplicity. On a
+shunting yard are a finite number of trains; a train is either <b>atomic</b> (iff it
+consists of a single car) or <b>composite</b> (if? it consists of a finite number of
+cars greater than one). The yard is empty, when it contains no trains. 
+Repeatedly we select a train: if it is atomic, it is removed from the yard, if it is
+composite, it is split into two (shorter) trains that, in this move, remain on
+the yard. The process terminates, when the yard is empty. The point is to
+construct the decreasing function t that is bounded from below, so that 
+termination is proved. We sketch the process by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+      <b>do</b> atomic train selected &rarr; remove it   </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
+       &#x25af; composite train selected &rarr; split it </td> </tr> <tr> <td></td> <td colspan = 2>
+      <b>od</b>                                          </td> </tr>
+</table>
+With CARS = the number of cars on the yard
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      t1 = CARS </td> </tr>
+</table>
+satisfies the requirement that the first guarded command decreases it and the
+other one leaves it constant. with
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+      TRAINS = the number of trains on the yard , </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          t2 = - TRAINS                           </td> </tr>
+</table>
+would satisfy the requirement that it is decreased by the second guarded commend
+(because that increases + TRAINS). This remains true when we add a function
+left constant by it, e.g.
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+         t2 = f(CARS) - TRAINS . </td> </tr>
+</table>
+(Note that we have already verified that CARS , and therefore f(CARS) for any
+function f , is unaffected by the second guarded command.) Because t2
+has to remain constant when the first guarded command is selected, we must
+choose for f the identity function:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+         t2 = CARS - TRAINS </td> </tr>
+</table>
+and thus we find t = 2 * CARS - TRAINS .
+<br>(With CLOSCONNS = the number of closed car-to-car connections,
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+         t2 = CLOSCONNS </td> </tr>
+</table>
+also does the job: it is left unchanged by the first and decreased by the second
+guarded command. This is not a new solution, for CLOSCONNS = CARS - TRAINS . )
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+For the asymmetric computation for x = gcd(X, Y) with X &gt; 0 and Y &gt; 0 :
+<table> <tr> <td>
+x, y := X, Y; <b>do</b> X &gt; y &rarr; x:=x - y &#x25af; y &gt; x &rarr; x, y == y, x <b>od</b> </td> </tr>
+</table>
+we find quite analogously t1 = x + y and t2 = y .
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p class=noindent><b>Note</b>. Obviously the condition that ti is left unchanged by the j-th (j &ne; i)
+guarded commands is stronger than necessary: it suffices to establish that ti
+is not increased by the other guarded commands. (End of note.)
+<p class=noindent><b>Note</b>. Instead of choosing t = t1 + ... + tn , we could also take &mdash;after
+having chosen the ti &mdash; t = a1*t1 + ... + an*tn with all ai&rsquo;s positive;
+in other words, the variant function is by no means unique, and we can choose
+the most convenient one. (End of note.)
+<p>The above has been prompted by my impression that some people seem to think
+that that there is something mysterious about the termination of the type of
+programs discussed. Its moral is that there is no mystery.
+<table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+NUENEN NL-4565</td><td>Burroughs Research Follow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-12-08<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

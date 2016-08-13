@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: When a symmetric operator distributes over &uarr; and &darr; (EWD 1292)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+	</head>
+  <body><div id="title"><h1>When a symmetric operator distributes over &uarr; and &darr;</h1></div>
+    <div id="frame" align="right">
+			<div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd12xx/EWD1292.PDF" 
+           title="Link to the PDF version of EWD 1292">EWD1292</a>
+      </div>
+		</div>
+		<div id="frame">
+			<div id="content">
+			  <p class="noindent"><u>When a symmetric operator distributes over &uarr; and &darr;</u> </p>
+				<p>&#09;To begin with we postulate (0) and (1):</p>
+				<p class="noindent">(0) &nbsp;&nbsp;&nbsp;relation &#x2291; is reflexive and antisymmetric, </p>
+				<p class="noindent">i.e., for all <var>x</var>, <var>y</var> &#09;</p>
+				<p><var>x</var>=<var>y</var> &#x2261; <var>x</var>&#x2291;<var>y</var> &#x2227; <var>y</var>&#x2291;<var>x</var></p>
+				<p class="noindent"> (1)  &nbsp;&nbsp;&nbsp;for any <var>x</var>,<var>y</var> there exists a (unique) value, which we denote by <var>x</var>&#x2191;<var>y</var>, that satisfies for all <var>z</var> &#09;</p>
+				<p><var>x</var>&#x2191;<var>y</var> &#x2291; <var>z</var> &#x2261;  <var>x</var>&#x2291;<var>z</var> &#x2227; <var>y</var>&#x2291;<var>z</var> . </p>
+				<p class="noindent"><u>Remark</u> Since the uniqueness can be proved, it need not be postulated; hence the parentheses.
+				  (End of Remark.)
+				  
+				  &#09;</p>
+				<p>It then follows that (for all <var>x</var>,<var>y</var>) </p>
+				<p class="noindent">(2)   &nbsp;&nbsp;&nbsp;&#x2191; is idempotent, symmetric, and associative				  </p>
+				<p class="noindent">(3)   &nbsp;&nbsp;&nbsp;<var>x</var> &#x2291; <var>x</var>&#x2191;<var>y</var></p>
+				<p class="noindent">(4)   &nbsp;&nbsp;&nbsp;<var>x</var> = <var>x</var>&#x2191;<var>y</var> &#x2261;  <var>y</var>&#x2291;<var>x</var></p>
+				<p class="noindent">(5)   &nbsp;&nbsp;&nbsp;&#x2291; is transitive (hence &mdash;see (0)&mdash; &#x2291; is what is known as &ldquo;a partial order&rdquo;)				  </p>
+				<p class="noindent">(6)   &nbsp;&nbsp;&nbsp;&#x2191; is monotonic				  </p>
+				<p>&#09;We'll just prove (6). </p>
+				<p class="noindent"><u>Proof</u> We calculate for any triple <var>x</var>,<var>y</var>,<var>z</var> :
+				  &#09;</p>
+				<p><var>x</var>&#x2191;<var>z</var> &#x2291;  <var>y</var>&#x2191;<var>z</var></p>
+				<p class="continue"> &#x2261;        {(4)}				  </p>
+			  <p class="nospace">&#09;<var>y</var>&#x2191;<var>z</var> =  (<var>y</var>&#x2191;<var>z</var>)&#x2191;(<var>x</var>&#x2191;<var>z</var>) </p>
+				<p class="continue">&#x2261;        {(2)}
+				  &#09;</p>
+				<p class="nospace"><var>y</var>&#x2191;<var>z</var> =  (<var>y</var>&#x2191;<var>x</var>)&#x2191;<var>z</var></p>
+				<p class="continue">&#x21D0;       {Leibniz&rsquo;s Principle}</p>
+				<p class="nospace"> &#09;<var>y</var> = <var>y</var>&#x2191;<var>x</var></p>
+				<p class="continue">&#x2261;        {(4)}
+				  &#09;</p>
+				<p class="nospace"><var>x</var> &#x2291; <var>y</var> &#09;</p>
+				<p class="noindent">To the above we add &ldquo;the dual&rdquo; (0&prime;) through (6&prime;) obtained from (0) through (6) by </p>
+				<p class="noindent">(&alpha;)&#09;interchanging the arguments of  &#x2291;  , and				  </p>
+<p class="noindent">(&beta;)&#09;replacing &#x2191; by &#x2193; and vice versa. </p>
+				<p class="noindent"><u>Remark</u> The reader may note that, thanks to the symmetry of &#x2227; , (0&prime;) is equivalent to (0).  
+				  The &ldquo;and vice versa&rdquo; has been added so as to make (&beta;) &mdash;like (&alpha;)&mdash; its own inverse.  
+				  (End of Remark.)				  </p>
+				<p class="noindent">&#09;And this concludes our summary of Lattice Theory.				  </p>
+				<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*   <br />
+				  *
+				  &#09;</p>
+				<p class="noindent">Now we are ready to formulate and prove the following simple theorem.</p>
+				<p class="noindent"> <u>Theorem</u> Let the symmetric infix operator &#9679; distribute over &uarr; and &darr;   Then				  </p>
+				<p class="noindent">(7)&#09; &nbsp;&nbsp;&nbsp;(<var>x</var>&uarr;<var>y</var>)&#9679;(<var>x</var>&darr;<var>y</var>) = <var>x</var>&#9679;<var>y</var></p>
+				<p class="noindent"><u>Proof</u> To begin with we observe for any <var>x</var>,<var>y</var> &#09;</p>
+				<p>(<var>x</var>&uarr;<var>y</var>)&#9679;(<var>x</var>&darr;<var>y</var>) </p>
+				<p class="continue">=         {&#9679; distributes over &uarr;}
+				  &#09;</p>
+				<p class="nospace">(<var>x</var>&#9679;(<var>x</var>&darr;<var>y</var>))&uarr;(<var>y</var>&#9679;(<var>x</var>&darr;<var>y</var>)) </p>
+				<p class="continue">=         {&#9679; distributes over &darr;, twice}				  </p>
+				<p class="nospace">&#09;(<var>x</var>&#9679;<var>x</var> &darr; <var>x</var>&#9679;<var>y</var>)&uarr;(<var>y</var>&#9679;<var>x</var> &darr; <var>y</var>&#9679;<var>y</var>)</p>
+				<p class="continue"> &#x2291;         {(3') and (6), twice}
+				  &#09;</p>
+				<p class="nospace"><var>x</var>&#9679;<var>y</var> &uarr; <var>y</var>&#9679;<var>x</var></p>
+				<p class="continue">=         {symmetry of &#9679; , idempotence of &uarr;}</p>
+				<p class="nospace"> &#09;<var>x</var>&#9679;<var>y</var> , </p>
+				<p class="noindent">i.e.,				  </p>
+				<p class="noindent">(8)&#09; &nbsp;&nbsp;&nbsp;(<var>x</var>&uarr;<var>y</var>)&#9679;(<var>x</var>&darr;<var>y</var>) &#x2291; <var>x</var>&#9679;<var>y</var> . 
+				  . </p>
+				<p class="noindent">By dualization we conclude from (8):				  </p>
+				<p class="noindent">(8&prime;)&#09; &nbsp;&nbsp;&nbsp;<var>x</var>&#9679;<var>y</var> &#x2291; (<var>x</var>&darr;<var>y</var>)&#9679;((<var>x</var>&uarr;<var>y</var>)  , </p>
+				<p class="noindent">and thanks to the symmetry of &#9679; and (0), the conjunction of (8) and (8&prime;) yields (7).
+				  (End of Proof). </p>
+				<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <br />
+* </p>
+				<p class="noindent"> The above theorem and proof emerged yesterday afternoon when K. Rustan M. Leino joined the session 
+				  of the ATAC and wanted to show us some aspects of his proof of the fact that the product of two 
+				  natural numbers equals that of their GCD and their LCM (what he did).  The decision to go from there
+				  to lattices in general was a minor step.  Acknowledgements are further due to Dr Rajeev Joshi, who
+				  contributed to what we presented here.				  </p>
+				<p class="noindent">Austin, 6 October 1999				  </p>
+				<p class="noindent">prof. dr. Edsger W. Dijkstra
+				  <br />
+				  Department of Computer Sciences
+				  <br />
+				  The University of Texas at Austin
+				  <br />
+				  Austin, TX 78712-1188
+				  <br />
+				  USA </p>
+			  <p>&nbsp;</p>
+			</div>
+			<!-- end signatures -->
+			<hr />
+			<!-- name and date -->
+			<div id="footer">
+				<font size="-1">
+         transcribed by Hasnain Mujtaba<br />
+					 revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="96">
+					   <!-- #BeginDate format:En2 -->08-Jan-2015<!-- #EndDate -->
+					 </csobj>
+				</font></div>
+		</div>
+	</body>
+</html>
+
+

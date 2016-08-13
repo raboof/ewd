@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: A letter to Professor Zohar Manna (EWD 574)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>A letter to Professor Zohar Manna</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd05xx/EWD574.PDF"
+           title="Link to the PDF version of EWD574">EWD574</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+           <p class="noindent"><b>A letter to Professor Zohar Manna, 26 July 1976</b>.
+  <p>Dear Zohar,
+<p>The fact that this letter has an EWD-number indicates that I intend to
+give it a somewhat wider distribution than just you. If you wish to answer to it,
+I can distribute your answer along the same channels, but, of course, only if you
+so desire and authorize me to do so.
+<p>Last week I spoke to one of the attendants of the recent Summer School 
+organized by the Mathematical Centre in Amsterdam, at which you were one of the 
+lecturers. As far as he was concerned you have stolen the show: he was most impressed
+by your performances and I thought that you might like to hear so. But that is
+not the reason for writing this letter to you.
+<p>This letter has been prompted by the &ldquo;Stanford Artificial Intelligence
+Laboratory Memo AIM-281/Computer Science Department Report No. STAN-ES-76-558&rdquo;
+of June 1976 and titled:
+<p class=noindent><table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      Is &ldquo;sometime&rdquo; sometimes better than &ldquo;always&rdquo;? Intermittent assertions in </td> </tr> <tr> <td></td> <td>
+      proving program correctness.&rdquo;                                                                      </td> </tr>
+</table>
+<br>written by you and Richard Waldinger.
+<p>One seemingly irrelevant remark first. I <b>hate</b> computer-produced manuscripts
+with all those different type founts &mdash;and all lines right-adjusted!&mdash; if the price
+to be paid is that all individual letters are ill-shaped.&rsquo; I just cannot read a
+report like yours without constantly suppressing the desire to clean my glasses
+because all those fuzzy boundaries are so annoying. I much prefer a well-chosen,
+single type fount manuscript produced on an excellent typewriter &mdash;this, of course,
+excludes most of the IBM pingpong balls&mdash; and I don&rsquo;t care about the right-adjustment
+either. (On the contrary: without it, significance can be given to additional spaces.)
+I consider this would-be service to the reader &mdash;or is it a service to the writer?&mdash;
+as a misuse of electronics that I abhor just as vehemently as soft music in 
+department stores, waiting rooms, airports etc. (The <b>only</b> thing printed decently on your
+report is the Stanford Seal in red on the cover!) I hope that &mdash;possibly after
+some thinking&mdash; you will agree that this remark &mdash;although not so much addressed
+to you personally&mdash; is <b>not</b> so irrelevant: as computer scientist we have, more than
+anybody else, I think, a responsibility in trying to prevent computer usage from
+degrading our lives. The rest of this letter is addressed to you personally.
+<p>You and Richard Waldinger deserve each reader&rsquo;s compliments for the way
+in which your report has been phrased: for that very reason it was a pleasure and
+a privilige to read it. I think that I understood every sentence of it, something
+that is in sharp contrast to what is usually dropped in my mailbox: reports of
+which I am sure that I cannot understand &mdash;nor anybody else for that matter&mdash; at
+least one out of every eight sentences. Your report is exceptionally well-written.
+Thank you, it is nice to see indispensable standards sometimes maintained! So much
+for my compliments, you yourself can undoubtedly think of other nice things to say
+about it.
+<p>When I read the abstract in which you announced to use &ldquo;assertions that
+must be true at some time when control is passing through the corresponding point,
+but that need not be true every time&rdquo; I was amazed to the point of being intrigued 
+I tried to think of an example where I would like to do that and could not think
+of any, so I continued to read the report itself. Afterwards I realized why I could
+not think of an example: you and I do not mean the same with &ldquo;control passing
+through a point.&rdquo;
+Let me reproduce, for the sake of clarity of this latter, one of your
+programs:
+<table> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+            <b>input</b>(x, y)                      </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 5>
+      start:                                        </td> </tr> <tr> <td></td> <td colspan = 5>
+      more: <b>if</b> x = y                         </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
+            <b>then</b> finish: <b>output</b>(y)    </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
+            <b>else</b> reducex: <b>if</b> x &gt; y </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+                          <b>then</b> x:= x - y     </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                               <b>goto</b> reducex  </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+                 reducey: <b>if</b> x &lt; y        </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                          <b>then</b> y:= y - x     </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>
+                               <b>goto</b> reducedy </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 3>
+                 <b>goto</b> more.                  </td> </tr>
+</table>
+<b>Note</b>. In order to display the symmetry more clearly, I would always have written
+on line 7 &ldquo;reducey: <b>if</b> y &gt; x&rdquo; (End of note.)
+<p class=noindent><b>Question</b>.Would it not have been more consistent to position the last &ldquo;goto more&rdquo;
+with the &ldquo;goto&rdquo; under the &ldquo;then&rdquo; two lines higher? (End of question.)
+<p>And in your treatment a vital role is played&ldquo; by Lemma 1:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      if sometime x = a1, y = b1 and x, y &gt;0 at more                </td> </tr> <tr> <td></td> <td>
+      then sometime x = y and y = max{u: u|a1 and u|b1} at more </td> </tr>
+</table>
+(where &ldquo;p|q&rdquo; should be read as &ldquo;p divides q&rdquo;).
+<p>Now my privately preferred representation for that code &mdash;with labels
+inserted for the purpose of&rsquo; this discussion&mdash; is:
+<table> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+          x, y := X, Y;                           </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+      L0: <b>do</b> x &gt; y &rarr; L1: x:= x - y </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td>
+           &#x25af; y &gt; x &rarr; L2: y:= y - x </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+          <b>od</b>;                              </td> </tr> <tr> <td></td> <td colspan = 3>
+      L3: print(y)                                </td> </tr>
+</table>
+<p class=noindent>with at L0 relation P0: gcd(x, y) = gcd(X, Y) <b>and</b> x &gt; 0 <b>and</b> y &gt; 0
+<br>with at L1: P0 <b>and</b> x &gt; y
+<br>with at L2: P0 <b>and</b> y &gt; x
+<br>with at L3 relation R: y = gcd(X, Y) because (P0 <b>and</b> <b>not</b> (x &gt; y <b>or</b> y &gt; x)) &rArr; R .
+<p>The reason that I was so amazed by your announcement is that in my view
+control passes <b>only</b> <b>once</b> through L0 &mdash;viz. at the initiation of the 
+<b>do</b> ... <b>od</b>&mdash;and only once through L3 &mdash;viz. at its completetion&mdash; . If we wish to take a
+closer look &mdash;i.e. inside the repetitive construct&mdash; we may observe control 
+passing a number of times through L1 and L2 .
+<p>Comparing my approach to yours I realized that I do not even consider
+control passing through the guards x &gt; y and y &gt; x. I consider the evaluation
+of the guards x &gt; y and y &gt; x &mdash;which as far as I am concerned could take place
+in parallel&mdash; not as something &ldquo;through which control passes&rdquo;. In my view the
+function of the control is to control the execution of the assignment statements;
+the guards &mdash;which in a sense are &ldquo;part&rdquo; of the control&mdash; could be evaluated by
+a separate &ldquo;control computer&rdquo;, I hardly consider their evaluation as part of the
+computation proper. The function of the computation proper is to decrease x by
+y or y by x , &ldquo;control&rdquo; has the secondary function to schedule these happenings
+in such a way that the invariance of P0 is maintained.
+<p>In this terminology the observation that &ldquo;assertions sometimes hold&rdquo;
+boils down to the observation that evaluation of a guard needs only be requested
+when its value is not known a priori. In that formulation the remark is nearly
+trivial.  
+<p>Von Neumann&rsquo;s idea that the processor A that is doing the real work &mdash;
+i.e. carrying out the assignment statements&mdash; and processor B that is evaluating
+the guards &mdash;i.e. figuring out what A has to do when&mdash; could profitably be merged
+into a single processor is some sort of a pun. (It is not as bad as his pun that
+a program should be able to modify its own instructions, but it is still a pun:
+it does not distinguish between the traffic and the lights!) But this pun is
+the kind of &ldquo;flattening&rdquo; that should only be considered in the specific realm of
+thought where it belongs, i.e. when we consider in more detail how to embed something
+with a clear conceptual structure in a homogeneous environment. Can you understand
+that in retrospect I think it a great pity that Bob Floyd formulated his 1967
+article in terms of that other-Von Neumann relic, the flowchart language? A choice
+that is responsible for the all too common misunderstanding that the flow analysis
+that isolates the &ldquo;loops&rdquo; is a key component of the inductive assertion method...
+<p>In other words, I have the feeling that part of the problem you feel you
+have solved has less to do with programming as such than with the underlying &mdash;but
+rather arbitrary&mdash; computational model you have chosen. For already quite some
+time I have the impression that with respect to both the theory and the practice
+of programming no significant further progress is possible, unless we postulate
+our semantics in a way that is absolutely independent of any computational model.
+This may sound as heresy in your ears &mdash;I just don&rsquo;t know!&mdash; but that paper by
+you and Richard Waldinger has confirmed my impression. The problem with computational
+models is that, by being overspecific, they are bound to lead one astray. This,
+indeed, might sound as heresy in the ears-of someone who writes in his conclusions
+about &rdquo;the way programs work&ldquo;, for that wording betrays an undiluted operational
+attitude. It is not the program that &rdquo;works&ldquo;! Agree?
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>Finally a few questions. In your conclusion you write: &rdquo;If the lemmas
+and the well-founded orderings for the induction are provided by the programmer,
+to construct the remainder of the proof appears to be fairly mechanical. On the
+other hand, to find appropriate lemmas and the corresponding orderings is as 
+difficult a task as finding the invariant assertions and well-founded orderings for
+the conventional ways of establishing correctness and termination.&ldquo; I believe
+you. But should not then the conclusion be that, indeed, the raw code is an
+inadequate starting point for verification, so inadequate that it is, as a matter
+of fact, silly to try to use it as such? And should not the conclusion be that
+the programmer has only done a decent job and has only delivered a useful and
+complete product, when he provides the lemmas, the invariant assertions etc.
+as well? Should not the conclusion be that the division of labour, as attempted
+in the sixties, in which the programmer produced just the raw code, has been proven
+to be an unworkable interface?
+<p>I know that some people find it difficult to draw these conclusions because
+they are afraid of their consequences; usually they phrase their objections in term:
+of commiseration with &ldquo;the average programmer&rdquo;, arguing that we cannot increase the
+burden on his shoulders. But that argument is a fallacy, because that is not what
+I am proposing. By teaching the programmer to be aware of the role of the invariant
+and of the nature of his inductive arguments we give him the mental tools that are
+indispensable for doing his job properly: as soon as he masters their use he will
+never again program without them!
+<p>Some people won&rsquo;t be able to use these tools to their advantage, but are
+those able to program now? In any case I don&rsquo;t think that we should allow their
+presence to prevent us from drawing above conclusions, which should have a profound
+influence on our teaching. I would like to be sure that the teaching of competent
+programmers does not meet opposition that is inspired by the hope to keep a target
+of artificial intelligence alive!
+<p>Greetings and best wishes! Yours ever,
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+</td><td>Edsgar .
+</td>  </tr>  </table>
+<table width=100%><tr><td valign=top width=40%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+NL-4565 NUENEN</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+ 
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-01-23<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

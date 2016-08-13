@@ -1,0 +1,442 @@
+<html>
+<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<title>E.W.Dijkstra Archive: Design considerations in more detail (EWD302)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+<body><div id="title"><h1>Design considerations in more detail</h1></div>
+    <div id="frame">
+			<div id="header">
+
+		<a href="https://www.cs.utexas.edu/~EWD/ewd03xx/EWD302.PDF"" 
+           title="Link to the PDF version of EWD 302">EWD 302</a>
+           </div>
+			<div id="content">
+				<p class="noindent"><u>Design considerations in more detail.</u></p>
+				<p>Preceding sections&#151;in particular &quot;A first example of step-wise program composition.&quot; have evoked the criticism that I have oversimplified the design process almost to the extent of dishonesty; I don't think this criticism fully unjustified and to remedy the situation I shall treat two examples in greater detail. The first example is my own invention; I have tried it out in a few oral examinations and finally I have used it at the end of my course &quot;An Introduction into the Art of Programming&quot; in the classroom. I posed the problem to an audience of fifty students and together, with me as leader of the discussion, they solved the problem in 90 minutes.</p>
+				<p>We consider a character set consisting of letters, a space(<var>sp</var>) and a point(<var>pnt</var>). Words consist of one or more, but at most twenty letters. An input text consists of one or more words, separated from each other by one or more spaces and terminated by zero or more spaces followed by a point. With the character valued function RNC (Read Next Character) the input text should be read from and including the first letter of the first words up to and including the terminating point. An output text has to be produced using the primitive PNC(<var>x</var>) (<i>i.e.</i> Print Next Character) with a character valued parameter. If the function of the program were to copy the text, the following program would do (assuming character valued variables at our disposal)</p>
+				<blockquote>
+					<b>char</b> <var>x</var>;<br>
+					<b>repeat</b> <var>x</var>:=RNC; PNC(<var>x</var>) <b>until</b> <var>x</var> = <var>pnt</var>&nbsp;&nbsp;.</blockquote>
+				<p>In this example, however, the text is to be subjected to the following transformation:</p>
+				<ol>
+					<li type="1" class="nospace"> in the output text, successive words have to be separated by a single space
+					<li type="1" class="nospace">&nbsp;in the output text, the last word has to be followed by a single point
+					<li type="1" class="nospace">when we number the words 0, 1, 2, 3, ... in the order from left to right (<i>i.e.</i> in which they are scanned by repeated evaluation of RNC), the words with an even ordinal number have to be copied, while the letters of the words with an odd ordinal number have to be printed in the reverse order.
+				</ol>
+				<p>For instance (using &quot;&#x02FD;&quot; to represent a space) the input text</p>
+				<blockquote>
+					&quot;this&#x02FD;&#x02FD;&#x02FD;is&#x02FD;&#x02FD;a&#x02FD;silly&#x02FD;&#x02FD;program&#x02FD;&#x02FD;.&quot;</blockquote>
+				<p class="noindent">has to be transformed into</p>
+				<blockquote>
+					&quot;this&#x02FD;si&#x02FD;a&#x02FD;yllis&#x02FD;program.&quot;&nbsp;&nbsp;.</blockquote>
+				<p>My reader is cordially invited to try this program himself, before reading on and to record his considerations so as to enable himself to compare them with the sequel. (It should take an experienced programmer much less than 90 minutes!)</p>
+				<p>The unknown length of the non-empty input text suggested a program of the structure</p>
+				<blockquote>
+					prelude;<br>
+					<b>repeat</b> something <b>until</b> ready;<br>
+					coda</blockquote>
+				<p class="noindent">but immediately this question turned up: &quot;With how much do we deal during a single execution of &quot;something?&quot; Four suggestions turned up:</p>
+				<ol>
+					<li type="1" class="continue">a single character of the input text
+					<li type="1" class="continue">a single character of the output text
+					<li type="1" class="continue">a word (of both texts)
+					<li type="1" class="continue">two successive words (of both texts)
+				</ol>
+				<p>The first two suggestions were rejected very quickly and without much explicit motiviation, although &#151;or because?&#151; it is not too difficult to provide it. (The first one is unattractive because the amount of output that can be produced on account of the next character of the input text varies wildly; for the second suggestion a similar objection holds. Apart from that, a program with a loop in a loop is in general cleaner: this suggests to look for the larger portions.) The audience rejected the fourth suggestion on account of the remark that the terminating point could come equally well after an even number of words as after an odd number of words. To make the selection of the third suggestion explicit, we wrote on the blackboard:</p>
+				<blockquote>
+					prelude;<br>
+					<b>repeat</b> process next word <b>until</b> point read;<br>
+					coda</blockquote>
+				<p>Everyone was satisfied in as far as this program expresses neatly that the output words are dealt with in exactly the same order as the corresponding input words are read, but it does not express that half of the words are to be printed in reverse order. When this was pointed out to them, they quickly introduced a state variable for the purpose. A first suggestion was to count the number of words processed and to make the processing dependent on the odd/evenness of this count, but a minor hesitation from my side was enough for the discovery that a boolean variable would meet the situation. It was decided that the &quot;prelude&quot; should include</p>
+				<blockquote>
+					<var>forward</var> := <b>true</b>;</blockquote>
+				while in &quot;process next word&quot; the printing in the order dependent on the current value of &quot;forward&quot; should be followed by
+				<blockquote>
+					<var>forward</var> := &not; <var>forward</var></blockquote>
+				<p>For me it was very gratifying to see that they introduced the variable <var>forward</var> before bothering about the details of word separation, which then became their next worry. It took them more time to realize that a further refinement of &quot;process next word&quot; required exact specification of which characters of the input text were going to be read and which characters of the output text were going to be printed at each execution of the repeatable statement. In fact, I had to pose the question to them and, after having done so, I asked them in which of the two texts the grouping presented itself most naturally. They selected the output text and chose the following grouping (indicating separation with a vertical bar):</p>
+				<blockquote>
+					|this&#x02FD;|si&#x02FD;|a&#x02FD;|yllis&#x02FD;|program.|</blockquote>
+				<p class="noindent"><i>i.e.</i> in units of a word followed by a proper terminator. I then asked for the corresponding grouping of the input characters. When their attention had been brought to the terminators, they suggested (from right to left!) the following separation of the input characters:</p>
+				<blockquote>
+					|this&#x02FD;&#x02FD;&#x02FD;i|s&#x02FD;&#x02FD;a|&#x02FD;s|illy&#x02FD;&#x02FD;p|rogram&#x02FD;&#x02FD;.|</blockquote>
+				<p class="noindent">as soon as one of them had remarked that the program could only &quot;know&quot; that an output word should be followed by a space after having &quot;seen&quot; the first letter of the next input word. I then remained silent, leaving them gazing at their grouping of the symbols until one of them discovered that the exceptional grouping of the characters of the first input word was inelegant, that the grouping should be</p>
+				<blockquote>
+					t|his&#x02FD;&#x02FD;&#x02FD;i|s&#x02FD;&#x02FD;a|&#x02FD;s|illy&#x02FD;&#x02FD;p|rogram&#x02FD;&#x02FD;.|</blockquote>
+				<p class="noindent"><i>i.e.</i> that the first character of the first word should be read in the prelude. Another variable was introduced and we arrived at</p>
+				<blockquote>
+					<b>boolean</b> <var>forward</var>; <b>char</b> <var>x</var>;<br>
+					<var>forward</var> := <b>true</b>; <var>x</var> := RNC;<br>
+					<b>repeat</b> process next word;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<var>forward</var> := &not; <var>forward</var><br>
+					<b>until</b> <var>x</var> = <var>pnt</var></blockquote>
+				<p class="noindent">in which the second line represents the prelude; in the meantime it had been decided that the coda could be empty.</p>
+				<p>The above stage had been reached after the first 45 minutes and we had our interval for coffee. Personally I felt that the problem had been solved, that from now onwards it was just a matter of routine; as it turned out, my audience was not practised enough and it took another 45 minutes to complete the program.</p>
+				<p>Unanimously, they decided to introduce a</p>
+				<blockquote>
+					<b>char array</b> <var>c</var>[1:20]</blockquote>
+				<p class="noindent">to store the letters of the word. (No one discovered that reading the letters and printing them in the reverse order could be done by a recursive routine!) Essentially, four things have to be done: the letters of the word have to be read, the letters of the word have to be printed, enough has to be read to decide which terminator is to be printed, and the terminator has to be printed. I did not list these four actions, I did not ask for an explicit decision on how to group and/or combine them. The audience decided that first all reading should be done and thereafter all printing. (From their side this was hardly a conscious decision.)</p>
+				<p>Trying to refine the reading and the printing process they hit an unsuspected barrier: they were &#151;at least for me: surprisingly&#151; slow in discovering that they still had to define an interface between reading and printing through which to transmit the word to be processed, no matter how obvious this interface was. It took a long time before anyone formulated that <nobr><var>c</var>[<var>i</var>]</nobr> should equal the <var>i</var>-th character of the word when read from left to right. Perhaps half of the audience was wondering what all the fuss was about, but it took an equally long time to discover that the length of the word needed some form of representation as well. No one suggested to do this by storing a terminator, they introduced a separate integer <var>l</var>, counting the number of letters of the word. They decided that the first word &quot;this&quot; should be represented by</p>
+				<blockquote>
+					<var>c</var>[1] = &quot;t&quot;, <var>c</var>[2] = &quot;h&quot;, <var>c</var>[3] = &quot;i&quot;, <var>c</var>[4] = &quot;s&quot; and <var>i</var> = 4 .</blockquote>
+				<p>They still had difficulty in arriving at the reading cycle and it was only when I had said repeatedly &quot;so we have decided that <var>l</var> is going to represent the number of letter[sic] of the word stored in the array&quot; that they arrived for the beginning of the reading process at</p>
+				<blockquote>
+					<var>l</var> := 0;<br>
+					<b>repeat</b> <var>l</var> := <var>l</var> + 1; <var>c</var>[<var>l</var>]:= <var>x</var>; <var>x</var>:= RNC <b>until</b> <var>x</var> = <var>sp</var> <b>or</b> <var>x</var> = <var>pnt</var> .</blockquote>
+				<p class="noindent">(In the first draft &quot;<b>or</b> <var>x</var> = <var>pnt</var>&quot; was missing, but this was remedied quickly.) Once this was on the blackboard they completed the reading process without much hesitation:</p>
+				<blockquote>
+					<b>while</b> <var>x</var> = <var>sp</var> <b>do</b> <var>x</var>:= RNC</blockquote>
+				<p>When we turned our attention to the printing process, they were more productive. Clearly the reading process had shown them the purpose of the interface and suggestions came from various sides. I had never described the dilemma to them (see <nobr><a href="https://www.cs.utexas.edu/~EWD/ewd02xx/EWD249.PDF">EWD249</a> &#150; <a href="https://www.cs.utexas.edu/~EWD/ewd02xx/EWD249.PDF#page=32">31</a></nobr>), whether to code an alternative clause selecting between two repetitions or a repetitive clause repeating an alternative statement. I was waiting for the dilemma to turn up, it came and I showed it to them. Then I had a surprise, for one of the students sugggested to map the two loops on each other with the aid of more variables. We introduced three integers, <var>k</var>, <var>inc</var>, <var>term</var> and the printing of the letters became</p>
+				<blockquote>
+					<b>if</b> <i>forward</i> <b>then begin</b> <var>k</var>:= 0; <var>inc</var>:= +1; <var>term</var>:= <var>l</var> <b>end</b><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>else begin</b> <var>k</var>:= <var>l</var> + 1; <var>inc</var>:= &#150;1; <var>term</var>:= 1 <b>end</b>;<br>
+					<b>repeat</b> <var>k</var>:= <var>k</var> + <var>inc</var>; PNC(<var>c</var>[<var>k</var>]) <b>until</b> <var>k</var> = <var>term</var></blockquote>
+				<p class="noindent">followed by</p>
+				<blockquote>
+					<b>if</b> <var>x</var> = <var>pnt</var> <b>then</b> PNC(<var>pnt</var>) <b>else</b> PNC(<var>sp</var>).</blockquote>
+				<p>Thus we arrived at the following program</p>
+				<blockquote>
+					<b>boolean</b> <var>forward</var>; <b>char</b> <var>x</var>; <b>char array</b> <var>c</var>[1:20]; <b>integer</b> <var>l</var>, <var>k</var>, <var>inc</var>, <var>term</var>;<br>
+					<i>forward</i>:= <b>true</b>; <var>x</var>:= RNC;<br>
+					<b>repeat</b> <var>l</var>:= 0;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<b>repeat</b> <var>l</var>:= <var>l</var> + 1; <var>c</var>[<var>l</var>]:= <var>x</var>; <var>x</var>:= RNC <b>until</b> <var>x</var> = <var>sp</var> &#x2228; <var>x</var> = <var>pnt</var>;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<b>while</b> <var>x</var> = <var>sp</var> <b>do</b> <var>x</var>:= RNC;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<b>if</b> <i>forward</i> <b>then begin</b> <var>k</var>:= 0; <var>inc</var>:= +1; <var>term</var>:= <var>l</var> <b>end</b><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>else begin</b> <var>k</var>:= <var>l</var> + 1; <var>inc</var>:= &#150;1; <var>term</var>:= 1 <b>end</b>;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<b>repeat</b> <var>k</var>:= <var>k</var> + <var>inc</var>; PNC(<var>c</var>[<var>k</var>]) <b>until</b> <var>k</var> = <var>term</var>;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<b>if</b> <var>x</var> = <var>pnt</var> <b>then</b> PNC(<var>pnt</var>) <b>else</b> PNC(<var>sp</var>);<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<var>forward</var>:= &not; <var>forward</var><br>
+					<b>until</b> <var>x</var> = <var>pnt</var> &nbsp;&nbsp;&nbsp;&nbsp;.</blockquote>
+				<p>This section has not been included because the problem tackled in it is very exciting. On the contrary, I feel tempted to remark that the problem is perhaps too trivial to act as a good testing ground for an orderly approach to the problem of program composition. This section has been included because it contains a true eye-witness account of what happened in the classroom. It should be interpreted as a partial answer to the question that is often posed to me, <i>viz.</i> to what extent I can teach programming style. (I have never used the &quot;Notes on Structured Programming&quot; &#151;mainly addressed to myself and perhaps to my colleagues&#151; in teaching. The classroom experiment described in this section took place at the end of a course entitled &quot;Introduction to the Art of Programming&quot;, for which separate lecture notes &#151;with exercises and all that&#151; were written. As of the moment of writing the students that followed this course have still to pass their examination, it is for me still an open question how successful I have been. They liked the course, I have heard that they described my programs as &quot;logical poems&quot;, so I have the best of hopes.)</p>
+				<p class="noindent"><u>The problem of the eight queens.</u></p>
+				<p>This last section is adapted from my lecture notes &quot;Introduction into the Art of Programming&quot;. I owe the example &#151;as many other good ones&#151; to Niklaus Wirth. This last section is added for two reasons.</p>
+				<p>Firstly, it is a second effort to do more justice to the process of invention. (As a matter of fact I start where the student is not familiar with the concept of backtracking and aim at discovering it as I go along.)</p>
+				<p>Secondly, and that is more important, it deals with recursion as a programming technique. In preceding sections (particularly in &quot;On a program model&quot;) I have reviewed the subroutine concept; there it emerged as an embodiment of what I have also called &quot;operational abstraction&quot;. In the relation between main program and subroutine we can distinguish quite clearly two different semantic levels. On the level of the main program the subroutine represents a primitive action; on that level it is used on account of &quot;what it does for us&quot; and on that same level it is irrelevant &quot;how it works&quot;. On the level of the subroutine body we are concerned with how it works but can &#151;and should&#151; abstract from how it is used. This clear separation of the two semantic levels &quot;what it does&quot; and &quot;how it works&quot; is denied to the designer of a recursive procedure. As a result of this circumstance the design of a recursive routine requires a different mental skill, justifying the inclusion of the current section in this manuscript. The recursive procedure has to be understood and conceived as a single semantic level: as such it is more like a sequencing device, comparable to the repetitive clauses.</p>
+				<p>It is requested to make a program generating all configurations of eight queens on a chess-board of 8*8 squares such that no queen can take any of the others. This means that in the configurations sought, no two queens may be on the same row, on the same column or on the same diagonal.</p>
+				<p>We don't have an operator generating all these configurations, this operator is precisely what we have to make. Now there is a very general way (<i>cf.</i> &quot;On grouping and sequencing&quot;) of tackling such a problem which is as follows.</p>
+				<p>Call the set of configurations to be generated: set <var>A</var>. Look for a set <var>B</var> of configurations with the following properties:</p>
+				<ol>
+					<li>set <var>A</var> is a subset of set <var>B</var>
+					<li>given an element of set <var>B</var> it is not too difficult to decide whether it belongs to set <var>A</var> as well
+					<li>we can make an operator generating all elements of set <var>B</var>.
+				</ol>
+				<p>With the aid of the generator (3) for the elements of set <var>B</var>, all elements of set <var>B</var> can then be generated in turn; they will be subjected to the decision criterion (2) which decides whether they have to be skipped or handed over, thus generating elements of set <var>A</var>. Thanks to (1) this algorithm will produce <em>all</em> elements of set <var>A</var>.</p>
+				<p>Three remarks are in order.</p>
+				<ol>
+					<li type="1">If the whole approach is to make sense, set <var>B</var> is not identical to set <var>A</var>, and as it must contain set <var>A</var> as a (true) subset, it must be larger than set <var>A</var>. For reasons of efficiency, however, it is advised to choose set <var>B</var> &quot;as small as possible&quot;: the more elements it has, the more elements of it have to be skipped on account of the decision criterion (2).<br>
+						&nbsp;
+					<li type="1">We should look for a decision criterion that is cheap to apply, at least the discovery that an element of <var>B</var> does <em>not</em> belong to <var>A</var> should (on the average) be cheap. Also this is dictated by efficiency considerations, as we may expect set <var>B</var> to be an order of magnitude larger than set <var>A</var>, <i>i.e.</i> the majority of the elements of <var>B</var> will have to be rejected.<br>
+						&nbsp;
+					<li type="1">The assumption is that the generation of the elements of set <var>B</var> is easier than a direct generation of the elements of set <var>A</var>. If, nevertheless, the generation of the elements of set <var>B</var> still presents difficulties, we can repeat our pattern of thinking, re-apply the trick and look for a still larger set <var>C</var> of configurations that contains <var>B</var> as a subset etc. (And, as the careful reader will observe, we shall do so in the course of this example.)
+				</ol>
+				<p>Above we have sketched a very general approach, applicable to many, very different problems. Faced with a particular problem, <i>i.e.</i> faced with a specific set <var>A</var>, the problem of course is what to select for our set <var>B</var>.</p>
+				<p>In a moment of optimism one could think that this is an easy matter, as we might consider the following technique. We list all the mutually independent conditions that our elements of set <var>A</var> must satisfy and omit one of them. Sometimes this works but as a general technique it is too naive: its shortcomings become apparent when we apply it blindly to the problem of the eight queens. We can characterize our solutions by the two conditions</p>
+				<ol>
+					<li type="1">there are 8 queens on the board
+					<li>no two of the queens can take each other.
+				</ol>
+				<p>Omitting either of them gives for set <var>B</var> the alternatives:</p>
+				<p class="noindent"><var>B<sub>1</sub></var>: all configurations with <var>N</var> queens on the board such that no two queens can take each other</p>
+				<p class="noindent"><var>B<sub>2</sub></var>: all configurations of 8 queens on the board.</p>
+				<p>But both sets are so ludicrously huge that they lead to utterly impractical algorithms. So we have to be smarter. The burning question is: &quot;How?&quot;.</p>
+				<p>Well, at this stage of our considerations, being slightly at a loss, we are not so much concerned with the efficiency of our final program as with the efficiency of our own thought processes! So, if we decide to make a list of properties of solutions, in the hope of finding a useful clue, this is a rather undirected search and therefore we should not invest too much mental energy in such a search, that is: for a start we should restrict ourselves to their <em>obvious</em> properties.</p>
+				<p>(I gave the puzzle as a sobering exercise to one of the staff members of the Department of Mathematics at my University, because he expressed the opinion that programming was easy. He violated the above rule and, being, apart from a pure, perhaps also a poor mathematician, he started to look for interesting, non-obvious properties. He conjectured that if the chessboard were divided in four squares of 4*4 fields, each square should contain two queens, and then he started to prove this conjecture without having convinced himself that he could make good use of it. He still has not solved the problem and, as far as I know, has not yet discovered that his conjecture is false.)</p>
+				<p>Well, let us go ahead and let us list the obvious properties we can think of.</p>
+				<ol>
+					<li type="a">No row may contain more than one queen, 8 queens are to be placed and the chessboard has exactly 8 rows. As a result we conclude that each row will contain precisely one queen.<br>
+						&nbsp;
+					<li type="a">Similarly we conclude that each column will contain precisely one queen.<br>
+						&nbsp;
+					<li type="a">There are 15 &quot;upward&quot; diagonals, each of them containing at most one queen, <i>i.e.</i> 8 upward diagonals contain precisely one queen and 7 upward diagonals are empty.<br>
+						&nbsp;
+					<li type="a">Similarly we conclude that 8 downward diagonals contain precisely one queen and 7 are empty.<br>
+						&nbsp;
+					<li type="a">Given any non-empty configuraion of queens such that no two of them can take each other, removal of any one of these queens will result in a configuration sharing that property.
+				</ol>
+				<p>Now the last property is very important. (To be quite honest: here I feel unable to buffer the shock of invention!) In our earlier terminology it tells us something about any non-empty configuration from set <var>B<sub>1</sub></var>. If we start with a solution (which is an 8-queen configuration from set <var>B<sub>1</sub></var>) and take away any one queen we get a 7-queen configuration from set <var>B<sub>1</sub></var>; taking away a next queen will leave again a configuration from set <var>B<sub>1</sub></var> and we can repeat this process until the chessboard is empty. We could have taken a motion picture of this process: playing it back backwards it would show how, starting from an empty board, via configurations from set <var>B<sub>1</sub></var> that solution can be built up by placing one queen at a time. (Whether the trick of the motion picture played backwards is of any assistance for my readers is not for me to judge; I only mention it because I know that such devices help me.) When making the picture, any solution could be reduced to the empty board in many ways, in exactly the same number of ways &#151;while playing it backwards&#151; each solution can be built up. Can we exploit this freedom? We have rejected set <var>B<sub>1</sub></var> because it is too large, but maybe we can find a suitable subset of it, such that each non-empty configuration of the subset is a one-queen extension of only one other configuration of the subset. The &quot;extension property&quot; suggests that we are willing to consider configurations with less than 8 queens on the board and that we would like to form new configurations by adding a queen to an existing configuration &#151;a relatively simple operation presumably. Well, this draws our attention immediately to the <em>generation</em> of the elements of the (still mysterious) set <var>B</var>. For instance, in what order? And this again raises a question to which, as yet, we have not paid the slightest attention: in what order are we to generate the solutions, <i>i.e.</i> the elements of set <var>A</var>? Can we make a reasonable suggestion in the hope of deriving a clue from it? (In my experience such a question about order is usually very illuminating. It is not only that we have to make a sequential program that by definition will generate the solutions in some order, so that the decision about the order will have to be taken at some stage of the game. The decision about the order usually provides the clue to the proof that the program will generate <em>all</em> solutions and each solution only <em>once</em>.)</p>
+				<p>Prior to that we should ask ourselves: how do we characterize solutions once we have them? To characterize a solution we must give the positions of 8 queens. The queens themselves are unordered, but the rows and the columns are not: we may assume them to be numbered from 0 to 7. Thanks to property a) which tells us that each row contains precisely one queen, we can order the queens according to the number of the row they occupy. Then each configuration of 8 queens can be given by the value of the <nobr><b>integer array</b> <var>x</var>[0:7],</nobr> where</p>
+				<blockquote>
+					<var>x</var>[<var>i</var>] = the number of the column occupied by the queen in the <var>i-</var>th row.</blockquote>
+				<p>Each solution is then an &quot;8&#150;digit word&quot; <nobr>(<var>x</var>[0]...<var>x</var>[7])</nobr> and the only sensible order in which to generate these words that I can think of is the alphabetical order.</p>
+				<p class="noindent">(Note. As a consequence we open the way to algorithms in which rows and columns are treated differently, while the original problem was symmetrical in rows and columns! To consider asymmetric algorithms is precisely what the above considerations have taught us!)</p>
+				<p>Returning to the alphabetical order: now we are approaching familiar ground. If the elements of set <var>A</var> are to be generated in alphabetical order and they have to be generated by selection from a larger set <var>B</var>, then the standard technique is to generate the elements of set <var>B</var> in alphabetical order as well and to produce the elements of the subset in the order in which they occur in set <var>B</var>.</p>
+				<p>First we have to generate all solutions with <nobr><var>x</var>[0] = 0</nobr> (if any), then those with <nobr><var>x</var>[0] = 1</nobr> (if any) etc.; of the solutions with <var>x</var>[0] fixed, those with <nobr><var>x</var>[1] = 0</nobr> (if any) have to be generated first, followed by those with <nobr><var>x</var>[1] = 1</nobr> (if any) etc. In other words, the queen of row 0 is placed in column 0 &#151;say the square in the bottom left corner&#151; and remains there until all elements of <var>A</var> (and <var>B</var>) with queen 0 in that position have been generated and only then is she moved one square to the right to the next column. For each position of queen 0, queen 1 will walk from left to right in row 1 &#151;skipping the squares that are covered by queen 0&#151;; for each combined position of the first two queens, queen 2 walks along row 2 from left to right, skipping all squares covered by the preceding queens, etc.</p>
+				<p>But now we have found set <var>B</var>! It is indeed a subset of <var>B<sub>1</sub></var>, set <var>B</var> consists of all configurations with more than one queen in each of the first <var>N</var> rows, such that no two queens can take each other.</p>
+				<p>The criterion for deciding whether an element of <var>B</var> belongs to <var>A</var> as well is that <nobr><var>N</var> = 8</nobr>.</p>
+				<p>Having established our choice for set <var>B</var>, we find ourselves faced with the task of generating its elements in alphabetical order. We could try to do this via an operator &quot;GENERATE NEXT ELEMENT OF <var>B</var>&quot; with a program of the form</p>
+				<blockquote>
+					INITIALIZE EMPTY BOARD;<br>
+					<b>repeat</b> GENERATE NEXT ELEMENT OF <var>B</var>;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<b>if</b> <var>N</var> = 8 <b>then</b> PRINT CONFIGURATION<br>
+					<b>until</b> <var>B</var> EXHAUSTED.</blockquote>
+				(Here we have used the fact that the empty board belongs to <var>B</var>, but not to <var>A</var>, and is not <var>B</var>'s only element. We have made no assumptions about the existence of solutions.)
+				<p>But for two reasons a program of the above structure is less attractive. Firstly, we don't have a ready-made criterion to recognize the last element of <var>B</var> when we meet it and in all probability we have to generalize the operator &quot;GENERATE NEXT ELEMENT OF <var>B</var>&quot; in such a way that it will produce the indication &quot;<var>B</var> EXHAUSTED&quot; when it is applied to the last &quot;true&quot; element of <var>B</var>. Secondly, it is not too obvious how to make the operator &quot;GENERATE NEXT ELEMENT OF <var>B</var>&quot;: the number of queens on the board may remain constant, it may decrease and it may increase.</p>
+				<p>So it is not too attractive. What can we do about it? As long as we regard the sequence of configurations of set <var>B</var> as a single, monotonous sequence, not subdivided into a succession of subsequences, the corresponding program structure will be a single loop as in the program just sketched. If we are looking for an alternative program structure, we must <em>therefore</em> ask ourselves &quot;How can we group the sequence of configurations from set <var>B</var> into a succession of subsequences?&quot;.</p>
+				<p>Realizing that the sequence of configurations from set <var>B</var> have to be generated in alphabetical order and thinking about the main subdivision in a dictionary &#151;<i>viz.</i> by first letter&#151; the first grouping is obvious: by position of queen 0.</p>
+				<p>Generating all elements of <var>B</var> &#151;for the moment we forget about the printing of these configurations that belong to set <var>A</var> as well&#151; then presents itself as</p>
+				<blockquote>
+					INITIALIZE EMPTY BOARD;<br>
+					<var>h</var>:= 0;<br>
+					<b>repeat</b> SET QUEEN ON SQUARE[0,<var>h</var>];<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;GENERATE ALL CONFIGURATIONS WITH QUEEN 0 FIXED;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;REMOVE QUEEN FROM SQUARE[0,<var>h</var>];<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<var>h</var>:= <var>h</var> + 1;<br>
+					<b>until</b> <var>h</var> = 8.</blockquote>
+				<p>But now the question repeats itself: how do we group all configurations with queen 0 fixed? We have already given the answer: in order of increasing column number of queen 1, <i>i.e.</i></p>
+				<blockquote>
+					<var>h1</var>:= 0;<br>
+					<b>repeat if</b> SQUARE[1,<var>h1</var>] FREE <b>do</b><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<b>begin</b> SET QUEEN ON SQUARE[1,<var>h1</var>];<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;GENERATE ALL CONFIGURATIONS WITH FIRST 2 QUEENS FIXED;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;REMOVE QUEEN FROM SQUARE[1,<var>h1</var>];<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<b>end</b>;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;<var>h1</var>:= <var>h1</var> + 1<br>
+					<b>until</b> <var>h1</var> = 8.</blockquote>
+				<p>For &quot;GENERATE ALL CONFIGURATIONS WITH FIRST 2 QUEENS FIXED&quot; we could write a similar piece of program and so on: inserting them inside each other would result in a correct program with eight nested loops, but they would all be very, very similar. To do so has two disadvantages:</p>
+				<ol>
+					<li>it takes a cumbersome amount of writing
+					<li>it gives a program solving the problem for a chessboard of 8*8 squares, but to solve the same puzzle for a board of, say, 10*10 squares would require a new, still longer program.
+				</ol>
+				<p>We are looking for a way in which all the loops can be executed under control of the same program text. Can we make the test of the loops identical? Can we exploit their identity?</p>
+				<p>Well, to start with, we observe that the outermost and innermost loops are exceptional.</p>
+				<p>The outermost loop is exceptional in that it does not test whether square[0,<var>h</var>] is free because we know it is free. But because we know it is free, there is no harm in inserting the conditional clause</p>
+				<blockquote>
+					<p><b>if</b> SQUARE[0,<var>h</var>] FREE <b>do</b></p>
+				</blockquote>
+				<p class="noindent">and this gives the outermost loop the same pattern as the next six loops.</p>
+				<p>The innermost loop is exceptional in the sense that as soon as 8 queens have been placed on the board, there is no point in generating all configurations with those queens fixed, because we have a full board. Instead the configuration should be printed, because we have found an element of set <var>B</var> that is also an element of set <var>A</var>. We can map the innermost cycle and the embracing seven upon each other by replacing the line &quot;GENERATE&quot; by</p>
+			<div id="content" align="left">
+				<blockquote>
+					<p class="noindent"><b>if</b> BOARD FULL <b>then</b> PRINT CONFIGURATION<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>else</b> GENERATE ALL CONFIGURATIONS<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EXTENDING THE CURRENT ONE.</p>
+				</blockquote>
+			</div>
+			<div id="content">
+				<p>For this purpose we introduce a global variable, <var>n</var> say, counting the number of queens currently on the board. The test &quot;BOARD FULL&quot; becomes <nobr>&quot;<var>n</var> = 8&quot;</nobr> and the operations on squares can then have <var>n</var> as first subscript.</p>
+				<p>By now the only difference between the eight cycles is that each has &quot;its private <var>h</var>&quot;. By the time we have reached this stage we can give an affirmative answer to the question whether we can exploit the identity of the loops. The sequencing through the eight nested loops can be invoked with the aid of a recursive procedure, <i>generate</i> say, which describes the cycle once. Using it, the program itself collapses into</p>
+				<blockquote>
+					<p>INITIALIZE EMPTY BOARD; <var>n</var>:= 0;<br>
+						<var>generate</var>;</p>
+				</blockquote>
+				<p class="noindent">while <var>generate</var> is recursively defined as follows:</p>
+				<blockquote>
+					<p><b>procedure</b> generate;<br>
+						<b>begin integer</b> <var>h</var>;<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;<var>h</var>:= 0;<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;<b>repeat if</b> SQUARE[<var>n</var>, <var>h</var>] FREE <b>do</b><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>begin</b> SET QUEEN ON SQUARE [<var>n</var>, <var>h</var>]; <var>n</var>:= <var>n</var> + 1;<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>if</b> <var>n</var> = 8 <b>then</b> PRINT CONFIGURATION<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>else</b> generate;<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>n</var>:= <var>n</var> &#150; 1; REMOVE QUEEN FROM SQUARE[<var>n</var>, <var>h</var>]<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>end</b>;<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>h</var>:= <var>h</var> + 1<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;<b>until</b> <var>h</var> = 8<br>
+						<b>end</b></p>
+				</blockquote>
+				<p>Each activation of &quot;generate&quot; will introduce its private local variable <var>h</var>, thus catering for <var>h</var>, <var>h<sub>1</sub></var>, ..., <var>h<sub>8</sub></var> that we would need when writing eight nested loops.</p>
+				<p>Our program &#151;although correct to this level of detail&#151; is not yet complete, <i>i.e.</i> it has not been refined up to the standard degree of detail that is required by our programming language. In out[sic] next refinement we should decide upon the conventions according to which we represent the configurations on the board. We have already decided more or less that we shall use the</p>
+				<blockquote>
+					<p><b>integer array</b> <var>x</var>[0:7]</p>
+				</blockquote>
+				<p class="noindent">giving in order the column numbers occupied by the queens, and also that</p>
+				<blockquote>
+					<p><b>integer</b> <var>n</var></p>
+				</blockquote>
+				<p class="noindent">should be used to represent the number of queens on the board. More precisely</p>
+				<blockquote>
+					<p class="noindent"><var>n</var> = the number of queens on the board<br>
+						<var>x</var>[<var>i</var>] for 0 &#x2264; <var>i</var> &lt; <var>n</var> = the number of the column occupied by<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the queen in the <var>i&#150;</var>th row.</p>
+				</blockquote>
+				<p>The array <var>x</var> and the scalar <var>n</var> are together sufficient to fix any configuration of the set <var>B</var> and those will be the only ones on the chessboard. As a result we have no <em>logical</em> need for more variables; yet we shall introduce a few more, because from a practical point of view we can make good use of them. The problem is that with only the above material the (frequent) analysis whether a given square in the next free row is uncovered is rather painful and time-consuming. It is here that we look for the standard technique as described in the seciton &quot;On trading storage space for computation speed&quot; (<a href="https://www.cs.utexas.edu/~EWD/ewd02xx/EWD249.PDF">EWD249</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd02xx/EWD249.PDF#page=54">53</a>). The role of the stored argument is here played by the configuration of queens on the board, but this value is not changing wildly, oh no, the only thing we do is adding or removing a queen. And we are looking for additional tables (whose contents are a function of the current configuration) such that they will assist us in deciding whether a square is free and also such that they can be updated easily when a queen is added to or removed from a configuration.</p>
+				<p>How? Well, we might think of a boolean array of 8&#x00d7;8, indicating for each square whether it is free or not. If we do this for the full board, adding a queen might imply dealing with 28 squares, removing a queen, however, is then a painful process, because it does not follow that all squares no longer covered by <em>her</em> are indeed free: they might be covered by one or more of the other queens that remain in the configuration. There is a (again standard) remedy for this, <i>viz.</i> associating with each square not a boolean variable, but an integer counter, counting the number of queens covering the square. Adding a queen then means increasing up to 28 counters by 1, removing a queen means decreasing them by 1 and a square is free when its associated counter equals zero. We could do it that way, but the question is whether this is overdoing it: 28 adjustments is indeed quite a heavy overhead on setting or removing a queen.</p>
+				<p>Each square in the freedom of which we are interested covers a row (which is free by definition, so we need not bother about that), covers one of the 8 columns (which still must be empty), covers one of the 15 upward diagonals (which must still be empty) and one of the 15 downward diagonals (which must still be empty). This suggests that we should keep track of</p>
+				<ol>
+					<li>the columns that are free
+					<li>the upward diagonals that are free
+					<li>the downward diagonals that are free
+				</ol>
+				<p>As each column or diagonal is covered only once we don't need a counter for each, a boolean variable is sufficient. The columns are readily identified by their column number and for the columns we introduce</p>
+				<blockquote>
+					<p><b>boolean array</b> <var>col</var>[0:7]</p>
+				</blockquote>
+				<p class="noindent">where <nobr>&quot;<var>col</var>[<var>i</var>]&quot;</nobr> means that the <var>i</var>-th column is still free.</p>
+				<p>How do we identify the diagonals? Well, along an upward diagonal the difference between row number and column number is constant, along a downward diagonal their sum. As a result, difference and sum respectively are the easiest index by which to distinguish the diagonals and we introduce therefore</p>
+				<blockquote>
+					<p><b>boolean array</b> <var>up</var>[&#150;7:+7], <var>down</var>[0:14] ,</p>
+				</blockquote>
+				<p class="noindent">to keep track of which diagonals are free.</p>
+				<p>The question whether <nobr><var>square</var>[<var>n</var>, <var>h</var>]</nobr> is free becomes</p>
+				<blockquote>
+					<p><var>col</var>[<var>h</var>] &#x2227; <var>up</var>[<var>n</var> &#150; <var>h</var>] &#x2227; <var>down</var>[<var>n</var> + <var>h</var>] ,</p>
+				</blockquote>
+				<p class="noindent">setting and removing a queen both imply the adjustment of three booleans, one in each array.</p>
+				<p>In the final program the variable <var>k</var> is introduced for general counting purposes, statements and expressions are labeled (in capital letters). Note that we have merged two levels of description, what were statements and functions on the upper level, now appear as explanatory labels.</p>
+				<p>With the final program we come to the end of the last section. We have attempted to show the pattern of reasoning by which one could discover backtracking as a technique, and also the pattern of reasoning by which one could discover a recursive procedure describing it. The most important moral of this section is perhaps that all that analysis and synthesis could be carried out before we had decided how (and how redundantly) a configuration would be represented inside the machine. It is true that such considerations only bear fruit when eventually a convenient representation for configurations can be found. Yet the mental isolation of a level of abstraction in which we allow ourselves not to bother about it seems cruical.</p>
+				<p>Finally I would like to thank the reader that has followed me up till here for his patience.</p>
+				<p class="noindent"><b>begin integer</b> <var>n</var>, <var>k</var>; <b>integer array</b> <var>x</var>[0:7]; <b>boolean array</b> <var>col</var>[0:7], <var>up</var>[&#150;7:+7], <var>down</var>[0:14];<br>
+					&nbsp;&nbsp;&nbsp;<b>procedure</b> generate;<br>
+					&nbsp;&nbsp;&nbsp;<b>begin integer</b> <var>h</var>;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>h</var>:= 0;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>repeat if</b> SQUARE[n,h] FREE: (<var>col</var>[<var>h</var>] &#x2227; <var>up</var>[<var>n</var> &#150; <var>h</var>] &#x2227; <var>down</var>[<var>n</var> + <var>h</var>]) <b>do</b><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>begin</b> SET QUEEN ON SQUARE[n,h]:<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>x</var>[<var>n</var>]:= <var>h</var>; <var>col</var>[<var>h</var>]:= <b>false</b>; <var>up</var>[<var>n</var> &#150; <var>h</var>]:= <b>false</b>; <var>down</var>[<var>n</var> + <var>h</var>]:= <b>false</b>; <var>n</var>:= <var>n</var> + 1;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>if</b> BOARD FULL: (<var>n</var> = 8) <b>then</b><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>begin</b> PRINT CONFIGURATION:<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>k</var>:= 0; <b>repeat</b> print(<var>x</var>[<var>k</var>]); <var>k</var>:= <var>k</var> + 1 <b>until</b> <var>k</var> = 8; newline<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>end</b><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>else</b> <i>generate</i>;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>n</var>:= <var>n</var> &#150; 1; REMOVE QUEEN FROM SQUARE[n,h]:<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>down</var>[<var>n</var> + <var>h</var>]:= <b>true</b>; <var>up</var>[<var>n</var> &#150; <var>h</var>]:= <b>true</b>; <var>col</var>[<var>h</var>]:= <b>true</b><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>end</b>;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>h</var>:= <var>h</var> + 1<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>until</b> <var>h</var> = 8<br>
+					&nbsp;&nbsp;&nbsp;<b>end</b>;<br>
+					&nbsp;&nbsp;&nbsp;INITIALIZE EMPTY BOARD:<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>n</var>:= 0;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>k</var>:= 0; <b>repeat</b> <var>col</var>[<var>k</var>]:= <b>true</b>; <var>k</var>:= <var>k</var> + 1 <b>until</b> <var>k</var> = 8;<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>k</var>:= 0; <b>repeat</b> <var>up</var>[<var>k</var> &#150; 7]:= <b>true</b>; <var>down</var>[<var>k</var>]:= <b>true</b>; <var>k</var>:= <var>k</var> + 1 <b>until</b> <var>k</var> = 15;<br>
+					&nbsp;&nbsp;&nbsp;generate<br>
+					<b>end</b></p>
+				<hr>
+				<p class="noindent"><font size="-1">Transcription by David J. Brantley,<br>
+						latest revision <csobj format="MedDate" h="13" region="15" t="DateTime" w="94">Tue, 18 Dec 2007</csobj>.</font></p>
+			</div>
+		
+		
+			
+				
+			
+			
+			
+				
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+			
+		
+			
+				
+			
+	</body>
+</html>

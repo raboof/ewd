@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Sequencing and the discriminated union (EWD 670)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>Sequencing and the discriminated union</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD670.PDF"
+           title="Link to the PDF version of EWD670">EWD670</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+                           
+<b>Sequencing and the discriminated union</b>.
+<p>The purpose of this note is to record an observation on a connection
+between the availability of sequencing primitives on the one hand and the
+need for the discriminated union on the other.
+<p>Our starting point is a rather abstract inner block that captures
+a structure of which I have encountered several examples. The variable z
+represents the global environment symbolically, the variable x is a 
+local variable, and the predicates H(x) and K(x) , used in the annotations,
+are complementary, i.e. H(x) = <b>non</b> K(x) . The BHH , BHK , etc. 
+represent boolean expressions such that (BHH(x,z) <b>or</b> BHK(x,z)) &rArr; H(x) , etc.
+<table> <tr> <td colspan = 3>
+<b>begin</b> <b>var</b> x: Xtype; x:= some function(z);               </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+   <b>do</b> BHH(x,z) &rarr; {H(x)} z:= ZHH(x,z); x:= XHH(x,z) {H(x)} </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
+    &#x25af; BHK(x,z) &rarr; {H(x)} z:= ZHK(x,z); x:= XHK(x,z) {K(x)} </td> </tr> <tr> <td></td> <td></td> <td>
+    &#x25af; BKH(x,z) &rarr; {K(x)} z:= ZKH(x,z); x:= XKH(x,z) {H(x)} </td> </tr> <tr> <td></td> <td></td> <td>
+    &#x25af; BKK(x,z) &rarr; {K(x)} z:= ZKK(x,z); x:= XKK(x,z) {K(x)} </td> </tr> <tr> <td></td> <td colspan = 2>
+   <b>od</b>                                                          </td> </tr> <tr> <td colspan = 3>
+<b>end</b>                                                            </td> </tr>
+</table>
+
+<p>Suppose now that we have to code this inner block in the absence of
+the required Xtype , but in the presence of two types, Htype and Ktype ,
+such that there is a natural one-to-one correspondence between the values
+in Htype and those x of Xtype satisfying H(x) , and, similarly,
+there is a natural one-to-one correspondence between the values in Ktype
+and those x of Xtype satisfying K(x) . The classical solution consists
+of replacing the above variable X by a triple, i.e. one boolean, one
+variable of Htype and one variable of Ktype . Reusing the same 
+identifiers in analogous functions, we get:
+<table> <tr> <td>&nbsp; </td> <td colspan = 3>
+ <b>begin</b> <b>var</b> Hholds: boolean; <b>var</b> h: Htype; <b>var</b> k: Ktype; Hholds:= Q(z);                  </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+    <b>if</b> Hholds &rarr; h:= some function(z) &#x25af; <b>non</b> Hholds &rarr; k:= other function(z) <b>fi</b>; </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+    <b>do</b> Hholds <b>cand</b> BHH(h,z) &rarr; z:= ZHH(h,z); h:= XHH(h,z)                                         </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td>
+      &#x25af; Hholds <b>cand</b> BHK(h,z) &rarr; z:= ZHK(h,z); k:= XHK(h,z); Hholds:= false                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
+      &#x25af; <b>non</b> Hholds <b>cand</b> BKH(k,z) &rarr; z:= ZKH(k,z); h:= XKH(k,z); Hholds:= true              </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
+      &#x25af; <b>non</b> Hholds <b>cand</b> BKK(k,z) &rarr; z:= ZKK(k,z); k:= XKK(k,z)                             </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+    <b>od</b>                                                                                                       </td> </tr> <tr> <td></td> <td colspan = 3>
+ <b>end</b>                                                                                                         </td> </tr>
+</table>
+                      
+This second program is ugly for a variety of reasons:
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The fact that at any moment in time of the values of h and k 
+only one matters is not syntactically expressed.
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Without the introduction of &ldquo;fake initializations&rdquo;, the assignments
+to h and k cannot be separated in the text into initializations 
+versus modifications. (This complaint is closely related to the first one.)
+<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The value of Hholds requires explicit manipulation, despite the
+fact that that value is almost a function of the place in the text.
+<br>4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The <b>cand</b>&rsquo;s are really necessary, because the BHH , BHK etc. may
+now be partial functions. (Note that we may not write
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 6>
+       <b>do</b> Hholds &rarr; <b>if</b> BHH(h,z) &rarr; ...                      </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 3>
+                   &#x25af; BHK(h,z) &rarr; ...                                   </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+                  <b>fi</b>                                                       </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td colspan = 5>
+        &#x25af; <b>non</b> Hholds &rarr; <b>if</b> BKH(k,z) &rarr; ...           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td>
+                          &#x25af; BKK(k,z) &rarr; ...                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+                        <b>fi</b>                                                 </td> </tr> <tr> <td></td> <td colspan = 6>
+       <b>od</b>                                                                  </td> </tr>
+</table>
+
+because, instead of to proper termination, this would lead to abortion.)
+<p>These complaints are largely overcome when we use &mdash;very much in the
+style suggested by Eric C.Hehner of the University of Toronto&mdash; what we
+might call &ldquo;semi-recursion&rdquo;. The main text for our program part then 
+becomes
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+    <b>if</b> Q(z) &rarr; processHtype(some function(z))        </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
+     &#x25af; <b>non</b> Q(z) - processKtype(other function(z)) </td> </tr> <tr> <td></td> <td colspan = 2>
+    <b>fi</b>                                                   </td> </tr>
+</table>
+with the two local refinements, which &mdash;under the assumption of 
+valueparameters in the style of ALGOL 60&mdash; can be written:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+     processHtype(value h: Htype):                                                </td> </tr> <tr> <td></td> <td colspan = 3>
+     <b>begin</b> <b>do</b> BHH(h,z) &rarr; z:= ZHH(h,z); h:= XHH(h,z) <b>od;</b> </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+           <b>if</b> BHK(h,z) &rarr; z:= ZHK(h,z); processKtype(XHK(h,z))         </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td>
+            &#x25af; <b>non</b> BHK(h,z) &rarr; skip                              </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+           <b>fi</b>                                                              </td> </tr> <tr> <td></td> <td colspan = 3>
+     <b>end</b>                                                                   </td> </tr>
+</table>
+
+and for &ldquo;processKtype&rdquo; similarly. Following Hehner we can abolish the
+                   
+<b>do</b>...<b>od</b> completely &mdash;and, in passing, retain the potential nondeterminacy&mdash;
+by refining as follows:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+     processHtype(value h: Htype):                                               </td> </tr> <tr> <td></td> <td colspan = 3>
+     <b>begin</b> <b>if</b> BHH(h,z) &rarr; z:= ZHH(h,z); processHtype(XHH(h,z)) </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td>
+            &#x25af; BHK(h,z) &rarr; z:= ZHK(h,z); processKtype(XHK(h,z))        </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
+            &#x25af; <b>non</b> (BHH(h,z) <b>or</b> BHK(h,z)) &rarr; skip        </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+           <b>fi</b>                                                             </td> </tr> <tr> <td></td> <td colspan = 3>
+     <b>end</b>                                                                  </td> </tr> <tr> <td colspan = 4>
+                                                                                 </td> </tr>
+</table>
+and for &ldquo;processKtype&rdquo; similarly.
+<p>This form of recursive refinement is at most &ldquo;<b>semi</b>-recursion&rdquo;, for
+what an ALGOL programmer would intuitively interpret as calls on recursive
+procedures are here all so-called &ldquo;last calls&rdquo;: for their implementation
+no stack is required and &mdash;because the term &ldquo;continuation&rdquo; has already a
+technical meaning in denotational semantics&mdash; we could call them 
+&ldquo;completions&rdquo;. If the &ldquo;completion&rdquo; is a recognized syntactic concept, none of the
+four complaints against our second program applies to our semi-recursive
+programs!
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>The above can be read as a plea for semi-recursion as a sequencing
+device. Its strength, however, remains to be ascertained. Semi-recursion
+provided a nice alternative for our second program, i.e. a second way of
+avoiding a discriminated union &mdash;a way of type formation about which I have
+mixed feelings&mdash; , but we should not forget that in this example we replaced
+only one variable ot such a type. The complete moral of this observation
+&mdash;if there is one&mdash; has still to be written; for the time being I must be
+content with having discovered a connection &mdash;between sequencing and types&mdash;
+of which I had been unaware before.
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN</td><td>BURROUGHS Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-02-02<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

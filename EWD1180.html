@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<title>E.W.Dijkstra Archive: Heuristics for a very simple Euclidean proof (EWD 1180)</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen" />
+		<style type="text/css"> body { line-height: 1.5em; } </style>
+	</head>
+	<body><div id="title"><h1>Heuristics for a very simple Euclidean proof</h1></div>
+		<div id="frame">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd11xx/EWD1180.PDF"
+					 title="Link to the PDF version of EWD1180">EWD 1180</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>Heuristics for a very simple Euclidean proof</u></p>
+				<img src="EWD1180_fig0.png" alt="EWD1180 figure 0" title="EWD1180 figure 0" style="float: left; margin: 1em 3em 1em 3em;" />
+				<p class="noindent">We consider 3 points on a given circle, <var>A</var> and <var>B</var> fixed and <var>P</var> movable along the clockwise circle segment from <var>A</var> to <var>B</var>. (See fig.&nbsp;0) &nbsp; At my recent oral examinations &ldquo;Mathematical Methodology&rdquo;, the students I asked did <em>not</em> know the theorem that <span class="unicode">&#x2220;</span><var>APB</var> is constant, i.e. independent of the position of <var>P</var>. So we designed the proof in as systematic a manner as possible.</p>
+				<p style="clear: both;" class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+				<p class="noindent">&#x2022; &nbsp; As a matter of routine we checked the relevance of the data. Is it essential that <var>A</var> is fixed? Yes, obviously. Is it essential that <var>P</var> is confined to the circle? Yes. (Some let <span class="unicode">&#x2220;</span><var>APB</var> shrink by moving <var>P</var> outside the circle, some let it increase by moving <var>P</var> inside.) Moral: we <em>have</em> to take the circle into account.</p>
+				<p class="noindent">&#x2022; &nbsp; How is a circle defined? As a set of points equidistant to the centre. So we had better introduce the centre <var>C</var> and the three radii of equal length. (See fig.&nbsp;1)</p>
+				<p class="noindent" align="center">
+					<img src="EWD1180_fig1and2.png" alt="EWD1180 figure 1 and 2" title="EWD1180 figure 1 and 2" /></p>
+				<p class="noindent">&#x2022; &nbsp; Since it is only essential that <var>A</var>, <var>B</var>, and <var>P</var> lie on the circle and this fact has been captured, the circle is now erased. (See fig.&nbsp;2)</p>
+				<p class="noindent">&#x2022; &nbsp; <em>Three</em> distances are the same, but usually equality is considered to be a <em>binary</em> relation. If the fact that <var>x</var>, <var>y</var>, <var>z</var> are all equal has to be captured by the pairwise equalities <var>x</var>=<var>y</var>, <var>y</var>=<var>z</var>, <var>z</var>=<var>x</var>, then 2 of the 3 suffice (since = is transitive). Which of the two pairs should we choose in fig.&nbsp;2? For reasons of symmetry these are <var>AC</var>=<var>PC</var> and <var>BC</var>=<var>PC</var>. Let us concentrate on the first one. (See fig.&nbsp;3)</p>
+				<img src="EWD1180_fig3.png" alt="EWD1180 figure 3" title="EWD1180 figure 3" style="float: right; margin: 1em 6em 1em 6em;" />
+				<p class="noindent">&#x2022; &nbsp; What can we conclude from <var>AC</var>=<var>PC</var>? This was invariably the moment some mathematical knowledge was introduced: an isosceles triangle has equal base angles. Together with the other case this leads to fig.&nbsp;4, in which equal angles have been marked equally.</p>
+				<p style="clear: both;"></p>
+				<img src="EWD1180_fig4.png" alt="EWD1180 figure 4" title="EWD1180 figure 4" style="float: left; margin: 0em 4em 0em 4em;" />
+				<p class="noindent">&#x2022; &nbsp; At this stage, most students remarked without prompting that a vital step had been made: from a given in terms of lengths a conclusion about angles has to be drawn, and the last step is vital because it provides the transition from lengths to angles. This is the moment to decide to remove the markings <img src="EWD1180_fig4b.png" alt="EWD1180 figure 4b" title="EWD1180 figure 4b" /> of equal lengths and to conduct the remainder of the argument in terms of angles.</p>
+				<p style="clear: both;"></p>
+				<p class="noindent">&#x2022; &nbsp; We have to show that <span class="unicode">&#x2220;</span><var>APB</var> is constant. We have not used yet that <var>A</var>, <var>B</var>, <var>C</var>, are fixed, and that therefore <span class="unicode">&#x2220;</span><var>ACB</var> is constant. This observation draws our attention to the angles around <var>C</var>. (Had we not made this observation, we could have observed that the angles around <var>C</var> are in fig.&nbsp;4 the only unmarked ones.) And this was the moment of the second introduction of some mathematical knowledge: most students chose to use that the angles of a triangle add up to &#x03C0; (which they called 180°). This leads to the marking as in fig.&nbsp;5 and we conclude that <span class="unicode">&#x2220;</span><var>APB</var> = ½ <span class="unicode">&#x2220;</span><var>ACB</var>, which proves the theorem.</p>
+				<img src="EWD1180_fig5and6.png" alt="EWD1180 figure 5 and 6" title="EWD1180 figure 5 and 6" style="float: left; margin: 1em 4em 1em 4em;" />
+				<p class="noindent"><u>Note</u> &nbsp; None of the students appealed to the theorem captured by</p>
+				<p class="noindent" align="center"><img src="EWD1180_fig5b.png" alt="EWD1180 figure 5b" title="EWD1180 figure 5b" /> &nbsp; &nbsp; &nbsp; ,</p>
+				<p class="noindent">extended <var>PC</var> and produced the marking as in fig.&nbsp;6. It has the advantage of not mentioning &#x03C0;<sup>*)</sup>, and is suggested by the observation that, at <var>P</var>, we have a constant angle with a variable partitioning: by extending <var>PC</var>, we create another constant angle with variable partitioning.</p>
+				<p class="noindent"><sup>*)</sup> The problem of introducing a constant (like &#x03C0;) is that then one has to use its properties. (End of Note.)</p>
+				<p>The problem was nice for warming up!</p>
+				<p style="clear: both;"></p>
+				<p style="margin-right: 2em;" align="right">Winding Stairs Campground,<br />14 May 1994</p>
+				<p class="noindent"></p>
+
+				<p class="noindent">
+					prof.dr. Edsger W.Dijkstra<br />
+					Department of Computer Sciences<br />
+					The University of Texas at Austin<br />
+					Austin, TX 78712-1188<br />
+				</p>
+			</div>
+			<div>
+        <br/>
+      </div>
+		</div>
+		<hr />
+		<div id="footer">
+         transcribed by Corrado Cantelmi<br />
+          revised 
+          <!-- #BeginDate format:En2 -->24-Dec-2011<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

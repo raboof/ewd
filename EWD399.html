@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: An immediate sequel to EWD398: &ldquo;Sequencing primitives revisited.&rdquo; (EWD 399)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>An immediate sequel to EWD398: &ldquo;Sequencing primitives revisited.&rdquo;</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd03xx/EWD399.PDF"
+           title="Link to the PDF version of EWD399">EWD399</a></div></div>
+      <div id="frame">
+         <div id="content">
+         <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR
+<hr />
+<p class="noindent">
+<p class="noindent"><b>An immediate sequel to EWD398: &ldquo;Sequencing primitives revisited.&rdquo;</b>.
+  <p>I have fixed the semantic definition of the <b>if</b>...<b>fi</b> and of the <b>do</b>...<b>od</b>
+constructs as introduced in EWD398.
+<p>Let &ldquo;Sif&rdquo; be: <b>if</b> B1:S1 &#x25af; ... &#x25af; Bn:Sn <b>fi</b> ; then wp(Sif, P) =
+{(<u>E</u> i: 1&le;i&le;n: Bi) and (1&le;i&le;n:(Bi <b>and</b> wp(Si, P)) <b>or</b> <b>non</b> Bi)} .
+<p>Let &ldquo;Sdo&rdquo; be: <b>do</b> B1:S1 &#x25af; ... &#x25af; Bn:Sn <b>od</b> ; then wp(Sdo, P) =
+(E i: 0 &le;i:   H<sub>i</sub>(Sdo, P)) , where the H<sub>i</sub>(Sdo, P) are given by the recurrence
+relation:   
+<table width=100%><tr><td valign=top width=10%>
+</td><td>H<sub>0</sub>(Sdo, P) = {P and non (E j: 1&le;j&le;n: Bi)}
+</td></tr>
+<tr><td valign=top>
+for i &gt;0:</td><td>H<sub>i</sub>(Sdo, P) = {wp(Sif, H<sub>i-1</sub>(Sdo, P)) <b>or</b> H<sub>i-1</sub>(Sdo, P)}
+</td>  </tr>  </table>
+Here the &ldquo;wp(Sif, ...) is the function defined above. The interpretation of
+H<sub>i</sub>(Sdo, P) is &rdquo;the weakest precondition such that we can guarantee 
+termination after at most i executions of a guarded command such that then the
+postcondition P will be satisfied. It is indeed the weakest precondition,
+if initially  wp(Sdo, P) is not satisfied, either non-termination or 
+termination without establishing the truth of P or both are possible. In terms of
+the H<sub>i</sub> an alternative definition of the weakest precondition for the
+<b>do</b>...<b>od</b> construct could have been &mdash;but I prefer to avoid the limit concept&mdash;
+<table width=100%><tr><td width=7%>&nbsp;</td><td valign=top width=15%>
+wp(Sdo, P) =</td><td>lim H<sub>i</sub>(Sdo, P)  
+</td></tr>
+<tr><td></td><td valign=top>
+</td><td>i &rarr; inf   
+</td>  </tr>  </table>
+so we had better forget this again.
+<p>The decision to postulate &mdash;EWD398 - 4, last paragraph&mdash; &ldquo;Fair random
+selection&rdquo; so that the construct as described on top of page 5 and in the
+middle of page 8 is guaranteed to terminate, was a mistake: for such constructs
+we prefer now not to exclude non-termination. It is just too tricky if the
+termination &mdash;and in particular: the proof of the termination&mdash; has to rely
+on the fair randomness of the selection and we had better restrict ourselves
+to constructs were each guarded command, when executed, implies a further
+approaching of the terminal state.
+<table>
+<tr><td>27th November 1973  </td><td width=15%></td><td>prof.dr.Edsger W.Dijkstra</td></tr>
+<tr><td>Burroughs   </td><td></td><td>Research Fellow </td></tr>
+<tr><td>Plataanstraat 5</td></tr>
+<tr><td>NUENEN - 4565, The Netherlands      </td></tr>
+</table><hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!&mdash; #BeginDate format:IS1 &mdash;>2014-11-08<!&mdash; #EndDate &mdash;>
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: Distances from the root in skew trees (EWD 801)</title>
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>Distances from the root in skew trees</h1></div>
+		<table width="467" border="0" cellspacing="0" cellpadding="0" cool gridx="16" gridy="16" height="2639" showgridx showgridy>
+			<tr height="2638">
+				<td content csheight="2638" width="466" height="2638" valign="top" xpos="0">
+					<div align="right">
+						&nbsp;&nbsp;<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD801.PDF">EWD 801</a></div>
+					<div align="left">
+						<u>Distances from the root in skew trees</u>
+						<p>by Edsger W. Dijkstra and C.S. Scholten</p>
+						<p>Renewed interest in algorithms for sorting in situ raised the question of the average distance from node to root in binary trees other than balanced ones. (Here binary trees are to be understood as rooted trees in which nodes have zero, one, or two sons.)</p>
+						<p>In particular we consider the infinite sequence of trees <b>T<sub>i</sub></b> (<b>i &#x2265; 0</b>), in which for some fixed <b>p</b> and <b>q</b> (<b>p &gt; q &#x2265; 0</b>)</p>
+						<ol>
+							<li type="1"><b>T<sub>i</sub></b> for <b>0 &#x2264; i &lt; p</b> are arbitrarily chosen
+							<li type="1"><b>T<sub>n</sub></b> and <b>T<sub>n+q</sub></b> are the subtrees of <b>T<sub>n+p</sub></b>
+						</ol>
+						<p>With <b>H<sub>i</sub></b> = the number of nodes in <b>T<sub>i</sub></b>, we have</p>
+						<blockquote>
+							<p><b>H<sub>n+p</sub> = H<sub>n+q</sub> + H<sub>n</sub> + 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>;</p>
+						</blockquote>
+						<p>with <b>G<sub>i</sub></b> = the sum of the distances of te nodes of <b>T<sub>i</sub></b> from its root we have</p>
+						<blockquote>
+							<p><b>G<sub>n+p</sub> = G<sub>n+q</sub> + G<sub>n</sub> + H<sub>n+q</sub> + H<sub>n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sub></b>.</p>
+						</blockquote>
+						<p>We are interested in the asymptotic behaviour of <b>G<sub>i</sub> / H<sub>i</sub></b> for large <b>i</b>, this ratio being the average distance from the root in <b>T<sub>i</sub></b>.</p>
+						<p>Without loss of generality we can confine ourselves to the case <b><nobr>gcd(p,q)</nobr>&nbsp;=&nbsp;1</b>, since in the case <b>gcd(p,q) = g &gt; 1</b>, the sequence <b>T<sub>i</sub></b> consists of an interleaving of <b>g</b> mutually independent sequences.</p>
+						<p>With <b>A<sub>i</sub></b> defined by <b>A<sub>i</sub> = H<sub>i</sub> + 1</b> and <b>B<sub>i</sub></b> defined by <b>B<sub>i</sub> = G<sub>i</sub> &#150; 2</b>, we derive</p>
+						<blockquote>
+							<dl start=0>
+								<dt><a name="eq0"></a>(0)&nbsp;&nbsp;&nbsp;&nbsp;<b>A<sub>n+p</sub> = A<sub>n+q</sub> + A<sub>n</sub></b>
+								<dt><a name="eq1"></a>(1)&nbsp;&nbsp;&nbsp;&nbsp;<b>B<sub>n+p</sub> = B<sub>n+q</sub> + B<sub>n</sub> + A<sub>n+p</sub></b>
+							</dl>
+						</blockquote>
+						Equation <a href="#eq1">(1)</a> is not homogeneous in the <b>B</b>'s, but by solving it for the <b>A</b>'s and substituting them in <a href="#eq0">(0)</a>, we get a homogeneous recurrence relation for the <b>B</b>'s, the characteristic polynomial of which is the product of <a href="#eq0">(0)</a>'s characteristic polynomial and the characteristic polynomial corresponding to the homogeneous part of <a href="#eq1">(1)</a>. We conclude that the characteristic equation for the <b>A<sub>i</sub></b> is
+						<blockquote>
+							<dl start=2>
+								<dt><a name="eq2"></a>(2)&nbsp;&nbsp;&nbsp;&nbsp;<b>x<sup>p</sup> &#150; x<sup>q</sup> &#150; 1 = 0</b>
+							</dl>
+						</blockquote>
+						and that that for the <b>B<sub>i</sub></b> is
+						<blockquote>
+							<dl start=3>
+								<dt><a name="eq3"></a>(3)&nbsp;&nbsp;&nbsp;&nbsp;<b>(x<sup>p</sup> &#150; x<sup>q</sup> &#150; 1)<sup>2</sup> = 0</b>
+							</dl>
+						</blockquote>
+						Under the constraints <b>gcd(p,q) = 1</b> and <b>p &gt; q &#x2265; 0</b>, <a href="#eq2">(2)</a> enjoys the property of having one positive root, <b>r</b> say, such that <b>r &gt; 1</b> and all other roots of <a href="#eq2">(2)</a> have a modulus smaller than <b>r</b>. (For a proof of this theorem, see later.)
+						<p>From this and the theory of linear recurrence relations we conclude</p>
+						<table width="433" border="0" cellspacing="2" cellpadding="0">
+							<tr>
+								<td align="left" valign="top">1)<sup>&nbsp;</sup>&nbsp;</td>
+								<td align="left" valign="top">that the leading term of <b>A<sub>i</sub></b> is of the form <b>k &middot; r<sup>i</sup></b> for some constant <b>k</b></td>
+							</tr>
+							<tr>
+								<td align="left" valign="top">2)<sup>&nbsp;</sup>&nbsp;</td>
+								<td align="left" valign="top">that the leading term of <b>B<sub>i</sub></b> is of the form <b>( l + L&middot;i ) &middot; r<sup>i</sup></b> for some constants <b>l</b> and <b>L</b>.</td>
+							</tr>
+						</table>
+						<br>
+						Substituting these leading terms in <a href="#eq1">(1)</a> we get
+						<blockquote>
+							<p><nobr><b>( l + L&middot;(n+p) ) &middot; r<sup>n+p</sup> =<br>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;( l + L&middot;(n+q) ) &middot; r<sup>n+q</sup> + ( l + L&middot;n ) &middot; r<sup>n</sup> + k &middot; r<sup>n+p</sup></b></nobr></p>
+						</blockquote>
+						<p>Since <b>r</b> is a root of <a href="#eq2">(2)</a> this can be reduced to</p>
+						<blockquote>
+							<dl start=4>
+								<dt><a name="eq4"></a>(4)&nbsp;&nbsp;&nbsp;&nbsp;<b>L / k = r<sup>p</sup> / ( p &middot; r<sup>p</sup> &#150; q &middot; r<sup>q</sup> )</b>
+							</dl>
+						</blockquote>
+						We define the skewness of a binary tree as the ratio (&#x2265; 1) of the numbers of nodes in its two subtrees. For the trees <b>T<sub>i</sub></b> it follows from the leading term of <b>A<sub>i</sub></b> that the asymptotic skewness <b>s</b> is given by <b>s = r<sup>q</sup></b>, whence <b>q&nbsp;=&nbsp;<sup>r</sup>log s</b>. Remembering that <b>r</b> satisfies <a href="#eq2">(2)</a>, we find <b>r<sup>p</sup> = s+1</b>, whence <b>p&nbsp;=&nbsp;<sup>r</sup>log (s+1)</b>. Hence <a href="#eq4">(4)</a> can be rewritten as
+						<blockquote>
+							<table>
+								<tr>
+									<td>
+										<dl start=5>
+											<dt valign=center><a name="eq5"></a>(5)&nbsp;&nbsp;&nbsp;&nbsp;<b>L / k = </b>
+										</dl>
+									</td>
+									<td align=center><b>s+1
+											<hr size=0>
+											(s+1) &middot; <sup>r</sup>log (s+1) &#150; s&middot;<sup>r</sup>log s</b></td>
+								</tr>
+							</table>
+						</blockquote>
+						<p>Because <b>r &gt; 1</b> &#151;so that the asymptotic value of <b>G<sub>i</sub> / H<sub>i</sub></b> equals that of  <b>B<sub>i</sub>&nbsp;/&nbsp;A<sub>i</sub></b>&#151;, we conclude that, expressed in <b>r</b> and <b>s</b>, the average distance from the root in <b>T<sub>i</sub></b> is for large <b>i</b></p>
+						<blockquote>
+							<table>
+								<tr>
+									<td align=center><b>(s+1)&nbsp;&middot;&nbsp;i
+											<hr size=0>
+											(s+1) &middot; <sup>r</sup>log (s+1) &#150; s&nbsp;&middot;&nbsp;<sup>r</sup>log s</b></td>
+								</tr>
+							</table>
+						</blockquote>
+						<p>Consequently, the average distance from the root in a tree from the sequence <b>T<sub>i</sub></b> with <b>N</b> nodes is</p>
+					</div>
+					<blockquote>
+						<div align="left">
+							<table>
+								<tr>
+									<td align=center><b>(s+1)&nbsp;&middot;&nbsp;log N<font color="#003333">
+												<hr size=0>
+											</font>(s+1)&nbsp;&middot;&nbsp;log (s+1) &#150; s&nbsp;&middot;&nbsp;log s</b></td>
+								</tr>
+							</table>
+						</div>
+					</blockquote>
+					<div align="left">
+						<p>i.e. an expression in <b>s</b> and <b>N</b> only.</p>
+					</div>
+					<div align="center">
+						<p><sup>*</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sub>*</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sup>*</sup></p>
+					</div>
+					<div align="left">
+						<p>We are left with the obligation to prove that <b>f x = 0</b> with <b>f x = x<sup>p</sup> &#150; x<sup>q</sup> &#150; 1</b> has one positive root <b>r &gt; 1</b> dominating the others. Since <b>f 0 = &#150;1</b> and <b>f(+&#x221E;) = +&#x221E;</b>, <b>f x = 0</b> has an odd number of positive roots. Because <b>f' x = x<sup>q&#150;1&nbsp;</sup>&middot;&nbsp;( p&middot;x<sup>p&#150;q</sup> &#150; q )</b> we conclude that <b>f' x = 0</b> has at most 1 positive root; hence <b>f x = 0</b> has 1 positive root <b>r</b> and, because <b>f 1 = &#150;1</b>, we conclude <b>r &gt; 1</b>. In other words</p>
+						<blockquote>
+							<dl start=6>
+								<dt><a name="eq6"></a>(6)&nbsp;&nbsp;&nbsp;&nbsp;<b>for x &#x2265; 0&nbsp;&nbsp;&nbsp;&nbsp;sgn(f x) = sgn(x&#150;r)</b>
+							</dl>
+						</blockquote>
+						In order to prove dominance of <b>r</b>, we consider a root <b>m&middot;e<sup>i&middot;&#x03C6;</sup></b> of <a href="#eq2">(2)</a>, with <b>m&nbsp;&gt;&nbsp;0</b>. Consequently
+						<blockquote>
+							<p><b>m<sup>p</sup> &middot; e<sup>i&middot;p&middot;&#x03C6;</sup> = m<sup>q</sup> &middot; e<sup>i&middot;q&middot;&#x03C6;</sup> + 1</b> ,</p>
+						</blockquote>
+						<p>from which we derive &#x2014;by taking absolute values&#x2014;</p>
+						<blockquote>
+							<p><b>m<sup>p</sup> &lt; m<sup>q</sup> + 1 &#x2228; (p&middot;&#x03C6;) <u>mod</u> 2&#x03C0; = (q&middot;&#x03C6;) <u>mod</u> 2&#x03C0; = 0</b> .</p>
+						</blockquote>
+						<p>Since <b>gcd(p,q) = 1</b>, this can be rewritten as <b>m<sup>p</sup> &#150; m<sup>q</sup> &#150; 1 &lt; 0 &#x2228; &#x03C6; = 0</b> or, in view of <a href="#eq6">(6)</a>: <b>m&lt;r &#x2228; &#x03C6; = 0</b>. q.e.d.</p>
+					</div>
+					<div align="center">
+						<p><sup>*</sup>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sub>*</sub>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sup>*</sup></p>
+					</div>
+					<div align="left">
+						<p>Finally we remark that thanks to</p>
+						<blockquote>
+							<table>
+								<tr align=center>
+									<td align=center><b>p
+											<hr size=0>
+											q</b></td>
+									<td>&nbsp;&nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;</td>
+									<td align=center><b>log (s+1)
+											<hr size=0>
+											log s</b></td>
+								</tr>
+							</table>
+						</blockquote>
+						<p>any value of <b>s</b> can be approximated arbitrarily closely by suitable choice of <b>p</b> and <b>q</b>, a fact that enhances the significance of the expression in <b>s</b> and <b>N</b> for the average distance from the root.</p>
+						<p>28 August 1981</p>
+						<table width=100%>
+							<tr>
+								<td align=left valign="top">drs. C. S. Scholten<br>
+									Philips Research Laboratories<br>
+									5600 MD&nbsp;&nbsp;EINDHOVEN<br>
+									The Netherlands</td>
+								<td align=right valign="top">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+								<td align=right valign="top">
+									<div align="left">
+										prof. dr. E. W. Dijkstra<br>
+										Burroughs Research Fellow<br>
+										Plataanstraat 5<br>
+										5671 AL&nbsp;&nbsp;NUENEN<br>
+										The Netherlands</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+					<div align="left"></div>
+					<div align="left">
+						<p><u></u></p>
+					</div>
+					<hr>
+					<font size="-1">transcribed by Martijn van der Veen<br>
+						revised <csobj format="MedDate" h="16" region="15" t="DateTime" w="93">Thu, 11 Nov 2004</csobj></font>
+					<p></p>
+				</td>
+				<td width="1" height="2638"><spacer type="block" width="1" height="2638"></td>
+			</tr>
+			<tr height="1" cntrlrow>
+				<td width="466" height="1"><spacer type="block" width="466" height="1"></td>
+				<td width="1" height="1"></td>
+			</tr>
+		</table>
+		<p></p>
+	</body>
+
+</html>

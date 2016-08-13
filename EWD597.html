@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Yet another note about termination (EWD 597)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>Yet another note about termination</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd05xx/EWD597.PDF"
+           title="Link to the PDF version of EWD597">EWD597</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<p><b>Yet another note about termination</b>.
+<p>I had never thought that I would have to write this note, but apparently
+I have to. In a paper I had written:
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&ldquo;For each repetitive process we must have a monotonicity argument on
+which to base our proof of termination.&rdquo;
+</td>  </tr>  </table>
+To my utter amazement, the Editor of the journal to which it was submitted.
+expressed in his letter seven lines of severe doubt about the above statement,
+ending with: &ldquo;Perhaps it is true, but it is a rather sweeping claim.&rdquo; I could
+only conclude that the need for a monotonicity argument for termination proofs
+is not the common knowledge I supposed it to be, and that the need, even when
+stated, is not intuitively obvious to everybody.
+<p>Because perhaps my Editor&rsquo;s hesitation was caused by the nondeterminacy
+that also played a role in that paper, let us consider the general &mdash;and in
+general nondeterministic&mdash; repetitive construct  DO:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      <b>do</b> B1 &rarr; S1 &#x25af; ... &#x25af; Bn &rarr; Sn <b>od</b> . </td> </tr>
+</table>
+On my recent trip through the USSR, Tony Hoare, who is presently more 
+operationally inclined than I, described it as
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      {<b>if</b> B1 &rarr;S1 &#x25af; ... &#x25af; Bn &rarr; Sn <b>fi</b>}* or {IF}* </td> </tr>
+</table>
+where with {...}* he meant &ldquo;as many successive executions as possible&rdquo;,
+where the execution of IF is regarded when all the guards are false (<b>non</b> BB).
+A termination proof for a given state x means that after a finite number of
+steps &mdash;i.e. applications of IF &mdash; the state <b>non</b> BB is reached. The actual
+number of steps may not be determined by x , e.g. <b>do</b> y &ge; 2 &rarr; y=: y - 2 &#x25af;
+y &ge; 1 &rarr; y:= y - 1 <b>od</b> with initially y &ge; 2 ; guaranteed termination for the
+initial state x , however, means that the <b>maximum number of steps needed</b>
+is finite. Denoting this maximum number by mn(x) , termination is guaranteed
+in all points x where mn(x) is finite. Denoting the transformation of
+the state as effectuated by IF symbolically by x=: F(x) &mdash;where F may
+be a partial function: F(x) need not be defined for states x , in which
+BB does not hold&mdash; it is clear that with the above meaning of mn we <b>must</b>
+have
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+    (mn(x) &gt; 0) &rArr; (mn(F(x)) &le; mn(x) -1)  . </td> </tr>
+</table>
+<p class=noindent><b>Note</b>. If F(x) is a single valued function, the program is deterministic and
+the maximum number of steps needed is also the actual number of steps needed;
+              
+and then we have
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+    (mn(x) &gt; 0) &rArr; (mn(F(x)) = mn(x) - 1) . (End of note.) </td> </tr>
+</table>
+<p>Hence, for all initial states in which termination is guaranteed to occur,
+the finite function mn(x) which decreases monotonically by at least one at
+each application of x:= F(x) exists; conversely: each proof of termination
+boils down to a proof of the existence of such a monotonically decreasing
+function.  
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>Because my challenged claim is one about all possible arguments for
+termination, a less operational approach that is directly based on the axiomatic
+definition of the repetitive construct might be appreciated.
+<p>For the repetitive construct DO the predicate transformation &mdash;see
+[1], page 35&mdash; is given in terms of the predicate transformation of the 
+corresponding alternative construct IF by
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+H<sub>0</sub>(R) = R <b>and</b> <b>non</b> BB </td><td align=right>
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+H<sub>k+1</sub>(R) = wp(IF, H<sub>k</sub>(R)) <b>or</b> H<sub>0</sub>(R)</td><td align=right>(2)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+wp(DO, R) = (<u>E</u> k: k &ge; 0: H<sub>k</sub>(R)) .</td><td align=right>
+</td>  </tr>  </table>
+From (2) it follows that for i &lt; j we have H<sub>i</sub>(R) &rArr; Hj(R) for all states
+and all post-conditions R . Proving termination means showing that a point
+x satisfies wp(DO, T) , i.e. that there exists a value t(x) such that
+H<sub>k</sub>(T) holds there for all values of k satisfying k &ge; t(x) . As x 
+satisfies an invariant relation, P say, it suffices to prove that
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+     (P <b>and</b> t &le; k) &rArr; H<sub>k</sub>(T) for all states x </td> </tr>
+</table>
+But this is the same formula as on the top of [1], page 42. In view of the
+fact that (2) <b>defines</b> H<sub>k+1</sub> in terms of H<sub>k</sub> , mathematical induction over k
+is <b>by</b> <b>definition</b> the only available pattern of reasoning. The argument is
+carried out in [1], pages 41/42; it shows quite clearly how for the 
+transition from k to k+1 the monotonicity assumption about IF , viz.
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      (P <b>and</b> BB <b>and</b> t &le; t0+1) &rArr; wp(IF, t &le; t0) </td> </tr>
+</table>
+is essentially needed.
+<p class=noindent>[1] Dijkstra, Edsger W., &ldquo;A Discipline of Programming&rdquo;. Prentice Hall, 1976
+<table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+NL-4565 NUENEN</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!&mdash; #BeginDate format:IS1 &mdash;>2014-12-12<!&mdash; #EndDate &mdash;>
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

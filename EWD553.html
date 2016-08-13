@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: On a gauntlet thrown by David Gries (EWD 553)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>On a gauntlet thrown by David Gries</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd05xx/EWD553.PDF"
+           title="Link to the PDF version of EWD553">EWD553</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<table> <tr> <td colspan = 2>
+<b>Copyright Notice</b>                                            </td> </tr> <tr> <td colspan = 2>
+The following manuscript                                           </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+    EWD 553: On a gauntlet thrown by David Gries                   </td> </tr> <tr> <td colspan = 2>
+is held in copyright by Springer-Verlag New York, who have granted </td> </tr> <tr> <td colspan = 2>
+permission to reproduce it here.                                   </td> </tr> <tr> <td colspan = 2>
+The manuscript was published as                                    </td> </tr> <tr> <td></td> <td>
+    <b><i>Acta Informatica 6</i></b> (1976): 357&ndash;359.EWD553 &ndash; 0           </td> </tr>
+</table>
+<p><b>On a gauntlet thrown by David Gries</b>.
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; by
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Edsger W.Dijkstra
+<p>It is requested to design a program that will generate the N! 
+permutations of the values from 0 through N-1 in such an order that the transition
+from one permutation to the next is always performed by exactly one swap of
+two neighbours.
+<p>In a permutation each pair of values such that the larger value precedes
+the smaller one, presents a so-called &ldquo;inversion&rdquo;. (In particular: the one and
+only permutation with zero inversions is the one in which the values are placed
+in monotonically increasing order.) The notion of inversions can be expected
+to be relevant because the swapping of two neighbours changes the total number
+of inversions by (plus or minus) 1 , and it is, therefore, suggested to
+characterize each permutation by its inversions. This can be done by 
+introducing N inversion counters inv[i] for 0 &le; i &lt; N , where inv[i] equals
+the number of inversions between the value i and the values smaller than i .
+(From this definition 0 &le; inv[i] &le; i follows; the total number of inversions
+of a permutation is the sum of the corresponding inv[i]-values.) That each
+permutation defines the inv[i]-values uniquely is obvious; that the 
+inv[i]values define the permutation uniquely is easily seen by considering the
+algorithm constructing the permutation from the inv[i]-values &mdash;processing
+these values in the order of increasing i &mdash; : this algorithm leaves us no
+choice.
+<p>There is, therefore, a one-to-one correspondence between the N! possible
+inv-values and the N! permutations, and the question becomes, which modification
+of the inv-value correspond to a swap of neighbours: each swap of two neighbours
+changes exactly one inv[i]-value by 1 , viz. with i = the larger of the two
+values swapped. The value of inv[i] is to be increased by 1 if the swap
+increases the number of inversions &mdash;i.e. if the larger value moves &ldquo;to the 
+left&rdquo;otherwise it is to be decreased.
+<p>A feasible sequence of inv-values to be generated is now reasonably
+obvious; it is the generalization of the Gray-code. For N = 4 it begins:
+<table>
+<tr><td>inv[0]</td><td>inv[1]</td><td>inv[2]</td><td>inv[3]</td><td>a[0]</td><td>a[1]</td><td>a[2]</td><td>a[3]</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>3</td><td>2</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>2</td><td>0</td><td>3</td><td>1</td><td>2</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>3</td><td>3</td><td>0</td><td>1</td><td>2</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>3</td><td>3</td><td>0</td><td>2</td><td>1</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>2</td><td>0</td><td>3</td><td>2</td><td>1</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>2</td><td>3</td><td>1</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>2</td><td>1</td><td>3</td></tr>
+<tr><td>0</td><td>0</td><td>2</td><td>0</td><td>2</td><td>0</td><td>1</td><td>3</td></tr>
+<tr><td>0</td><td>0</td><td>2</td><td>1</td><td>2</td><td>0</td><td>3</td><td>1</td></tr>
+<tr><td>0</td><td>0</td><td>2</td><td>2</td><td>2</td><td>3</td><td>0</td><td>1</td></tr>
+<tr><td>0</td><td>0</td><td>2</td><td>3</td><td>3</td><td>2</td><td>0</td><td>1</td></tr>
+<tr><td>0</td><td>1</td><td>2</td><td>3</td><td>3</td><td>2</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>1</td><td>0</td></tr>
+</table>
+etc.
+<p>The rule is as follows. An inv[i]-value is defined to be &ldquo;changeable&rdquo;
+if it may be increased or decreased by 1 . It may be increased if the sum of
+the inv[j]-values to its left &mdash;i.e. for j &lt; i &mdash; is even and it has not
+reached its maximum value; it may be decreased if the sum of the inv[j]-values
+to its left is odd and it has not reached its minimum value zero. At each step,
+always the right-most changeable inv[i]-value &mdash;i.e. with the largest i-value&mdash;
+is changed. It is not difficult to see that in the permutation, the value i is,
+indeed swapped with a smaller value. (We leave it to the reader to prove that,
+starting with inv[i] = 0 for all i , N!-1 applications of this rule yields
+the remaining N!-1 possible inv-values.)
+<p>After having established the value i , such that inv[i] has to be
+changed, and, also, whether the value i has to be swapped with its predecessor
+in the permutation (corresponding to an increase of inv[i] ) or with its
+successor in the permutation (corresponding to a decrease of inv[i] ), we have
+to establish the place c in the permutation, where the value i is located.
+This value c is given by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+      i - (the number of smaller values to its right) </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; </td> <td>
+        + (the number of larger values to its left) . </td> </tr>
+</table>
+Because for all j &gt; i , inv[j] has an extreme value (0 or j), c is given by
+c = i - inv[i] + (the number of values of j such that j &gt; i and inv[j] = j )
+<p>In the following program we have given inv[0] &mdash;which should be constantly
+= 0 &mdash; the funny value -2 ; this is the usual, mean, little coding trick, in
+order to let the search for the right-most changeable inv[i]-value terminate
+artificially when there is no more such an inv[i]-value. The variable &ldquo;totinv&rdquo;
+records the total number of inversions in the array a, used to record the
+permutation. The invariant of the inner loop in the following program is
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      0 &le; i &lt; N <b>or</b>                                                              </td> </tr> <tr> <td></td> <td>
+      (i &lt; j &lt; N) &rArr; &ldquo;inv[j] is not changeable&rdquo; <b>and</b>             </td> </tr> <tr> <td></td> <td>
+      linv = &ldquo;sum of the inv[j]-values for 0 &lt; j &lt; i&rdquo; <b>and</b>           </td> </tr> <tr> <td></td> <td>
+      c = &ldquo;number of values j such that i &lt; j &lt; N <b>and</b> inv[j] = j&rdquo; . </td> </tr>
+</table>
+ 
+<table> <tr> <td>&nbsp; </td> <td colspan = 5>
+ <b>begin</b> <b>integer</b> <b>array</b> a, inv [0:N-1]; <b>boolean</b> ready; <b>integer</b> totinv, i, c, linv; </td> </tr> <tr> <td></td> <td colspan = 5>
+ i:= 0; do i < N &rarr; a[i]:= i; inv[i]:= 0; i:= i + 1 <b>od</b>; inv[0]:= -2;                                    </td> </tr> <tr> <td></td> <td colspan = 5>
+ ready:= <b>false</b>; totinv:= 0;                                                                                 </td> </tr> <tr> <td></td> <td colspan = 5>
+ <b>do</b> <b>non</b> ready &rarr; printarray(a);                                                                  </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+       {establish the value  i  such that  inv[i]  has to be changed:}                                             </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
+       i:= N - l; c:= 0; linv:= totinv - inv[i];                                                                   </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
+       <b>do</b> inv[i] = i <b>and</b> even(linv) &rarr;                                                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
+             c:= c + l; i:= i - l; linv:= linv - inv[i]                                                            </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 3>
+        &#x25af; inv[i] = 0 <b>and</b> odd(linv) &rarr;                                                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>
+             i:= i - l; linv:= linv - inv[i]                                                                       </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
+       <b>od</b> { inv[i] has to be changed if  i > 0 };                                                           </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
+       {compute the position  c  of value  i  in the permutation:}                                                 </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
+       c:= c + i - inv[i];                                                                                         </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
+       {generate next permutation or signal completion:}                                                           </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
+       <b>if</b> even(linv) <b>and</b> i > 0 &rarr;                                                                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+            inv[i]:= inv[i] + l; totinv:= totinv + l; swap(a, c-l, c)                                              </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 3>
+        &#x25af; odd(linv) <b>and</b> i > 0 &rarr;                                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+            inv[i]:= inv[i] - l; totinv:= totinv - l; swap(a, c, c+1)                                              </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 3>
+        &#x25af; i = 0 &rarr; ready:= <b>true</b>                                                                  </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
+       <b>fi</b>                                                                                                   </td> </tr> <tr> <td></td> <td colspan = 5>
+ <b>od</b>                                                                                                         </td> </tr> <tr> <td></td> <td colspan = 5>
+ <b>end</b>                                                                                                        </td> </tr>
+</table>
+<p class=noindent>Post Scriptum.
+<p>The problem solved above has been posed to me by David Cries, who told
+me that he had found it a non-trivial task to present a solution to it in a
+convincing manner. The argument shown led quickly to the above solution,
+which is submitted for publication upon his request. Finally I would like to
+express my great indebtness to the referee whose many and well-considered
+recommendations have led to a considerable improvement in readability. (End of
+Post Scriptum.)
+<br><br><br><table width=100%><tr><td valign=top width=50%>
+Burroughs</td><td> prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+Plataanstraat 5</td><td
+</td></tr>
+<tr><td valign=top>
+NUENEN - 4565</td><td>
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-01-23<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

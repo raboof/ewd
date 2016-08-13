@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: A theorem about odd powers of odd integers (EWD 650)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>A theorem about odd powers of odd integers</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD650.PDF"
+           title="Link to the PDF version of EWD650">EWD650</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<b>Copyright Notice </b>
+<table> <tr> <td colspan = 2>
+The following manuscript                                                         </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+     EWD 650 A theorem about odd powers of odd integers                       </td> </tr> <tr> <td colspan = 2>
+is held in copyright by Springer-Verlag New York.                                </td> </tr> <tr> <td colspan = 2>
+The manuscript was published as pages 349–350 of                                 </td> </tr> <tr> <td></td> <td>
+     Edsger W. Dijkstra, Selected Writings on Computing: A Personal Perspective, </td> </tr> <tr> <td></td> <td>
+     Springer-Verlag, 1982. ISBN 0–387–90652–5.                                  </td> </tr> <tr> <td colspan = 2>
+<b>Reproduced with permission from Springer-Verlag New York.  </b>               </td> </tr> <tr> <td colspan = 2>
+<b>Any further reproduction is strictly prohibited.  </b>                        </td> </tr> <tr> <td colspan = 2>
+                                                                                 </td> </tr>
+</table>
+<p class=noindent><b>A theorem about odd powers of odd integers</b>.
+<p class=noindent><b>Theorem</b>. For any odd p &ge; 1 , integer K &ge; 1 , and odd r such that
+that 1 &le; r &lt; 2<sup>K</sup>, a value x exists such that
+<table width=100%><tr><td valign=top width=10%>
+R:</td><td>1 &le; x &lt; 2<sup>K</sup> <b>and</b> 2<sup>K</sup>|(x<sup>p</sup>-r) <b>and</b> odd(x) .
+</td>  </tr>  </table>
+<b>Note</b>. For &ldquo;a|b&rdquo; read: &ldquo;a divides b&rdquo;. (End of note.)
+<p class=noindent><b>Proof</b>. The existence of x is proved by designing a program computing x
+satisfying R .
+<p>Trying to establish R by means of a repetitive construct, we must
+choose an invariant relation. This time we apply the well-known technique
+of replacing a constant by a variable, and replace the constant K by the
+variable k . Introducing d = 2k for the sake of brevity, we then get
+<table width=100%><tr><td valign=top width=10%>
+P:</td><td>d = 2<sup>k</sup> <b>and</b> 1 &le; x &lt; d <b>and</b> d|(x<sup>p</sup>-r) <b>and</b> odd(x) .
+</td>  </tr>  </table>
+This choice of invariant relation P is suggested by the observation that
+R is trivial to satisfy for K 1; hence P is trivial to establish
+initially. The simplest structure to try for our program is therefore:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+     x, k, d :=1, 1, 2 {P};                                                                        </td> </tr> <tr> <td></td> <td>
+     <b>do</b> k &ne; K &rarr; &ldquo;increase k by 1 under invariance of F&rdquo; <b>od</b> {R} . </td> </tr>
+</table>
+Increasing k by 1 (together with doubling d ) can only violate the
+term d|(x<sup>p</sup>-r) . The weakest precondition that d:= 2*d does <b>not</b> do so
+is &mdash;according to the axiom of assignment&mdash; (2*d)|(x<sup>p</sup>-r) . Hence an
+acceptable component for &ldquo;increase k by 1 under invariance of P&rdquo;
+is
+<table width=100%><tr><td valign=top width=10%>
+</td><td> (2*d)|(x<sup>p</sup>-r) &rarr; k, d := k+1, 2*d .
+</td>  </tr>  </table>
+In the case <b>non</b> (2*d)l(x<sup>p</sup>-r) we conclude from d|(x<sup>p</sup>-r) that x<sup>p</sup>-r is
+an odd multiple of d . Because d is even, and p and x are odd, the
+binomial expansion tells us that (x+d)<sup>p</sup>-x<sup>p</sup> is an odd multiple of d
+and that hence (x+d)<sup>p</sup>-r is a multiple of 2*d . Because also d is 
+doubled, x &lt; d remains true under x:= x+d , because d is even odd(x) obviously
+remains true, and our program becomes:
+
+<table> <tr> <td>&nbsp; </td> <td colspan = 3>
+ x, k, d := 1, 1, 2 {P};                                                                     </td> </tr> <tr> <td></td> <td colspan = 3>
+ <b>do</b> k &ne; K &rarr; <b>if</b> (2*d)|(x<sup>p</sup>-r) &rarr; k, d := k+1, 2*d {P}                   </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td>
+             &#x25af; <b>non</b> (2*d)|(x<sup>p</sup>-r) &rarr; x, k, d := x+d, k+1, 2*d {P} </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+           <b>fi</b> {P}                                                                     </td> </tr> <tr> <td></td> <td colspan = 3>
+ <b>od</b> {R}                                                                               </td> </tr>
+</table>
+Because this program obviously terminates, its existence proves the theorem.
+(End of proof.) 
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>With the argument as given, the above program was found in five minutes.
+I only mention this in reply to Zohar Manna and Richard Waldinger, who wrote
+in &ldquo;Synthesis: Dreams &rArr; Programs&rdquo; (SR1 Technical Note 156, November 1977)
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&ldquo;Our instructors at the Structured Programming School have urged us
+to find the appropriate invariant assertion before introducing a loop.
+But how are we to select the successful invariant when there are so
+many promising candidates around? [...] Recursion seems to be the ideal
+vehicle for systematic program construction [...]. In choosing to
+emphasize iteration instead, the proponents of structured programming
+have had to resort to more dubious (sic!) means.&rdquo;
+</td>  </tr>  </table>
+<p>Although I haven&rsquo;t used the term Structured Programming any more for at least
+  five years, and although I have a vested interest in recursion, yet I felt
+  addressed by the two gentlemen. So it seemed only appropriate to record that
+  the &ldquo;more dubious means&rdquo; have &mdash;again!&mdash; been pretty effective. (I have
+  evidence that, despite the existence of this very simple solution, the problem
+  is not trivial: many computing scientists could not solve the programming
+  problem within an hour. Try it on your colleagues, if you don&rsquo;t believe me.)</p>
+<p>&nbsp;</p>
+<table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL Nuenen</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-04-10<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

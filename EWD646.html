@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: A not so simple theorem about undirected graphs (EWD 646)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>A not so simple theorem about undirected graphs</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD646.PDF"
+           title="Link to the PDF version of EWD646">EWD646</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+                                                        
+<b>A not so simple theorem about undirected graphs.</b> See pg.2.
+<p>(The other day Alain Martin told me that C.S.Scholten had shown him a
+rather complicated proof for what seemed a fairly simple theorem, and 
+commucated the theorem to me. I felt challenged and tried to find a &ldquo;simple&rdquo; proof
+myself. The proof that I found is recorded below, partly because I think my
+proof simple enough to have some beauty, partly because perhaps the theorem
+is not so simple after all: it took me a full day to prove it and another
+five hours to write the following in manuscript.)
+<p>In a finite, undirected graph we call two nodes that are directly 
+connected by an edge of the graph each other&rsquo;s &ldquo;neighbours&rdquo;. Let P and Q be
+two different nodes of the graph. We define a &ldquo;path from P to Q &rdquo; as a
+sequence of nodes, starting with P and ending with Q , such that no node
+occurs more than once in it and any two adjacent nodes in the sequence are
+each other&rsquo;s neighbours in the graph. Of such a path, P and Q are called
+&ldquo;the terminal nodes&rdquo;, the ones in between are called &ldquo;the internal nodes&rdquo;.
+(If P and Q are not each other&rsquo;s neighbours, a path from P to Q has
+at least one internal node.)
+<p>The theorem states that for any pair of different nodes A and B that
+are not each other&rsquo;s neighbours, there exists a node C that is an internal
+node of any path from A to B , or there exists a pair of paths from A to
+B that have no internal node in common.
+<p>In order to prove it, we arbitrarily select one path from A to B and
+call it &ldquo;the special path&rdquo;; its edges are called &ldquo;the special edges&rdquo;, its 
+internal nodes are called &ldquo;the special nodes&rdquo;. For brevity&rsquo;s sake we denote on
+the special path the direction from A to B as the direction &ldquo;from left to
+right&rdquo;.
+<p>Next, let P and Q be two non-adjacent nodes of the special path: we
+define &ldquo;an external path between P and Q &rdquo; as a path between P and Q
+of which no node of the special path is an internal node. If between a P
+and a Q of the special path an external path exists, we call the special
+nodes between P and Q &mdash;if P is to the left of Q : the special nodes
+that are to the right of P and also to the left of Q&mdash; &ldquo;covered&rdquo; by that
+external path.
+                   
+<p>It is clear that a covered special node can never be a candidate for C
+an external path allows a path from A to B that bypasses all special nodes
+it covers.
+<p>There are now two mutually exclusive cases: either there exist one or
+more special nodes not covered b an external ath or each special node is
+covered by at least one external path.
+<p>In the first case the theorem is true, for each path from A to B must
+pass through all uncovered special nodes, hence any special node that is not
+covered by any external path can be taken as node C.
+<p>In the second case the theorem is also true, for if each special node
+is covered by at least one external path, two paths from A to B exist that
+have no internal node in common. We shall show this existence by construction.
+<p>We shall construct a sequence of external paths PQ<sub>0</sub>, PQ<sub>1</sub>, ... , PQ<sub>N</sub> .
+The left-hand terminal node of the path PQ<sub>i</sub> will be denoted by P<sub>i</sub> ; the
+right-hand terminal node of the path PQ<sub>i</sub> will be denoted by Q<sub>i</sub> . Denoting
+the relation &ldquo;to the left of&rdquo; by &ldquo;&lt;&rdquo; our sequence of external paths shall
+have the following two properties:
+<p class=noindent>Property 1:
+<table width=100%><tr><td valign=top width=10%>
+</td><td>A = P<sub>0</sub> &lt; P<sub>1</sub> &lt; Q<sub>0</sub> &le; P<sub>2</sub> &lt; Q<sub>1</sub> &le; P<sub>3</sub> &lt; Q<sub>2</sub> &le; ..... Q<sub>N-2</sub> &le; P<sub>N</sub> &lt; Q<sub>N-1</sub> &lt; Q<sub>N</sub> = B .
+</td>  </tr>  </table>
+Property 2:
+<table width=100%><tr><td valign=top width=10%>
+</td><td>For i &ne; j the external paths PQ<sub>i</sub> and PQ<sub>j</sub> have no internal node in
+common .
+</td>  </tr>  </table>
+<p>Because (see property 1) we have for 0 &lt; i &lt; N
+<table width=100%><tr><td valign=top width=10%>
+</td><td>P<sub>i</sub> &lt; Q<sub>i-1</sub> &le; P<sub>i+1</sub> &lt; Q<sub>i</sub> ,
+</td>  </tr>  </table>
+Q<sub>i-1</sub> and P<sub>i+1</sub> , if not coincident, can be connected via special nodes 
+between them on the special path and this entire connection will be covered by
+PQ<sub>i</sub>; similarly we connect A with P<sub>1</sub> and Q<sub>N-1</sub> with B .
+Then PQ<sub>0</sub>, PQ<sub>2</sub>, PQ<sub>4</sub> ,... and PQ<sub>1</sub>, PQ<sub>3</sub>, PQ<sub>5</sub> supplemented with the
+connections introduced in the previous paragraph form two paths from A to
+B that have no internal node in common: on account of property 1 they share
+ 
+no special nodes, on account of property 2 they share no non-special nodes
+as internal nodes.
+<p>For PQ<sub>0</sub> we choose an external path with P<sub>0</sub> = A &mdash;because the 
+leftmost special node is covered, such an external path exists&mdash; and Q<sub>0</sub> as far
+to the right as possible. If Q<sub>0</sub> coincides with B the construction stops
+here, otherwise we proceed repeatedly as follows until an external path PQ<sub>N</sub>
+with Q<sub>N</sub> = B has been selected.
+<p>Let PQ<sub>i</sub> be the last external path selected and let Q<sub>i</sub> not coincide
+with B . Then Q<sub>i</sub> is a special node and, hence, covered by at least one
+external path. For PQ<sub>i+1</sub> we choose a path covering Q<sub>i</sub> with Q<sub>i+1</sub> as far
+to the right as possible. For i = 0 , the fact that Q<sub>0</sub> &lt; Q<sub>1</sub> and the way
+in which PQ<sub>0</sub> has been selected imply P<sub>0</sub> &lt; P<sub>1</sub> ; for i &gt; 0 , the fact
+Q<sub>i</sub> &lt; Q<sub>i+1</sub> and the way in which PQ<sub>i</sub> has been selected imply that the path
+PQ<sub>i+1</sub> does not cover Q<sub>i+1</sub> and hence we conclude Q<sub>i-1</sub> &lt; P<sub>i+1</sub>, The 
+quality P<sub>i+1</sub> &lt; Q<sub>i</sub> follows from the fact that PQ<sub>i+1</sub> covers Q<sub>i</sub> . This
+proves the inequalities mentioned in property 1 . Property 2 follows from
+the fact that PQ<sub>i+1</sub> has no internal node in common with PQ<sub>k</sub> for 0 &le; k &le; i :
+such a common node would provide an external path between Pk and Qi+1 , the
+existence of which is not compatible with the construction of Q<sub>k</sub> as a 
+rightmost node. And this completes our proof.
+<p class=noindent><b>Acknowledgements</b>. I am indebted to C.S.Scholten for having found the theorem,
+to Alain Martin for having screened my proof, and to my mother, mrs.B.C.Dijkstra -
+Kluyver for having discovered a serious omission in my proof&rsquo;s first 
+presentation &mdash;as a matter of fact, the omission was so serious that she did not
+believe the proof&mdash; .
+<p class=noindent><b>Note</b>. With directed paths A &rarr; B and P &rArr; Q the proof can be applied directly
+to the more interesting case of directed graphs.
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN i</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>.
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-01-25<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

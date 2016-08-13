@@ -1,0 +1,326 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: The characterization of semantics. (EWD 401)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>The characterization of semantics.</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd04xx/EWD401.PDF"
+           title="Link to the PDF version of EWD401">EWD401</a></div></div>
+      <div id="frame">
+         <div id="content">
+         <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR
+<hr />
+<p class="noindent">
+<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial Black, sans-serif"><b>Copyright
+		Notice</b></FONT></P>
+		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>The
+		following manuscript </FONT></FONT>
+		</P>
+		<P STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>
+EWD 401: The characterization of semantics</FONT></FONT>
+		</P>
+		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>
+is held in copyright by Prentice-Hall International, who have granted
+<br>permission to reproduce it here.</FONT></FONT>
+		</P>
+		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>
+The manuscript was published as Chapter 3 of</FONT></FONT>
+		</P>
+		<P STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2> 
+A Discipline of Programming. Prentice-Hall, 1976. </FONT></FONT>
+		</P>
+<p class="noindent"><p class="noindent">
+<b>The characterization of semantics.</b>
+<p>We are primarily interested in systems that, when started in an
+&ldquo;initial state&rdquo;, will end up in a &ldquo;final state&rdquo; which, as a rule, depends
+on the choice of the initial state. This is a view that is somewhat different
+from the idea of the finite state automaton that on the one hand absorbs a
+stream of input characters and on the other hand produces a stream of output
+characters: to translate that in our picture we must assume that the value
+of the input (i.e. the argument) is reflected in the choice of the initial
+state and that the value of the output (i.e. the answer) is reflected in the
+final state. Our view relieves us from all sorts of peripheral complications.
+<p>Now I assume that the design of such a system is a goal-directed
+activity, in other words that we want to achieve something with the system.
+For instance, if we want to make a machine capable of computing the greatest
+common divisor, we could demand of the final state that it satisfies
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+x = GCD(X, Y)</td><td align=right>(1)
+</td>  </tr>  </table>
+<p>In the machine we have been envisaging, we shall then also have
+y = GCD(X, Y) &mdash;because the game terminates when x = y ), but that is not
+part of our requirement when we decide to accept the final value of x as
+our &ldquo;answer&rdquo;.
+<p>We call condition (1) the (desired) &ldquo;post-condition&rdquo; &mdash;&ldquo;post&rdquo; because
+it imposes a condition upon the state in which the system must find itself
+after its activity. Note, that the post-condition could be satisfied by
+many of the possible states. In that case we apparently regard each of them
+as equally satisfactory and there is then no reason to require that the
+final state is a unique function of the initial state.
+<p>In order to use such a system when we want it to produce an answer
+&mdash;say &ldquo;reach a state satisfying condition (l) for a given set of values
+of X and Y&mdash; we must know the set of corresponding initial states, more
+precisely: the set of initial states that is guaranteed to result in a final
+state satisfying (l). If we can bring the system without computational effort
+into one of these states, we know how to use the system to produce for us
+the desired answer! To give the example of Euclid&rsquo;s cardboard game: we
+can guarantee a final state satisfying the post-condition (1) for any
+initial state satisfying
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+GCD(x, y) = GCD(X, Y) <b>and</b> 0 &lt;x &le; 500 <b>and</b> 0 &lt;y &le; 500</td><td align=right>(2).
+</td>  </tr>  </table>
+(The upper limits have been added to do justice to the limited size of the
+cardboard. If we start with a pair (X, Y) such that GCD(X, Y) = 713, then
+there exists no pair (X, Y) satisfying (2), i.e. for those values of X and Y
+condition (2) reduces to F and that means that the machine in question
+cannot be used to compute the GCD(X. Y) for that pair of values of X and Y.
+<p>For many (X, Y)-combinations, many states satisfy (2). In the case
+that 0 &lt; X &le; 500 and 0 &lt; Y &le; 500, the <b>trivial</b> choice is x = X and y = Y:
+it is a choice that can be made without any evaluation of the GCD-function,
+even without appealing to the fact that the GCD-function is a symmetric
+function of its arguments.
+<p>The condition that characterizes the set of <b>all</b> initial states that
+are guaranteed to lead to a final state satisfying a given post-condition
+is called &ldquo;the weakest pre-condition corresponding to that post-condition&rdquo;.
+(We call it &ldquo;weakest&rdquo;, because the weaker a condition, the more states
+satisfy it and we aim here at characterizing <b>all</b> possible starting points
+that are certain to lead to one of the desired states.)
+<p>If the system (machine, mechanism) is denoted by &ldquo;S&rdquo; and the desired
+post-condition by &ldquo;R&rdquo;, then we denote the corresponding weakest pre-condition by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+             wp(S, R) </td> </tr>
+</table>
+It the initial state satisfies wp(S, R), the mechanism is certain to
+establish eventually the truth of R. Because wp(S, R) is the weakest 
+precondition, we also know that if the initial state does not satisfy wp(S, R),
+the mechanism is not certain to establish eventually the truth of R. In the
+case that S is a deterministic machine &mdash;i.e. the final state is uniquely
+determined by the initial state&mdash; it <b>will</b> then fail to do so, in the case
+that S is a non-deterministic machine, the most we can say is that then it
+<b>may</b> fail to do so.
+<p>As we proceed we shall see that there are a variety of ways in which
+the mechanism S may fail to reach a final state satisfying the post-condition
+R. One of the possibilities is that it reaches a final state for which R is
+false; another possibility is that it does not reach a final state at all,
+either because the system finds itself engaged in an endless task or because
+the system has got stuck.
+<p>We take the point of view that we know the possible performance of
+the mechanism S completely if and only if we can derive for any post-condition
+R the corresponding weakest pre-condition wp(S, R) because then we have
+captured completely what the mechanism can do for us. In the jargon: it is
+then that we know its &ldquo;semantics&rdquo;.
+<p>Two remarks are in order. Firstly, the set of possible post-conditions
+is in general so huge, that this knowledge in tabular form &mdash;in a table with
+an entry for each R we would find the corresponding wp(S, R)&mdash; would be
+utterly unmanageable, and therefore useless. Therefore the definition of
+the semantics of the mechanism is always given in another way, viz. in the
+form of a rule describing how for any given post-condition R the corresponding
+weakest pre-condition wp(S, R) can be derived. Such a rule &mdash;which is fed
+with the predicate R denoting the post-condition and delivers a predicate
+wp(S, R) denoting the corresponding weakest pre-condition&mdash; is called &ldquo;a
+predicate transformer&rdquo;. When we ask for the definition of the semantics of
+the mechanism S m what we really ask for is its corresponding predicate
+transformer.
+<p>Secondly, we are often &mdash;and I feel tempted to add &ldquo;thank goodness&rdquo;&mdash;
+not interested in the complete semantics of a mechanism. This is because it
+is our intention to use the mechanism S for a specific purpose only, viz.
+for establishing the truth of a very specific post-condition R for which
+it has been designed. And even for that specific post-condition R , we are
+often not interested in the exact form of wp(S, R): often we are content
+with a stronger condition P for which we can show that
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+P =&gt; wp(S, R)</td><td align=right>(3)
+</td>  </tr>  </table>
+(read: &ldquo;P implies wp(S, R)&rdquo;). This means that wherever in the state space
+P is true, wp(S, R) is true as well: P is a sufficient pre-condition.
+In terms of sets it means that the set of states characterized by P is a
+subset of the set of states characterized by wp(S, R) . If for a given
+P, S and R relation (3) holds this can often be proved without explicit
+formulation &mdash;or if you prefer &ldquo;computation&rdquo; or &ldquo;derivation&rdquo;&mdash; of the
+predicate wp(S, R). And that is a good thing for except in trivial cases
+we must expect that the explicit formulation of wp(S, R) will defy at
+least the size of our sheet of paper, our patience or our (analytical)
+ingenuity (or any combination of them).
+<p>The meaning of wp(S, R) : &ldquo;the weakest pre-condition for the initial
+state such that the mechanism S will establish a final state satisfying
+the post-condition R &rdquo; allows us to conclude that, considered as function
+of the post-condition R, the predicate transformer has a number of properties.
+<p class="noindent"><b>Property 0</b>.     For any mechanism S and any post-conditions R and Q,
+the equality &ldquo;R = Q&rdquo; alows us to conclude &ldquo;wp(S, R) = wp(S, Q)&rdquo; . In
+words: if R and Q are two predicates denoting the same post-condition,
+than the derived predicates wp(S, R) and wp(S, Q) denote the same 
+precondition. One can argue whether it is worth-while to mention explicitly a
+property that is so obvious: if it did not hold, we had been talking nonsense
+all the time! I mention Property 0 for the sake of completeness. (I myself
+have worked for more than a month with predicate transformers without having
+formulated this property explicitly....)
+<p class="noindent"><b>Property 1</b>.     For any mechanism S we have &ldquo;wp(S, F) = F&rdquo; . Suppose
+that this was not true; under that assumption there would be at least one
+state satisfying wp(S, F) . Take such a state as the initial state for the
+mechanism S : then, according to our definitio of the weakest pre-condition
+&ldquo;the mechanism S will establish a final state satisfying the post-condition
+F &rdquo;, But this is a contradiction for there are by definition no states
+satisfying F . Property 1 is known under the name of &ldquo;The Law of the
+Excluded Miracle&rdquo;.
+<p class="noindent"><b>Property 2</b>.      For any mechanism S and any post-conditions Q and R
+&ldquo;Q &rArr; R&rdquo; allows us to conclude &ldquo;wp(S, Q) &rArr; wp(S, R)&rdquo;. Indeed, because
+any initial state satisfying wp(S, Q) is &ldquo;such that the mechanism S will
+establish a final state satisfying the post-condition Q&rdquo;; on account of
+&ldquo;Q &rArr; R&rdquo; any such final state will satisfy R as well, i.e. any initial
+state satisfying wp(S, Q) is such that the mechanism will establish a final
+state satisfying the post-condition R and therefore any initial state
+satisfying wp(S, Q) will satisfy wp(S, R) as well. Property 2 is called
+&ldquo;The property of Monotonicity&rdquo;.
+<p class="noindent"><b>Property 3</b>.     For any mechanism S and any post-conditions Q and R
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+(wp(S, Q) and wp(S, R)) = wp(s, Q <b>and</b> R)</td><td align=right>(4).
+</td>  </tr>  </table>
+The lefthand side of (4) implies the righthand side because for any initial
+state satisfying both wp(S, Q) and wp(S, R) we have the combined 
+knowledge that a final state will be established satisfying both Q and R.
+Also, on account of the Property of Monotonicity we conclude from
+(Q <b>and</b> R) &rArr; Q that wp(S, Q <b>and</b> R) &rArr; wp(S, Q) ; Similarly we conclude
+that wp(S, Q and R) &rArr; wp(S, R) and from the last two implications we
+conclude that the righthand side of (4) implies the lefthand side. Both
+sides implying eachother, they must be equal and thus Property 3 has been
+proved.
+<p class="noindent"><b>Property 4</b>.     For any mechanism S and any post-condition Q and R
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+(wp(S, Q) <b>or</b> wp(S, R)) &rArr; wp(S, Q <b>or</b> R)</td><td align=right>(5)
+</td>  </tr>  </table>
+Also this is a direct consequence of the Property of Monotonicity.
+From Q &rArr; Q <b>or</b> R follows wp(S, Q) &rArr; wp(S, Q <b>or</b> R) ; from R &rArr; Q <b>or</b> R
+follows wp(S, R) &rArr; wp(S, Q or R). And then, relation (5) follows.
+<p>We can make a stronger assertion tor the special case that the
+mechanism is deterministic. The deterministic machine has the special
+property that its behaviour &mdash;i.e. if a final state will be reached and,
+if so, which one&mdash; is fully determined by the initial state. While in
+general we can only be sure that the final state will satisfy the 
+post-condition R provided that the initial state satisfies wp(S, R), we know for
+the deterministic machine S that the final state will satisfy the 
+postcondition R if and only if the initial state satisfies wp(S, R) : this
+is because every initial state that could lead to a final state satisfying
+R must lead to that final state satisfying R . In the special case of
+the deterministic machine the righthand side of (5) implies therefore the
+lefthand side as well and we have
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+(wp(S, R) <b>or</b> wp(S, Q)) = wp(S,  R <b>or</b> Q) .</td><td align=right>(6)
+</td>  </tr>  </table>
+<p>In this book &mdash;and that may turn out to be its distinctive
+feature&mdash; I shall treat non-determinacy as the rule and determinacy as
+the exception: a deterministic machine will be regarded as a special case
+of the non-deterministic one, as a mechanism for which Property 4 is given
+by (6) rather than by the somewhat weaker (5). This decision reflects a
+drastic change in my own thinking. Back in 1958 I have been one of the
+firsts to develop the basic software for a machine with an I/O interrupt
+and the irreproducibility of the behaviour of such a &mdash;to all intents and
+purposes: non-deterministic&mdash; machine has been a traumatic experience. When
+the idea of the I/O interrupt was first suggested I was so terrified at the
+thought of having to build reliable siftware for such an intractable beast
+that I have delayed the decision to incorporate the feature for at least
+three months. And even after I had given in &mdash;I had been flattered out of
+my resistance!&mdash; I was highly uncomfartable. When the prototype was becoming
+king of operational I had my worst fears fully confirmed: a bug in the
+program could evoke the erratic behaviour so strongly suggestive of an
+irreproducible machine error. And secondly &mdash;and that was in the time that
+for deterministic machines we still believed in &ldquo;debugging&rdquo;&mdash; it was right
+from the start quite obvious that program testing was quite ineffective as
+a means for rasing the confidence level.
+<p>For many years thereafter I have regarded the irreproducibility
+of the behaviour of the non-deterministic machine as an added complication
+that should be avoided whenever possible. Interrupts were nothing but a
+curse inflicted by the hardware engineers upon the poor software makers.
+Out of this fear of mine the discipline for &ldquo;harmoniously co-operating
+sequential processes&rdquo; has been born. In spite of its success I was still
+afraid for our solutions &mdash;although proved to be correct&mdash; seemed ad hoc
+solutions to the problem of &ldquo;taming&rdquo; &mdash;that is the way we felt about it!&mdash;
+special forms of non-determinacy. The background of my fear was the absence
+of a general methodology.
+<p>Two circumstances have changed the scene since then. The one is
+the discovery that, even in the case of fully deterministic machines,
+program testing is hardly helpful. As I have now said many times and written
+in many places: program testing can be quite effective for showing the
+presence of bugs, but is hopelessly inadequate for showing their absence.
+The other one is the discovery that in the mean time it has emerged that
+any design discipline must do justice to the fact that the design of a
+mechanism that is to have a purpose, must be a goal-directed activity. In
+our special case it means that we can expect our post-condition to tbe the
+starting point of our design considerations. In a sense we shall be &ldquo;working
+backwards&rdquo;. In doing os we shall find that the implication of relation (5)
+is the essential part, for the equality of relation (6) we shall have very
+little use.
+<p>Once the mathematical equipment needed for the design of 
+nondeterministic mechanisms achieving a purpose has been developed, the 
+nondeterministic machine is no longer frightening, on the contrary! We shall
+learn to appreciate it even as a valuable steeping stone in the design of
+an ultimately fully deterministic mechanism.
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>Above we have mentioned that the complete evaluation of wp(S, R)
+is often beyond our interest and/or power and that we are content with a
+sufficient pre-condition such that P &rArr; wp(S, R) , i.e. that P is a
+sufficient pre-condition to guarantee that the mechanism S will reach a
+final state satisfying R .
+<p>A closely related but subtly different concept is that of the
+&ldquo;safe pre-condition&rdquo;. We call &ldquo;P with respect to the mechanism S a safe
+pre-condition for the post-condition R if an initial state satisfying P
+guarantees that the mechanism S cannot reach a final state not satisfying
+R &rdquo;. In formula we denote this state of affairs by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+           {P} S {R} </td> </tr>
+</table>
+Note that the two negations in the end of the definition of the
+concept of &ldquo;a safe pre-condition&rdquo; do not cancel: an initial state satisfies
+a safe pre-condition either because it will lead to a final state satisfying
+R or to no state at all (i.e. when the mechanism S fails to terminate
+properly) or both.
+<p>The concept of a safe pre-condition derives its usefulness from
+the following property. From
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+           {P} S {R} </td> </tr>
+</table>
+follows     
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+(wp(S, T) <b>and</b> P) :&rArr; wp(S, R)</td><td align=right>. (7)
+</td>  </tr>  </table>
+<p>Here the term wp(S, T) describes the weakest pre-condition such
+that S will reach &ldquo;a final state satisfying T &rdquo;, but as each state satisfies
+T by definition, this reduces to &ldquo;the weakest pre-condition such that S
+will reach a final state&rdquo; or &ldquo;will terminate properly&rdquo;. From this observation
+and the definitions, the above property follows immediately. It tells us that
+&ldquo;(wp(S, T) <b>and</b> P)&rdquo; is a sufficient pre-condition for the establishment of
+the truth of R
+<p>The above relation between safe and sufficient pre-conditions will
+play a central role in the practice of program composition. The point is
+that termination is in general a tricky problem, but in deriving a safe
+pre-condition for the post-condition R we can ignore the termination
+problem. When establishing the termination we can ignore the post-condition
+R ! In formula (7) the requirements
+<table width=100%><tr><td valign=top width=10%>
+1)</td><td>that the mechanism will terminate, and
+</td></tr>
+<tr><td valign=top>
+2)</td><td>that the final state will satisfy R
+</td>  </tr>  </table>
+have been factored nicely: two different concerns have been separated.
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-11-15<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+

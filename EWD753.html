@@ -1,0 +1,95 @@
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">         
+      
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">         
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">        
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />        
+    <title>E.W.Dijkstra Archive: On a theorem by Lambek and Moser. (EWD 753)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>  
+   </head>      
+  <body><div id="title"><h1>On a theorem by Lambek and Moser.</h1></div>        
+    <div id="frame" align="right">  
+      <div id="header" align="right">      
+        <a href="https://www.cs.utexas.edu/~EWD/ewd07xx/EWD753.PDF"    
+           title="Link to the PDF version of EWD753">EWD753</a></div></div> 
+        <div id="frame">    
+           <div id="content">
+             <p class="noindent"><b>On a theorem by Lambek and Moser.</b> 
+<p>While looking for interesting functions mapping
+sequences of integers into sequences of integers,
+W.H.J. Feijen found in [1] the following results
+attributed to J. Lambek and L. Moser.
+<p>Let <var>f</var> be an ascending continued concatenation
+of natural numbers, more precisely:
+<table width=100%><tr><td valign=top width=10%>
+</td>
+<td>(<span class="noindent"><b>A</b>&thinsp;</span><var>x </var>: <var>x</var>&thinsp;&ge;&thinsp;0 : 0 &le; <var>f</var> <var>x</var> &le; <var>f</var> (<var>x</var>+1)) , </td>  </tr>  </table>
+such that, furthermore,  <var>f</var> <var>x</var> exceeds any given          
+bound <var>F</var> for sufficiently large <var>x</var>, more precisely:
+<table width=100%><tr><td valign=top width=10%>
+</td>
+  <td>(<span class="noindent"><b>A</b>&thinsp;</span><var>F</var> : <var>F&thinsp;</var>&ge;&thinsp;0 : (<span class="noindent"><b>E</b>&thinsp;</span><var>X </var>: <var>X</var>&thinsp;&ge;&thinsp;0 : (<span class="noindent"><b>A</b>&thinsp;</span><var>x </var>: <var>x</var>&thinsp;&ge;<var>&thinsp;X </var>: <var>f</var> <var>x</var> > <var>F</var>))) . </td>  </tr>  </table>
+<p>Let the function <var>C</var> with <var>g </var>= <var>C</var> <var>f</var> be defined by the relation for all <var>y</var> &ge; 0          
+<table width=100%><tr><td valign=top width=10%>
+</td>
+<td><var>g</var> <var>y</var> = (<span class="noindent"><b>N</b>&thinsp;</span><var>x</var> : <var>x&thinsp;</var>&ge;&thinsp;0 : <var>f</var> <var>x</var> &le; <var>y</var>) </td>  </tr>  </table>
+(The right-hand side being read as &ldquo;the number of distinct natural values <var>x</var> such that          
+<var>f</var> <var>x</var> is at most <var>y</var>&rdquo;).          
+Obviously, <var>g</var> is also an ascending continued concatenation such that <var>g</var> <var>y</var> exceeds any given bound <var>G</var> for sufficiently large <var>y</var>.
+<p>The first result attributed to Lambek and Moser is that then <var>f</var> = <var>C</var> <var>g</var>, as is illustrated by the example          
+<table> 
+<tr><td width="20
+"> </td><td width="15
+" align="right">0</td><td width="25" align="right">1</td><td width="25" align="right">2</td><td width="25" align="right">3</td><td width="25" align="right">4</td><td width="25" align="right">5</td><td width="25" align="right">6</td><td width="25" align="right">7</td><td width="25" align="right">8</td><td width="25" align="right">9</td><td width="30" align="right">......</td></tr> 
+<tr>
+  <td><var>f </var>:</td><td align="right">0</td><td align="right">1</td><td align="right">1</td><td align="right">3</td><td align="right">6</td><td align="right">6</td><td align="right">7</td><td align="right">8</td><td align="right">10</td><td align="right">10</td><td align="right">......</td></tr> 
+<tr>
+  <td><var>g </var>:</td><td align="right">1</td><td align="right">3</td><td align="right">3</td><td align="right">4</td><td align="right">4</td><td align="right">4</td><td align="right">6</td><td align="right">7</td><td align="right">8</td><td align="right">8</td><td align="right">......</td></tr> 
+</table>
+<p>Let for any continued concatenation <var>q</var> of natural numbers the function <var>D</var> be defined by the relation for all <var>n</var> &ge; 0          
+</p>
+<table width=100%><tr><td valign=top width=10%>
+</td><td><var>D</var> <var>q</var> <var>n</var> = <var>n</var> + (<var>q</var> <var>n</var>) . </td>  </tr>  </table>
+<p>In the above example we would have          
+<table> 
+<tr><td width="35"> </td><td width="25" align="right">0</td><td width="25" align="right">1</td><td width="25" align="right">2</td><td width="25" align="right">3</td><td width="25" align="right">4</td><td width="25" align="right">5</td><td width="25" align="right">6</td><td width="25" align="right">7</td><td width="25" align="right">8</td><td width="25" align="right">9</td><td>......</td></tr> 
+<tr>
+  <td width="35"><var>D</var> <var>f</var> :</td><td width="25" align="right">0</td><td width="25" align="right">2</td><td width="25" align="right">3</td><td width="25" align="right">6</td><td width="25" align="right">10</td><td width="25" align="right">11</td><td width="25" align="right">13</td><td width="25" align="right">15</td><td width="25" align="right">18</td><td width="25" align="right">19</td><td>......</td></tr> 
+<tr>
+  <td width="35"><var>D</var> <var>g</var> :</td><td width="25" align="right">1</td><td width="25" align="right">4</td><td width="25" align="right">5</td><td width="25" align="right">7</td><td width="25" align="right">8</td><td width="25" align="right">9</td><td width="25" align="right">12</td><td width="25" align="right">14</td><td width="25" align="right">16</td><td width="25" align="right">17</td><td>......</td></tr> 
+</table>
+<p>The second result attributed to Lambek and Moser is that <var>D</var> <var>f</var> and <var>D</var> <var>g</var> form a partitioning of the natural numbers.          
+For people willing to generalize pictures the visualization &ldquo;proves&rdquo; these results. The elements of  <var>f</var> and <var>D</var> <var>f</var> have been 
+represented by vertical bars, one wide and of the corresponding length, those of <var>g</var> and <var>D</var> <var>g</var> have been represented by a horizontal
+ ones. The mapping <var>C</var> then becomes a reflection. <br><IMG SRC="EWD753IM1.png" NAME="circle" BORDER=0>
+<br>
+Tracing the plot, we can place the bars in the order of increasing length: bar 14 is next (horizontally), bar 15 vertically, bars 16 and 17 again horizontally, etc.          
+<p class="noindent"><table width=100%><tr><td valign=top width=5%>
+[1]</td>
+<td>Honsberger, Ross</td></tr><tr><td valign=top>
+</td>
+<td>&ldquo;Ingenuity in Mathematics&rdquo;</td></tr><tr><td valign=top>
+</td><td><i>New Mathematical Library, Vol 23
+</i></td></tr><tr><td valign=top>
+</td><td>Mathematical Association of America (1970)
+</td>  </tr>  </table>
+<p>&nbsp;</p>
+<table width=100%><tr><td valign=top width=50%>
+Plantaanstraat 5</td><td>9 October 1980
+</td></tr><tr><td valign=top>
+5671 AL NUENEN</td><td>prof. dr. Edsger W. Dijkstra
+</td></tr><tr><td valign=top>
+The Netherlands</td><td>Burroughs Research Fellow
+</td>  </tr>  </table>
+          
+<hr /> 
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />   
+    Last revision  
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">   
+      <!&mdash; #BeginDate format:IS1 &mdash;>
+      <!-- #BeginDate format:En2 -->10-Nov-2015<!-- #EndDate -->
+    </csobj> 
+  .</font></p>    
+  <p>&nbsp;</p>   
+</div></div></div></div>
+</body></html> 

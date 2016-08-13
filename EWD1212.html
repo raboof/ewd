@@ -1,0 +1,63 @@
+<HTML>
+<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<title>E.W. Dijkstra Archive: For the record: painting the squared plane (EWD1212)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+	</HEAD>
+
+<BODY><div id="title"><h1>For the record: painting the squared plane</h1></div>
+
+    <div id="frame">
+			<div id="header">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd12xx/EWD1212.PDF" 
+           title="Link to the PDF version of EWD1212">EWD1212</a>
+      </div>
+			<div id="content">
+				<P class="noindent"><U>For the record: painting the squared plane</U></P>
+				<p>Thanks to Richard S. Bird, the following problem circulated at the 3rd International Conference on the Mathematics of Program Construction, Kloster Irsee, Germany, 1995.</p>
+				<p>Starting with a sufficiently large piece of (white) squared paper, we play the following one-person game, that consists of two phases. In the first phase, we may select 9 squares and colour them red. In the second phase, we may repeatedly colour a white square red provided it already has at least 2 red neighbours (where being neighbours means sharing an edge). The question to be answered is &quot;Is it possible to colour the 10 by 10 square?&quot;</p>
+				<div align="center">
+					<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					</p>
+					*</div>
+				<p>When, in the second phase, a white square may be coloured on account of exactly two &quot;enabling&quot; neighbours, we can draw the topological conclusion that there are two possibilities for the relative position of those two enabling neighbours: either around a corner or opposite to each other. When we demonstrate a possibility by showing how to do it, we can hardly avoid that each move in our witness is of some type. For instance: in order to show that the 9 by 9 square can be coloured, we can colour in the first phase the squares along a diagonal; in the second phase the enabling neighbours are then always situated around a corner. (For the 9 by 9 square there are also solutions in which opposite enabling neighbours occur as well.)</p>
+				<p>When demonstrating an impossibility, we consider no solutions because there aren't any, and in this type of argument it would be very nice to avoid the case analysis by not drawing the topological conclusion at all, i.e. by ignoring the cyclic arrangement of the four neighbours and of the four edges they share with the square they surround. In short, for an impossibility argument it is very tempting to try to get away with the simplicity of a counting argument. The only still open question is then what to count.</p>
+				<p>Counting red squares is too crude: their number increases by 1 at a time, which is only mildly interesting; worse is that the notion &quot;red square&quot; says nothing about the notion of being neighbours. In order to capture the latter, we have to turn to the edges.</p>
+				<p>How do we relate edges to colours of squares? Each edge is identified by --and identifies-- the pair of squares that share it. This enables us to define three &quot;edge colours&quot;:</p>
+				<dl>
+					<dt>an edge is red, when shared by two red squares,
+					<dt>an edge is white, when shared by two white squares, and
+					<dt>an edge is pink, when shared by a red square and a white square.
+				</dl>
+				<p class="noindent">Accordingly, a white square has no red edges, and a red square has no white edges. More precisely: colouring a white square red, turns its pink edges into red ones, and its white edges into pink ones. The rule in the second phase of &quot;at least two red neighbours&quot; means that at least 2 pink edges turn red, and at most 4-2 white edges turn pink. In other words: in the second phase, the number of pink edges does not increase. Since the first phase does create at most 36 pink edges, we never end up with the 40 pink edges that would occur in a red square of 10 by 10, and thus the question is settled.</p>
+				<div align="right"></div>
+				<div align="center">
+					<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+						*</p>
+				</div>
+				<p>Faced with a problem, people usually react as follows. In their first explorations they try to colour the 10 by 10 square, and, finding they cannot do it, they change to trying to show the impossibility, but in that second effort they drag all the topological ballast into the argument, make pictures, talk about &quot;occupied colums and rows&quot; etc. In that second effort they are heading for a counting argument, but are insufficiently aware that avoiding case analysis is counting's major purpose.</p>
+				<div align="center">
+					<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+						*</p>
+				</div>
+				<p>The final argument nicely illustrates the linguistic demands that the doing of mathematics makes: a term for what we called &quot;pink edges&quot; is absolutely essential.</p>
+		<div id="frame" align="right">
+			<div id="content" align="right">
+				<p>Austin, 30 August 1995</p>
+			</div>
+		</div>
+		<div id="frame">
+			<div id="content">
+				<p class="noindent">prof. dr. Edsger W. Dijkstra<br>
+					Department of Computer Sciences<br>
+					The University of Texas at Austin<br>
+					Austin, TX 78712-1188<br>
+					USA</p>
+				<hr border=0>
+				<p class="noindent"><font size="-1">Transcribed by Jennifer Lu Greene.<br>
+						Last revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="94">Sun, 30 Dec 2007</csobj>.</font></p>
+			</div>
+		</div>
+	</BODY>
+</HTML>
+

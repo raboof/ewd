@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: A sequel to EWD535 (EWD 536)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>A sequel to EWD535</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd05xx/EWD536.PDF"
+           title="Link to the PDF version of EWD536">EWD536</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+           <p class="noindent">26th November 1975  
+  <p class=noindent><b>A sequel to EWD535</b>.
+<p>I just realized that in EWD535 I have failed to touch upon the second
+point raised in your letter, where you write that you feel compelled to
+replace
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+<b>if</b> B &rarr; S1 &#x25af; <b>non</b> B &rarr; S2 <b>fi</b></td><td align=right>(1)
+</td>  </tr>  </table>
+by
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+<b>if</b> B <b>then</b> S1 <b>else</b> S2 <b>fi</b></td><td align=right>(2)
+</td>  </tr>  </table>
+because of the fact that two successive calls of B &ldquo;may not return the
+same value on two calls because of another precessor changing the state&rdquo;.
+I had forgotten about it, because in the EWD535-versions of your program
+the boolean procedure had disappeared.
+<p>In my book &ldquo;A Discipline of Programming&rdquo;, and in all the theory about
+semantics that underlies the notion of the guarded commands, all expressions
+&mdash;not only the guards, but also all arithmetic expressions at the 
+right-hand side of an assigment operator&mdash; are regarded as (possibly partial)
+functions of the &ldquo;current state&rdquo;, which is supposed to change only as a
+result of explicit assignments. Furthermore I have restricted myself to
+a programming language that trivially admits a sequential implementation.
+I have given no further prescriptions about that implementation; in particular
+I have not prescribed that the execution of (1) must imply a separate
+evaluation of B and another one of <b>non</b> B . On the contrary! One can
+defend the point of view, that for any boolean expression B the evaluation
+of B <b>by definition</b> implies the concurrent evaluation of <b>non</b> B , because
+both answers give exactly the same information about the current state.
+From that point of view &mdash;I still talk about sequential uniprogramming&mdash;
+one can appreciate (2) as a hint to that part of the compiler that optimizes
+boolean expressions: it saves it the trouble to recognize that the two guards
+are the complement of each other. Needless to say, that all forms of 
+side-effects are ruled out: they are regarded by me as invalid implementations
+as they would violate the axiom of assignment, etc.
+<p>The awkward point is how to transfer this pattern of reasoning in
+order to describe the semantics of a number of mutually unsynchronized
+programs that &mdash;at a certain grain of interleaving, say: a memory cycle&mdash;
+fool in the same store. I know of only one way (and it is not very attractive!
+I shall sketch it nevertheless; the unattractiveness is probably a consequence
+of the sad fact that these problems are inherently ugly.)
+<p>Consider programs A and B with the shared variables x and y;
+consider then separately program A in its private state space extended
+with x and y , and the program B in its private state space extended
+by x and y. When considering program A we now must admit that at each
+semicolon of A so to speak, the total state of A (i.e. including x and
+y) may change non-deterministically, only bound by the limitations of what
+B may do. If, for instance, B has the trivial form
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      <b>do</b> true &rarr; x:= random <b>od</b> </td> </tr>
+</table>
+(assuming that B has a private random number generator) this means for
+program A that at any semicolon the value of x may be subjected to
+a random variation. (A rather terrible form of interference!) If B has
+the trivial form 
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+<b>do</b> true &rarr; X:= 1 <b>od</b></td><td align=right>(3)
+</td>  </tr>  </table>
+it means for program A that at any &ldquo;semicolon&rdquo; x is either equal to 1
+or unchanged. In order to make this a workable system, one has to postulate,
+that in each &ldquo;unit of evaluation&rdquo; (see below) at most one shared variable
+is referenced at most once. Here a unit of evaluation is something about
+the internal sequencing of evaluation we don&rsquo;t wish to make any committments.
+Without that constraint it could make a difference whether A evaluated
+&ldquo;x + x&rdquo; or &ldquo;2 * x&rdquo;: in the second case we could guarantee an even result,
+in the first case we can not! And then, a more or less decent mathematical
+system becomes totally impossible.
+<p>The problem, of course, is, that program B has more structure than
+(3), and that, when studying program A we have to take that into account.
+If, in program A we have
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+<b>do</b> x &gt; 0 &rarr; s:= x; x:= s - 1 <b>od</b></td><td align=right>(4)
+</td>  </tr>  </table>
+we cannot guarantee termination with B of form (3) ; we could however,
+with B of the form 
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+<b>do</b> true &rarr; <b>do</b> y &gt; 0 &rarr; x:= 1 <b>od</b> <b>od</b></td><td align=right>(5)
+</td>  </tr>  </table>
+guarantee termination of (4) provided initially y &le; 0, because then
+B can interfere with the loop (4) at most once. More detail you can find
+in the thesis of Susan Spear Owicki from Cornell University, Ithaca, N.Y.
+14850 (according to my Webster), Department of Computer Science.
+<p>It was the experience of studying her thesis, and the moral of a
+number of my own exercises, that caused me &mdash;first thing I did!&mdash; when I
+tried to understand your solution, to do away with the boolean procedure
+INITIALIZERESPONSIBILITY: the value that its call returns is <b>not</b> a function
+of the state, but a (very complicated) function of past history. But that
+implies that I want to see at this level the semicolons, the sequencing
+to be more precise. One can read your observation as a plea for the
+<b>if</b>-<b>then</b>-<b>else</b>-<b>fi</b> construct; another conclusion can be that a function
+procedure, the evaluation of which references more than one shared variable
+is a misleading construct that we had better regard as &ldquo;against the rules&rdquo;.
+Susan Dwicki has made the latter choice, and she has my blessing. Unless
+new arguments emerge I think that I shall stick to my guarded commands:
+I am still quite happy with them!
+<p>The most effective way of mastering complexity is avoiding the 
+introduction of complexity in the first place! I would love to know how I could
+put more &ldquo;meat&rdquo; into that observation.
+<center>Yours ever,</cwnter>
+<table width=100%><tr><td valign=top width=60%>
+Burroughs</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+Plataanstraat 5</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+NL-4565 NUENEN</td><td>
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-01-08<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

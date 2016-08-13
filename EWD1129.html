@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: Why &quot;heavy-weight&quot; bits are unavoidable. (EWD 1129)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>Why &quot;heavy-weight&quot; bits are unavoidable.</h1></div>
+	
+	    <div id="frame">
+			<div id="header">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd11xx/EWD1129.PDF" 
+           title="Link to the PDF version of EWD 1129">EWD 1129</a>
+      </div>
+			<div id="content">
+				<u>Why &quot;heavy-weight&quot; bits are unavoidable.</u>
+				<p>The following statement from my <a href="https://www.cs.utexas.edu/~EWD/ewd10xx/EWD1036.PDF">&quot;On the cruelty of really teaching computing science&quot;</a> was recently challenged in an as yet private communication:</p>
+				<blockquote>
+					<p class="noindent">&quot;In the discrete world of computing, there is no meaningful metric in which &quot;small&quot; changes and &quot;small&quot; effects go hand in hand, and there never will be.&quot;.</p>
+				</blockquote>
+				<p class="noindent">Here is the type of reasoning that led to the above conclusion.</p>
+				<p>We restrict ourselves for simplicity's sake to a store of <var>n</var> bits, for which we consider the inversion of a single bit as the smallest possible change. With each storage configuration we associate a value, and on the corresponding value space we envisage a metric that defines a distance d(<var>x</var>,<var>y</var>) for any pair of values (<var>x</var>,<var>y</var>). Besides the obvious d(<var>x</var>,<var>x</var>) = 0 and d(<var>x</var>,<var>y</var>) = d(<var>y</var>,<var>x</var>) , the metric being &quot;meaningful&quot; is meant to imply the validity of the triangular inequality, viz. d(<var>x</var>,<var>y</var>) &#x2264; d(<var>x</var>,<var>z</var>) + d(<var>z</var>,<var>y</var>).</p>
+				<p>Assume now that our metric is such that the distance between two values that correspond to storage configurations that differ in precisely one bit is (at most) 1. (This assumption is intended to model that &quot;small&quot; changes and &quot;small&quot; effects go hand in hand.) From the fact that the store has <var>n</var> bits and the triangular inequality we now deduce that the distance between any two values that correspond to storage configurations is at most <var>n</var>. But this upper bound is much too small to be economically acceptable: instead of storing in <var>n</var> bits one of the values from 0 through <var>n</var> , we know how to store in those <var>n</var> bits one of the values from 0 through 2<sup><var>n</var></sup>-1. So, in my quoted statement &quot;never&quot; means &quot;not as long as we refuse to pay an exponential price while a linear one is feasible&quot;.</p>
+			</div>
+			<div align="right">
+				<p class="noindent">
+						Austin, 30 April 1992</p>
+			</div>
+			<div align="left">
+						<p class="noindent">prof.dr. Edsger W. Dijkstra<br>
+							Department of Computer Sciences<br>
+							The University of Texas at Austin,<br>
+							Austin, TX 78712-1188<br>
+							USA</p>
+					</div>
+			<div align="left">
+						<p><u></u></p>
+					</div>
+			<hr>
+					<font size="-1">transcribed by Martijn van der Veen<br>
+						revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="83">Tue, 1 Jan 2008</csobj></font>
+					<p></p>
+				</td>
+				<td width="1" height="790"><spacer type="block" width="1" height="790"></td>
+			</tr>
+			<tr height="1" cntrlrow>
+				<td width="465" height="1"><spacer type="block" width="465" height="1"></td>
+				<td width="1" height="1"></td>
+			</tr>
+		</table>
+		<p></p>
+	</body>
+
+</html>

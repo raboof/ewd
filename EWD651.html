@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: A strong P/V-implementation of conditional critical regions (EWD 651)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>A strong P/V-implementation of conditional critical regions</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD651.PDF"
+           title="Link to the PDF version of EWD651">EWD651</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+                     
+<b>A strong P/V-implementation of conditional critical regions</b>.
+<p class=noindent>(This note describes a program of which I announced, before starting on it,
+that it would become &ldquo;ghastly complicated&rdquo;. I think that my expectation has
+been fulfilled. This note is written for various reasons:
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a successful result of four hours of hard work should be recorded
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the existence of a program solving the problem in question under
+the chosen constraints is, to my knowledge at least, a new discovery
+<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I am not certain yet how to describe the program&rsquo;s development, nor
+how to justify the result.)
+<p class=noindent><b>The problem</b>.
+<p>With a semaphore m , initially = 1 , the mutual exclusion problem
+can be solved by
+....P(m); critical section; V(m).....
+This, however, introduces the danger of individual starvation in the case
+of three or more processes, when the P/V-operations are so-ca1led &ldquo;weakly
+implemented&rdquo;. In the weak implementation it is left absolutely undefined
+which of the blocked processes is allowed to proceed when two or more processes
+are blocked by P(m) when a V(m) is executed: individual starvation &mdash;as
+the result of &ldquo;infinite overtaking&rdquo;&mdash; can then not be excluded. It is 
+therefore not unusual to postulate for the P/V-operations a so-called &ldquo;strong
+implementation&rdquo;, in which infinite overtaking is impossible &mdash;to admit the
+processes in the order of &ldquo;first-come-first-served&rdquo; would be one way of
+guaranteeing the strong property&mdash; . (Under the assumption of weak 
+P/V-operations we have to prove that for each semaphore s the number of
+processes blocked by P(s) will, when positive, eventually be reduced to
+zero. All solutions I know ensure that each semaphore blocks at most one
+process: under that circumstance the difference between weak and strong
+implementation disappears. A starvation-free solution using a fixed number
+of weak semaphores is not known for an unbounded number of processes, and
+can probably be shown not to exist.)
+<p>With conditional critical regions
+<b>&ldquo;with</b> r <b>when</b> Bi <b>do</b> Si <b>od</b>&rdquo;
+                 
+we have exactly the same problem. In a weak implementation of conditional
+critical regions it is left undefined which of the blocked processes is
+allowed to continue when after the execution of an Si more than one blocked
+process has a true guard Bj . Ensuring progress of the individual programs
+under the assumption of weakly implemented conditional critical regions 
+implies proving that for each blocked process this will eventually become the
+<b>only</b> blocked process with a true guard; this proof obligation imposes a
+severe constraint on the programs &mdash;several critical regions with the same
+guard may create serious complications&mdash; . For a strong implementation of
+conditional critical regions &mdash;i.e. one that disallows infinite overtaking&mdash;
+it should suffice to prove that infinite blocking of a particular process
+implies infinite overtaking. More precisely: we have then only to prove
+that, whenever a process is ready to enter a conditional critical region,
+the corresponding guard will be true within a finite time. The assumption
+that this has been proved is denoted by &ldquo;the assumption of weak absence of
+starvation on the B-level&rdquo;. The problem is to give a strong implementation
+of conditional critical regions for an unbounded number of processes,
+using a fixed number of (possibly strong) semaphores.
+<p class=noindent><b>The solution</b>.
+<p>Martin Rem has discovered how to implement conditional critical regions
+with three semaphores in a very nice way. (Earlier, but somewhat less nice,
+this has been done by Coen Bron.) Rem&rsquo;s solution is a beauty, but it is only
+a weak implementation. In this note we shall describe how with two more
+semaphores, conditional critical regions can be strongly implemented, by
+superimposing upon Hem&rsquo;s solution the idea of &ldquo;the binary bakery algorithm&rdquo;.
+Roughly speaking, blocked processes are divided over two groups, L and R ,
+and R-processes have priority over L-processes. As long as the R-group
+is not empty, it is not allowed to grow; its priority over the L-group and
+the assumption of weak absence of starvation on the B-level thus implies
+that the R-group gets empty in a finite period of time. Then the L-group
+is emptied &mdash;either by transferring its members to the R-group or by allowing
+them to proceed&mdash; before new processes are admitted to the critical 
+competition.
+                        
+<IMG SRC="EWD651IM.png" NAME="relation" BORDER=0>
+<br>In the above drawing of four rectangular waiting rooms the dotted lines
+indicate the possible paths of (mostly blocked) processes. Circles indicate
+switches on their paths, each waiting room has an exit marked by the name
+&mdash;sL, sR, tL, or tR&mdash; of a binary semaphore. Inside each waiting room I have
+written the name &mdash;nL, nR, wL, or wR&mdash; of an integer counting the number of
+processes inside the corresponding waiting room. When the processes from
+the R-group should be allowed to test their guard&mdash;i.e. after the execution
+of an S&mdash; , as in Rem's solution the top-right-hand waiting room is first
+emptied into the bottom-right-hand waiting room, before they are admitted
+(one at a time) to test their guard. The top-right-hand waiting room has
+first to be emptied so that we can collect there the processes from the R-group
+of which it has been established that their guards are still false. (For
+more details of this part of the algorithm, see EWD629.) At the left-hand
+side we have the same arrangement for the processes in the L-group. Then
+the critical activity is left (with m = 1) and a new process is admitted
+                      
+at the top, the bottom waiting rooms are empty and all blocked processes have,
+indeed, a false guard.
+<p>When m = 1 , the L-group is empty <b>or</b> the R-group is not empty; when
+the R-group is not empty, L will be true, ensuring that new blocked processes
+will be placed in the L-group, so that those in the R-group cannot be overtaken
+by the new ones; when the R-group is empty, the L-group is empty as well and
+the value of L is immaterial.
+<p>When m = 0 and a blocked process tests again its guard, L is false
+if the process has been admitted to the test via V(tR), thus ensuring that
+when the process does not escape, it remains in the R-group; L is true
+when a process has been admitted to the test via V(tL), except when during
+this critical activity (i.e. period with m = 0 ) the R-group has become
+empty and the L-group has to be emptied.
+<p>This tells us that upon completion of an Si , the boolean L can 
+always be set to false: if the R-group is not empty, its processes will test
+their guards first, if the R-group has become empty, but the L-group is not,
+the L-group has to be emptied, and if both are empty, the value of L is
+immaterial.
+<p>The system should be initialized with m = 1 , sL = sR = tL = tR = 0,
+and nL = nR = wL = wR = 0 ; the initial value of the boolean L is immaterial.
+<p>For the following program I am much indebted to W.H.J.Feijen. In my
+first version the transfer from the members of the L-group to the R-group,
+when the latter had become empty, bypassed the testing of their guards, and
+only when the transfer was completed, was testing resumed. Feijen&rsquo;s first
+contribution was the remark that it was the purpose of the transfer to empty
+the L-group, and that therefore no harm was done when during the transfer
+a blocked proces escaped via its Si if it found its guard true. His second
+contribution was to urge me to make the picture on the previous page and to
+draw the paths. As a rule I don&rsquo;t like such drawings because usually I find
+them more confusing than helpful. In this case, however, the picture was
+so helpful that with the picture next to me &mdash;and a full awareness of Rem&rsquo;s
+                                
+<table> <tr> <td colspan = 10>
+P(m);                                                                                                                          </td> </tr> <tr> <td colspan = 10>
+<b>do</b> <b>non</b> Bi &rarr;                                                                                                  </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 8>
+      <b>if</b> L &rarr; nL:= nL + l; <b>if</b> wL > 0 &rarr; V(tL) &#x25af; wL = 0 &rarr; V(m) <b>fi</b>;                     </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 5>
+              P(sL); nL, wL := nL - l, wL + 1;                                                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+              <b>if</b> nL > 0 &rarr; V(sL) &#x25af; nL = 0 &rarr; V(tL) <b>fi</b>;                                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+              P(tL); wL:= wL - l                                                                                               </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 7>
+       &#x25af; <b>non</b> L &rarr; nR:= nR + 1;                                                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+              <b>if</b> wR > 0 &rarr; V(tR)                                                                                    </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 4>
+               &#x25af; wR = 0 &rArr; L:= true;                                                                                </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+                          <b>if</b> nL + wL = 0 &rarr; V(m)                                                                    </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
+                           &#x25af; nL > 0 &rarr; V(sL)                                                                        </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>
+                           &#x25af; nL = 0 <b>and</b> wL > 0 &rarr; V(tL)                                                      </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                          <b>fi</b>;                                                                                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+              P(sR); nR, wR := nR - 1, wR + 1;                                                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+              <b>if</b> nR > 0 &rarr; V(sR) &#x25af; nR = 0 &rarr; V(tR) <b>fi;</b>                                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+              P(tR); wR:= wR - l                                                                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 6>
+        <b>fi</b>                                                                                                              </td> </tr> <tr> <td colspan = 10>
+<b>od</b>                                                                                                                      </td> </tr> <tr> <td colspan = 10>
+Si;                                                                                                                            </td> </tr> <tr> <td colspan = 10>
+L:= false;                                                                                                                     </td> </tr> <tr> <td colspan = 10>
+<b>if</b> nR + wR > 0 &rarr; <b>if</b> nR > 0 &rarr; V(sR) &#x25af; nR = 0 &rarr; V(tR) <b>fi</b>                              </td> </tr> <tr> <td>&nbsp; </td> <td colspan = 9>
+ &#x25af; nR + wR = 0 &rarr; <b>if</b> nL + wL > 0 &rarr; <b>if</b> nL > 0 &rarr; V(sL) &#x25af; nL = 0 &rarr; V(tL) <b>fi</b> </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+                  &#x25af; nL + wL = 0 &rarr; V(m)                                                                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                          <b>fi</b>                                                                                            </td> </tr> <tr> <td colspan = 10>
+<b>fi</b>                                                                                                                      </td> </tr>
+</table>
+solution as described in EHD529&mdash; I could compose the above program while
+sitting at the keyboard of my typewriter. (I had written down the text
+at yesterday&rsquo;s session of &ldquo;The Tuesday Afternoon Club&rdquo; but had left the
+manuscript at the University, and I am certainly not used to knowing programs
+like the above by heart. Never using a terminal, I am not used to composing
+programs behind the keyboard either. I can only conclude that the drawing
+was this time very helpful.)
+<p>Because testing of the guards of the processes in a group always
+                           
+starts with the top waiting room empty, and the critical activity always
+ends with the bottom waiting rooms empty, for the four semaphores associated
+with the exits from the waiting rooms a weak implementation suffices. For
+the semaphore m , however, we need a strong implementation.
+<p>In a sense the whole experiment was a disappointment. Our original
+goal was an implementation of the conditional critical regions that would
+be strong <b>by virtue of the strength of the sequencing primitives used</b>. We
+have not been able to reach that goal, as we have only been able to ensure
+the strength by means of the &ldquo;binary bakery algorithm&rdquo;, as reflected in
+the L-group and the R-group. Whether this goal can be reached at all
+is unknown; on account of yesterday&rsquo;s experience I doubt.
+<p>Finally: although it is conceptually very satisfying that this 
+scheduling problem can be solved with a fixed number of semaphores, I can hardly
+say that I like the program. As the program stands it is rather an incentive
+to search for more appropriate means.
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL Nuenen</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-01-25<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

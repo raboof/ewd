@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Monotonic  replacement  algorithms  and  their  implementation  (EWD 465)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>Monotonic  replacement  algorithms  and  their  implementation </h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd04xx/EWD465.PDF"
+           title="Link to the PDF version of EWD465">EWD465</a></div></div>
+      <div id="frame">
+         <div id="content">
+           <hr />
+           <p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR        </p>
+           <hr />
+<P CLASS="noindent" STYLE="margin-bottom: 0.5cm">&nbsp;</P>
+<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial Black, sans-serif">Copyright Notice</FONT></P>
+		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>
+The following manuscript </FONT></FONT>		</P>
+		<P STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>
+EWD 465 Monotonic  replacement  algorithms  and  their  implementation  </FONT></FONT>		</P>
+		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>
+is held in copyright by Springer&mdash;Verlag New York. </FONT></FONT>		</P>
+		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>
+The manuscript was published as pages 84-88  of </FONT></FONT>		</P>
+		<P STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>
+Edsger W. Dijkstra, Selected Writings on Computing: A Personal Perspective, </FONT></FONT>		</P>
+		<P STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>
+Springer-Verlag, 1982. ISBN O&mdash;387&mdash;90652&mdash;5. </FONT></FONT>		</P>
+		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>
+Reproduced with permission from Springer-Verlag New York. <BR>
+Any further reproduction is strictly prohibited.</B></FONT></FONT><FONT SIZE=2>		.</FONT></P>
+<p><b>Monotonic replacement algorithms and their implementation</b>.
+<p>(The following is written with demand paging for fixed-size pages in
+mind; the size of the pages being fixed is probably not essential.)
+<p>The idea of a virtual storage implementation is that not all the
+stored information (both program and variables) needed for the progress
+of a computation need to be in primary store simultaneously, but that for
+large periods of time parts of it may reside in secondary store. For this
+purpose the information is partitioned over a number of chunks such that
+during progress the information of a chunk will be either totally present
+in, or totally absent from primary store. In this sense the chunks are our
+&ldquo;units of presence&rdquo;. If all the chunks have the same size, they are called
+&ldquo;pages&rdquo;; primary store is then subdivided into so-called &ldquo;page frames&rdquo;,
+i.e. units of store able to contain exactly one page.
+<p>The idea of demand paging is that the computation can proceed at
+full speed until access to an absent page is required. Such a requirement
+is called &ldquo;a page fault&rdquo;: the computation causing it comes to a grinding
+halt until the page needed has been brought in. If only pages were brought
+in, the capacity of primary memory would be exceeded very quickly; therefore,
+upon a page fault a page <b>swap</b> takes place: one of the pages present in
+primary memory while the page fault occurs is sent back to secondary store,
+is &ldquo;dumped&rdquo;. The page subjected to this fate is called &ldquo;the victim&rdquo; and it
+is the purpose of the so-called &ldquo;replacement algorithm&rdquo; to choose the victim.
+<p>Elsewhere &mdash;in EWD462 (and in its preliminary version EWD408)&mdash; I
+have argued that in a multiprogramming environment the victim should be
+chosen from the present pages of the program causing the fault. The number
+of pages that a program has present in primary store, its so-called &ldquo;window
+size&rdquo;, is; as a result, not changed by the occurrence of a page fault. It
+is the purpose of this note to describe how the information is to be collected
+on account of which a reconsideration of the window size can be justified,
+<p>We call a replacement algorithm &ldquo;monotonic&rdquo; iff (i.e. if and only if)
+it has the following property. If the program were executed twice (but in
+strict synchronism) with two different window sizes, the pages present in
+the smaller window will at any moment all be present in the larger window,
+if this were the case at program start. Monotonic replacement algorithms
+have the pleasant property that the page faults occurring with the larger
+window size are a subset of those occurring with the smaller window size,
+and an increase of the window size can <b>never</b> lead to a higher page fault
+frequency. It is easily seen, however, that a larger window size needs not
+to lead to a lower page fault frequency either.
+<p class="noindent"><b>Note 1</b>. Here &ldquo;frequency&rdquo; is not meant as &ldquo;number of times per unit of real
+time&rdquo;, but as &ldquo;number of times per unit of computational time&rdquo;, i.e. with
+repect to a clock that runs while the program is being executed at full
+speed and is stopped while the computation is not in progress.(End of note 1.)
+<p class="noindent"><b>Note 2</b>. In the sequel we shall take the freedom to consider for fixed
+window size the page fault frequency as a function of &mdash;computation,
+see previous note&mdash; time, although a frequency cannot be the function of a
+moment, as it is only defined as an average over a period. For the time
+being we can think of something like
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      8 /(now - the moment of the last page fault but 7) </td> </tr>
+</table>
+Physicists &mdash;vide Lorentz&mdash; do things like this all the time; we shall
+return to this later. (End of note 2.)
+<p>Although we know that at any moment the page fault frequency is a
+non-increasing function of the window size, we have without further 
+information no knowledge about the <b>slope</b> of that curve (nor need, for a given
+computation that slope be constant in time). As a result, with a certain
+target page fault frequency in mind, we cannot trust the effectiveness of
+the simple feedback mechanism that increases or decreases the window size
+if the page fault frequency observed with the current window size was too
+high or too low respectively. (This would be like trying to keep a car on
+the road for which the actual steering mechanism reacts with unknown and
+varying sensitivity to a rotation of the wheel!)
+<p>In particular:
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the current window size gives a page fault frequency which is
+higher than the target value, we would like to know the larger window size
+(if any!) for which the page fault frequency would be small enough. (We
+just cannot expect to find this larger value by trial and error: if within
+the bounds of primary store no such window exists, all trials become errors,
+and quickly even expensive ones!)
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the current window size gives a page fault frequency which is
+higher than the target value &mdash;and therefore, decreasing the actual window
+size is not something one feels tempted to suggest&mdash; we would like to know
+how much the window size can be decreased without increasing the page fault
+frequency.
+<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If the current window size w gives a page fault frequency lower
+than the target value, we should like to know the page fault frequency for
+a window of size w - 1 : if that is much higher than the target value, we
+must abstain from decreasing the window size.
+<p class="noindent"><b>Note 3</b>. The curve plotting the page fault frequency as a (non-increasing)
+function of the window size has very often rather sharp knees. In such a
+situation the simple feedback system can easily lead to thrashing half the
+time.(End of note 3.)
+<p>The moral of the above is that in order to justify an adjustment of
+the window size, we would like to know the (current) page fault frequency
+for all possible window sizes, and not just for the actual window size w.
+In the sequel we shall show how this information can be obtained for monotonic
+replacement algorithms.
+<p>Monotonic replacement algorithms define (independent of actual window
+sizes!) after each access a unique order for the pages of the computation
+that have been accessed at least once during program start. (In the following
+that ordering only interests us for the first maxw elements, if maxw is
+the maximum window size.) At any moment the k-th page in that order is the
+unique (!) page that would be contained in the window of size k, but
+not in that of size k -1
+<p>Consider now the effect of an access to a page which, prior to the
+access to it, is at position K in that order; upon completion of that
+access it must be at position 1 . (If we had executed the program with
+a window size = 1, the page concerned would have been in that single page
+frame window.) If K &gt; 1 , then the page originally in position 1 has
+to move to a position higher up in the order, k<sub>1</sub> say; then the page
+originally in position k<sub>1</sub> has to move to a higher position, k<sub>2</sub> say
+etc. until a page is brought into position K . More precisely:
+<br>with k<sub>i<sub>0</sub></sub>  = 1, k<sub>i<sub>n</sub></sub>  = K and for 0 < j < n: k<sub>i<sub>j</sub></sub>  < k<sub>i<sub>j+1</sub></sub>
+<br>a cyclic permutation of pages has to take place with the page originally
+at position K moving to a lower position (viz. 1), all other ones moving
+to a higher position. For position k with k &gt; K, the ordering remains
+unaffected.
+<p class="noindent"><b>Note 4</b>. If, for 0 &le; i &lt; K we take k<sub>i+1</sub> = k<sub>i</sub> + 1, i.e. each page
+originally at a position k &lt; K moves one position higher up in the order,
+we have the LRU-algorithm (Least Recently Used). For each window size w
+we have that K &gt; w indicates a page fault, the page originally at position
+w is indeed both the least recently used one and also the one that will
+be pushed outside the window. (End of note 4.)
+<p class="noindent"><b>Note 5</b>. All other reorderings than the cyclic permutations described above
+would lead to more than one page moving to a lower position in the order,
+i.e. for some window sizes an unasked for page would be brought inside the
+window, but that is not what we call &ldquo;demand paging&rdquo;: the combination of
+demand paging and monotonicity makes the above cyclic permutations the only
+permissible ones. (End of note 5.)
+ <p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>The mechanism consists of a string of mosquitos numbered from 1 through
+wmax. Mosquito nr. i has a variable cp (current page) whose value equals
+&mdash;for the moment we assume that the mosquitos are fast enough&mdash; the name
+of the page currently in the i-th position of the order. Furthermore each
+mosquito is activated by placing a page name on its &ldquo;A input&rdquo; and one on
+its &ldquo;B input&rdquo;. The A input will equal the name of the page that arrives
+in its position, the B input is the name of the page being accessed. Upon
+access of a page, its name is placed on both A input and B input of
+mosquito nr. 1. The code for mosquito or. i is: (for LRU)
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+     <b>if</b> cp &ne; B input &rarr; A output:= cp; </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                       B output:= B input;           </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
+                       cp:= A input                  </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td colspan = 2>
+      &#x25af; cp = B input &rarr; cp:= A input      </td> </tr> <tr> <td></td> <td colspan = 3>
+     <b>fi</b>                                       </td> </tr>
+</table>
+where the output of mosquito nr. i is the input for mosquito nr. i + 1 .
+<p>Left alone, the mosquitos will update their cp-value in the order of
+increasing ordinal number. If the accessed page was originally in position
+K, the first K-1 mosquitos will select the first alternative, the K-th
+mosquito will select the second alternative and there the &ldquo;ripple&rdquo; ends. If
+K &gt; w, a genuine page fault occurs.
+<p>If this string of mosquitos were used to detect the presence or absence
+of a page, the transmission speed of the ripple would have to be very high
+viz. wmax mosquitos per memory access at least. Under the assumption of
+independent presence/absence detection with respect to the current window,
+higher mosquitos may lag behind! It suffices if they can go through the
+above motions with a speed of once per memory access: they are like the
+elements of a fancy shift register.
+<p>For the i-th mosquito each selection of the first alternative 
+corresponds to a page fault that would have occurred if i has been the actual
+window size. Each mosquito has to extract from this series a corresponding
+&ldquo;page fault frequency&rdquo;. They can do so by taking the past into account by
+an exponentially decreasing weight, for instance by keeping each a variable
+amppf (&ldquo;average moment previous page faults&rdquo;) and transmitting &ldquo;now&rdquo;, and
+adjusting each time the first alternative is selected amppf for instance by
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;amppf := amppf + (new - amppf)/8,
+(where &ldquo;now&rdquo; refers to the moment that the ripple entered the string of 
+mosquitos). If for a certain window size the page faults occur at regular
+time intervals &ldquo;delta&rdquo;, then in the limit:
+<table width=100%><tr><td valign=top width=30%>
+before each adjustment:</td><td>now - amppf = 8 * delta        and
+</td></tr>
+<tr><td valign=top>
+after each adjustment:</td><td>now - amppf = 7 * delta
+</td>  </tr>  </table>
+<p>If we don&rsquo;t like this discontinuity, we can store per mosquito in
+addition for instance amppf&rsquo;, each time updated by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                    amppf&rsquo;:= amppf&rsquo; + (now - amppf&rsquo;)/2 . </td> </tr>
+</table>
+With page faults occurring at regular time intervals &ldquo;delta&rdquo;, we have then
+in the limit:
+<table width=100%><tr><td valign=top width=30%>
+before each adjustment:</td><td>  now - amppf&rsquo; = 2 * delta
+</td></tr>
+<tr><td valign=top>
+after each adjustment:</td><td>    now - amppf&rsquo; = 1 * delta
+</td>  </tr>  </table>
+As a result we have constantly   amppf&rsquo; - amppf = 6 * delta,
+and with the above we have achieved a Lorentz-like smoothing (see Note 2.)
+ <p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>Two questions have been left unanswered, but it seems premature to
+try to settle them now.
+<p>The first question is what to do when a processor switches from one
+program to another. As an elephant contains the information of wmax 
+mosquitos, wmax may be high and processor switching may occur at great 
+frequency, switching one elephant with equal frequency from one program to
+another might lead to unacceptable switching delays. I can only think of the
+crude solution: have at least as many elephants as we have high-priority
+programs. With LSI-techniques &mdash;the more of the <b>same</b> hardware, the 
+better-this is perhaps no so unacceptable as it sounds in my puritan ears.
+<p>The second question is how the collected information for a program
+is to be delivered. This has to occur at a page fault &mdash;when the victim
+has to be chosen&mdash; and upon reconsideration of the window size. 
+Particularly in the first case the &ldquo;lagging behind&rdquo; of the mosquitos higher up
+in the order presents some difficulties: it makes instantaneous selection
+of the victim impossible.
+<p class="noindent">
+<table width=100%><tr><td valign=top width=30%>
+19th December 1974</td><td> </td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+NUENEN - 4565</td><td> </td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!&mdash; #BeginDate format:IS1 &mdash;>2014-11-15<!&mdash; #EndDate &mdash;>
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

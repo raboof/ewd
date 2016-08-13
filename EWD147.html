@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Proposal for the input and the notation of the system (EWD 147)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+	</head>
+  <body><div id="title"><h1>Proposal for the input and the notation of the system</h1></div>
+    <div id="frame" align="right">
+			<div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD147.PDF" 
+           title="Link to the PDF version of EWD147">EWD147</a>
+      </div>
+		</div>
+		<div id="frame">
+			<div id="content">
+				<p><br/>
+					
+<h1>Proposal for the Input and the Notation of the System.</h1>
+<h1>0. Introduction</h1>
+<p>Input of the system will take place in two stages.</p>
+<p>From the written documents we shall punch on Flexowriters the tape HACOSYS (Hand Coded System), an assembler will read HACOSYS and punch the tape BICOSYS (Binary Coded System).  The tape BICOSYS will load the system into a virgin machine. BICOSYS, which will be handled daily by the operator will be very much shorter than HACOSYS, which is only handled at system modification.
+<h1>1. The General Structure of BICOSYS.</h1>
+<p>Paper tape can be read</p>
+	<p class="continue">1) for the sake of initial input into the virgin machine under complete control of Charon</p>
+	<p class="continue">2) under normal program control (with Charon as program controlled slave).</p>
+<p>We call the two forms of input primary and secondary input.</p>
+<p>Primary input is unchecked; for this reason we shall restrict it to a minimum, i.e.</p>
+	<p class="noindent">1) an interrupt jump in M[24] to the starting address of the secondary input program</p>
+	<p class="continue">2) the secondary input program inself.  The latter will be stored in a future core page.</p>
+<p>The tasks of the secondary input program are the following ones</p>
+	<p class="noindent">1) It has to verify its correct presence in core store, say by means of a sum check.  It has to clear the remainder of the memory.</p>
+	<p class="continue">2) It has to clean all the necessary teeth in the normal manner but for the real time clock, which has to remain dormant (say by LVCA <u>false</u> )</p>
+	<p class="continue">3) All LVIF's can be set in their future position and IV can be set <u>true</u></p>
+	<p class="continue">4) Now the secondary input program starts to read paper tape over the golden reader in a most unorthodox manner, viz.</p>
+		<p class="nospace">4.1) it will give tape read commands directly to the golden reader</p>
+		<p class="nospace">4.2) it will keep the IFT-value negative, it will not rely on the interrupt</p>
+		<p class="nospace">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mechanism but will inspect the IFT increases.</p>
+	<p class="continue">5) Secondary reading will consist of two phases, core filling, followed by segment filling.</p>
+	<p>During core filling all core locations with permanent meaning are filled.  They are filled in such a way that at the end of core filling the primary input program looks as a program in PM1.  All mechanisms to dump segments are then present, the clock, if necessary, can be started and secondary reading continues to fill the segments.  The multirunning system is then working but for the information streams.</p>
+	<p class="continue">6) Finally the golden reader is set in accordance with the initial state of the corresponding CM and PM1 ends its activity as normal programs do.</p>
+<p>The information on BICOSYS consists of</p>
+	<p class="continue">a) the text of the secondary input program</p>
+	<p class="continue">b) the information to be read during core filling</p>
+	<p class="continue">c) the information to be read during segment filling.</p>
+<h1>2. The Structure of HACOSYS.</h1>
+<p>HACOSYS will consist of two parts</p>
+	<p class="continue">1) the Table, followed by</p>
+	<p class="continue">2) the Contents, the latter subdivided into</p>
+		<p class="nospace">2.1) the secondary input program</p>
+		<p class="nospace">2.2) the core information</p>
+		<p class="nospace">2.3) the segment information</p>
+<h1>2.1. The Structure of the HACOSYS Table.</h1>
+<p>The identifiers occuring on the HACOSYS Table identify parameters, the HACOSYS Table specifies their constant type and value according to rules to be explained in this section.  The identifiers have the complete HACOSYS Contents as their scope.
+<p> They are of three different types</p>
+	<p class="noindent">1) constants</p>
+		<p class="nospace">1.1) fixed constants</p>
+		<p class="nospace">1.2) derived constants</p>
+		<p class="nospace">1.3) invariant addresses</p>
+	<p class="continue">2) dynamic addresses</p>
+	<p class="continue">3) static addresses</p>
+<p>On the HACOSYS Table they are introduced in the following order</p>
+	<p class="noindent">1) the fixed constants</p>
+	<p class="continue">2) the dynamic addresses</p>
+	<p class="continue">3) the static addresses, the invariant addresses and the derived constants in order of increasing CCA (Current Core Address)</p>
+<p>The CR (if desired, preceded by comment introduced by quotes) acts as separator.</p>
+<h1>2.1.1 The Fixed Constants</h1>
+<p>The fixed constant is given by its identifier, followed by "=", followed by its value; its value &mdash;a single word&mdash; may be given by a (signed or unsigned) decimal integer or by a (signed or unsigned) octal number (at most 9 octal digits enclosed within apostrophes).  Then one or more separators have to follow.</p>
+<h1>2.1.2. The dynamic Addresses.</h1>
+<p>Dynamic addresses are defined in terms of the value of CDA (Current Dynamic Address); CDA is initialized by "<u>d</u> p[q]", where "p" (unsigned decimal integer) and "q" (decimal integer) specify a dynamic address in the usual manner.  Then one or more separators must follow.</p>
+<p>A dynamic address is then given by its identifier, followed by an unsigned decimal number enclosed within parentheses.  The value of CDA is then assigned to the parameter identified, whereafter CDA is increased by the amount given within the parentheses.  One or more separators follow.</p>
+<h1>2.1.3. The Static Addresses.</h1>
+<p>The static addresses can only be given after the first CCA initialization, that specifies the value of CCA (Current Core Address)</p>
+<p>The CCA initialization consists of <u>c</u>, followed by an address value, given as unsigned (decimal or octal) number, followed by one or more separators.  This value is the next CCA value, CCA must be monotonically non decreasing.</p>
+<p>A static address is then given by its identifier, followed by an unsigned decimal number within parentheses, followed by one or more separators.  The value of CCA is assigned to the parameter identified, whereafter CCA is increased by the amount given within the parentheses.</p>
+<h1>2.1.4 The Derived Constants.</h1>
+<p>After the definiton of a static address, one or more "derived constants" may be given.  Each derived constant is given by its identifier, followed by "=", followed by a word, given as decimal or octal number.  The value of the derived constant is this word increased by the static address value just assigned to the last static address. (In a &mdash;be it clumsy&mdash; manner, this facility enables us to introduce "SE1" with the value "SUBCD(:PSE1)" as soon as PSE1 has been defined.)</p>
+<h1>2.1.5. The Invariant Addresses.</h1>
+<p>When CCA points to a location that shall contain an SV, then the moment has come to give the invariant addresses, related to that correspoinding segment.</p>
+<p>By "<u>s</u>" invariant address definition is announced and the variable CLN (Current Line Number) is set to zero.  From then onwards invariant addresses related to this segment can be given by giving their identifier, followed by an unsigned decimal number between parentheses.</p>
+<p>The value assigned to the parameter is the invariant address, composed of CCA and CLN (which must be less than 512), whereafter CLN is increased by the amount given within the parentheses.  Invariant address definition with respect to this segment is ended by "<u>t</u>", which causes CCA to be increased by 1.</p>
+<p>The individual invariant address definitions belonging to the same segment must be separated by one or more separators.  Following "<u>s</u>" and preceding "<u>t</u>" no separator is required.</p>
+<h1>2.2. The Structure of the HACOSYS Contents.</h1>
+<p>On the HACOSYS Contents we find in order on the tape</p>
+	<p class="continue">1) the primary input</p>
+	<p class="continue">2) the core information</p>
+	<p class="continue">3) the segment information.</p>
+<h1>2.2.1. The Primary Input.</h1>
+<p>A piece of primary input is announced by "<u>p</u>", followed by an unsigned (decimal or octal) number or a static address, (i.e. the identifier of a static address) indicating the starting address, followed by an unsigned decimal number between parentheses indicating the number of words that follow, followed by one or more separators.  Then the successive words will follow, all separated from one another.</p>
+<p>On account of such part of the HACOSYS Contents, a part of BICOSYS will be made, intended for primary input, on successive locations, starting at the address given. This BICOSYS portion will contain at the end a word more, computed in such a way that the total sum of this portion is = 0.</p>
+<p>A number of such pieces of primary input may follow. (E.g. one for M[24] and one for the secondary input program).</p>
+<h1>2.2.2. A Piece of Core Filling.</h1>
+<p> Such a piece is announced by the identifier of its static starting address, followed by an unsigned decimal integer between parentheses, indicating the number of words that follow.  Then the words follow, announcement and words all followed by one or more separators.</p>
+<p>Many such pieces may follow.</p>
+<h1>2.2.3. A Piece of Segment Filling.</h1>
+<p>Such a piece is as  a piece of core filling but for the fact that it is announced by the identifier of an invariant address.  Many such pieces may follow.</p>
+<h1>2.2.4. The End of HACOSYS.</h1>
+<p>An "<u>e</u>" indicates the end of HACOSYS.</p>
+<h1>2.2.5. The Words.</h1>
+<p>We shall now describe how the words on the HACOSYS Contents are written down.  They are of two different layouts, called "constants" and "instructions".  In the following description an "optional sign" is "+" , "-" or "empty"; an octal number is an apostrophe, followed by at most 9 octal digits, followed by an apostrophe.</p>
+<h1>2.2.5.1. The Layout of HACOSYS constants.</h1>
+<p>The following 6 basic forms are admissible</p>
+	<p class="continue">a) an optional sign, followed by an unsigned decimal integer</p>
+	<p class="continue">b) an optional sign, followed by an unsigned octal number</p>
+	<p class="continue">c) an optional sign, followed by the identifier of a fixed constant</p>
+	<p class="continue">d) an optional sign, followed by the identifier of a derived constant</p>
+	<p class="continue">e) an optional sign, followed by the identifier of an invariant address</p>
+	<p class="continue">f) an optional sign, followed by a colon ":", followed by the identifier of a static</p>
+	<p class="continue">&nbsp;&nbsp;&nbsp;address.</p>
+<p>All six may be followed by the optional increment; this consists of (zero or more times) a "[", followed by one of the six constant formats, followed by "]".</p>
+<p>Remark 1. The character sequences "][+" and "][-", that may thus arise may be contracted into "+" and "-" respectively.</p>
+<p>Remark 2. If the constant starts with a minus sign, this minus sign applies to the complete constant: all increments are added (mod 2 ! 27 -1) and at the end the result is inverted.</p>
+<h1>2.2.5.2. The Layout of HACOSYS instructions.</h1>
+<p>The instruction notation is an adaptation of the ELAN conventions.</p>
+<p>Instructions with an address of type "STAT" may have this address in the form</p>
+	<p class="continue">a) M</p>
+	<p class="continue">b) the identifier of a static address</p>
+<p class="noindent">followed by the optional increment as described in 2.2.5.1. (The identifier "M" is regarded as static address = 0).  The resulting address must fit into the 15 bits available.</p>
+<p>Instructions with an address of type "STATB" may have this address in the form</p>
+	<p class="continue">a) M[B]</p>
+	<p class="continue">b) identifier of a static address, followed by "[B]</p>
+<p class="noindent">followed by the optional increment (also after "B", the contraction convention applies). The resulting address must fit into the 15 bits available.</p>
+<p>instructions with an address of type "DYN" may have this address in the form</p>
+	<p class="continue">a) MG, MA, MS, MC, MT, MD, Mp</p>
+	<p class="continue">b) the identifier of a dynamic address</p>
+<p class="noindent">followed by the optional increment.</p>
+<p>In the above cases the corrections are applied to the future address part of the instruction.</p>
+<p>The address operand of type ":DYN" has the form ":" followed by one of the forms dynamic address just described; the address operand ":STAT" has the form of an unsigned constant (see 2.2.5.1).  Both followed by the optional increment.</p>
+<p>All increments that follow are added to the unsigned operand thus described.  The result must be less than 32768 in absolute value, an initial plus or minus sign applies to the result thus obtained, the resulting sign is processed in building up the instruction part.</p>
+			<hr/>
+			<!-- name and date -->
+			<div id="footer">
+				<font size="-1">
+         transcribed by Brian Fitzwater<br />
+					 revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="96"><!-- #BeginDate format:En2 -->04-Sep-2011<!-- #EndDate -->
+					 </csobj>
+				</font></div>
+		</div>
+	</body>
+</html>
+
+

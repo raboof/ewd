@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+
+
+
+
+
+<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: Termination detection for diffusing computations (EWD684)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+<body bgcolor="#ffffff"><div id="title"><h1>Termination detection for diffusing computations</h1></div>
+<div id="frame">
+
+<div id="header">
+        <a href="http://www.cs.utexas.edu/users/EWD/ewd6xx/EWD684.PDF" 
+           title="PDF scan of EWD 684" target="_blank">EWD 684</a>
+      </div>
+      <div id="content">
+
+<br>
+				<center>
+					<u>Termination detection for diffusing computations</u>.<br>
+by<br>
+					Edsger W. Dijkstra and C. S. Scholten</center>
+			</div>
+			<div id="content" align="left">
+				<p>The following seems to capture the quintessence of a situation that is not unusual in distributed processing. Consider a finite, directed graph. (If the graph contains an edge from node <var>A</var> to node <var>B</var>, we call <var>B</var> &quot;a successor of <var>A</var>&quot; and <var>A</var> &quot;a predecessor of <var>B</var>&quot;.) One node is called &quot;the gate&quot; and we may assume that each node is &quot;reachable from the gate&quot;, a concept defined by the (usual) postulates:</p>
+				<p class="continue">1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the gate is &quot;reachable from the gate&quot;</p>
+				<p class="continue">2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if <var>A</var> is &quot;reachable from the gate&quot;, then so are all successors of <var>A</var></p>
+				<p class="continue">3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;only those nodes are &quot;reachable from the gate&quot; that are so on account<br>
+					of 1) and 2).</p>
+				<p class="continue">In addition, the gate has an extra incoming edge, leading to it, so to speak, from &quot;the environment&quot; &#x2014;a symbolic predecessor of the gate&#x2014;.</p>
+			</div>
+			<div id="content">
+				<p>A so-called &quot;diffusing computation&quot; is started when, via the extra edge, the environment injects a &quot;message&quot; into the gate. (Prior to that all nodes are assumed to be in their natural state.) Upon reception of a message from one of its predecessors, a node reacts typically in one of two ways:</p>
+				<p class="continue">a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;either it absorbs the message, or</p>
+				<p class="continue">b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it sends a message to each of its successors.</p>
+				<p class="continue">A node, originally without successors, is modeled as a node with at least one successor &#x2014;for instance, itself!&#x2014; that always opts for
+reaction a).  It is the possibility of reaction b) that inspired the
+name "diffusing computations".  From now onwards we shall confine our
+attention to such computations for which it can be proved that each
+node will opt for reaction b) a bounded number of times.  For such
+computations eventually each node will reach the state that all
+messages it had opted to transmit to its successors have been
+transmitted, each node is "waiting" for a next message that doesn't
+come and the whole graph is as dead as a doornail; when this stable
+state has been reached the diffusing computation is defined to have
+terminated.  Our problem is the design of a signalling scheme &#x2014;to be
+superimposed upon the diffusing computation proper&#x2014; such that, when
+the diffusing computation proper has thus terminated, the gate will
+eventually signal the fact of this completion back to the environment.
+Besides a node's ability to receive messages from its predecessors and
+to send messages to its successors, we assume each node also able to
+receive "signals" from its successors and send "signals" to its
+predecessors; in other words, each edge is assumed to be able to
+accommodate two-way traffic, but only messages of the computation
+proper in the one direction and signals in the opposite direction.  We
+shall impose that in the total computation &#x2014;i.e. from the moment that
+the initial message was injected into the gate until the gate emits
+the completion signal towards the environment&#x2014; each edge will have
+carried as many messages in the one direction as it has carried
+signals in the opposite direction. </p>
+				<p> The implementation of the signalling scheme we propose requires for
+each node an integer variable called "count", initially and finally
+zero, and what we have dubbed "a cornet", initially and finally empty.
+(The name "cornet" has been chosen because, like in a pointed bag, one
+element contained in it enjoys a special status: whereas in a
+traditional bag all elements contained in it enjoy the same status, one
+of the elements contained in a non-empty cornet occupies the special
+position of being "the oldest element".  Whereas a stack is
+characterized by "last in, first out", a cornet is a characterized by
+the much weaker "very first in, very last out".) </p>
+				<p>Each reception by <var>B</var> of a message from <var>A</var> causes the name of <var>A</var> to be added to <var>B</var>'s cornet, which by this mechanism can be filled with names of predecessors of <var>B</var>. Note that, because the directed graph may contain merging, and even cyclic paths, the cornet of <var>B</var> may contain the name of <var>B</var>'s predecessor <var>A</var> several times. When the name of <var>A</var> is added to <var>B</var>'s empty cornet, this occurrence of <var>A</var>'s name in <var>B</var>'s cornet is marked as &quot;the oldest element&quot;.</p>
+				<p>The transmission of a signal from <var>B</var> to its predecessor <var>A</var> is accompanied by the removal of one occurrence of <var>A</var>'s name from <var>B</var>'s cornet.</p>
+				<p> As reception of a message from a predecessor and transmission of a
+signal to a predecessor correspond &#x2014;in the way just described&#x2014; to the only changes of the contents of a node's cornet, and because a node has to return to each of its predecessors a signal for each message received from that predecessor, the current contents of a node's cornet summarize its signalling obligations. The choice of predecessor to receive a signal is, by definition, constrained by the condition that the name of the predecessor chosen occurs still at least once in the cornet of the signalling node (because otherwise it would be impossible to remove an occurrence of that name from that cornet). The <em>additional</em> constraint &#x2014;which distinguishes a
+cornet from a standard bag&#x2014; is that from a cornet the element marked as &quot;the oldest element&quot; may only be removed provided it was the <em>only</em> element in the cornet (which, as a result of the removal, then becomes empty). In order to determine when a node will return a signal to one of its predecessors the variable &quot;count&quot;, which is initially equal to zero, is manipulated in the following fashion. Let a node receive a message and, as a result, send a message to <var>x</var> of its successors: in reaction a) <var>x</var> = 0, in reaction b) <var>x</var> = <var>k</var> if <var>k</var> denotes the number of its successors. (We can regard reactions a) and b) as extreme cases and admit values of <var>x</var> such that 0 &lt; <var>x</var> &lt; <var>k</var> as well, i.e. the reaction in which a node sends a message to some of its successors.) Whenever a node reacts thus upon a message received from one of its predecessors, it increases its count by <var>k</var> - <var>x</var>; when it receives a signal from one of its successors, it increases its count by 1. These are the only mechanisms that increase the count. The count is only decreased in multiples of <var>k</var>, more preciesely, when the count &#x2265; <var>k</var> and the cornet is non-empty, the count will be decreased by <var>k</var> and the node will return a signal to a predecessor, the name of which is removed from the node's cornet as described in the preceding paragraph.</p>
+				<p> This completes the description of the signalling scheme.  Note
+that a node neither records to which successors it has sent messages,
+nor from which successors it has received signals. </p>
+				<center>
+					<p>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+						
+*</p>
+				</center>
+				<p>For each edge we define the &quot;<var>deficit</var>&quot; as the number of messages transmitted along that edge, minus the number of signal returned along it. In its role of message receiver and signal sender, the node to which an edge points guarantees that the deficit of that edge is non-negative. Furthermore, for each node the relation</p>
+				<p class="noindent">P1:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the size of its cornet = the sum of the deficits of its incoming edges</p>
+				<p class="noindent">which is true to start with, is left invariant: when the node receives a message both sides are increased by 1, when the node sends a signal both sides are decreased by 1.</p>
+				<p>For each node we define the &quot;<var>stock</var>&quot; as the number of messages, the transmission of which it has decided but not yet performed; by definition also stocks are non-negative. This concept enables us to formulate for each node the relation
+				<p></p>
+				<table width="100%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td valign="top" width="48%">P2:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>k</var> * (the size of its cornet)&nbsp;&nbsp;= </td>
+						<td>the sum of the <var>deficit</var>s of its <var>k</var> outgoing edges + <var>count</var> + <var>stock</var></td>
+					</tr>
+				</table>
+				<p class="noindent">which is clearly true to start with; of its invariance we can convince ourselves via the following table of increments, in which the rows correspond to the quantities incremented and the columns to the events:</p>
+				<p class="noindent"></p>
+				<table width="95%">
+					<tr>
+						<td width="40%"></td>
+						<td width=10%>I</td>
+						<td width=10%>&nbsp;&nbsp;II</td>
+						<td width=10%>&nbsp;III</td>
+						<td width=10%>&nbsp;IV</td>
+					</tr>
+					<tr>
+						<td width="40%"><var>k</var> * (the size of its cornet)</td>
+						<td width="10%"><var>k</var></td>
+						<td width="10%">&nbsp;&nbsp;0</td>
+						<td width="10%">&nbsp;&nbsp;0</td>
+						<td width="10%">-<var>k</var></td>
+					</tr>
+					<tr>
+						<td width="40%">sum of the <var>deficit</var>s</td>
+						<td width="10%">0</td>
+						<td width="10%">+1</td>
+						<td width="10%">-1</td>
+						<td width="10%">&nbsp;&nbsp;0</td>
+					</tr>
+					<tr>
+						<td width="40%"><var>count</var></td>
+						<td width="10%"><var>k</var>-<var>x</var></td>
+						<td width="10%">&nbsp;&nbsp;0</td>
+						<td width="10%">+1</td>
+						<td width="10%">-<var>k</var></td>
+					</tr>
+					<tr>
+						<td width="40%"><var>stock</var></td>
+						<td width="10%"><var>x</var></td>
+						<td width="10%">-1</td>
+						<td width="10%">&nbsp;&nbsp;0</td>
+						<td width="10%">&nbsp;&nbsp;0</td>
+					</tr>
+				</table>
+				<p></p>
+				<table width="50%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td>
+							<div align="right">
+								with&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I:</div>
+						</td>
+						<td width="6%"></td>
+						<td>receiving a message</td>
+					</tr>
+					<tr>
+						<td>
+							<div align="right">
+								II:</div>
+						</td>
+						<td width="6%"></td>
+						<td>sending a message</td>
+					</tr>
+					<tr>
+						<td>
+							<div align="right">
+								III:</div>
+						</td>
+						<td width="6%"></td>
+						<td>receiving a signal</td>
+					</tr>
+					<tr>
+						<td>
+							<div align="right">
+								IV:</div>
+						</td>
+						<td width="6%"></td>
+						<td>sending a signal</td>
+					</tr>
+				</table>
+				<p class="noindent">and <var>deficit</var>s being non-negative and <var>k</var> &gt; 0, that <var>count</var> &#x2265; <var>k</var> implies that the cornet is non-empty. Hence, a <var>count</var> &#x2265; <var>k</var> is, all by itself, a sufficient condition for the transmission of a signal to a predecessor. Hence, when the diffusing computation proper has died out &#x2014;i.e. all stocks =0&#x2014;, each <var>count</var> will eventually become less than the <var>k</var> of its node. (If a <var>count</var> is &#x2265 <var>k</var>, it will be decreased by <var>k</var> and, because also a signal is sent, the <var>count</var> of one of its predecessors is increased by 1; this process, however, is bound to terminate, because each time the sum of all the <var>deficit</var>s is decreased by 1.) Let us call the state in which all <var>stock</var>s are zero and all <var>count</var>s less than the corresponding <var>k</var>'s &#x2014;i.e. the state in which neither messages, nor signals are anymore
+sent&#x2014; the "ultimate state".  From P2 we conclude that in the ultimate
+state &#x2014;because then we have <var>count</var> &lt; <var>k</var> and <var>stock</var> = 0&#x2014;</p>
+				<p class="noindent"></p>
+				<table width="100%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td valign="top" width="42%"><var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;k</var> * (the size of its cornet) &lt;</td>
+						<td>the sum of the deficits of its <var>k</var> outgoing edges + <var>k</var></td>
+					</tr>
+				</table>
+				<p class="noindent">
+				
+
+holds for reach node.  Because the right-hand side is at most equal to
+<br>
+				</p>
+				<p><var>k</var> * (the maximum <var>deficit</var> of its outgoing edges + 1)</p>
+				<p class="noindent">we can now, thanks to P1 and because <var>k</var>&gt;0, formulate our </p>
+				<p class="noindent"><u>Lemma</u>.  In the ultimate state each node has at least one
+outgoing edge with a deficit at least equal to the sum of the deficits
+of its incoming edges. </p>
+				<p> Up till now we have not made use of the fact that a node has a
+cornet: for the above a standard bag instead of a cornet would have
+been sufficient.  We shall now exploit the difference between a cornet
+and a bag. </p>
+				<p> We call a node without "oldest element", i.e. one with an empty
+cornet, a "neutral node".  Relation P1 tells us that the deficits of
+the incoming edges of a neutral node are all = 0, relation P2 tells us
+that the deficits of the outgoing edges of a neutral node, and its
+count and its stock are all = 0.  A node that is not neutral is called
+"engaged".  We can now formulate the invariant relation </p>
+				<p></p>
+				<table width="100%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td valign="top">P3:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td>the set of edges, each of which leads to an engaged node from its predecessors named by the oldest element of that engaged node, form a rooted tree &#x2014;the so-called "engagement tree"&#x2014; for which the
+environment acts as the root. </td>
+					</tr>
+				</table>
+				<p>Because only the gate can have the environment's name as its oldest element, the gate is the only possible descendant of the environment. Relation P3 is certainly true at the beginning, when the environment injects a message into the gate. It obviously remains true when node <var>B</var> becomes engaged: <var>B</var> does so by receiving a message from one of its predecessors, node <var>A</var> say, but at that moment, node <var>A</var> was certainly engaged, and the engagement tree is extended with a branch from <var>A</var> to <var>B</var>. Finally we have to show that, when <var>B</var> returns to neutral, <var>B</var> was a leaf of the engagement tree. As long as <var>B</var> remains engaged, its cornet contains an occurrence of <var>A</var>'s name as &quot;the oldest element&quot; and the deficit of the edge from <var>A</var> to <var>B</var> remains positive. When that deficit returns to zero, also the size of <var>B&nbsp;</var>'s cornet returns to zero; from P2 we conclude that at that moment all <var>B&nbsp;</var>'s outgoing edges have a deficit equal to zero. Because branches of the engagement tree correspond to edges with a positive deficit, none of <var>B&nbsp;</var>'s outgoing edges can correspond at that moment to a branch of the engagement tree, and, hence, <var>B</var> was at that moment a leaf.</p>
+				<p> Having thus established the existence of the engagement tree, we
+are, at last, ready to prove our two theorems. </p>
+				<p class="noindent"><u>Theorem 1</u>.  When the gate returns a signal to the environment,
+the diffusing computation has died out. </p>
+				<p class="noindent"><u>Proof</u>. When the gate returns a signal to the environment, it
+returns itself to the neutral state; as the gate was the environment's
+only descendant, the engagement tree is now empty, i.e. all nodes are
+in the neutral state. (End of proof.) </p>
+				<p class="noindent"><u>Theorem 2</u>. When the diffusing computation has died out, the
+gate will eventually return a signal to the environment. </p>
+				<p class="noindent"><u>Proof</u>. We have already shown that, when the diffusing computation has died out, the system will reach the ultimate state. Let in the ultimate state <var>y</var> be the maximum value of all the <var>deficit</var>s on the whole graph. Consider an edge with <var>deficit</var> <var>y</var>. Its target can have no other incoming edges with a positive deficit, for then the sum of the <var>deficit</var>s of its incoming edges would exceed <var>y</var> and, according to our Lemma, it would have an outgoing edge with a <var>deficit</var> exceeding <var>y</var>, something which is impossible because <var>y</var> has been defined to be the maximum <var>deficit</var>. According to our Lemma and on account of our definition of <var>y</var>, that target has at least one outgoing edge with a <var>deficit</var> = <var>y</var>. As a result edges with <var>deficit</var> = <var>y</var> from at least one cyclic path, such that none of the nodes on that path has other incoming edges with a positive <var>deficit</var>. Therefore, no node of such a cyclic path can be reached from the environment via branches of the engagement tree, which all have a positive <var>deficit</var>. Hence the nodes on such a cyclic path are all neutral, <var>y</var> therefore equals zero, therefore all nodes are neutral, and therefore the environment has received the signal from the gate when the ultimate state has been reached. (End of proof.) </p>
+				<p class="noindent"><u>Remark</u>. On account of the close similarity of the diffusing computation and deadlock, it seems likely that our solution can be adapted to the purpose of deadlock detection in networks. As we are more in favour of deadlock prevention, we did not pursue this possibility. (End of remark.) </p>
+				<p class="noindent"><u>Acknowledgements</u>. We are indebted to the members of The Tuesday Afternoon Club. In one session a particular diffusing computation and the problem of the detection of its termination were discussed; in its next session our first draft was subjected to a scrutiny that improved the final presentation. Finally we are indebted to Dr. P. M. Merlin from the Technion-Israel Institute of Technology who, in a lecture he gave at the University of Newcastle-upon-Tyne, inspired the problem.</p>
+				<p class="noindent"></p>
+			</div>
+			<div align="left">
+			<table border="0" cellpadding="0" cellspacing="2" width="459">
+				<tbody>
+<tr>
+<td valign="top" width="203">
+Plataanstraat 5<br>NL&#8211;4565 NUENEN<br>
+The Netherlands</td>
+<td valign="top" width="250">prof.dr.Edsger W.Dijkstra<br>
+Burroughs Research Fellow</td>
+</tr>
+						<tr>
+							<td valign="top" width="203"></td>
+							<td valign="top" width="250"></td>
+						</tr>
+						<tr>
+<td valign="top" width="203">
+Philips Research Laboratories<br>
+5656 AA EINDHOVEN<br>
+The Netherlands</td>
+<td valign="top" width="250">drs.C.S.Scholten<br>
+Scientific Adviser</td>
+</tr>
+
+			</tbody></table>
+		</div>
+			<hr>
+		<font size="-1">transcribed by Xiaozhou (Steve) Li<br>
+			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="94">Tue, 18 Mar 2008</csobj></font>
+	</body></html>

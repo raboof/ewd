@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<title>E.W.Dijkstra Archive: Only a matter of style? (EWD 1200)</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen" />
+		<link href="../formulas.css" rel="stylesheet" media="screen" />
+		<style type="text/css"> .nowrap  { white-space:  nowrap; } </style>
+	</head>
+	<body><div id="title"><h1>Only a matter of style?</h1></div>
+		<div id="frame">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd12xx/EWD1200.PDF"
+					 title="Link to the PDF version of EWD1200">EWD 1200</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>Only a matter of style?</u></p>
+				<p>For educational purposes we analyse the opening pages of an 11-page article that appeared in <i>The American Mathematical Monthly</i>, Volume 102 Number 2 / February 1995. We added line numbers in the right margin.</p>
+				<p class="noindent">line 4: Since in this article, squares don&rsquo;t get alternating colours, it could be argued that the term &ldquo;chessboard&rdquo; is misplaced.</p>
+				<p class="noindent">line 4: The introduction of the name &ldquo;<var>B</var>&rdquo; seems unnecessary: it is used &#x2014;in the combination &ldquo;the board <var>B</var>&rdquo;&#x2014; in the text for Figure 1 and in line 71; in both cases just &ldquo;the board&rdquo; would have done fine. In line 77 occurs the last use of <var>B</var>, viz. in &ldquo;<var>X</var>&nbsp;<span class="unicode">&#x2282;</span>&nbsp;<var>B</var>&rdquo;, which is dubious since <var>B</var> was a board and not a set; in line 77, I would have preferred &ldquo;Given a set <var>X</var> of cells&rdquo;.</p>
+				<p class="noindent">line 7/8: The first move, being a move like any other, does not deserve a separate description. The term &ldquo;step&rdquo; is redundant.</p>
+				<p class="noindent">line 8: Why not &ldquo;a move consists of&rdquo;?</p>
+				<p class="noindent">line 10/11: At this stage the italics are puzzling, since a move is possible if, for some <var>i</var>,&thinsp;<var>j</var>, cell (<var>i</var>,&thinsp;<var>j</var>) contains a pebble and cells (<var>i</var>+1,<var>&thinsp;j</var>) and (<var>i</var>,&thinsp;<var>j</var>+1) are empty.</p>
+				<p class="noindent">line 10: Twice the term &ldquo;positions&rdquo; for what everywhere else is called &ldquo;cells&rdquo;.</p>
+				<p class="noindent">line 12: Why not &ldquo;After <var>k</var> moves the board had <var>k</var>+1 pebbles on it&rdquo;?</p>
+				<p class="noindent">line 12/14: In the one sentence, <var>k</var> counts moves, in the other <var>k</var> counts pebbles. Since the prose does not indicate the scope of dummies, this double use of the same <var>k</var> is a little bit unforgivable.</p>
+				<p class="noindent">line 14: &ldquo;and we set <var>R</var> := <span class="unicode">&#x222A;</span><sub><var>k</var>&#x2265;1</sub> <var>R</var>(<var>k</var>)&rdquo;. We remark<br />
+					&#x2022; &nbsp; the use of the verb &ldquo;to set&rdquo; when defining (the set!) <var>R</var> can be considered unfortunate<br />
+					&#x2022; &nbsp; since &ldquo;<var>R</var>&rdquo; is not used on the next two pages, the name seems to be introduced too early<br />
+					&#x2022; &nbsp; the introduction of the name <var>R</var> seems unnecessary; in the rest of the paper I saw it used once in &ldquo;any <var>C</var>&nbsp;<span class="unicode">&#x2208;</span>&nbsp;<var>R</var>&rdquo;, where &ldquo;any reachable configuration&rdquo; would have done. (<em>Note</em>. In the context in question &#x2014;p&nbsp;116&#x2014; the reachable context can remain anonymous: the quoted occurrence of <var>C</var> is the <em>only</em> occurrence of the identifier <var>C</var> in that context. My conclusion is that the reachable configuration has been called <var>C</var> only in order to admit the boolean expression <var>C</var>&nbsp;<span class="unicode">&#x2208;</span>&nbsp;<var>R</var>.)<br />
+					&#x2022; &nbsp; the authors have chosen a special symbol for what is sometimes referred to as &ldquo;definitional equality&rdquo;; they are not the only ones to do so, but I would like to remark that I have never seen a proper justification of the convention (nor can I think of one)<br />
+					&#x2022; &nbsp; after the introduction of ALGOL60, the mathematical community has adopted the latter&rsquo;s assignment operator as symbol for &ldquo;definitional equality&rdquo;, thereby only adding to the confusion since assignment has nothing to do with equality (vide <var>x</var>:=<var>x</var>+1)<br />
+					&#x2022; &nbsp; identifier <var>R</var> has been given two meanings, in particular the type of <var>R</var> is no longer defined: the one <var>R</var> is of the type &ldquo;set of cells&rdquo;, the other <var>R</var> is of type &ldquo;natural number&rdquo; &#x2192; &ldquo;set of cells&rdquo;.
+				</p>
+				<p class="noindent">line 15: Why not &ldquo;the eight reachable configurations&rdquo;? The printed text raises the question of how a reachable configuration can be impossible.</p>
+				<p class="noindent">line 17: The printed text refers to an obligation for pebbles; had it been &ldquo;some cell having coordinates (<var>i</var>,&thinsp;<var>j</var>) with <var>i</var>+<var>j</var>&nbsp;&#x2264;&nbsp;3 must contain a pebble&rdquo;, we would have had an obligation for cells! It is better to avoid this spurious dilemma by deleting &ldquo;must&rdquo; &#x2014;a verb that is usually better avoided&#x2014; and to write &ldquo;some pebble occupies a cell&rdquo; or &ldquo;some cell contains a pebble&rdquo;.</p>
+				<p class="noindent">line 17/18: I think the authors meant &ldquo;This fact seems to have noted first by M.Kontsevich.&rdquo;</p>
+				<p class="noindent">line 19/22: We remark<br />
+					&#x2022; &nbsp; in a sentence of the structure &ldquo;If <var>L</var>(<var>k</var>) denotes the set {(<var>i</var>,&thinsp;<var>j</var>):&nbsp;<var>i</var>&nbsp;+&nbsp;<var>j</var>&nbsp;=&nbsp;<var>k</var>} then [.....].&rdquo; the scope of the convention stated in the antecedent ends at the end of the consequent; in this paper, the scope of <var>L</var>&rsquo;s definition extends through the whole paper!<br />
+					&#x2022; &nbsp; in line 20, <var>L</var>(1) <span class="unicode">&#x222A;</span> <var>L</var>(2) <span class="unicode">&#x222A;</span> <var>L</var>(3) should be <var>L</var>(0) <span class="unicode">&#x222A;</span> <var>L</var>(1) <span class="unicode">&#x222A;</span> <var>L</var>(2) <span class="unicode">&#x222A;</span> <var>L</var>(3); <var>L</var>(0) is also missing in Lemma 2.<br />
+					&#x2022; &nbsp; in line 21, delete &ldquo;must always&rdquo;: &ldquo;any reachable configuration has a pebble...&rdquo;. [Now I come to think of it, &ldquo;some cell&rdquo; is okay, for the cells are distinguished by their coordinates; &ldquo;some pebble&rdquo; is nonsense, for the pebbles are as indistinguishable as the electrons in the helium atom.]<br />
+				</p>
+				<p class="noindent">line 38, 45, 47 &amp; 49: add &ldquo;<var>L</var>(0) <span class="unicode">&#x222A;</span>&rdquo;.</p>
+				<p class="noindent">line 39: It is a pity that the weight of cell (<var>i</var>,&thinsp;<var>j</var>) has been given as <span class="nowrap">2<sup>&#x2212;(<var>i</var>+<var>j</var>)</sup></span>, instead of as (½)<sup><var>i</var>+<var>j</var></sup> or rather (½)<sup><var>i</var></sup>&nbsp;·&nbsp;(½)<sup><var>j</var></sup>, the latter being a special case of <var>p</var><sup><var>i</var></sup>·<var>q</var><sup><var>j</var></sup> with <var>p</var>+<var>q</var>=1. (The latter equality equivales the requirement that a move does not change the total weight covered.) The unproved statement about the boundaries &#x2014;line 53/55&#x2014; follows via (<var>p</var>,<var>&thinsp;q</var>)=(1,0) and (<var>p</var>,<var>&thinsp;q</var>)=(0,1)</p>
+				<p class="noindent">line 42: I would prefer &ldquo;the total weight of the cells covered&rdquo;; as printed, it might be misread as &ldquo;the weights of cells covered&rdquo;. I would also prefer &ldquo;covered&rdquo; replaced by &ldquo;occupied&rdquo;, the term used before.</p>
+				<p class="noindent">line 52, 56, 58, 60: add &ldquo;<var>L</var>(0) <span class="unicode">&#x222A;</span>&rdquo;.</p>
+				<p class="noindent">line 55: replace &ldquo;which&rdquo; by &ldquo;that&rdquo;. (That was easy.).</p>
+				<p class="noindent">line 55/59: These two sentences have baffled me for at least 15 minutes &#x2014;and this was when I really got cross with the authors&#x2014;. Forget about minor problems such as &ldquo;weight covered&rdquo; &#x2014;on top of this page [line 42], cells were the things being <span class="nowrap">covered&#x2014;;</span> what hit me was &ldquo;can&rdquo; in line 55 and &ldquo;these cells&rdquo; in line 58. Eventually I realized that the verb &ldquo;can&rdquo; hints at a hidden inequality: the conclusion that should have been drawn is that the total weight of the cells outside <var>L</var>(0) <span class="unicode">&#x222A;</span> <var>L</var>(1) <span class="unicode">&#x222A;</span> <var>L</var>(2) but with only one cell from each of the boundaries is <em>at most</em> 1. From line 58, &ldquo;must&rdquo; is again a candidate for deletion. Furthermore, authors should know that an obscure notion like &ldquo;these cells&rdquo; is not clarified by printing the preceding &ldquo;all&rdquo; in italics.</p>
+				<p class="noindent">line 67/71: &ldquo;It might be helpful&rdquo;: helpful for what purpose and how? &ldquo;in this model&rdquo;: in which model? &ldquo;the pebbles first move&rdquo;: what is the meaning of &ldquo;first&rdquo;? The text mentions no &ldquo;later&rdquo; or &ldquo;second&rdquo;; &ldquo;are identified in the obvious way&rdquo;: how obvious?</p>
+				<p class="noindent">line 74: delete &ldquo;in fact&rdquo;, as it does not contribute anything</p>
+				<p class="noindent">line 75: the introduction of the adjective &ldquo;standard&rdquo;, which is used nowhere else, serves no purpose.</p>
+				<p class="noindent">line 72: This sentence has no connection to what precedes it, and is closely connected to what follows it; this is not reflected in the vertical spacing, which obscures the logical structure of the text. Moreover, it would have been nice if &ldquo;the easy induction argument&rdquo; had been shown: a few colleagues and I spent 1½ hours on not finding it.</p>
+				<p class="noindent">line 75: The introduction of the adjective &ldquo;standard&rdquo; as technical term is superfluous, since the term is not used in the rest of the paper.</p>
+				<p class="noindent">line 77/81:
+					&#x2022; This paragraph displays the (not uncommon) shortcoming that its logical relation to the rest of the text requires the study of its contents. Is it going to demonstrate Lemma 3 or is it an introduction to Theorem 1? (At first reading, I assumed the former, and got puzzled.)<br />
+					&#x2022; &nbsp; It is elliptic: line 77 announces the definition of the set <var>M</var>(<var>X</var>), but lines 78 through 81 formally don&rsquo;t do so (they don&rsquo;t mention <var>M</var>(<var>X</var>)&nbsp;).<br />
+					&#x2022; &nbsp; It is very obscure. The notation <var>M</var>(<var>X</var>) strongly suggests that the paragraph should define a function of type: &ldquo;set of cells&rdquo; &#x2192; &ldquo;set of moves&rdquo;. The text, however, describes a process that seems to depend on an initial distribution of pebbles. But there is more ambiguity. Suppose there are 2 cells, one in <var>X</var> and one not in <var>X</var>, but both containing pebbles; we are then to remove pebbles either from the one or from the other: how do we choose? Also, how do we &ldquo;remove all but at most one of the pebbles&rdquo;? For me, &ldquo;at most one&rdquo; is in natural numbers &ldquo;zero or one&rdquo;, but the removal of &ldquo;all but zero or one of the pebbles&rdquo; is too nondeterministic to define a function. For the dependence on the initial pebble distribution I can suggest a fix, but not for the rest of the ambiguities.
+				</p>
+				<p>It is here that I gave up. When studying a paper I don&rsquo;t consider it my duty to conjecture what should have been written down.</p>
+				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+				<p>The above has been written for my students with the intention of helping them to improve the quality of their writings.</p>
+				<p style="margin-right: 2em;" align="right">Austin, 22 February 1995</p>
+				<p class="noindent">(Followed by EWD1200-8, 9, 10)</p>
+
+				<p class="noindent">
+					prof.dr. Edsger W.Dijkstra<br />
+					Department of Computer Sciences<br />
+					The University of Texas at Austin<br />
+					Austin, TX 78712-1188<br />
+					USA
+				</p>
+				<p>&nbsp;</p>
+
+				<hr />
+
+</div>
+</div>
+
+<div style="background-color: #f8f8f8; padding: 0.5em; float: left;">
+
+				<p class="noindent"><br />[<i>The American Mathematical Monthly</i>, Vol.102 No.2 / February 1995, pages 113-115]</p>
+
+
+
+
+
+				<p>&nbsp;</p>
+				<table cellpadding ="0" cellspacing="0" border="0">
+					<tr>
+						<td align="center" style="font-size: 120%;">
+							<hr style="height: 2px;"/>
+							<b><span style="font-size: 120%;">Pebbling a Chessboard</span></b>
+							<hr />
+							<b>Fan Chung, Ron Graham, John Morrison,<br />
+							and Andrew Odlyzko</b>
+							<hr style="height: 2px;"/>
+							<br />
+							<br />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>1. INTRODUCTION.</b> The following puzzle has attracted some attention recently.<br />
+							We first learned of it through Martin Gardner [<b>6</b>]. A version of it appeared in<br />
+							Omni magazine in 1993 [<b>11</b>]. However, it was proposed over 10 years ago by<br />
+							Kontsevich [<b>9</b>], and a partial analysis of it was published shortly thereafter by<br />
+							Khodulev [<b>8</b>]. We begin with an infinite &ldquo;chessboard&rdquo; <var>B</var> covering the first quad-
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">0</td>
+					</tr>
+					<tr>
+						<td>
+							rant. The cells of the board are labelled by integer coordinates (<var>i</var>,&thinsp;<var>j</var>) with <var>i</var>,<var>&thinsp;j</var> &#x2265; 0.<br />
+							Initially, a single &ldquo;pebble&rdquo; is located in cell (0,0) (the lower left corner; see Figure<br />
+							1). The first step or &ldquo;move&rdquo; consists of replacing this pebble by two pebbles,<br />
+							located at cells (1,0) and (0,1), respectively. In general, a move will consist of<br />
+							removing some pebble, say in cell (<var>i</var>,&thinsp;<var>j</var>), and replacing <i>two</i> pebbles on the board, in
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">5</td>
+					</tr>
+					<tr>
+						<td>
+							positions (<var>i</var> + 1,&thinsp;<var>j</var>) and (<var>i</var>,<var>&thinsp;j</var> + 1), <i>provided each of these positions is not already<br />
+							occupied.</i>
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">10</td>
+					</tr>
+
+					<tr>
+						<td align="center">
+							<img src="EWD1200_fig1.png" alt="EWD1200 figure 1" title="EWD1200 figure 1" /><br />&nbsp;
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							&nbsp; &nbsp; After <var>k</var> steps the board will have <var>k</var> + 1 pebbles on it. We call such configura-<br />
+							tions of pebbles <i>reachable configurations</i>. We will denote by <var>R</var>(<var>k</var>) the set of<br />
+							reachable configurations with <var>k</var> pebbles, and we set <var>R</var> := <span class="unicode">&#x222A;</span><sub><var>k</var>&#x2265;1</sub> <var>R</var>(<var>k</var>). In Figure 2,
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							we show the eight possible reachable configurations with at most four pebbles.<br />
+							&nbsp; &nbsp; A little experimentation convinces one that in any reachable configuration,<br />
+							some pebble must occupy a cell having coordinates (<var>i</var>,<var>&thinsp;j</var>) with <var>i</var> + <var>j</var> &#x2264; 3. This fact<br />
+							first seems to have been noted by M. Kontsevich [<b>9</b>]. We give the &ldquo;book&rdquo; proof of<br />
+							this in the next section. If <var>L</var>(<var>k</var>) denotes the set (or &ldquo;level&rdquo;) {(<var>i</var>,<var>&thinsp;j</var>): <var>i</var> + <var>j</var> = <var>k</var>} then
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">15</td>
+					</tr>
+
+					<tr>
+						<td align="center">
+							<img src="EWD1200_fig2.png" alt="EWD1200 figure 2" title="EWD1200 figure 2" style="padding-top: 0.5em;"/><br />&nbsp;
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							we can express the above assertion by saying that <var>L</var>(1) <span class="unicode">&#x222A;</span> <var>L</var>(2) <span class="unicode">&#x222A;</span> <var>L</var>(3) is <i>unavoid-<br />
+							able</i>, i.e. any reachable configuration must always have some pebble in a cell in <br />
+							<var>L</var>(1) <span class="unicode">&#x222A;</span> <var>L</var>(2) <span class="unicode">&#x222A;</span> <var>L</var>(3). In general, an unavoidable set is one which intersects every<br />
+							reachable configuration. Of course if &nbsp;<var>S</var>&nbsp; is unavoidable and &nbsp;<var>T</var> <span class="unicode">&#x2287;</span> <var>S</var>&nbsp; then &nbsp;<var>T</var>&nbsp; is<br />
+							unavoidable. Let us call <var>S</var> a <i>minimal unavoidable</i> set if <var>S</var> is unavoidable but no
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">20</td>
+					</tr>
+
+					<tr>
+						<td>
+							proper subset of <var>S</var> is, and let <var>M</var>(<var>k</var>) denote the family of minimal unavoidable sets<br />
+							with <var>k</var> cells.<br />
+							&nbsp; &nbsp; In this note we will characterize the elements of <var>M</var>(<var>k</var>) and give a polynomial<br />
+							time algorithm for recognizing such elements. Many of these results were first<br />
+							proved by Khodulev [<b>9</b>], and we present them here for completeness, since the
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">25</td>
+					</tr>
+
+					<tr>
+						<td>
+							paper [<b>8</b>] is not widely available and contains only sketches of proofs. We will also<br />
+							determine the asymptotic growth rates of <var>r</var>(<var>k</var>) := |<var>R</var>(<var>k</var>)| and <var>m</var>(<var>k</var>) := |<var>M</var>(<var>k</var>)|, the<br />
+							sizes of <var>R</var>(<var>k</var>) and <var>M</var>(<var>k</var>), respectively, as <var>k</var> &#x2192; &#x221E;. (These results are all new.) It<br />
+							turns out that the analysis of <var>r</var>(<var>k</var>) and <var>m</var>(<var>k</var>) leads to some interesting problems in<br />
+							asymptotic enumeration.
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">30</td>
+					</tr>
+
+					<tr>
+						<td>
+							&nbsp; &nbsp; Further results on this problem, including generalizations to arbitrary partially<br />
+							ordered sets, have been obtained by Eriksson [<b>4</b>].<br />
+							<br />
+							<b>2. PROPERTIES OF UNAVOIDABLE SETS</b><br />
+							<br />
+							<b>Lemma 1.</b> [<b>9</b>] <i>The set L</i>(1) <span class="unicode">&#x222A;</span> <i>L</i>(2) <span class="unicode">&#x222A;</span> <i>L</i>(3) <i>of all </i>(<i>i</i>,<i>&thinsp;j</i>) <i>with i + j &#x2264; 3 is unavoidable.</i><br />
+							<i>Proof:</i> To each cell (<var>i</var>,<var>&thinsp;j</var>) assign the <i>weight</i> 2<sup>&#x2212;(<var>i</var>+<var>j</var>)</sup>. Observe that:
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">35</td>
+					</tr>
+
+					<tr>
+						<td>
+							<table cellpadding="0" cellspacing="0" border="0">
+								<tr>
+									<td style="width: 3em;" align="right" valign="top">(i)&nbsp;</td>
+									<td>
+										The total weight covered by pebbles in any reachable configuration is 1.<br />
+										This is so since the starting cell (0,) has weight 1, and a move does not<br />
+										change the weight of cells covered, i.e.,
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td align="center">
+										2<sup>&#x2212;(<var>i</var>+<var>j</var>)</sup> = 2<sup>&#x2212;((<var>i</var>+1)+<var>j</var>)</sup> + 2<sup>&#x2212;(<var>i</var>+(<var>j</var>+1))</sup>.
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 3em;" align="right">(ii)&nbsp;</td>
+									<td>
+										The total weight of <i>all</i> cells in the board is <span class="unicode">&#x2211;</span><sub><var>i</var>, <var>j</var> &#x2265; 0</sub> 2<sup>&#x2212;(<var>i</var>+<var>j</var>)</sup> = 4.
+									</td>
+								</tr>
+							</table>
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">40</td>
+					</tr>
+
+					<tr>
+						<td>
+							<table cellpadding="0" cellspacing="0" border="0">
+								<tr>
+									<td style="width: 3em; vertical-align: top; padding-top: 0.15em;" align="right">(iii)&nbsp;</td>
+									<td>
+										The total weight of <var>L</var>(1) <span class="unicode">&#x222A;</span> <var>L</var>(2) <span class="unicode">&#x222A;</span> <var>L</var>(3) is 13/4. Thus, the weight of the<br />
+										<i>complement</i> of <var>L</var>(3) is only 3/4, and since that is less than 1, cannot<br />
+										contain all the pebbles of a reachable configuration. Thus <var>L</var>(1) <span class="unicode">&#x222A;</span> <var>L</var>(2) <span class="unicode">&#x222A;</span><br />
+										<var>L</var>(3) is unavoidable.<span style="float: right;" class="unicode">&#x220E;</span>
+									</td>
+								</tr>
+							</table>
+							&nbsp; &nbsp; However, <var>L</var>(1) <span class="unicode">&#x222A;</span> <var>L</var>(2) <span class="unicode">&#x222A;</span> <var>L</var>(3) is not a minimal unavoidable set. The following
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">45</td>
+					</tr>
+
+					<tr>
+						<td>
+							result was proved by Khodulev [<b>8</b>]. It was independently conjectured by Martin<br />
+							Gardner [<b>6</b>]. The proof given here is due to Harold Reiter [<b>14</b>].<br />
+							<br />
+							<b>Lemma 2.</b> <var>L</var>(1) <span class="unicode">&#x222A;</span> <var>L</var>(2) <i>is unavoidable</i>.<br />
+							<br />
+							<i>Proof:</i> As before, assign the weight 2<sup>&#x2212;(<var>i</var>+<var>j</var>)</sup> to the cell (<var>i</var>,&thinsp;<var>j</var>). Observe now that any<br />
+							reachable configuration &nbsp;C&nbsp; has exactly one pebble on each of the boundaries<br />
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">50</td>
+					</tr>
+					<tr>
+						<td>
+							{(<var>i</var>,0): <var>i</var> &#x2265; 0} and {(0,&thinsp;<var>j</var>): <var>j</var> &#x2265; 0}. Thus, the total weight which <var>C</var> can cover outside<br />
+							of <var>L</var>(1) <span class="unicode">&#x222A;</span> <var>L</var>(2) is<br />
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">55</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<img src="EWD1200_fig3.png" alt="EWD1200 figure 3" title="EWD1200 figure 3" style="padding-top: 0.5em;"/><br />&nbsp;
+						</td>
+					</tr>
+					<tr>
+						<td>
+							This implies that if <var>C</var> is to avoid <var>L</var>(1) <span class="unicode">&#x222A;</span> <var>L</var>(2), it must cover <i>all</i> these cells, which is<br />
+							impossible since <var>C</var> is finite.<span style="float: right;" class="unicode">&#x220E; &nbsp; &nbsp;</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							&nbsp; &nbsp; However, <var>L</var>(1) <span class="unicode">&#x222A;</span> <var>L</var>(2) is not minimal either, as we will see later.<br />
+							&nbsp; &nbsp; We should observe that for any reachable configuration <var>C</var>, the <i>set</i> of moves<br />
+							needed for reaching <var>C</var> is unique. Only the <i>order</i> in which these moves are<br />
+							executed can vary in the different ways of reaching <var>C</var>.<br />
+							&nbsp; &nbsp; Suppose now that we relax the rules for moves by allowing the replacement of a
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">60</td>
+					</tr>
+					<tr>
+						<td>
+							pebble at (<var>i</var>,&thinsp;<var>j</var>) by pebbles at (<var>i</var> + 1,&thinsp;<var>j</var>) and (<var>i</var>,&thinsp;<var>j</var> + 1) even when these positions<br />
+							might already be occupied by pebbles. In other words, we allow the accumulation<br />
+							of multiple pebbles in cells during the process of reaching <var>C</var>. It might be helpful<br />
+							for this model to imagine that the pebbles first move onto the vertices of an<br />
+							infinite binary tree rooted at (0,0). Then the 2<sup><var>k</var></sup> vertices in the <var>k</var>th level of the
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">65</td>
+					</tr>
+					<tr>
+						<td>
+							tree are identified in the obvious way with the <var>k</var> + 1 cells in the <var>k</var>th level <var>L</var>(<var>k</var>) :=<br />
+							{(<var>i</var>,<var>j</var>): <var>i</var> + <var>j</var> = <var>k</var>} of the board <var>B</var>.<br />
+							&nbsp; &nbsp; An easy induction argument now establishes the following result<br />
+							<br />
+							<b>Lemma 3.</b> <i>If a configuration of pebbles (with at most one pebble per cell) can be<br />
+							reached by moves which </i><b>allow</b><i> accumulations of pebbles in cells, then in fact it can</i>
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">70</td>
+					</tr>
+					<tr>
+						<td>
+							<i>also be reached by the &ldquo;standard&rdquo; moves, i.e., those which do </i><b>not allow</b><i> accumu-<br />
+							lation.</i><br />
+							<br />
+							&nbsp; &nbsp; Given a set <var>X</var> <span class="unicode">&#x2282;</span> <var>B</var>, we define the set <var>M</var>(<var>X</var>) of moves recursively as follows.<br />
+							Starting at level 0 and proceeding one level at a time by increasing levels, perform<br />
+							the moves required either to remove <i>all</i> pebbles from a cell in <var>X</var>, or to remove all
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">75</td>
+					</tr>
+					<tr>
+						<td>
+							but at most one of the pebbles from a cell not in <var>X</var>. Continue through the last<br />
+							level <var>L</var>(<var>h</var>(<var>X</var>)) containing a cell of <var>X</var>.<br />
+							<br />
+							<b>Theorem 1.</b> <var>X</var> <span class="unicode">&#x2282;</span> <var>B</var> <i>is unavoidable if and only if after executing the moves in</i> <var>M</var>(<var>X</var>),<br />
+							<i>some cell contains at least 3 pebbles.</i><br />
+						</td>
+						<td style="padding-left: 1em; vertical-align: top;">80</td>
+					</tr>
+				</table>
+
+</div>
+
+				<p align="center" style="clear: both;"><br />(End of EWD1200)</p>
+
+		<hr />
+		<div id="footer">
+         transcribed by Corrado Cantelmi<br />
+          revised 
+          <!-- #BeginDate format:En2 -->26-Dec-2011<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

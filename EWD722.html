@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: A book review for the IBM Systems Journal. (EWD 722)</title>
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>A book review for the IBM Systems Journal.</h1></div>
+		<div align="right">
+			&nbsp;&nbsp;<a href="https://www.cs.utexas.edu/~EWD/ewd07xx/EWD722.PDF" target="_blank">EWD 722</a></div>
+		<div align="left">
+			<p><u>A book review for the IBM Systems Journal.</u></p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>Structured Programming, Theory and Practice</i>, R.C.Linger, H.D.Mills, and B.I.Witt, Addison-Wesley Publishing Company, Inc., Reading, MA, 1979. 402pp. (ISDN 0&#150;201&#150;14461 ABCDEFGHIJ-HA-79, $18.95)</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Although published by Addison-Wesley, this book should be regarded as an IBM product, rather than a general textbook or a scientific monograph. According to its title page, all its authors are from IBM Corporation, and it appeared in &quot;The Systems Programming Series&quot;, which is not only sponsored by IBM but, according to page IV of the book, has an &quot;IBM Editorial Board&quot;. (Its members have been listed in alphabetical order, with the exception of Mr. Gruener from Addison-Wesley, who is mentioned last!) Addison-Wesley did a very neat job of binding and printing, with the exception of eight pages at the end of section 7.5 which are (reduced) facsimile of (poor) lineprinter output.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The book has been divided into seven chapters with the following titles: 1. Precision Programming, 2. Elements of Logical Expression, 3. Elements of Program Expression, 4. Structured Programs, 5. Reading Structured Programs, 6. The Correctness of Structured Programs, and 7. Writing Structured Programs. I found the majority of them quite illuminating and/or instructive.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chapter 1 (14 pp.) sets the scene quite nicely and contains many remarks that deserve to be quoted, such as:</p>
+			<blockquote>
+				<p>There is a simple reason why you should commit yourself to writing programs that are free from errors from the very start. It is that you will never be able to establish that the program has no errors in it by testing. Since there is no way to be certain that you have found the last error, your real opportunity to gain confidence in a program is to never introduce the first error. [Actually, the quotation ends with &quot;to never find the first error&quot;, but that seemed one of the very rare misprints I detected.]</p>
+			</blockquote>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The authors' healthy attitude regarding the proper role of mathematical proofs is shown by:</p>
+			<blockquote>
+				<p>&nbsp;A mathematical proof is an agenda for a repeatable experiment, just as in a physics or chemical laboratory. But the main subject in each experiment is another person instead of physical objects or material. The intended result of the experimenter is a subjective conviction on the part of the other person that a given logical hypothesis leads to a given logical conclusion. [...] As noted, any human fallibility may be present because reasoning is a human activity; that is, an agreement that a proof is correct and the actual correctness of the proof are two quite independent things.</p>
+			</blockquote>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chapter 2 (30 pp.) &#x2014;ending with a one-page bibliography of &quot;Related Reading&quot;&#x2014; introduces the necessary concepts and notations from mathematics in general, while Chapter 3 (46 pp.) does the same for programs in particular.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chapter 4 (56 pp.) pays to control flow an amount of attention which I thought a bit too much until I read Chapter 5 (66 pp.: you see, the chapters are getting longer and longer!), which ends with a 25-page &quot;Case Study in Program Reading&quot;, one of the highlights of the book! The authors have undertaken the horrendous task of unravelling a contorted PL/I program &#x2014;taken from the open literature!&#x2014;, introducing this job with the very true words: &quot;as it stands, it is a formidable object for human understanding!&quot;. This case study is impressive in more than one way: not only does it drive home the message how terribly (and needlessly) contorted programs can be, but it also illustrates the power of the methods derived in the preceding chapter.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chapter 6 (84 pp.: yes, again longer!) appealed less to me. As the authors remark themselves (p.237): &quot;Even though the above derivation is a little tedious, [...]&quot;. Being used to what I am used to, I found the qualification &quot;a little tedious&quot; applicable to most of that chapter, as only a modest amount of mathematical sophistication could have shortened many an argument. Under the assumption that I was not representative of their target audience I decided not to blame the authors.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Chapter 7 (94 pp.) is largely devoted to the systematic development of three programs, and the authors should be recommended on their choice of problems, as the three are very different from each other.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; One detailed comment on line 6 of the program on page 176, where, in the functional description of the succeeding program fragment, they have written</p>
+			<blockquote>
+				<p>(&#x2203;<i>k</i> (<i>key</i> = <i>table</i>(<i>k</i>), <i>lo</i> &#x2264; <i>k</i> &#x2264; <i>hi</i>) &#x2192; <i>i </i>:=<i>k</i> [...]) .</p>
+			</blockquote>
+			<p>The truth of the boolean expression to the left of the arrow does, however, not define the value of <i>k</i> that is used at the right-hand side of the arrow: at the left-hand side <i>k</i> is a bound variable.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; One general comment. The authors have clearly tried to reach as large an audience as possible, a goal that evidently implied for them that they could permit themselves only a modest departure from the PL/I subculture. In a more radical attitude a shorter (and simpler) book could have reached their target audience. In short: for an IBM product, the book is excellent.</p>
+		</div>
+		<div align="center">
+			<table width="212" border="0" cellspacing="2" cellpadding="0">
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td>Edsger W.Dijkstra<br>
+						The Netherlands</td>
+				</tr>
+			</table>
+		</div>
+		<hr>
+		<font size="-1">transcribed by Tristram Brelstaff<br>
+			revised <csobj format="MedDate" h="12" region="15" t="DateTime" w="97">Thu, 14 Jul 2005</csobj></font>
+	</body>
+
+</html>

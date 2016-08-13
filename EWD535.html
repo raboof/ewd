@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: An answer to Jack Mazola (EWD 535)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>An answer to Jack Mazola</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd05xx/EWD535.PDF"
+           title="Link to the PDF version of EWD535">EWD535</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+           <p class="noindent">24th November 1975  
+  <p class=noindent><b>An answer to Jack Mazola.</b>
+<p>Thank you for your letter of 7 Nov. 1975. I was very pleased to read
+that my writings had inspired John McClintock and you to do better than
+your (or McElintock&rsquo;s) first effort. I had &mdash;and I offer my apologies if
+this is a great disappointment&mdash; difficulties in understanding your invariants,
+because they are mixed expressions in two different languages: on the 
+left-hand side of the implication we have boolean expression which at any moment
+in time are defined by the current state of the aggregate, at the right-hand
+side of the implication are phrases about past and future, and not all 
+sentences &mdash;such as &ldquo;if he ever restarts&rdquo;&mdash; were too clear to me. The only thing
+left for me to do was to try to convince myself that everything was OK in
+my own (old-fashioned! see below) way. The following is not a description
+of how I would develop the program ab initio: I cannot fake that, I have
+been &ldquo;spoiled&rdquo; by studying your solution and, as a result, have lost my
+virginity. The first thing I did was to study the following program (here
+&ldquo;x&rdquo; is a local variable of each machine)
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+      <b>do</b> <b>non</b> initialized &rarr;                    </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+            done[me]:= false;                                    </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+            x:= 1; <b>do</b> done[x] &rarr; x:= x + 1 <b>od</b>; </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+            <b>if</b> x = me &rarr; initialized:= true           </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td>
+             &#x25af; x &lt; me &rarr; skip                      </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+            <b>fi</b>;                                           </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+            done[me]:= true                                      </td> </tr> <tr> <td></td> <td colspan = 3>
+      <b>od</b>                                                  </td> </tr>
+</table>
+and asked myself the question whether &ldquo;initialized&rdquo; will become true, when
+a number of the machines is started. The answer is &ldquo;Yes&rdquo;, provided the
+machines that re not started have their done = true; the argument is that
+of the started machines the one with the lowest number is certain to end
+its inner loop with x = me and will therefore perform &ldquo;initialize:= true&rdquo;.
+Note that for this argument the initial value of done for the machines that
+are started, is irrelevant.
+<p>The next question is: can we make of &ldquo;initialize:= true&rdquo; mutually
+exclusive actions &mdash;so-called &ldquo;critical sections&rdquo;. So I tried to do it by
+inserting your waiter (note that in your letter, page 4, is a misprint, it
+should be
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 5>
+      &ldquo;<b>do</b> X &le; HI &rarr; <b>do</b> <b>non</b> DONE[X] &rarr; SKIP <b>od</b>&rdsquo; ) </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 4>&nbsp;
+                                                                                                   </td> </tr> <tr> <td></td> <td colspan = 5>
+      <b>do</b> <b>non</b> initialized                                                               </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+            done[me]:= false;                                                                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 3>
+            x:= 1; <b>do</b> done[x] &rarr; x:= x + 1 <b>od</b>;                                    </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 3>
+            <b>if</b> x = me &rarr; <b>do</b> x &lt; N &rarr; x:= x + 1;                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                        <b>do</b> <b>non</b> done[x] &rarr; skip <b>od</b>                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+                  <b>od</b>;                                                                        </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                  initialized:= true                                                                </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 3>
+            &#x25af; x &lt; me &rarr; skip                                                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 3>
+            <b>fi</b>;                                                                              </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 3>
+            done[me]:= true                                                                         </td> </tr> <tr> <td></td> <td colspan = 5>
+      <b>od</b>                                                                                     </td> </tr>
+</table>
+Assume that at moment t machines i and j (i &ne; j) are both
+ready to perform &ldquo;initialized:= true&rdquo;. Then we have at moment t:
+done[i] = done[j] = false.
+Let ti be the last moment &lt; t such that done[i] was true;
+let tj be the last moment &lt; t such that done[j] was true.
+From the fact that machine i has reached the statement &ldquo;initialized:= true&rdquo;
+we can conclude that done[j] = true has been observed while done[i] was
+already = false , hence ti &lt; tj . Similarly we find that tj &lt; ti , and
+this gives us the required contradiction. Mutual exclusion is guaranteed.
+The next question is: can we have introduced deadlock by our addition?
+We cannot have a number of processes mutually blocking each other with their
+done = false in that added waiting cycle, because the one with the largest
+number of the set does not inspect the other values done from the set. But
+machine i may be kept in that inner cycle by a machine j (j &gt; i) happily
+rotating in the outer cycle, but with such a speed that machine i always
+misses the rare moments that done[j] = true . Therefore the assignment
+done[me]: true is followed by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+      x:= 1;                                                                         </td> </tr> <tr> <td></td> <td colspan = 2>
+      <b>do</b> x &lt; me &rarr; <b>do</b> <b>non</b> done[x] &rarr; skip <b>od</b>; </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+            x:= x + 1                                                                </td> </tr> <tr> <td></td> <td colspan = 2>
+      <b>od</b>                                                                      </td> </tr>
+</table>
+Because of the arguments given by you this does not introduce the danger
+of deadlock in the last waiting cycle.
+The last modification is to ensure that initialization now occurs
+only once; because &ldquo;initialized:= true&rdquo; has been guaranteed to be executed
+in a critical section, it suffices obviously to replace it by
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+<b>do</b> <b>non</b> initialized &rarr; initialize; initialized:= true <b>od</b></td><td align=right>(1)
+</td>  </tr>  </table>
+and now I have arrived at a program that differs only marginally from your
+solution, which I thought a very beautiful one.
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>There is a second way in which I am no virgin with respect to this
+problem: it is very similar to the critical section problem that I solved
+in the Sep.1965 issue of the Comm.ACM., and naturally, the old patterns of
+reasoning come again floating in my consciousness. To prove things about
+such processes that may interfere with each other in such a fine-grained
+fashion is a risky business, as I have learned the hard way.(In the meantime
+you should have received EWD520, our next, and hopefully last, version of
+the on-the-fly garbage collection.) The person with the most extensive
+experience of proving things about such aggregates of programs is David
+Gries. One of the more valuable tricks is to associate &ldquo;ghost variables&rdquo;
+to which the programs only assign values. They &mdash;i.e. their values&mdash; can
+then be used to express things about the progress of the various programs,
+they provide means for expressing formally and without ambiguity such things
+as mutual exclusion. In this example, mutual exclusion is clearly needed
+if a precaution like (1) is to ensure that initialization will only be
+performed <b>once</b>. But even then, to formalize the ti &lt; tj and tj &lt; ti
+argument of the previous page is no fun; as yet I have seen no more formal,
+yet &ldquo;decent&rdquo; argument. (A challenge when I have nothing else to do!) For
+practical reasons I would regard the argument on the previous page convincing
+enough. As yet the formal proofs tend to become hairy....
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>Finally I would like to congratulate you with your decision not to be
+content with the first solution and it justification. The experience that
+the next effort gives something much nicer is a very common one, but it is
+only believed by those who have had the experience themselves!
+<center>Yours ever,</center>
+<br><br><table width=100%><tr><td valign=top width=60%>
+Burroughs</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+Plataanstraat 5</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+NUENEN - 4565, The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-11-28<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

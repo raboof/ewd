@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: A position paper on Software Reliability (EWD 627)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>A position paper on Software Reliability</h1></div>
+    <div id="frame">
+			<div id="header">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD627.PDF" target="_blank"" 
+           title="Link to the PDF version of EWD627">EWD627</a>
+      </div>
+      <div id="content">
+		
+					<div align="left">
+						<p></p>
+					</div>
+					<p class="noindent"><u>A position paper on Software Reliability</u></p>
+				<div align="left">
+					<p>The term &ldquo;software reliability&rdquo; does <em>not</em> occur in my active vocabulary &#x2014;by which I mean that I almost never use it&#x2014; , although I think that it occurs in my passive vocabulary &#x2014;by which I mean that I believe to know what people mean by it when they use it&#x2014; . The only conclusion that I can draw from this observation, is that &ldquo;software reliability&rdquo; as I understand it is in my opinion <em>not</em> a very fruitful notion.</p>
+					<p>I call a tool &ldquo;reliable&rdquo; when it is safe to use by virtue of the fact that, when used, it acts as intended, or, more precisely, reacts upon our input as intended. With this meaning of &ldquo;reliability&rdquo; I assume all of us to agree that &ldquo;reliability&rdquo; is a great, even indispensable virtue of all tools worth building. Consequently, &ldquo;software reliability&rdquo; would certainly be a notion, important enough to devote a panel discussion to.</p>
+					<p>But is the notion fruitful? We can try to decide by dissecting it, by analysing what we can conclude when a tool is not reliable.</p>
+					<p>When we try to do that, we come to the conclusion that there are two vastly different kinds of tools. On the one hand we have tools like a hammer or even a bicycle, tools that we learn to use without explicit knowledge of their properties: being able to solve the differential equations of motion is <em>not</em> a prerequisite for the ability to use a hammer or to ride a bicycle. We learn to use those tools by the experience of using them. At the other end of the spectrum we have tools like mathematical theorems. Although their virtuosic use again requires experience in using them, this time &ldquo;just experience&rdquo; is insufficient: the safe usage of a theorem requires explicit knowledge of it, we need to know precisely under which conditions we are allowed to draw which conclusion, for that is <em>all</em> the theorem is about!</p>
+					<p>The tools at both ends of the spectrum are so radically different that there is little point in trying to abstract from that difference. Hence we <em>have</em> to make up our mind: is a piece of software more like a hammer or more like a mathematical theorem? For various reasons I am convinced that it is more appropriate to consider a piece of software, in its capacity of a tool, like a mathematical theorem than like a hammer.</p>
+					<p>Over the intended range of its applications the hammer&rsquo;s reactions are a continuous function of its inputs; besides that, in his choice of inputs the user of a hammer has very few degrees of freedom. These two circumstances make it possible to learn subconsciously, i.e. from experience, how to use a hammer.</p>
+					<p>In the case of a typical program, where the input typically consists of character sequences, it is exceptional when the intended reaction is anything like a continuous function of inputs, and the tremendous processing power of machines has increased the number of degrees of freedom in the possible inputs in the typical application considerably. As a consequence I don&rsquo;t regard the kind of tool as embodied by a computer program as one that, like a hammer or a bicycle, one can learn to use by the experience of using it. A computer program, considered as a tool, is a very different kind of tool indeed!</p>
+					<p>A computer program is a tool that one can use by virtue of the knowledge of its explicitly stated properties. Those stated properties are known as &ldquo;its functional specification&rdquo; or &ldquo;its specification&rdquo; for short. The specification specifies, in one way or another, <em>what</em> the execution of the program achieves, without fixing <em>how</em> this desired net effect is being achieved. In this sense the specifications have been described as &ldquo;logical firewall between user and implementor&rdquo;: it is a contract between the program composer and the program user. The program user is in his right as long as his use of the program is justified by its specifications, the program designer is not to blame as long as correct executions of his program meet the specifications.</p>
+					<p>This indispensable division of responsibilities, however, reveals why &ldquo;software reliability&rdquo; is too crude a term to be of much usefulness. For its reveals two very different ways in which a program can manifest itself as an unsafe tool to use.</p>
+					<p>Firstly, it may be that the specifications are to blame. The specifications may be poorly stated &#x2014;in which case the program user can be written down as a fool, for no one should build his application on quicksand&#x2014; or the specifications, although quite clear and unambiguous, describe a tool that is either clumsy to use in general or just hardly adequate for his task &#x2014;in the second case the user is probably regarded best as a victim of circumstances&#x2014; .</p>
+					<p>Secondly, the specifications may be perfect, but even correct executions of the program may fail to meet them &#x2014;and in this case certainly the program designer has to be blamed&#x2014; .</p>
+					<p>(In the case of poorly stated specifications, both program designer and program user share the blame for any disastrous application: both of them should have realized the ambiguity of the specifications)</p>
+					<p>We can carry the analogy between program user and program designer one stage further: in the same way as in which the specifications allow the user to rely upon the program regardless of <em>how</em> the executions achieve the specified results, the specifications allow the program designer to design a program meeting them, regardless of <em>how</em>, that is in which interpretation and in which environment, his program is going to be used. But here the symmetry between program user and program designer ends dramatically.</p>
+					<p>As soon as in the specifications the inputs and the outputs are treated as values that are divested from the interpretation given to them in the intended environment of program usage, the specifications are indeed &ldquo;a logical firewall&rdquo;, and the question whether or not the program meets the specification can, in principle at least, be settled by mathematical means. The rigorous separation of responsibilities isolated for the program designer a task that is within the realm of applicability of scientific methods.</p>
+					<p>At the other side of the interface provided by the specifications, the program&rsquo;s user can never justify the program&rsquo;s usage any better than he understands the environment in which he employs the program. As the vast majority of those environments is miles away from being formally defined, the question whether or not a program has been used adequately or not is nearly always a question that is too vague to be amenable to scientific treatment.</p>
+					<p>And now we see, why &ldquo;software reliability&rdquo; is a fruitless notion. Thanks to the existence of the interface as should be provided by the functional specification it covers two completely different questions: the formalised question whether a program is <em>correct</em>, i.e whether it meets its specifications, and the unformalised question whether a tool meeting those specifications is in such-and-such unformalised and ill-understood environment a <em>pleasant</em> tool to use. Correctness is a <em>scientific</em> issue, pleasantness is a <em>non-scientific</em> one, and it&rsquo;s therefore confusing to try to deal with both of them in a single sweep. And that is why the term &ldquo;software reliability&rdquo; has been banned from my active vocabulary.</p>
+					<p>Finally, for those who haven&rsquo;t observed it. I would like to draw attention to the fact that I have refused to call the one issue more important than the other: I have refused to do so because I wouldn&rsquo;t know how to justify such a judgement. I state this, because at gatherings like this I have often seemed to observe the general feeling that, the scientific issue now being well-isolated, the non-scientific issue now remains as the key problem; I would like to point out that such general feeling is no more than a reflection of the circumstance that at such meetings &#x2014;like nearly everywhere, for that matter&#x2014; the truly scientifically inclined are a minority.</p>
+					<p>Scientists largely prefer to confine their attention to the scientific issue, and as long as they don&rsquo;t ignore the existence of the non-scientific issues, I think that that constraint is correct. The scientific issue may have been well-isolated, we are far from having solved all its problems, and the scientist&rsquo;s attention is primarily required where he can contribute more than anybody else. As far as the non-scientific issue is concerned, there is little reason to assume that the scientist is much better equipped to contribute than others. As furthermore no scientific fruits are to be expected from dealing with fundamentally non-scientific issues, the scientist is justified in experiencing dealing with the non-scientific issue not only as a neglect of duty, but even as a waste of time.</p>
+					<p class="noindent">P.S. The reader is mistaken if he thinks that he can send me a copy of Imre Lakatos&rsquo;s <i>Proofs and Refutations</i> for my education.</p>
+					<p></p>
+					<table width="400" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td valign="top">Plataanstraat 5<br>
+								5671 AL NUENEN</td>
+							<td valign="top">prof.dr.Edsger W.Dijkstra<br>
+								Burroughs Research Fellow</td>
+						</tr>
+					</table>
+				</div>
+				<div align="left">
+						<p><u></u></p>
+					</div>
+				<hr>
+				<font size="-1">transcribed by Didier Deshommes<br>
+						revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="91">Wed, 6 Aug 2008</csobj></font>
+				<p></p>
+			
+			
+			
+			
+			
+			
+	</body>
+
+</html>

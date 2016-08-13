@@ -1,0 +1,38 @@
+
+<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+<title>E.W. Dijkstra Archive: The marriage agency (EWD1214)</title>
+<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+
+
+<body><div id="title"><h1>The marriage agency</h1></div>
+
+    <div id="frame">
+			<div id="header">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd12xx/EWD1214.PDF" 
+           title="Link to the PDF version of EWD1214">EWD1214</a>
+      </div>
+      <div id="content">
+
+<p class="noindent"><u>The marriage agency</u></p>
+<p>A marriage agency has in its files 25 men and 25 women and aims at acquainting the men with the women by organising dinner evenings, each one involving 12 tables, seating 2 men and 2 women. (Consequently, at each dinner evening, 1 man and 1 woman have a day off.) The question is how many of such dinner evenings the marriage agency can schedule without some man and woman sharing a table twice.</p>
+<div align="center">
+	<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+		*</p>
+</div>
+<p>Frans van der Sommen raised this problem at the end of the ETAC session of 8 August 1995. Rutger M. Dijkstra, who happened to attend that session, immediately showed how to schedule 12 dinner evenings: partition the men into a singleton and 12 pairs numbered [0...12), do the same with the women, and let on the <var>n</var>th evening the men of pair <var>i</var> share a table with the women of pair (<var>i</var>+<var>n</var>) <u>mod</u> 12.</p>
+<p>The demonstration that 12 is indeed the maximum took a litle bit longer. Consider a sequence of 13 dinner evenings. Then at most 13 men have had an evening off, and therefore at least 12 (= 25 - 13) men dined all 13 evenings. Such a man enjoyed 26 (= 2 &#x00D7; 13) times the company of a woman; the number of women being 25, there is &#x2014;pigeon-hole principle&#x2014; at least one woman whose company he enjoyed at least twice. [As said, this took a little bit longer. We first tried too crude a counting argument in terms of man-woman combinations. Their total number is 625 (= 25 &#x00D7; 25), each evening 48 (= 4 &#x00D7; 12) combinations are getting acquainted. Since 625/48 = 13+1/48, this rules out a schedule of 14 or more evenings, but the feasibility of a schedule of 13 dinner evenings it leaves open.]</p>
+<p>This is actually a sequel to <a title="PDF scan of EWD 1212" href="https://www.cs.utexas.edu/~EWD/ewd12xx/EWD1212.PDF">EWD1212</a>: feasibility is shown by means of a witness, infeasibility by a counting argument.</p>
+<div align="right">
+	<p>Austin, 5 September 1995&nbsp;&nbsp;&nbsp;</p>
+</div>
+<p class="noindent">prof.dr. Edsger W. Dijkstra<br>
+	Department of Computer Sciences<br>
+	The University of Texas at Austin<br>
+	Austin, TX 78712 - 1188 USA</p>
+<hr>
+<p class="noindent"><font size="-1">Transcribed by Guy Haworth<br>
+					
+	Last revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="94">Sun, 30 Dec 2007</csobj>.</font></p>
+<p></p></body>
+
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: Globale beschrijving van de drijvende arithmetiek van de EL X8. (EWD 145)</title>
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>Globale beschrijving van de drijvende arithmetiek van de EL X8.</h1></div>
+		<div align="right">
+			&nbsp;&nbsp;EWD <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD145.PDF" target="_blank">145</a></div>
+		<div align="left">
+			<p><u>Globale beschrijving van de drijvende arithmetiek van de EL X8.</u></p>
+				<p>
+				Met &quot;globaal&quot; wordt bedoeld, dat deze beschrijving de lezer in staat stelle voor zichzelf uit te maken, wat het antwoord van een zekere operatie is, als hij de operanden kent. Het is niet gezegd, dat deze beschrijving ook de beschrijving is van de manier, waarop de arithmetische circuits van de EL X8 dit antwoord construeren.</p>
+				<p><u>Voorstelbare getallen.</u></p>
+			<p>
+				De drijvende arithmetiek opereert op getallen van de vorm</p>
+			<blockquote>
+				<p><var>m</var> &#x00D7; 2&#x2191;<var>e</var></p>
+			</blockquote>
+			<p>waarbij <var>m</var> (van mantisse) voldoet aan 0 &#x2264; abs (<var>m</var>) &#x2264; 2&#x2191;40 &#x2212; 1<br>
+				en <var>e</var> (van exponent) voldoet aan 0 &#x2264; abs (<var>e</var>) &#x2264; 2&#x2191;11 &#x2212; 1 = 2047.</p>
+			<p>Opm. 1. Voor <var>e</var> zijn 12 bits ter beschikking, voor <var>m</var> 41; in beide gevallen kan de waarde 0 op twee wijzen worden voorgesteld, nl. +0 en &#x2212;0.</p>
+				<p>Opm. 2. Niet alleen <var>e</var> maar ook <var>m</var> neemt dus louter gehele waarden aan.</p>
+				<p><u>Afronding.</u></p>
+			<p>Optelling, aftrekking, vermenigvuldiging en deling kunnen alle een resultaat afleveren, dat, ongeacht de bovengrens van abs(<var>e</var>) niet exact voorstelbaar is, omdat de afstand van meest en minst significante bit van abs(<var>m</var>) meer dan 39 zou moeten zijn.<br>
+				
+				(Bij optelling en aftrekking kan dit ontstaan doordat de mantissen onder elkaar geschoven moeten worden, bij de vermenigvuldiging is de afstand van meest en minst significante bit van het execte product in het algemeen 79 of 78, bij de doorgaans niet opgaande deling is deze afstand oneindig).<br>
+				
+				In al deze gevallen wordt exact afgerond, en in het twijfelgeval van de nul af.<br>
+				Het twijfelgeval treedt op, wanneer de afstand van meest en minst significante bit van het exacte antwoord 40 is; <var>m.a.w</var>. als de exacte <var>m</var> = 2&#x2191;40 + 1 wordt dit tot 2&#x2191;40 + 2 afgerond, zodat halvering tot 2&#x2191;39 + 1 mogelijk is.<br>
+				Aldus is de eventueel afgeronde <var>m</var> en exacte <var>e</var> (waarin netjes van alle halveringen is boekgehouden) bepaald. Van deze exacte <var>e</var> nemen we voorshands niet aan, dat hij aan abs(<var>e</var>) &#x2264; 2047 voldoet.</p>
+			<p>Opm. 3. Door de conventie, dat het twijfelgeval van de nul af wordt afgerond is gegarandeerd, dat (&#x2212;<var>a</var>)&#x00D7; <var>b</var> = &#x2212; (<var>a</var> &#x00D7; <var>b</var>) is.<br>
+				Vervolgens worden exacte <var>e</var> en (eventueel afgeronde) <var>m</var> aan de normering onderworpen.<br>
+				De normering probeert de absolute waarde van <var>e</var> zo klein mogelijk te krijgen als zonder cijferverlies mogelijk is. (Elke verhoging van <var>e</var> moet gecompenseerd worden door halvering van <var>m</var>,<br>
+				wat alleen zonder cijferverlies mogelijk is, als <var>m</var> eerst even is; elke verlaging van <var>e</var> moet gecompenseerd worden door verdubbeling van <var>m</var>, wat zonder &quot;cijferverlies aan kop&quot; alleen mogelijk is als abs(<var>m</var>) &lt; 2&#x2191;39).</p>
+				<p>Opm. 4. Dit proces kan eindigen doordat abs(<var>e</var>) = 0 wordt; in dat geval wordt <var>e</var> = +0 afgeleverd.<br>
+				Als <var>m</var> = &plusmn; 0, kan onbeperkt zonder cijferverlies geschoven worden: in de hardware zit een <var>m</var> = &plusmn; 0 detectie, die dit geval kortsluit en onmiddelijk <var>e</var> = + 0 maakt.<br>
+				Nadat aldus gepoogd is abs(<var>e</var>) zo klein mogelijk te maken, wordt gekeken, of abs(<var>e</var>) klein genoeg is.<br>
+				Als <var>e</var> &#x2265; 2048 is, dan wordt als antwoord afgeleverd <var>e</var> = 2047 en <var>m</var> = &plusmn; (2&#x2191;40 &#x2212; 1), en wel met het teken van de oorspronkelijk m.<br>
+				Als <var>e</var> &#x2264; &#x2212; 2048 wordt (bij herhaling)<br>1) <var>e</var> met 1 opgehoogd<br>2) <var>m</var> <u>afkappend</u> gehalveerd, als abs(<var>m</var>) &gt; 1 is;<br>
+				als abs(<var>m</var>) = 1 is blijft <var>m</var> ongewijzigd.</p>
+				<p>Met andere woorden: in geval van overflow wordt het grootste getal met het goede teken afgeleverd, in het geval van underflow wordt door uitschuiven gepoogd de exponent alsnog binnen de perken te brengen. Het minste, wat overblijft is daarbij &amp;plusmn; 2&#x2191;(&#x2212;2047).<br>
+				Underflow kan dus <u>niet</u> <var>m</var> = 0 genereren.</p>
+				<p>Opm. 5. Aftrekking van een getal &quot;<var>m</var> &#x00D7; 2&#x2191;<var>e</var>&quot; wordt gerealiseerd door &quot;&#x2212;<var>m</var> &#x00D7; 2&#x2191;<var>e</var>&quot; op te tellen.</p>
+				<p>Opm. 6. Overflow kan optreden bij +, &#x2212;, &#x00D7; en &#x2215; .<br>Underflow kan niet bij + en &#x00D7; optreden.</p>
+				<p>Opm. 7. Additieve bewerkingen leveren alleen nul op als het antwoord exact = 0 is; dit antwoord is alleen <var>m</var> = +0 wanneer de operanden van de effectieve optelling (zie opm. 5) beide = +0 zijn.</p>
+				<p>
+				Opm. 8. De vermenigvuldiging levert alleen exact nul als antwoord, wanneer ten minste een factor = 0 is. Het teken van de productnul volgt de normale tekenregel voor producten.</p>
+			<p>
+				Opm. 9. Voor de deling geldt:<br>deeltal &#x2260; 0, deler &#x2260; 0&#x2192; quoti&Icirc;nt &#x2260; 0<br>deeltal = &plusmn; 0, deler is &#x2260; 0 &#x2192; quoti&Icirc;nt = &plusmn; 0 (met in achtname van de normale tekenregels).<br>
+				De situatie voor deler = &plusmn; 0 is momenteel het voorwerp van ernstige discussie.<br>
+				Verwacht wordt:<br>deeltal &#x2260; 0, deler &plusmn; 0 &#x2192; &plusmn; (2&#x2191;40 &#x2212;1) &#x00D7; 2&#x2191;2047 met in achtname van de normale tekenregel.<br>deeltal = &plusmn; deler = &plusmn; 0 &#x2192; een welgedefinieerd antwoord met in achtname van de tekenregel.</p>
+		</div>
+		<div align="right">
+			<p>Eindhoven, 6 december 1965.</p>
+		</div>
+		<hr>
+		<font size="-1">transcribed by Sam Samshuijzen<br>
+			
+			revised <csobj format="MedDate" h="16" region="15" t="DateTime" w="89">Wed, 19 Jul 2006</csobj></font>
+	</body>
+
+</html>

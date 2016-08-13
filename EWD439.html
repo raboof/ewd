@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Associons continued (EWD 439)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>Associons continued</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd04xx/EWD439.PDF"
+           title="Link to the PDF version of EWD439">EWD439</a></div></div>
+    <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR
+<hr />
+<p class="noindent">
+<p class="noindent"><b>Associons continued</b>.
+  <table> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                    by                            </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+        Edsger W.Dijkstra, W.H.J.Feijen and M.Rem </td> </tr>
+</table>
+<p>Up till now our original goal, that is high concurrency, has hardly
+been incorporated. We intend to introduce the possibility of high concurrency
+by introducing statements operating on sets. But rather than introducing variables,
+whose values are sets, we propose to characterize sets as &ldquo;all the solutions of
+equations&rdquo;. The unknowns of these equations will be names: in our equations we
+shall indicate them with the reserved identifiers x0, x1, x2 etc.
+<p>For instance, let the store contain a large number of associons of the
+form (fatherof,&ldquo;n1&rdquo;,&ldquo;n2&rdquo;), where &ldquo;n1&rdquo; and &ldquo;n2&rdquo; stand for names of persons. To
+derive from this genealogy the brother-relation, we would write
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      (fatherof,x0,x1) and (fatherof,x0,x2) &rArr; (brotherof,x1,x2) . </td> </tr>
+</table>
+<p>Here the expression at the left-hand side of the implication sign is
+regarded as an equation in the names x0, x1 and x2, and it defines the set of all
+ordered triples &ldquo;x0, x1, x2&rdquo; such that, upon substitution, the two associons 
+mentioned occur in store. For each solution for whivh (brotherof,x1,x2) is not in store
+it will be created; the amount of concurrency is up to the implementation.
+The statement terminates when for all solutions of the left-hand side the 
+righthand side holds as well.
+<p>The above program records any person with a father as a brother of himself.
+If that is not the intention, the situation could be adjusted by adding a next 
+statement
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      (brotherof,x0,x0) = non (brotherof,x0,x0) . </td> </tr>
+</table>
+<b>Note</b>: For the time being we impose upon ourselves the rule that the set of solutions
+must be fully determined by the equation at the left-hand side. As a result no x
+at the right-hand side may occur that does not occur at the left-hand side as well,
+and we, therefore, do not admit as a replacement for our last statement
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      () &rArr; <b>non</b> (brotherof,x0,x0); </td> </tr>
+</table>
+according to our rule that only associons of the form mentioned at the right-hand
+may be created or destroyed
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      (brotherof,c0,c0) &rArr; <b>non</b> () </td> </tr>
+</table>
+is equally inacceptable. (End of note.)
+<p>For all unknowns that occur only once in a statement &mdash;i.e. once at the
+left-hand side and not at the right-hand side&mdash; it seems a bit superfluous to
+give that unknown a specific name. For instance, if we want to create associons
+indicating who is a father, we could of course do it with
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      (fatherof,c0,x1) = (isfather,x0) </td> </tr>
+</table>
+but in the solution set, as defined by the left-hand side, a father with five sons
+occurs five times, while we know that we only need him once. We propose the notation
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      (fatherof,c0,?) &rArr; (isfather,c0) . </td> </tr>
+</table>
+<p>The question-mark has the function of the existential quantifier: (fatherof,n,
+holds if and only if there exists at least one person of whom n has been recorded
+to be the father. Viewed in terms of &ldquo;associon matching&rdquo; refers to a don&rsquo;t care
+position.
+<p>We may also have it at the right-hand side, provided that the term is negated:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+           () &rArr; <b>non</b> (fatherof,?,?); </td> </tr>
+</table>
+would destroy the whole genealogy.
+<p>We do allow the question-mark in a negated term at the left-hand side as well,
+e.g.
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+     (fatherof,?,c0) <b>and</b> <b>non</b> (fatherof,c0,?) &rArr; (nooffspring,x0) . </td> </tr>
+</table>
+The term (fatherof,?,x0) requires the presence of an associon telling that x0 is
+a son, the term <b>non</b> (fatherof,c0,?) requires the total absence of associons of three
+elements, the first two of which are fatherof and &ldquo;x0&rdquo; respectively.
+<p>To create the above set of associons &ldquo;nooffspring&rdquo; without a question-mark
+is very painful. It could be done by 
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      (fatherof,x0,x1) &rArr; (nooffspring,x1);           </td> </tr> <tr> <td></td> <td>
+      (fatherof,c0,x1) &rArr; <b>non</b> (nooffspring,c0) </td> </tr>
+</table>
+The first one makes all sons in the class nooffspring, the second removes from that
+class all fathers.
+<p>What would have failed to work is
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+       (fatheroff,x1,x0) <b>and</b> <b>non</b> (fatherof,x0,x2) = (nooffspring,x0) . </td> </tr>
+</table>
+The term <b>non</b> (fatherof,x0,x2) is no restriction at all, because there are nearly
+infinitely many values of x2, such that the associon (fatherof,x0,x2) is absent.
+We, therefore, insist upon the rule that
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      | a negative trem at the left-hand side may contain no x that does not </td> </tr> <tr> <td></td> <td>
+      | occur in a positive term of that left-hand side as well.             </td> </tr>
+</table>
+<b>Note</b>. The failing statement above cannot be corrected by adding positive terms
+containing x2 at the left-hand side. (End of note.)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>Let for any node name n, n1, n2,
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+      (r0,n) &lt;=&gt; &ldquo;n is the name of a node of a given directed graph&rdquo;                         </td> </tr> <tr> <td></td> <td colspan = 2>
+      (r1,n1,n2) &lt;=&gt; &ldquo;the directed edge from n1 to n2 belongs to the given  directed graph.&rdquo; </td> </tr>
+</table>
+Let it be requested to generate all associons:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      (r2,n1,n2) &lt;=&gt; &ldquo;from.n1 the node n2 can be reached.&rdquo; </td> </tr>
+</table>
+<b>Program 1</b>.
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      (r0,x0) &rArr; (r2,x0,x0);                         </td> </tr> <tr> <td></td> <td>
+      (r2,x0,x1) <b>and</b> (r1,x1,x2) &rArr; (r2,x0,x2) </td> </tr>
+</table>
+The first line expresses that each node can be reached from itself; the second line
+expresses the rest. Note that, as solutions of the left-hand side are found and new
+associons are created, new solutions to the left-hand side are possible. The statement
+stops when the transitive closure has been formed.
+<br><b>Program 2</b>.     
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+           (r0,x0) = (r2,x0,x0);                              </td> </tr> <tr> <td></td> <td>
+           (r1,x0,x1) = (r2,x0,x1);                           </td> </tr> <tr> <td></td> <td>
+           (r2,x0,x1) <b>and</b> (r2,x1,x2) &rArr; (r2,x0,x2) </td> </tr>
+</table>
+In program 2 the possible concurrency in the last statement may grow more
+rapidly than in program 1. (With N nodes in a directed ring, program 1 is linear
+in N, program 2 in logN.)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>When no three points are on the same line, let
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r0,n) &lt;=&gt; &ldquo;n is the name of a point in the plane&rdquo;.    </td> </tr> <tr> <td></td> <td>
+          (r1,n1,n2,n3) &lt;=&gt; &ldquo;n1,n2,n3 is a clock-wise triangle.&rdquo; </td> </tr>
+</table>
+Requested (r2,n1,n2) &lt;=&gt; &ldquo;n1,n2 is an edge of the clock-wise convex hull.&rdquo;
+<br>Program
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r1,x0,x1,?) <b>and</b> <b>non</b> (r1,x1,x0,?) = (r2,x0,x1) . </td> </tr>
+</table>
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>Let
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r0,n) &lt;=&gt; &ldquo;n is the name of a node&rdquo;. </td> </tr>
+</table>
+We would like to select an arbitrary node, i.e. we should like to create exactly
+one associon
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r1,n) &lt;=&gt; &ldquo;n is the chosen node&rdquo;. </td> </tr>
+</table>
+We cannot write
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r0,x0) = (r1,x0) </td> </tr>
+</table>
+because that would select all nodes. We could try the following one
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+(r0,x0) <b>and</b> <b>non</b> (r1,?) &rArr; (r1,x0)     .</td><td align=right>(1)
+</td>  </tr>  </table>
+<p>This is OK under the assumption that the implementation selects only one
+solution of the left-hand side at a time: it would select e.g. x0 = nl, then
+create (r1,n1) and then it would stop. However, we would not like to impose
+this non-concurrency as a general requirement, i.e. we would like this statement
+also to allow that an unknown number of nodes is selected, n1 through nk, and
+that for all of them (r1,n<sub>i</sub>) is created. In short: our statement selects an
+arbitrary non-empty subset of the set of nodes. (If the given set is empty, the
+selected set is empty as well.) Well, (1) is a nice, non-deterministic tool, but
+it is still not a way for selecting exactly one!
+<p>Alternatively: if we cannot select one, can we remove all but one? With the
+aid of
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r1,n1,n2) &lt;=&gt; &ldquo;n1 is n2&rdquo; </td> </tr>
+</table>
+we could try
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r0,x0) = (r1,x0);                                                                    </td> </tr> <tr> <td></td> <td>
+          (r0,x0) = (r2,x0,x0);                                                                 </td> </tr> <tr> <td></td> <td>
+          (r1,x0) <b>and</b> (r1,x1) <b>and</b> <b>non</b> (r2,x0,x1) &rArr; <b>non</b> (r1,x1) </td> </tr>
+</table>
+but this works equally bad: if x0,x1 is a solution, so is x1,x0 and the last two
+associons of the type (r1,n) could disappear simultaneously.
+<p>A new tool seems indicated: we must be able to prescribe that we only need
+one solution. We shall do so by using instead of the x, the equally reserved
+identifier y and the selection of the unique node will be accomplished by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r0,y0) <b>and</b> <b>non</b> (r1,?) &rArr; (r1,y0) . </td> </tr>
+</table>
+The term <b>non</b> (r1,?) is obligatory, because
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r0,y0) &rArr; (r1,y0) </td> </tr>
+</table>
+would still copy the whole set, be it one at a time: as long as there are solutions
+of the left-hand side that do not satisfy the right-hand side, the game proceeds
+as usual.
+<p>Let it be required to order the nodes in an arbitrary permutation, i.e.
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r3,n1,n2) &lt;=&gt; &ldquo;n1 is n2&rsquo;s left-hand neighbour.&rdquo; </td> </tr>
+</table>
+Program:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r0,y0) <b>and</b> <b>non</b> (r3,?,?) &rArr; (r3,handle,y0);                                                   </td> </tr> <tr> <td></td> <td>
+          (r3,?,y0) <b>and</b> <b>non</b> (r3,y0,?) <b>and</b> (r0,y1) <b>and</b> <b>non</b> (r3,?,y1) &rArr; (r3,y0,y1); </td> </tr> <tr> <td></td> <td>
+          () &rArr; <b>non</b> (r3,handle,?)                                                                              </td> </tr>
+</table>
+The constant &ldquo;handle&rdquo; has been introduced such that :
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r3,?,n) &lt;=&gt; &ldquo;n has been placed in the sequence&rdquo;. </td> </tr>
+</table>
+The left-hand side of the second statement is in words: y0 must occur in the
+sequence without right-hand neighbour and y1 must be a node not in the sequence.
+Frased that way, it is not too bad.
+<p>Here we have our first equation with two y&rsquo;s. It means: select from all solutio
+&mdash;as if they had been x&rsquo;es!- exactly one sing1e pair. What about x&rsquo;es and y&rsquo;s
+occurring in the same left-hand equation?
+<p>Let us have one x and one y in a left-hand side equation. The corresponding
+solution set could be either:
+<br>a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;every possible value of x combined with one then possible value of y.
+<br>b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;one value of y combined with all then possible values of x.
+The choice we have is due to the fact that the universal and the existential
+quantifier do not commute.
+<p>We propose to distinguish between the two cases by the way in which we number
+our unknowns; and to indicate
+<table> <tr> <td>
+case a)</td><td>&nbsp; &nbsp; by &nbsp; &nbsp; </td><td>x0 y1  </td> </tr> <tr> <td>
+case b)</td><td>&nbsp; &nbsp; by &nbsp; &nbsp; </td><td>y0 x1. </td> </tr>
+</table>
+<p>The set of solutions for an equation in
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          z0,z1, ... ,zn </td> </tr>
+</table>
+where z may either be an x or an y, is given recursively as follows:
+<p>We start with one empty k-tuple for k = 0.
+<br>If zk = xk,
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      each k-tuple gives rise to as many k+1-tuples that we can form by extending </td> </tr> <tr> <td></td> <td>
+      it with a permissible value for xk; each k-tuple gives rise to at least one </td> </tr> <tr> <td></td> <td>
+      k+1-tuple;                                                                  </td> </tr>
+</table>
+If zk = yk,
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      each k - tuple gives rise to exactly one k+1-tuple that we can form by </td> </tr> <tr> <td></td> <td>
+      extending it with an arbitrary permissible value for yk.               </td> </tr>
+</table>
+The set of n+1 tuples is our set of solutions.
+<p class="noindent"><b>Note 1</b>. The relative ordering of succesive x&rsquo;es is irrelevant; so is the relative
+ordering of successive y&rsquo;s. (End of note 1)
+<p class="noindent"><b>Note 2</b>. When in a statement all x&rsquo;es are replaced by y&rsquo;s, its activity is equal to
+a possible activity of the original form, because the concurrency when x&rsquo;es are
+present is not obligatory. They are therefore identical when the statement with
+the x&rsquo;es is deterministic. (End of note 2)
+<p class="noindent"><b>Note 3</b>. We don&rsquo;t expect much use of complicated alternation of x&rsquo;es and y&rsquo;s in the
+ordered sequence of unknowns. (End of note 3)
+ <p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>Let for N different values of n
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          (r0,n) &lt;=&gt; &ldquo;n is the name of a node&rdquo;. </td> </tr>
+</table>
+Let it be requested to form N-1 associons
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+         (r1,n1,n2) &lt;=&gt; &ldquo;n1,n2 is a directed edge of an arbitrary rooted spanning tree.&rdquo; </td> </tr>
+</table>
+                             
+Program:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+         (r0,y0) <b>and</b> <b>non</b> (r1,?,?) &rArr; (r1,handle,y0);                  </td> </tr> <tr> <td></td> <td>
+         (r0,x0) <b>and</b> <b>non</b> (r1,?,x0) <b>and</b> (r1,?,y1) &rArr; (r1,y1,x0) </td> </tr> <tr> <td></td> <td>
+         () &rArr; <b>non</b> (r1,handle,?)                                             </td> </tr>
+</table>
+The middle statement has the property thet many new nodes may be attached
+simultaneously to the tree, but no one in more than one way: a merging of branches
+is excluded. Different new nodes may be attached simultaneously to the same old one.
+ <p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>          (To be continued.)
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-11-15<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

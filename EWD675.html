@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: The equivalence of bounded nondeterminacy and continuity (EWD 675)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>The equivalence of bounded nondeterminacy and continuity</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD675.PDF"
+           title="Link to the PDF version of EWD675">EWD675</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<table> <tr> <td colspan = 3>
+<b>Copyright Notice  </b>                                                       </td> </tr> <tr> <td colspan = 3>
+The following manuscript                                                        </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+    EWD 675 The equivalence of bounded nondeterminacy and continuity            </td> </tr> <tr> <td colspan = 3>
+is held in copyright by Springer-Verlag New York.                               </td> </tr> <tr> <td colspan = 3>
+The manuscript was published as pages 358–359 of                                </td> </tr> <tr> <td></td> <td colspan = 2>
+    Edsger W. Dijkstra, Selected Writings on Computing: A Personal Perspective, </td> </tr> <tr> <td></td> <td colspan = 2>
+    Springer-Verlag, 1982. ISBN 0–387–90652–5.                                  </td> </tr> <tr> <td colspan = 3>
+<b>Reproduced with permission from Springer-Verlag New York.   </b>             </td> </tr> <tr> <td colspan = 3>
+<b>Any further reproduction is strictly prohibited.   </b>                      </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                                                                </td> </tr>
+</table>
+<p class=noindent>                
+<b>The equivalence of bounded nondeterminacy and continuity</b>.
+<p>Unbounded nondeterminacy is presented by the function &ldquo;any natural
+number&rdquo; such that
+<table width=100%><tr><td valign=top width=10%>
+</td><td>wp("x:= any natural number", 0 &le; x) = T
+</td></tr>
+<tr><td valign=top>
+</td><td>wp("x:= any natural number", x &le; k) = F    for <b>all</b>  k .
+</td>  </tr>  </table>
+
+Program S is continuous &mdash;see Chapter 9 of &ldquo;A Discipline of 
+Programming&rdquo;, where this property is called Property 5&mdash; means that for any
+infinite sequence of predicates C<sub>0</sub> , C<sub>1</sub> , C<sub>2</sub> , ... such that
+<table width=100%><tr><td valign=top width=10%>
+</td><td>for r &ge; 0 &nbsp; &nbsp; C<sub>r</sub> &ne; C<sub>r+1</sub>  &nbsp; &nbsp; for all states
+</td>  </tr>  </table>
+we have for all states
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+wp(S, (<u>E</u> r: r &ge; 0: c<sub>r</sub>)) = (<u>E</u> s: s &ge; 0: wp(S, c<sub>s</sub>))</td><td align=right>(1)
+</td>  </tr>  </table>
+
+and in the same chapter I have shown that all programs that could be
+written in my programming language fragment &mdash;with finite (1) guarded
+command sets&mdash; are continuous.
+<p>It is further shown that the program &ldquo;x:= any natural number&rdquo; is
+not continuous &mdash;and, hence, cannot be written in that programming language
+fragment&mdash; . For the sake of completeness, we repeat the proof. Assume
+the program S: &ldquo;x2: any natural number&rdquo; to be continuous. We then have:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+        T = wp(S, 0 &le; x)                                </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; </td> <td>
+          = wp(S, (<u>E</u> r: r &ge; 0: 0 &le;x &le; r))  </td> </tr> <tr> <td></td> <td></td> <td>
+          = (<u>E</u> s: s &ge; 0: wp(S, 0 &le; x &le; s)) </td> </tr> <tr> <td></td> <td></td> <td>
+          = (<u>E</u> s: s &ge; 0: F) = F                  </td> </tr>
+</table>
+
+a contradiction that leads to the conclusion that &ldquo;x:= any natural number&rdquo;
+cannot be continuous, i.e. that continuity implies bounded nondeterminacy.
+<p>In the sequel of this note we shall show that the inverse holds as well,
+viz. that the existence of a noncontinuous program implies the inclusion of
+unbounded nondeterminacy. (The following argument was suggested to me by
+C.S.Scholten almost instantaneously when I had posed the problem.)
+Assume the existence of a program S and an infinite sequence of
+                         
+predicates C such that C<sub>r</sub> &rArr; C<sub>r+1</sub>, such that (1) does not hold. Because
+in (1) the right-hand side implies the left-hand side trivially, this means
+that we assume
+<table width=100%><tr><td valign=top width=10%>
+</td><td>wp(S, (<u>E</u> r: r &ge; 0: c<sub>r</sub>))<b>and</b> <b>non</b> (E s: s &ge; 0: wp(S, c<sub>s</sub>)) =                   
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+wp(S, (<u>E</u> r: r &ge; 0: c<sub>r</sub>))<b>and</b> (<u>A</u> s: s &ge; 0: <b>non</b> wp(S, c<sub>s</sub>))</td><td align=right>(2)
+</td>  </tr>  </table>
+to be different from F .
+<p>Consider now the program
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+       S; x:= (<b>MIN</b>: k: C<sub>k</sub>) </td> </tr>
+</table>
+started in an initial state satisfying (2). Because the initial state
+satisfies wp(S, (<u>E</u> r: r &ge; 0: C<sub>r</sub>)) , this program terminates and is
+guaranteed to establish 0 &le; x . On the other hand, the assumption that
+for some K it is certain to establish x &le; K means that S is certain
+to establish C<sub>K</sub> , a conclusion that is incompatible with the second term
+of (2). Hence its nondeterminacy is unbounded. (The fact that our program
+of unbounded nondeterminacy is not a total program, but only defined for
+initial states satisfying (2) is here not relevant: the essential thing is
+that (2) differs from F , i.e. that the set of states satisfying (2) is
+not empty.)
+<p>Here we have established the <b>equivalence</b> of continuity and the 
+boundedness of nondeterminacy. In EWD673 we have established the equivalence between
+the boundedness of nondeterminacy and the equality between weak and strong
+termination. Hence the three criteria
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continuity or not
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nondeterminacy bounded or not
+<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weak and strong termination equivalent or not
+are three different aspects of the <b>same</b> dichotomy. All this is very
+satisfying. (The arguments are so simple that, presumable, this is already
+known. But it was new for me, and I like the arguments.)
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN</td><td>BURROUGHS Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td> 
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-02-05<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

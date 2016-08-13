@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>Edsger W. Dijkstra Archive: Ruwe schets vertaalproce (EWD 112)</title>
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>Edsger W. Dijkstra Archive: Ruwe schets vertaalproce</h1></div>
+		<div align="right">
+			<p> <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD112.PDF" target="_blank">EWD112</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD112.PDF" target="_blank">0</a></p>
+		</div>
+		<div align="left">
+			<p><u>Ruwe schets vertaalproce</u>    </p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We zullen proberen om de vertaler in twee left to right scans in elkaar te draaien. In de eerste scan gebeurt onder meer het volgende.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De heptaden van de invoerstroom worden tot basic characters geassembleerd en in deze vorm wordt de text van het ALGOL programma ten bate van de tweede scan opgeborgen. In deze representatie komen enige non-ALGOL characters voor, zoals &quot;Nieuwe Regel&quot; en &quot;illigitiem&quot;, bv. een rare onderlijning. We zullen nl. proberen om bij check alarm de pass in questie af te maken; het is niet gezegd, dat dat kan: immers, als je de executie van een programma beschouwt als &quot;de laatste pass&quot;, wat het toch eigenlijk is, dan hebben we inmiddels al besloten, dat we in geval van alarm zullen stoppen.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Behalve, dat de text in basic characters voor later gebruik wordt opgebouwd, wordt hij in de eerste scan aan een aantal analyses onderworpen. Ten eerste zullen we de delimiter structure zorgvuldig checken; in deze phase zullen we nooit gebruik maken van &quot;de bijbehorende declaratie&quot; omdat die in principe nog ongezien kan wezen.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verder is de belangrijkste taak van de eerste scan om de volledige naamlijst op te bouwen. Wij stellen ons voor, dat dit gaat via een stapel, die als transition mechanism gebruikt wordt: hierin worden alle gedeclareerde namen plus de uit deze declaratie volgende en voor de tweede pass relevante gegevens opgenomen. Zodra een blok einde gedetecteerd is, wordt de top van deze naamstapel naar de definitieve naamlijst overgeheveld. Wel moeten we door enige ketening zorgen, dat de boomstructuur van deze naamlijst correct tot uiting gebracht wordt. In deze definitieve naamlijst fokken we dus de namen bloksgewijs in volgorde van blokeinde. Hiermee hebben we bereikt, dat voor dit naamsorteerproces elke naam precies een keer verhuisd wordt. Dit is mooi.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Neventaak van de eerste scan is om de niet lege regels van de aangeboden text te nummeren en om via de output op herkenbare plaatsen het toegekende regelnummer uit te printen. (Bv. in regels, waarin labels voorkomen en regels, waarin procedures gedeclareerd worden. De output mag zich hier bedienen van een enkel alphabet.) In deze output mag zelfs wel iets van de blokstructuur tot uiting komen; als in de eerste scan al fouten ontdekt worden, komen deze foutmeldingen door dit lijstje heen, maar dit achten we geen bezwaar (we = Cor en ik).</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In de tweede scan wordt het complete ALGOL-programma definitief gemaakt en op segementen ingedeeld. Dit lijkt een beetje moeilijk, maar moet wel meevallen, want we hebben drie machtige kanonnen tot onze beschikking. Ten eerste hebben we de volledige naamlijst met alle declaratiegegevens, die we maar wensen (daar had de eerste pass dan maar voor moeten zorgen). Ten tweede is dit essentieel een vertaler, die het objectprogramma in het geheugen opbouwt, ten derde hebben we de volledige text van het objectprogramma ook al in het geheugen staan en kunnen we de vertaler tamelijk straffeloos een stukje in de toekomst laten kijken.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Een en ander impliceert wel, dat de routine &quot;read next character&quot; een soortement van juweeltje dient te worden. Ten eerste kent hij twee toestanden: in de eerste fase moet hij het volgende basic character uit de heptaden opbouwen en dumpen, in de tweede fase moet hij &quot;the next character&quot; uit de gedumpte informatiestroom halen. Ter verhoging van de feestvreugde zal hij wel twee pointers moeten hebben, een testpointer en een gehadpointer.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dit lijkt in deze staat van &quot;ruwheid&quot; een redelijk overzicht van de taken.</p>
+		</div>
+		<div align="right">
+			<p>8 december 1964</p>
+		</div>
+		<hr>
+		<p><font size="-1">Transcribed by Frank Steggink<br>
+				Revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="82">Tue, 6 Jan 2004</csobj>.</font></p>
+	</body>
+
+</html>

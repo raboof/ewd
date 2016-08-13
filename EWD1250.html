@@ -1,0 +1,68 @@
+
+<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+<title>Edsger W. Dijkstra Archive: The couples, the river, and the little boat (EWD 1250)</title>
+<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+
+<body><div id="title"><h1>Edsger W. Dijkstra Archive: The couples, the river, and the little boat</h1></div>
+    <div id="frame">
+			<div id="header">
+        <a href=../../ewd12xx/EWD1250.PDF 
+           title="Link to the PDF version of EWD1250">EWD1250</a>
+      </div>
+		<div id="content">
+			<p class="noindent"><u>The couples, the river, and the little boat</u></p>
+			<p>Here is the problem:</p>
+			<p class="noindent">&quot;Two husbands and two wives have to cross a river in a boat which can only hold two people. How can they cross so that no woman is in the company of a man unless her husband is also present?&quot;</p>
+			<div align="center">
+				<p>(Copyright (c) 1967 by Morris Kline)</p>
+			</div>
+			<p class="noindent">[It is understood that the absence/presence constraint refers to the separate banks as well as to the boat.]</p>
+			<div align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					*</p>
+			</div>
+			<p class="noindent"><u>Request</u> If you think this problem too trivial to waste your time on, please state <em>instantaneously</em> the number of different solutions. Thank you. ( End of Request.)</p>
+			<p>We can name the four people by considering the couples (<var>H</var>,<var>W</var>) and (<var>h</var>,<var>w</var>); we can then enumerate the disallowed combinations:</p>
+			<blockquote>
+				<p><var>wH</var>&nbsp;&nbsp;&nbsp;&nbsp;<var>wHW</var>&nbsp;&nbsp;&nbsp;&nbsp;<var>Wh</var>&nbsp;&nbsp;&nbsp;&nbsp;<var>Whw</var></p>
+			</blockquote>
+			<p class="noindent">(which is shorter than enumarating the allowed ones) and explore the tree of all possible scenarios, an extensive search.</p>
+			<p>There are two ways of reducing the size of the search tree, viz.</p>
+			<p class="continue">(<i>i</i>)&nbsp;&nbsp;restoring the symmetry between the couples, a symmetry which has been destroyed by naming them differently, and</p>
+			<p class="continue">(<i>ii</i>)&nbsp;&nbsp;strenghtening the constraints &#x2014; which, if done unwisely, may reduce the number of solutions to zero.</p>
+			<p>Ignoring the distictions between the two couples, i.e. ignoring the distinction betweer upper and lower case in our enumeration of disallowed combinations, there is little else we can do but count the numbers of wives and husbands. We propose the stronger constraint:</p>
+		<div id="content" align="center">
+			<p class="noindent">the husbands stay together.</p>
+		</div>
+		<div id="content">
+			<p class="noindent">(i.e. in each combination, the number of husbands is even). But as soon as the husbands stay together, we don't need to distinguish between them &#x2014;they could be truly identical twins&#x2014; , nor between the wives: the pairing, as was represented by the couples, has disappeared from the picture, and after this abstraction there is only one solution left:</p>
+			<blockquote>
+				<p class="noindent">two wives go ;<br>
+					one wife returns ;<br>
+					two husbands go ;<br>
+					one wife returns ;<br>
+					two wives go ,</p>
+			</blockquote>
+			<p class="noindent">and since the two wives are as indistinguishable from each other other as the electrons in the helium atom, this is truly 1 solution. (Remember: the instruction &quot;take away one from three&quot; yields &quot;two&quot;, and it makes no sense, when instructed to take away one from three, to ask &quot;which one?&quot;.)</p>
+			<p class="noindent"><u>Aside</u> Wim Feijen solved the above problem in exactly the same way &quot;during a short nap on the coach&quot;. (End of Aside.)</p>
+		</div>
+		<div id="content" align="center">
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Austin, 13 November 1996</p>
+		</div>
+		<div id="content">
+			<p class="noindent">prof. dr Edsger W. Dijkstra<br>
+				Department of Computer Sciences<br>
+				The University of Texas at Austin<br>
+				Austin, TX 78712&#150;1188 USA</p>
+			<hr>
+			<font size="-1">Transcribed by Gijs Geleijnse<br>
+				Revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="97">Mon, 10 Dec 2007</csobj>.</font> </div>
+	
+	
+	
+		
+	
+	
+	
+		
+			

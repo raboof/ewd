@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: A superficial book. (EWD 564)</title>
+		<style type="text/css">
+         p { text-indent: 2.0em; }
+        </style>
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>A superficial book.</h1></div>
+		<div align="right">
+			&nbsp;&nbsp;<a title="PDF scan of EWD 564" href="https://www.cs.utexas.edu/~EWD/ewd05xx/EWD564.PDF" target="_blank">EWD 564</a></div>
+		<div align="left">
+			<div>
+				<p><u>A superficial book.</u></p>
+				&quot;Techniques of Program Structure and Design.&quot;, Edward Yourdon, Prentice Hall, 1975.
+				<p>It is not my habit to comment in written form on all the junk and trash that meets my eyes, but sometimes I must.  Edward Yourdon's book presents such a case, because the book is not just superficial, it is dangerously so.  It is a misleading text, against which potential readers should be warned.  The fact that the book is poorly written is something that the uninitiated but careful reader can discover for himself; the uninitiated reader, however, can not discover from this book alone that, measured against today's state of the art, it is hopelessly old-fashioned, and betrays a singular lack of insight in the subject matter it claims to cover.</p>
+				<p>It is poorly written: even the English of the title is faulty! &quot;Techniques of Design&quot; is a proper construct, but &quot;Techniques of Program Structure&quot; is just a meaningless concatenation of words. Another example of poor English do we find on page 247 &quot;...until it has been demonstrated to everyone's satisfaction that the corrected bug does work correctly.&quot;.  If it &quot;does not work correctly&quot; &#x2014;in the author's parlance&#x2014; how can we refer to &quot;the corrected bug&quot;? Furthermore I find it somewhat strange that after its correction &#x2014;i.e. its removal!&#x2014; the bug is still supposed to be there and &quot;doing&quot; something.  Presumably the author should have written &quot;...until it has been demonstrated to everyone's satisfaction that the bug has been successfully removed.&quot;.  But even after that repair, the sentence is not very helpful, for what is meant by &quot;everyone's satisfaction&quot;?  My guess is that from the unspecified environment the author refers to, I, for instance, should be excluded.  The quotation is typical of the author's approach: in spite of the fact that the title mentions &quot;techniques&quot; the author skirts technical issues completely, and seems to measure quality primarily indirectly by degree of &quot;satisfaction&quot; given to the environment.  The book is misleading in that it suggests that such a nontechnical, sociological approach suffices.</p>
+				<p>The next quotation from page 246 is, I am afraid, fairly indicative for the book's quality:</p>
+				<blockquote>
+					<p>&quot;<u>7.1.7  Glitch</u></p>
+					<p>The word &quot;glitch&quot; is one of those unofficial terms that has gained popularity in the vocabulary of the industrial/academic computer communities of Cambridge and Berkeley. Though never defined precisely a glitch is usually thought of as an unforeseen feature of a computer program (or, in most cases, the specification and design of a program) that renders it inefficient, unelegant, or awkward to use. Note there is a difference between a bug and a glitch. A bug implies that the program is not working to specifications, while a glitch implies that the specification itself (of some property of the program outside the scope of the specification) is awkward or clumsy.&quot;</p>
+				</blockquote>
+				
+				I am &#x2014;I am happy to say&#x2014; unfamiliar with the &quot;industrial/academic computer communities&quot; alluded to, that are here accused of such sloppy use of the term &quot;glitch&quot;, a precisely defined term which in that meaning is officially reserved for a very well-known phenomenon that is to be expected to occur when synchronizing independently clocked systems. (Stronger: neither in Berkeley, nor in Cambridge, USA, have I ever heard the term used by people in any other than its technical meaning.) But suppose for a moment that the author were not wrong in this paragraph: does the paragraph then carry any helpful information? I could hardly find any....				<p>An example of hilarious nonsense can be found on page 281 where &quot;it seems that the number [...] of bugs increases exponentially with the number of instructions in the module.&quot;  This tells us that by making a module large enough we can achieve that the number of bugs exceeds the number of instructions in the module, nay, even exceeds the number of bits needed to store these instructions!  The frightening thing about this piece of nonsense, however, is that , in spite of an earlier chapter on &quot;Modular Programming&quot; &#x2014;of more than 40 pages&#x2014; the author still thinks he can meaningfully speak of &quot;the number of bugs in a module&quot;.  If he had used that earlier chapter to develop a meaningful concept &quot;module&quot;, he would have discovered that the &quot;number of bugs in a single module&quot; is either zero or one, i.e. the module is either correct or not.  In the latter case, counting their number is as meaningless as counting the number of misspellings in the names of the well-known authors in computer science &quot;Ivan Yourdon&quot; or &quot;Niklaus Hoare&quot;.</p>
+				<p>One final quotation &#x2014;page 9&#x2014; &quot;Of course, it is important (sic!) to point out that comments are not an end unto themselves.&quot;  This sentence may give us a glimpse of the intended readership: those who still think that comments are an end unto themselves.</p>
+			</div>
+			<div align="center">
+				*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+				*</div>
+			<div>
+				<p>We shall not blame the author for the publisher's blurb on the jacket that describes the book as &quot;A clearly written, logically organized, and easy-to-understand discussion....&quot;.  But I am amazed and alarmed, when I see this book recommended in a Prentice-Hall folder as follows:</p>
+				<blockquote>
+					<p>&quot;I certainly enjoyed reading this excellent treatise.  The author is obviously an authority on the subject but so are many others. However, the rare quality of his exposition is a synergistic combination of humor, elegance of style, breadth of coverage, diversity of programming languages and applications, organization, and lucidity.  What more can I say?  [...]&quot;<br>
+						
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Carl Hammer, Ph.D., Director, Computer Sciences, Univac, Adjunct Professor, The American University, Washington, D.C.</p>
+				</blockquote>
+				
+				and
+
+				<blockquote>
+					&quot;Best I've seen on the topic.&quot;<br>
+					Professor H.R.Knitter, University of Wisconsin, Madison.</blockquote>
+				<p>Publishers are supposed to be willing to print anything they think they can sell &#x2014;I don't think that that is the full truth, but they are supposed to be that way.  Professors at our Universities are supposed to be able not to mistake a totally unscientific work for something worth their recommendation, but, apparently, that is not the full truth either....</p>
+			</div>
+			<table width="459" border="0" cellspacing="2" cellpadding="0">
+				<tr>
+					<td valign="top" width="203">Plataanstraat 5<br>
+						NL-4565 NUENEN<br>
+						The Netherlands</td>
+					<td valign="top" width="250">prof.dr.Edsger W.Dijkstra<br>
+						Burroughs Research Fellow</td>
+				</tr>
+			</table>
+		</div>
+		<hr>
+		<font size="-1">transcribed by Tristram Brelstaff<br>
+			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="92">Wed, 31 Jan 2007</csobj></font>
+	</body>
+
+</html>

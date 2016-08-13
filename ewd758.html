@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">         
+      
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">         
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">        
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />        
+    <title>E.W.Dijkstra Archive: An intriguing example. (EWD 758)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>  
+   </head>      
+  <body><div id="title"><h1>An intriguing example.</h1></div>        
+    <div id="frame" align="right">  
+      <div id="header" align="right">      
+        <a href="https://www.cs.utexas.edu/~EWD/ewd07xx/EWD758.PDF"    
+           title="Link to the PDF version of EWD758">EWD758</a></div></div> 
+        <div id="frame">    
+           <div id="content">
+           <p class="noindent">
+<p class="noindent"><b>An intriguing example.</b> 
+<p>In the following all variables and all elements of the infinite arrays <var>f</var>&thinsp;[0...] and <var>g</var>[0...] are of type natural number.
+<p>Array <var>f</var> is <b>ascending</b>, i.e.
+<table width=100%><tr><td valign=top width=10%>
+</td><td><u>(</u><b>A</b>&thinsp;<var>x&thinsp;</var>: <var>x</var>&ge;0&thinsp;: <var>f&thinsp;</var>[<var>x</var>] &le; <var>f&thinsp;</var>[<var>x</var>+1]) </td><td align=right>(0)
+</td>  </tr>  </table>
+and <b>unbounded</b>, i.e. 
+<table width=100%><tr><td valign=top width=10%>
+</td><td><u>(</u><b>A</b>&thinsp;<var>y</var>&thinsp;: <var>y</var>&ge;0&thinsp;: (<u>E</u>&thinsp;<var>x</var>&thinsp;: <var>x</var>&ge;0&thinsp;: <var>f</var>&thinsp;[<var>x</var>]&thinsp;&gt;&thinsp;<var>y</var>)) </td><td align=right>(1)
+</td>  </tr>  </table>
+<p>As a result of (1)
+<table width=100%><tr><td valign=top width=10%>
+prog 0:</td><td><b>do</b> <var>f</var>&thinsp;[<var>x</var>]&thinsp;&le;&thinsp;<var>y</var> &rarr; <var>x</var>&thinsp;:=&thinsp;<var>x</var>+1 <b>od</b>
+</td>  </tr>  </table>
+terminates. Also &mdash; obviously &mdash;
+<table width=100%><tr><td valign=top width=10%>
+prog 1:</td><td><b>do</b> <var>f</var>&thinsp;[<var>x</var>]&thinsp;&gt;&thinsp;<var>y</var> &rarr; <var>g</var>[<var>y</var>]:= <var>x</var>;&thinsp;<var>y</var>&thinsp;:= <var>y</var>+1 <b>od</b>
+</td>  </tr>  </table>
+terminates. The &ldquo;combined&rdquo; program
+<table> <tr> <td>&nbsp;&nbsp;&nbsp;&nbsp;</td> <td colspan=2>
+    <var>x</var>,&thinsp;<var>y</var> := 0,0; </td> </tr> <tr> <td></td> <td colspan=2>
+    <b>do</b> <var>f</var>&thinsp;[<var>x</var>]&thinsp;&le;&thinsp;<var>y</var> &rarr; <var>x</var>&thinsp;:= <var>x</var> + 1; </td> </tr> <tr> <td></td>  <td colspan=1>
+     &nbsp;&#11007; <var>f</var>&thinsp;[<var>x</var>]&thinsp;&gt;&thinsp;<var>y</var> &rarr; <var>g</var>[<var>x</var>]&thinsp;:= <var>x</var>; <var>y</var>&thinsp;:=&thinsp;<var>y</var>+1</td> </tr> <tr> <td></td> <td colspan=2>
+    <b>od</b>                                        </td> </tr> </table>
+obviously fails to terminate. Hence, <var>x</var> and <var>y</var> are both unbounded: more and more of <var>f</var> will be taken into account, and more and more of <var>g</var> will be defined.
+<p>From 0 we derive 
+<table width=100%><tr><td valign=top width=10%>
+</td>
+<td>(<b>N</b>&thinsp;<var>i</var>&thinsp;: <var>i</var>&ge;0&thinsp;: <var>f</var>&thinsp;[<var>i</var>]&thinsp;&le;&thinsp;<var>f</var>&thinsp;[<var>x</var>]) &ge; <var>x</var>+1 </td><td align=right>(2)
+</td>  </tr>  </table>
+The weakest precondition that <var>x</var>&thinsp;:= <var>x</var>+1 establishes
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(<b>N</b>&thinsp;<var>i</var>&thinsp;: <var>i</var>&ge;0&thinsp;: <var>f</var>&thinsp;[<var>i</var>]&thinsp;&le;&thinsp;<var>y</var>) &ge; <var>x</var></td><td align=right>(3)
+</td>  </tr>  </table>
+is, according to the axiom of assignment, 
+<table width=100%><tr><td valign=top width=10%>
+</td>
+<td>(<b>N</b>&thinsp;<var>i</var>&thinsp;: <var>i</var>&ge;0&thinsp;: <var>f</var>&thinsp;[<var>i</var>]&thinsp;&le;&thinsp;<var>y</var>) &ge; <var>x</var>+1 , </td>  </tr>  </table>
+<p class="noindent">which, on account of (2), is implied by <var>f</var>&thinsp;[<var>x</var>]&thinsp;&le;&thinsp;<var>y</var>; hence, the first alternative leaves (3), which is established by <var>x</var>,&thinsp;<var>y</var>&thinsp;:= 0,0, invariant. 
+  So does the second alternative (obviously). 
+  </p>
+<p>From <var>f</var>&thinsp;[<var>x</var>]&thinsp;&gt;&thinsp;<var>y</var> we derive, on account of (0)
+</p>
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(<b>N</b>&thinsp;<var>i</var>&thinsp;: <var>i</var>&ge;0&thinsp;: <var>f</var>&thinsp;[<var>i</var>]&thinsp;&le;&thinsp;<var>y</var>) &le; <var>x</var> , </td>  
+</tr>  </table>
+which, in conjunction with (3) allows us to conclude that, then, (<u>N</u>&thinsp;<var>i</var>&thinsp;: <var>i</var>&ge;0: <var>f</var>&thinsp;[<var>i</var>]&thinsp;&le;&thinsp;<var>y</var>) = <var>x</var>. Hence, we have the second invariant
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(<b>A</b>&thinsp;<var>j</var>&thinsp;: 0&le;<var>j</var>&lt;<var>y</var>&thinsp;: <var>g</var>[<var>j</var>] = (<u>N</u>&thinsp;<var>i</var>&thinsp;: <var>i</var>&ge;0&thinsp;: <var>f</var>&thinsp;[<var>i</var>]&thinsp;&le;&thinsp;<var>j</var>)) </td><td align=right>(4)
+</td>  </tr>  </table>
+and this is exactly the property I wanted to prove about my program 
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p>  
+The example is &mdash;  see <a href="EWD753.html" title="EWD753.html">EWD753</a>&mdash; inspired by the theorem of Lambek and Moser, a theorem Wim Feijen found when looking for functions to be programmed in SASL. 
+As a matter of fact, my &ldquo;combined&rdquo; program was <em>not</em> the first program I wrote to solve this problem: it is a direct translation of the 
+following SASL definitions I wrote first: (my syntax) 
+<table width="100%"> 
+<tr> <td>&nbsp;&nbsp;&nbsp;</td> <td colspan=4>
+   <b>def</b> k <var>x</var> <var>y</var> (<var>p</var>:<var>q</var>) = </td> <td  width=40%  align=right>(5)</td></tr> <tr> <td></td> <td>&nbsp;&nbsp;&nbsp;</td> <td colspan=2> 
+      <b>if</b> <var>p</var>&thinsp;&le;&thinsp;<var>y</var> &rarr; k (<var>x</var>+1) <var>y</var> <var>q</var></td>  </tr> <tr> <td></td> <td></td>  <td colspan=1>
+       &nbsp;&#11007;<var> p</var>&thinsp;&gt;&thinsp;<var>y</var> &rarr; <var>x </var>: k <var>x</var> (<var>y</var>+1) (<var>p</var>:<var>q</var>)</td> </tr> <tr> <td></td> <td></td> <td colspan=2>
+      <b>fi</b>                                   </td> </tr> <tr> <td></td> <td colspan=3>
+   <b>def</b> g = k 0 0 f                         </td> </tr> </table>
+<p>But even the proof of the fact that <var>g</var> is ascending 
+&mdash;which in the iterative program follows trivially from the equally obvious invariant
+<table width=100%><tr><td valign=top width=10%>
+</td><td><var>y</var> = 0 <b>cor</b> <var>g</var>[<var>y</var>&minus;1]&thinsp;&le;&thinsp;<var>x</var> &mdash;
+</td>  </tr>  </table>
+was very painful when I tried a proof technique à la <a href="EWD749.html">EWD749</a> which does justice to the &ldquo;functional&rdquo; nature of applicative languages: 
+(5) is expressed in terms of tails, my proof is in terms of finite prefixes. I think I should ask an expert (See <a href="EWD759.html" title="EWD759.html">EWD759</a>.)
+<p class="noindent"><table width=100%><tr><td valign=top width=50%>
+Plantaanstraat 5</td><td>9 November 1980
+</td></tr><tr><td valign=top>
+5671 AL NUENEN</td><td>prof. dr. Edsger W. Dijkstra
+</td></tr><tr><td valign=top>
+The Netherlands</td><td>Burroughs Research Fellow
+</td>  </tr>  </table>
+          
+<hr /> 
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />   
+    Last revision  
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">   
+      <!&mdash; #BeginDate format:IS1 &mdash;>
+      <!-- #BeginDate format:En2 -->10-Nov-2015<!-- #EndDate -->
+      <!&mdash; #EndDate &mdash;>  
+    </csobj> 
+  .</font></p>    
+  <p>&nbsp;</p>   
+</div></div></div></div>
+</body></html> 

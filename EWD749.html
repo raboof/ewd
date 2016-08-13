@@ -1,0 +1,207 @@
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">         
+      
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">         
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">        
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />        
+    <title>E.W.Dijkstra Archive: On the productivity of recursive definitions. (EWD 749)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>  
+   </head>      
+  <body><div id="title"><h1>On the productivity of recursive definitions.</h1></div>        
+    <div id="frame" align="right">  
+      <div id="header" align="right">      
+        <a href="https://www.cs.utexas.edu/~EWD/ewd07xx/EWD749.PDF"    
+           title="Link to the PDF version of EWD749">EWD749</a></div></div> 
+        <div id="frame">    
+           <div id="content">
+             <p class="noindent"><u>On the productivity of recursive definitions</u>.                      
+           <p>The purpose of this note is to summarize what we have learned at the last two sessions of the Tuesday Afternoon Club. 
+We shall discuss conditions under which finite expressions can be said to  represent infinite sequences. 
+The simplest example of such a finite expression is 
+<table width=100%><tr><td valign=top width=10%>
+</td><td>ones
+</td>  </tr>  </table>
+ where <var>ones</var> is defined recursively by
+<table width=100%><tr><td valign=top width=10%>
+</td>
+  <td><b>def</b> <var>ones</var> = 1 : <var>ones</var></td>  </tr>  </table>
+(Here we have borrowed from SASL  the colon to denote concatenation.) 
+<p>Repeated application of the definition of <var>ones</var> gives 
+<table width=100%><tr><td valign=top width=10%>
+</td><td><var>ones</var></td></tr><tr><td valign=top>
+</td><td>= 1 : <var>ones</var></td></tr><tr><td valign=top>
+</td>
+<td>= 1 : 1 : <var>ones</var> &nbsp;&nbsp;&nbsp;&nbsp;, and so on. </td>  </tr>  </table>
+<p class="noindent"><u>On terminology</u><b>. </b>
+<p>All through our discussions we have been been painfully aware of our need of a terminology that would not be misleading. 
+<p><u>Aside</u>. How much harm can be done by a misleading terminology was brought home to me this morning when I received a technical 
+note (without title) written by Richard J. Treitel, a Stanford student. 
+When I introduced the predicate transformer, I knew that it wasn&rsquo;t fully correct to call it &ldquo;wp&rdquo; and it wasn&rsquo;t fully correct either to 
+denote its (second) argument and its value by &ldquo;post-condition&rdquo; and &ldquo;pre-condition&rdquo; respectively. 
+In view of convention {<var>P</var>} <var>S</var> {<var>R</var>}, I could have called them &ldquo;right-condition&rdquo; and &ldquo;left-condition&rdquo;. Yet I adopted the traditional terminology, 
+hoping that no one would be misled. 
+But R.J. Treitel states about wp that &ldquo;it explicitly involves a notion of time.&rdquo; (End of aside.) 
+<p>For our purpose, the term &ldquo;infinite&rdquo; won&rsquo;t do. Firstly, when introducing two complementary concepts, 
+I prefer positive terms for both, because naming one by the negation of the other destroys the symmetry by presenting the latter one as  the more &ldquo;basic&rdquo; concept. 
+(For <var>x</var> &ne; <var>y</var> I prefer the pronunciation &ldquo;<var>x</var> differs from <var>y</var>&rdquo; to &ldquo;<var>x</var> is not equal to <var>y&rdquo;</var>. 
+I  have still to encounter the first mathematician who pronounces <var>x</var> = <var>y</var> as &ldquo;<var>x</var> doesn&rsquo;t differ from <var>y</var>&rdquo;!). 
+Secondly, we shall encounter two drastically different ways in which a sequence can fail to be infinite. 
+<p>In the time domain we have &mdash;remarkably enough!&mdash; plenty of negation-free terms to denote infinite, such as &ldquo;eternal&rdquo; and &ldquo;permanent&rdquo;, but that won&rsquo;t 
+  help us, for my ultimate goal is a non-operational treatment in which our texts needn&rsquo;t be interpreted as executable code. 
+  I have hesitated for a long time between &ldquo;ongoing sequences&rdquo; and &ldquo;continuing sequences&rdquo; &mdash;not being too pleased with either of the two&mdash;. 
+  After consultation of all my English and American dictionaries I concluded that &ldquo;continued concatenation&rdquo; should do the job. 
+<p class="noindent"><u>Note</u>. My Webster&rsquo;s New Collegiate Dictionary gives: &ldquo;continued fraction&rdquo; <i>n</i>: a fraction whose numerator is an integer and whose 
+denominators is an integer plus a fraction whose numerator is an integer and whose denominator is an integer plus a fraction and so on&rdquo;. 
+<p>The Shorter Oxford English Dictionary gives &ldquo;Continued 1[...] 2. Carried on in space, time, or series&rdquo; with as one of the examples: &ldquo;C. Fraction: a fraction whose denominator is an integer plus a fraction, which latter fraction has a similar denominator and so on.&rdquo; 
+<p>(In passing I noted that none of my dictionaries defined &ldquo;continued fraction:  a fraction whose nominator is an integer and whose denominator is an integer plus a continued fraction.&rdquo;) 
+<p>I take the fact that dictionaries from both sides of the Atlantic Ocean close their definitions with the famous &ldquo;and so on&rdquo; as an indication that &ldquo;continued&rdquo; admirably renders the idea of a non-terminating recursion. 
+<p>(End of &ldquo;On terminology&rdquo;) 
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p>  
+<p>In the following, &lt;atom&gt; stands for a character from a (finite or infinite) alphabet, say a natural number.
+Sequences, concatenations, and continued concatenations are defined by the following syntax: 
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&lt; seq &gt; ::= &lt; atom &gt; | &lt; conc &gt;
+</td></tr><tr><td valign=top>
+</td><td>&lt; conc &gt; ::= ( &lt; seq &gt; : &#x2280; seq &#x2281; )
+</td></tr><tr><td valign=top>
+</td><td>&lt; contconc &gt; ::= ( &lt; seq &gt; : &#x2280; contconc &#x2281; )
+</td>  </tr>  </table>
+With the bracket pair &#x2280; &#x2281; I denote an instance of the corresponding syntactic category, but with its outer parenthesis pair, if present, optionally stripped off. 
+(This seemed a convenient way to indicate that concatenation as denoted  by the colon is deemed to associate to the right.) 
+Note that I did not bother to introduce the empty sequence (nor NIL). 
+<p>The usual functions &ldquo;head&rdquo; and tail are only introduced for concatenations (continued or not): 
+<table width=100%><tr><td valign=top width=10%>
+</td>
+<td>hd (<var>p</var> : <var>q</var> ) = a </td></tr><tr><td valign=top>
+</td><td>tl (<var>p</var> : <var>q</var>) = <var>q</var></td>  </tr>  </table>
+a head is always a &lt;seq&gt;, and a tail is a &lt;seq&gt; or a &lt;contconc&gt;, just as the argument. 
+<p>For concatenations we define the true prefix &ldquo;tpf <var>n</var>&rdquo; of length <var>n</var> for <var>n</var> &ge; 1 by                                  
+<table width=100%><tr><td valign=top width=10%>
+</td><td>tpf 1 (<var>p</var> : <var>q</var>) = <var>p</var></td></tr><tr><td valign=top>
+</td><td>tpf (<var>n</var>+1) (<var>p</var> : <var>q</var>) = (<var>p</var> : (tpf <var>n</var> <var>q</var>)) ; </td>  </tr>  </table>
+<p>a tpf <var>n</var> (<var>p</var> : <var>q</var>) &mdash;when defined, of course&mdash; is always a &lt;seq&gt;.
+  The distinguishing feature of continued concatenations is that tpf <var>n</var> &lt; contconc&gt; is defined for all <var>n</var> &ge; 1; 
+  tpf <var>n</var> &lt;conc&gt; is only 
+  defined for <var>n</var> up to some limit &mdash;this because the true prefix of an &lt;atom&gt; is undefined. 
+  </p>
+<p>That, for some <var>f</var>, tpf <var>n</var> <var>f</var> is defined for all <var>n</var> &ge; 1  is, in principle, always proved by mathematical induction over <var>n</var>. 
+  With </p>
+<table width=100%><tr><td valign=top width=10%>
+</td><td><b>def</b> ones = 1 : ones
+</td>  </tr>  </table>
+the fact that &ldquo;tpf <var>n</var> ones&rdquo; is a &lt;seq&gt; implies that also tpf (<var>n</var>+1) ones is a 
+&lt;seq&gt; because &ldquo;1&rdquo; is a &lt;seq&gt;. Hence, ones is a continued concatenation. 
+<p>With 
+<table width=100%><tr><td valign=top width=10%>
+</td><td>def <var>C</var> = <var>c</var> : <var>D</var> ; </td></tr><tr><td valign=top>
+</td><td>def <var>D</var> = <var>d</var> : <var>C</var> , </td>  </tr>  </table>
+One way would be to derive <var>C</var> = <var>c</var> : <var>d</var> : <var>C</var> by substitution and to proceed as before. 
+With &ldquo;seq <var>f</var>&rdquo; meaning &ldquo;<var>f</var> is a &lt;seq&gt;&rdquo;, and with &ldquo;Q <var>m</var>&rdquo; meaning 
+&rdquo;(tpf <var>m</var> <var>C</var>) and (tpf <var>m</var> <var>D</var>) are both defined&rdquo;, it is 
+easily seen that 
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(seq <var>c</var>) &and; (seq <var>d</var>) &or; (Q <var>m</var>) &rArr; Q (<var>m</var>+1) , </td>  </tr>  </table>
+<p>and mathematical induction over single <var>m</var> will do the job. 
+  In the case of mutual recursion this trick seems applicable in general. 
+  </p>
+<p>More interesting recursive definitions contain a formal parameter, and are essentially of the form </p>
+<table width=100%><tr><td valign=top width=10%>
+</td>
+  <td><b>def</b> f <var>x</var> = g <var>x</var> : f (h <var>x</var>) . </td>  </tr>  </table>
+<p>Given a predicate P such that, 
+<table width=100%><tr><td valign=top width=10%>
+</td>
+<td>(P <var>x</var>) &rArr; (seq (g <var>x</var>)) &and; (P (h <var>x</var>)) </td><td align=right>(*)
+</td>  </tr>  </table>
+(or, without functional application the highest priority: 
+<table width=100%><tr><td valign=top width=10%>
+</td>
+<td>P <var>x</var> &rArr; seq (g <var>x</var>) &and; P (h <var>x</var>) ) </td>  </tr>  </table>
+and with &ldquo;Q <var>m</var>&rdquo; meaning &ldquo;for all <var>x</var>, Px implies 
+that tpf <var>m</var>(f <var>x</var>) is defined&rdquo;, it is easy to show that Q <var>m</var> &rArr; Q (<var>m</var>+1). 
+Hence formula (*) summarizes 
+our proof obligation for the demonstration that 
+P <var>x</var> implies that f <var>x</var> is a continued concatenation.
+<p>The generalization to mutually recursive 
+definitions is now straightforward. With 
+<table width=100%><tr><td valign=top width=10%>
+</td><td><b>def</b> f0 <var>x</var> = g0 <var>x</var> : f1 (h1 <var>x</var>); </td></tr><tr><td valign=top>
+</td><td><b>def</b> f1 <var>x</var> = g1 <var>x</var> : f0 (h0 <var>x</var>) </td>  </tr>  </table>
+the analogue of (*) is 
+P0 <var>x</var> &rArr; seq (g0 <var>x</var>) &and; P1 (h1 <var>x</var>)  and 
+P1 <var>x</var> &rArr; seq (g1 <var>x</var>) &and; P0 (h0 <var>x</var>)  .
+<p>Finally some examples.
+<table width=100%><tr><td valign=top width=10%>
+For</td><td><b>def</b> id <var>f</var> = p : id <var>q</var></td></tr><tr><td valign=top>
+</td><td><b>&nbsp; &nbsp; &nbsp; where</b> p : 1 = f
+</td>  </tr>  </table>
+take for P: P <var>x</var> means: <var>x</var> is a continued concatenation
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p>  
+<p class="noindent">
+<table width=100%><tr><td valign=top width=20%>
+Consider:</td><td>eleven <var>p</var> = <var>p</var> : <var>p</var></td></tr><tr><td valign=top>
+</td>
+<td>eleven (<var>p</var> : <var>q</var>) = <var>p</var> : <var>p</var>+p1 : q1 </td></tr><tr><td valign=top>
+</td>
+<td>&nbsp; &nbsp; &nbsp; <b>where</b> p1 : q1 =eleven q
+</td>  </tr>  </table>
+Here the first line defines eleven for an argument
+that is an atom, the next two define the value of
+eleven when the argument is a concatenation. This
+time the previous P does not suffice; we need now :
+&rdquo;P <var>x</var> means: <var>x</var> is a member of the syntactic category
+&lt;<var>x</var>&gt;, defined by &lt;<var>x</var>&gt; ::= &lt;integer&gt; : &#x2280;<var>x</var>&#x2281; &rdquo;.
+(For such arguments the first line of the definition is irrelevant.)
+<p>In our next example we are interested in a
+condition Q <var>x</var> such that eleven <var> </var> is a &lt;seq&gt;.        
+Take for Q, &ldquo;Q <var>x</var> means that <var>x</var> is a member 
+of the syntactic category &lt;<var>x</var>&gt;, defined by 
+<table width=100%><tr><td valign=top width=10%>
+</td>
+<td>&lt;<var>x</var>&gt; ::= &lt;integer&gt; | &lt;integer&gt; : &#x2280;<var>x</var>&#x2281;&nbsp;&nbsp;&nbsp;&rdquo;.
+</td>  </tr>  </table>
+We can prove  
+<table width=100%><tr><td valign=top width=10%>
+</td>
+<td>Q <var>x</var> &rArr; Q (eleven <var>x</var>) </td>  </tr>  </table>
+a result we need when we wish to prove that 
+<table width=100%><tr><td valign=top width=10%>
+with</td><td><b>def</b> pascal x = x : pascal (eleven x)
+</td>  </tr>  </table>
+Q <var>x</var> implies that pascal <var>x</var> is a continued concatenation. 
+(The interesting value is of course, pascal 1; it 
+equals the continued concatenation of the lines of 
+the Pascal Triangle.)
+<p>What is the condition on <var>x</var> such that frill <var>x</var> is a continued concatenation, with frill given by 
+<table width=100%><tr><td valign=top width=10%>
+</td><td><b>def</b> frill <var>x</var> = <var>p</var> : frill <var>q</var></td></tr><tr><td valign=top>
+</td><td>&nbsp; &nbsp; &nbsp; <b>where</b> <var>p</var> : <var>q</var> = eleven <var>x</var> ? </td>  </tr>  </table>
+<p class="noindent"><b>Remark.</b> Instead of tpf <var>n</var>, which is not defined on
+atoms, we should have introduced pf <var>n</var>, given by 
+<table width=100%><tr><td valign=top width=10%>
+</td><td>pf 1 <var>p</var> = <var>p</var></td></tr><tr><td valign=top>
+</td><td>pf 1 (<var>p</var> : <var>q</var>) = <var>p</var></td></tr><tr><td valign=top>
+</td><td>pf (<var>n</var>+1) (<var>p</var> : <var>q</var>) = <var>p</var> : pf <var>n</var> <var>q</var> . </td>  </tr>  </table>
+<table width=100%><tr><td valign=top width=40%>
+</td><td>(End of remark.)
+</td>  </tr>  </table>
+<p><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>18 - 25 September 1980
+</td></tr><tr><td valign=top>
+5671 AL NUENEN</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr><tr><td valign=top>
+The Netherlands</td><td>Burroughs Research Fellow
+</td>  </tr>  </table>
+          
+<hr /> 
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />   
+    Last revision  
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">   
+      <!&mdash; #BeginDate format:IS1 &mdash;>
+      <!-- #BeginDate format:En2 -->20-Jul-2015<!-- #EndDate -->
+      <!&mdash; #EndDate &mdash;>  
+    </csobj> 
+  .</font></p>    
+  <p>&nbsp;</p>   
+</div></div></div></div>
+</body></html> 

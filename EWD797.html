@@ -1,0 +1,858 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: Fibonacci numbers and Leonardo numbers. (EWD 797)</title>
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>Fibonacci numbers and Leonardo numbers.</h1></div>
+		<div align="right">
+			&nbsp;&nbsp;<a href="https://www.cs.utexas.edu/~EWD/ewd07xx/EWD797.PDF" target="_blank">EWD 797</a></div>
+		<div align="left">
+			<CENTER>
+				<TABLE WIDTH="94%">
+<TR>
+						<td>
+							<pre><font face="verdana"><u>Fibonacci numbers and Leonardo numbers.</u>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(The following formal derivations and computations
+are absolutely elementary and without scientific in-
+terest. But I am interested in some numbers and
+need the formulae, and learned that working on a
+scratch pad I make too many mistakes. Hence.)
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Fibonacci numbers are given by
+
+F<sub>0</sub> = 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F<sub>1</sub> = 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;F<sub>n+2</sub> = F<sub>n+1</sub> + F<sub>n</sub>	(or : F<sub>n+2</sub> &#150; F<sub>n+1</sub> &#150; F<sub>n</sub> = 0).
+
+The analytical solution of a homogeneous recurrence
+relation like this is found by solving first the cor-
+responding characteristic equation which one gets
+by &quot;trying&quot; an F of the form F<sub>n</sub> = x<sup>n</sup> :
+
+(0)		x<sup>2</sup> &#150; x &#150; 1 = 0
+
+This equation has two different roots, which I
+shall denote by  &#x03B1; and  &#x03B2;
+
+(1)	&#x03B1; = &frac12; + &frac12;&#x221A;5 = 1.618034&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sup>10</sup>log &#x03B1; = 0.208988
+
+	 &#x03B2; = &frac12; &#150; &frac12;&#x221A;5 = &#150; .618034
+
+	Obvious properties are
+
+(2)	&#x03B1; + &#x03B2; = 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x03B1;</font>&#x2219;<font face="verdana">&#x03B2; = &#150;1
+
+	  &#x03B1;<sup>2</sup> = &#x03B1; + 1  ,  &#x03B1;<sup>3</sup> = 2</font>&#x2219;<font face="verdana">&#x03B1; + 1  ,  &#x03B1;<sup>4</sup> = 3</font>&#x2219;<font face="verdana">&#x03B1; + 2  ,  etc.
+
+	Because &#x03B1; &#x2260; &#x03B2; , &#x03B1;<sup>n</sup> and &#x03B2;<sup>n</sup> give rise to linearly
+independent sequences and <u>each</u> solution of the
+homogeneous recurrence relation is of the form
+
+(3)		F<sub>n</sub> = X</font>&#x2219;<font face="verdana">&#x03B1;<sup>n</sup> + Y</font>&#x2219;<font face="verdana">&#x03B2;<sup>n</sup>
+
+where the constants X and Y are determined by
+solving the set of linear equations
+</font></pre>
+							<table width="179" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td><font face="verdana">(4) </font></td>
+									<td align="right"><font face="verdana">X + Y = F<sub>0</sub></font></td>
+								</tr>
+								<tr>
+									<td></td>
+									<td align="right"><font face="verdana">&#x03B1;</font>&#x2219;<font face="verdana">X + &#x03B2;</font>&#x2219;<font face="verdana">Y = F<sub>1</sub></font></td>
+								</tr>
+							</table>
+							<pre><font face="verdana">			
+ Multiplying the second equation by &#x03B1; we get </font>&#x2014;<font face="verdana">see (2)</font>&#x2014;<font face="verdana">
+
+		(&#x03B1; + 1)</font>&#x2219;<font face="verdana">X &#150; Y = &#x03B1;</font>&#x2219;<font face="verdana">F1	  , and hence
+		(&#x03B1; + 2)</font>&#x2219;<font face="verdana">X = F<sub>0</sub> + &#x03B1;</font>&#x2219;<font face="verdana">F<sub>1</sub>	, hence
+
+  	     F<sub>0</sub> + (&frac12; + &frac12; &#x221A;5)</font>&#x2219;<font face="verdana">F<sub>1</sub>	   &nbsp;&nbsp;&nbsp;2</font>&#x2219;<font face="verdana">F<sub>0</sub> + (1 + &#x221A;5)</font>&#x2219;<font face="verdana">F<sub>1</sub>        (5 &#150; &#x221A;5)
+X   =	 &#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;  =  &#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501; &#x2219; &#x2501;&#x2501;&#x2501;&#x2501;&#x2501;
+		    2 &frac12; + &frac12; &#x221A;5			    (5 + &#x221A;5)	         (5 &#150; &#x221A;5)
+
+           </font><font size="-1" face="verdana"><sub>1</sub></font><font face="verdana"> 
+     =  </font>&#x2501;&#x2501; <font face="verdana">(10</font>&#x2219;<font face="verdana">F<sub>0</sub> &#150; 2</font>&#x2219;<font face="verdana">F<sub>0</sub></font>&#x2219;<font face="verdana">&#x221A;5 + 4</font>&#x2219;<font face="verdana">F<sub>1</sub></font>&#x2219;<font face="verdana">&#x221A;5) =
+          </font><font size="-2" face="verdana"><sup>20</sup></font><font face="verdana">
+
+          &nbsp;5</font>&#x2219;<font face="verdana">F<sub>0</sub> + (2</font>&#x2219;<font face="verdana">F<sub>1</sub> &#150; F<sub>0</sub>)</font>&#x2219;<font face="verdana">&#x221A;5
+      =   &#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;                                          (5)
+                      10
+
+	and, for reasons of symmetry
+
+         (5</font>&#x2219;<font face="verdana">F<sub>0</sub> &#150; (2</font>&#x2219;<font face="verdana">F<sub>1</sub> &#150; F<sub>0</sub>)</font>&#x2219;<font face="verdana">&#x221A;5)
+Y    =  &#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;                                            (5')
+                      10 
+
+	For the Fibonacci numbers we substitute  F<sub>0</sub> = F<sub>1</sub> = 1
+and find, according to (3)
+
+(6)	F<sub>n</sub> = (&frac12; + &#x215F;</font><font size="-3" face="verdana">10</font><font face="verdana">&#x221A;5)</font>&#x2219;<font face="verdana">&#x03B1;<sup>n</sup> + (&frac12; &#150; &#x215F;</font><font size="-3" face="verdana">10</font><font face="verdana">&#x221A;5)</font>&#x2219;<font face="verdana">&#x03B2;<sup>n</sup>
+
+	= .723607</font>&#x2219;<font face="verdana">&#x03B1;<sup>n</sup> + .276393</font>&#x2219;<font face="verdana">&#x03B2;<sup>n</sup>
+
+			*		*
+				*
+
+	We now switch to the Leonardo numbers given
+by  L<sub>0</sub> = 1     L<sub>1</sub> = 1       L<sub>n+2</sub> = L<sub>n+1</sub> + L<sub>n</sub> + 1 . This
+recurrence relation is not homogeneous but
+</font>&#x2014;<font face="verdana">because x = 1 is not a root of (0)</font>&#x2014;<font face="verdana"> this is only
+an apparent complication: (L<sub>n+2</sub> + 1) = (L<sub>n+1</sub>+1) + (L<sub>n</sub> + 1),
+and we immediately derive
+
+(7)	   	L<sub>n</sub> = 2</font>&#x2219;<font face="verdana">F<sub>n</sub> &#150; 1  .
+
+	The nth Leonardo tree has L<sub>n</sub> vertices. The
+(n+2)th Leonardo tree is a binary tree, of which
+the (n+1)th and the nth Leonardo tree are
+the two subtrees. A number that is perhaps of some
+interest is the distance from the root summed
+over the vertices of the nth Leonardo tree.
+Denoting this quantity by K<sub>n</sub> we derive from
+the definition
+
+(8)	   K<sub>n+2</sub> = (K<sub>n+1</sub> + L<sub>n+1</sub>) + (K<sub>n</sub> + L<sub>n</sub>)
+or
+	   (K<sub>n+2</sub>&#150;2) = (K<sub>n+1</sub>&#150;2) + (K<sub>n</sub>&#150;2) + (L<sub>n+1</sub>+1) + (L<sub>n</sub>+1)
+
+or with
+
+(9)   	K<sub>n</sub> = 2</font>&#x2219;<font face="verdana">(H<sub>n</sub> + 1)  or  H<sub>n</sub> = (K<sub>n</sub>&#150;2)/2
+(10)	H<sub>n+2</sub> = H<sub>n+1</sub> + H<sub>n</sub> + F<sub>n+2</sub>
+
+	Solving (10) for F<sub>n+2</sub> and taking the recurrence
+relation for the F's into account one finds that the
+H's satisfy a homogeneous linear recurrence relation
+with (x<sup>2</sup> &#150; x &#150; 1)<sup>2</sup> = 0 as characteristic equation. (This
+is a special case of a more general theorem of
+which I was not aware.) Hence the general form
+of H<sub>n</sub> is
+
+(11)	H<sub>n</sub> = (a + n</font>&#x2219;<font face="verdana">A)</font>&#x2219;<font face="verdana">&#x03B1;<sup>n</sup> + (b + n</font>&#x2219;<font face="verdana">B)</font>&#x2219;<font face="verdana">&#x03B2;<sup>n</sup>
+
+where the constants a, A, b, and B are determined
+by solving  </font>&#x2014;<font face="verdana">see (2)</font>&#x2014;
+
+								<pre>
+<table width="469" border="0" cellspacing="2" cellpadding="0">
+										
+										
+								
+										
+										<tr>
+									
+											
+											<td><font face="verdana">(12)</font></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">a +</font></td>
+											
+											
+									
+											
+											<td align="right"></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">b&nbsp;&nbsp;&nbsp;</font></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">= H<sub>0</sub></font></td>
+											
+											
+								</tr>
+										
+										
+								
+										
+										<tr>
+									
+											
+											<td></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">&#x03B1;</font>&#x2219;<font face="verdana">a +</font></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">&#x03B1;</font>&#x2219;<font face="verdana">A +</font></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">&#x03B2;</font>&#x2219;<font face="verdana">b +</font></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">&#x03B2;</font>&#x2219;<font face="verdana">B = H<sub>1</sub></font></td>
+											
+											
+								</tr>
+										
+										
+								
+										
+										<tr>
+									
+											
+											<td></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">(&#x03B1; + 1)</font>&#x2219;<font face="verdana">a +</font></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">(2</font>&#x2219;<font face="verdana">&#x03B1; + 2)</font>&#x2219;<font face="verdana">A +</font></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">(&#x03B2; + 1)</font>&#x2219;<font face="verdana">b +</font></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">(2</font>&#x2219;<font face="verdana">&#x03B2; + 2)</font>&#x2219;<font face="verdana">B = H<sub>2</sub></font></td>
+											
+											
+								</tr>
+										
+										
+								
+										
+										<tr>
+									
+											
+											<td></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana"> (2</font>&#x2219;<font face="verdana">&#x03B1; + 1)</font>&#x2219;<font face="verdana">a +</font></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">(6</font>&#x2219;<font face="verdana">&#x03B1; + 3)</font>&#x2219;<font face="verdana">A +</font></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana">(2</font>&#x2219;<font face="verdana">&#x03B2; + 1)</font>&#x2219;<font face="verdana">b +</font></td>
+											
+											
+									
+											
+											<td align="right"><font face="verdana"> (6</font>&#x2219;<font face="verdana">&#x03B2; + 3)</font>&#x2219;<font face="verdana">B = H<sub>3</sub></font></td>
+</tr>
+</table>
+<pre><font face="verdana"> We eliminate  a  and  b  with
+
+(13)	y<sub>0</sub> = H<sub>2</sub> &#150; H<sub>1</sub> &#150; H<sub>0</sub>,	y<sub>1</sub> = H<sub>3</sub> &#150; H<sub>2</sub> &#150; H<sub>1</sub></font></pre>
+<table width="291" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="right"><font face="verdana">(&#x03B1; + 2)</font>&#x2219;<font face="verdana">A&nbsp;&nbsp;&nbsp;+</font></td>
+<td align="right" width="44%"><font face="verdana">(&#x03B2; + 2)</font>&#x2219;<font face="verdana">B&nbsp;&nbsp;=&nbsp;&nbsp;y<sub>0</sub></font></td>
+											
+																					
+									
+																					
+											<td></td>
+											
+																					
+								</tr>
+										
+																				
+								
+																				
+										<tr>
+									
+																					
+											<td align="right"><font face="verdana">(3</font>&#x2219;<font face="verdana">&#x03B1; + 1)</font>&#x2219;<font face="verdana">A&nbsp;&nbsp;&nbsp;+</font></td>
+											
+																					
+									
+																					
+											<td align="right" width="44%"><font face="verdana">(3</font>&#x2219;<font face="verdana">&#x03B2; + 1)</font>&#x2219;<font face="verdana">B&nbsp;&nbsp;=&nbsp;&nbsp;y<sub>1</sub></font></td>
+											
+
+											<td>    &nbsp;&nbsp;&nbsp;&nbsp;,</td>
+										</tr>
+									</table>
+<font face="verdana">	which leads to
+</font>
+<table width="308" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="right"><font face="verdana">5</font>&#x2219;<font face="verdana">A&nbsp;&nbsp;+</font></td>
+<td align="right" width="32%"><font face="verdana">5</font>&#x2219;<font face="verdana">B&nbsp;&nbsp;=&nbsp;&nbsp;z<sub>0</sub></font></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td align="right"><font face="verdana">&#x03B1;</font>&#x2219;<font face="verdana">(5</font>&#x2219;<font face="verdana">A)&nbsp;&nbsp;+</font></td>
+<td align="right" width="32%"><font face="verdana">&#x03B2;</font>&#x2219;<font face="verdana">(5</font>&#x2219;<font face="verdana">B)&nbsp;&nbsp;=&nbsp;&nbsp;z<sub>1</sub></font></td>
+<td align="right"><font face="verdana">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with</font></td>
+</tr>
+</table>
+									
+<font face="verdana">(14)		z<sub>0</sub> = 3</font>&#x2219;<font face="verdana">y<sub>0</sub> &#150; y<sub>1</sub>	,	z<sub>1</sub> = 2</font>&#x2219;<font face="verdana">y<sub>1</sub> &#150; y<sub>0</sub>
+
+	This set of equations is of the same form as (4).
+Hence we have
+
+                  5</font>&#x2219;<font face="verdana">z<sub>0</sub> + (2</font>&#x2219;<font face="verdana">z<sub>1</sub> &#150; z<sub>0</sub>)</font>&#x2219;<font face="verdana">&#x221A;5
+(15)  A =     </font>&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;<font face="verdana">
+                             50
+
+                  5</font>&#x2219;<font face="verdana">z<sub>0</sub> &#150; (2</font>&#x2219;<font face="verdana">z<sub>1</sub> &#150; z<sub>0</sub>)</font>&#x2219;<font face="verdana">&#x221A;5 
+(15') B =      </font>&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;
+                <font face="verdana">             50 
+
+ We can eliminate A and B from (12) with
+
+		y<sub>3</sub> = &#150;2</font>&#x2219;<font face="verdana">H<sub>3</sub> + 3</font>&#x2219;<font face="verdana">H<sub>2</sub> + 6</font>&#x2219;H<sub>1</sub> &#150; H<sub>0<br>
+									</sub>
+<table width="250" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="right"><font face="verdana">5</font>&#x2219;<font face="verdana">a&nbsp;&nbsp;&nbsp;&nbsp;+</font></td>
+<td align="right"><font face="verdana">5</font>&#x2219;<font face="verdana">b</font></td>
+<td><font face="verdana">&nbsp;=&nbsp;5</font>&#x2219;<font face="verdana">H<sub>0</sub></font></td>
+</tr>
+<tr>
+<td align="right"></td>
+<td align="right"><font face="verdana">&#x03B1;</font>&#x2219;<font face="verdana">(5</font>&#x2219;<font face="verdana">a) +</font></td>
+<td align="right"><font face="verdana">&#x03B2;</font>&#x2219;<font face="verdana">(5</font>&#x2219;<font face="verdana">b)</font></td>
+<td><font face="verdana">&nbsp;=&nbsp;y<sub>3</sub>
+</font></td>
+</tr>
+</table>
+									
+<font face="verdana">which is again of the form (4). Eliminating  y<sub>3</sub>, we get
+
+               &nbsp;25</font>&#x2219;<font face="verdana">H<sub>0</sub> + (&#150;4</font>&#x2219;<font face="verdana">H<sub>3</sub> + 6</font>&#x2219;<font face="verdana">H<sub>2</sub> + 12</font>&#x2219;<font face="verdana">H<sub>1</sub> &#150; 7</font>&#x2219;<font face="verdana">H<sub>0</sub>)</font>&#x2219;<font face="verdana">&#x221A;5
+(16) a =    </font>&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;<font face="verdana"> 
+                                   50
+
+               &nbsp;25</font>&#x2219;<font face="verdana">H<sub>0</sub> &#150; (&#150;4</font>&#x2219;<font face="verdana">H<sub>3</sub> + 6</font>&#x2219;<font face="verdana">H<sub>2</sub> + 12</font>&#x2219;<font face="verdana">H<sub>1</sub> &#150; 7</font>&#x2219;<font face="verdana">H<sub>0</sub>)</font>&#x2219;<font face="verdana">&#x221A;5
+(16') b =    </font>&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;
+                     <font face="verdana"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;50 
+
+	Let us apply these formulae with the numerical
+values of K<sub>0</sub>, K<sub>1</sub>, K<sub>2</sub>, K<sub>3</sub> and then check them against
+the numerical value of K<sub>4</sub> . (It is a long time ago
+since I made my last check.)
+											
+										<table width="339" border="0" cellspacing="0" cellpadding="3">
+												
+
+												<tr>
+
+													<td align="center"><font face="verdana">n:</font></td>
+													
+
+													<td align="center"><font face="verdana">L<sub>n</sub>:</font></td>
+													
+
+													<td align="center"><font face="verdana">K<sub>n</sub>:</font></td>
+													
+
+													<td align="center"><font face="verdana">H<sub>n</sub></font></td>
+													
+
+													<td></td>
+													
+
+													<td><font face="verdana">From (13) : y<sub>0</sub> = 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y<sub>1</sub> = 3</font></td>
+													
+</tr>
+												
+
+												<tr>
+
+													<td align="center"><font face="verdana">0</font></td>
+													
+
+													<td align="center"><font face="verdana">1</font></td>
+													
+
+													<td align="center"><font face="verdana">0</font></td>
+													
+
+													<td align="center"><font face="verdana">&#150;1</font></td>
+													
+
+													<td></td>
+													
+
+													<td><font face="verdana">From (14) : z<sub>0</sub> = 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z<sub>1</sub> = 4</font></td>
+													
+</tr>
+												
+
+												<tr>
+
+													<td align="center"><font face="verdana">1</font></td>
+													
+
+													<td align="center"><font face="verdana">1</font></td>
+													
+
+													<td align="center"><font face="verdana">0</font></td>
+													
+
+													<td align="center"><font face="verdana">&#150;1</font></td>
+													
+
+													<td></td>
+													
+
+													<td><font face="verdana">From (15) :</font></td>
+													
+</tr>
+												
+
+												<tr>
+
+													<td align="center"><font face="verdana">2</font></td>
+													
+
+													<td align="center"><font face="verdana">3</font></td>
+													
+
+													<td align="center"><font face="verdana">2</font></td>
+													
+
+													<td align="center"><font face="verdana">0</font></td>
+													
+
+													<td></td>
+													
+
+													<td>
+
+														<table width="198" border="0" cellspacing="0" cellpadding="0">
+															
+
+															<tr>
+
+																<td><font face="verdana">A = </font></td>
+																
+
+																<td>
+
+																	<div align="center">
+																	<font face="verdana">15 + 5</font>&#x2219;<font face="verdana">&#x221A;5<br>
+																		
+</font>&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&nbsp;<br>
+																	<font face="verdana"><sup>50</sup></font></div>
+																	
+</td>
+																
+
+																<td><font face="verdana">=</font></td>
+																
+
+																<td>
+
+																	<div align="center">
+																		<font face="verdana">3 + &#x221A;5<br>
+																	</font>&#x2501;&#x2501;&#x2501;&#x2501;<br>
+			<font face="verdana"><sup>10</sup></font></div>
+																	
+</td>
+																
+</tr>
+															
+
+														</table>
+														
+</td>
+													
+</tr>
+												
+
+												<tr>
+
+													<td align="center"><font face="verdana">3</font></td>
+													
+
+													<td align="center"><font face="verdana">5</font></td>
+													
+
+													<td align="center"><font face="verdana">6</font></td>
+													
+
+													<td align="center"><font face="verdana">2</font></td>
+													
+
+													<td></td>
+													
+
+													<td></td>
+													
+</tr>
+												
+
+												<tr>
+
+													<td align="center"><font face="verdana">4</font></td>
+													
+
+													<td align="center"><font face="verdana">9</font></td>
+													
+
+													<td align="center"><font face="verdana">16</font></td>
+													
+
+													<td align="center"><font face="verdana">7</font></td>
+													
+
+													<td></td>
+													
+
+													<td>
+
+														<table width="91" border="0" cellspacing="0" cellpadding="0">
+															
+
+															<tr>
+
+																<td width="30%"><font face="verdana">B =</font></td>
+																
+
+																<td align="center"><font face="verdana">3 &#150; &#x221A;5<br>
+																	
+</font>&#x2501;&#x2501;&#x2501;&#x2501;<br>
+																
+<font face="verdana"><sup>10</sup></font></td>
+																
+</tr>
+</table>
+</td>
+</tr>
+</table>
+
+<table width="422" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="20%"><font face="verdana">From (16)</font></td>
+<td align="center" width="10%"><font face="verdana">a = </font></td>
+<td align="center" width="45%"><font face="verdana">&#150;25 + (&#150;8 &#150; 12 + 7)</font>&#x2219;<font face="verdana">&#x221A;5<br>
+</font>&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;<br>
+<font face="verdana"><sup>50</sup></font></td>
+<td align="center" width="5%"><font face="verdana">=</font></td>
+<td align="center" width="25%"><font face="verdana">&#150;25 &#150;13</font>&#x2219;<font face="verdana">&#x221A;5<br>
+</font>&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;<br>
+<font face="verdana"><sup>50</sup></font></td>
+</tr>
+<tr>
+<td width="20%"></td>
+<td align="center" width="10%"></td>
+<td align="center" width="45%">&nbsp;</td>
+<td align="center" width="5%"></td>
+<td align="center" width="25%"></td>
+</tr>
+<tr>
+<td width="20%"></td>
+<td align="center" width="10%"><font face="verdana">b =</font></td>
+<td align="center" width="45%"><font face="verdana">&#150;25 + 13</font>&#x2219;<font face="verdana">&#x221A;5<br>
+</font>&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;<br>
+<font face="verdana"><sup>50</sup></font></td>
+<td align="center" width="5%">.</td>
+<td align="center" width="25%"></td>
+</tr>
+</table>
+</font><font face="verdana"><font face="verdana">In order to check these values for  n = 4  we compute
+
+(a + 4</font>&#x2219;<font face="verdana">A)</font>&#x2219;<font face="verdana">&#x03B1;<sup>4</sup> = &#x215F;</font><font size="-2" face="verdana">50</font>&#x2219;<font face="verdana">(&#150;25 &#150; 13</font>&#x2219;<font face="verdana">&#x221A;5 + 60 + 20</font>&#x2219;<font face="verdana">&#x221A;5)</font>&#x2219;<font face="verdana">(3</font>&#x2219;<font face="verdana">&#x03B1; + 2)
+ = &#x215F;</font><font size="-2" face="verdana">100</font>&#x2219;<font face="verdana">(35 + 7</font>&#x2219;<font face="verdana">&#x221A;5) (7 + 3</font>&#x2219;<font face="verdana">&#x221A;5) = &#x215F;</font><font size="-2" face="verdana">100</font>&#x2219;<font face="verdana">(245 + 105 + 154</font>&#x2219;<font face="verdana">&#x221A;5) =
+ 3&frac12; + 1.54</font>&#x2219;<font face="verdana">&#x221A;5 .	This is OK and that is very encouraging.
+
+	We are now in a position to compute the asymp-
+totic behaviour of the average distance from the root</font>
+									<table width="469" border="0" cellspacing="0" cellpadding="0">
+										
+												
+
+												
+										<tr>
+
+													
+											<td align="center"><font face="verdana">K<sub>n</sub><br>
+													
+															
+&#x2501;&#x2501;<br>
+													
+															
+L<sub>n</sub></font></td>
+											
+													
+
+													
+											<td align="center">=</td>
+											
+													
+															
+														
+													
+										
+													
+														
+															
+													
+											<td align="center" width="20%"><font face="verdana">2</font>&#x2219;<font face="verdana">H<sub>n</sub> + 2<br>
+													
+															
+																	
+																
+															
+												&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;<br>
+													
+															
+																	
+																
+															
+												2</font>&#x2219;<font face="verdana">F<sub>n</sub> &#150; 1</font></td>
+											
+													
+															
+														
+													
+										
+													
+														
+															
+													
+											<td align="center">&#x2192;</td>
+											
+													
+															
+														
+													
+										
+													
+														
+															
+													
+											<td align="center"><font face="verdana">H<sub>n<br>
+														
+																
+																		
+																	
+																
+												</sub></font>&#x2501;&#x2501;<font face="verdana"><br>
+													
+															
+																	
+																
+															
+												F<sub>n</sub></font></td>
+											
+													
+															
+														
+													
+										
+													
+														
+															
+													
+											<td align="center">&#x2192;</td>
+											
+													
+															
+														
+													
+										
+													
+														
+															
+													
+											<td align="center" width="28%"><font face="verdana">&#x215F;</font><font size="-4" face="verdana">10</font>&#x2219;<font face="verdana">(3 + &#x221A;5)<br>
+													
+															
+																	
+																
+															
+												&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;&#x2501;<br>
+													
+															
+																	
+																
+															
+												&#x215F;</font><font size="-4" face="verdana">10</font>&#x2219;<font face="verdana">(5 + &#x221A;5)</font></td>
+											
+													
+															
+														
+													
+										
+													
+														
+															
+													
+											<td align="center">=&nbsp;&nbsp;&nbsp;&nbsp;</td>
+											
+													
+															
+														
+													
+										
+													
+														
+															
+													
+											<td align="center" width="10%"><font face="verdana">5 + &#x221A;5<br>
+													
+															
+&#x2501;&#x2501;&#x2501;&#x2501;<br>
+10</font></td>
+<td>&#x2219;</td>
+</tr>
+</table>
+
+									<pre><font face="verdana"><font face="verdana">With  N  the number of points, the average distance
+grows as	&#x215F;</font><font size="-3" face="verdana">10</font>&#x2219;<font face="verdana">(5 + &#x221A;5)</font>&#x2219;<font face="verdana"><sup>&#x03B1;</sup>log N = .723607</font>&#x2219;<font face="verdana"><sup>&#x03B1;</sup>log N  , a growth
+rate I would like to compare to the one of the completely
+balanced binary tree. The number of nodes in the
+nth binary tree equals  2<sup>n+1</sup> &#150; 1 . The sum over
+its nodes of their distances from the root is
+(<u>S</u> i : 0 &#x2264; i &#x2264; n : i</font>&#x2219;<font face="verdana">2<sup>i</sup>) = (n&#150;1)</font>&#x2219;<font face="verdana">2<sup>n+1</sup> + 2 . With N
+the number of points, the dominant term of the
+growth rate of the average distance from the
+root is therefore  <sup>2</sup>log N .  For the Leonardo
+trees it is .723607</font>&#x2219;<font face="verdana"><sup>&#x03B1;</sup>log N = 1.042296</font>&#x2219;<font face="verdana"><sup>2</sup>log N .
+The ratio is </font>&#x2014;<font face="verdana">as was to be expected</font>&#x2014;<font face="verdana"> larger than
+1, but only very little so. (I am not convinced
+of the relevance of the notion &quot;average distance
+from the root&quot; ; it has the advantage that the
+above estimations can be derived by elementary
+means.)
+
+			*		*
+				*
+
+	We know that, with a given number, taking
+away the largest possible Leonardo number
+and repeating this process on the remainder,
+we decompose the given number,  x say, in the
+minimum number f(x) of Leonardo numbers.
+What is the average value of f(x) when  x
+ranges over the first  N  natural numbers ?
+
+	Defining	D<sub>i</sub> = (<u>S</u>x : 0 &#x2264; x &#x2264; L<sub>i+1</sub> : f(x))  , we have
+D<sub>0</sub> = 0  ,  D<sub>1</sub> = 3  ,  D<sub>n+2</sub> = D<sub>n+1</sub> + D<sub>n</sub> + L<sub>n+1</sub> + 2  ,
+hence D<sub>2</sub> = 6  ,  D<sub>3</sub> = 14  ,  D<sub>4</sub> = 27  , etc.
+
+	This is the moment I am going to reap the fruit
+of (13), (14), and (15). With H<sub>n</sub> = D<sub>n</sub> + 1  we have
+H<sub>n+2</sub> = H<sub>n+1</sub> + H<sub>n</sub> + 2</font>&#x2219;<font face="verdana">F<sub>n+1</sub>  , and (11) is applicable.
+We have  H<sub>0</sub> = 1 , H<sub>1</sub> = 4 , H<sub>2</sub> = 7 , and H<sub>3</sub> = 15. From
+(13)  y<sub>0</sub> = 2 , y<sub>1</sub> = 1 ; from (14)  z<sub>0</sub> = 2 , z<sub>1</sub> = 6 , and
+from (15)  A = &#x215F;</font><font size="-3" face="verdana">50</font>&#x2219;<font face="verdana">(10 + 10</font>&#x2219;<font face="verdana">&#x221A;5) = &#x215F;</font><font size="-3" face="verdana">5</font>&#x2219;<font face="verdana">(1 + &#x221A;5) . Hence the
+dominant term of H<sub>n</sub>  (and D<sub>n</sub>)  is &#x215F;</font><font size="-3" face="verdana">5</font>&#x2219;<font face="verdana">(1 + &#x221A;5)</font>&#x2219;<font face="verdana">n</font>&#x2219;<font face="verdana">&#x03B1;<sup>n</sup> .
+The leading term of  L<sub>n+1</sub> (=2</font>&#x2219;<font face="verdana">F<sub>n+1</sub> &#150; 1)  is  &#x215F;</font><font size="-3" face="verdana">5</font>&#x2219;<font face="verdana">(5 + &#x221A;5)</font>&#x2219;<font face="verdana">&#x03B1;<sup>n+1</sup> =
+&#x215F;</font><font size="-3" face="verdana"><sub>10</sub></font>&#x2219;<font face="verdana">(1 + &#x221A;5) (5 + &#x221A;5)</font>&#x2219;<font face="verdana">&#x03B1;<sup>n</sup> .
+
+	The growth rate of the average value of  f(x)  is
+that of H<sub>n</sub>/L<sub>n+1</sub> , i.e. 2</font>&#x2219;<font face="verdana">n/(5 + &#x221A;5)</font><font face="verdana"> = &#x215F;</font><font size="-3" face="verdana">10</font>&#x2219;<font face="verdana">(5 &#150; &#x221A;5)</font>&#x2219;<font face="verdana">n =
+.276393</font>&#x2219;<font face="verdana"><sup>&#x03B1;</sup>log N .
+
+	Analogously to the perfectly balanced binary trees
+we can replace the Leonardo numbers by B<sub>n</sub> = 2<sup>n+1</sup> &#150; 1.
+Let  f'(x)  be the minimum number of B's with sum  x 
+and let  C<sub>n</sub> = (<u>S</u> : 0 &#x2264; x &#x2264; B<sub>n</sub> : f'(x)). We find
+C<sub>n</sub> = (n + 1)</font>&#x2219;<font face="verdana">2<sup>n</sup>  . In this case the growth rate of the
+average value of f'(x) is </font>&#x2014;<font face="verdana">not surprisingly</font>&#x2014;
+<font face="verdana">C<sub>n</sub>/B<sub>n</sub> = &frac12; (n + 1) = &frac12;</font>&#x2219;<font face="verdana"><sup>2</sup>log N = <sup>4</sup>log N . Comparing
+this with the case of the Leonardo numbers
+
+	.276393  <sup>&#x03B1;</sup>log N =  .796243 </font>&#x2219; <font face="verdana"><sup>4</sup>log N
+
+and this time the ratio is markedly smaller than 1.
+</font></font><font face="verdana"><font face="verdana"><font face="verdana">
+													<table width="459" border="0" cellspacing="2" cellpadding="0">
+														
+													
+												
+											
+										
+								
+										
+											
+												
+													
+														<tr>
+									
+											
+												
+													
+														
+															<td valign="top" width="203"><font face="verdana">Plataanstraat 5<br>
+																	5671 AL NUENEN<br>
+																	The Netherlands	</font></td>
+															
+														
+													
+												
+											
+									
+											
+												
+													
+														
+															<td valign="top" width="250"><font face="verdana">12th July 1981<br>
+																	prof.dr. Edsger W.Dijkstra<br>
+																	Burroughs Research Fellow</font></td>
+															
+														
+													
+												
+											
+								</tr>
+														
+													
+												
+											
+										
+							
+									
+										
+											
+												
+													</table>
+												</font></font></font></pre>
+								</pre>
+							</pre>
+						</td>
+						
+					</TR>
+</TABLE>
+			</CENTER>
+		</div>
+		<hr>
+		<font size="-1">transcribed by Sam Samshuijzen<br>
+			
+			revised <csobj format="MedDate" h="12" region="15" t="DateTime" w="92">Tue, 7 Jun 2005</csobj></font>
+	</body>
+
+</html>

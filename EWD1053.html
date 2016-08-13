@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<title>E.W.Dijkstra Archive: Monochrome pairs in the three-coloured plane (EWD 1053)</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen" />
+		<link href="../formulas.css" rel="stylesheet" media="screen" />
+		<style type="text/css">
+			body    { line-height: 1.5em; }
+		</style>
+	</head>
+	<body><div id="title"><h1>Monochrome pairs in the three-coloured plane</h1></div>
+		<div id="frame">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd10xx/EWD1053.PDF"
+					 title="Link to the PDF version of EWD1053">EWD 1053</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>Monochrome pairs in the three-coloured plane</u></p>
+				<p>A few months ago I encountered the following</p>
+				<p class="noindent"><u>Theorem</u> &nbsp; If each point in the Euclidean plane is red, white, or blue, there exists a monochrome pair of points with mutual distance 1.</p>
+				<p class="noindent">This morning I looked at it again, and designed the following proof.</p>
+				<p>Consider the three-coloured plane. According to the pigeonhole principle, 4 points suffice to guarantee the existence of a monochrome pair among them. Regrettably, we cannot arrange them in such a way that all pairs are at distance 1. The best we can do is 5 pairs at distance 1 and 1 pair at distance &#x221A;<span style="border-top: 1px solid;">3</span>:</p>
+				<p class="noindent" align="center"><img src="ewd1053_fig1.png" alt="EWD1053 figure 1" title="EWD1053 figure 1" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .</p>
+				<p>Using the term &ldquo;<var>d</var>-pair&rdquo; to denote a pair of points with mutual distance <var>d</var>, we have to show: (there exists a monochrome 1-pair). The above configuration only allows us to conclude</p>
+				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 1em;">
+					<tr><td><u>Lemma</u>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;In the three-coloured plane</td></tr>
+					<tr><td></td><td>(all &#x221A;<span style="border-top: 1px solid;">3</span>-pairs are monochrome) <span class="unicode">&#x2228;</span></td></tr>
+					<tr><td></td><td>(there exists a monochrome 1-pair)</td></tr>
+				</table>
+				<p>Consider now an isosceles triangle ABC.</p>
+				<p class="noindent" align="center" style="margin-top: 0;"><img src="ewd1053_fig2.png" alt="EWD1053 figure 2" title="EWD1053 figure 2" /></p>
+				<p class="noindent">Then<br />
+				&nbsp; &nbsp; &nbsp; &#x00AC; (there exists a monochrome 1-pair)<br />
+				<span class="unicode">&#x21D2;</span> &nbsp; &nbsp; &nbsp; {Lemma}<br />
+				&nbsp; &nbsp; &nbsp; (all &#x221A;<span style="border-top: 1px solid;">3</span>-pairs are monochrome)<br />
+				<span class="unicode">&#x21D2;</span> &nbsp; &nbsp; &nbsp; {instantiation: AB and BC are &#x221A;<span style="border-top: 1px solid;">3</span>-pairs}<br />
+				&nbsp; &nbsp; &nbsp; (AB and BC are monochrome)<br />
+				<span class="unicode">&#x21D2;</span> &nbsp; &nbsp; &nbsp; {transitivity of equality}<br />
+				&nbsp; &nbsp; &nbsp; (AC is monochrome)<br />
+				<span class="unicode">&#x21D2;</span> &nbsp; &nbsp; &nbsp; {instantiation: AC is a 1-pair}<br />
+				&nbsp; &nbsp; &nbsp; (there exists a monochrome 1-pair) &nbsp; ,<br />
+				and, since [&#x00AC;P <span class="unicode">&#x21D2;</span> P] &#x2261; [P], the above observation proves the theorem.</p>
+				<p align="right">(End of Proof.)</p>
+				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+				<p>When I encountered the theorem, I had convinced myself that the vertices of the complete triangular grid</p>
+
+				<p class="noindent" align="center" style="margin-top: 0;"><img src="ewd1053_fig3.png" alt="EWD1053 figure 3" title="EWD1053 figure 3" /> &nbsp; etc.</p>
+
+				<p class="noindent">admit a three-colouring without monochrome neighbours. Consequently, I knew this morning that, of the Euclidean plane, something more than the existence of vertices of complete triangular grids had to be taken into account. (This turned out to be the existence of triangles of the shape of <span class="unicode">&#x25B3;</span>ABC.)</p>
+				<p>We had to demonstrate the existence of monochrome 1-pairs. The above observation suggested the consideration of monochrome <var>d</var>-pairs with <var>d</var>&#x2260;1; that is how the monochrome &#x221A;<span style="border-top: 1px solid;">3</span>-pairs entered the picture. The introduction of <span class="unicode">&#x25B3;</span>ABC was then suggested by trying to exploit the meaning of the adjective &ldquo;monochrome&rdquo;, i.e., trying to exploit the properties of equality.</p>
+				<p align="center">Nuenen, 18 June 1989</p>
+				<p class="noindent">
+					prof.dr. Edsger W.Dijkstra<br />
+					Department of Computer Sciences<br />
+					The University of Texas at Austin<br />
+					Austin, TX 78712-1188<br />
+					USA.<br />
+				</p>
+			</div>
+
+				<p class="noindent">P.S. &nbsp; In details, the above is a bit clumsy.</p>
+				<p style="margin-right: 10em; margin-top: 0;" align="center">Sept. 1989 &nbsp; EWD</p>
+
+			<div>
+        <br/>
+      </div>
+		</div>
+		<hr />
+		<div id="footer">
+         transcribed by Corrado Cantelmi<br /> 
+         revised 
+         <!-- #BeginDate format:En2 -->27-Nov-2011<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

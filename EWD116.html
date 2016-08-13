@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>Edsger W. Dijkstra Archive: De bankiersalgorithme en verfijningen daarvan (EWD 116)</title>
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>Edsger W. Dijkstra Archive: De bankiersalgorithme en verfijningen daarvan</h1></div>
+		<div align="right">
+			<p> <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD116.PDF" target="_blank">EWD116</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD116.PDF#page=1" target="_blank">0</a></p>
+		</div>
+		<div align="left">
+			<p><u>De bankiersalgorithme en verfijningen daarvan</u></p>
+			<p><u>0. Inleiding</u></p>
+			<p>In dit rapport wordt de interferentie besproken tussen simultane programma's, zoals deze voortvloeit uit het gemeenschappelijk gebruik van randapparatuur. Aan de restricties, die voortvloeien uit het feit, dat deze verschillende programma's in eenzelfde (eindig) geheugen moeten worden geherbergd, wordt (voorlopig?) geen aandacht geschonken. Onze primaire zorg ten aanzien van deze interferentie is de beheersing ervan, d.w.z. de vermijding van een dodelijke omarming. Onze eerste beschouwing is van toepassing, als het slechts gaat om een enkel soort communicatieapparaat.</p>
+			<p><u>1. De bankier met homogene klanten en &eacute;&eacute;n valuta</u></p>
+			<p>Een bankier (lees &quot;installatie&quot;) beschikt over een eindig kapitaal in guldens (lees &quot;bandlezers&quot;). Hij is bereid geld aan klanten (lees &quot;programma's&quot;) te lenen op de volgende voorwaarden:</p>
+			<ol>
+				<li type="1">de klant verricht de leningen voor een in de tijd gemeten eindige transactie;
+				<li type="1">de klant moet van tevoren de maximale omvang van de voor de transactie benodigde lening opgeven;
+				<li type="1">de klant hoeft niet meteen dit totale bedrag op te nemen en tot het einde toe vast te houden; integendeel, het wordt aangemoedigd, als hij pas om meer geld komt vragen, als hij het nodig heeft en als hij zo gauw mogelijk weer komt afbetalen;
+				<li type="1">de klant mag niet mopperen, wanneer hij om uitbreiding van zijn lening om meer geld komt en te horen krijgt: &quot;Weliswaar overschrijdt U met deze aanvraag Uw opgegeven maximum niet, maar op dit moment kan ik U het gevraagde niet lenen. Ik zal U bericht sturen, wanneer ik U wel de door U gevraagde lening kan verstrekken&quot;;
+				<li type="1">de garantie, dat dit moment mettertijd zal aanbreken ontleent de klant aan de wijsheid van de bankier en het feit, dat zijn medeklanten aan dezelfde eis gebonden zijn, nl., dat ze, zodra ze over het gevraagde bedrag de beschikking gekregen hebben, met bekwame spoed hun zaken voortzetten, d.w.z. dus in een eindige tijd om meer komen vragen, dan wel terugbetalen, dan wel hun transactie be&euml;indigen;
+				<li type="1">be&euml;indiging van een transactie, van de bankier-klant contract impliceert dat het geleende bedrag geheel is terugbetaald. Rente wordt niet berekend.
+			</ol>
+			<p>De primaire vragen zijn</p>
+			<ol>
+				<li type="a">onder welke voorwaarden kan de bankier met een zich aanmeldende klant een contract aangaan?
+				<li type="a">onder welke voorwaarden kan de bankier bij aanvraag van (meer) geld tot uitbetaling overgaan zonder het gevaar te lopen, dat hij wegens dodelijke omarming niet zijn verplichtingen kan nakomen?
+			</ol>
+			<p>Ter verklaring van het verschijnsel van dodelijke omarming het volgende voorbeeld: Een bankier met een kapitaal van 8 gulden heeft twee klanten A en B, die beiden 6 gulden als hun maximale behoefte hebben opgegeven. Als A en B beiden twee gulden hebben opgegeven is er nog geen vuiltje aan de lucht. Wil nu bv. eerst A zijn lening tot 3 uitbreiden, dan mag dat. Komt dan echter B om zijn derde gulden, dan moet uitbetaling aangehouden worden, hoewel er nog 3 gulden in kas is. Zou immers aan B zijn derde gulden uitbetaald worden, dan zou er nog maar 2 gulden in kas overblijven. Als nu A voor zijn voortzetting nog 3 gulden vraagt (waar hij &quot;mettertijd&quot; recht op kan laten gelden) dan kan dit niet gegeven worden en A moet wachten; als echter ook B met zijn zaken in een stadium gekomen is, dat</p>
+		</div>
+		<div align="right">
+			<p> <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD116.PDF" target="_blank">EWD116</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD116.PDF#page=2" target="_blank">1</a></p>
+		</div>
+		<div align="left">
+			<p>hij de resterende 3 gulden nodig heeft, voordat hij over terugbetaling kan gaan denken, dan zit de hele troep zo vast als een huis. Dit verschijnsel wordt &quot;de dodelijke omarming&quot; genoemd en het is deze calamiteit, die de bankier in zijn wijsheid dient te voorkomen. Deze alinea ter explicatie.</p>
+			<p>Vraag a. is gemakkelijk beantwoord: de bankier kan met elke zich aanbiedende klant het contract ondertekenen als de door de klant genoemde behoefte het totale kapitaal van de bankier niet overtreft.</p>
+			<p>Om vraag b. te beantwoorden voeren wij enige termen in:</p>
+			<p>De bankier beschikt over een vast &quot;<tt>kapitaal</tt>&quot;. Elke klant biedt zich aan onder opgave van zijn maximale &quot;<tt>behoefte</tt>&quot;.<br>
+				Er geldt voor elke klant</p>
+			<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;behoefte &#x2264; kapitaal&quot;.</tt></p>
+			<p>De momentane toestand van een klant is gegeven door zijn &quot;<tt>lening</tt>&quot;; aanvankelijk is &quot;<tt>lening </tt>&#x2261;<tt> 0</tt>&quot;, voor elke klant zal steeds gelden</p>
+			<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;lening &#x2264; behoefte&quot;.</tt></p>
+			<p>Afhankelijk van deze twee grootheden voeren wij per klant in de &quot;<tt>claim</tt>&quot;, gegeven door</p>
+			<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;claim = behoefte - lening&quot;.</tt></p>
+			<p>De claim is dus het bedrag, dat de klant mogelijk voor de completering van zijn transacties er nog bij wil kunnen eisen.<br>
+				Tenslotte voeren wij in de zg. &quot;<tt>kasvoorraad</tt>&quot; gegeven door</p>
+			<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;kasvoorraad = kapitaal - som van de leningen&quot;.</tt></p>
+			<p>Uiteraard geldt &quot;<tt>0 &#x2264; kasvoorraad</tt>&quot;.</p>
+			<p>Om te kijken of de bankier bij aanvraag om meer tot uitbetaling kan overgaan, onderzoekt hij de toestand die ontstaan zou zijn als hij tot uitbetaling zou overgaan. Is deze toestand &quot;veilig&quot;, dan gaat hij tot uitbetaling over; is deze toestand &quot;onveilig&quot;, dan wordt de uitbetaling aangehouden en komt de klant op de wachtlijst. Rest ons te beschrijven, hoe hij de veiligheid van een situatie onderzoekt.</p>
+			<p>In wezen onderzoekt hij, of hij al zijn klanten nog kan bedienen en hij dus &quot;mettertijd&quot; zijn hele kapitaal kan vrijmaken. Hij voert daartoe in de groep van &quot;bedienbare klanten&quot; (aanvankelijk leeg) en de groep van &quot;te dienen klanten&quot; (aanvankelijk alle klanten omvattend). Voorts voert hij in de hulpgrootheid &quot;vrij te maken bedrag&quot;, die aanvankelijk gelijk gemaakt wordt aan de kasvoorraad. Nu begint de algorithme:</p>
+			<p>Zolang de groep der &quot;te dienen klanten&quot; nog niet leeg is, wordt er hieronder gezocht naar een klant, wiens momentane claim de momentane waarde van het vrij te maken bedrag niet overschrijdt. Wordt zo'n te bedienen klant gevonden, dan wordt hij overgeheveld naar de groep &quot;bedienbare klanten&quot;, waarbij tegelijkertijd het &quot;vrij te maken bedrag&quot; met zijn momentane lening vermeerderd wordt, waarna het proces herhaald zal worden. Dit proces kan op twee manieren eindigen:</p>
+			<ol>
+				<li type="a">Doordat op deze wijze de groep &quot;te dienen klanten&quot; leeg wordt, in dit geval is de situatie &quot;veilig&quot;;
+				<li type="a">Doordat, voordat de groep &quot;te bedienen klanten&quot; leeg is, zich hierin geen klant bevindt met een claim, die de inmiddels bereikte waarde van het vrij te maken bedrag niet overschrijdt; in dit geval is de situatie &quot;onveilig&quot;.
+			</ol>
+		</div>
+		<div align="right">
+			<p><a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD116.PDF" target="_blank">EWD116</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD116.PDF#page=3" target="_blank">2</a></p>
+		</div>
+		<div align="left">
+			<p>Opm. Veiligheid kan reeds geconstateerd worden, zodra &quot;vrij te maken bedrag = kapitaal&quot; is; de resterende te bedienen klanten zijn dan a fertion bedienbaar.</p>
+			<p>Het is duidelijk, dat de bankier, door de situatie steeds veilig te houden, de dodelijke omarming steeds kan vermijden. Men kan ook laten zien, dat zodra de bankier zich tot een onveilige situatie verleiden laat, het behoefte patroon zich zo kan ontwikkelen, dat de dodelijke omarming niet meer is af te wenden.</p>
+			<p><u>2. Uitbreiding tot verscheidene in-converteerbare valuta</u></p>
+			<p>Het bovenbeschrevene is van toepassing wanneer de onderlinge interferentie tussen programma's zich beperkt tot &quot;vechten om een soort apparaat&quot;, zeg &quot;bandlezers&quot;, waarbij de ene bandlezer ons iedere keer even lief is als de andere. In de praktijk werden we geconfronteerd met het feit, dat de programma's bandlezers, bandponsers, kaartlezers en wat niet willen bespelen. Deze zijn inconverteerbaar in de zin, dat het bitter weinig helpt, als je voor een programma, dat eigenlijk een bandlezer nodig heeft, probeert te troosten met de mededeling &quot;Pech, maar ik heb nog wel een ponser voor je&quot;.</p>
+			<p>In termen van de bankier komt dit er op neer dat kapitaal, lening, behoefte, claim en kasvoorraad nu niet enkel in guldens, maar in meer dimensies (franken, ponden en kronen) uitgedrukt worden. De passage in de algorithme &quot;een klant wiens momentane clai de momentane waarde van het vrij te maken bedrag niet overschrijdt&quot; dient vervangen te worden door &quot;een klant, van wie geen claim de momentane waarde van de corresponderende kasvoorraad overschrijdt&quot;. Verder is de hele algorithme, inclusief het idee van het kasgeld onveranderd bruikbaar.</p>
+			<hr>
+			<p>Transcribed by Frank Steggink<br>
+				Revised <csobj format="MedDate" h="16" region="15" t="DateTime" w="101">Wed, 7 Jan 2004</csobj>.</p>
+		</div>
+	</body>
+
+</html>

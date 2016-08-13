@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: On avoiding the infinite (EWD 416)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>On avoiding the infinite</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd04xx/EWD416.PDF"
+           title="Link to the PDF version of EWD416">EWD416</a></div></div>
+    <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR
+<hr />
+<p class="noindent">
+<p><b>On avoiding the infinite</b>.
+<p>This chapter should be skipped by most of my readers: it should be
+skipped by all those that could not care less, it should also be skipped
+by all dyed-in-the-wool logicians, who probably care too much. Its
+inclusion is the consequence of a few piercing remarks made by John C.
+Reynolds in earlier correspondence between him and me. It goes without
+saying that he is in no way to be held responsible for the following
+exposition, which, I am sure, is somewhat shaky anyhow.
+<p>With respect to modelling what computers can do for us, there are
+two extremist views.
+<p>The one view stresses the fact that computer stores have only a
+finite capacity and that therefore our machines can be regarded as a finite
+state automaton. This has as a consequence that if the computation proceeds
+without terminating , it must return within a finite number of steps in
+a state in which it has been before. If the machine is fully deterministic,
+history will from then onwards repeat itself, and the computation will
+therefore never terminate. If the machine is non-deterministic in the sense
+as we have introduced non-determinacy &mdash;i.e. that in some states there is
+a choice between a finite number of alternatives&mdash; the situation is more
+complicated. We may have states where the machine will never terminate,
+we may have states where the machine will certainly terminate and we may
+have states where the machine may terminate after an a priori unbounded
+number of steps. In a machine with two boolean variables &ldquo;stop&rdquo; and &ldquo;go on&rdquo;
+we can investigate the following program:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+      <b>do</b> go on &rarr; skip                        </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; </td> <td>
+        &#x25af; <b>non</b> stop &rarr; skip        </td> </tr> <tr> <td></td> <td></td> <td>
+        &#x25af; <b>non</b> stop &rarr; stop:= true </td> </tr> <tr> <td></td> <td colspan = 2>
+      <b>od</b>                                     </td> </tr>
+</table>
+If &ldquo;go on&rdquo; is true, it will remain so and proper termination is excluded.
+If &ldquo;go on&rdquo; is false, we have to distinguish between two cases: if &ldquo;stop&rdquo;
+is true, termination is ensured, if, however, &ldquo;stop&rdquo; is false, the 
+nondeterminacy leaves the choice between the second and the third guarded
+command open. As long as the third guarded command is not selected, &ldquo;stop&rdquo;
+remains false and the second command may be selected an unbounded number
+of times: termination is not guaranteed but it remains possible.
+<p>The other view stresses that, although the number of states of a
+modern computer is indeed finite, it is in practice so incredibly large
+that the remark that the deterministic machine is bound to start cycling
+is rather irrelevant, because the length of most cycles is such that we
+could never live long enough to see the machine perform such a cycle.
+The freedom to forget about the fact that we can only distinguish between
+a finite number of different states is then immediately exploited by
+introducing variables of type integer whose range &mdash;all whole numbers&mdash;
+is clearly infinite. In our previous examples we have very clearly done
+so. How does this model, however, relate to what can take place in our
+admittedly finite computers?
+<p>The extremists with the second point of view forget that nobody but
+the Good Lord could make such a machine &mdash;and that up till now He has
+failed to do so!&mdash; and have made it a subject of intensive study, to the
+extent that they have pondered about what it could do when we would set
+it in motion from now until eternity. As soon as one starts asking oneself
+such questions, however, its infinite size is no longer only a luxury
+but also creates problems, problems we should like to avoid. In this
+monograph we try to steer a middle course between the Scylla of the
+finite constraints and the Charybdis of the unfathomed infinite. We shall
+try to come away with just enough theory for dealing with the behaviour
+of the unlimited machines only for initial states such that proper 
+termination is guaranteed.
+<p>Let us first restrict ourselves to the simpler case that the unlimited
+machine is fully deterministic. In each initial state activation of our
+machine will then give rise to a unique happening; if that happening 
+terminates after a finite number of computational steps have taken place, a finite
+number of integer values have been manipulated and therefore their maximum
+absolute value had a unique lowest upper bound. We repeat that that lowest
+upper bound is uniquely determined by the initial state. For that initial
+state we apparently did not need our unlimited machine! The computation
+could have been done by a machine of finite size, and even stronger: we
+&mdash;or at least the Good Lord&mdash; could decide upon a sufficient size a priori.
+<p>The critical step in the above reasoning is that the knowledge of
+an upper bound for the number of computational steps allows us to conclude
+an upper bound for the maximum absolute value of integers to be catered
+for. Let us now consider a non-deterministic machine and the class of
+of possible happenings that may take place when we activate it in an
+initial state such that only properly terminating computations can ensue.
+Each individual computation of that class will only manipulate a finite
+number of values, but if the class of possible computations is infinite,
+a maximum abolute value manipulated is no longer necessarily bounded. That
+would be nasty and we should try to convince ourselves that the form of
+non-determinacy we have introduced is so mild, that infinity of the class
+of possible computations when termination is guaranteed, is excluded.
+Luckily we can, it the <b>if</b> ... <b>fi</b>- and the <b>do</b> ... <b>od</b>-constructs are our
+only source for non-determinacy. Firstly each guarded command list 
+contains a fixed and finite number of alternatives. Secondly the a priori
+upper bound on the number of computational steps implies an upper bound
+on the number of times the non-deterministic choice can be made. From
+these two considerations it follows that the form of non-determinacy
+we have introduced is aptly described as &ldquo;bounded non-determinacy&rdquo;. As
+a result also in the case of our bounded non-determinacy, we &mdash;or again
+at least the Good Lord&mdash; could for each initial state decide a priori
+upon a sufficient size of a finite machine that could do the job.
+<p>The moral of the story is that a bounded number of computational
+steps and bounded non-determinacy together imply that the number of
+possible happenings and the maximum value possibly manipulated are both
+bounded as well.
+<p>The fact that the non-determinacy is bounded is very intimately
+tied to the guarded commands. For not only do they not introduce unbounded
+non-determinacy as we have seen, but also in the presence of unbounded
+non-determinacy &mdash;supplied by some other magical means&mdash; the semantic
+definition of the repetitive construct would be subject to doubt, to say
+the least.
+<p>Suppose that we have a non-deterministic primitive
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+            &ldquo;set x to any positive value&rdquo; </td> </tr>
+</table>
+and consider now the program
+<table width=100%><tr><td valign=top width=10%>
+S:</td><td><b>do</b> x &gt; 0 &rarr; x:= x - 1
+</td></tr>
+<tr><td valign=top>
+</td><td>&nbsp;&#x25af; x &lt; 0 &rarr; set x to any positive value <b>od</b>
+</td>  </tr>  </table>
+<p>I expect most readers to agree that, no matter what initial value
+of x , this program will terminate sooner or later with x = 0 . If
+initially x &ge; 0, then we know a priori the number of steps (viz. the
+initial value of x ); it initially x &lt; 0, we don&rsquo;t, but yet we have the
+feeling that it must terminate because then the second alternative will
+be chosen and after its successful execution, x will have some positive
+value that will be brought down to zero in a finite number of steps. As
+we shall see, the crux can be pinned down to the proviso &ldquo;after its
+successful execution&rdquo;.
+<p>Our formalism, however, gives for H<sub>k</sub>(T) &mdash;the weakest pre-condition
+such that the construct terminates after at most k steps&mdash;:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+         H<sub>k</sub>(T) = 0 &le; x &le; k) </td> </tr>
+</table>
+and
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+         wp(DO, T) = (<u>E</u> k: k &ge; 0: h<sub>k</sub>(T)) </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                   = (<u>E</u> k: k &ge; 0: 0 &le; x &le; k)  </td> </tr> <tr> <td></td> <td></td> <td>
+                   = (0 &le; x)                               </td> </tr>
+</table>
+The inability to give for any negative x a priori an upper bound for
+the number of steps needed is translated into &ldquo;for negative x termination
+is not guaranteed&rdquo;. Have we failed?
+<p>That we have not can been seen by considering a possible 
+implementation for set x to any positive value, e.g.
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+    go on:= true; x:= 1;                 </td> </tr> <tr> <td></td> <td colspan = 2>
+    <b>do</b> go on &rarr; x:= x + 1     </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
+     &#x25af; go on &rarr; go on:= false </td> </tr> <tr> <td></td> <td colspan = 2>
+    <b>od</b> .                          </td> </tr>
+</table>
+This construct will continue to increase x as long as the first 
+alternative is chosen; as soon as the second alternative has been chosen once, it
+terminates immediately. Upon termination x may indeed be &ldquo;any positive
+value&rdquo; in the sense that we cannot think of a positive value X such
+that termination with x = X is impossible. However, termination is not
+guaranteed either! If we substitute our implementation for &ldquo;set x to
+any positive value&rdquo; we get
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+       <b>do</b> x &gt; 0 &rarr; x:= x -1             </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td colspan = 3>
+        &#x25af; x &lt; 0 &rarr; go on:= true; x:= 1; </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+            <b>do</b> go on &rarr; x:= x + 1          </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
+             &#x25af; go on &rarr; go on:= false      </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 2>
+            <b>od</b>                                 </td> </tr> <tr> <td></td> <td colspan = 4>
+       <b>od</b>                                      </td> </tr>
+</table>
+Now it is fully correct not to guarantee termination for initial states
+with x &lt; 0 , but not so much because we cannot say a priori how many steps
+the outer cycle will take, but because we cannot guarantee termination for
+the subprocess that would decide upon that number of steps: we cannot
+guarantee termination for the process that is expected to increase x to
+an unbounded value! If it is expected to increase x possibly beyond any
+bound, we must also accept that it will go on for an arbitrarily long time,
+even forever.
+<p>There is still another reason for wanting to avoid unbounded 
+nondeterminacy. The repetitive construct gives rise to a weakest pre-condition
+of the form
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      (<u>E</u> k: k &ge; h<sub>k</sub>) </td> </tr>
+</table>
+where
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+    for k &ge; 0: H<sub>k</sub> &rArr; H<sub>k+1</sub> for all states </td> </tr>
+</table>
+(This implication is intuitively clear from our interpretation &ldquo;... after
+at most k executions of a guarded command&rdquo;; formally it is easily proved
+by mathematical induction.) Such a condition might easily occur as 
+postcondition for another statement, S say, and then we would like that
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+wp(S,(<u>E</u> k: k &ge; 0: H<sub>k</sub>)) = (<u>E</u> n: n &ge; 0: wp(s, H<sub>n</sub>)) .</td><td align=right>(1)
+</td>  </tr>  </table>
+<p>For a statement S with unbounded non-determinacy, however, this
+equality does not necessarily hold, as is shown by the example
+<table width=100%><tr><td width=10%></td><td valign=top width=10%>
+H<sub>k</sub>:</td><td>0 &le; x &le; k
+</td></tr>
+<tr><td></td><td valign=top>
+S:</td><td>set X to any positive value
+</td>  </tr>  </table>
+Relation (1) does hold, however, under the assumption that the 
+non-determinacy of S is bounded. In order to prove (1), we prove that for all
+states each side of (1) implies the other.
+<p>Consider an initial state such that the righthand side of (1) is
+true, i.e. there exists a value N such that in this initial state
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          wp(S, H<sub>N</sub>) </td> </tr>
+</table>
+holds. Because
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      H<sub>N</sub> &rArr; (<u>E</u> k: k &ge; 0: H<sub>k</sub>) for all states </td> </tr>
+</table>
+we may conclude that
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      wp(s, H<sub>N</sub>) &rArr; wp(S, (<u>E</u> k: k &ge; 0: H<sub>k</sub>)) for all states </td> </tr>
+</table>
+and therefore in the initial state considered the lefthand side of (1)
+must be true as well. We have proved that the righthand side of (1) implies
+the lefthand side of (1) in all states without an appeal on the bound on
+the non-determinacy; we need this bound to prove the implication the other
+way round.
+<p>Consider an initial state such that
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+               wp(s, (<u>E</u> k: k &ge; 0: H<sub>k</sub>)) ; </td> </tr>
+</table>
+for such an initial state we guarantee termination in a bounded set of
+final states, each of them satisfying
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              (<u>E</u> k: k &ge; 0: H<sub>k</sub>) ; </td> </tr>
+</table>
+because each H<sub>k</sub> implies all its successors, for each of these final states
+there is a minimum value kmin, such that
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              (<u>A</u> k: k &ge; kmin: H<sub>k</sub>) . </td> </tr>
+</table>
+Because the set of possible final states is bounded, the set of kmin-values
+is bounded and there is a maximum kmin-value, K say. As a result, our
+initial state satisfies
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              wp(S, HK) </td> </tr>
+</table>
+and as
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              wp(S, HK) &rArr; (<u>E</u> n: n &ge; 0: wp(S, H<sub>n</sub>)) </td> </tr>
+</table>
+the implication has been proved in the other direction as well. Relation (1)
+has been proved for all states. 
+<p>As a consequence we can prove &mdash;with the usual meanings of EB, IF
+and DO &mdash; that
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      (BB and wp(DO, R)) = wp(IF, wp(DO, R)) </td> </tr>
+</table>
+<table> <tr> <td colspan = 2>
+for wp(IF, wp(DO, R)) = wp(IF, (<u>E</u> k: k &ge; 0: H<sub>k</sub>(R))) </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                      = (<u>E</u> n: n &ge; 0: wp(IF, H<sub>n</sub>(R))) </td> </tr>
+</table>
+(and because
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+             H<sub>0</sub>(R) &rArr; <b>non</b> BB and for any P we have wp(IF, P) &rArr; BE )                </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                  = BB <b>and</b> (<u>E</u> n: n &ge; 0: wp(IF, H<sub>n</sub>(R)) <b>or</b> H<sub>0</sub>(R)) </td> </tr> <tr> <td></td> <td></td> <td>
+                  = BB <b>and</b> (<u>E</u> k: k &ge; 1: H<sub>k</sub>(R))                                    </td> </tr> <tr> <td></td> <td></td> <td>
+                  = BB <b>and</b> wp(DO, R)   .                                                               </td> </tr>
+</table>
+<p>In other words, in all initial states such that EB holds
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+<b>do</b> b<sub>1</sub> &rarr; SL<sub>1</sub> &#x25af; B<sub>2</sub> &rArr; SL<sub>2</sub> &#x25af; ... &#x25af; B<sub>n</sub> &rArr; SL<sub>n</sub> <b>od</b></td><td align=right>(2)
+</td>  </tr>  </table>
+is equivalent to
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+<b>if</b> b<sub>1</sub> &rarr; SL<sub>1</sub> &#x25af; B<sub>2</sub> &rArr; SL<sub>2</sub> &#x25af; ... &#x25af; B<sub>n</sub> &rArr; SL<sub>n</sub> <b>fi</b></td><td align=right>
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+<b>do</b> b<sub>1</sub> &rarr; SL<sub>1</sub> &#x25af; B<sub>2</sub> &rArr; SL<sub>2</sub> &#x25af; ... &#x25af; B<sub>n</sub> &rArr; SL<sub>n</sub> <b>od</b></td><td align=right>(3)
+</td>  </tr>  </table>
+In initial states where BB does not hold, program (2) would have acted
+as &ldquo;skip&rdquo;, while program (3) would have acted as &ldquo;abort&rdquo;.
+<p>I find it somewhat disconcerting that so much has been involved in
+the formal proof of the partial equivalence of (2) and (3), the more so
+because this partial equivalence is intuitively so obvious. On the other
+hand it gives some confidence that it can be done. At the beginning of
+this chapter I have suggested that the majority of my readers should skip
+this chapter; at its end I express the hope that the few that have studied
+it will appreciate its inclusion.
+  
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-11-15<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+

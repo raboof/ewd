@@ -1,0 +1,252 @@
+<html>
+
+<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+<title>E.W. Dijkstra Archive: A problem solved in my head (EWD666)</title>
+</head>
+
+<body><div id="title"><h1>A problem solved in my head</h1></div>
+
+<p align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD666.PDF" target="_blank">EWD666</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD666.PDF#page=1" target="_blank">0</a></p>
+
+<p><u>A problem solved in my head</u>.</p>
+
+<p>This is a description of how I eventually solved the other night a problem while lying in bed. I observed a few years ago that the moment at which mathematicians introduce avoidable complications very often coincides with the moment that they resort to such mechanical aids as pencil and paper. It was then that, for the sake of clarity of my own thinking, I decided to be less liberal with the use of pencil and paper and not to use them when I could avoid using them. I also expressed the hope that one day a problem would cross my way that most people wouldn't think of solving in their heads, so that I could use that problem for an experiment.</p>
+
+<p>A few months ago I was told such a problem. (Later I heard that some people when 
+confronted with it, instead of solving it themselves, with or without pencil and 
+paper, went to such extremes as writing a computer program for it!) Of two 
+unknown integers between 2 and 99 (bounds included) a person P is told the 
+product and a person S is told the sum. When asked whether they know the two 
+numbers, the following dialog takes place:</p>
+
+<p>P: &quot;I don't know them.&quot;</p>
+
+<p>S: &quot;I knew that already.&quot;</p>
+
+<p>P: &quot;Then I know now the two numbers.&quot;</p>
+
+<p>S: &quot;Then I now know them too.&quot;</p>
+
+<p>With the above data we are requested to determine the two numbers, and to 
+establish that our solution is unique.</p>
+
+<p>As I am not very good at mental arithmetic, the above problem seemed ideal for my experiment. I started on the problem a couple of times, as soon as I lay in bed, but found the problem rather soporific: each time I slept within ten minutes. Last Sunday morning I returned from the U.S.A. and, exhausted as I was, I slept Sunday night soundly. During my absence a letter from Tom Hull had arrived, reminding me of this problem, and Monday night, in bed, I started on it again. Was it jet lag that kept me awake? That night I solved the problem in the following way. (Readers that would like to think about the problem themselves need not turn the page.)</p>
+
+<hr>
+
+<p align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD666.PDF" target="_blank">EWD666</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD666.PDF#page=2" target="_blank">1</a></p>
+
+<p>From the fact that the product does not determine the factors we deduce that</p>
+
+<p>1)&nbsp;&nbsp;&nbsp; the product is not the product of two primes</p>
+
+<p>and from the fact that, furthermore, the factors must be less than 99, that the 
+product contains no prime factor &#8805; 50, or because 53 is the smallest prime &#8805; 
+50 -- more precisely that</p>
+
+<p>2)&nbsp;&nbsp;&nbsp; the product contains no prime factor &#8805; 53.</p>
+
+<p>Because S knew already without any information from P that P couldn't determine the two factors, their sum must be such that properties 1 and 2 can be deduced from their sum. Property 1 excludes for the sum all numbers that can be written as the sum of two primes. Goldbach's Conjecture -- I had never thought that I would ever use that! -- that all even numbers &#8805; 4 can in fact written as the sum 
+of two primes, rules out all even values for the sum (if no upper bound for the 
+numbers were given). If an odd number can be written as the sum of two primes, 
+one of them must be even, i.e. = 2, and hence the knowledge that the sum is a 
+non-prime + 2 is sufficient to guarantee property 1. In order to guarantee 
+property 2 the sum should be &#8804; 54.</p>
+
+<p>Hence the knowledge that is implied by the first answer by S is that the sum is 
+a non-prime + 2 and &#8804; 54. Let us call this set S0:</p>
+
+<p>S0 = {11, 17, 23, 27, 29, 35, 37, 41, 47, 51, 53}.</p>
+
+<p>(This set I could not remember of course; I recomputed a next member of S0 
+whenever I needed one.)</p>
+
+<p>After the first answer by S, P knows that the sum of the factors must be a 
+member of S0. If P is smarter than we have been, he can perhaps conclude that 
+the sum is a member of a smaller set, but not being smarter than I was, I had no 
+other choice than to assume that P could determine the factors of the given 
+product by means of additional knowledge that their sum is a member of S0.</p>
+
+<p>Person P cannot determine the factors if his product can be written in more than one way as x * y, such that x + y is a member of S0. He would, for instance, be baffled by a product = 30, because 6 + 5 = 11 and</p>
+
+<hr>
+
+<p align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD666.PDF" target="_blank">EWD666</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD666.PDF#page=3" target="_blank">2</a></p>
+
+<p>2 + 15 = 17. Person P has, however, a particularly easy task if the product is 
+(a prime * a power of 2): because all the members of S0 are odd, one factor must 
+be odd (i.e. the prime), the other one must be even (i.e. the power of 2).</p>
+		<p>Hence if the product were 24, P would immediately conclude 3 * 8, if it were 28, 
+P would immediately conclude 7 * 4. Because</p>
+		<blockquote>
+			<p>3 + 8 = 7 + 4 = 11,</p>
+		</blockquote>
+		<p>in the case of a sum = 11, S could then never make the final remark that he knew 
+the two numbers too! Hence, on account of the second answer given by S, <u>we</u> -- not 
+P when he gave his second answer -- can delete from S0 all values such as 11 that 
+can be written in more than one way as a prime + a power of 2. Because that 
+seemed effective and was pretty easy to do, I observed that</p>
+		<p>11 = 4 + 7 = 8 + 3</p>
+
+<p>17 = 4 + 13</p>
+
+<p>23 = 4 + 19 = 16 + 7</p>
+
+<p>27 = 4 + 23 = 8 + 19 = 16 + 11</p>
+
+<p>29 = 16 + 13</p>
+
+<p>35 = 4 + 31 = 16 + 19</p>
+
+<p>37 = 8 + 29 = 32 + 5</p>
+
+<p>41 = 4 + 37</p>
+
+<p>47 = 4 + 43 = 16 + 31</p>
+
+<p>51 = 4 + 47 = 8 + 43 = 32 + 19</p>
+
+<p>53 = 16 + 37</p>
+
+<p>and that left <u>me</u> with possible sums from</p>
+
+<p>S1 = {17, 29, 41, 53}</p>
+
+<p>and I dealt with those four possibilities in turn.</p>
+
+<p>sum = 17</p>
+
+<table border="0" cellpadding="5" cellspacing="0" width="100%" >
+  <tr>
+    <td width="40%">2 * 15 = 6* 5</td>
+    <td width="50%">rejected because 6 + 5 = 11 in S0</td>
+  </tr>
+  <tr>
+    <td width="40%">3 * 14 = 2 * 21</td>
+    <td width="50%">rejected because 2 + 21 = 23 in S0</td>
+  </tr>
+  <tr>
+    <td width="40%">4 * 13</td>
+    <td width="50%">decidable for P</td>
+  </tr>
+  <tr>
+    <td width="40%">5 * 12 = 3 * 20</td>
+    <td width="50%">rejected because 3 + 20 = 23 in S0</td>
+  </tr>
+  <tr>
+    <td width="40%">6* 11 = 2 *33</td>
+    <td width="50%">rejected because 2 + 33 = 35 in S0</td>
+  </tr>
+</table>
+
+
+<hr>
+
+<p align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD666.PDF" target="_blank">EWD666</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD666.PDF#page=4" target="_blank">3</a></p>
+
+<table border="0" cellpadding="5" cellspacing="0" width="100%" >
+  <tr>
+    <td width="40%">7 * 10 = 2 * 35</td>
+    <td width="50%">rejected because 2 + 35 = 37 in S0</td>
+  </tr>
+  <tr>
+    <td width="40%">8 * 9 = 3 * 24</td>
+    <td width="50%">rejected because 3 + 24 = 27 in S0</td>
+  </tr>
+</table>
+
+<p>Because the case sum = 17 provides only one situation in which it is decidable 
+for P what factors are, the pair of numbers (4, 13) are a solution. In order to 
+show that this solution is unique, it suffices to show for each of the remaining 
+three cases of S1 that at least one other decidable case exists besides 16 * 13, 
+4 * 37, and 16 * 37 respectively.</p>
+
+<p>sum = 29</p>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td width="40%" valign="top">4 * 25 = 20 *5</td>
+    <td width="50%">decidable by P (as 4 * 25) because<br>
+    20 +5 = 25 is not in S0</td>
+  </tr>
+</table>
+
+<p>sum = 41</p>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td width="40%" valign="top">3 * 38 = 2 * 57 = 6 * 19</td>
+    <td width="50%">decidable by P (as 3 * 38) because neither<br>
+    2 + 57 = 59, nor 6 + 19 = 25 in S0</td>
+  </tr>
+</table>
+
+<p>sum = 53</p>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td width="40%" valign="top">6 * 47 = 2 * 141 = 3 * 94</td>
+    <td width="50%">decidable by P (as 6 * 47) because neither<br>
+    2 + 141 = 143, nor 3 + 94 = 97 in S0.</td>
+  </tr>
+</table>
+
+<p>Hence S cannot justify his second answer for the sum 29, 41, or 53, and the 
+uniqueness of our solution has been established as well.</p>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td width="20%">&nbsp;</td>
+    <td width="20%">
+    <p align="center">*</td>
+    <td width="20%">&nbsp;</td>
+    <td width="20%">
+    <p align="center">*</td>
+    <td width="20%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="20%">&nbsp;</td>
+    <td width="20%">&nbsp;</td>
+    <td width="20%">
+    <p align="center">*</td>
+    <td width="20%">&nbsp;</td>
+    <td width="20%">&nbsp;</td>
+  </tr>
+</table>
+
+<p>I am not ashamed of admitting that finding the above argument took me almost six hours. Early the next morning I had to lecture at the THE without having slept at all! Yet I think that one night's sleep was worth the experiment.</p>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td width="33%">Plataanstraat 5</td>
+    <td width="33%">&nbsp;</td>
+    <td width="34%">prof.dr.Edsger W.Dijkstra</td>
+  </tr>
+  <tr>
+    <td width="33%">5671 AL NUENEN</td>
+    <td width="33%">&nbsp;</td>
+    <td width="34%">BURROUGHS Research Fellow</td>
+  </tr>
+  <tr>
+    <td width="33%">The Netherlands</td>
+    <td width="33%">&nbsp;</td>
+    <td width="34%">&nbsp;</td>
+  </tr>
+</table>
+
+<p>P.S. (written by hand on page three of the original) After EWD666 had been typed 
+I learned that my late sister mrs. H.A. van Yzeren-Dijkstra has solved this very 
+same problem in the late sixties when she was nearly blind; at that stage ãpaper 
+and pencilä were hardly of any use to her at all!</p>
+
+<p>Edsger W. Dijkstra</p>
+
+<hr>
+
+<p>Transcription by Wolfgang Houben.<br>
+			Last revised <csobj format="MedDate" h="16" region="15" t="DateTime" w="106">Thu, 19 Jun 2003</csobj>.</p>
+
+</body>
+
+</html>

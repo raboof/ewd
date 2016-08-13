@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><!-- InstanceBegin template="/Templates/EWD transcription.dwt" codeOutsideHTMLIsLocked="false" -->
+<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>E.W.Dijkstra Archive: &ldquo;An alternative ending for AvG16/EWD809&rdquo; (AvG18/EWD 811)</title>
+<!-- InstanceEndEditable -->
+<link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<!-- InstanceParam name="signature" type="boolean" value="true" -->
+</head>
+
+<body><div id="title"><h1>&ldquo;An alternative ending for AvG16/EWD809&rdquo; (AvG18/EWD 811)</h1></div>
+<div id="frame" align="right">
+	<div id="header" align="right"><!-- InstanceBeginEditable name="link to PDF" --><a href="http://www.cs.utexas.edu/~EWD/ewd08xx/EWD811.PDF" 
+	title="Link to the PDF version of EWD841">AvG18/EWD811</a><!-- InstanceEndEditable --></div>
+</div>
+<div id="frame">
+
+<div id="content">
+
+
+
+
+<p class="noindent"><!-- InstanceBeginEditable name="title heading" --><u>An alternative ending for AvG16/EWD809</u><!-- InstanceEndEditable --></p>
+<!-- InstanceBeginEditable name="body" -->
+<p>(Early comments from W.H.J.Feijen and from C.S.Scholten have suggested further disentanglement of smoothsort&rsquo;s presentation.)</p>
+<p>In smoothsort the descending tree covering the unsorted prefix is a so-called &quot;leftward tree&quot;, i.e. a tree in which each son is situated to the left of its father. As a result, the rightmost element of the unsorted prefix is the root of the tree and hence dominates all other elements of the unsorted prefix. Note that the leftward trees are the only ones permissible under the constraint that smoothsort leaves an initially increasing sequence unchanged all through the computation. This constraint is strongly suggested by the aim that  smoothsort be best-case of order <var>N</var>&thinsp;; in a moment we shall encounter a further consequence of that aim.</p>
+<p>Its rightmost element dominating all its others, the unsorted prefix can be shortened by one element without violation of P4. In contrast to heapsort&rsquo;s tree, which is pruned leaf by leaf, smoothsort&rsquo;s tree is pruned in the second phase at its root: it becomes a forest of as many trees can be made into a single descending leftward tree by grafting the one with the leftmost root upon the root of the other (sift being applied in circumstance <var>c</var>); hence the forest can be rebuilt &mdash;possibly in many ways&mdash; into a single descending leftward tree.</p>
+<p>In smoothsort this freedom is exploited to bound the maximum number of sons with the same father, because such an upper bound is a sufficient condition for the number of comparisons to be of order <var>N</var>&middot;log <var>N</var> in the worst case and of order <var>N</var> in the best case. In smoothsort each father has in fact at most 3 sons. In order to maintain that state of affairs, of the trees of the aforementioned forest only the tree with the lefmost root may have nodes with as many as three sons: by grafting in the order from left to right upon the remaining roots no father with more than 3 sons is introduced. The requirement that no different forest ever emerges implies that all fathers with  three sons are on the leftmost path from the root of the covering leftward tree and that the unordered prefix itself is that tree&rsquo;s postorder traversal. (The postorder traversals of its first-generation subtrees followed by its root.)</p>
+<p>As a result we can &mdash;and shall do so in the sequel&mdash; view the unsorted prefix as the concatenation of the postorder traversals of one or more binary trees such that, firstly, in each binary tree each father dominates its offspring and, secondly, the roots of the binary trees are ascending in the order in which they occur.</p>
+<p>In contrast to heapsort, which permanently uses (part of) the same simple tree, smoothsort has to keep track of the shape of a changing tree, i.e. it has to keep track of the sequence of binary trees whose concatenated postorder traversals form the unordered prefix. The sequence has to be such that the clerical labour involved herein can also be of order <var>N</var> in the best case.</p>
+<p>To this purpose, the binary trees admitted are the so-called Leonardo trees <var>LT</var><var class="subscript">i</var>: <var>LT</var><span class="subscript">0</span> and <var>LT</var><span class="subscript">1</span>, both consist of a single leaf, <var>LT<span class="subscript">i</span></var><span class="subscript">+2</span> has <var>LT<span class="subscript">i</span></var><span class="subscript">+1</span> as its left subtree and <var>LT</var><var class="subscript">i</var> as its right subtree. The concatenation is a so-called standard concatenation, i.e. it consists of the postorder traversal of the largest possible Leonardo tree, followed by the standard concatenation for the remainder of the unsorted prefix. Thus we achieve that the unsorted prefix is covered by the minimum number of Leonardo trees. (Leonardo trees have been preferred to balanced binary trees because, on the average, 25% more trees are needed for coverage by the latter.)</p>
+<p>As in heapsort, smoothsort&rsquo;s second phase &mdash;in which the sorted sequence is built up from the right&mdash; is preceded by a first phase in which the unsorted prefix of length <var>N</var> (i.e. covering the whole sequence) is prepared. In contrast to heapsort, this preparation starts from the left; <var>q</var> &mdash;in the first phase the length of the prepared prefix&mdash; is initialized at 1 and repeatedly increased by 1 until <var>q</var> = <var>N</var>.</p>
+<p>The first phase&rsquo;s main task is to see to it that at each increase of <var>q</var> the Leonardo trees covering the prefix are such that each (binary) father dominates its (binary) offspring. There are two cases. If increasing <var>q</var> by 1 boils down to extending the standard concatenation by a one-node Leonardo tree, this obligation is empty; otherwise <var>LT<span class="subscript">i</span></var><span class="subscript">+1&thinsp;</span>, <var>LT</var><var class="subscript">i</var>&thinsp;, and the new element are combined into <var>LT<span class="subscript">i</span></var><span class="subscript">+2</span>&thinsp;, to whose root sift is applied (circumstance <var>b</var>).</p>
+<p>The first phase&rsquo;s second obligation is to insert a grafting operation (circumstance <var>c</var>) each time a Leonardo tree is formed that will not subsequently be absorbed in a larger Leonardo tree; as a result, at the end of the first phase the roots of the binary trees are in ascending order.</p>
+<p>In order to arrive at an algorithm of order <var>N</var> in the best case, a stack records which Leonardo trees cover the unsorted prefix. (Because each Leonardo tree occurs at most once in a standard concatenation, a bit stack in fact suffices.)</p>
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="EditRegion5" -->
+<p>&nbsp;</p>
+<table width="624" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="302" valign="top"><p class="noindent">drs. A.J.M. van Gasteren<br />
+      BP Venture Research Fellow<br />
+      Dept. of Mathematics and<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Computing Science<br />
+      University of Technology<br />
+      5600 MB EINDHOVEN<br />
+      The Netherlands
+    </p></td>
+    <td width="322" valign="top">
+      <p class="noindent">prof.dr.Edsger W. Dijkstra<br />
+        Burroughs Research Fellow</p>
+      <p class="continue">Plataanstraat 5<br />
+5671 AL NUENEN<br />
+The Netherlands</p></td>
+  </tr>
+</table>
+<!-- InstanceEndEditable --></div>
+
+<div id="footer">
+  <p class="noindent"><font size="-1">
+    Transcribed by <!-- InstanceBeginEditable name="name of transcriber" -->Bart Vreugdenhil<!-- InstanceEndEditable --><br />
+  </font><font size="-1">
+    Revised 
+    <!-- #BeginDate format:En2 -->10-Oct-2012<!-- #EndDate --></font>  </p>
+</div>
+
+</div>
+</body>
+<!-- InstanceEnd --></html>

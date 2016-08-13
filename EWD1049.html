@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<title>E.W.Dijkstra Archive: A somewhat open letter to Uri Leron (EWD 1049)</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen" />
+	</head>
+	<body><div id="title"><h1>A somewhat open letter to Uri Leron</h1></div>
+		<div id="frame">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd10xx/EWD1049.PDF"
+					 title="Link to the PDF version of EWD1049">EWD 1049</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>A somewhat open letter to Uri Leron</u></p>
+				<p class="noindent">Dear Colleague,</p>
+				<p>you end your letter of March 30, 1989, with:</p>
+				<p>&ldquo;I finish with a puzzle, that somehow seems to me related to your Sylvester's theorem (<a href="EWD1016.html">EWD1016</a>). Consider two finite, equinumerous sets of points in the plane. Assume there are no colinear triples. Show that there exists a pairing (bijective correspondence) between the two sets, so that no two line segments connecting corresponding points intersect. (This theorem has a very short, elegant, &ldquo;existential&rdquo; proof that mathematicians love and, I suspect, you won&rsquo;t.)&rdquo;</p>
+				<p>The relation to Sylvester&rsquo;s conjecture is quite close indeed: rephrased as a programming problem &#x2014;&ldquo;design an algorithm that constructs a pairing without intersecting segments&rdquo;&#x2014; it is solved by standard programming methodology. It is much simpler than Sylvester&rsquo;s problem in the sense that, in refining the repeatable statement, it will turn out that there is no nondeterminism to be restricted; nor does it require the introduction of a variable (like <var>E</var> in EWD1016) to be incorporated in the invariant. In this case we have a variable <var>q</var> and the invariant <var>P</var> is</p>
+				<p class="noindent" align="center"><var>P</var>: &nbsp; <var>q</var> represents a pairing of the two sets</p>
+				<p class="noindent">and the simplest program structure to be tried is</p>
+				<table cellpadding="0" cellspacing="0" border="0" style="margin-top: 1em; margin-left: 2em;">
+					<tr><td></td>
+					<td>&ldquo;initialise <var>q</var> so as to establish <i>P</i>&rdquo; {<var>P</var>}</td></tr>
+					<tr><td>;&nbsp;&nbsp;</td><td><b>do</b> there exists a pair of intersecting segments</td></tr>
+					<tr><td></td>
+				  <td>&nbsp; &nbsp; &#x2192; {?} &ldquo;change <var>q</var> under invariance of <var>P</var>&rdquo; {<var>P</var>}</td></tr>
+					<tr><td></td><td><b>od</b></td></tr>
+				</table>
+				<p class="noindent">and now we have to prove termination of the algorithm. At the place marked with {?}, the <em>only</em> thing that can be asserted besides <var>P</var> are two intersecting segments, say A0-B0 and A1-B1</p>
+				<p class="noindent" align="center" style="margin-top: 0;"><img src="ewd1049_fig1.png" alt="EWD1049 figure 1" title="EWD1049 figure 1" /></p>
+				<p class="noindent">and no three points (of these four) are colinear. This information allows only <em>one</em> way of changing <var>q</var> under invariance of <var>P</var>: &ldquo;flip&rdquo; the pairs as indicated by the dotted segments</p>
+				<p class="noindent" align="center" style="margin-top: 0;"><img src="ewd1049_fig2.png" alt="EWD1049 figure 2" title="EWD1049 figure 2" /></p>
+				<p>In order to prove termination we have to find a function on <var>q</var> that is decreased by such a flip, which replaces in <var>q</var>&rsquo;s set of pairs/segments two of those by two others. If replacement of a few elements of an otherwise unknown set has to decrease the value of a function on the set, the latter had better be a monotonic function &#x2014;such as the sum&#x2014; of a function on the <em>individual</em> elements. (This rules out the number of segment intersections as choice for decreasing function, since that one is defined on the <em>pairs</em> of elements.) What is the simplest function of a pair/segment? The length of the segment, or any function thereof, but the identity function will do: the triangular inequality tells us that the sum of the lengths of the dotted segments is less than the sum of the lengths of the solid segments (the absence of collinear triples guaranteeing that the triangles involved are nondegenerate). The sum of the lengths of the segments is thus a function on <var>q</var> that meets all the requirements for our proof of termination.</p>
+				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+				<p>My guess is that your &ldquo;very short, elegant, &ldquo;existential&rdquo; proof that mathematicians love&rdquo; begins like &ldquo;Consider a pairing with minimal total length of the corresponding segments and assume now that two line segments intersect.&rdquo; Etc. Such a presentation starts by pulling a gigantic rabbit out of a hat and, indeed, I don&rsquo;t like that. The above program derivation shows that the choice of decreasing function (which embodies the proof&rsquo;s invention) is all but forced.</p>
+				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+				<p>In defence of vague notions such as &ldquo;intuition&rdquo; and &ldquo;understanding&rdquo; you wrote</p>
+				<p class="noindent">&ldquo;Formal, rigorous terminology are not nearly powerful enough to capture the richness and complexity of [<em>human</em> thought] processes.&rdquo;.</p>
+				<p class="noindent">I don&rsquo;t and won&rsquo;t deny you the right to be intrigued by what you perceive as the richness and complexity of human thought processes; it just so happens that I am more interested in increasing the power and simplicity of mathematics. The extent to which we live in different worlds is amply illustrated by the fact that you introduced your problem as &ldquo;a puzzle&rdquo;, something I would never have done. For the noun, the Concise Oxford Dictionary gives &ldquo;problem or toy designed to test knowledge, ingenuity, or patience&rdquo;, for the verb, Webster&rsquo;s New Collegiate Dictionary gives &ldquo;1: to be uncertain as to action or choice &nbsp; 2: to attempt a solution of a puzzle by guesswork or experiment&rdquo;, for me reasons enough to avoid the term in this context. I definitely prefer a much more conscious approach to problem solving, avoiding trial and error as much as possible.</p>
+				<p>With my greetings and best wishes, and in gratitude for drawing my attention to your problem,</p>
+				<p align="center">yours ever,</p>
+				<p align="center" style="text-indent: 8em; margin-top: 0;">Edsger W.Dijkstra</p>
+				<p align="center">Austin, 12 April 1989</p>
+				<p class="noindent">
+					prof.dr. Edsger W.Dijkstra<br />
+					Department of Computer Sciences<br />
+					The University of Texas at Austin<br />
+					Austin, TX 78712-1188<br />
+					United States of America<br />
+				</p>
+			</div>
+			<div>
+        <br/>
+      </div>
+		</div>
+		<hr />
+		<div id="footer">
+         transcribed by Corrado Cantelmi<br />
+          revised 
+          <!-- #BeginDate format:En2 -->27-Nov-2011<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

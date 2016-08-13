@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: The mathematics behind the Banker’s Algorithm  (EWD 623)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>The mathematics behind the Banker’s Algorithm </h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD623.PDF"
+           title="Link to the PDF version of EWD623">EWD623</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<table> <tr> <td colspan = 2>
+<b>Copyright Notice  </b>                                                      </td> </tr> <tr> <td colspan = 2>
+The following manuscript                                                       </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td>
+   EWD 623 The mathematics behind the Banker’s Algorithm                       </td> </tr> <tr> <td colspan = 2>
+is held in copyright by Springer-Verlag New York.                              </td> </tr> <tr> <td colspan = 2>
+The manuscript was published as pages 308–312 of                               </td> </tr> <tr> <td></td> <td>
+   Edsger W. Dijkstra, <i>Selected Writings on Computing: A Personal Perspective</i>, </td> </tr> <tr> <td></td> <td>
+   Springer-Verlag, 1982. ISBN 0–387–90652–5.                                  </td> </tr> <tr> <td colspan = 2>
+<b>Reproduced with permission from Springer-Verlag New York.       </b>        </td> </tr> <tr> <td colspan = 2>
+<b>Any further reproduction is strictly prohibited. </b>                       </td> </tr>
+</table>
+<p class=noindent><b>The mathematics behind the Banker&rsquo;s Algorithm.</b>
+<p>(I recently showed at my lectures the so-cal1ed &ldquo;Banker&rsquo;s Algorithm&rdquo; as
+an example of a method for deadlock prevention. Because my informal 
+justification left my students visibly unconvinced, I designed a more explicit one
+while preparing my next week&rsquo;s lectures. This note is written because I think
+the argument I developed at that occasion rather nice; it is not a symptom of
+any revival of my interest in the Banker&rsquo;s Algorithm as a scheduling strategy.)
+<p>We consider a non-empty set P of processes p , each of them engaged on
+a finite transaction for the completion of which it may need a (varying but
+bounded) number of units of some shared resource at its exclusive disposal.
+(The units are all equivalent, say: pages of store.)
+<p>A process may &ldquo;borrow&rdquo; one or more units, which are then added to its
+current &ldquo;loan&rdquo;, it may &ldquo;return&rdquo; one or more units, which are then subtracted
+from its current loan. The act of borrowing is restricted by the condition that,
+for each process, the loan will never exceed a pre-stated &ldquo;need&rdquo;, i.e. the
+maximum number of units that may be simultaneously needed by that process for
+the completion of its transactions. The act of returning is restricted by the
+(obvious) constraint that for no process the loan can ever become negative; upon
+completion of a transaction, the corresponding loan returns to zero.
+<p>If there are &ldquo;cap&rdquo; units in the system, the sum of the loans cannot exceed
+cap . More precisely, if we define
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+cash = cap - sum(p <b>from</b> P: loan[p])</td><td align=right>(1)
+</td>  </tr>  </table>
+then &ldquo;cash&rdquo; represents the number of unallocated units and must satisfy
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+0 &le; cash &le; cap </td><td align=right>(2)
+</td>  </tr>  </table>
+For each process p we have
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+0 &lt; loan[p] &le; need[p] &le; cap </td><td align=right>(3)
+</td>  </tr>  </table>
+<p>A simple example shows that the danger of deadlock is present. Consider
+with two processes the following pattern of loans and needs:
+<table> <tr> <td>
+cap = 4 , need[0] = need[1] = 3 , loan[0] = loan[1] = 2 , cash = 0 . </td> </tr>
+</table>
+ 
+                     
+Because for each process loan &lt; need still holds, each process is entitled to
+request a further unit before returning units; because, however, cash = 0 ,
+deadlock would result if they both do so.
+<p>The act of borrowing is, therefore, split into two parts. The process 
+requests the units to be borrowed from a banker and waits until the banker has
+granted this request.
+<p class=noindent><b>Definition.</b> A &ldquo;pattern&rdquo; (of loans and needs) is &ldquo;safe&rdquo; if a granting strategy
+exists such that it can be guaranteed that all (current and future) requests
+can be granted within a finite period of time. (End of definition.)
+<p>It is the function of the banker to keep the pattern safe. The banker
+does so by inspecting for each request, whether the pattern that would result
+from granting that request is safe or not. If it is safe, the request can be
+granted immediately &mdash;and we assume that then the banker does so&mdash; . If it is
+not safe, the banker postpones the granting of that request until a more 
+favourable moment: because the postponement has not changed the pattern of loans
+and needs, which is therefore still safe, that moment will come within a finite
+period of time. It is the purpose of the so-called &ldquo;Banker&rsquo;s Algorithm&rdquo; to
+investigate, whether a given pattern of loans and needs is safe or not.
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>For each process p we introduce as abbreviation
+<table width=100%><tr><td valign=top width=10%>
+</td><td>claim[p] = need[p] - loan[p]: ;
+</td>  </tr>  </table>
+for each process p the current claim[p] thusirepresents the maximum number
+of units it may need to borrow before it returns any units. Suppose that P
+consists of N processes, and that\
+<table width=100%><tr><td valign=top width=10%>
+</td><td>P[0], P[1], ... , P[N-1]                 
+</td>  </tr>  </table>
+represents a permutation of the process numbers such that
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> i: 0 &le; i &le; N: claim[p[N]] &le; cash + sum(0 &le; j &lt; i: 1oan[p[j]])) .</td><td align=right>(4)
+</td>  </tr>  </table>
+<b>Lemma 1</b>. Relation (4) implies that the pattern is safe. (End of lemma 1.)
+<br><b>Proof</b>. The existence of a granting strategy such as required for safety is
+
+
+shown by the strategy of <b>only</b> granting(<b>all</b>)requests from process p[i] , provided
+that all processes p[j] for 0 &le; j &lt; i have terminated their transactions. 
+Relation (4) then implies that for i=0, 1, ... , N-1 in succession, cash will
+be sufficient to grant all requests from process p[i] without violating (2) .
+Within a finite period of time, process p[i] will have terminated its transaction
+and i can be increased by 1. (End of proof.) 
+<p>The Banker&rsquo;s Algorithm tries to find such a permutation of the process
+numbers by keeping
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> i: 0 &le; i &le; k: claim[p[i]] &le; cash + sum(0 &le; j &lt; i: 1oan[p[j]]))</td><td align=right>(5)
+</td>  </tr>  </table>
+invariant. After having established it (trivially) by means of k:= 0 , it then
+tries to increase k by 1 under invariance of (5) until k = N . It does
+so by not changing p[0], ... , p[k-1] , and by searching for an h , such that
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+k &le; h &lt; N <b>and</b> claim[p[h]] &lt; cash + sum(0 &le; j &lt; k: loan[p[j]]) .</td><td align=right>(6)
+</td>  </tr>  </table>
+If such an h has been found,           
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&ldquo;p:swap(h, k); k:= k+1&rdquo;
+</td>  </tr>  </table>
+increases k by 1 under invariance of (5). If, however, for k &lt; N equation 
+(6) has no solution for h , we say that &ldquo;the ordering effort has failed&rdquo;. If
+(6) remains solvable each time, until k = N , we say that &ldquo;the ordering effort
+has not failed&rdquo;. 
+<p>Because an ordering effort that does not fail implies the existence of
+a permutation satisfying (4), and, hence, on account of lemma 1, that the
+pattern is safe, we conclude that for a pattern that is not safe, all ordering
+efforts must fail. Or, with
+<table width=100%><tr><td valign=top width=10%>
+Ass.0:</td><td>the pattern of loans and needs is not safe
+</td></tr>
+<tr><td valign=top>
+Ass.1:</td><td>all ordering efforts must fail
+</td>  </tr>  </table>
+we have derived
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+Ass.0 &rArr; Ass.1 .</td><td align=right>(7)
+</td>  </tr>  </table>
+with
+<table width=100%><tr><td valign=top width=10%>
+Ass.2:</td><td>a failing ordering effort is possible
+</td>  </tr>  </table>
+we conclude (because the set of possible ordering efforts is not empty) that
+            
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+Ass.1 &rArr; Ass.2 .</td><td align=right>(8)
+</td>  </tr>  </table>
+<p>Consider next
+<table width=100%><tr><td valign=top width=10%>
+Ass.3:</td><td>the non-empty set of processes &mdash;or, to be quite precise, the 
+non-empty set P&rsquo; of process numbers&mdash; can be partioned into A + B ,
+such that B is non-empty and<br>
+(<u>A</u> b from B: claim[b] &gt; cash + sum(a <b>from</b> A: loan[a])) .
+</td>  </tr>  </table>
+<p class=noindent>We can then conclude that
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+Ass.2 &rArr; Ass.3 .</td><td align=right>(9)
+</td>  </tr>  </table>
+<b>Proof</b>. Consider the state as reached by the failng ordering effort that is
+possible under the assumption of Ass.2 . Choose then
+<table width=100%><tr><td valign=top width=10%>
+</td><td>A = {P[j] | 0 &le; j &lt; k} ;
+</td>  </tr>  </table>
+from which we conclude that
+<table width=100%><tr><td valign=top width=10%>
+</td><td>cash + sum(a <b>from</b> A: loan[a]) = cash + sum(0 &le; j &lt; k: loan[p[j]]) ;
+</td>  </tr>  </table>
+choose furthermore
+<table width=100%><tr><td valign=top width=10%>
+</td><td>B = {P[j] | k &lt;j &lt; N} ;
+</td>  </tr>  </table>
+because k &lt; N , B is not empty, and because the ordering effort has failed,
+(6) has no solution for h , and hence A satisfy and B the criteria that
+are imposed upon them in Ass.3 . (End of proof.)
+<p>Finally we conclude
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+Ass.3 &rArr; Ass.0</td><td align=right>(10)
+</td>  </tr>  </table>
+<b>Proof</b>. Let all processes from B from now on try to borrow until their loans
+equal their needs, before they return any units. Let all processes from A
+terminate their activity. In spite of what has been returned, Ass.3 implies
+that the banker has still not enough in cash to see any process from B through
+to completion, and, hence, the pattern of loans and needs is not safe. (End of
+proof.)
+<p>Combining (7), (8), (9), and (10), we see
+<table width=100%><tr><td valign=top width=10%>
+</td><td>Ass.0 &rArr; Ass.1 &rArr; Ass.2 &rArr; Ass.3 &rArr; Ass.0
+</td>  </tr>  </table>
+but from this cyclic implication we are allowed to conclude
+                   
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+Ass.0 = Ass.1 = Ass.2 = Ass.3 .</td><td align=right>(11)
+</td>  </tr>  </table>
+<p>Conclusion (11) is the important one. While it is obvious that a 
+non-failing ordering effort implies that the pattern is safe, (11) implies that the
+discovery of a single failing ordering effort allows us to conclude immediately
+&mdash;i.e. without any of the back-tracking that is traditionally involved in the
+search for permutations satisfying some criterion&mdash; that no such permutation
+exists and that the pattern is not safe.
+<p>From (11) it also follows rapidly that, in order to investigate the
+safety of the pattern that would result from granting,in a safe situation a
+request to process c , the ordering effort can be stopped as soon as c = p[k] ,
+for then safety is already implied. (The credit for this discovery is due to
+L.Zwanenburg, who made it in the early sixties.)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p>  
+<p>In retrospect I am grateful to the puzzled looks on my students&rsquo; faces.
+That from a cyclic arrangement of n assertions, each implying the next one, we
+can conclude that all n assertions are equivalent &mdash;or to put it more 
+dramaticly: can conlude all n(n-1) pair-wise implications&mdash; is not unknown at all.
+But the larger the value of n , the more impressive an example of effective
+reasoning we have, in particular if &mdash;as in this case&mdash; the assertions have
+been arranged in such an order, that the n antecedents are not difficult to
+prove.
+<p>It is a pity that, probably, the case n = 2 is the most common one,
+for in that case the &ldquo;gain&rdquo; &mdash;as measured in terms of the number of implications
+established&mdash; is nihil!
+<table width=100%><tr><td valign=top width=40%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<p class=noindent>PS. Please note my new postal code!
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-01-24<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

@@ -1,0 +1,472 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Finding the correctness proof of a concurrent program (EWD 640a)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>Finding the correctness proof of a concurrent program (EWD 640a)</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+  <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD640a.PDF"
+           title="Link to the PDF version of EWD640a">EWD640a</a></div></div>
+    <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+                   
+<p class=noindent><b>Finding the correctness proof of a concurrent program</b>.
+<p class=noindent><b>Introduction</b>.
+<p>In this paper we want to do more than just giving another &mdash;be it 
+unusual&mdash; example of the utility of the first-order predicate calculus in
+proving the correctness of programs. In addition we want to show how,
+thanks to a systematic use of the first-order predicate calculus, fairly
+general &mdash;almost &ldquo;syntactic&rdquo;&mdash; considerations about the formal manipulations
+involved can provide valuable guidance for the smooth discovery of an 
+otherwise surprising argument.
+<p>For proofs of program correctness two fairly different styles have
+been developed, &ldquo;operational&rdquo; proofs and &ldquo;assertional&rdquo; proofs. Operational
+correctness proofs are based on a model of computation, and the corresponding
+computational histories are the subject matter of the considerations. In
+assertional correctness proofs the possibility of interpreting the program
+text as executable code is ignored and the program text itself is the subject
+matter of the formal considerations.
+<p>Operational proofs &mdash;although older and, depending on one&rsquo;s education,
+perhaps more &ldquo;natural&rdquo; than_assertional proofs&mdash; have proved to be tricky to
+design. For more complicated programs the required classification of the
+possible computational histories tends to lead to an exploding case analysis
+in which it becomes very clumsy to verify that no possible sequence of events
+has been overlooked, and it was in response to the disappointing experiences
+with operational proofs that the assertional style has been developed.
+<p>The design of an assertional proof &mdash;as we shall see below&mdash; may 
+present problems, but, on the whole, experience seems to indicate that assertional
+proofs are much more effective than operational ones in reducing the gnawing
+uncertainty whether nothing has been overlooked. This experience, already
+gained while dealing with sequential programs, was strongly confirmed while
+dealing with concurrent programs: the circumstance that the ratios of the
+speeds with which the sequential components proceed is left undefined greatly
+increases the class of computational histories that an operational argument
+would have to cover!
+                        
+<p>In the following we shall present the development of an assertional
+correctness proof of a program of N-fold concurrency. The program has been
+taken from the middle of a whole sequence of concurrent programs of 
+increasing complexity &mdash;the greater complexity at the one end being the consequence
+of finer grains of interleaving&mdash; . For brevity&lsquo;s sake we have selected here
+from this sequence the simplest item for which the assertional correctness
+proof displays the characteristic we wanted to show. (It is got the purpose
+of this paper to provide supporting material in favour of the assertional
+style: in fact, our example is so simple that an operational proof for it
+is still perfectly feasible.)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>In the following y denotes a vector of N components y[i] for
+0 &le; i &lt; N . With the identifier f we shall denote a vector-valued function
+of a vector-valued argument, and the algorithm concerned solves the equation
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+y = f(y)</td><td align=right>(1)
+</td>  </tr>  </table>
+or, introducing f<sub>0</sub>, f<sub>1</sub>, f<sub>2</sub>,... for the components of f
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+y[i] = f<sub>i</sub>(y) for 0 &le; i &lt; N .</td><td align=right>(2)
+</td>  </tr>  </table>
+<p>It is assumed that the initial value of y and the function f are
+such that repeated assignments of the form
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+&lt;y[i]== f<sub>i</sub>(y) &gt;</td><td align=right>(3)
+</td>  </tr>  </table>
+will lead in a finite number of steps to y being a solution of (1). In
+(3) we have used Lamport&rsquo;s notation of the angle brackets: they enclose
+&ldquo;atomic actions&rdquo; which can be implemented by ensuring between their 
+executions mutual exclusion in time. For the sake of termination we assume that
+the sequence of i-values for which the assignments (3) are carried out is
+(the proper begin of) a sequence in which each i-value occurs infinitely
+often. (We deem this property guaranteed by the usual assumption of &ldquo;finite
+speed ratios&rdquo;; he who refuses to make that assumption can read the following
+as a proof of partial correctness.)
+<p>For the purpose of this paper it suffices to know that functions f
+exist such that with a proper initial value of y equation (1) will be solved
+            
+by a finite number of assignments (3). How for a given function f and
+initial value y this property can be established is ggt the subject of
+this paper. (He who refuses to assume that the function f and the initial
+value of y have this property is free to do so: he can, again, read the
+following as a proof of partial correctness that states that <b>when</b> our
+concurrent program has terminated, (1) is satisfied.)
+<p>Besides the vector y there is &mdash;for the purpose of controlling 
+termination&mdash; a vector h , with boolean elements h[i] for 0 &le; i &lt; N , all
+of which are true to start with. We now consider the following program of
+N-fold concurrency, in which each atomic action assigns a value to at most
+one of the array elements mentioned. We give the program first and shall
+explain the notation afterwards.
+The concurrent program we are considering consists of the following
+N components (0 &le; i &lt; N):
+<table> <tr> <td colspan = 5>
+cpnt<sub>i</sub>:                                                               </td> </tr> <tr> <td>L0: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+       <b>do</b> &lt; (<u>E</u> j: h[j]) &gt; &rarr;                  </td> </tr> <tr> <td>L1:</td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+                &lt; <b>if</b> y[i] = f<sub>i</sub>(y) &rarr; h[i]:= false &gt;  </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 2>
+                  &#x25af; y[i] &ne; f<sub>i</sub>(y) &rarr; y[i]:= f<sub>i</sub>(y) &gt; ; </td> </tr> <tr> <td>L2j:</td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                (<u>A</u> j: &lt; h[j]:= true &gt; )  </td> </tr> <tr> <td></td> <td></td> <td colspan = 3>
+                <b>fi</b>                                             </td> </tr> <tr> <td></td> <td colspan = 4>
+       <b>od</b>                                                      </td> </tr>
+</table>
+<p>In line L0 , &ldquo;(<u>E</u> j: h[j])&rdquo; is an abbreviation for 
+<table width=100%><tr><td valign=top width=20%>
+</td><td>(<u>E</u> j: 0 &le; j &lt; N: h[j]) ;
+</td>  </tr>  </table>
+for the sake of brevity we shall use this abbreviation throughout this paper.
+By writing &lt; (<u>E</u> j: h[j]) &gt; in the guard we have indicated that the inspection
+whether a true h[j] can be found is an atomic action.
+The opening angle bracket &ldquo; &lt; &rdquo; in L1 has two corresponding closing
+brackets, corresponding to the two &ldquo;atomic alternatives&rdquo;; it means that in
+the same atomic actions the guards are evaluated and either &ldquo;h[i]:= false&rdquo;
+or &ldquo;y[i]:= f<sub>i</sub>(y)&rdquo; is executed. In the latter case, N separate atomic
+actions follow, each setting an h[j] to true: in line L2j we have used
+            
+the abbreviation &rdquo;(<u>A</u> j: &lt; h[j]:= true &gt; )&ldquo; for the program that performs
+the N atomic actions &lt; h[0]:= true &gt; through &lt; h[N-1]:= true &gt; in some
+order which we don&rsquo;t specify any further.
+In our target state y is a solution of (1), or, more explicitly
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> j: y[j] = f<sub>j</sub>(y)) .</td><td align=right>(4)
+</td>  </tr>  </table>
+holds. We first observe that (4) is an invariant of the repeatable statements,
+i.e. once true it remains true. In the alternative constructs always the
+first atomic alternative will then be selected, and this leaves y , and
+hence (4) unaffected. We can even conclude a stronger invariant
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+<b>non</b> (<u>E</u> j: h[j]) <b>and</b> (<u>A</u> j: y[j] = f<sub>j</sub>(y))</td><td align=right>(5)
+</td>  </tr>  </table>
+or, equivalently
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> j: <b>non</b> h[j]) <b>and</b> (<u>A</u> j: y[j] = f<sub>j</sub>(y))</td><td align=right>(5&rsquo;)
+</td>  </tr>  </table>
+for, when (5) holds, no assignment h[i]:= false can destroy the truth of
+(<u>A</u> j: <b>non</b> h[j]) . when (4) holds, the assumption of finite speed ratios
+implies that within a finite number of steps (5) will hold. But then the
+guards of the repetitive constructs are false, and all components will terminate
+nicely with (4) holding. The critical point is: can we guarantee that none
+of the components terminates too soon?
+<p>We shall give an assertional proof, following the technique which has
+been pioneered by Gries and Owicki [1]. We call an assertion &rdquo;universally
+true&ldquo; if and only if it holds between any two atomic actions &mdash;i.e. &rdquo;always&ldquo;
+with respect to the computation, &rdquo;everywhere&ldquo; with respect to the text&mdash; .
+More precisely: proving the universal truth of an assertion amounts to showing
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that it holds at initialization
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that its truth is an invariant of each atomic action.
+<p>In order to prove that none of the components terminates too soon, i.e.
+that termination implies that (4) holds, we have to prove the universal truth of
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>E</u> j: h[j]) <b>or</b> (<u>A</u> j: y[j] = f<sub>j</sub>(y)) .</td><td align=right>(6)
+</td>  </tr>  </table>
+Relation (6) certainly holds when the N components are started because
+initially all h[j] are true. We are only left with the obligation to
+prove the invariance of (6); the remaining part of this paper is devoted
+to that proof, and to how it can be discovered.
+               
+<p>We get a hint of the difficulties we may expect when trying to prove
+the invariance of (6) with respect to the first atomic alternative of L1:
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&lt; y[i] = f<sub>i</sub>(y) &rarr; h[i]:= false &gt;
+</td>  </tr>  </table>
+as soon as we realize that the first term of (6) is a compact notation for
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+h[0] <b>or</b> h[1] <b>or</b> h[2] <b>or</b> ... <b>or</b> h[N-1]</td><td align=right>
+</td>  </tr>  </table>
+which only changes from true to false when, as a result of &ldquo;h[i]:= false&rdquo;
+the <b>last</b> true h[j] disappears. That is ugly!
+<p>We often prove mathematical theorems by proving a stronger &mdash;but,
+somehow, more manageable&mdash; theorem instead. In direct analogy: instead
+of trying to prove the invariant truth of (6) directly, we shall try to
+prove the invariant truth of a stronger assertion that we get by replacing
+the conditions y[j] = f<sub>j</sub>(y) by stronger ones. Because <b>non</b> R is stronger
+than Q provided (Q <b>or</b> R) holds, we can strengthen (6) into
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>E</u> j= h[j]) <b>or</b> (<u>A</u> j: non R<sub>j</sub>)</td><td align=right>(7)
+</td>  </tr>  </table>
+provided 
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> j: y[j] = f<sub>j</sub>(y) <b>or</b> R<sub>j</sub>)</td><td align=right>(8)
+</td>  </tr>  </table>
+holds. (Someone who sees these heuristics presented in this manner for the
+first time may experience this as juggling, but I am afraid that it is quite
+standard and that we had better get used to it.)
+<p>What have we gained by the introduction of the N predicates R<sub>j</sub> ?
+Well, the freedom to choose them! More precisely: the freedom to <b>define</b>
+them in such a way that we can <b>prove</b> the universal truth of (8) &mdash;which is
+structurally quite pleasant&mdash; in the usual fashion, while the universal truth
+of (7) &mdash;which is structurally equally &ldquo;ugly&rdquo; as (6)&mdash; follows more or less
+directly from the <b>definition</b> of the R<sub>j</sub>&rsquo;s : that is the way in which we
+may hope that (7) is more &ldquo;manageable&rdquo; than the original (6).
+<p>In order to find a proper definition of the R<sub>j</sub>&rsquo;s, we analyse our
+obligation to <b>prove</b> the invariance of (8).
+If we only looked at the invariance of (8), we might think that a
+definition of the R<sub>j</sub>&rsquo;s in terms of y :
+               
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+R<sub>j</sub> = (y[j] &ne; f<sub>j</sub>(y))</td><td align=right>
+</td>  </tr>  </table>
+would be a sensible choice. A moment&rsquo;s reflection tells us that that
+definition does not help: it would make (8) universally true by definition,
+and the right-hand terms of (6) and (7) would be identical, whereas under the
+truth of (8), (7) was intended to be stronger than (6).
+<p>For two reasons we are looking for a definition of the R<sub>j</sub>&rsquo;s in which
+the y does <b>not</b> occur: firstly, it is then that we can expect the proof of
+the universal truth of (8) to amount to something &mdash;and, thereby, to contribute
+to the argument&mdash; , secondly, we would like to conclude the universal truth
+of (7) &mdash;which does not mention y at all!&mdash; from the <b>definition</b> of the
+R<sub>j</sub>&rsquo;s . In other words, we propose a definition of the R<sub>j</sub>&rsquo;s which does not
+refer to y at all: only with such a definition <b>does</b> the replacement of
+(6) by (7) and (8) localize our dealing with y completely to the proof
+of the universal truth of (8).
+<p>Because we want to define the R<sub>j</sub>&rsquo;s independently of y , because
+initially we cannot assume that for some j-value y[j] = f<sub>j</sub>(y) holds, and
+because (8) must hold initially, we must guarantee that initially
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> j: R<sub>j</sub>)</td><td align=right>(9)
+</td>  </tr>  </table>
+holds. Because, initially, all the h[j] are true, the initial truth of
+(9) is guaranteed if the R<sub>j</sub>&rsquo;s are defined in such a way that we have
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>E</u> j: <b>non</b> h[j]) <b>or</b> (<u>A</u> j: R<sub>j</sub>) .</td><td align=right>(10)
+</td>  </tr>  </table>
+We observe, that (10) is again of the recognized ugly form we are trying to
+get rid of. We have some slack &mdash;that is what the R<sub>j</sub>&rsquo;s are being 
+introduced for&mdash; and this is the moment to decide to try to come away with a
+stronger &mdash;but what we have called: &ldquo;structurally more pleasant&rdquo;&mdash; relation
+for the definition of the R<sub>j</sub>&rsquo;s , from which (10) immediately follows. The
+only candidate I can think of is
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(A j: <b>non</b> h[j] <b>or</b> R<sub>j</sub>)</td><td align=right>(11)
+</td>  </tr>  </table>
+and we can already divulge that, indeed, (11) will be one of the defining
+equations for the R<sub>j</sub>&rsquo;s .
+<p>From (11) it follows that the algorithm will now start with all the
+                   
+R<sub>j</sub>&rsquo;s true. From (8) it follows that the truth of R<sub>j</sub> can be appreciated
+as &ldquo;the equation y[j] = f<sub>j</sub>(y) need not be satisfied&rdquo;, and from (7) it follows
+that in our final state we must have all the R<sub>j</sub>&rsquo;s  equal to false.
+<p>Let us now look at the alternative construct
+<table> <tr> <td align=right>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;L1: </td> <td colspan = 3>
+      &lt;<b>if</b> y[i] = f<sub>i</sub>(y) &rarr; h[i]:= false &gt;            </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp;</td> <td colspan = 2>
+          &#x25af; y[i] &ne; f<sub>i</sub>(y) &rarr; y[i]:= f(y) &gt;;          </td> </tr> <tr> <td align=right>L2j:</td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                 (<u>A</u> j: &lt; h[j]:= true &gt;) </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+          <b>fi</b>                                                  </td> </tr>
+</table>
+We observe that the first alternative sets h[i] false, and that the second
+one, as a whole, sets all h[j] true. As far as the universal truth of (11)
+is concerned, we therefore conclude that in the first alternative R<sub>i</sub> is 
+allowed to, and hence <b>may</b> become false, but that in the second alternative as a
+whole, all R<sub>j</sub>'s <b>must</b> become true.
+<p>Let us now confront the two atomic alternatives with (8). Because,
+when the first atomic alternative is selected, only y[i] = f<sub>i</sub>(y) has been
+observed, the universal truth of (8) is guaranteed to be an invariant of the
+first atomic alternative, provided it enjoys the following property (12):
+<p>In the execution of the first atomic alternative
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+&nbsp; &nbsp; &nbsp; &lt; y[i] = f<sub>i</sub>(y) &rarr; h[i]:= false &gt;</td><td align=right>
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+<b>no</b> R<sub>j</sub> for j &ne; i changes from true to false.</td><td align=right>(12)
+</td>  </tr>  </table>
+<p>Confronting the second atomic alternative
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&lt; y[i] &ne; f<sub>i</sub>(y) &rarr; y[i]:= f<sub>i</sub>(y) &gt;
+</td>  </tr>  </table>
+with (8), and observing that upon its completion <b>none</b> of the relations
+y[j] = f<sub>j</sub>(y) needs to hold, we conclude that the second atomic alternative
+itself must already cause a final state in which all the R<sub>j</sub>&rsquo;s are true,
+in spite of the fact that the subsequent assignments h[j]:= true &mdash;which
+would each force an R<sub>j</sub> to true on account of (11)&mdash; have not been executed
+yet. In short: in our definition for the R<sub>j</sub>&rsquo;s we must include besides
+(11) <b>another</b> reason why an R<sub>j</sub> should be defined to be true.
+<p>As it stands, the second atomic alternative only modifies y but we
+had decided that the definition of the R<sub>j</sub>&rsquo;s would not be expressed in terms
+       
+of y ! The only way in which we can formulate the additional reason for an
+R<sub>j</sub> to be true is in terms of an <b>auxiliary</b> variable (to be introduced in a
+moment), whose value is changed in conjunction with the assignment to y[i] .
+The value of that auxiliary variable has to force each R, to true until the
+subsequent assignment &lt; h[j]:= true &gt; does so via (11). Because the second,
+atomic alternative is followed by N subsequent, separate atomic actions
+&lt; h[j]:= true &gt; &mdash;one for each value of j &mdash; , it stands to reason that we
+introduce for the i-th component cpnt<sub>i</sub> an auxiliary local boolean array
+s<sub>i</sub> with elements s<sub>i</sub>[j] for 0 &le; j &lt; N . Their initial (and &ldquo;neutral&rdquo;)
+value is true. The second atomic alternative of L1 sets them all to false,
+the atomic statements L2j will reset them to true one at a time.
+<p>In contrast to the variables y and h , which are accessible to
+all components &mdash;which is expressed by calling them &ldquo;global variables&rdquo;&mdash; ,
+each variable s<sub>i</sub> is only accessible to its corresponding component cpnt<sub>i</sub>
+&mdash;which is expressed by calling the variable s<sub>i</sub> &ldquo;local&rdquo; to component
+as is usual in annotating or verifying sequential programs. If a local
+assertion contains only local variables, it can be justified on account of
+the text of the corresponding component only.
+<p>Local variables give rise to so-called "local assertions".  Local
+assertions are most conveniently written in the program text of the 
+individual components at the place corresponding to their truth:  they state
+a truth between preceding and succeeding statements in exactly the same way
+as is usual in annotating or verifying sequential programs.  If a local
+assertion contains only local variables, it can be justified on account of
+the text of the corresponding component only.
+<p>In the following annotated version of  cpnt<sub>i</sub>  we have inserted local
+assertions between braces.  In order to understand the local assertions about
+s<sub>i</sub>  it suffices to remember that  s<sub>i</sub>  is local to  cpnt<sub>i</sub> .  The local
+assertion  {R<sub>i</sub>}  in the second atomic alternative of  Ll  is justified by
+the  guard   y[i] &ne; f<sub>i</sub>(y). in conjunction with (8).  We have further 
+incorporated in our annotation the consequence of (12) and the fact that the
+execution of a second alternative will never cause an  R<sub>j</sub>  to become false:
+a true  R<sub>j</sub>  can only become false by virtue of the execution of the first
+alternative of  Ll  by  cpnt<sub>i</sub>  itself!  Hence,  R<sub>i</sub>  is true all through the
+execution of the second alternative of  cpnt<sub>i</sub>  .
+                   
+<br>cpnt<sub>i</sub>:
+<table> <tr> <td>L0: </td> <td colspan = 4>
+ <b>do</b> &lt; (<u>E</u> j: h[j]) &gt;&rarr; {(<u>A</u> j: s<sub>i</sub>[j])}                                </td> </tr> <tr> <td>L1: </td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+      &lt;<b>if</b> y[i] = f<sub>i</sub>(y) &rarr; h[i]:= false &gt; {(<u>A</u> j: s<sub>i</sub>[j])}                    </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 2>
+        &#x25af; y[i] &ne; f<sub>i</sub>(y) &rarr;                                                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                {R<sub>i</sub>} y[i]:= f<sub>i</sub>(y);                                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>
+                (<u>A</u> j: s<sub>i</sub>[j]:= false) &gt; {R<sub>i</sub> <b>and</b> (<u>A</u> j: <b>non</b> s<sub>i</sub>[j])};   </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>
+                (<u>A</u> j:{R<sub>i</sub> <b>and</b> <b>non</b> s<sub>i</sub>[j]} &lt; h[j]:= true; s<sub>i</sub>[j]:= true &ne; ) </td> </tr> <tr> <td>L2j: </td> <td></td> <td></td> <td colspan = 2>
+        <b>fi</b> {(<u>A</u> j: s<sub>i</sub>[j])}                                                  .         </td> </tr> <tr> <td></td> <td colspan = 4>
+ <b>od</b>                                                                                         </td> </tr> <tr> <td colspan = 5>
+                                                                                                   </td> </tr>
+</table>
+On account of (11)  R<sub>j</sub>  will be true upon completion of  L2j . But
+the second atomic alternative of  Ll  should already have made  R<sub>j</sub>  true,
+and it should remain so until  L2j  is executed.  The precondition of  L2j,
+as given in the annotation, hence tells us the &ldquo;other reason besides
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(A j: <b>non</b> h[j] <b>or</b> R<sub>j</sub>)</td><td align=right>(11)
+</td>  </tr>  </table>
+why an  R<sub>j</sub>  should be defined to be true&rdquo;:
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(A i, j: <b>non</b> R<sub>i</sub> <b>or</b> s<sub>i</sub>[j] <b>or</b> R<sub>j</sub>)·</td><td align=right>(13)
+</td>  </tr>  </table>
+Because it is our aim to get eventually all the  R<sub>j</sub>'s  false, we <b>define</b>
+the  R<sub>j</sub>'s  as the <b>minimal</b> solution of (11) and (13), minimal in the sense
+of:  as few  R<sub>j</sub>'s  true as possible.
+<p>The existence of a unique minimal solution of (11) and (13) follows
+from the following construction.  Start with all  R<sub>j</sub>'s  false &mdash;all equations
+of (13) are then satisfied on account of the term  &ldquo;<b>non</b> R<sub>i</sub>&rdquo; &mdash; .  If all
+equations of (11) are satisfied as well, we are ready &mdash;no true  R<sub>j</sub>'s  at
+all&mdash; ; otherwise (11) is satisfied by setting  R<sub>j</sub>  to true for all j-values
+for which  h[j]  holds.  Now all equations of (11) are satisfied, but some
+of the equations of (13) need no longer be satisfied: as long as an (i, j)-
+pair can be found for which the equation of (13) is not satisfied, satisfy it
+by setting that  R<sub>j</sub>  to true:  as this cannot cause violation of (11) we
+end up with the  R<sub>j</sub>'s  being a solution of (11) and (13).  But it is also
+the minimal solution, because any  R<sub>j</sub>  true in this solution must be true
+in any solution.
+<p>For a value of i , for which
+                    
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> j: s<sub>i</sub>[j])</td><td align=right>(14)
+</td>  </tr>  </table>
+holds, the above construction tells us that the truth of R<sub>i</sub> forces no
+further true R<sub>j</sub>&rsquo;s via (13); consequently, when such an R<sub>i</sub> becomes false,
+no other R<sub>j</sub>-values are then affected. This, and the fact that the first
+atomic alternative of L1 is executed under the truth of (14) tells us,
+that with our definition of the R<sub>j</sub>&rsquo;s as the minimal solution of (11) and (13),
+requirement (12) is, indeed, met.
+<p>We have proved the universal truth of (8) by defining the R<sub>j</sub>&rsquo;s as
+the minimal solution of (11) and (13). The universal truth of (7), however,
+is now obvious. If the left-hand term of (7) is false, we have
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> j:<b>non</b> h[j]),</td><td align=right>
+</td>  </tr>  </table>
+and (11) and (13) have as minimal solution all R<sub>j</sub>&rsquo;s false, i.e.
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> j: <b>non</b> R<sub>j</sub>)</td><td align=right>,
+</td>  </tr>  </table>
+which is the second term of (7). From the universal truth of (7) and (8),
+the universal truth of (6) follows, and our proof is completed.
+<p class=noindent><b>Concluding remarks</b>.
+<p>This note has been written with many purposes in mind:
+<table width=100%><tr><td valign=top width=5%>
+1)</td><td>To give a wider publicity to an unusual problem and the mathematics
+involved in its solution.
+</td></tr>
+<tr><td valign=top>
+2)</td><td>To present a counterexample contradicting the much-propagated and hence
+commonly held belief that correctness proofs for programs are only laboriously
+belabouring the obvious.
+</td></tr>
+<tr><td valign=top>
+3)</td><td>To present a counterexample to the much-propagated and hence commonly
+held belief that there is an antagonism between rigour and formality on the
+one hand and &ldquo;understandability&rdquo; on the other.
+</td></tr>
+<tr><td valign=top>
+4)</td><td>To present an example of a correctness proof in which the first-order
+predicate calculus is used as what seems an indispensable tool.
+</td></tr>
+<tr><td valign=top>
+5)</td><td>To present an example of a correctness proof in which the first-order
+predicate calculus is a fully adequate tool.
+</td></tr>
+<tr><td valign=top>
+6)</td><td>To show how fairly general &mdash;a1most &ldquo;syntactic&rdquo;&mdash;_considerations about
+the formal manipulations involved can provide valuable guidance for the 
+discovery of a surprising and surprisingly effective argument, thus showing how
+a formal discipline can assist &ldquo;creativity&rdquo; instead of &mdash;as is sometimes
+suggested&mdash; hampering it.
+</td></tr>
+<tr><td valign=top>
+7)</td><td>To show how also in such formal considerations the principle of
+separation of concerns can be recognized as a very helpful one.
+</td>  </tr>  </table>
+<p>I leave it to my readers to form their opinion whether with the above
+I have served these purposes well.
+<p class=noindent><b>Acknowledgements</b>. I would like to express my gratitude to both IFIP WE2.3 and
+&ldquo;The Tuesday Afternoon Club&rdquo;, where I had the opportunity to discuss this
+problem. Those familiar with the long history that led to this note, however,
+know that in this case I am indebted to C.S.Scholten more than to anyone else.
+Comments from S.T.M.Ackermans, David Gries, and W.M.Turski on an earlier version
+of this paper are greatfully acknowledged.
+<p class=noindent>[1] Owicki, Susan and Gries, David, &ldquo;Verifying Properties of Parallel
+, Programs: An Axiomatic Approach&rdquo;. Comm.ACM 19, 5 (May 1975), pp.279-285.
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>.
+</td>  </tr>  </table>
+
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-04-10<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

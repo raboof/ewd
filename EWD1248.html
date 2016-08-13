@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: Homework #1 (See EWD996) (EWD 1248)</title>
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff"><div id="title"><h1>Homework #1 (See EWD996)</h1></div>
+		<div id="frame">
+			<div id="header">
+        <a href=../../ewd12xx/EWD1248.PDF 
+           title="Link to the PDF version of EWD1248">EWD1248</a>
+      </div>
+			<div id="content">
+				<p class="noindent"><u>Homework #1</u> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(See <a title="PDF scan of EWD 996" href="https://www.cs.utexas.edu/~EWD/ewd09xx/EWD996.PDF">EWD996</a>)</p>
+				<p>Show that, for any finite set of grid points in the plane, we can colour each of the points either red or blue such that on each grid line the number of red points differs by at most 1 from the number of blue points.</p>
+			</div>
+			<div align="center">
+						<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+							*</p>
+					</div>
+			<div align="left">
+						<p>A <u>snake</u> is a non-empty sequence or cycle of distinct grid points to be coloured such that</p>
+						<p class="continue">(<i>i</i>) adjacent points in the snake can be connected by a grid line such that along the snake horizontal and vertical connections alternate, and</p>
+						<p class="continue">(<i>ii</i>) a sequential snake is maximal in the sense that neither endpoint can be further connected.</p>
+						<p>We observe that, if there are points to be coloured, a snake can be formed: start with a point and extend in both directions the snake as long as possible; when no new points can be added to the snake, it is made into a cycle, if that is possible.</p>
+						<p>Through each endpoint of a sequential snake passes a grid line containing an odd number of &#147;snake points&#148;; on account of (<i>ii</i>), these lines contain no further points to be coloured. All other grid lines contain their snake points partitioned into pairs of &#147;snake neighbours&#148;.</p>
+						<p>Since on account of (<i>i</i>) each cycle contains an even number of points, we can colour the points along a snake alternately red and blue, and we do so, thereby only creating differences of 1 on grid lines with no uncoloured points left.</p>
+						<p>The algorithm that produces a colouring with the required properties consists of repeatedly &#x2014;i.e., as long as not all points of the given set have been coloured&#x2014; creating a snake and then colouring it. The invariants of this algorithm are</p>
+						<p class="continue">(<i>iii</i>) on a grid line that contains an uncoloured point the number of red points equals the number of blue ones</p>
+						<p class="continue">(<i>iv</i>) on no grid line the number of red points differs by more than 1 from the number of blue ones.</p>
+				<p class="noindent"><u>Note</u> The above argument has a bit more structure than the one in <a title="PDF scan of EWD 996" href="https://www.cs.utexas.edu/~EWD/ewd09xx/EWD996.PDF">EWD996</a>, which did not contain the concept of a snake. <a title="PDF scan of EWD 996" href="https://www.cs.utexas.edu/~EWD/ewd09xx/EWD996.PDF">EWD996</a>, however, was free from rabbits. (End of note.)</p>
+				<p class="noindent"></p>
+			</div>
+		<blockquote>
+			<blockquote>
+				<blockquote>
+					<blockquote>
+						<blockquote>
+							<blockquote>
+								<div id="frame" align="left">
+									<table width="235" border="0" cellspacing="2" cellpadding="0">
+										<tr>
+											<td>Austin, 9 October 1996<br>
+												(Written manu sinistra with a<br>
+												Parker roller ball, Fine.)</td>
+										</tr>
+									</table>
+								</div>
+							</blockquote>
+						</blockquote>
+					</blockquote>
+				</blockquote>
+			</blockquote>
+		</blockquote>
+		<div id="frame">
+			<div align="center">
+				<blockquote>
+					<blockquote>
+						<p></p>
+					</blockquote>
+				</blockquote>
+			</div>
+			<div align="left">
+				<p class="noindent">prof. dr. Edsger W. Dijkstra<br>
+					
+							Department of Computer Sciences<br>
+					
+							The University of Texas at Austin<br>
+					
+							Austin, TX 78712-1188<br>
+					
+							USA</p>
+				<p><u></u></p>
+			</div>
+			<hr>
+			<font size="-1">
+					transcribed by Mario B&eacute;land<br>
+				
+					revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="97">Mon, 10 Dec 2007</csobj></font>
+			<p></p>
+			<p></p>
+		</div>
+	</body>
+
+</html>

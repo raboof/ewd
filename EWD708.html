@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="convertArticle.pl">
+		<title>E.W.Dijkstra Archive: When messages may crawl.
+ (EWD 708)</title>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<div align="right">
+			&nbsp;&nbsp;<a href="https://www.cs.utexas.edu/~EWD/ewd07xx/EWD708.PDF" target="_blank">EWD 708</a></div>
+		<div align="left">
+			<p><u>When messages may crawl.</u></p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The last session of the Tuesday Afternoon Club was devoted to the question when what has been proved to be correct when viewed as &quot;a telex system&quot;, can also be implemented as &quot;a mail system&quot;. The original motivation was the following.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We consider a network in which a node can transmit messages to (some) other nodes, and the only things we postulate about message transmission are<br>
+				1)	no message arrives before it has been sent<br>
+				2)	each message sent arrives eventually.<br>
+				A system with such message transmission properties was called &quot;a mail system&quot;.</p>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The idea was to try to partition the correctness proof of a mail system in the following way:<br>
+				
+				1)	prove that the system would be correct when viewed as &quot;a telex system&quot; in which message transmission is instantaneous, i.e. the sending and receiving of a message is part of the same &quot;point action&quot;<br>2) show that the system satisfies the antecedents of some general Laws &#x2014;as yet unknown to us&#x2014; stating when the correctness of a telex system implies the correctness of the corresponding mail system.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We spent the afternoon on pruning the problem and on collecting &quot;evidence&quot; by designing all sorts of telex systems allowing and not allowing replacement by mail transmission. On account of the evidence, some Laws were conjectured, some of these conjectures were refuted by counterexample, and finally a formal approach for tackling the problem was suggested, but by then I was too tired to pursue the matter any further. That is what I did the next day. Hence this note, which has been written with the hope of providing next week's session of the Tuesday Afternoon Club with an inspiring starting point.</p>
+		</div>
+		<div align="center">
+			<p>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+				*</p>
+		</div>
+		<div align="left">
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Consider the following repetitive program as representative for a two-node telex system</p>
+			<blockquote>
+				<table width="458" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="95%"><tt>{<i>P</i>} <u>do</u> <i>B</i>1<i>C</i>&nbsp;&#x2192; <i>S</i>1<i>C</i>; <i>S</i>1<i>D</i> {<i>P</i>}<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;&#x2225;&nbsp;<i>B</i>2<i>D</i> </tt>&#x2192;<tt> <i>S</i>2<i>D</i>; <i>S</i>2<i>C</i> {<i>P</i>}<br>
+								&nbsp;&nbsp;&nbsp;&nbsp;<u>od</u></tt></td>
+						<td valign="top">(1)</td>
+					</tr>
+				</table>
+			</blockquote>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here the top line represents a telex message from node <i>C</i> to node <I>D</I>, the bottom line represents a telex message in the opposite direction. The guard <i>B1C</i> depends only on variables belonging to node<i> C</i> , in <i>S1C</i> only variables belong to node <i>C</i> are accessed, in <i>S1D</i> only variables belonging to node <i>D</i>, and similarly for the next line. (In this model, the messages are essentially empty envelopes; allowing the envelopes to contain something was felt to be a minor complication that we could postpone for the time being.) As indicated, <i>P</i> is the correspondent invariant relation. As part of the correctness proof of (1) the theorems</p>
+			<blockquote>
+				<table width="458" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="95%"><tt><i>P</i> <u>and</u> <i>B</i>1<i>C</i> &#x21D2; wp(&quot;<i>S</i>1<i>C</i>; <i>S</i>1<i>D</i>&quot;, <i>P</i>)</tt></td>
+						<td valign="top">(2)</td>
+					</tr>
+				</table>
+				<table width="458" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="95%"><tt><i>P</i> <u>and</u> <i>B</i>2<i>D</i> &#x21D2; wp(&quot;<i>S</i>2<i>D</i>; <i>S</i>2<i>C</i>&quot;, <i>P</i>)</tt></td>
+						<td valign="top">(3)</td>
+					</tr>
+				</table>
+			</blockquote>
+			<p>  
+				have been established.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We decided that the following program would be representative for the corresponding mail system</p>
+			<blockquote>
+				<p><tt>{P} <i>c</i>, <i>d</i> := 0, 0 ; {<i>M</i>}<br>
+						<u>do</u> <i>B</i>1<i>C</i> &#x2192; <i>S</i>1<i>C</i> ; <i>d</i>:= <i>d</i> + 1 {<i>M</i>}<br>
+						 &#x2225; <i>d</i> &gt; 0 &#x2192; <i>d</i>:= <i>d</i> - 1 ; <i>S</i>1<i>D</i> {<i>M</i>}<br>
+						 &#x2225; <i>B</i>2<i>D</i> &#x2192; <i>S</i>2<i>D</i> ; <i>c</i>:= <i>c</i> + 1 {<i>M</i>}<br>
+						 &#x2225; <i>c</i> &gt; 0 &#x2192; <i>c</i>:= <i>c</i> - 1 ; <i>S</i>2<i>C</i> {<i>M</i>}<br>
+						<u>od</u></tt></p>
+			</blockquote>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here we have to prove</p>
+			<blockquote>
+				<table width="458" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="95%"><tt>(c, d) &#x2260; (0, 0) <u>or</u> P = M<br>
+							</tt></td>
+						<td valign="top">(4)</td>
+					</tr>
+				</table>
+				<table width="458" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="95%"><tt>M <u>and</u> B1C &#x21D2; wp(&quot;S1C; d:= d + 1&quot;, M)</tt></td>
+						<td valign="top">(5)</td>
+					</tr>
+				</table>
+				<table width="458" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="95%"><tt>M <u>and</u> d &gt; 0 &#x21D2; wp(&quot;d:= d &#150; 1; S1D&quot;, M) </tt></td>
+						<td valign="top">(6)</td>
+					</tr>
+				</table>
+				<table width="458" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="95%"><tt>M <u>and</u> B2D &#x21D2; wp(&quot;S2D ; c:= c + 1&quot;, M)</tt></td>
+						<td valign="top">(7)</td>
+					</tr>
+				</table>
+				<table width="458" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="95%"><tt>M <u>and</u> c &amp;gt; 0 &#x21D2; wp(&quot;c:= c &#150; 1; S2C&quot;, M)</tt></td>
+						<td valign="top">(8)</td>
+					</tr>
+				</table>
+			</blockquote>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Relations (4), (6), and (8) can be satisfied independently of (2) and (3) by a suitable choice for <i>M</i>. Defining for any statement <i>S</i> and any natural number <i>x</i></p>
+			<blockquote>
+				<table width="458" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="95%"><tt><i>S</i>&#x2191;0 = skip </tt></td>
+						<td valign="top">(9)</td>
+					</tr>
+				</table>
+				<table width="458" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="95%"><tt><i>S</i>&#x2191;(<i>x</i> + 1) = &quot;<i>S</i>&#x2191;<i>x</i> ; <i>S</i>&quot;</tt></td>
+						<td valign="top">(10)</td>
+					</tr>
+				</table>
+			</blockquote>
+			<p>we can satisfy relations (4), (6), and (8) by choosing for <i>M</i></p>
+			<table width="498" border="0" cellspacing="2" cellpadding="0">
+				<tr>
+					<td width="95%"><i>M</i>:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>c</i> &#x2265; 0 <u>and</u> <i>d</i> &#x2265; 0 <u>and</u> wp(&quot;<i>S</i>1<i>D</i>&#x2191;<i>d</i> ; <i>S</i>2<i>C</i>&#x2191;<i>c</i>&quot;, <i>P</i>)</td>
+					<td valign="top">(11)</td>
+				</tr>
+			</table>
+			<p>(Note that &quot;<i>S</i>1<i>D</i> ; <i>S</i>2<i>C</i>&quot; = &quot;<i>S</i>2<i>C</i> ; <i>S</i>1<i>D</i>&quot;: accessing disjoint sets of variables, they obviously commute.)</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In the sequel we drop for the sake of brevity from (11) the (implied) terms <i>c</i> &#x2265; 0 <u>and</u> <i>d</i> &#x2265; 0 . Trying to prove (5) using (2) I discovered that I had to make two further assumptions about node <i>C</i></p>
+			<blockquote>
+				<table width="458" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="95%"><i>B</i>1<i>C</i> &#x21D2; wp(<i>S</i>2<i>C</i>, <i>B</i>1<i>C</i>)</td>
+						<td valign="top">(12)</td>
+					</tr>
+				</table>
+				<div align="left">
+					<table width="458" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td width="95%">wp(&quot;<i>S</i>2<i>C</i> ; <i>S</i>1<i>C</i>&quot;, <i>R</i>) &#x21D2; wp(&quot;<i>S</i>1<i>C</i> ; <i>S</i>2<i>C</i>&quot;, <i>R</i>) for any <i>R</i></td>
+							<td valign="top">(13)</td>
+						</tr>
+					</table>
+				</div>
+			</blockquote>
+			<p>From (12) we immediately deduce for any <i>x</i> &#x2265; 0</p>
+			<blockquote>
+				<div align="left">
+					<table width="458" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td width="95%"><i>B</i>1<i>C</i> &#x21D2; wp(&quot;<i>S</i>2<i>C</i>&#x2191;<i>x</i>&quot;, <i>B</i>1<i>C</i>)</td>
+							<td valign="top">(14)</td>
+						</tr>
+					</table>
+				</div>
+			</blockquote>
+			<p>From (13) &#x2014;which, for instance, would be satisfied if <i>S</i>1<i>C</i> and <i>S</i>2<i>C</i> were to commute&#x2014; we immediately deduce for any <i>x</i> &#x2265; 0 and any <i>R</i></p>
+			<blockquote>
+				<div align="left">
+					<table width="458" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td width="95%">wp(&quot;<i>S</i>2<i>C</i>&#x2191;<i>x</i> ; <i>S</i>1<i>C</i>&quot;, <i>R</i>) &#x21D2; wp(&quot;<i>S</i>1<i>C</i> ; <i>S</i>2<i>C</i>&#x2191;<i>x</i>&quot;, <i>R</i>)</td>
+							<td valign="top">(15)</td>
+						</tr>
+					</table>
+				</div>
+			</blockquote>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In order to prove (5), we now proceed as follows.</p>
+			<table width="480" border="0" cellspacing="2" cellpadding="0">
+				<tr>
+					<td><i>M</i> <u>and</u> <i>B</i>1<i>C</i> = </td>
+					<td>(by (11))</td>
+				</tr>
+				<tr>
+					<td>
+				wp(&quot;<i>S</i>1<i>D</i>&#x2191;<i>d</i> ; <i>S</i>2<i>C</i>&#x2191;<i>c</i>&quot;, <i>P</i>) <u>and</u> <i>B</i>1<i>C</i> &#x21D2; </td>
+					<td>(by (14))</td>
+				</tr>
+				<tr>
+					<td>
+				wp(&quot;<i>S</i>1<i>D</i>&#x2191;<i>d</i> ; <i>S</i>2<i>C</i>&#x2191;<i>c</i>&quot;, <i>P</i>) <u>and</u> wp(&quot;<i>S</i>2<i>C</i>&#x2191;<i>c</i>&quot;, <i>B</i>1<i>C</i> =</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>
+				wp(&quot;<i>S</i>1<i>D</i>&#x2191;<i>d</i> ; <i>S</i>2<i>C</i>&#x2191;<i>c</i>&quot;, <i>P</i>) <u>and</u> wp(&quot;<i>S</i>1<i>D</i>&#x2191;<i>d</i> ; <i>S</i>2<i>C</i>&#x2191;<i>c</i>&quot;, <i>B</i>1<i>C</i>) =</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>
+				wp(&quot;<i>S</i>1<i>D</i>&#x2191;<i>d</i> ; <i>S</i>2<i>C</i>&#x2191;<i>c</i>&quot;, <i>P</i> <u>and</u> <i>B</i>1<i>C</i>) &#x21D2;</td>
+					<td>(by (2))</td>
+				</tr>
+				<tr>
+					<td>
+				wp(&quot;<i>S</i>1<i>D</i>&#x2191;<i>d</i> ; <i>S</i>2<i>C</i>&#x2191;<i>c</i>&quot;, wp(&quot;<i>S</i>1<i>C</i> ; <i>S</i>1<i>D</i>&quot;, <i>P</i>)) =</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>
+				wp(&quot;<i>S</i>1<i>D</i>&#x2191;(<i>d</i>+1) ; <i>S</i>2<i>C</i>&#x2191;<i>c</i> ; <i>S</i>1<i>C</i>&quot;, <i>P</i>) &#x21D2; </td>
+					<td>(by (15))</td>
+				</tr>
+				<tr>
+					<td>wp(&quot;<i>S</i>1<i>C</i>&quot;, wp(&quot;<i>S</i>1<i>D</i>&#x2191;(<i>d</i>+1) ; <i>S</i>2<i>C</i>&#x2191;<i>c</i>&quot;, <i>P</i>)) =</td>
+					<td>(by (11))</td>
+				</tr>
+				<tr>
+					<td>wp(&quot;<i>S</i>1<i>C</i> ; <i>d</i>:= <i>d</i> + 1&quot;, <i>M</i>)</td>
+					<td></td>
+				</tr>
+			</table>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In this derivation only the last equality is fishy, because our form for <i>M</i> is most definitely <u>not</u> a first-order formula, and yet we appeal to the axiom of assignment. Yet I am sure that it is correct ; the justification will require that the &quot;variable&quot; <i>d</i> does not occur in the original program (1). The 2nd and the 4th equalities depend on the disjointness of variables, the 3rd on the conjunction property of wp .</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;So much for the derived invariant relation. In order to complete the proof with a proof for convergence, we have to derive a new variant function as well, but that exercise is left for later.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In order to prove (7) from (3) we must make about node <i>D</i> the two assumptions to (12) and (13) about node <i>C</i> .</p>
+		</div>
+		<div align="center">
+			<p>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+				*</p>
+		</div>
+		<div align="left">
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The example is very modest, and in itself not very exciting. What does excite me is that the antecedent of our Law is formulated in <u>local</u> conditions only! Apparently the correctness proof of the telex system duly captures here all global aspects of the problem.</p>
+			<p>29th of March 1979</p>
+		</div>
+		<div align="left">
+			<table width="459" border="0" cellspacing="2" cellpadding="0">
+				<tr>
+					<td valign="top" width="203">
+						
+						Plataanstraat 5<br>
+						
+						5671 AL NUENEN<br>
+						The Netherlands</td>
+					<td valign="top" width="250">prof.dr.Edsger W.Dijkstra<br>
+						Burroughs Research Fellow</td>
+				</tr>
+			</table>
+		</div>
+		<hr>
+		<font size="-1">transcribed by Sam Samshuijzen<br>
+			
+			revised <csobj format="MedDate" h="12" region="15" t="DateTime" w="99">Mon, 11 Jul 2005</csobj></font>
+	</body>
+
+</html>

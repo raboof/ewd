@@ -1,0 +1,127 @@
+<x-html><!x-stuff-for-pete base="" src="" id="0" charset=""><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" />
+    <title>The marked coins and the scale  (EWD 1260)</title>
+			<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+  </head>
+  <body><div id="title"><h1>The marked coins and the scale </h1></div>
+    <div id="frame">
+				<div id="header">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd12xx/EWD1260.PDF" 
+          title="Link to the PDF version of EWD1260">EWD 1260</a>
+      </div>
+				<u>The marked coins and the scale</u>
+				<div id="content">
+					<p>Our tool is a simple scale with two plates, as is used by the goddess Justitia; a weighing has one of 3 possible outcomes: the scale balances, or it tips in the one direction, or it tips in the other direction.</p>
+					<p>All genuine coins have the same weight, a fake coin is heavier or lighter. We are presented with a number of &#x201C;marked coins&#x201D; of which we know:</p>
+					<p class="continue">&#x2022;&nbsp;&nbsp;exactly 1 of the marked coins is fake,</p>
+					<p class="continue">&#x2022;&nbsp;&nbsp;a coin marked as &#x201C;pluscoin&#x201D; is genuine or too heavy,</p>
+					<p class="continue">&#x2022;&nbsp;&nbsp;a coin marked as a &#x201C;minuscoin&#x201D; is genuine or too light.</p>
+					<p>We are considering the problem of identifying the fake coin in <var>n</var> weighings. Because a sequence of n weighings has 3<var><sup>n</sup></var> outcomes, one cannot guarantee the identification of the fake one among more than 3<var><sup>n</sup></var> coins to be investigated, but this upper bound can be achieved. By mathematical induction, we shall prove that n weighings suffice to identify the fake one among 3<var><sup>n</sup></var> marked coins. At the same time we shall derive all protocols achieving this identification.</p>
+					<p>Because 3<sup>0</sup>=1, the base (i.e., <var>n</var>=0) is trivial: in the case of 1 marked coin, that one is the fake one and 0 weighings suffice.</p>
+					<p>For the induction step, we write the number of marked coins among which the fake one is to be identified as</p>
+					<p class="noindent">(0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>P</var> + <var>M</var> + <var>p</var> + <var>m</var> + <var>t&nbsp;&nbsp;&nbsp;&nbsp;</var>,</p>
+					<p class="noindent">
+					
+					where at the first weighing
+</p>
+					<p class="noindent"><var>P</var> = # pluscoins on the left-hand plate</p>
+					<p class="continue"><var>M</var> = # minuscoins on the left-hand plate</p>
+					<p class="continue"><var>p</var> = # pluscoins on the right-hand plate</p>
+					<p class="continue"><var>m</var> = # minuscoins on the right-hand plate</p>
+					<p class="continue"><var>t</var> = # coins left on the table</p>
+					<p>In order to enable the first weighing to give enough information to localize the fake coin, we insist that both plates contain the same number of coins, i.e.</p>
+					<p class="noindent">(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>P</var> + <var>M</var> = <var>p</var> + <var>m&nbsp;&nbsp;&nbsp;&nbsp;</var>.</p>
+					<p class="noindent">
+					
+					Under that constraint, tipping or balancing of the scale can be related to the place of the fake coin, more precisely:
+</p>
+					<p class="continue">&#x2022;&nbsp;&nbsp;If the left-hand plate goes down, the fake coin is either among the <var>P</var> pluscoins or the <var>m</var> minuscoins, i.e. within a set of <var>P</var>+<var>m</var> coins.</p>
+					<p class="continue">&#x2022;&nbsp;&nbsp;If the left-hand plate goes up, the fake coin is either among the <var>M</var> minuscoins or among the <var>p</var> pluscoins, i.e. within a set of <var>M</var>+<var>p</var> coins.</p>
+					<p class="continue">&#x2022;&nbsp;&nbsp;If the scale balances, the fake coin is among the t coins on the table.</p>
+					<p>To maximize (0), we independently maximize <var>P</var>+<var>m</var>, <var>M</var>+<var>p</var>, and <var>t</var>. Since we have still <var>n</var> weighings left, this yields <i>ex hypothese</i></p>
+					<p></p>
+					<table width="100%" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td valign="top" width="8%">(2)</td>
+							<td><var>P </var>+<var>m</var> = 3<var><sup>n</sup></var><br>
+								<var>M</var>+<var>p</var> = 3<var><sup>n</sup></var><br>
+								<var>t</var> = 3<var><sup>n</sup>&nbsp;&nbsp;</var></td>
+						</tr>
+					</table>
+					<p class="noindent">
+					
+					which yields that (0) equals 3<var><sup>n</sup></var><sup>+1</sup> as desired, provided (1) and (2) have a solution. Elementary algebra suffices to show that they are equivalent to
+</p>
+					<p class="noindent"></p>
+					<table width="100%" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td valign="top" width="8%">(3)</td>
+							<td><var>P </var>= <var>p</var><br>
+								<var>M</var> = <var>m</var><br>
+								<var>P</var>+<var>M</var> = 3<var><sup>n</sup></var><br>
+								<var>t</var> = 3<var><sup>n</sup>&nbsp;&nbsp;</var></td>
+						</tr>
+					</table>
+					<p class="noindent">
+					which tells us that in the 1st weighing, both sides should contain equal numbers of pluscoins and equal numbers of minuscoins.
+</p>
+					<p>Such a solution indeed exists. Start with the plates empty and all 3<var><sup>n</sup></var><sup>+1</sup> coins on the table. A move consists of taking either two pluscoins or two minuscoins from the table and putting one of those on each plate, until (# coins left on the table) = 3<var><sup>n</sup></var>. Because the number of coins on the table is odd, it is &#x2265; 3 when a move still has to be performed: with 2 markings, and &#x2265; 3 coins, at least 2 coins have equal marking.</p>
+					<p>The solution of (3) is not necessarily unique: for instance, with <var>n</var>=2 and the marking +++++----, we have the following two solutions</p>
+				</div>
+			<div id="frame" align="center">
+				<div id="content" align="center">
+					<blockquote>
+						<table width="80%">
+							<tr>
+								<td width="33%">left</td>
+								<td width="33%">right</td>
+								<td width="33%">table</td>
+							</tr>
+							<tr>
+								<td width="33%">++-</td>
+								<td width="33%">++-</td>
+								<td width="33%">+--</td>
+							</tr>
+							<tr>
+								<td width="33%">+--</td>
+								<td width="33%">+--</td>
+								<td width="33%">+++</td>
+							</tr>
+						</table>
+						<p>&nbsp;</p>
+					</blockquote>
+				</div>
+			</div>
+			<div id="frame">
+				<div id="content" align="center">
+					<p class="noindent">
+					*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+						
+					*</p>
+				</div>
+				<div id="content">
+					<p>Equation (1) can be dropped if we admit (fake) coins of negative weight and have our genuine coins being weightless. The same freedom is obtained by the availability of enough genuine coins: if <var>P</var>+<var>M</var> &#x2260; <var>p</var>+<var>m</var>, some genuine coins can then be used to make up for the difference, so that both plates carry the same number of coins. (This was the situation that prevailed in <a title="PDF scan of EWD 1083" href="https://www.cs.utexas.edu/~EWD/ewd10xx/EWD1083.PDF">EWD1083</a>.)</p>
+					<p>I gave the problem of <a title="PDF scan of EWD 1083" href="https://www.cs.utexas.edu/~EWD/ewd10xx/EWD1083.PDF">EWD1083</a> (unmarked coins with at most one fake coin, and as many genuine coins as you like) to my students. Almost all of them found solutions, sometimes of considerable ingenuity. The ingenuity was always involved in the creation of a very special solution. The purpose of this note is to draw attention to the fact that finding the most general solution could very well be the simplest task. In the above I did not feel to have to invent anything.</p>
+				</div>
+				<div id="content" align="right">
+					Austin, 31 March 1997</div>
+				<div id="content">
+					<div>
+						prof. dr. Edsger W. Dijkstra<br>
+						Department of Computer Sciences<br>
+						The University of Texas at Austin<br>
+						Austin, TX 78712-1188<br>
+						USA</div>
+					<hr>
+					<div id="footer">
+						transcribed by Xiaozhou (Steve) Li<br>
+						revised <csobj format="MedDate" h="15" region="15" t="DateTime" w="110">Mon, 10 Dec 2007</csobj></div>
+				</div>
+			</div>
+		</body>
+</html>
+</x-html>

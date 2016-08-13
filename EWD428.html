@@ -1,0 +1,526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Array variables (EWD 428)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>Array variables</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd04xx/EWD428.PDF"
+           title="Link to the PDF version of EWD428">EWD428</a></div></div>
+    <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR
+<hr />
+<p class="noindent">
+<p><b>Array variables</b>.
+ 
+<p>I have been trained to regard an array in the ALGOL 60 sense as a
+finite set of elementary, consecutively numbered variables, whose &ldquo;identifiers&rdquo;
+could be &ldquo;computed&rdquo;. But for two reasons this view does not satisfy me anymore.
+The first reason is my abhorrence of variables with undefined values.
+In the previous chapter we solved this problem by introducing for each
+variable a passive scope and an active scope, separated by a syntactically
+recognizable initialization for that variable. But when we regard the array
+as a collection of (subscripted) variables, that solution breaks down.
+<p>The second reason is of a combinatorial nature and more fundamental.
+In ALGOL 60 the compound statement that causes the variables, x and y to
+interchange their values, needs an additional variable, h say,
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+            h:= x; x:= y; y:= h </td> </tr>
+</table>
+which is cumbersome and ugly compared with the concurrent assignment
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+            x, y := y, x . </td> </tr>
+</table>
+<p>For the concurrent assignment we have insisted that all variables at the
+left-hand side should be different: it would be foolish to attach to
+&ldquo;x, x := 1, 2&rdquo; any other meaning than &ldquo;error&rdquo;. For a long time, however,
+I hesitated to adopt the concurrent assignment on account of the problems
+it causes in cases like
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+            A[i],A[j]:= x, y      ; </td> </tr>
+</table>
+should this be allowed when i &ne; j , but not when i = j ? Or is, perhaps,
+i = j permissible if x = y holds as well, as for instance in
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              A[i], A[j] := A[j], A[i]     ? </td> </tr>
+</table>
+If we go that route we are clearly piling one logical patch upon another.
+However, I have now come to the conclusion that it is not the concurrent
+assignment, but the notion of the subscripted variable that is to be blamed.
+In the axiomatic definition of the assignment statement via &ldquo;substitution
+of a variable&rdquo; one cannot afford &mdash;as in, I guess, all parts of logic&mdash;
+any uncertainty as to whether two variables are the same or not.
+<p>The moral of the story is that we must regard the array in its
+entirety as a single variable, a so-called &ldquo;array variable&rdquo;, in contrast
+to the &ldquo;scalar variables&rdquo; discussed so far. In the following I shall restrict
+myself to array variables that are the analogon of one-dimensional arrays.
+<p>We can regard (the value of) a variable of type &ldquo;integer&rdquo; as an
+it integer-valued function without arguments &mdash;i.e. defined on a domain 
+consisting of a single, anonymous point&mdash;, a function that does not change
+unless explicitly changed (usually by an assignment). It is somewhat
+unusual to consider functions without arguments; but we mention the 
+viewpoint for the sake of the analogy. For, similarly we can regard (the value 
+of) a variable of type &ldquo;integer array&rdquo; as an integer-valued function of
+one argument with a domain in the integers, a function, again, that does
+not change unless explicitly changed.
+<p>But the value of a variable of type &ldquo;integer array&rdquo; cannot be any
+integer-valued function defined on a domain in the integers, for I shall
+restrict myself to such types that, given two variables of that type, we
+can write an algorithm establishing whether or not the two variables have
+the same value. If x and y are scalar variables of type &ldquo;integer&rdquo;, the 
+this algorithm boils down to the boolean expression x = y, i.e. both
+functions are evaluated at the only (anonymous) point of their domain and
+these integer values are then compared. Similarly, if ax and ay are
+two variables of type &ldquo;integer array&rdquo;, their values are equal if and only
+if, as functions, they have the same domain and in each point of the domain
+their values are equal to each other. In order that all these comparisons
+are possible, we <b>must</b> restrict ourselves to finite domains. And what is
+more, besides being finite, the domains must be availabe in one way or
+another to the algorithm that is to compare the values of the array variables
+ax and ay.
+<p>For practical purposes I shall restrict myself to domains consisting
+of consecutive integers (when not empty). But even then there are at least
+two possibilities. In ALGOL 60 the domain is fixed by giving in the declaration
+&mdash;e.g. &ldquo;<b>boolean</b> <b>array</b> A[1:10], B[1:5]&rdquo; &mdash; the lower and upper bounds for
+the subscript value. As a type determines the class of possible values for
+a variable of that type, we must come to the conclusion that the two arrays
+A and B in the above example are of different type: A may have 1024
+different values, B only 32. In ALGOL 60 we have as many different types
+&ldquo;boolean array&rdquo; as we can have bound pairs (and, as the bound pair may
+contain expressions, the type is in principle only determined upon block
+entry). Besides that, the necessary knowledge about the domain must be
+provided by other means: without further information it is impossible to
+write in ALGOL 60 an inner block determining whether two global boolean
+arrays A and B are equal!
+<p>The alternative is to introduce only one type &ldquo;integer array&rdquo; and
+only one type &ldquo;boolean array&rdquo; and to regard &ldquo;the domain&rdquo; as part (aspect)
+of any value of such type; we must then be able to extract that aspect
+from any such value. Let ax be an array variable; in its active scope I
+propose to extract the bounds of the domain from its value by means of two
+integer-valued functions, denoted by &ldquo;ax.lob&rdquo; and &ldquo;ax.hib&rdquo; respectively,
+with the understanding that the domain of the function &ldquo;ax(i)&rdquo; extends
+over all integers i satisfying
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+           ax.lob &le; i &le; ax.hib . </td> </tr>
+</table>
+Besides those two I propose a third (dependent) one, &ldquo;ax.dom&rdquo;, equal to
+the number of points in the domain. The three functions satisfy
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+           ax.dom = ax.hib - ax.lob + 1 &ge; 0 . </td> </tr>
+</table>
+(Note that even the empty domain &mdash;dom = 0&mdash; has a place along the number
+line: lob and hib remain defined, they then satisfy hib = lob - 1 .)
+<p>We have used here a new notation, the dot as in &ldquo;ax.lob&rdquo;, &ldquo;ax.hib&rdquo;
+vand &ldquo;ax.dom&rdquo;. The names following the dot are what is called &ldquo;subordinate 
+to the type of the variable whose name precedes the dot&rdquo;. Following the
+dot that follows a variable, only names subordinate to the type of that
+variable may occur and their meaning will be as defined with respect to
+that type.
+<p class="noindent"><b>Remark 1</b>. In other contexts, i.e. not following the dot, the same names
+may be used with completely different meaning. We could introduce an array
+variable named &ldquo;dom&rdquo; and in its active scope we could refer to &ldquo;dom.lob&rdquo;,
+&ldquo;dom.hib&rdquo; and even &ldquo;dom.dom&rdquo; ! Such perversities are not recommended and
+therefore I have tried to find subordinate names that, although of some
+mnemonic value, are unlikely candidates for introduction by the programmer
+himself. (End of remark 1.)
+<p class="noindent"><b>Remark 2</b>. A further reason for using the dot notation rather than the
+function notation &mdash;e.g. &ldquo;dom(ax)&rdquo; etc.&mdash; is that, unless we introduce
+different sets of names for these functions defined on boolean arrays and
+integer arrays respectively &mdash;which would be awkward&mdash; we are forced to
+introduce functions of an argument that may be of more than one type,
+something I would like to avoid as long as possible. (End of remark 2.)
+<p class="noindent"><b>Remark 3</b>. The expression &ldquo;ax(i)&rdquo; is used to denote the function value in
+point i. Only when the value of &ldquo;ax(i)&rdquo; is required needs the argument
+i to be defined and to satisfy
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+        ax.lob &le; i &le; ax.hib . </td> </tr>
+</table>
+In view of the dot notation we could regard &ldquo;ax(i)&rdquo; as an abbreviation
+for &ldquo;ax.val(i)&rdquo; , where &ldquo;val&rdquo; his the subordinate name indicating 
+evaluation in the point as indicated by the value of the further argument i.
+For each type, such an abbreviation can be introduced just once! Note
+that also the type &ldquo;integer&rdquo; could have a subordinate name &ldquo;val&rdquo;, that
+would enable us to write a little bit more explicitly:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+               x:= y.val </td> </tr>
+</table>
+instead of the usual and somewhat sloppy x:= y .(End of remark 3.)
+<p>For the sake of convenience we introduce two further functions; for
+the array variable ax they are defined if ax.dom &gt; 0 . They are
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      ax.low , defined to be equal to ax(ax.lob) and </td> </tr> <tr> <td></td> <td>
+      ax.high , defined to be equal tot ax(ax.hib)   </td> </tr>
+</table>
+They denote the function values at the lowest and the highest point of the
+domain respectively. They are nothing really new, they are defined in terms
+ 
+ 
+of concepts (ready known and in the definition of the semantics of operations
+on array values we do not need to mention the effect of them explicitly.
+<p>As stated above, a scalar variable can be regarded as a function
+(without argument) that can be changed by assigning a new value to it: such
+an assignment destroys the information stored as &ldquo;its old value&rdquo; completely.
+We also need operations to change the value of an array variable &mdash;without
+them it would always be an array constant!&mdash;but the assignment of a new
+value to it that is totally unrelated to its old value will play a less 
+central role. It is not that the assignment to an array variable presents
+any logical difficulties &mdash;on the contrary, I am tempted to add&mdash; but there
+is something wrong with its economics. With a large domain size the amount
+of information stored as &ldquo;the value of an array variable&rdquo; can be very large,
+and neither copying nor destroying such large amounts of information are
+considered as &ldquo;nice&rdquo; operations. On the contrary: in many programming tasks
+the core of the problem consists of building up an array value gradually,
+i.e. in a number of steps, each of which can be considered as a &ldquo;nice&rdquo;
+operation, &ldquo;nice&rdquo; ln the sense that the new value of the array can be
+regarded as a &ldquo;pleasant&rdquo; derivation of its old value. What makes such
+operations &ldquo;nice&rdquo; or &ldquo;pleasant&rdquo; depends essentially on two aspects: firstly,
+the relation between the old and the new value should be mathematically
+manageable &mdash;otherwise the operations are for us too cumbersome to use&mdash;
+and, secondly, its implementation should not be too expensive for the kind
+of hardware, that we intend to instruct with our program. The extent to
+which we are willing to take the latter hardware constraints into account
+is not a scientific question, but a political one and as a consequence I
+don&lsquo;t feel obliged to give an elaborate justification of my choices. For
+the sake of convenience I shall be somewhat more liberal than many programmers
+would be &mdash;particularly those that are working daily with machinery, the
+conceptual design of which is ten or more years old&mdash;; on the other hand I
+hope to be sufficiently aware of the possible technical consequences of
+my choices, that they remain, if not realistic, at least not totally 
+unrealistic.
+<p>Our first modification of the value of an array variable, ax say,
+does not change the domain size, nor the set of function values, nor their
+order, it only shifts the domain over a number of places, k say, upwards  
+along the number line. (If k &lt; 0 it is a shift over -k places in the
+other direction, if k = 0 it is the identity transformation, semantically
+equivalent to &ldquo;skip&rdquo;.) We denote it by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+           ax:shift(k) . </td> </tr>
+</table>
+<p>Here we have introduced the colon &ldquo;:&rdquo;. Its lowest dot indicates in the
+usual manner that the following name is subordinate to the type of the
+variable mentioned to its left; the upper dot is just an embellishment
+(inspired by the assignment operator &ldquo;:=&rdquo;), indicating that the value of
+the variable mentioned to its left is subject to redefinition.
+<p>Immediately we are confronted with the question, whether we can give
+an axiomatic definition of the predicate transformer wp(&ldquo;ax:shift(E)&rdquo;, R) .
+Well, it must be a predicate transformer similar to the one of the axiom
+of assignment to a scalar variable, but more complicated &mdash;and this will
+be true as well for all the other modifiers of array values&mdash; because the
+value of a scalar value is fully defined by one (elementary) value, while
+the value of an array variable involves the domain itself and a function
+value for all points of the domain. Because the value of the array variable
+ax is fully determined by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      the value of ax.lob ,                                     </td> </tr> <tr> <td></td> <td>
+      the value of ax.dom and                                   </td> </tr> <tr> <td></td> <td>
+      the value of ax(i) for ax.lob &le; i &lt; ax.lob + ax.dom </td> </tr>
+</table>
+we can &mdash;in principle, at least&mdash; restrict ourselves to post-conditions R
+referring to the array value only in terms of &ldquo;ax.lob&rdquo;, &ldquo;ax.dom&rdquo; and
+&ldquo;ax(arg)&rdquo; where arg may be any integer-valued expression. For such a
+post-condition R the corresponding weakest pre-condition
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+        wp(&ldquo;ax:shift(E)&rdquo;, R) </td> </tr>
+</table>
+is derived from R by simultaneously replacing
+<table width=100%><tr><td valign=top width=10%>
+1)</td><td>all occurrences of ax.lob by (ax.lob + (E))
+</td></tr>
+<tr><td valign=top>
+2)</td><td>all occurrences of (sub)expressions of the form ax(arg) by
+ax({arg) - (E)) .
+</td>  </tr>  </table>
+<b>Note</b>. If E itself depends on the value of ax , the safest way is to
+evaluate first for the given R with a completely new name, K say,
+wp(&ldquo;ax:shift(K)&rdquo;, R) , in which then the actual expression E is 
+substituted for K . We have already encountered the same complication when
+applying the axiom of assignment such as x:= x + f(x). (End
+of note.)
+<p>We give a few examples. Let R be ax.lob = 10 , then
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+      wp(&ldquo;ax:shift(ax.lob)&rdquo;, R) = (ax.lob + ax.lob = 10) </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                  = (ax.lob = 5) .                                   </td> </tr>
+</table>
+Let R be (<u>A</u> i: 0 &le; i &lt; ax.dom: ax(ax.lob + i) = i) , then
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      wp(&ldquo;ax:shift(7)&rdquo;, R) = (<u>A</u> i: 0 &le; i &lt; ax.dom: ax(ax.lob + 7 + i - 7) = i) </td> </tr>
+</table>
+<p>An alternative way of formulating the weakest pre-condition is
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+         wp(&ldquo;ax:shift(E)&rdquo;, R) = R<sub>ax&rsquo; &rarr; ax</sub> </td> </tr>
+</table>
+(i.e. a copy of R , in which every occurrence of ax is replaced by ax&rsquo;),where
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+            ax&rsquo;.lob= ax.lob + (E)                          </td> </tr> <tr> <td></td> <td>
+            ax&rsquo;.dom = ax.dom                               </td> </tr> <tr> <td></td> <td>
+            ax&rsquo;(arg) = ax(arg - (E) for any value of arg . </td> </tr>
+</table>
+From these three definitions it follows that
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+            ax&rsquo;.hib = ax.hib + E  </td> </tr> <tr> <td></td> <td>
+            ax&rsquo;.low = ax.low      </td> </tr> <tr> <td></td> <td>
+            ax&rsquo;,.high = ax.high . </td> </tr>
+</table>
+<b>Note</b>. Such equalities are meant to imply that if the right-hand side is
+undefined, the left-hand side is so as well. 
+<p>For the definition of our further operators we shall follow the
+latter technique: it describes more clearly how the final value ax&lsquo; 
+depends on the initial value ax .
+<p>The next operators extend the domain at either the high or the lows
+end with one point. The function value in the new point is given as parameter
+which must be of the so-called &ldquo;base type&rdquo; of the array, i.e. boolean for
+a boolean array, etc. The operators are of the form
+ax:hiext(x) or ax:loext(x) .
+<p>The semantic definition of hiext is given by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+        wp(&ldquo;ax:hiext(x)&rdquo;, R) = R<sub>ax&rsquo; &rarr; ax</sub> </td> </tr>
+</table>
+where
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+        ax&rsquo;.lob = ax.lob                          </td> </tr> <tr> <td></td> <td colspan = 2>
+        ax&rsquo;.hib = ax.hib + 1                      </td> </tr> <tr> <td></td> <td colspan = 2>
+        ax&rsquo;.dom = ax.dom + 1                      </td> </tr> <tr> <td></td> <td colspan = 2>
+        ax&rsquo;(arg) = x &nbsp; &nbsp; &nbsp; &nbsp;  for arg = ax.hib + 1 </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                 = ax(arg) &nbsp; &nbsp; &nbsp;   for arg &ne; ax.hib + 1 .  </td> </tr>
+</table>
+<p>The semantic definition of loext is given by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+        wp(&ldquo;ax:loext(x)&rdquo;, R) = R<sub>ax&rsquo; &rarr; ax </sub> </td> </tr>
+</table>
+where
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+        ax&rsquo;.lob = ax.lob - 1                     </td> </tr> <tr> <td></td> <td colspan = 2>
+        ax&rsquo;.hib = ax.hib                         </td> </tr> <tr> <td></td> <td colspan = 2>
+        ax&rsquo;.dom = ax.dom + 1                     </td> </tr> <tr> <td></td> <td colspan = 2>
+        ax&rsquo;(arg) = x &nbsp; &nbsp; &nbsp; &nbsp;  for arg = ax.lob - 1 </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                 = ax(arg) &nbsp; &nbsp; &nbsp;   for arg &ne; ax.lob -1   . </td> </tr>
+</table>
+ 
+<b>Note</b>. Our earlier remark that also the empty domain would have its place
+along the number line was to ensure that the extension operators hiext
+and  loext are also defined when applied to an array variable with dom = 0 .
+(End of note.)
+<p>The next two operators remove a point from the domain at either the
+high or the low end. They are only defined when initially dom &gt; 0 holds
+for the array to which they are applied; when applied to an array with
+dom = 0 , they lead to abortion. They destroy information in the sense that
+one of the function values gets lost.
+<p>The semantic definition of hirem is given by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+         wp(&ldquo;ax:hirem&rdquo;, R) = (ax.dom &gt; 0 <b>and</b> R<sub>ax&rsquo; &rarr; ax</sub>) </td> </tr>
+</table>
+where
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+         ax&rsquo;.lob = ax.lob                      </td> </tr> <tr> <td></td> <td colspan = 2>
+         ax&rsquo;.hib = ax.hib - 1                  </td> </tr> <tr> <td></td> <td colspan = 2>
+         ax&rsquo;.dom = ax.dom - 1                  </td> </tr> <tr> <td></td> <td colspan = 2>
+         ax&rsquo;(arg) = undefined &nbsp; &nbsp; &nbsp; &nbsp; for arg = ax.hib </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                  = ax(arg) &nbsp; &nbsp; &nbsp; &nbsp; for arg &ne; ax.hib      </td> </tr>
+</table>
+<p>The semantic definition of lorem is given by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+         wp(&ldquo;ax:lorem&rdquo;, R) = (ax.dom &gt; 0 and R<sub>ax&rsquo; &rarr; ax</sub>) </td> </tr>
+</table>
+where
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+         ax&rsquo;.lob = ax.lob + 1                   </td> </tr> <tr> <td></td> <td colspan = 2>
+         ax&rsquo;.hib = ax.hib                       </td> </tr> <tr> <td></td> <td colspan = 2>
+         ax&rsquo;;dom = ax.dom - 1                   </td> </tr> <tr> <td></td> <td colspan = 2>
+         ax&rsquo;(arg) : undefined  &nbsp; &nbsp; &nbsp; &nbsp; for arg = ax.lob </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                    ax(arg)   &nbsp; &nbsp; &nbsp; &nbsp;  for arg &ne; ax.lob .  </td> </tr>
+</table>
+<p>For the sake of convenience we introduce two further operations, the
+semantics of which can be expressed in terms of the functions and operations
+already introduced: they are
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+     x, ax:hipop , semantically equivalent to &ldquo;x:= ax.high; ax:hirem&rdquo; and </td> </tr> <tr> <td></td> <td>
+     x, ax:lopop , semantically equivalent to &ldquo;x:= ax.low; ax:lorem&rdquo; .    </td> </tr>
+</table>
+They are given in a notation which is reminiscent of the one for the
+concurrent assignment; the name following the &ldquo;:&rdquo; must be subordinate to
+the type of the variable immediately before the &ldquo;:&rdquo;. Obviously, the other
+variable x must be of the base type of the array variable ax .
+<p>The above modifiers all change the domain of the function, either only
+its place along the number line or also its size. Two further modifiers will
+be introduced, modifiers that leave the domain as it stands, but only affect
+one or two function values.
+<p>A very important one does not introduce new function values, but only
+rearranges them. It is of the form
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+            ax:swap(i, j) . </td> </tr>
+</table>
+It leads to abortion when invoked without both i and j lying in the
+domain. Its semantics are given by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+        wp(&ldquo;ax:swap(i, j)&rdquo;, R) = (ax.lob &le; i &le; ax.hib <b>and</b> </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                  ax.lob &le; j &le; ax.hib <b>and</b>             </td> </tr> <tr> <td></td> <td></td> <td>
+                                  Rax&lsquo; &rarr; ax)                            </td> </tr>
+</table>
+where
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+        ax&rsquo;.lob = ax.lob                                    </td> </tr> <tr> <td></td> <td colspan = 2>
+        ax&rsquo;.hib = ax.hib                                    </td> </tr> <tr> <td></td> <td colspan = 2>
+        ax&rsquo;.dom = ax.dom                                    </td> </tr> <tr> <td></td> <td colspan = 2>
+        ax&rsquo;(arg) = ax(j)  &nbsp; &nbsp; &nbsp; &nbsp;for arg = i                        </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                 = ax(i)  &nbsp; &nbsp; &nbsp; &nbsp;for arg = j                              </td> </tr> <tr> <td></td> <td></td> <td>
+                 = ax(arg) &nbsp; &nbsp; &nbsp; &nbsp; for arg &ne; i <b>and</b> arg &ne; j . </td> </tr>
+</table>
+ 
+<b>Note</b>. Initially i &ne; j is not required: if initially i = j holds. the 
+value of the array variable remains unaffected. (End of note.)
+<p>Our last modifier redefines a single function value; it is of the
+form                      
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+         ax:alt(i, x) . </td> </tr>
+</table>
+It leads to abortion when invoked without i lying in the domain; the
+second parameter x must be of the array variable&rsquo;s base type. Its semantics are given by 
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+        wp(&ldquo;ax:alt(i, x)&rdquo;, R) = (ax.lob &le; i &le; ax.hib <b>and</b> </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                         R<sub>ax&ldquo; &rarr; ax</sub>)         </td> </tr>
+</table>
+where
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+        ax&rsquo;.lob = ax.lob               </td> </tr> <tr> <td></td> <td colspan = 2>
+        ax&rsquo;.hib = ax.hib               </td> </tr> <tr> <td></td> <td colspan = 2>
+        ax&rsquo;.dom = ax.dom               </td> </tr> <tr> <td></td> <td colspan = 2>
+        ax&rsquo;(arg) = x   &nbsp; &nbsp; &nbsp; &nbsp;    for arg = i </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                 = ax(arg)&nbsp; &nbsp; &nbsp; &nbsp; for arg &ne; i .  </td> </tr>
+</table>
+The operation denoted above as &ldquo;ax:alt(i, x)&rdquo; is semantically 
+equivalent to what FORTRAN or ALGOL 60 programmers know as &ldquo;the assignment to 
+a subscripted variable&rdquo;. (They would write &ldquo;AX(I) = X&rdquo; and &ldquo;ax[i]:=x&rdquo;
+respectively.) I have introduced this operation in the form &ldquo;ax:alt(i, x)&rdquo;
+in order to stress that such an operation affects the array ax as a whole:
+two functions with the same domain are different functions if they differ   
+in at least one point of the domain. The &ldquo;official&rdquo; &mdash;or, if you prefer:
+&ldquo;puritan&rdquo;&mdash; notation &ldquo;ax:alt(i, x)&rdquo; is, however, even to my taste too
+cumbersome and too unfamiliar and I therefore propose &mdash;I too have my
+weaker moments!&mdash; to use instead
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                ax:(i)= x </td> </tr>
+</table>
+a notation which is somewhat shorter, reminiscent of the so much more
+familiar assignment statement and still reflecting, by its opening &ldquo;ax:&rdquo;
+that we must view it as affecting the array variable ax. (The decision
+to write &ldquo;ax:(i)= x&rdquo; is not much different from the decision to write
+&ldquo;ax(i)&rdquo; instead of the more pompous &ldquo;ax.val(i)&rdquo;.)
+<p>None of the previous operators can be used for initialization: they
+can only change the value of an array under the assumption that it has
+already a value, they can only occur in the active scope of the array
+variable. We have not yet introduced the assignment
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+         ax:= bx </td> </tr>
+</table>
+a construct that would do the job. I am, however, very hesitant to do so,
+because in its full generality &ldquo;assignment of a value&rdquo; usually implies
+&ldquo;copying a value&rdquo; and if the domain of the function bx is large, this
+is not to be regarded as a &ldquo;nice&rdquo; operation in present technology: Not
+that I am absolutely unwilling to introduce &ldquo;unpleasant&rdquo; operations, but
+if I do so, I would not like them to appear on paper as innocent ones. A   
+programming language in which &ldquo;x:= y&rdquo; should be regarded as &ldquo;nice&rdquo;, but
+&ldquo;ax:= bx&rdquo; should have to be regarded as &ldquo;unpleasant&rdquo; would be misleading;
+it would at least mislead me. A way out of this dilemma is to admit as
+the right-hand side of the assignment to an array variable only enumerated
+constants, e.g. of the form
+<p class="p0">< <var>integer</var> > {, < <var>value of the base type</var> >})</p>
+such that
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      bx:= (5, true, true, false, true) </td> </tr>
+</table>
+would establish
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+   bx.lob = 5    bx(5) = true  </td> </tr> <tr> <td></td> <td colspan = 2>
+   bx.hib = 8    bx(6) = true  </td> </tr> <tr> <td></td> <td colspan = 2>
+   bx.dom = 4    bx(7) = false </td> </tr> <tr> <td></td> <td> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                 bx(8) = true  </td> </tr>
+</table>
+The consequence of such a restriction is that assignment of or initialization
+with a value with a large domain size cannot be written down unnoticed. My
+expectation is that most initializations will be with values with dom = 0  .
+<p>A few concluding remarks are in order.
+<p>There is, to start with, the question of economics. My basic assumption
+is that all operations mentioned in this chapter can be performed at roughly
+the same price. Some assumption of this nature has to be made, for without
+it the programming task does not make sense. For instance, instead of writing
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+               ax:(5)= 7 </td> </tr>
+</table>
+we could have written the inner block
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+    <b>begin</b> <b>glovar</b> ax; <b>privar</b> bx;                         </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 2>
+      <b>if</b> ax.lob &le; 5 <b>and</b> 5 &le; ax.hib &rarr;                </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td>
+        bx <b>vir</b> int <b>array</b>:= (0);                                </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
+        <b>do</b> ax.hib &ne; 5 &rarr; bx:hiext(ax.high); ax:hirem <b>od</b> </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
+        ax:hirem; ax:hiext(7);                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
+        <b>do</b> bx.dom &ne; 0 &rarr; ax:hiext(bx.high); bx:hirem <b>od</b> </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+      <b>fi</b>                                                              </td> </tr> <tr> <td></td> <td colspan = 3>
+    <b>end</b>                                                               </td> </tr>
+</table>
+but I would like to reject that inner block as a worthy substitute, not
+so much on account of the length of the text, but on account of its 
+inefficiency. I will not even regard &ldquo;ax:(5) = 7&rdquo; as an abbreviation of the
+above inner block.
+<p>With the possible exception of the assignment of an enumerated value
+I assume in particular the price of all operations independent of the
+values of the arguments supplied to it: the price of executing ax:shift(k)
+will be independent of the value of k, the price of executing ax:swap(i, j)
+will be independent of the values of i and j, etc. with present-day
+technology these assumptions are not unrealistic.
+<p>It is in such considerations that the justification is to be found
+for my willingness to introduce otherwise superfluous names: we could have
+restricted ourselves to ax.lob and ax.dom, for whenever we would need
+ax.hib, we could write
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+            ax.lob + ax.dom - 1 </td> </tr>
+</table>
+instead, but that would make the effective use of ax.hib &ldquo;twice as expensive&rdquo;
+as the effective use of ax.lob and our consciousness of this fact could
+easily twist our thinking. (Worse: it is guaranteed to do so.)
+<p>I said that the prices are of the same order of magnitude. What I
+also mean is &ldquo;of the same order of magnitude as other things that we consider
+as primitive&rdquo;. If the array operations were orders of magnitude more 
+expensive than other operations, we would, for instance, find ourselves
+invited to replace
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          ax:swap(i, j)     </td> </tr>
+</table>
+by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          <b>if</b> i &ne; j &rarr; swap(i, j) &#x25AF; i = j &rarr; skip <b>fi</b> </td> </tr>
+</table>
+and very quickly we should need to know both the exact price ratios and
+a very good estimate for the probability of hitting the case &ldquo;i = j&rdquo; in
+order to be able to decide, whether our replacement of ax:swap(i, j)
+by the alternative construct is actually an improvement or not. I know
+of mathematicians who revel in such optimization problems, problems of
+which they sometimes seem to thing that they constitute the central problems
+of computer programming. I leave these problems gladly to them if they are
+happy with them: the operations that we prefer to consider as primitive
+should not confront us with such conflicts. I like to believe that we have
+more important problems to worry about.
+A final remark about implementation. It is conceivable that upon
+initialization of the array variable ax some limits are given: a lower
+limit for ax.lob, or an upper limit for ax.hib or both, or perhaps only
+an upper limit for ax.dom. If such &ldquo;hints to the compiler&rdquo; are included,
+a wealth of traditional storage management techniques becomes exploitable.
+I prefer, however, to regard such &ldquo;hints to the compiler&rdquo; not as part of
+the program: they only make (on some equipment!) a cheaper implementation
+possible, they represent for the implementation the permission (but not
+the obligation!) to abort a program execution in which such a stated limit  
+is exceeded.                                                               
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-11-15<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

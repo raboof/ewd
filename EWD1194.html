@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+		<title>E.W.Dijkstra Archive: Z.P.Su&rsquo;s second problem (EWD 1194)</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="assets/transcriptions.css" rel="stylesheet" media="screen" />
+		<style type="text/css"> .nowrap  { white-space:  nowrap; } </style>
+	</head>
+	<body><div id="title"><h1>Z.P.Su&rsquo;s second problem</h1></div>
+		<div id="frame">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd11xx/EWD1194.PDF"
+					 title="Link to the PDF version of EWD1194">EWD 1194</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>Z.P.Su&rsquo;s second problem</u></p>
+				<p>The other day Zhendong Patrick Su showed me the following problem of the last Putnam Competition, in which he had participated. (He had solved the problem, I did not.)</p>
+				<p>Consider the points in or on the right-angled triangle with hypotenuse of length &#x221A;<span style="border-top: 1px solid;">2</span>:</p>
+				<p class="noindent" align="center"><img src="EWD1194_fig1.png" alt="EWD1194 figure 1" title="EWD1194 figure 1" />.</p>
+				<p class="noindent">Let each of these points have 1 of 4 colours. Show the existence of a monochrome pair with mutual distance <span class="nowrap">&#x2265; 2 &#x2212; &#x221A;<span style="border-top: 1px solid;">2</span>.</span></p>
+				<p>Let us call that critical distance <var>r</var>, i.e. <span class="nowrap"><var>r</var> = 2 &#x2212; &#x221A;<span style="border-top: 1px solid;">2</span> </span>; let us call a monochrome pair at mutual distance <span class="nowrap">&#x2265; <var>r</var></span> a &ldquo;desired pair&rdquo;.</p>
+				<p>If <var>A</var> belongs to a desired pair, we are done; similarly for <var>B</var>. If neither <var>A</var> nor <var>B</var> belongs to a desired pair, we proceed as follows.</p>
+				<p>To begin with we observe that <var>r</var> satisfies <span class="nowrap"><var>r</var> = &#x221A;<span style="border-top: 1px solid;">2</span> · (1&#x2212;<var>r</var>),</span> from which we</p>
+				<p class="noindent" align="center"><img src="EWD1194_fig2.png" alt="EWD1194 figure 2" title="EWD1194 figure 2" /></p>
+				<p class="noindent">conclude that, with <var>AP </var>= <var>r</var> and <var>BQ </var>= <var>r</var>, we have <var>PQ </var>=<var> r</var>. Completing the diamonds with <var>AR</var> = <var>r</var> and <var>BS</var> =<var> r</var>, we conclude <var>RQ</var> = <var>r</var> and <var>PS </var>= <var>r</var>. Being the hypotenuse of a right-angled triangle with side = <var>r</var>, <var>RC</var> and <var>SC</var> are both &gt;&nbsp;<var>r</var>.</p>
+				<p>In the case that neither <var>A</var> nor <var>B</var> belongs to a desired pair, <var>A</var> and <var>B</var> &#x2014;more than <var>r</var> apart&#x2014; are of different colour, and <var>P</var>, <var>S</var>, <var>C</var>, <var>R</var>, <var>Q</var> &#x2014;all &#x2265;&nbsp;<var>r</var> apart from <var>A</var> and <var>B</var>&#x2014; are all of the remaining 2 colours. Consequently, in the cyclic arrangement <var>P</var>, <var>S</var>, <var>C</var>, <var>R</var>, <var>Q</var> of these 5 points, 5 being odd, two successive points are of the same colour. Their mutual distance being at least <var>r</var>, they form a desired pair. QED.</p>
+				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+				<p>In the above argument we have appealed to the following theorem:</p>
+				<p>Consider a finite undirected graph in which each vertex is of degree 2. If each vertex is of one of 2 colours and the number of vertices is odd, there exists an edge that connects a vertex to a vertex of the same colour.</p>
+				<p>The proof is by double application of the pigeon-hole principle. Let the number of vertices &#x2014;which equals the number of edges&#x2014; be 2<var>n</var>+1. Since there are 2 colours, there are at least <var>n</var>+1 vertices of the dominant colour; as they are all of degree 2, they give rise to 2<var>n</var>+2 endpoints of the dominant colour. Since there are &ldquo;only&rdquo; 2<var>n</var>+1 edges, at least 1 of them has 2 endpoints of the dominant colour.</p>
+				<p style="margin-right: 2em;" align="right">Austin, 25 December 1994</p>
+
+				<p class="noindent">
+					prof.dr. Edsger W.Dijkstra<br />
+					Department of Computer Sciences<br />
+					The University of Texas at Austin<br />
+					Austin, TX 78712-1188<br />
+					USA
+				</p>
+				<br />
+			</div>
+			<div>
+        <br/>
+      </div>
+		</div>
+		<hr />
+		<div id="footer">
+         transcribed by Corrado Cantelmi<br />
+          revised 
+          <!-- #BeginDate format:En2 -->26-Dec-2011<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

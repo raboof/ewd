@@ -1,0 +1,72 @@
+
+<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+<title>E.W. Dijkstra Archive: It is all distributivity (EWD1142)</title>
+<link href="assets/transcriptions.css" rel="stylesheet" media="screen">
+
+    <body><div id="title"><h1>It is all distributivity</h1></div><div id="frame">
+			<div id="header">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd11xx/EWD1142.PDF" 
+           title="Link to the PDF version of EWD1142">EWD1142</a>
+      </div>
+		<div id="content">
+			<p class="noindent"><u>It is all distributivity</u></p>
+			<p>Let &#x2022; be a binary infix operator. Depending on how we Curry, we can form two classes of unary operators from <b>,</b> the general elements of which are often denoted by (<var>x</var>&#x2022;) and (&#x2022;<var>y</var>), defined</p>
+			<blockquote>
+				<p class="noindent">(<var>x</var>&#x2022;) = &#x3008;&#x03BB;<var>y</var>: <var>x</var>&#x2022;<var>y</var>&#x3009;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&#x2022;<var>y</var>) = &#x3008;&#x03BB;<var>x</var>: <var>x</var>&#x2022;<var>y</var>&#x3009;</p>
+			</blockquote>
+			<p class="noindent">We call them in this note &quot;the derived unary operators&quot;.</p>
+			<p>To begin with we observe &#x2014;with apologies for the two different usages of parentheses&#x2014;</p>
+			<p class="p0">(<var>x</var>&#x2022;<var>z</var>)&#x2022;<var>y</var> = <var>x</var>&#x2022;(<var>z</var>&#x2022;<var>y</var>)</p>
+			<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{definition of derived operators}</p>
+			<p class="p0">(&#x2022;<var>y</var>).((<var>x</var>&#x2022;).<var>z</var>) = (<var>x</var>&#x2022;).((&#x2022;<var>y</var>).<var>z</var>)</p>
+			<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{definition of functional composition}</p>
+			<p class="p0">((&#x2022;<var>y</var>)&#x25E6;(<var>x</var>&#x2022;)).<var>z</var> = ((<var>x</var>&#x2022;)&#x25E6;(&#x2022;<var>y</var>)).<var>z</var>&nbsp;&nbsp;,</p>
+			<p class="noindent">hence, that a binary operator is &quot;associative&quot; means that its derived unary operators commute.</p>
+			<p>To say that &#x2022; &quot;distributes over&quot; some binary operator is really a statement about its derived unary operators: &quot;&#x2022; distributes from the left over &#x25A1;&quot; means that for all <var>x</var>, <var>y</var>, <var>z</var>:</p>
+			<p>&nbsp;&nbsp;(<var>x</var>&#x2022;).(<var>y</var> &#x25A1; <var>z</var>) = (<var>x</var>&#x2022;).<var>y</var> &#x25A1; (<var>x</var>&#x2022;).<var>z</var>&nbsp;&nbsp;&nbsp;;</p>
+			<p class="noindent">distribution from the right means similarly</p>
+			<p>&nbsp;&nbsp;(&#x2022;<var>x</var>).(<var>y</var> &#x25A1;<var> z</var>) = (&#x2022;<var>x</var>).<var>y</var> &#x25A1; (&#x2022;<var>x</var>).<var>z</var> &nbsp;&nbsp;.</p>
+			<p class="noindent">Both formulae are of the form</p>
+			<p>&nbsp;&nbsp;<var>f</var>.(<var>y</var> &#x25A1; <var>z</var>) = <var>f</var>.<var>y</var> &#x25A1; <var>f</var>.<var>z</var>&nbsp;&nbsp;,</p>
+			<p class="noindent">which captures &quot;<var>f</var> distributes over &#x25A1;&quot;. But what comes of this formula if &#x25A1; turns out to be unary? Replacing in the last formula <var>p</var>&#x25A1;<var>q</var> by <var>g</var>.<var>p</var>, we get</p>
+			<p>&nbsp;&nbsp;<var>f</var>.(<var>g</var>.<var>y</var>) = <var>g</var>.(<var>f</var>.<var>y</var>) or <var>f</var>&#x25E6;<var>g</var> = <var>g</var>&#x25E6;<var>f</var> .</p>
+			<p class="noindent">Hence, that two unary operators &quot;commute&quot; means that they distribute over each other. Hence, that a binary operator is associative just means that its derived unary operators distribute over each other.</p>
+			<div align="right">
+				<p>Austin, 2 November 1992</p>
+			</div>
+			<p class="noindent">prof. dr. Edsger W. Dijkstra<br>
+				Department of Computer Sciences<br>
+				The University of Texas as Austin<br>
+				Austin, TX 78712-1188 USA</p>
+			<hr>
+			<p class="noindent">Transcribed by Guy Haworth.</p>
+			<p class="continue">Last revised <csobj format="MedDate" h="16" region="15" t="DateTime" w="115">Mon, 31 Dec 2007</csobj>.</p>
+			<p></p>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+		
+	
+		
+			
+		</body>

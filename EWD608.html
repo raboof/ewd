@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: An elephant inspired by the Dutch National Flag (EWD 608)</title>
+      <link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body><div id="title"><h1>An elephant inspired by the Dutch National Flag</h1></div>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD608.PDF"
+           title="Link to the PDF version of EWD608">EWD608</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<p>Copyright Notice
+<table> <tr> <td colspan = 2>
+<b>The following manuscript </b>                                                        </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+     EWD 608 An elephant inspired by the Dutch National Flag                     </td> </tr> <tr> <td colspan = 2>
+is held in copyright by Springer-Verlag New York.                                </td> </tr> <tr> <td colspan = 2>
+The manuscript was published as pages 264–267 of                                 </td> </tr> <tr> <td></td> <td>
+     Edsger W. Dijkstra, Selected Writings on Computing: A Personal Perspective, </td> </tr> <tr> <td></td> <td>
+     Springer-Verlag, 1982. ISBN 0–387–90652–5.                                  </td> </tr> <tr> <td colspan = 2>
+<b>Reproduced with permission from Springer-Verlag New York.</b>                 </td> </tr> <tr> <td colspan = 2>
+<b>Any further reproduction is strictly prohibited.</b>                          </td> </tr>
+</table>
+<p class=noindent><b>An elephant inspired by the Dutch National Flag. </b>
+<p>Encouraged by the success of EWD607, we now embark upon the analysis of a
+more intricate elephant. We start with a cyclic arrangement of 3 + 3 mosquitoes.
+Three main mosquitoes, called R(ed), W(hite), and B(lue) respectively, and three
+buffer mosquitoes RW, WB, and BR, in between:
+<p>R &rarr; RW &rarr; W &rarr; WB &rarr; B &rarr; BR &rarr; R  .
+<p>The buffer mosquitoes are quite simple, e.g.:
+<table> <tr> <td colspan = 4>
+RW: <b>begin</b> <b>channel</b> W;                        </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+         <b>begin</b> <b>channel</b> R; buf: pebble;      </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+               <b>do</b> R?(buf) &rarr; W!(buf) <b>od</b> </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+         <b>end</b>                                       </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+     <b>end</b>                                           </td> </tr>
+</table>
+<p>When its (input)channel with R ceases to exist, R?(buf) will become false,
+and block exit will cause termination of the existence of the (output)channel with
+W.
+Each of the main mosquitoes has three &ldquo;bags <b>of</b> pebble&rdquo;, named &ldquo;r(ed)&rdquo;,
+&ldquo;w(hite)&rdquo;,and &ldquo;b(lue)&rdquo; . The R mosquito must collect in its bag called &ldquo;r&rdquo;
+all red pebbles in the system; its &ldquo;foreign&rdquo; pebbles it transmits, one at a time,
+via the buffer mosquito RW , first emptying its blue bag because its blue pebbles
+&mdash;that have to reach their destination via W &mdash; have to travel the longer distance.
+The arrangement is worth investigating because we expect problems with the proof
+of termination.
+<p>The solution that I am proposing has also a starting problem, but I am not
+going to divulge that now: I hope that that difficulty emerges &ldquo;naturally&rdquo;
+from a systematic analysis of our system.
+<p class=noindent>mosquito R:
+<table> <tr> <td colspan = 4>
+<b>begin</b> <b>channel</b> BR;                                                                                                      </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+      x, y: pebble; r, w, b: bag 3: pebble;                                                                                          </td> </tr> <tr> <td></td> <td colspan = 3>
+      <b>proc</b> accept: <b>if</b> <b>non</b> BR?(y) &rarr; skip &#x25af; BR?(y) &rarr; place <b>fi</b> <b>corp</b>;                </td> </tr> <tr> <td></td> <td colspan = 3>
+      <b>proc</b> place: <b>if</b> white(y) &rarr; w:= w &#x2241; y &#x25af; red(y) &rarr; r:= r &#x2241; y  <b>fi</b> <b>corp</b>;  </td> </tr> <tr> <td></td> <td colspan = 3>
+      r, w, := &ldquo;initial values&rdquo; {R3};                                                                                    </td> </tr> <tr> <td></td> <td colspan = 3>
+      <b>begin</b> <b>channel</b> RW;                                                                                                </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+            <b>do</b> card(b) &gt; 0 &rarr; x:= any(b);&rsquo;b:= b &#x2243; x;                                                      </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                     RW!(x); accept                                                                                                  </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+            <b>od</b> {R2}:                                                                                                          </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+            <b>do</b> card(w) &gt; 0 &rarr; x:= any(w); w:= w &#x2243; x;                                                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
+                     RW!(x); accept                                                                                                  </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+            <b>od</b>                                                                                                                </td> </tr> <tr> <td></td> <td colspan = 3>
+      <b>end</b> {R1};&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  <b>Note</b>: &ldquo;card&rdquo; -short for &ldquo;cardina1ity&rdquo;&mdash;                          </td> </tr> <tr> <td></td> <td colspan = 3>
+      <b>do</b> BR?(y) &rarr; place <b>od</b> {R0} &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; denotes &ldquo;number of elements in&rdquo;.                             </td> </tr> <tr> <td colspan = 4>
+<b>end</b> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (End of note.)                                                                                                   </td> </tr>
+</table>
+(and cyclicly).
+<p>We assume that &mdash;by some magic, not to be discussed here&mdash; BR (the text
+of which starts with &ldquo;<b>begin</b> <b>channel</b> R&rdquo;) and R (the text of which starts with
+&ldquo;<b>begin</b> <b>channel</b> BR&rdquo;) perform the entry to their outer blocks simultaneously,
+thereby establishing the channel between them (which will be used only as an
+input channel to R ). when the three input channels to the main mosquitoes have
+been established, the six inner blocks will be entered &mdash;pairwise simultaneously,
+but now R paired with RW &mdash; and the output channels for the main mosquitoes
+have been established. (This is <b>very</b> informal and intuitive, but OK for the
+moment: if coded wrongly, such paired block entries can, of course, create a
+glorious deadlock.)
+<p>Let us now study mosquito R backwards. My final goal is to establish
+proper termination with
+<table width=100%><tr><td valign=top width=10%>
+R0:</td><td>card(b) = card(w) = 0 and y-tai1(R0) is empty,
+</td>  </tr>  </table>
+i.e. mosquito R has to terminate with red pebbles only when nothing will be
+sent to it anymore; with &ldquo;y-tail(Ri)&rdquo; I denote the sequence of y-values still
+to be absorbed in stage Ri before BR?(y) turns definitely false.
+<p>The first step is to investigate the transition from R1 to R0 . 
+Termination of the repetitive construct in between guarantees non BR?(y) , i.e.
+guarantees that y-tail(R0) is empty; infinite repetition is excluded by
+y-tail(R1) is finite .
+  
+<p>Because card(b) = card(w) = 0 does not follow from &ldquo;<b>non</b> BB&rdquo; it had
+better hold at R1 and be kept invariant by &ldquo;place&rdquo;. Keeping card(w) = 0
+invariant by &ldquo;place&rdquo; implies the absence of white pebbles in the tail, avoiding
+abortion implies the absence of blue ones, and we find for R1
+<table width=100%><tr><td valign=top width=10%>
+R1:</td><td>card(b) = card(w) = 0 <b>and</b> y-tail(R1) is finite and red only
+</td>  </tr>  </table>
+<b>Note</b> The condition &ldquo;finite and red only&rdquo; is satisfied by the empty tail. (End
+of&rsquo; note.)
+<p>The next step is to investigate the transition from R2 to R1 . Because
+card(b) = 0 does not follow from &ldquo;<b>non</b> BB&rdquo; , we require it at R2 ; exclusion
+of abortion taken into account:
+<table width=100%><tr><td valign=top width=10%>
+</td><td>card(b) = 0 <b>and</b> y-tail(R2) contains no blue pebbles
+</td>  </tr>  </table>
+We have to impose more, because we have also to guarantee
+<table width=100%><tr><td valign=top width=10%>
+</td><td>card(w) = 0 <b>and</b> y-tail(R1) is finite and red only .
+</td>  </tr>  </table>
+Termination guarantees card(w) = 0 and is guaranteed by
+<table width=100%><tr><td valign=top width=10%>
+</td><td>y-tail (R2) is finite
+</td>  </tr>  </table>
+(For the variant function we can take: card(w) + number of white pebbles in y-tail.)
+But how do we guarantee that y-tail(R1) is red only?
+<p>Let us define for a finite tail without blue pebbles
+<table width=100%><tr><td valign=top width=45%>
+if tail contains no white pebbles:</td><td>slack = - 1
+</td></tr>
+<tr><td valign=top>
+if tail contains white pebbles 2 slack :</td><td>the total number of red pebbles
+preceding the last white one
+</td>  </tr>  </table>
+and let us consider the relation card(w) &gt; slack ; then
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;card(w) = 0 implies that the finite tail is all red
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;card(w) &gt; slack is an invariant for the repeatable statement from
+R2 to R1 ; because card(w) &ge; 0 by definition, this is obvious if the
+resulting tail has no white pebbles, otherwise
+<table width=100%><tr><td valign=top width=10%>
+</td><td>2a) y has been white, in which case both&rsquo; card(w) and slack
+remained unchanged
+</td></tr>
+<tr><td valign=top>
+</td><td>2b) y has been red, in which case both card(w) and slack have been
+decreased by 1 .
+</td>  </tr>  </table>
+Hence, collecting all our requirements , we deduce
+                         
+<table width=100%><tr><td valign=top width=10%>
+R2:</td><td>card(b) = 0 <b>and</b> y-tail(R2) is finite, without blue pebbles <b>and</b>
+card(w) &gt;-slack(R2) .
+</td>  </tr>  </table>
+For the transition from R3 to R2 , infinite repetition is excluded a
+priori, abortion is excluded by the absence of blue pebbles in the tail, the
+invariant relation that does the trick is
+<table width=100%><tr><td valign=top width=10%>
+</td><td>card(b) + card(w) &gt;-slack
+</td>  </tr>  </table>
+and we find for R3
+<table width=100%><tr><td valign=top width=10%>
+R3:</td><td>y-tail(R3) is finite, without blue pebbles and eard(b) + card(w) &gt; slack(R3) .
+</td>  </tr>  </table>
+<p>Taking the finiteness for a moment for granted, we see that
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the absence of blue pebbles in the y-tail is guaranteed (because R does
+not transmit red pebbles, and cyclicly)
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;slack(R3) &ge; 0 (because R does transmit blue pebbles, if any, before
+white ones, if any, and cyclicly.)
+<p>Hence, a safe starting state is: each mosquito with at least one foreign
+pebble! The complication at the start has, indeed, shown up nicely.
+<p>Termination was more easily demonstrated than originally feared.
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Mosquito R will generate in its x-sequence an a priori bounded number of
+blue pebbles.
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In the same way, mosquito B will only generate in its x-sequence an
+a priori bounded number of white pebbles.
+<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equating the x-output of B with the y-input of R , we conclude that
+mosquito R will only receive a bounded number of white pebbles.
+Combining 1) and 3) we conclude that mosquito R will only generate a finite
+x-sequence.
+<p>The proof of total conservation of pebbles is left to the reader.
+<p>
+<table width=100%><tr><td valign=top width=40%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+NL-4565 NUENEN</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-12-13<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><!-- InstanceBegin template="../../Templates/EWD transcription.dwt" codeOutsideHTMLIsLocked="false" -->
+<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>E.W.Dijkstra Archive: &ldquo;A review of a book on PEARL&rdquo; (EWD 814)</title>
+<!-- InstanceEndEditable -->
+<link href="assets/transcriptions.css" rel="stylesheet" media="screen"/>
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<!-- InstanceParam name="signature" type="boolean" value="true" -->
+</head>
+
+<body><div id="title"><h1>&ldquo;A review of a book on PEARL&rdquo;</h1></div>
+<div id="frame" align="right">
+	<div id="header" align="right"><!-- InstanceBeginEditable name="link to PDF" --><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD814.PDF" 
+	title="Link to the PDF version of EWD814">EWD814</a><!-- InstanceEndEditable --></div>
+</div>
+<div id="frame">
+
+<div id="content">
+
+
+
+
+<p class="noindent"><!-- InstanceBeginEditable name="title heading" --><u>A review of a book on PEARL</u><!-- InstanceEndEditable --></p>
+<!-- InstanceBeginEditable name="body" -->
+<p class="noindent"><i>PEARL: Systematische Darstellung f&uuml;r den Anwender</i> by
+  Axel Kappatsch, Horst Mittendorf, and Peer Rieder. (300p.) &mdash;M&uuml;nchen, Wien: Oldenbourg, 1979. <br />
+  ISBN 3-486-23021-2</p>
+<p>This book&rsquo;s title says &ldquo;PEARL: a systematic presentation for the user&rdquo;, where PEARL is an acronym for &ldquo;Process and Experiment Automation Real-time Language&rdquo;. I found it hard to decide which of the two is worse, the book or the language; eventually I decided that the language has won the race: the book is bad, but the language is terrible.</p>
+<p>The book has eight chapters: 0. Introductory Example (4p.), 1. Construction of a PEARL Programme (13p.), 2. Data and Data Aggregates (57p.), 3. Communication with Peripheral Equipment (46p.), 4. Specification of the Peripheral Equipment in the SYSTEM Part (69p.), 5. Sequential Control (19p.), 6. Control of Concurrent Activities (19p.), and 7. Message Evaluation as Example of a Complete PEARL Programming System (42+48p.).</p>
+<p>It is in all respects a publication from a subculture. The introduction mentions PEARL as an existing object, but neither when, nor by whom it has been designed, and references to the literature are confined to three pages of references to PEARL publications only. Worse, the poor reader has to join the authors midstream. In Chapter 0, the reader has to guess which letter combinations are key words &mdash;there are 146 (!) of them&mdash; and which are identifiers chosen by the programmer. In Chapter 1 it becomes annoying that the reader is confronted with a text in four different type founts without being told what significance to attach to that difference; similarly, formal syntax is given in an unexplained formalism; scope rules are given a pictorial &ldquo;explanation&rdquo;, the interpretation of which is guesswork. The pictorial &ldquo;explanation&rdquo; of assignment and dereferencing in Chapter 2 is a similar new mystery. Etc.</p>
+<p>PEARL is described in terms of an elaborate private terminology. This was probably unavoidable since PEARL seems to combine the worst of PL/I, ALGOL 68, and three assembler languages. The reader&rsquo;s life is complicated, firstly, by the absence of an index guiding the reader to the definitions of those private terms &mdash;the table of contents is too coarse to take its place&mdash; and, secondly, by the fact that many of these definitions are very implicit: a typical usage of the term is supposed to tell the reader what is meant by the term. (E.g. &ldquo;INV does not belong to the type of an object, but to the access function represented by the identifier, and is therefore referred to as <u>access attribute</u>.&rdquo; And as far as I could find out, this is supposed to tell us what is meant by &ldquo;access attributes&rdquo;.) In actual fact so-called &ldquo;teaching by example&rdquo; is a euphemism for not teaching at all.</p>
+<p>The last chapter of 42 pages deals with a worked-out example of 28 pages PEARL code, given in a separate appendix. I did not have the courage to follow that example in any detail, since the appendix is a reduced copy of more than 1500 lines of extremely poor lineprinter output. (The manufacturer of that lineprinter has been tactfully left anonymous.)</p>
+<p>Sometimes a subculture is an avant-garde; PEARL&rsquo;s subculture, however, is inbred, old-fashioned, and backward. Its approach to the definition of semantics is entirely operational. For the semantic definition of sequential programming languages the operational approach is very clumsy, but in the case of concurrency it is a disaster. I think it is not only the book that is to be blamed for explaining the language in terms of an implementation &mdash;e.g. &ldquo;the main significance of a module is that it represents a piece of PEARL text that can be compiled separately&rdquo;&mdash;, I fear it is the language itself. Interrupts are primarily a device by means of which a number of sequential processes can share a smaller number of processors. The definition of a language geared to  multi-programming should be absolutely neutral with respect to the number of processors that might be available in a specific implementation. In PEARL, however, &ldquo;INTERRUPT&rdquo; is one of the 146 key words! Though it is now well-known for more than 15 years, PEARL&rsquo;s designers evidently did not know that the actual number of processors available is the easiest thing to abstract from. Whenever I see the announcement of a German book on Computing Science, I always wonder why it has been published in German; this time I wondered why it had been published at all. But I found the explanation: the German Federal Government has spent more than 50 million DM. on the development of this &ldquo;baroque monstrosity&rdquo; and when mistakes are made on a sufficiently grandiose scale they become by definition a precious achievement. The frequent reference to DIN documents is very telling: it is the <var>n</var>-th confirmation (<var>n</var> large!) that standardisation as primary target is one of the worst possible incentives for language design; with Ada the USA Department of Defense has increased &mdash;quite unnecessarily&mdash; <var>n</var> still further.</p>
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="EditRegion5" -->
+<p>&nbsp;</p>
+<table width="624" border="0" cellpadding="0" cellspacing="10">
+  <tr>
+    <td width="368" valign="top">Plataanstraat 5<br />
+      5671 AL NUENEN<br />
+      The Netherlands</td>
+    <td width="226" valign="top">28 February 1982<br />
+      prof.dr.Edsger W. Dijkstra<br />
+      Burroughs Research Fellow</td>
+  </tr>
+</table>
+<!-- InstanceEndEditable --></div>
+
+<div id="footer">
+  <p class="noindent"><font size="-1">
+    Transcribed by <!-- InstanceBeginEditable name="name of transcriber" --><font size="-1">Bart Vreugdenhil</font><!-- InstanceEndEditable --><br />
+  </font><font size="-1">
+    Revised 
+    <!-- #BeginDate format:En2 -->20-Feb-2013<!-- #EndDate --></font>  </p>
+</div>
+
+</div>
+</body>
+<!-- InstanceEnd --></html>
