@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: More on A.J.Martin's design (EWD 672)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd06xx/EWD672.PDF"
+           title="Link to the PDF version of EWD672">EWD672</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<p class=noindent>                
+<b>More on A.J.Martin&rsquo;s design</b>. (A sequel to EWD668)
+<p>This is a sequel to EWD668 &ldquo;On the correctness of a design by Alain
+J.Martin&rdquo; in the sense that we use his problem, and modify his solution,
+in a reconsideration of the role of fair daemons for the purpose of the
+prevention of individual starvation. We use here the same configuration
+of customer mosquitoes M , each coupled to its private service mosquito
+m , and the service mosquitoes again arranged in a ring, in which each 
+refers to its neighbours as L and R . Omitting queries and shrieks,
+each customer mosquito can be written as before:
+<table width=100%><tr><td valign=top width=10%>
+M:</td><td><b>do</b> true a noncritical section; m; m; critical section; m <b>od</b>
+</td>  </tr>  </table>
+<p>By way of experiment we write our service mosquitoes in Hehner&rsquo;s
+style as a (nonterminating) semi-recursion of two refinements &ldquo;
+giv&rdquo; and
+&ldquo;rec&rdquo;, with the understanding that only one service mosquito is 
+initialized with &ldquo;giv&rdquo; and all others are initialized with &ldquo;rec&rdquo;. Let us first
+consider solutions in which, when none of the customer mosquitoes is 
+interested in entering its critical section, the service mosquitoes continue
+frantically transmitting the privilege to their left-hand neighbours:
+<table width=100%>
+<tr><td valign=top width=10%> giv: </td><td valign=top>
+<b>if</b> L &rarr; rec &#x25af; M e M; M; L; rec <b>fi</b></td><td align=right>(1)
+</td></tr>
+<tr><td valign=top> rec: </td><td valign=top>
+R &rarr; giv</td><td align=right>
+</td>  </tr>  </table>
+<p>Without assumption of a fair daemon, this &ldquo;solution&rdquo; is full of the
+danger of individual starvation: in the state giv , when a service 
+mosquito is ready to admit its customer to the critical section, it is also
+free not to do so, and to transmit the privilege to its left-hand neighbour.
+How much better than (1) is (2) in this respect?
+<table width=100%>
+<tr><td valign=top width=10%> giv: </td><td valign=top>
+L; rec</td><td align=right>(2)
+</td></tr>
+<tr><td valign=top> rec: </td><td valign=top>
+<b>if</b> R &rarr; giv &#x25af; M &rarr; R; M; M; giv <b>fi</b></td><td align=right>
+</td>  </tr>  </table>
+<p>At first sight this solution is much better: as long as an 
+m-mosquito&rsquo;s service is not requested by its M-mosquito, it is &ldquo;almost always&rdquo;
+in the rec-state, ready to honour the call for attention from its 
+M-mosquito. From a practical point of view (2) might be acceptable, in general
+(2) is almost as unsatisfactory as (1) in the sense that the absence of
+individual starvation relies on a guarantee of local progress of m-mosquitoes.
+              
+If an m-mosquito is allowed to go to sleep in state rec , and
+is only woken up when its right-hand neighbour is ready to communicate with
+it and that communication is unfairly chosen each time, individual starvation
+may occur as before. The only way of exorcizing the danger of individual
+starvation without the assumption of fair daemons requires that an 
+m-mosquito may not only react on the presence, but also on the absence of a
+request from its M-mosquito. Then we could write
+<table width=100%>
+<tr><td valign=top width=10%> giv: </td><td valign=top>
+l rec</td><td align=right>(3)
+</td></tr>
+<tr><td valign=top> rec: </td><td valign=top>
+R; <b>if</b> M &rarr; M; M &#x25af; non M &rarr; skip <b>fi</b>; giv</td><td align=right>
+</td>  </tr>  </table>
+with the understanding that the alternative construct never gives rise to
+delay or abortion: either the M-mosquito is ready to communicate or it
+is not, and only in the latter case the second alternative will be chosen.
+<p>The next question is: is it possible, after this linguistic extension,
+to change this solution (without re-introducing the danger of individual
+starvation) in such a way that, when no M-mosquito requires service, the
+ring of m-mosquitoes comes to rest? (This is the usual problem of avoiding
+the busy form of waiting, which is of interest if the m-mosquitoes are 
+programs sharing a processor with others.) I could do it in the following
+manner, in which &mdash;in order to prevent one M-mosquito with an &ldquo;empty&rdquo;
+noncritical section from monopolizing the access right&mdash; an m-mosquito
+that has served its customer transmits the privilege to its left-hand
+neighbour, whether it has asked for it or not. Solution (4) is a 
+modification of A.J.Martin&ldquo;s solution discussed in EWD668. The commands between
+the m-mosquitoes are of two kinds, labelled &rdquo;.a&ldquo; and &rdquo;.b&ldquo; respectively.
+<table width=100%>
+<tr><td valign=top width=10%> giv: </td><td valign=top>
+<b>if</b> L.a &rarr; test and transmit</td><td align=right>(4)
+</td></tr>
+<tr><td valign=top>
+</td><td>&#x25af; M &rarr; serve and transmit
+</td></tr>
+<tr><td valign=top>
+</td><td><b>fi</b>
+</td></tr>
+<tr><td valign=top>
+rec:</td><td><b>if</b> L.a &rarr; R.a; R.a; test and transmit
+</td></tr>
+<tr><td valign=top>
+</td><td>&#x25af; M &rarr; R.a; R.a; serve and transmit
+</td></tr>
+<tr><td valign=top>
+</td><td>&#x25af; R.b &rarr; giv
+</td></tr>
+<tr><td valign=top>
+</td><td><b>fi</b>
+</td>  </tr>  </table>
+ 
+<table width=100%><tr><td valign=top width=25%>
+test and transmit:</td><td>if M &rarr; M; M &#x25af; <b>non</b> M &rarr; skip <b>fi</b>; L.a; rec
+</td></tr>
+<tr><td valign=top>
+serve and transmit:</td><td>M; M; <b>if</b> L.a &rarr; L.a &#x25af; L.b &rarr; skip <b>fi</b>; rec
+</td>  </tr>  </table>
+                
+Note that, because R.b and L.b occur both in guard positions, the
+addition of queries and shrieks would make a shriek in a &ldquo;guarding 
+communication command&rdquo; unavoidable.
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>In a way I liked the solution discussed in EWD668, and I was pleased
+to discover, how the assumption of a fair daemon &mdash;which is a rather 
+operational concept&mdash; could be translated in a clear pattern for a proof 
+obligation. On the other hand I am still a little bit afraid of nondeterminacy
+with an unknown, but finite bound, because I foresee problems when we try
+to define the semantics more explicitly than just by a set of proof 
+obligations. Hence my desire to explore, whether or not I could modify A.J.
+Martin&rsquo;s solution so as to make it independent of a daemon&rsquo;s fairness.
+I was pleased with the discovery that it could be done, although I think
+the price of two linguistic extensions &mdash;both of which seem necessary&mdash;
+rather high, as in particular the last one may have unpleasant properties.
+(If I remember it correctly, both extensions fall outside the scope of the
+synchronization facilities considered in the GREEN Language for the DoD.)
+<p>The above has been written partly in preparation for tomorrow&rsquo;s
+meeting of the Tuesday Afternoon Club, to which &mdash;and in particular to
+Joseph M.Morris&mdash; I am indebted for prompting me to this exploration.
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>The day after the above had been written, Alain J.Martin saw the
+text and remarked that the above &ldquo;both of which seem necessary&rdquo; &mdash;8 lines
+above&mdash; was unjustified, as our second language extension, i.e. the 
+introduction of shrieks in guarding communication commands, could have been
+avoided after the first extension had been accepted. In a repetitive 
+construct of the form:
+<table width=100%><tr><td valign=top width=10%>
+</td><td><b>do</b> M? &rarr; S1 &#x25af; L?  S2 <b>od</b>
+</td>  </tr>  </table>
+we relied in EWD668 on a fair daemon for the absence of the danger of
+individual starvation. With the possibility of explicit reaction on the
+<b>absence</b> of a request for communication, we could have coded instead:
+<table> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                                                                         </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+       <b>do</b> M? &rarr; S1; <b>if</b> L? &rarr; S2 &#x25af; <b>non</b> L? &rarr; skip <b>fi</b> </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td colspan = 2>
+        &#x25af; L? &rarr; S2; <b>if</b> M? &rarr; S1 &#x25af; <b>non</b> M? &rarr; skip <b>fi</b>      </td> </tr> <tr> <td></td> <td colspan = 3>
+       <b>od</b>                                                                         </td> </tr> <tr> <td colspan = 4>
+                                                                                         </td> </tr>
+</table>
+This transformation, applied to A.J.Martin&rsquo;s solution as described
+in EWD668 would have made it starvation-free without relying on a deemon&rsquo;s
+fairness.
+If we so desire we can regard the first version as an abbreviation
+of the second one or a similar one, which allows a bounded amount of 
+&ldquo;unfairness&rdquo;, such as
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+       <b>do</b> M? &rarr; S1; <b>if</b> M? &rarr; S1 &#x25af; <b>non</b> M? &rarr; skip <b>fi</b>; </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+              <b>if</b> L? &rarr; S2 &#x25af; <b>non</b> L? &rarr; skip <b>fi</b>                   </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td colspan = 3>
+        &#x25af; L? &rarr; S2; <b>if</b> L? &rarr; S2 &#x25af; <b>non</b> L? &rarr; skip <b>fi</b>; </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
+               <b>if</b> M? &rarr; S1 &#x25af; <b>non</b> M? &rarr; skip <b>fi</b>;                 </td> </tr> <tr> <td></td> <td colspan = 4>
+       <b>od</b>                                                                                    </td> </tr>
+</table>
+
+<p>Both the argument in EWD668 and the above transformations are for
+me incentives to be less afraid of fair daemons than I used to be. I have
+now good hope that &ldquo;daemons of bounded unfairness&rdquo; turn out to be 
+mathematically manageable without the need of committing ourselves to a value of
+the bound on their unfairness. (The conclusion, as drawn in EWD675, that
+well-founded sets don&rsquo;t seem to be really necessary points in the same
+direction.)
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN</td><td>BURROUGHS Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-02-05<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">         
+      
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">         
+  <head>        
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />        
+    <title>E.W.Dijkstra Archive: On Kleinrock's Theorem. (EWD 775)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>  
+   </head>      
+  <body>        
+    <div id="frame" align="right">  
+      <div id="header" align="right">      
+        <a href="../../ewd07xx/EWD775.PDF"    
+           title="Link to the PDF version of EWD775">EWD775</a></div></div> 
+        <div id="frame">    
+           <div id="content">
+           <p class="noindent"><b>On Kleinrock&rsquo;s Theorem.</b> 
+           <p>The following has been triggered by C.A.R. Hoare&rsquo;s &ldquo;A general conservation law for queuing disciplines&rdquo; (<i>Information
+Processing Letters 2</i> (1972) 82&ndash;85); this article refers to L. Kleinrock, &ldquo;A conservation law for queuing disciplines&rdquo;, <i>Naval Research Logistics 
+Quarterly</i> (June 1965) 181&ndash;192, and has been submitted because it offers for Kleinrock&rsquo;s theorem a proof that is simpler than the original one. 
+<p>In Hoare&rsquo;s formulation, Kleinrock&rsquo;s theorem is as follows. Assume (1) No server is idle when there is a waiting customer. (2) Arrival times and 
+service times of both customers and servers are not affected by the decision who is to receive service at what time 
+(i.e. they are independent of the scheduling). (3) Preemption is not used. Then <blockquote>
+<div class="eq-c">
+<span class="intsuma">
+<span class="lim"><var>N</var></span>
+<span class="sum">&sum;</span>
+<span class="lim"><var>i</var>=1</span></span>&thinsp;<span class="intsumb"><var>W</var><sub><var>i</var></sub>&thinsp;&#183;<var>R</var><sub><var>i</var></sub></span>
+</div></blockquote>
+<p class="noindent">
+is independent of the choice of non-preemptive scheduling method.  Here the customers are numbered from 1 through <var>N</var>, <var>W<sub>i</sub></var> 
+is the total waiting time for customer <var>i</var>, and <var>R<sub>i</sub></var> is the total service time for customer <var>i</var>. 
+<p>This note is written to point out that (1) for a single-server system the proof is trivial, and (2) for a multi-server system the theorem 
+is not quite correct. 
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>
+<p>Consider a schedule in which customer <var>q</var> is served immediately after customer <var>p</var>, with <span class="nowrap"><var>W</var><sub><var>q</var></sub>&thinsp;&gt;<var>&thinsp;W</var><sub><var>p</var></sub>.</span> The possible 
+decision to service these two customers in the other order would have affected the waiting time as follows. 
+<p><var>W<sub>p</sub></var>,&thinsp;<var>W<sub>q</sub></var> := <var>W<sub>p</sub></var>+<var>&thinsp;R<sub>q</sub></var>,<var>&thinsp;W<sub>q</sub></var>&minus;&thinsp;<var>R<sub>p</sub></var>
+<p>The products <var>W<sub>p</sub></var>&#183;&thinsp;<var>R<sub>p</sub></var> and <var>W<sub>q</sub></var>&#183;&thinsp;<var>R<sub>q</sub></var> are therefore increased and decreased respectively by the product of the service times, and 
+   their sum remains constant. 
+   Kleinrock&rsquo;s theorem follows by induction </p>
+ <p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;*<br>
+   *</p> 
+ <p>Consider a two-server system in which three customers, with service times =1, =1, and =2 respectively, 
+   arrive simultaneously. Two schedules are possible with &#x2211;<var>W<sub>i</sub></var>&thinsp;&middot;&thinsp;<var>R</var><sub><var>i</var></sub> = 1 and = 2 respectively.
+   For customer <var>i</var>, which is served from <var>t</var>&thinsp;0 till <var>t</var>1 we can define a &ldquo;moment of inertia&rdquo; of his service as 
+</p>
+ <blockquote>
+<div class="eq-c">
+<span class="intsuma">
+<span class="lim">&nbsp;&nbsp;&nbsp;<var>t</var>1</span>
+<span class="int">&int;</span>
+<span class="lim"><var>t</var>&thinsp;0</span></span>&thinsp;<span><var>t</var>&thinsp;&#183;<var>dt</var></span>
+  = 
+&#189;
+(<var>t</var>1<sup>2</sup>&minus;<var>t</var>&thinsp;0<sup>2</sup>)  =  (<var>t</var>1&minus;<var>t</var>&thinsp;0)&thinsp;&#183;&thinsp;<span class="bigfont">⟮</span><div class="fraction">
+  <span class="fup"><var>t</var>&thinsp;0 + <var>t</var>1</span>
+  <span class="bar">/</span>
+  <span class="fdn">2 </span>
+</div><span class="bigfont">⟯</span>  =  <var>R<sub>i</sub></var> &middot;&thinsp;(<var>A<sub>i</sub></var>&thinsp;+&thinsp;<var>W<sub>i</sub></var>&thinsp; + <var>&frac12; R<sub>i</sub></var>)  =  <var>R<sub>i</sub></var>&thinsp;&middot;&thinsp;<var>W<sub>i</sub></var> + <var>C<sub>i</sub></var></div></blockquote>
+
+ <p class="noindent">where <var>A<sub>i</sub></var> is the moment of arrival of customer <var>i</var> and <var>C<sub>i</sub></var> = <span class="eq-c"><var>R<sub>i</sub></var> &middot;&thinsp;(<var>A<sub>i</sub></var> + <var>&frac12;R<sub>i</sub></var>)</span>; 
+   our assumptions imply that <var>C<sub>i</sub></var> is independent of the scheduling. 
+   If S(<var>t</var>) is the number of customers served at moment <var>t</var>, then the <var>"</var>moment of inertia&rdquo; of total service satisfies 
+</p><blockquote>
+<div class="eq-c">
+<span class="intsuma">
+<span class="lim">&nbsp;&nbsp;&nbsp;<var>T</var></span>
+<span class="int">&int;</span>
+<span class="lim">0</span></span> S(<var>t</var>)&thinsp;&#183;<span><var>t</var>&thinsp;&#183;<var>dt</var></span>
+ &nbsp; = &nbsp; <span class="intsuma">
+<span class="lim"><var>N</var></span>
+<span class="sum">&sum;</span>
+<span class="lim"><var>i</var>=1</span></span>&thinsp;<span class="intsumb"><var>R</var><sub><var>i</var></sub>&thinsp;&#183;<var>W</var><sub><var>i</var></sub></span> 
++ <span class="intsuma">
+<span class="lim"><var>N</var></span>
+<span class="sum">&sum;</span>
+<span class="lim"><var>i</var>=1</span></span>&thinsp;<span class="intsumb"><var>C</var><sub><var>i</var></sub></span>
+</div></blockquote>
+ Hence, Kleinrock&rsquo;s theorem holds among schedules with the same &ldquo;moment of inertia&rdquo; of total service. 
+ <p class="noindent"><b>Acknowledgement</b>. I am indebted to C.A.R. Hoare for having invited me to try to simplify is proof (which was already a 
+simplification of Kleinrock&rsquo;s). (End of acknowledgement.) 
+ 
+ <p class="noindent"><table width=100%><tr><td valign=top width=50%>
+Plantaanstraat 5</td><td>4 February 1982
+</td></tr><tr><td valign=top>
+5671 AL NUENEN</td><td>prof. dr. Edsger W. Dijkstra
+</td></tr><tr><td valign=top>
+The Netherlands</td><td>Burroughs Research Fellow
+</td>  </tr>  </table>
+<hr /> 
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />   
+    Last revision  
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">   
+      <!&mdash; #BeginDate format:IS1 &mdash;>
+      <!-- #BeginDate format:En2 -->12-Nov-2015<!-- #EndDate -->
+    </csobj> 
+  .</font></p>    
+  <p>&nbsp;</p>   
+</div></div></div></div>
+</body></html> 

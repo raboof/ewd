@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: On one-sided smoothing of event sequences (EWD 478)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd04xx/EWD478.PDF"
+           title="Link to the PDF version of EWD478">EWD478</a></div></div>
+      <div id="frame">
+         <div id="content">
+  <hr />
+  <p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR           
+  <hr />
+<p class="noindent">
+<p class="noindent"><b>On one-sided smoothing of event sequences.</b>                           
+<p>We consider a finite number of events E<sub>i</sub> (i from
+0 through N) occurring at moments t<sub>i</sub> (i > j &rArr; t<sub>i</sub> > t<sub>j</sub>). 
+The problem I found myself faced with was how to 
+define a continuous function f(t) that could be 
+interpreted as &ldquo;the event frequency at moment t.&rdquo; 
+(I encountered this problem when trying to discover 
+a strategy for deciding how much primary store 
+should be allocated to independent programs in a  
+multiprogrammed environment when for each program 
+a &ldquo;target page fault frequency&rdquo; had been decided.) 
+<p>A possible definition of the event frequency is 
+in terms of the Dirac function: 
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+N</td><td align=right>
+</td></tr>
+<tr><td valign=top align=right> f(t) = </td></td><td valign=top>
+&#x03a3   &#x03b4 (t - t<sub>i</sub>)</td><td align=right>(1)
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+i=0</td><td align=right>
+</td>  </tr>  </table>
+ 
+which has the obvious advantage that it satisfies
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
++&#x221e</td><td align=right>
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+&#x222b f&rsquo;(t).dt = N + 1</td><td align=right>(2)
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+-&#x221e</td><td align=right>
+</td>  </tr>  </table>
+but the equally obvious disadvantage of severe 
+discontinuities, which makes the comparison of f0(t) 
+and f1(t) &mdash; two different frequencies corresponding 
+to different values of the parameter I could control &mdash; 
+rather difficult. Hence our desire to smooth the 
+data. The smoothing, however, had to be one-sided 
+in the sense that the smoothed value f&rsquo;(t) may
+at any moment t only depend on the set of 
+values t<sub>i</sub> with t<sub>i</sub> &le; t. In order to make a 
+sensible choice among the wealth of possibilities 
+for f(t) we should impose upon f(t) as many 
+&ldquo;sensible&rdquo; constraints as we can think of. To 
+start with,  property (2) seems a good choice. 
+The next one is that we should realize that 
+frequencies &mdash;as usually understood&mdash; have a 
+dimension &ldquo;time <sup>-1</sup>&rdquo;, i.e. if we consider at moments 
+t&rsquo;<sub>i</sub> = at<sub>i</sub> and define the corresponding frequency 
+f&rsquo;(t) for that second event sequence, then 
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+f&rsquo;(at) = (1/a) f(t)</td><td align=right>(3)
+</td>  </tr>  </table>
+should hold. Poperty (3) is not in conflict with 
+requirement (2), for
+<table><tr>
+<td>+&#x221e</td><td>+&#x221e</td><td>+&#x221e</td> 
+</tr><tr>
+<td>&#x222b f&rsquo;(t&rsquo;).dt&rsquo; =</td><td>&#x222b f&rsquo;(at).d(at) =</td><td>&#x222b a.f&rsquo;(at).dt =</td> 
+</tr><tr>
+<td>-&#x221e</td><td>-&#x221e</td><td>-&#x221e</td>
+</tr><tr>
+<td>&nbsp;</td><td>+&#x221e</td><td>&nbsp;</td>
+</tr><tr>
+<td>&nbsp;</td><td>&#x222b f(t).dt = N + 1</td><td>&nbsp;</td>  
+</tr><tr>
+<td>&nbsp;</td><td>-&#x221e</td><td>&nbsp;</td>
+</tr></table>
+Reasonable as requirement (3) may seem it is 
+(for finite sequences) too much to hope for: if t<sub>0</sub> = 0 
+the relation (3) will not hold for t<sub>0</sub> &le; t &le; t<sub>1</sub>, for how 
+are we going to guess &ldquo;a&rdquo;? Therefore we must loosen
+it and can only require (3) to hold asymptotically 
+for t &gt; t<sub>i</sub> with sufficiently large i. 
+<p>Relation (2) however, still stands rather firmly. Because 
+in (2) we have only used  
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
++&#x221e</td><td align=right>
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+&#x222b &#x03b4(t) dt = 1</td><td align=right>
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+-&#x221e</td><td align=right>
+</td>  </tr>  </table>
+We could consider functions w<sub>i</sub>(t) such that 
+<p>
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+w(t) = 0  for  t &lt; 0</td><td align=right>(4)
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+&#x221e</td><td align=right>
+</td></tr>
+<tr><td valign=top> and </td></td><td valign=top>
+&#x222b w(t).dt = 1</td><td align=right>(5)
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+0</td><td align=right>
+</td>  </tr>  </table>
+<table>
+<tr><td>
+  <table> 
+  <tr><td>&nbsp;</td><td>N</td></tr>
+  <tr><td align=right>and replace (1) by  f(t) =</td><td>&#x03a3   w<sub>i</sub> (t - t<sub>i</sub>)</td></tr>
+  <tr><td>&nbsp;</td><td>i=0</td></tr>
+  </table>
+</td><td width=2%>(6)</td></tr>
+</table>where (4) does credit to the one-sidedness of the 
+required smoothing , (5) guarantees (2) and (6) makes 
+the whole definition invariant for shifting of the 
+origin. The question is whether we can choose the w<sub>i</sub>
+in such a way &mdash; satisfying (4) and (5) &mdash; as to 
+approximate (3) at least asymptotically. 
+<p>A reasonable first guess &mdash; corresponding to fading 
+out of the past in an exponential way &mdash; for w<sub>i</sub>(t) is 
+with k<sub>i</sub> &gt; 0: 
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+w<sub>i</sub>(t) = 0    for t &lt; 0</td><td align=right>
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+&nbsp; &nbsp; &nbsp; = k<sub>i</sub>.e<sup>-k<sub>i</sub>.t</sup>   for t &ge; 0</td><td align=right>(7)
+</td>  </tr>  </table>
+where we can try to adapt k<sub>i</sub> &mdash; on account of past 
+history, if any &mdash; towards a better approximation of (3). 
+I called (7) a first guess, because we also wanted  
+a continuous function f(t) and with (6) and (7), 
+f(t) is discontinuous for any t = t<sub>i</sub>. A continuous 
+f would follow from the proper linear compositum 
+&mdash; proper in view of (4), (5) and w<sub>i</sub>(t) = 0 &mdash; 
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+w<sub>i</sub>(t) = 0   for t &lt; 0</td><td align=right>
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+&nbsp; &nbsp; &nbsp; = (e<sup>-k<sub>i</sub>.t</sup> - e<sup>-h<sub>i</sub>.t</sup>).(h<sub>i</sub>.k<sub>i</sub>)/(h<sub>i</sub> - k<sub>i</sub>)  for t &ge; 0</td><td align=right>(8)
+</td>  </tr>  </table>
+and now we are free in the choice of both h<sub>i</sub> and k<sub>i</sub>, 
+provided that they are both positive and different 
+from each other. I am severely tempted to 
+restrict myself to 
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+h<sub>i</sub> = c * k<sub>i</sub>   with  c &ne; 1 and c &gt; 0</td><td align=right>(9)
+</td>  </tr>  </table>
+the reason being that both h<sub>i</sub> and k<sub>i</sub> are of 
+dimension &ldquo;time<sup>-1</sup>&rdquo; and that I cannot forget 
+my target (3). 
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>In order to come to grips with the constant c
+I studied (omitting subscripts &ldquo;i&rdquo;) according to (8) & (9) 
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td>
+   w(t) = k . c/(c-1) . (e<sup>-kt</sup> - e<sup>-ckt</sup>)  </td> </tr>
+</table>
+and tried to determine  c  so as to minimize the 
+maximum value of 
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+            c/(c-1) . (e<sup>-kt</sup> - e<sup>-ckt</sup>)  </td> </tr>
+</table>
+(I wanted my ripples as smooth as possible.) As this  
+led to the inacceptable value c = 1, I took the 
+limit for c &rarr; 1 and found &mdash; and this is my
+final suggestion &mdash; 
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+w(t) = 0   for t < 0</td><td align=right>
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+&nbsp; &nbsp; &nbsp; = k<sub>i</sub><sup>2</sup>t.e<sup>-k<sub>i</sub>t</sup>   for t &ge; 0</td><td align=right>(10)
+</td>  </tr>  </table>
+<table> 
+<tr><td>&nbsp;</td><td>&#x221e</td></tr> 
+<tr><td>Also (10) has the property that</td><td>&#x222b w<sub>i</sub>(t).dt = 1 </td></tr> 
+<tr><td>&nbsp;</td><td>0</td></tr> 
+</table> 
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>The next thing to decide is, how to choose 
+the value k<sub>i</sub>. A constant value for k<sub>i</sub> seems 
+in view of (9) out of the question, because k<sub>i</sub> 
+has the dimension of a frequency. Apart from 
+initial difficulties it seems reasonable to choose  
+k<sub>i</sub> proportional to f(t<sub>i</sub>) i.e. 
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+k<sub>i</sub> = d * f(t<sub>i</sub>)</td><td align=right>(11)
+</td>  </tr>  </table>
+To get some feeling for a reasonable value 
+for d, we consider f(t) for t&ge;0 as results 
+from an <b>infinite</b> sequence of events that have 
+occurred at t=0, -1, -2, -3, .... etc; for all passed 
+events we may assume the same value k<sub>i</sub> = k 
+and we find for f(t), according to (6) and (10) 
+<table> 
+<tr><td>&nbsp;</td><td>&#x221e</td></tr> 
+<tr><td>f(t) = k.</td><td>&#x03a3   k.(t+i).e<sup>-k.(t+i)</sup> </td></tr> 
+<tr><td>&nbsp;</td><td>i=0</td></tr> 
+</table> 
+which, indeed satisfies f(0) = f(1) as was to  
+be expected. 
+<p class="noindent"><b>Note</b>. I summed the sequence and found 
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&nbsp; &nbsp; k<sup>2</sup>.e<sup>-k.t</sup>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;e<sup>-k</sup>
+</td></tr>
+<tr><td valign=top>
+f(t) =</td><td>(&mdash;&mdash;&mdash;&mdash;) . (t + &mdash;&mdash;&mdash;&mdash;)
+</td></tr>
+<tr><td valign=top>
+</td><td>&nbsp; &nbsp; 1 - e<sup>-k</sup>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 1 - e<sup>-k</sup>
+</td>  </tr>  </table>
+(End of note) 
+<p>The functions (10) have all one maximum, 
+viz. at t = k<sub>i</sub><sup>-1</sup>. We would like to attribute 
+the maximum of f(t) for 0 &le; t &le; 1 to the term 
+with i = 0 (i.e. the last event). For i &gt; 0 all the  
+terms should be decreasing functions of t for t &gt; 0. 
+We can expect the smoothest maximum of f(t) 
+if it is in the neighbourhood of t = &#x00bd; and
+this suggests k in the neighbourhood of 2 and 
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+d = 2</td><td align=right>(12)
+</td>  </tr>  </table>
+For, because in the average f(t) = 1, we know 
+that f(0) = f(1) &lt; 1, therefore with d = 2 we 
+shall find k &lt; 2 and the term with i = 0 
+will reach its maximum at t<sub>0</sub> &gt; &#x00bd;. Because 
+the contribution of the remaining terms is a 
+decreasing function of t, this will be compensated 
+and f(t) will find its maximum at t<sub>f</sub> &lt; t<sub>0</sub>. 
+<p class="noindent"><b>Note</b>. Using I sliderule I have investigated the
+consequences of the choice d = 2. Salvo errore et 
+omissione I found for k=1.616, f(0) = f(1) = 0.808 
+as minimum value for f(t)  and f(0.41) = 1.105 as 
+maximum value. Anyone that would like to rely on 
+these figures should reestablish them in a more  
+reliable manner, I only mention these results because 
+they represent the outcome of an hour&rsquo;s work and give 
+some impression of how smooth f(t) becomes 
+in the case of equally spaced events. If it were 
+of importance, I would try slightly smaller values of 
+d as well. (End of note) 
+<p class="noindent">
+<table width=100%><tr><td valign=top width=25%>
+19th February 1975</td><td>prof.dr.Edsger W. Dijkstra 
+</td></tr>
+<tr><td valign=top>
+Plataanstraat 5</td><td>Burroughs Research Fellow 
+</td></tr>
+<tr><td valign=top>
+NUENEN - 4565</td><td>
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-12-08<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

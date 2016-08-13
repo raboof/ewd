@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Betrouwbaarheid van programma&rsquo;s. (EWD 384)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd03xx/EWD384.PDF"
+           title="Link to the PDF version of EWD384">EWD384</a></div></div>
+      <div id="frame">
+         <div id="content">
+         <hr />
+  <p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+  <hr />
+<p class="noindent">
+  <p class="noindent"><b>Betrouwbaarheid van programma&rsquo;s.</b>
+  <p>Mathematische uitspraken plegen zich door drie eigenschappen te 
+onderscheiden:
+<br>a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ze zijn algemeen in de zin, dat ze op een groot aantal gevallen van
+toepassing zijn; (men formuleert een eigenschap van &ldquo;alle niet ontaarde
+driehoeken&rdquo;)
+<br>b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ze zijn heel precies; (dit in tegenstelling tot alle uitspraken, die
+hun algemeenheid aan vaagheid ontlenen)
+<br>c)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;er bestaat een bewijstraditie, waardoor de kans op onjuistheid van de
+uitspraak drastisch gereduceerd kan worden; (hierbij tekenen we aan, dat er
+voor het bereiken van een dergelijk betrouwbaarheidsniveau geen alternatieven
+bekend zijn). 
+<p>Zodra wij rekenautomaten aan het werk zetten met de bedoeling aan de
+uitkomsten consequenties te verbinden, dan zijn wij daartoe slechts gemachtigd
+voor zover wij ons geloof kunnen rechtvaardigen, dat de geproduceerde uitkomsten
+inderdaad het antwoord op het door ons gestelde probleem zijn. Een eerste
+vereiste daartoe in, dat wij ons ervan kunnen overtuigen, dat het programma
+correct in. Hoe kunnen wij deze overtuiging bereiken?
+<p>In de begintijd heeft men dit door &ldquo;programma testen&rdquo; geprobeerd te 
+bereiken: men onderwerpt het programma aan een aantal bekende testgevallen,
+proefberekeningen, waarvan het antwoord bekend is: als in deze testgevallen
+het juiste resultaat bereikt werd, nam men aan, dat het programma in alle
+gevallen het correcte resultaat zou produceren. De bittere ervaring heeft
+geleerd, dat deze laatste aanname ongerechtvaardigd is.
+<p>Het punt is, dat de klasse mogelijk bedoelde rekenprocessen, dat onder
+controle van een niet helemaal triviaal programma zo enorm groot is, dat men
+met de testgevallen slechts een absoluut verwaarloosbare fractie metterdaad
+proberen kan en hele subklassen van in een of andere zin &ldquo;critische gevallen&rdquo;
+kan <b>en zal</b> missen. Sterker: de klasse van de mogelijke berekeningen is een
+klasse van zo sterk gestructureerde objecten, dat als van de 1000 testgevallen
+er 1 is misgegaan, de verwachting dat ook in de toekomst van de 1000 
+testgevallen er gemiddeld 1 zal misgaan, helemaal ongerechtvaardigd is: de berekeningen
+zijn onvoldoende gelijksoortig om hier zinvol statistiek op te kunnen bedrijven.
+(Dit is iets, wat allelei mensen maar heel moeilijk kunnen geloven.) Om het
+vereiste betrouwbaarheidsniveau te halen, rest ons slechts een ding: nl. 
+bewijzen, dat het programma correct is.
+<p>Om dit te kunnen doen, moet aan drie voorwaarden voldaan zijn:
+<br>a)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;de vereiste eigenschappen moeten voldoende scherp en hanteerbaar 
+geformuleerd zijn (anders hoeven we over &ldquo;correctheid&rdquo; helemaal niet te praten)
+<br>b)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;er moet een bewijstraditie zijn (inclusief stellingen, axioma&rsquo;s en
+beproefde redeneerpatronen)
+<br>c)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;de voor een correctheidsbewijs benodigde hoeveelheid &ldquo;manipulatie&rdquo; moet
+binnen de grenzen van het mogelijke blijven.
+<p>De eerste pogingen om correctheidsbewijzen te leveren, waren niet 
+bemoedigend. In retrospectie is dat ook heel begrijpelijk.
+Om van een programma de correctheid te bewijzen, zal men een formele
+definitie van de semantiek van de programmeertaal, waarin het programma is
+uitgedrukt, moeten hebben en de eerste pogingen, zulke formele definities te
+geven, hebben, hoewel tot ondubbelzinnige definities -en dat was in die tijd
+al heel wat!- niet geleid tot axiomastelsels, die zich soepel leenden tot
+basis van correctheidsbewijzen. In dit opzicht lijken de tijden inmiddels
+veranderd.
+<p>Een tweede oorzaak van de aanvankelijk ontmoedigende ervaringen was
+gelegen in het feit, dat men zich in zijn optimisme stortte in het leveren
+van correctheidsbewijzen van programma&rsquo;s geschreven in toen gangbare 
+programmeertalen, die meestal niet vrij waren van anomalieen, die een zekere
+barokheid niet ontzegd kon worden en die zeker niet ontworpen waren in een
+tijd, dat men zich over bewijsbaarheid van correctheid al veel zorgen maakte.
+<p>De grootste doorbraak is echter gekomen door de ontdekking, dat de 
+hoeveelheid vereiste manipulatie sterk kon afhangen van de structuur van het
+programma en dat een van de dingen, die men met structurering van een 
+programma na kon streven juist vermindering van de bewijslast was. Een onmiddellijk
+gevolg van deze ontdekking is geweest, dat men het correctheidsprobleem
+constructiever ging benaderen. In plaats van dat men eerst een programma ging
+schrijven en dan ging proberen om te bewijzen, dat het goed was, gingen mensen
+correctheidsbewijs en programma hand in hand ontwikkelen: op het moment, dat
+het correctheidsbewijs vorm kreeg, schreef men een programma, waarop dit
+correctheidsbewijs van toepassing was. Een extra &ldquo;benefit&rdquo; van deze 
+benaderingswijze was, dat op dat moment de correctheids overwegingen zich ontpopten tot
+een vruchtbaar heuristisch hulpmiddel.
+<p>Een van de machtigste hulpmiddelen is de invariantiestelling voor loops
+van C.A.R.Hoare:
+<p>Indien voor de statement S de voorwaarde P <b>and</b> B een voldoende 
+preconditie is om te garanderen dat, mits de uitvoering van S eindigt, aan de
+post-conditie P dan voldaan zal zijn, dan is voor de statement
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+               <b>while</b> B <b>do</b> S <b>od</b>   </td> </tr>
+</table>
+de pre-conditie P voldoende om in geval van beeindiging de post-conditie
+P <b>and</b> <b>non</b> B te garanderen.
+<p>Het belang van deze stelling is daarin gelegen, dat hij zich zeer wel
+blijkt te lenen voor de constructie van programma&rsquo;s. Om een bepaalde relatie
+R te bewerkstelligen, kiest men een P en een B, zodat P and non B de 
+eindrelatie R impliceert. Het programma krijgt dan de algemene vorm
+<table> <tr> <td colspan = 2>
+vestig de geldigheid van P;                                             </td> </tr> <tr> <td colspan = 2>
+<b>while</b> B <b>do</b> onder invariantie van P een &ldquo;stap&rdquo; </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+        in de richting van &ldquo;non B&rdquo; <b>od</b>  .                     </td> </tr>
+</table>
+<p>De stelling is in bijzonder machtig, omdat we ons bij de bewijsvoering
+er niet over hoeven uit te laten, hoe effectief de stap in de richting &ldquo;<b>non</b> B&rdquo;
+nou wel precies is: zolang we er ons van kunnen overtuigen dat de toestand
+&ldquo;<b>non</b> B&rdquo; in een eindig aantal stappen bereikt zal worden, is dit stuk van het
+correctheidsbewijs compleet. Doordat de stelling van Hoare zich er niet over
+uitspreekt, hoevaak de herhaalbare statement herhaald wordt, hebben we hier
+een stuk gereedschap dat ons in staat stelt programma&rsquo;s met een deterministisch
+netto effect te construeren onder gebruikmaking van het semi-deterministische
+primitivum &ldquo;een stap in de goede richting&rdquo;. Het is dit gebruik van 
+semi-deterministische primitiva, dat onder de naam &ldquo;strategische abstractie&rdquo; bezig is
+burgerrecht te verkrijgen.
+<p>Bijna alle programma&rsquo;s, die ik ken, om bij een gegeven puntenwolk in
+het platte vlak het convex omhulsel te vinden, zijn via strategische abstractie
+bijvoorbeeld afbeeldbaar op hetzelfde abstracte programma van de volgende
+vorm, waarin de mogelijke waarden van de variabele &ldquo;convex omhulsel&rdquo; het
+convex omhulsel van een niet lege deelverzameling van de gegeven punten zijn.
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+   initialiseer het convex omhulsel, zodat het een of meer               </td> </tr> <tr> <td></td> <td colspan = 2>
+   punten omvat;                                                         </td> </tr> <tr> <td></td> <td colspan = 2>
+   <b>while</b> er bestaat een punt buiten het convex omhulsel <b>do</b> </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
+      kies een punt buiten het convex omhulsel en noem dat q;            </td> </tr> <tr> <td></td> <td></td> <td>
+      pas het convex omhulsel aan, zodat ook punt q omvat is             </td> </tr> <tr> <td></td> <td colspan = 2>
+   <b>od</b>                                                             </td> </tr>
+</table>
+<p>In hun uiteindelijke uitwerking kunnen de hierop geente programma&rsquo;s
+nog enorm verschillen, bv. doordat ze zich in de keuze van het punt q altijd
+zullen beperken tot een punt dat op het uiteindelijke contour zal blijken
+te liggen of zich deze beperking niet opleggen.
+<p>Een tweede techniek begint burgerrecht te verkrijgen onder de naam
+&ldquo;representationele abstractie&rdquo;. Hier scheidt men de feitelijk gekozen
+techniek om in het geheugen verschillende waarden van een (abstracte)
+variabele te representeren van de voor de bewijsvoering meest conveniente
+wijze om deze verschillende waarden te karakteriseren, daarmee het 
+correctheidsbewijs in dit opzicht factoriserend. Aan de hand van enige simpele
+voorbeelden zal een en ander geillustreerd worden.
+<p class="noindent">2 juli 1973 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;             prof.dr.Edsger W.Dijkstra
+</body></html>
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-11-15<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

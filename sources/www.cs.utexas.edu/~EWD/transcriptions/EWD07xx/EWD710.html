@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: When messages may crawl, II (A sequel to EWD708) (EWD 710)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd07xx/EWD710.PDF"
+           title="Link to the PDF version of EWD710">EWD710</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+                                         
+<b>When messages may crawl, II (A sequel to EWD708)</b>.
+<p>In EWD708 I wrote &ldquo;the messages are essentially empty envelopes;
+allowing the envelopes to contain something was felt to be a minor 
+complication that we could postpone for the time being&rdquo;. The purpose of this
+note is to investigate how minor or major this complication turns out to be.
+<p>We modify the program by distinguishing the different messages from
+C to D by a subscript i and the ones in the opposite direction by a
+subscript j : 
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+&nbsp;</td><td align=right>(1)
+</td>  </tr>  </table>
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+   {P} <b>do</b> B1C<sub>i</sub>,&rarr; S1<sub>i</sub>; S1D<sub>i</sub> {P}   </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td>
+        &#x25af; B2Dj &rarr; S2Dj; S2Cj {P}                                   </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+       <b>od</b>                                                              </td> </tr>
+</table>
+and its correctness proof now comprises the (many) theorems
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+P <b>and</b> B1C<sub>i</sub> &rArr; wp(&ldquo;S1C<sub>i</sub>; S1D<sub>i</sub>&rdquo;, P)</td><td align=right>(2<sub>i</sub>)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+P <b>and</b> B2D<sub>j</sub> &rArr; wp(&ldquo;S2D<sub>j</sub>; S2C<sub>j</sub>&rdquo;, P) .</td><td align=right>(3<sub>j</sub>)
+</td>  </tr>  </table>
+In this note we regard the way in which the difference between 
+different messages from C to D has been indicated by the implementation as
+irrelevant: the contents of the messages may differ, they may be sent along
+different channels that can be distinguished, or any mixture thereof. It is
+an implementation detail, from which we are allowed to abstract.
+<p>In analogy to EWD708, the following program is regarded to be 
+representative for the corresponding mail system:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+     {P} (<u>A</u> j: c<sub>j</sub>:= 0); (<u>A</u> i: d<sub>i</sub>:= 0); {M}                                      </td> </tr> <tr> <td></td> <td colspan = 2>
+     <b>do</b> B1C<sub>i</sub> &rarr; S1C<sub>i</sub> ; d<sub>i</sub>:= d<sub>i</sub> + 1 {M}                       </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
+      &#x25af; d<sub>i</sub> &gt; 0 &rarr; d<sub>i</sub>:= d<sub>i</sub> - 1; S1D<sub>i</sub> {M}                   </td> </tr> <tr> <td></td> <td></td> <td>
+      &#x25af; B2D<sub>j</sub> &rarr; S2D<sub>j</sub>; c<sub>j</sub>:= c<sub>j</sub> + 1 {M}                         </td> </tr> <tr> <td></td> <td></td> <td>
+      &#x25af; c<sub>j</sub> &gt; 0 &rarr; c<sub>j</sub>:= c<sub>j</sub> - 1; S2C<sub>j</sub> {M}                   </td> </tr> <tr> <td></td> <td colspan = 2>
+     <b>od</b>                                                                                                      </td> </tr>
+</table>
+with the corresponding proof obligations
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>E</u> j: c<sub>j</sub> &ne; 0) <b>or</b> (<u>E</u> i: d<sub>i</sub> &ne; 0) <b>or</b> P = M</td><td align=right>(4)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+M <b>and</b> B1C<sub>i</sub> &rArr;wp(&ldquo;S1C<sub>i</sub>; d<sub>i</sub>:= d<sub>i</sub> +1&rdquo;, M)</td><td align=right>(5<sub>i</sub>)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+M <b>and</b> d<sub>i</sub> &gt; 0 &rArr; wp(&ldquo;d<sub>i</sub>:= d<sub>i</sub> - 1; S1D<sub>i</sub>&rdquo;, M)</td><td align=right>(6<sub>i</sub>)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+M <b>and</b> B2D<sub>j</sub> &rArr; wp(&ldquo;S2D<sub>j</sub>; c<sub>j</sub>:= c<sub>j</sub> + 1&rdquo;, M)</td><td align=right>(7<sub>j</sub>)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+M <b>and</b> c<sub>j</sub> &gt; 0 &rArr; wp(&ldquo;c<sub>j</sub>:= c<sub>j</sub> - 1; S2C<sub>j</sub>&rdquo;, M)</td><td align=right>(8<sub>j</sub>)
+</td>  </tr>  </table>
+With the same notational convention &mdash;(9) and (10)&mdash; from EWD708, we
+can satisfy (4), (6<sub>i</sub>), and (8<sub>j</sub>) by choosing for M
+<table width=100%>
+<tr><td valign=top width=10%> M: </td><td valign=top>
+wp(&ldquo;(<u>A</u> i: S1D<sub>i</sub> &uarr; d<sub>i</sub>); (<u>A</u> j: S2C<sub>j</sub> &uarr; c<sub>j</sub>)&rdquo;, P)</td><td align=right>(11)
+</td>  </tr>  </table>
+provided that (11) makes sense. In analogy to EWD708 this implies
+       (<u>A</u> j: c<sub>j</sub> &ge; 0) <b>and</b> (<u>A</u> i: d<sub>i</sub> &ge; 0)       ,
+but this invariance is duly maintained by the above representation of the
+mail system. But for (11) to make sense, we must require that (<u>A</u> i: S1D<sub>i</sub> &uarr; d<sub>i</sub>)
+and (<u>A</u> j: S2C<sub>j</sub> &uarr; c<sub>i</sub>) are defined, i.e. we must require
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> i1,i2: "SlD<sub>i1</sub> &uarr; d<sub>i1</sub>; SlD<sub>i2</sub> &uarr; d<sub>i2</sub>" = "S1Di2 &uarr; d<sub>i2</sub>; S1D<sub>i1</sub> &uarr; d<sub>i1</sub>")</td><td align=right>(16)
+</td></tr>
+<tr><td valign=top> and </td><td valign=top>
+(<u>A</u> jl,j2: "S2C<sub>j1</sub> &uarr; c<sub>j1</sub>; S2C<sub>j2</sub> &uarr; c<sub>j2</sub>" = "S2Cj2 &uarr; c<sub>j2</sub>; S2C<sub>j1</sub> &uarr; c<sub>j1</sub>")</td><td align=right>(17)
+</td>  </tr>  </table>
+(This curious way of numbering results from my desire to give similar 
+formulae in this note and in EWD708 the same number.)
+<p>Salvo errore et omissione I have come to the conclusion that properties
+(12) and (13) are stronger than necessary, and so are their consequences (14)
+and (15), as mentioned in EWD708. In order to prove (5i) from (2i) the
+weaker assumptions
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> j: B1C<sub>i</sub> &rArr; wp("S2C<sub>i</sub> &uarr; c<sub>i</sub>", BlC<sub>i</sub>)) (</td><td align=right>14)
+</td></tr>
+<tr><td valign=top> <b>and</b> </td><td valign=top>
+(<u>A</u> j: BlC<sub>i</sub> <b>and</b> wp("S2C<sub>j</sub> &uarr; c<sub>j</sub>; S1C<sub>i</sub>", R) &rArr; wp("S1C<sub>i</sub>; S2C<sub>j</sub> &uarr; c<sub>j</sub>", R))
+</td><td align=right>(15)
+</td>  </tr>  </table>
+suffice. (The absence of the beginning term &ldquo;E1C&rdquo; in (13) and (15) of
+EWD708 is, in retrospect, just an omission.)
+<p>One way of proving (14) and (15) is to show &mdash;as suggested in EWD708&mdash;
+for each (i,j)-pair
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+B1C<sub>i</sub> &rArr; wp(&ldquo;S2C<sub>j</sub>&rdquo;, B1C<sub>i</sub>)
+</td><td align=right>(12)
+</td>  </tr>  </table>
+
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+B1C<sub>i</sub> <b>and</b> wp(&ldquo;S2C<sub>j</sub>; S1C<sub>i</sub>&rsquo;, R) &rArr;wp(&rdquo;S1C<sub>i</sub>; S2C<sub>j</sub>&ldquo;, R) .</td><td align=right>(13)
+</td>  </tr>  </table>
+<p>Properties (12) and (13) have the attraction that they are local
+properties of node C of the telex system. Note that relations (14) and
+(15) are also a consequence of
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+B1C<sub>j</sub> &rArr; (c<sub>j</sub> = 0) .</td><td align=right>(18)
+</td>  </tr>  </table>
+<p>Similarly, in the spirit of EWD708, we would try to prove for any
+(j1,j2)-pair
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+&rdquo;S2C<sub>j1</sub>; S2C<sub>j2</sub>&ldquo; = &rdquo;S2C<sub>j2</sub>; S2C<sub>j1</sub>&ldquo;</td><td align=right>(19)
+</td>  </tr>  </table>
+from which (17) follows. Again we should note the existence of the 
+alternative: c<sub>j1</sub> = 0 <b>or</b> c<sub>j2</sub> = 0 .
+<p>Summarizing our proof obligation with respect to node C , we have to show:
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> i, j; BlC<sub>i</sub> &rArr; wp("S2C<sub>j</sub>, BlC<sub>i</sub>) <b>or</b> c<sub>j</sub> = 0)</td><td align=right>(20)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+(<u>A</u> i, j: BlC<sub>i</sub> <b>and</b> wp("S2C<sub>j</sub>; S1C<sub>i</sub>", R) &rArr; wp("SlC<sub>i</sub>; S2C<sub>j</sub>", R) <b>or</b> c<sub>j</sub> = 0)</td><td align=right>(21)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+(<u>A</u> jl,j2: "S2C<sub>j1</sub>; S2C<sub>j2</sub>" = "S2C<sub>j2</sub>; S2C<sub>j1</sub>" <b>or</b> c<sub>j1</sub> = 0 <b>or</b> c<sub>j2</sub> = 0)</td><td align=right>(22)
+</td>  </tr>  </table>
+
+With respect to node D we have, mutatis mutandis, the same obligations.
+<p>The weakening of our proof obligations, as represented by (20), (21),
+and (22) leaves me with mixed feeling. Each time we have to make essential
+use of the weakening, we have to prove that under certain circumstances 
+&ldquo;exponents&rdquo; are zero, and those are global properties that are not directly 
+reflected &mdash;at least for the time being I don&rsquo;t see how&mdash; in the original telex
+system. I console myself with the thought that, if a mail system is our
+eventual target, they are not very desirable properties: in order to make
+a mail system it is customary to make message receptions commute if possible.
+One advantage of conditions (20), (21), and (22) is certainly that they give
+the designer of a mail system a clear summary of his options.
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-02-18<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

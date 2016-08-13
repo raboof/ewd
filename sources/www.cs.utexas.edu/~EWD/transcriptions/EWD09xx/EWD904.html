@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>E.W.Dijkstra Archive: A problem solved by my nephew Sybrand L. Dykstra (EWD 904)</title>
+	</head>
+
+	<body bgcolor="#ffffff">
+		
+					<p><u></u></p>
+					<div align="right">
+						<p> <a href="../../ewd09xx/EWD904.PDF" target="_blank">EWD 904</a></p>
+					</div>
+					<div align="left">
+						<p><u>A problem solved by my nephew Sybrand L. Dijkstra</u></p>
+						<p>Given a circular arrangement of 16 lights and one pushbutton. When the button is pushed the new state of each light depends as follows on the (old) states of that light and its clockwise neighbour:</p>
+						<ul>
+							<li>when they were both on or both off, the light is on in the new state;<br>
+								&nbsp;
+							<li>when one was on and the other was off, the light is off in the new state.
+						</ul>
+						<p>Prove that all lights are burning after the button has been pushed 16 or more times.</p>
+						<center>
+							*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+							*</center>
+						<p>Having studied &quot;Een methode van programmeren&quot; --&quot;A method of programming&quot;--  by W. H. J. Feijen and me, and hence being familiar with the symmetry and associativity of the equivalence, my young nephew solved this problem essentially by the following argument.</p>
+						<p>An arbitrary light is called &quot;nr.0&quot;, and the clockwise neighbor of light nr.<i>i</i> is called light nr. <i>i</i>+1. With</p>
+						<blockquote>
+							<p>B(<i>i,j</i>) &equiv; &quot;light nr. <i>i</i> is burning after the <i>j</i>-th push&quot;</p>
+						</blockquote>
+						<p>the behaviour of the system is given by</p>
+						<p>(0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B(<i>i,j</i>+1) &equiv; B(<i>i,j</i>) &equiv; B(<i>i</i>+1, <i>j</i>)</p>
+						<p>In preparation of a proof by mathematical induction we observe:</p>
+						<p>(i) since 2<sup>0</sup> = 1, (0) equivales</p>
+						<blockquote>
+							<p>B(<i>i, j</i>+2<sup>0</sup>) &equiv; B(<i>i,j</i>) &equiv; B(<i>i</i>+2<sup>0</sup>, <i>j</i>). &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(End of (i).)</p>
+						</blockquote>
+						<p>(ii) From (the induction hypothesis)</p>
+						<p>(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B(<i>i, j</i>+2<sup><i>n</i></sup>) &equiv; B(<i>i,j</i>) &equiv; B(<i>i</i>+2<sup><i>n</i></sup>,j)</p>
+						<p>we derive, since 2<sup><i>n</i></sup> + 2<sup><i>n</i></sup> = 2<sup><i>n+1</i></sup>, by substituing <i>i</i>+2<sup><i>n</i></sup> for <i>i</i></p>
+						<p>(2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B(<i>i</i>+2<sup><i>n</i></sup>, <i>j</i>+2<sup><i>n</i></sup>) &equiv; B(<i>i</i>+2<sup><i>n</i></sup>, <i>j</i>) &equiv; B(<i>i</i>+2<sup><i>n+1</i></sup>, <i>j</i>)</p>
+						<p>and, similarly, by substituting <i>j</i>+2<sup><i>n</i></sup> for <i>j</i></p>
+						<p>(3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B(<i>i</i>, <i>j</i>+2<sup><i>n+1</i></sup>) &equiv; B(<i>i</i>, <i>j</i>+2<sup><i>n</i></sup>) &equiv; B(<i>i</i>+2<sup><i>n</i></sup>, <i>j</i>+2<sup><i>n</i></sup>)</p>
+						<p>Eliminating B(<i>i</i>+2<sup><i>n</i></sup>, <i>j</i>+2<sup><i>n</i></sup>) from (2) and (3) yields</p>
+						<p>(4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B(<i>i</i>, <i>j</i>+2<sup><i>n+1</i></sup>) &equiv; B(<i>i</i>, <i>j</i>+2<sup><i>n</i></sup>) &equiv; B(<i>i</i>+2<sup><i>n</i></sup>,<i>j</i>) &equiv; B(<i>i</i>+2<sup><i>n+1</i></sup>, <i>j</i>)</p>
+						<p>Eliminating B(<i>i</i>, <i>j</i>+2<sup><i>n</i></sup>) &equiv; B(<i>i</i>+2<sup><i>n</i></sup>, <i>j</i>) from (1) and (4) yields</p>
+						<p>(5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B(<i>i</i>, <i>j</i>+2<sup><i>n+1</i></sup>) = B(<i>i</i>,<i>j</i>) &equiv; B(<i>i</i>+2<sup><i>n+1</i></sup>, <i>j</i>)</p>
+						<p>i. e. with <i>n</i>+1 substituted for <i>n</i>. (End of (ii).)</p>
+						<p>Combining observations (i) and (ii), we have proved (1) for all natural <i>n</i>, in particular for <i>n</i>=4:</p>
+						<p>(6)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B(<i>i</i>, <i>j</i>+16) &equiv; B(<i>i</i>, <i>j</i>) &equiv; B(<i>i</i>+16, <i>j</i>)</p>
+						<p>Since lights nr. <i>i</i> and <i>i</i>+16 are identical, B(<i>i</i>, <i>j</i>) &equiv; B(<i>i</i>+16, <i>j</i>), hence, from (6), B(<i>i</i>,&nbsp;<i>j</i>+16) .</p>
+						<p align="right">q.e.d.</p>
+						<p>The above proof is, all by itself, nice enough to be recorded. I am particularly delighted, for when the section on predicate calculus in our book kindles the above in the mind of a 15-year-old, the seed is worth to be sown.</p>
+					</div>
+					<div align="center">
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Neunen, 14 December 1984</p>
+					</div>
+		<div align="left">
+						<p>Prof. dr. Edsger W. Dijkstra<br>
+							Dept. of Computer Sciences<br>
+							The University of Texas at Austin<br>
+							AUSTIN, TX 78712-1188<br>
+							United States of America<br>
+						</p>
+						<hr>
+						<font size="-1">transcribed by Michael Lugo<br>
+							revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="94">Tue, 27 Mar 2007</csobj></font>
+						<p></p>
+					</div>
+	</body>
+
+</html>

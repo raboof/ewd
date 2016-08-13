@@ -1,0 +1,616 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive:  A personal summary of the Gries-Owicki Theory (EWD 554)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd05xx/EWD554.PDF"
+           title="Link to the PDF version of EWD554">EWD554</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<table> <tr> <td colspan = 3>
+<b>Copyright Notice </b>                                                        </td> </tr> <tr> <td colspan = 3>
+The following manuscript                                                        </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
+     EWD 554 A personal summary of the Gries-Owicki Theory :                    </td> </tr> <tr> <td colspan = 3>
+is held in copyright by Springer-Verlag New York.                               </td> </tr> <tr> <td colspan = 3>
+The manuscript was published as pages 188–199 of                                </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+    Edsger W. Dijkstra, <i>Selected Writings on Computing: A Personal Perspective</i>, </td> </tr> <tr> <td></td> <td colspan = 2>
+    Springer-Verlag, 1982. ISBN 0–387–90652–5.                                  </td> </tr> <tr> <td colspan = 3>
+<b>Reproduced with permission from Springer-Verlag New York.</b>                </td> </tr> <tr> <td colspan = 3>
+<b>Any further reproduction is strictly prohibited.</b>                         </td> </tr>
+</table>
+
+<p class=noindent><b>A personal summary of the Gries-Owicki Theory</b>.
+<p>This is a very personal summary of the theory developed by Susan Speer
+Owicki under supervision of David Gries. I had a flu, and on its first day I
+just slept and shivered; later I passed the time in bed with trying to 
+reconstruct what I had learned from reading in Susan Owicki&rsquo;s doctoral thesis. If the
+following fails to do justice to their work &mdash;someone has borrowed my copy of
+her thesis!&mdash; I am the only one to blame.
+<p>There has been a time that it was the function of our programs to instruct
+our machines, but times have changed: now it is more fruitful to consider it
+the purpose of our machines to execute our programs. The same shift of attention
+can be recognized in the more theoretical work that is concerned with the 
+semantics of programming languages. There has been a time, that this was a very
+descriptive activity, trying to capture what happened in our machines during
+program execution. The result has been a series of operational language definitions.
+in which the semantics of programming languages was given via an interpreter that
+under control of the program text changed the machine state over and over again.
+By means of &ldquo;abstract programs&rdquo; and equally &ldquo;abstract states&rdquo; people have tried
+to mold this approach into a viable tool, but it kept all the essential 
+disadvantages of operational language definitions. Faced with a specific program they
+tell you no more than how to do a hand-simulation. Since Floyd, and later but
+more noticeably Hoare, we have been shown another approach, which seems more
+promising.
+<p>Here a program text is regarded as a mathematical object all by itself,
+which is postulated to establish a relation between two machine states. If we
+were very pure, we should call them, say, the &ldquo;left-hand state&rdquo; and the 
+&ldquo;right-hand state&rdquo;. The relation between the two states is implicitly given by a set
+of axioms and rules of inference that together delineate what, given a text,
+one can prove about that relation. Taken all by itself, this would be a very
+formal and rather sterile game, but it so happens that the axioms have been
+chosen very carefully, so carefully in fact, that when we identify the 
+&ldquo;left-hand state&rdquo; with the initial state and the &ldquo;right-hand state&rdquo; with the final
+state of a computer (as can be recorded in its store) a started sequential
+computer can establish an instance of that relation (and even can do so without
+implicit backtracking).
+<p>In the preceding paragraph I have tried to capture the essence of this
+so-called &ldquo;axiomatic method&rdquo; as clearly as possible, because it has generated
+after its introduction much misunderstanding and discussion (which has generated
+more heat than light). Even as much as five years later the axiomatic method
+has been blamed for not demonstrating that it captured correctly the computational
+model, that was supposed to underly it,&ldquo;the computational model on which it was
+based&rdquo;. The axiomatic method is not &ldquo;based&rdquo; upon a computational model, the most
+we can say is that it has been inspired by a computational model. Once the axioms
+are chosen, it is the obligation of the implementation to provide a sufficiently
+truthful model. with purely sequential programs, this approach has been very
+successful, the Gries-Owicki Theory presents the first significant step towards
+applying similar techniques to concurrent processing as well.
+<p>Taken literally, the previous sentence makes no sense. From a very puristic
+point of view, neither Floyd, nor Hoare (nor I in the early seventies) talked
+about &ldquo;sequential programming&rdquo; or &ldquo;sequential programming languages&rdquo;. We talked
+about texts, and about proving things about them. The aspect of &ldquo;being sequential&rdquo;
+had absolutely no meaning on that level of discourse, it became only meaningful
+when we tried to visualize a computer establishing an instance of the relation,
+when we tried to visualize &ldquo;a computation&rdquo;. And the axioms we considered were
+such that the only safe and realistic implementation of such a computing engine
+that we could envisage, was one in which the actions took place one after the
+other. Apart from that &ldquo;implementation detail&rdquo; the whole notion of sequentiality
+was not applicable in our level of discourse in which we had abstracted quite
+rigorously from the class of computational histories.
+<p>From the same puristic point of view, the Gries-Owicki Theory does not
+deal at all with concurrent processing. It is again a formal system relating
+a pair of machine states to each other by means of a text. Only the proof
+rules &mdash;the axioms and the rules of inference&mdash; differ. It so happens that,
+when we would like to design a computing engine able to establish an instance
+of this relation, we suddenly see a straightforward way in which a number of
+processors could be engaged concurrently on that task. 50 we are not designing
+a &ldquo;language for concurrent programming&rdquo; or any similar misnomer, from our
+mathematical point of view it is a programming language as any other, with
+consequences and possibilities for the implementation that we should ignore at
+the current level of discourse.
+<p>A simple &ldquo;sequential&rdquo; program can be represented as
+<table width=100%><tr><td valign=top width=10%>
+S =</td><td>&ldquo;S0; S1; ... ; Sn&rdquo; .
+</td>  </tr>  </table>
+When we wish to describe in more detail the kind of relations between initial
+an final state, say that we wish to establish a set of initial states corresponding
+to a final state satisfying the relation R , we can interlace our sequence of
+statements Si with a sequence of relations Pi :
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&ldquo;{P0} S0; {P1} S1;  ; {Pn} Sn {R}&rdquo; .
+</td>  </tr>  </table>
+The axiomatic definition associates with each statement Si &mdash;assignment 
+statements to start with&mdash; a so-called predicate transformer wp . If now we have
+<table width=100%><tr><td valign=top width=15%>
+for 0 &le; i &lt; n</td><td>Pi = wp(Si, Pi+1)
+</td></tr>
+<tr><td valign=top>
+</td><td>Pn = wp(Sn, R)
+</td>  </tr>  </table>
+then, for the whole program S we have P0 = wp(S, R) and we interpret P0
+as the weakest pre-condition for the initial state such that starting program
+S as a whole is certain to end up in a final state satisfying R .
+<p>This is, because from given units Si &mdash;say: assignment statements&mdash; the
+semicolon describes how a new unit can be formed. In formula the semantics of
+the semicolon is given by
+wp(&ldquo;S1; S2&rdquo;, P) = wp(S1, wp(S2, P))
+from which, for instance, follows that the semicolon is associative. If we
+wanted, for instance, to combine in program S the first two initial statements
+to a single unit &mdash;indicated by square brackets&mdash; we could indicate this as
+follows:
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&ldquo;{P0} [S0; S1]; {P2} S2;  ; {Pn} Sn {n}&rdquo;
+</td>  </tr>  </table>
+By combining S0 and S1 in the above way into a single unit, the relation P1
+remains anonymous; implementation-wise it says that we prefer not to pay explicit
+attention to the &ldquo;intermediate state&rdquo; that will prevail after the execution of
+S0 , but before the execution of S1 . In the purely &ldquo;sequential systems&rdquo; we are
+familiar with, our freedom in combining units into larger ones, thereby eliminating
+the &ldquo;internal predicates&rdquo; is unrestricted: we are all the time free to choose
+to consider a composite object either as an unanalyzed whole or as something
+composed out of parts. In the Gries-Owicki Theory this freedom is restricted
+(thereby giving the implementation greater freedom, such as the introduction of
+concurrency).
+<p>We have shown on the previous page how the concatenation via the 
+semicolon gives rise to internal predicates. So do the other sequencing techniques
+or &ldquo;control structures&rdquo; in the case of &ldquo;sequential programming&rdquo; , e.g.
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+        {P12} <b>if</b> B1 &rarr; {P1} S1 </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td>
+               &#x25af; B2 &rarr; {P2} S2 </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+              <b>fi</b> {R12}             </td> </tr>
+</table>
+Here the rules are that P12 should be the weakest predicate satisfying
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+        P12 &rArr; (B1 <b>or</b> B2) (in order to avoid abortion) </td> </tr> <tr> <td></td> <td>
+        (P12 <b>and</b> B1)&rArr; P1                                </td> </tr> <tr> <td></td> <td>
+        (P12 <b>and</b> B2)&rArr; P2                                </td> </tr>
+</table>
+where P1 and P2 are given by P1 = wp(S1, R12) and P2 = wp(S2, R12) .
+<br>Again we are free to &ldquo;eliminate&rdquo; predicates such as P1 or P2 , for instance
+by replacing the second equation by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+        (P12 <b>and</b> B1)&rArr; wp(S1, R12) . </td> </tr>
+</table>
+In our program we could indicate that elimination of P1 for instance by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+        {P12} <b>if</b> [B1 &rarr; S1] </td> </tr>
+</table>
+somehow suggesting that the whole first guarded command is to be regarded as a
+single unit. In &ldquo;sequential programming&rdquo; such freedom of combination, of 
+elimination of predicates, is unrestricted.
+<p>The notation of the square brackets is unattractive if we want to
+indicate the elimination of the predicate following a repetitive construct. The
+second problem that the repetitive construct introduces is the problem of 
+termination. Provided
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+        (P12 <b>and</b> B1) &rArr; wp(S1, P12) </td> </tr> <tr> <td></td> <td>
+        (P12 <b>and</b> B2) &rArr; wp(S2, P12) </td> </tr>
+</table>
+we can read and justify
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+        {P12} <b>do</b> B1 &rarr; S1                                  </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td>
+               &#x25af; B2 &rarr; S2                                  </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+              <b>od</b> {P12 <b>and</b> <b>non</b> (B1 <b>or</b> B2)} </td> </tr>
+</table>
+as stating that the initial validity of P12 is sufficient to ensure the final
+validity of (P12 <b>and</b> <b>non</b> (B1 <b>or</b> B2)) , provided that the repetitive construct
+terminates on this level. If the repetitive construct is followed by a next
+statement, we can again eliminate its post-condition by straightforward proving
+that it implies the pre-condition for that following next statement.
+<p>Certain predicates are never eliminated. We never eliminate the predicate
+describing the total pre-condition, nor the predicate describing the total 
+postcondition. (In a sense they can never be regarded as the internal predicate of
+a composition.) Furthermore we shall never eliminate what could be described as
+&ldquo;the post-condition of a guarded command set&rdquo;. If the guarded command set is the
+body of an alternative construct, this refers to the post-condition of the 
+alternative construct; if the guarded command set is the body of a repetitive construct,
+this refers to the invariant relation. The reason for this restriction is the
+following: each assignment statement and each set of guards has now a unique
+preceding predicate, where with &ldquo;preceding predicate&rdquo; we mean the last preceding,
+non-eliminated predicate. For instance
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 5>
+      {P0} S1; S2;                              </td> </tr> <tr> <td></td> <td colspan = 5>
+      {P1} S3; <b>if</b> B4 &rarr; {P2} S4      </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
+                &#x25af; B5 &rarr; S5; S6       </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+               <b>fi</b>;                       </td> </tr> <tr> <td></td> <td colspan = 5>
+      {P3} S7;                                  </td> </tr> <tr> <td></td> <td colspan = 5>
+      {P4} <b>do</b> B8 &rarr; S8; {P5} S9 {P4} </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 3>
+            &#x25af; B10 .. S10 {P4}            </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+           <b>od</b>; S11 {R}                   </td> </tr>
+</table>
+Then we have:&rArr;
+<br>P0 is the preceding predicate of S1, and S2;
+<br>P1 is the preceding predicate of S3, B4, BS, S5, and S6;
+<br>P2 is the preceding predicate of S4
+<br>P3 is the preceding predicate of S7
+<br>P4 is the preceding predicate of B8, S8, B10, S10, and S11
+<br>P5 is the preceding predicate of S5.
+<p>Besides non-abortion in the alternative construct and termination of the
+repetitive construct, we have to prove
+<br>P0 &rArr; wp(S1, wp(S2, P1))
+<br>P1 &rArr; wP(S3, (B4 &rArr; P2) <b>and</b> (B5 &rArr; wp(S5, wp(S6, P3))))
+<br>P2 &rArr; wp(S4, P3)
+<br>P3 &rArr; wp(S7, P4)
+<br>P4 &rArr; (B8 &rArr; wp(S8, P5))<b>and</b> (B10 &rArr; wp(S10, P4)) <b>and</b> (<b>non</b> (B8 <b>or</b> B10) &rArr; wp(S11,R))
+<br>P5 &rArr; wp(S9, P4) .
+<p>Here are six relations. They are implications with an assertion at the
+left-hand side, and at the right-hand side, besides other assertions, only
+guards and statements of which the left-hand side is &ldquo;the preceding predicate&rdquo;.
+<p>Suppose for a moment that, via other means we have established that P0
+is strong enough to guarantee proper termination as well. Starting the obvious
+sequential implementation in an initial state satisfying P0 , a computation
+would ensue during which at the corresponding stages the machine would be in
+a state satisfying one of the Pi&rsquo;s, and finally the machine would end in a state
+satisfying R. What would we have to prove in addition if we would like to
+ensure, that at all those stages another predicate, Q say, would be true as
+well? This, of course, under the assumption that we would start the machine in
+an initial state also satisfying Q .
+<p>Well, in principle, we should replace in our six relations all the 
+predicates Pi and R at all their occurrences by Pi <b>and</b> Q and R <b>and</b> Q 
+respectively! The first line would then become
+<br>P0 <b>and</b> Q &rArr; wp(S1, wp(S2, P1 <b>and</b> Q))
+<br>Its right-hand side reduces as follows:
+<table><tr><td valign=top>
+wp(S1, wp(S2, P1 <b>and</b> Q))</td><td>= wp(S1, wp(S2, P1) <b>and</b> wp(S2, Q))
+</td></tr>
+<tr><td valign=top>
+</td><td>= wp(S1, wp(S2, P1)) <b>and</b> wp(S1, wp(S2, Q)) .
+</td>  </tr>  </table>
+Therefore, when the formulae at the bottom of page 4 &mdash;without the Q inserted
+&mdash;have been proved, our only additional proof obligation is:
+<br>P0 <b>and</b> Q &rArr; wp(S1, wp(S2, Q))
+<br>With respect to our original program we say that we have &ldquo;proved the invariance
+of Q&rdquo;.
+<p>Consider now two programs, operating on the same variables. Suppose further,
+that with respect to each program we have proved the invariance of the assertions
+occurring in the other (or: occurring in the others, when we have three or more
+of such programs). This is, of course, a very strong assumption. But if it is
+satisfied, we have proved something useful about the following non-deterministic
+implementation.
+<p>Let us start a machine in an initial state satisfying each program&rsquo;s 
+initial assertion. we now allow the execution of an arbitrary one of the programs
+to proceed until its next assertion. Firstly we have proved that this assertion
+will then hold, secondly we have proved that the initial assertion(s) of the
+other program(s) have not been disturbed. Then, again, an arbitrary program is
+allowed to proceed with its execution until the next assertion, etc. When all
+programs have finished, all final assertions will hold.
+<p>Mind you: we are not talking about concurrency yet. We are talking about
+a non-deterministic machine, that can take care of the progress of a bunch of
+sequential programs, and we have stated conditions under which we can certainly
+allow a certain degree of interleaved execution, viz. from assertion to assertion.
+<p>As the reader will have noticed, I have mentioned a few times &ldquo;suppose
+that we have proved proper termination&rdquo;. I made that caveat, because we would
+like to apply our theory also to a bunch of programs with the property that for
+the individual programs proper termination cannot be proved. The termination
+of a repetitive construct in the one program may depend on the execution of
+the other program having reached a certain stage. This will certainly be the
+case when we implement synchronization constraints by means of a busy form of
+waiting. In a case like that, we cannot even &ldquo;prove&rdquo; the termination of the
+bunch of programs without further assumptions about the daemon that makes the
+choice how to interleave: the bunch would not terminate if every time the daemon
+selected the waiting process to perform the next inspection of the unchanged
+state of affairs! The fact that a proof of termination of the whole bunch may
+require assumptions about the friendliness of the daemon justifies 
+postponement of that issue.
+<p>It is not only the repetitive construct, for which the daemon&rsquo;s degree
+of being tamed can be an issue, also the alternative construct might, if we so
+desire, call for a certain amount of friendliness of the daemon. It could,
+for instance, be one of the daemon&rsquo;s restrictions, that an alternative construct,
+preceded immediately by its &ldquo;preceding predicate&rdquo; will never be selected for
+execution in those machine states where its selection for execution would lead
+to abortion of that program.
+<p>For the time being we assume that there is at least one sequence of choices
+by the daemon that will lead to proper termination of all the programs, and we
+assume the daemon to be friendly enough to choose such a sequence.
+<p>But even for that target, our formalism has to be changed: we have to
+replace the weakest pre-conditions wp(S, P) which guarantee proper termination
+in a final state satisfying P by the so-called &ldquo;weakest liberal pre-conditions&rdquo;
+wp(S, P) guaranteeing that the mechanism S will <b>not</b> terminate in a state
+<b>not</b> satisfying P . (This is the transition from total correctness, where the
+production of the right result is guaranteed, to partial correctness, where only
+the production of a wrong result is excluded. C.A.R.Hoare has taken this step
+a long time ago, and apparently at that time without much hesitation; I don&rsquo;t
+like it too much and would not like to take it unless I felt forced to do so.)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>The next step is to introduce the possibility of concurrent execution,
+but to do it in such a way that, firstly, it is easily implementable, and,
+secondly, that no further non-determinacy is introduced. For this purpose we
+divide the variables over various classes. On the one hand we have the <b>private</b>
+<b>variables</b>; private variables are always private to a specific program, viz.
+the <b>only</b> program that is allowed to refer to them. They are the local variables
+of the program they are private to, the other programs cannot inspect their
+values, not change them. On the other hand we have the so-called <b>common</b> or
+<b>shared</b> <b>variables</b>: they are the remaining variables, to which at least two
+processes refer. It is clear that all interaction between the different programs
+must take place via the shared variables.
+<p>Each program is executed from assertion to assertion; here we assume
+that evaluation of a guard from a guarded command set implies the evaluation of
+all the guards from that set. The step from each assertion to the (dynamically)
+next assertion &mdash;our considered grain of interleaving&mdash; we call &ldquo;a unit of
+action&rdquo;. We now impose upon our units of action the constraint that they can
+be implemented with <b>at most one access to at most one shared variable</b>. with
+a memory switch that, in case of competition, orders the individual accesses
+to memory in some way or another, it is now clear that we can allow concurrent
+execution of as many units of actions as we have still incompleted programs.
+The reason that we are allowed to do so is that, no matter how we mix them,
+there always exists an order in which the units of action, executed one at a
+time, would have established the same net effect. Two units of action referring
+to two different common variables (or to no common variables at all) commute,
+for two units of action referring to the same common variable we can take the
+order in which the switch has granted them access to that shared variable.
+<p>Our restriction as regards access to shared variables has severe 
+consequences: the guards of a guarded command set may refer to at most one shared
+variable. On the other hand, we now know that, with B a shared variable
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+   {P} if B &rarr; S1                   </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td>
+        &#x25af; <b>non</b> B &rarr; S2 </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+       <b>fi</b> {P2}                   </td> </tr>
+</table>
+will not lead to abortion. (Note, that in the case of two successive inspections
+of B it is hard to prevent that, when the first inspection has encountered
+the value <b>false</b> , the next inspection may encounter the value <b>true</b> .)
+Note, that, if in the above example, B is not a common variable (nor an
+expression referring to one), the guards of the guarded command set do not
+refer to a shared variable, and that in that case S1 may refer once to a common
+variable, and S2 may refer once to a different common variable: we have two
+possible units of action! For the time being, this is about the only thing
+I intend to say about concurrency.
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+
+<table width=100%>
+<tr><td>Consider now the two programs</td><td valign=top>
+</td><td align=right>&#x21af; Here two assertions are missing! Sorry! EWD
+</td>  </tr>  </table>
+<table width=100%><tr><td valign=top width=50%>
+{P0} in1:= true;</td><td>{Q0} in2:= true;
+</td></tr>
+<tr><td valign=top>
+{P1} <b>od</b> in2 &rarr; &#x21af;in1:= false;</td><td>{Q1} <b>od</b> in1 &rarr; &#x21af;in2:= false;
+</td></tr>
+<tr><td valign=top>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {P2} in1:= true {P1}</td><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {Q2} in2:= true {Q1}
+</td></tr>
+<tr><td valign=top>
+&nbsp; &nbsp; &nbsp; &nbsp; <b>od</b></td><td>&nbsp; &nbsp; &nbsp; &nbsp; <b>od</b>
+</td></tr>
+<tr><td valign=top>
+&nbsp; &nbsp; &nbsp; &nbsp; luck1:= true;</td><td>&nbsp; &nbsp; &nbsp; &nbsp; luck2:= true;
+</td></tr>
+<tr><td valign=top>
+{P3} critical section 1;</td><td>{Q3} critical section 2;
+</td></tr>
+<tr><td valign=top>
+{P3} luck1, in1:= false, false;</td><td>{Q3} luck2, in2:= false, false;
+</td></tr>
+<tr><td valign=top>
+{P4} noncritical section 1</td><td>{Q4} noncritical section 2 .
+</td></tr>
+<tr><td valign=top>
+PROGRAM 1</td><td>PROGRAM 2
+</td>  </tr>  </table>
+<br>with P0: <b>non</b> luck1 , we can prove
+<br>P1: <b>non</b> luck1 <b>and</b> in1
+<br>P2: <b>non</b> luck1 <b>and</b> <b>non</b> in1
+<br>P3: in1 <b>and</b> luck1
+<br>P4: <b>non</b> luck1 <b>and</b> <b>non</b> in1
+<br>and similarly for the Q&rsquo;s in Program 2. Furthermore we observe that all the Pi
+imply P: luck1 &rArr; in1 , and, similarly, that all the Qi imply Q: luck2 &rArr; in2  
+We can now replace all the original assertions Pi in Program 1 by Pi <b>and</b> Qj
+for any j : the proofs remain valid, because Program 1 does not refer to the
+variables mentioned in Qj . Similarly we can replace all the original forms of
+Qi in the second program by Qi <b>and</b> Pj for any j : again the proofs remain
+valid, because Program 2 does not refer to the variables mentioned in Pj .
+Having thus proved that the assertions of each of the programs are invariant
+with respect to the other program, we can conclude the universal validity of
+P <b>and</b> Q .
+<p>Finally we consider the relation R : <b>non</b>(luck 1 <b>and</b> luck 2) . Also
+this relation can be added to all assertions, it is also everywhere valid. The
+critical assignment in Program 1 that could destroy its validity is, of course
+&ldquo;luck1:= true&rdquo;, but it is safe, because
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+           wp(&ldquo;luck1:= true&rdquo;, R) = <b>non</b> luck2 , </td> </tr>
+</table>
+a condition that is implied by Q <b>and</b> <b>non</b> in2 . We interpret the universal
+validity of R as the guarantee of mutual exclusion in time of the two critical
+sections. 
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>The classical use of critical sections has been the maintenance of an
+invariant relation 
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+       IR(a, b, c) </td> </tr>
+</table>
+between a number of shared variables &mdash;here denoted by a , b , c&mdash; , where
+this invariance cannot be maintained by a single unit of action, as a result of
+which a modification of the variables a, b, and c always implies a temporary
+violation of IR(a, b, c), after which it is again restored. with the aid of
+the additional variables we can replace it by a relation which is, indeed,
+universally valid, viz.:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      luck1 <b>or</b> luck 2 <b>or</b> IR(a, b, c) . </td> </tr>
+</table>
+Under the assumption that the pieces of program denoted by &ldquo;noncritical
+sections&rdquo; do not refer to the shared variables a, b, and c &mdash;nor to the private
+variables &ldquo;luck&rdquo;, of course&mdash; the proof that the noncritical sections leave this
+relation invariant is trivial. For the critical sections &mdash;the only pieces of
+program that are allowed to refer to a , b , and c&mdash; it suffices to give the
+invariance proof for each of the critical sections in isolation.
+<p>At the beginning of critical section 1 &mdash;i.e. immediately after the
+assignment &ldquo;luck1:= true&rdquo;, we can assert
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+luck1 <b>and</b> IR(a, b, c) .</td><td align=right>(1)
+</td>  </tr>  </table>
+Internally, within the critical section 1 , we can introduce, wherever IR(a, b, c)
+is temporarily violated, assertions of the type
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+luck1 <b>and</b> IR(a, b, c, priv1)</td><td align=right>(2)
+</td>  </tr>  </table>
+where with &ldquo;priv1&rdquo; we have denoted any other variables &mdash;besides luck1&mdash; that
+are <b>private to Program 1</b>. At the end of the critical section 1 &mdash;i.e. just 
+before luck1 is reset to false&mdash; we must have again assertion (1) . We assume
+a similar proof that critical section 2 , considered in isolation, as a whole
+does not violate IR(a, b, c) .
+<p>The reasons why these two separate proofs for the critical sections in
+isolation suffice, is that assertions (1) and (2) are invariant with respect
+to Program 2 (and vice versa). The internal statements of critical section 2
+cannot violate them, because their preceding predicates all contain the factor
+&ldquo;luck 2&rdquo;, and the universal validity of R:
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+<b>non</b>(luck1 <b>and</b> luck2)</td><td align=right>&nbsp;
+</td>  </tr>  </table>
+ensures that the conjunction of these predicates and the assertions (1) and (2)
+is F ; because false implies everything, these proofs of invariance are trivial.
+The statements in noncritical section 2 cannot violate them either, because
+they don&rsquo;t refer to the variables occurring in (1) or (2).
+<p class=noindent><b>Note</b>. These proofs are so trivial that within critical sections the constraint
+that what we consider as &ldquo;units of actions&rdquo; refer at most to one shared variable
+can be weakened. Because, with a private variable &ldquo;register&rdquo;
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      register:= c; {register = c} c:= register + 1  </td> </tr>
+</table>
+
+gives rise to an internal assertion &ldquo;register = c&rdquo; which is trivially invariant,
+it is tempting to consider then the alternative c:= c + 1 as a unit of action.
+Such shortcuts should only be introduced with great care. (End of note.)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>Our solution for the mutual exclusion problem uses essentially two shared
+variables in1 and in2 . (They are really the only two variables that matter:
+the variables luck1 and luck2 are so-called &ldquo;ghost variables&rdquo; which have
+only been introduced for the sake of being able to formulate what we mean by
+&ldquo;mutual exclusion&rdquo; and of being able to formulate the proofs. In the actual
+programs to be executed they &mdash;and all operations operating on them&mdash; can be
+eliminated.) We also know that this solution is not acceptable when we reject
+solutions with the danger of after-you-after-you blocking. This danger is
+exorcized by Dekker&rsquo;s solution, which I give below in the following form. The
+initial value of the shared integer &ldquo;turn&rdquo; should be either 1 or 2 .
+I only give Program 1 ; Program 2 can be obtained from it by interchanging
+1&rsquo;s and 2&rsquo;s.
+<table> <tr> <td colspan = 7>
+{P0} in1:= true;                                                                        </td> </tr> <tr> <td colspan = 7>
+{P1} <b>if</b> in2 &rarr; {P2} <b>if</b> turn = 1 &rarr; skip {P3}                      </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 2>
+                    &#x25af; turn &ne; 1 &rarr; {P4} in1:= false;                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                 {P5} <b>do</b> turn &ne; 1 &rarr; skip {P5} <b>od</b>; </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>
+                                 {P6} in1:= true {P3}                                   </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+                   <b>fi</b>;                                                           </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+              {P3} <b>do</b> in2 &rarr; skip {P3} <b>od</b>;                            </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td colspan = 5>
+      &#x25af; <b>non</b> in2 &rarr; skip                                               </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 6>
+     <b>fi</b>;                                                                         </td> </tr> <tr> <td></td> <td colspan = 6>
+     luck1:= true;                                                                      </td> </tr> <tr> <td colspan = 7>
+{P7} critical section l;                                                                </td> </tr> <tr> <td colspan = 7>
+{P7} turn:= 2;                                                                          </td> </tr> <tr> <td colspan = 7>
+{P7} luckl, in1 := false, false;                                                        </td> </tr> <tr> <td colspan = 7>
+{P8} noncritical section l                                                              </td> </tr>
+</table>
+Studying this program in relative isolation, we derive, under the assumption
+<br>P0: <b>non</b> luck1  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; further
+<br>P1: <b>non</b> luck1 <b>and</b> in1
+<br>P2: P1
+<br>P3: <b>non</b> luck1 <b>and</b> in1 <b>and</b> turn = 1
+<br>P4: <b>non</b> luck1
+<br>P5: <b>non</b> luck1 <b>and</b> <b>non</b> in1
+<br>P6: <b>non</b> 1uck1 <b>and</b> <b>non</b> in1 <b>and</b> turn = 1
+<br>P7: luck1 <b>and</b> in1
+<br>P8: <b>non</b> luk1 <b>and</b> <b>non</b> in1
+<p>Again the relation luck1 &rArr; in1 is implied by all of them, and together
+with Program 2 we can derive the universal validity of <b>non</b>(luck1 <b>and</b> luck2) as
+before.
+<p>The difference between this program and the program on page 8 is that
+we need only weaker assumptions about the daemon if we would like to be sure
+of termination of the program on page 11. with the program on page 8, the
+daemon could select an unbounded number of units of actions from Program 1
+and an unbounded number of units of actions from Program 2, without ever one
+of the critical sections being selected. With our new programs this is no longer
+true.
+<p>Selection of an infinite number of units of actions from program 1
+implies &mdash;because there are only two loops in it, and from at least one an
+infinite number must be selected&mdash; the validity of
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(P5 <b>and</b> turn &ne; 1) <b>or</b> (P3 <b>and</b> in2) </td> </tr></td><td align=right>
+</td>  </tr>  </table>
+or
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<b>non</b> in1 <b>and</b> turn &ne; 1) <b>or</b> (in1 <b>and</b> in2 <b>and</b> turn = 1)</td><td align=right>(3)
+</td>  </tr>  </table>
+(Note that the term &ldquo;turn = 1&rdquo; in the Pi is invariant with respect to Program 2.)
+For Program 2 we have the corresponding relation
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<b>non</b> in2 <b>and</b> turn &ne; 2) <b>or</b> (in1 <b>and</b> in2 <b>and</b> turn = 2)</td><td align=right>(4)
+</td>  </tr>  </table>
+The conjunction of (3) and (4) reduces to
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<b>non</b> in1 <b>and</b> <b>non</b> in2 <b>and</b> turn &ne; 1 <b>and</b> turn &ne; 2) .</td><td align=right>&nbsp;
+</td>  </tr>  </table>
+<p>And, indeed, when we start the two programs with, say, turn = 3, the
+infinite looping of both programs is quite easily realized. If, however, we
+start the two programs &mdash; and so we assume&mdash; with
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+turn = 1 <b>or</b> turn = 2</td><td align=right>(5)
+</td>  </tr>  </table>
+then it is easily seen that (5)&rsquo;is invariant with respect to both programs,
+therefore can be regarded as universaly valid, and thus implying the falsity
+of the conjunction of (3) and (4). This falsity is usually taken as the proof
+of the absence of the danger of after-you-after-you blocking (and, a fortiori,
+the absence of the danger of deadlock).
+<p>The conclusion that the machine executing the programs&lsquo; units of action
+in interleaved fashion will eventually terminate, rests on the assumption that
+the daemon will not be so grossly unfair as to select always the next unit of
+action from the same program. From a formal point of view this is a most unattractive
+assumption.
+<p>It would introduce a mechanism of unbounded nondeterminacy, it would
+give us means for implementing
+<p class=noindent>&ldquo;set x to any positive integer&rdquo;
+<br>without being able to give an upper bound for the final value of x . We
+could, for instance, replace in program 1 the statement <b>do</b> in2 &rarr; skip <b>od</b> by
+<p class=noindent>x:= 1; <b>do</b> in2 &rarr; x= x + 1 <b>od</b> .
+<br>The consequences of introducing unbounded non-determinacy are sufficiently
+horrifying to reject the above approach.
+<p>Such a little loop with a skip as the repeatable statement is, of course,
+too indirect a way of indicating that to all intents and purposes, this program
+should not continue. We supply it with a kind of &ldquo;fake continuation&rdquo;. The only
+way of not making assumptions about the fairness of the daemon is to restrict
+it explicitly in its freedom. The alternative construct gives us a way out.
+<p>In normal sequential programming we have regarded an alternative construct
+with all its guards false as a reason for abortion. An equivalent rule for the
+implementation would be: postpone progress of this computation as long as all
+the guards are false. In a uniprogramming environment we have &ldquo;once all false,
+always all false&rdquo; and this second rule would be as good as abortion. In a
+multiprogramming environment it would mean for the daemon that, as suggested
+on page EWD554 - 6,&ldquo;an alternative construct, preceded immediately by its
+&ldquo;preceding predicate&rdquo; will never be selected for execution in those machine
+states where its selection for execution would lead to abortion of that program&rdquo;.
+By replacing in the program on page EWD554 - 11
+<table width=100%><tr><td valign=top width=30%>
+<b>do</b> turn &ne; 1 &rarr; skip <b>od</b></td><td>by <b>if</b> turn = 1 &rarr; skip <b>fi</b>
+</td></tr>
+<tr><td valign=top>
+and</td><td>
+</td></tr>
+<tr><td valign=top>
+<b>do</b> in2 &rarr; skip <b>od</b> </td><td>by <b>if</b> <b>non</b> in2 &rarr; skip <b>fi</b>
+</td>  </tr>  </table>
+and postulating that the daemon will not select a unit of action that starts
+with an alternative construct with false guards only, we have eliminated <b>from</b>
+<b>this example</b> all unbounded repetitions. To what extent the ideal &ldquo;no unbounded
+repetitions in the individual programs&rdquo; can be achieved in general &mdash;possibly
+by allowing certain <b>special</b> units of action to refer to more than one shared
+variable&mdash; is a question to which I don&rsquo;t know the answer at the moment of
+writing.
+<table width=100%><tr><td valign=top width=50%>
+14th of March 1976</td><td>prof.dr.Edsger w.Dijkstra
+</td></tr>
+<tr><td valign=top>
+Burroughs, Plataanstraat 5</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+NUENEN - 4565, The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-01-23<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

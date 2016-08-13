@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<title>E.W. Dijkstra Archive: Over seinpalen (EWD 74)</title>
+  <!-- special characters used in this document:
+  &euml; &iuml; &ouml;
+  beeindiging  -> be&euml;indiging
+  beinvloeding -> be&iuml;nvloeding
+  geinitieerd  -> ge&iuml;nitieerd
+  geentameerd  -> ge&euml;ntameerd
+  categorieen  -> categorie&euml;n
+  sequentiele  -> sequenti&euml;le
+  coordinator  -> co&ouml;rdinator
+  -->
+</head>
+
+<body>
+		<div align="right">
+			<p> <a href="../../ewd00xx/EWD74.PDF" target="_blank">EWD74</a> -
+<a href="../../ewd00xx/EWD74.PDF#page=1" target="_blank">1</a></p>
+		</div>
+		<div align="left">
+			<p><u>Over seinpalen</u></p>
+		</div>
+		<p>Wij beschouwen een aantal onderling &quot;zwak gekoppelde&quot;, in zichzelf sequenti&euml;le processen. Onder de &quot;zwakke koppeling&quot; versta ik, dat ze op bepaalde punten rekening met elkaar kunnen moeten houden. Als bv. een aantal processen af en toe wel eens van een of andere faciliteit gebruik wil maken, die maar een proces tegelijk kan bedienen, dan betekent dit, dat de processen wel eens even op elkaar kunnen moeten wachten. Als het ene proces informatie verwerkt, dat door een ander proces geleverd moet worden, dan is het ook duidelijk, dat het eerste op het laatste kan moeten wachten. M.a.w. de processen moeten ten opzichte van elkaar in zekere mate gesynchroniseerd kunnen worden.</p>
+		<p>Om de processen in de gelegenheid te stellen onderling informatie uit te wisselen over elkaars staat van vordering, is er een gemeenschappelijk geheugen ingevoerd. De elementen van dit geheugen zijn non-negatieve integers, die we <u>seinpalen</u> noemen.</p>
+		<p>In de individuele processen zijn de voor de onderlinge synchronisatie belangrijke punten gemarkeerd, doordat daar is aangegeven, dat bij passering van zo'n punt op bepaalde seinpalen een bepaalde operatie moet worden uitgevoerd. De individuele processen hebben hier de keuze uit twee operaties, de zg. V-operatie en de zg. P-operatie, welke wij hieronder zullen beschrijven.</p>
+		<p>In het volgende nemen wij aan, dat S1, S2, S3 etc. namen zijn van toegankelijke seinpalen (niet alle seinpalen hoeven in elk proces toegankelijk te zijn!); de V- en de P-operatie zullen wij schrijven als procedure statement.</p>
+		<p><u>De V-operatie ("verhoog" ).</u></p>
+		<p>
+De V-operatie heeft betrekking op minstens 1 seinpaal, dus bv. "V(S1)"
+of "V(S1, S2, S3)". Als een van de individuele processen de V-operatie
+uitvoert, dan is het effect, dat alle er ditmaal bij opgegeven seinpalen <u>in &eacute;&eacute;n ondeelbare handeling </u>met 1 worden verhoogd.</p>
+		<p><u>Opm. 1</u> De toevoeging &quot;in &eacute;&eacute;n ondeelbare handeling&quot; bedoelt het volgende uit te drukken. Stel, dat de waarde van de seinpaal S1 = 3 is en dat dan bv. twee van de (simultaan werkende!) processen &quot;tegelijkertijd&quot; de operatie V(S1) willen uitvoeren. Tengevolge van de ondeelbaarheid van de handeling mogen we ons dan voorstellen dat deze twee V-operaties op dezelfde seinpaal in een overigens niet ter zake doende volgorde in successie uitgevoerd worden, zodat na afloop S1 = 5 is en niet een van de ophogingen bv. onder tafel is geraakt.</p>
+		<p><u>Opm. 2</u> De V-operatie met meer dan 1 argument is logisch niet
+noodzakelijk, maar wel elegant. In de statement "V(S1, S2)" wordt een
+simultane verhoging van beide seinpalen gevraagd; vervangen we dit
+in een van de individuele processen door "V(S1);V(S2)", dan vragen
+we heel expliciet om ophoging in een bepaalde volgorde. Het zou wel
+eens wat minder leuk kunnen zijn om daartoe gedwongen te zijn, als
+men liever "neutraal" een aantal seinpalen simultaan wil ophogen. </p>
+		<p><u>Opm. 3</u> Als de V-operatie met meer dan 1 argument wel wordt
+opgenomen, dan zullen wij ons voorlopig beperken tot het geval, dat de
+erbij opgegeven seinpalen verschillend zijn. </p>
+		<p><u>De P-operatie ("Prolaag").</u></p>
+		<p>In een individueel proces markeert de P-operatie de tentatieve passering van dit punt. De P-operatie heeft betrekking op 1 of meer seinpalen, dus bv. &quot;P(S1)&quot; of &quot;P(S1, S2, S3)&quot;. Als de P-operatie in een van de individuele processen ge&euml;ntameerd is,</p>
+		<hr>
+		<div align="right">
+<p> <a href="../../ewd00xx/EWD74.PDF" target="_blank">EWD74</a> -
+    <a href="../../ewd00xx/EWD74.PDF#page=2" target="_blank">2</a></p>
+</div>
+		dan is daarmee een operatie begonnen, die slechts beeindigd kan worden op een moment, dat alle erbij opgegeven seinpalen positief zijn. Be&euml;indiging van een P-operatie impliceert, dat alle erbij opgegeven seinpalen met 1 verlaagd worden en ook deze be&euml;indiging geldt als <u>&eacute;&eacute;n ondeelbare handeling</u>. Ook voor de P-operatie beperken we ons tot
+het geval, dat de erbij opgegeven seinpalen onderling verschillend zijn. 
+		<p><u>Opm. 1</u> De P-operatie met meer dan 1 argument is logisch wel
+noodzakelijk.</p>
+		<p><u>Opm. 2</u> Vele seinpalen nemen slechts de waarden 0 en 1 aan. In dat
+geval fungeert de V-operatie als "baanvak vrijgeven"; de P-operatie, de
+tentatieve passering, kan slechts voltooit worden, als de betrokken
+seinpaal (of seinpalen) op veilig staat en passering impliceert dan
+een op onveilig zetten. </p>
+		<p><u>Enige voorbeeldjes voor het gebruik van seinpalen.</u></p>
+		<p>Voorbeeld 1. &nbsp;&nbsp;&nbsp; Als wij een klasje machines (alias processen) Xi hebben (dwz. X0, X1, X2, etc...) en in elk proces komt een kritische sectie voor, kritisch in die zin, dat geen twee kritische secties tegelijkertijd onder behandeling mogen zijn, dan kunnen we dit bereiken met een seinpaal, zeg SX, die in dit simpele geval slechts tweewaardig zal zijn;</p>
+		<p>SX = 0 zal betekenen: een van de machines Xi is aan zijn kritische sectie bezig<br>
+			SX = 1 zal betekenen: geen van de machines Xi is aan zijn kritische sectie bezig.</p>
+		<p>De omschrijving van alle processen is nu gelijkluidend:</p>
+		<p>&quot;LXi: P(SX); TXi; V(SX); rest proces Xi; <u>goto</u> LXi&quot;</p>
+		<p>Als we alle processen Xi op hun gelabelde punt (dwz. &quot;aan het begin van de regel&quot;) zouden starten met de beginwaarde SX = 2, dan zouden we verwezenlijkt hebben, dat ongeacht de omvang van het klasje processen Xi en nooit meer dan twee simultaan aan hun kritische sectie bezig zouden zijn. Dit is kennelijk een generalisatie van de probleemstelling van wederzijdse uitsluiting. (Het is precies de situatie van bv, n tape decks aan twee kanalen.)</p>
+		<p>Wij vestigen er de aandacht op, dat de formulering van de individuele processen Xi onafhankelijk is van de omvang van het klasje Xi, iets wat met het ook op de dynamische variatie van deze omvang wel hoogst gewenst is. Ook de maximaal toegestane simultaniteit voor de kritische secties dringt niet tot de formulering van de individuele processen door.</p>
+		<p>Voorbeeld 2. Nu beschouwen we een groepje machines Xi en een groepje machines Yj, elk met hun kritische sectie TXi resp. TYj. Uitvoering van een critische sectie dient uitvoering van alle andere kritische secties uit te sluiten, maar tevens eisen we, dat de uitvoering van een TX-sectie en een TY-sectie alternerende gebeurtenissen zijn.</p>
+		<p>We kunnen dit bereiken met twee tweewaardige seinpalen, zeg SX en SY.</p>
+		<p>SX = 1 betekent, dat nu eerst een TX-sectie aan de beurt is.<br>
+			SY = 1 betekent, dat nu eerst een TY-sectie aan de beurt is.</p>
+		<p>De programma's voor de machines luiden:</p>
+		<p>&quot;LXi: P(SX); TXi; V(SY); proces Xi; <u>goto</u> LXi" en <br>
+			
+"LYj: P(SY); TYj; V(SX); proces Yj; <u>goto</u> LYj&quot; .</p>
+		<p>Als de processen alle &quot;aan het begin van de regel&quot; gestart worden moet SX = 1 en SY = 0 zijn of andersom.</p>
+		<hr>
+		<div align="right">
+<p> <a href="../../ewd00xx/EWD74.PDF" target="_blank">EWD74</a> -
+    <a href="../../ewd00xx/EWD74.PDF#page=3" target="_blank">3</a></p>
+</div>
+		Voorbeeld 3. Tenslotte beschouwen we een klasje machines Xi, die informatie eenheden willen lozen in een cyclische buffer met een capaciteit van N informatie eenheden; voorts een klasje machines Yj, die informatie eenheden uit deze buffer willen verwerken.
+		<p>Omdat vullen van de buffer administratieve maatregelen met &quot;vulwijzer&quot; impliceert - en voor legen mutatis mutandis hetzelfde geldt - eisen we bovendien, dat vullen slechts door 1 machine Xi tegelijkertijd kan geschieden en evenzo, dat legen slechts door 1 machine Yj tegelijkertijd kan geschieden.</p>
+		<p>We voeren hiervoor in vier seinpalen:</p>
+		<p>SX1 = aantal vrije plaatsen in de buffer (aanvankelijk = N)<br>
+			
+SX = 0 als een van de machines Xi aan het vullen is, anders = 1<br>
+			
+SY1 = aantal gevulde plaatsen in de buffer (aanvankelijk = 0)<br>
+			SY2 = 0 als een van de machines Yj aan het legen is (anders = 1)</p>
+		<p>Er zal gelden N - 1 &lt; SX1 + SY1 &lt; N.</p>
+		<p>De machines zijn nu:</p>
+		<p>&quot;LXi: P(SX1,SX2); vul volgende plaats van de buffer; V(SY1,SX2);.....; <u>goto</u>
+LXi"<br>
+			
+"LYj: P(SY1,SY2); leeg volgende plaats van de buffer; V(SX1,SY2);.....; <u>goto</u>
+LYj"</p>
+		<p><u>Hardware voorzieningen.</u></p>
+		<p>Onze cyclische processen gaan we nu in twee groepen onderverdelen. Die van de ene groep heten &quot; de concrete machines&quot;, die van de andere groep heten &quot; de abstracte machines&quot;.</p>
+		<p>De &quot;concrete machines&quot; zijn de transput-apparaten. Dit zijn alle (cyclische) processen, die met een eigen tijdsbewustzijn gedurende een zekere periode autonoom hun werk doen. Onder &quot;autonoom&quot; verstaan wij in dit verband onafhankelijk van de besturing van de centrale computer. Behalve transporten van en naar de buitenwereld (paper tape, printer, ponskaarten etc.) valt hieronder ook transporteren tussen kerngeheugen enerzijds en trommel of magneetband anderzijds. Het zijn die processen, die, mits eenmaal door de X8 in gang gezet, simultaan met de werkende centrale computer plaats vinden. &nbsp;</p>
+		<p>De &quot;abstracte machines&quot; zijn de onderling asynchrone programma's. Aangezien de centrale computer de facto steeds maar met 1 programma bezig is, kunnen wij stellen, dat van de abstracte machine er op elk moment hoogstens eentje werkt. (Het is mogelijk, dat geen van deze programma's werkt: de centrale computer &quot;zit dan in de co&ouml;rdinator&quot;. De co&ouml;rdinator wordt niet als een van de abstracte machines beschouwd.)</p>
+		<p>Zolang seinpalen louter door abstracte machines geselecteerd worden, zijn hiervoor geen speciale hardware voorzieningen nodig (behalve doofheid): elke geheugenplaats kan als geprogrammeerde seinpaal fungeren.</p>
+		<p>Een seinpaal, die louter door de concrete machines geselecteerd wordt (ik laat even in het midden, of die er zullen zijn, het is heel goed denkbaar) is een aangelegenheid, die zich geheel buiten de X8 afspeelt en hoeft ons op het ogenblik dus ook niet te interesseren.</p>
+		<p>Een seinpaal, die zowel door een concrete als door een abstracte machine geselecteerd moet kunnen worden, vraagt echter onze speciale aandacht. Het is duidelijk dat hiervoor wel speciale hardware voorzieningen en rigoureuze conventies nodig zijn.</p>
+		<p>In principe is elke &quot;hardware seinpaal&quot; een (per installatie) vaste geheugen-</p>
+		<p></p>
+		<hr>
+		<div align="right">
+<p> <a href="../../ewd00xx/EWD74.PDF" target="_blank">EWD74</a> -
+    <a href="../../ewd00xx/EWD74.PDF#page=4" target="_blank">4</a></p>
+</div>
+		plaats; door het transput-apparaat kan daar 1 van worden afgetrokken (externe P-operatie) of 1 bij opgeteld worden (externe V-operatie).
+		<p>Als de centrale computer deze seinpalen moet ophogen of aflagen, dan moet dit gebeuren met behulp van de additieve uitopdracht. In dit geval is nl. interferentie tussen beide additieve operaties (nl. een intern en een externe) niet mogelijk.</p>
+		<p>Een complicatie is, dat aan elke hardware seinpaal een flip-flip geassocieerd is, die aangeeft of de bijbehorende seinpaal positief is. (Voor de noodzaak van deze flip-flop, zie later)</p>
+		<p>We kunnen nu twee soorten hardware seinpaal onderscheiden (als regel heeft elk transput apparaat er van beide soorten eentje):</p>
+		<p>1) Een startopdrachtentelling. In dit geval verricht de centrale computer de V-operatie, en het transputmechanisme verricht de P-operatie. De geassocieerde flip-flop heet in zo'n geval een acflop.</p>
+		<p>2) Een ingrepentelling. In dit geval verricht de centrale computer de P-operatie en het transput-apparaat de V-operatie. De geassocieerde flip-flop heet in zo'n geval een inflop.</p>
+		<p>In elke installatie zijn de concrete machines genummerd. Uit het nummer is dan af te leiden welke geheugenplaatsen voor startopdrachten- en ingrepentelling gereserveerd zijn; de bijbehorende Acflop en Inflop zijn onder opgaven van het apparaatnummer bereikbaar.</p>
+		<p>Wij laten nu zien, hoe de centrale computer bij wijziging van een hardware seinpaal de bijbehorende flip-flop zo nodig kan aanpassen. (Aanpassing van zo'n flip-flop ten gevolge van wijziging door de transput-apparatuur is niet de zorg van de centrale computer, maar van de bouwers.</p>
+		<p></p>
+		<p><u>De V-operatie door de centrale computer.</u></p>
+		<p>Zij t de integer, die in het kerngeheugen de seinpaal representeert; de geassocieerde flip-flop noemen we Acflop. Het transput-apparaat zal een volgende startopdracht accepteren, als die er is en het er aan toe is. Het verricht in de voltooiing van de P-operatie op deze seinpaal de handeling, die beschreven kan worden door</p>
+		<p>&quot;<u>if</u> Acflop <u>then</u> <u>begin</u> t := t - 1; <u>if</u> t
+&lt; 0 <u>then</u> Acflop := <u>false</u>&quot;.</p>
+		<p>Deze P-operatie, die beschouwd moet worden als onderdeel van het consumeren van de volgende startopdracht, heeft dus als mogelijk gevolg, dat het opnemen van volgende startopdrachten tot nader order niet meer zal plaats vinden; dit nl. als tengevolge van uitputting van de voorraad Acflop op <u>false</u> gezet is.</p>
+		<p>Additionele spelregels zijn:<br>
+			
+a) dat deze handeling vanuit de computer bezien moet worden als
+ondeelbare handeling - dit schept zijn voordelen - maar dan anderzijds
+de computer niet over demogelijkheid zal beschikken om deze handeling
+over een aantal opdrachten te verbieden - en dit schept zijn problemen.<br>
+			b) dat bij be&iuml;nvloeding van t en Acflop door de computer het pertinent verboden is, als hoe kort ook ten onrechte Acflop <u>true</u> zou zijn. Op dat moment zou nl. het transput-apparaat meteen ten onrechte kunnen gaan werken.</p>
+		<p>Als de centrale computer - ter melding dat de volgende startinformatie is klaar gezet - op deze seinpaal de V-operatie moet uitvoeren, geschiedde dit door het volgende stukje programma:</p>
+		<hr>
+		<div align="right">
+<p> <a href="../../ewd00xx/EWD74.PDF" target="_blank">EWD74</a> -
+    <a href="../../ewd00xx/EWD74.PDF#page=5" target="_blank">5</a></p>
+</div>
+		
+"t:= t + 1;<br>&nbsp;<u>if</u> <u>non</u> Acflop <u>then</u> <br>&nbsp; &nbsp; <u>begin</u> <u>if</u> 0 &lt; t <br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<u>then</u> Acflop := <u>true</u> <u>end</u>&quot;
+		<p>De rechtvaardiging van dit stukje programma is als volg. Na de ophoging wordt Acflop getest; als Acflop <u>true</u> was, dan was dus de telling
+t positief en kan deze door de ophoging alleen maar positiever geworden
+zijn en eventueel aanpassen van Acflop ligt dus tot nader order op de
+weg van de transputmachine. Maar als we de Acflop <u>false</u>
+aantreffen, dan kan de transputmachine de P-operatie niet meer
+uitvoeren, zodat van die kant t en Acflop ongemoeid gelaten worden en de
+centrale computer rustig de test kan uitvoeren. </p>
+		<p><u>De P-operatie door de centrale computer.</u></p>
+		<p>Weer zullen we de seinpaal aanduiden met t; de bijbehorende flip-flop noemen we nu Inflop. Inflop geve aan, of t positief is. De V-operatie, die door de transputmachine uitgevoerd wordt, kan beschreven worden door:</p>
+		<p>&quot;t := t + 1; <u>if</u> 0 &lt; t <u>then</u> Inflop := <u>true</u>&quot;;</p>
+		<p>van de centrale computer bezien is dit een ondeelbare, niet tegen te houden handeling.</p>
+		<p>De voltooiing van de P-operatie zal de centrale computer alleen uitvoeren als Inflop <u>true</u> is; bij gratie van doofheid - waarbij
+de waarde van Inflop geen effect heeft, zie later - kan de computer zich
+permitteren om Inflop tijdelijk <u>false</u> te zetten.</p>
+		<p>De voltooiing van de P-operatie door de computer bestaat nu uit het volgende stukje programma:</p>
+		<p>&quot; t := t - 1;<br>
+			&nbsp; Inflop := <u>false</u>;<br>
+			&nbsp; <u>if</u> 0 &lt; t <u>then</u><br>
+			&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Inflop := <u>true</u>&quot;</p>
+		<p>Essentieel is hierbij aangenomen:<br>
+			
+a) dat het geen kwaad kan, als Inflop ten onrechte een tijdje <u>false</u>
+is<br>
+			
+b) dat als transput-machine en computer "tegelijkertijd" proberen om de
+assignment "Inflop := <u>true</u>" uit te voeren, dat dan na afloop
+zeker Inflop <u>true</u> zal zijn.</p>
+		<p>De rechtvaardiging van dit stukje programma is nu als volgt. Elke V-operatie voor de assignment &quot;Inflop := <u>false</u>&quot; &nbsp;uit bovenstaand programmaatje doet niet te zake, omdat daarna in elk geval Inflop <u>false</u> gezet wordt. Als tijdens de assignment &quot;inflop :=&nbsp;<u>false</u>&quot; de telling t positief is, dan zal de computer uiteindelijk de statement &quot;inflop :=&nbsp;<u>true</u>&quot; uitvoeren. Door tussengeschoven operaties V kan de telling t alleen maar nog groter worden en dus wordt Inflop correct achter gelaten. Als tijdens de assignment &quot;Inflop :=&nbsp;<u>false</u>" de telling t daarentegen
+non-positief is, moeten we twee gevallen onderscheiden. In het geval,
+dat de telling t niet door tussengeschoven V-operaties positief wordt,
+dan zullen zowel de transput-machine als de computer de Inflop verder
+ongemoeid laten en Inflop blijft dus terecht =<u>false</u> achter. Als door ondergeschoven V-operaties daarentegen de telling positief wordt, dan zal in elk geval door de transput machine op het moment van omslag de assignment &quot;Inflop :=&nbsp;<u>true</u>" uitgevoerd worden ( en
+mogelijk ten overvloede ook nog een keer door de computer, nl. als ten
+tijde van de test de telling t al positief is ). In dit laatste geval
+wordt Inflop dus gegarandeerd correct op <u>true</u> achtergelaten. <br>
+		</p>
+		<hr>
+		<div align="right">
+<p> <a href="../../ewd00xx/EWD74.PDF" target="_blank">EWD74</a> -
+    <a href="../../ewd00xx/EWD74.PDF#page=6" target="_blank">6</a></p>
+</div>
+		
+Opm. De uitleesbaarheid van de Acflops en de tweezijdigheid van de
+zetbaarheid van de Inflops zijn in de X8 geintroduceerd speciaal om deze
+programmaatjes mogelijk te maken. Deze hardware is in zekere zin de
+extra prijs die we betalen moeten voor de ononderdrukbaarheid van de
+autonome operaties op de seinpalen. 
+		<p><u> De hardware voor de ingreep.</u></p>
+		<p>
+In het volgende zullen we Inflop <u>true</u> ook door = 1, en <u>false</u> door = 0&nbsp; representeren.</p>
+		<p>Zoals gezegd zijn de Inflops genummerd. In een installatie met minder dan 27 Inflops zijn deze gezamenlijk als bits van het zg. (1ste) Inflopwoord uitleesbaar met behulp van een speciale communicatieopdracht. (Komen er meer Inflops, dan wordt een 2de Inflopwoord geintroduceerd. Etc etc. Ik verwacht dat er per Inflopwoord hoogstens 26 bits gebruikt zullen worden en dat het tekenbit van een inflopwoord altijd = 0 is met het oog op normering.)</p>
+		<p>Opm. Welke positie de verschillende Inflops in het Inflopwoord innemen is mij niet bekend: hier kon nog wel eens een beslissing over genomen moeten worden.</p>
+		<p>Bij elke Inflop hoort een luisterbit; ook dit is een flip-flop, die door de X8 individueel in beide richtingen zetbaar is. Ook de luisterbits zijn via een (of zo nodig meer) zg. &quot;luisterwoord&quot; uitleesbaar. Een luisterbit neemt in het luisterwoord dezelfde positie in als de overeenkomstige Inflop in het Inflopwoord.</p>
+		<p>Tenslotte is er een flip-flop, die aangeeft of de X8 &quot;doof&quot; dan wel &quot;horend&quot; is. Een ingreep vindt plaats als<br>
+			
+a) het collatieresultaat van Inflopwoord(en) en luisterwoord(en) niet
+enkel nullen bevat<br>
+			b) en tevens de machine horend is.</p>
+		<p>Opm. De doofmakende opdrachten van de X8 werken &quot;instantaan&quot;; het is dus niet mogelijk, dat na de opdracht &quot;maak doof&quot; nog net een interruptie plaats vindt (zoals dit bij de X1 het geval was).</p>
+		<p>Pro memorie: Dit moet gecontroleerd worden voor de herstellende sprong, die de overgang horend &#8594; door kan bewerkstelligen; nagevraagd moet worden of ook de horend makende opdrachten instantaan werken.</p>
+		<p>De ingreep bestaat daaruit dat:<br>
+			
+a) er een speciale subroutinesprong wordt uitgevoerd (met een voor dit
+doel gereserveerde labda)<br>
+			b) in de uitvoering van deze subroutinesprong de normale ophoging van de opdrachtteller onderdrukt wordt en de machine onmiddellijk doof gemaakt wordt.</p>
+		<p>De ingreepsprong verwijst de besturing naar de &quot;ingreeproutine&quot;; deze begint met registerinhouden e.d. te redden om te zorgen dat het nu onderbroken programma later voortgezet kan worden alsof er niets gebeurd is. Vervolgens zal het de Inflops moeten analyseren om te ontdekken welk extern apparaat zo nodig iets te melden had en wat, etc.</p>
+		<p><u>De co&ouml;rdinator.</u></p>
+		<p>Een belangrijk onderdeel van de co&ouml;rdinator is de ingreeproutine. Ik verwacht dat de ingreeproutine zozeer met de co&ouml;rdinator verweven zal zijn, dat een gescheiden behandeling nauwelijks mogelijk is.</p>
+		<p></p>
+		<hr>
+		<div align="right">
+<p> <a href="../../ewd00xx/EWD74.PDF" target="_blank">EWD74</a> -
+    <a href="../../ewd00xx/EWD74.PDF#page=7" target="_blank">7</a></p>
+</div>
+		De co&ouml;rdinator wachtlijst bevat alle programma in de machine, onderverdeeld in twee categorie&euml;n, de geblokkeerden en de uitvoerbaren.
+		<p>Geblokkeerde programmaas zijn programmaas die niet verder kunnen, doordat ze op een seinpaal staan te wachten, op de voltooiing van een voor hun voortzetting noodzakelijke gebeurtenis.</p>
+		<p>Uitvoerbare programmaas zijn programmaas die wel verder kunnen ware het niet dat de X8 maar 1 van hen verder kan helpen. (Ik neem aan dat het programma dat door de X8 uitgevoerd wordt onder de uitvoerbare gerangschikt blijft: de term &quot;wachtlijst&quot; is dan wat merkwaardig, maar laten we er maar in berusten. Als de besturing echt in de co&ouml;rdinator zit, dan is de term in orde.)</p>
+		<p>Het effect van de P-operatie kan zijn, dat een programma van uitvoerbaar nu geblokkeerd wordt, het effect van een V-operatie kan zijn, dat een (ander) programma uit de groep der geblokkeerde naar de uitvoerbare wordt overgeheveld. Een programma, dat in actie door een interruptie onderbroken wordt, blijft gerangschikt onder de uitvoerbare!</p>
+		<p>We kunnen het ook zo zien: als in een programma een P-operatie ge&iuml;nitieerd wordt, dan was op dat moment het programma in actie, dus uitvoerbaar. Nu zijn er twee gevallen. Of de heersende waarden van de betroffen seinpalen vormen geen beletsel, of zij doen dit wel. In het eerste geval worden zij afgelaagd, de P-operatie is daarmee voltooid en het programma blijft uitvoerbaar. (of het ook in actie blijft is een heel ander chapiter!) In het tweede geval wordt het programma uit de groep der uitvoerbaren gehaald. De groep der geblokkeerde bevat dus alleen alle programmaas die in een ge&iuml;nitieerde maar niet voltooide P-operatie zijn blijven hangen.</p>
+		<p>De P-operaties van de abstracte machines worden dus beslist niet als een permanent observeren van de betrokken seinpalen gespeeld, in tegendeel: de abstracte machines, die geblokkeerd zijn, sluimeren. Nu de abstracte machines, eenmaal geblokkeerd zijnde, niet meer gevoelig zijn voor het positief zijn van seinpalen, moet de co&ouml;rdinator gevoelig zijn voor het positief <u>worden</u> van seinpalen. Maw, aks 1 of meer seinpalen positief worden, heeft de co&ouml;rdinator de plicht om vast te stellen, of er nu geblokkeerde uit hun blokkade geholpen kunnen worden en zo ja, dan dient de co&ouml;rdinator dit te doen. (Bij de V-operatie met meer dan 1 argument kunnen er dus twee abstracte machines naar de uitvoerbare overgeheveld moeten worden) Hier ligt een vrij stringente plicht voor de co&ouml;rdinator: er moet immers vermeden worden, dat een abstracte machine geblokkeerd is door een geprogrammeerde seinpaal, die inmiddels &quot;onopgemerkt&quot; positief is geworden. De abstracte machine kijkt niet meer, de seinpaal seint niet meer en de boel zit vast!</p>
+		<p>Het is om bovenstaande redenen, dat wij voor de V-operatie, die tot nog toe als ophoging beschreven is, beslist niet zullen volstaan met een simpele additieve uitopdracht. De geprogrammeerde V-operatie wordt een aanroep van een co&ouml;rdinatorroutine: deze zal de meegegeven seinpalen verhogen en tevens kijken, wat de aan deze verhoging te verbinden consequenties zijn!</p>
+		<p>Hier zien we inmiddels de verweving van de ingreeproutine en de co&ouml;rdinator. De ingreeproutine sec doet niet veel meer, dan vaststellen op welke (hardware)&nbsp; seinpaal de V-operatie is uitgevoerd en ook dit zal in de regel tot gevolg hebben, dat een abstracte machine gedeblokkeerd wordt.</p>
+		<p>De geblokkeerde programmaas bevinden zich in de co&ouml;rdinatorwachtlijst onder opgave van de seinpalen, die bij de voltooiing de P-operatie afgelaagd moeten worden.</p>
+		<hr>
+		<div align="right">
+<p> <a href="../../ewd00xx/EWD74.PDF" target="_blank">EWD74</a> -
+<a href="../../ewd00xx/EWD74.PDF#page=8" target="_blank">8</a></p>
+</div>
+		Ik stel mij voor, dat de onderverdeling van de wachtlijst geschieden zal niet door verplaatsing maar door kettingrijgen. Ik neem aan dat elke abstracte machine bij creatie een nummer toegekend krijgt - het laagste vrije nummer - en dit nummer gedurende zijn bestaan zal blijven behouden. Ik neem voorts aan, dat onder dit nummer in de wachtlijst direct geselecteerd kan worden.
+		<p>Ik wilde alle uitvoerbare machines met een ketting aan elkaar rijgen, verder wilde ik bij elke non-positieve seinpaal de beginschakel van een mogelijk niet lege blokkade ketting maken.</p>
+		<p>Als nu een van de abstracte machines de P-operatie wil uitvoeren, dan worden de meegegeven seinpalen onderzocht. Als een van de seinpalen non-positief bevonden wordt, dan worden de andere seinpalen helemaal niet meer bekeken, want deze abstracte machine wordt meteen aan de blokkadeketting van deze seinpaal gehangen. De opmerking is nl dat voordat deze seinpaal positief is, de P-operatie in elk geval niet voor voltooiing in aanmerking komt.</p>
+		<p>Als nu een V-operatie op een seinpaal wordt uitgevoerd, dan kan de co&ouml;rdinator nu op vrij snelle wijze de mogelijke consequenties hiervan nagaan. Was de blokkade ketting leeg, dan stond er niets op deze V-operatie te wachten en geen van de geblokkeerde machines komt dus voor deblokkade in aanmerking. Als de blokkadeketting van deze seinpaal niet leeg is, dan onderzoekt men een abstracte machine in de ketting: als de overige seinpalen geen beletsel vormen, dan kan een P-operatie voltooid worden en gaat deze abstracte machine over naar de uitvoerbare. Als een andere seinpaal wel een beletsel vormt, dan gaat de abstracte machine over naar de blokkade ketting van die laatste seinpaal. Repetatur, totdat of de seinpaal weer nul is (succesvolle deblokkade) of de ketting leeg is (of beide). Het is vanzelfsprekend dat door het dusdanig afwerken van de V-operatie het uitgesloten is dat een positieve seinpaal met non-lege blokkadeketting zou overblijven.</p>
+		<p>Salvo errore et omissione zou de co&ouml;rdinator naar aanleiding van een V-operatie dankzij deze kettingen nu vrij snel moeten kunnen vaststellen of hieraan verdere consequenties verbonden zijn en zo ja, welke.</p>
+		<p>In dit schema passen de luisterbits voortreffelijk: men maakt de luisterbit van een hardware seinpaal = 1 als zijn blokkadeketting gevuld is, anders = 0. Immers: als de blokkadeketting leeg is, dan staat er in eerste instantie niets op deze seinpaal te wachten. Wat zullen we dan een ingreep introduceren, als deze seinpaal positief wordt? Zo komen de luisterbits naar voren als middel om onnodige ingrepen te onderdrukken. Of dit veel zoden aan de dijk zet, valt nog ernstig te bezien, het zou best eens zo kunnen zijn, dat er haast altijd op een ingreep gewacht wordt.</p>
+		<hr>
+		<p>Transcription by Patrick Tingen. </p>
+<p>Last revised on <csobj format="MedDate" h="16" region="15" t="DateTime" w="107">Mon, 30 Jun 2003</csobj>.</p>
+</body>
+</html>
+
+

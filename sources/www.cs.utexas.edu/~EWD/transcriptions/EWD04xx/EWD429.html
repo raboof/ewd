@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: A generalization of the Shaffer Stroke for n-valued logic (EWD 429)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd04xx/EWD429.PDF"
+           title="Link to the PDF version of EWD429">EWD429</a></div></div>
+    <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR
+<hr />
+<p class="noindent">
+<p class="noindent"><b>A generalization of the Shaffer Stroke for n-valued logic</b>.
+<table> <tr> <td>
+<p>            by C.S.Scholten </td> </tr>
+</table>
+<p>For binary variables &mdash;i.e. ranging over {0, 1}&mdash; x and y the
+&ldquo;Shaffer Stroke&rdquo; &mdash;a1ias &ldquo;alternative denial&rdquo; or &ldquo;nand&rdquo;&mdash; is the operator
+&mdash;or binary function&mdash; denoted by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              x | y </td> </tr>
+</table>
+and (usually) defined as
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              1 - x.y           .              </td> </tr> <tr> <td colspan = 2>
+As            1 - x.y = (x.y + 1) <b>mod</b> 2 </td> </tr> <tr> <td colspan = 2>
+and           x.y = min(x, y)                  </td> </tr>
+</table>
+an alternative definition is:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              x | y = (min(x, y) + 1) <b>mod</b> 2 . </td> </tr>
+</table>
+It is well-known [1] that any binary function of k binary arguments can
+be expressed using the Shaffer Stroke as the only primitive operator.
+<p>In the following we regard n-ary variables &mdash;i.e. ranging over
+{0, 1, ..., n-1}&mdash; and shall demonstrate that any n-ary function of k
+n-ary arguments can be expressed, using as the only operator the generalization
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              x | y = (min(x, y) + 1) <b>mod</b> n . </td> </tr>
+</table>
+In the following we shall use the notation
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              suc(x) = (x + 1) <b>mod</b> n . </td> </tr>
+</table>
+in terms of which we can rewrite:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              x | y = suc(min(x, y)) . </td> </tr>
+</table>
+<p class="noindent"><b>Theorem 1</b>. The function suc &mdash;as defined above&mdash; is expressible.
+<table> <tr> <td>
+Proof.        suc(x) = x | x </td> </tr>
+</table>
+<p class="noindent"><b>Theorem 2</b>. The function pred &mdash;defined by pred(x) = (x - 1) <b>mod</b> n&mdash; is
+expressible.
+<table> <tr> <td>
+Proof.        pred(x) = suc<sup>n-1</sup>(x) </td> </tr>
+</table>
+<p class="noindent"><p class="noindent"><b>Theorem 3</b>. The function min is expressible.
+<table> <tr> <td>
+Proof.        min(x, y) = pred(x | y) </td> </tr>
+</table>
+<b>Note</b>. Because                                                     
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              min(x, y, z) = min(min(x, y), z) etc. </td> </tr>
+</table>
+also the minimum of more than two arguments is expressible. (End of note.)
+<p class="noindent"><b>Theorem 4</b>. For any n-ary constant c the discriminator function d<sub>c</sub>(x),
+<table> <tr> <td colspan = 2>
+given by      d<sub>c</sub>(x) = n - 1 for x = c </td> </tr> <tr> <td>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                    = 0     for x &ne; c         </td> </tr>
+</table>
+is expressible.   
+<table> <tr> <td colspan = 3>
+Proof. Because                                     </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+              suc<sup>n-c</sup>(x) = 0   for x = c </td> </tr> <tr> <td></td> <td> &nbsp; &nbsp; </td> <td>
+                        = 0   for x &ne; c         </td> </tr>
+</table>
+is expressible. 
+<table> <tr> <td colspan = 2>
+we have       min(1, suc<sup>n-c</sup>(x)) = 0 for x = c </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                = 1 for x &ne; c ,       </td> </tr>
+</table>
+so that       d<sup>c</sup>(x) = pred(min(1, suc<sup>n-c</sup>(x))) .
+<p class="noindent"><b>Theorem 5</b>. For any n-ary constant c the weighten discriminator function
+w<sub>c</sub>(x, y), given by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+              w<sub>c</sub>(x, y) = y     for x = c </td> </tr> <tr> <td></td> <td>&nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                       = n - 1 for x f c            </td> </tr>
+</table>
+is expressible.
+<table> <tr> <td colspan = 2>
+Proof.        min(d<sub>c</sub>(x), suc(y)) = suc(y) for x = c </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                 = 0      for x &ne; c         </td> </tr>
+</table>
+and because pred(suc(y)) = y , we find
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              w<sub>c</sub>(x, y) = pred(min(d<sub>c</sub>(x), suc(y))) . </td> </tr>
+</table>
+<p class="noindent"><b>Theorem 6</b>. The selector function, defined by
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              sel(x, y<sub>0</sub>, y<sub>1</sub>. ... , y<sub>n-1</sub>) = yi for x = i </td> </tr>
+</table>
+is expressible.
+<table> <tr> <td colspan = 2>
+Proof.        sel(x, y<sub>0</sub>, y<sub>1</sub>, ... , y<sub>n-1</sub>) =                                        </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+              min(w<sub>0</sub>(x, y0). w<sub>1</sub>(x, y<sub>1</sub>).  . w<sub>n-1</sub>(x, y<sub>n_1</sub>)) . </td> </tr>
+</table>
+<p class="noindent">The final induction from 2 to k arguments is straightforward.           
+<p class=noindent>[1] Shaffer. H.M., A set of five independent postulates for Boolean algebras,
+with applications to logical constants. Trans.Amer.Math.Soc. vol 14, pp,481-488
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-11-15<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>E.W.Dijkstra Archive: For brevity's sake (EWD 1070)</title>
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff">
+	
+	<div id="frame">
+			<div id="header">
+        <a href="../../ewd10xx/EWD1070.PDF" 
+           title="Link to the PDF version of EWD 1070">EWD 1070</a>
+      </div>
+      <div id="content">
+
+		<div align="left">
+			<p class="noindent"><u>For brevity's sake</u></p>
+			<p>Since the turn of the century, Russell's Paradox is a standard ingredient of all texts on the foundation of mathematics. Its purpose is to illustrate the trouble one can run into by admitting the seemingly innocent notion of &quot;the set of all sets&quot;. We shall not pursue that trouble here, since this is not a book on the foundation of mathematics. Today we are <em>not</em> interested in Russell's Paradox, we are solely interested in its presentation. Being essentially a one-liner, it is a very simple example to make our point; it has the added advantage of being familiar to many. Its usual presentation is along the following lines.</p>
+			<p>A set may be a member of itself or not. Consider now the set of all sets that are not a member of themselves. Calling this set <var>R</var>, its formal definition would be</p>
+			<p class="noindent">(0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>R</var> = { <var>x</var> | <var>x</var> &#x2209; <var>x </var>}</p>
+			<p class="noindent">&#x2014;to be read as &quot;the set of all sets <var>x</var> such that <var>x</var> &#x2209; <var>x</var> &#x2014;. The question we now try to answer is: &quot;Is <var>R</var> a member of itself?&quot;. Suppose that <var>R</var> is not a member of itself&quot;; since, according to (0), <var>R</var> contains <em>all</em> such sets , <var>R</var> would contain itself, which contradicts our assumption that <var>R</var> is not a member of itself. Conversely, assume that <var>R</var> is a member of itself; since, according to (0), <var>R</var> contains <em>only</em> sets that are not members of themselves, <var>R</var> would not contain itself, which contradicts our assumption. So, our question &quot;Is <var>R</var> a member of itself?&quot; admits neither answer.</p>
+			<p>This concludes the first presentation of Russell's Paradox. Consider now the following alternative.</p>
+			<p>A set may be a member of itself or not. Consider now the set of all sets that are not a member of themselves. Calling this set <var>R</var>, the formal definition of membership of it would be</p>
+			<p class="noindent">(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>x</var> &#x2208; <var>R</var> = <var>x</var> &#x2209; <var>x&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</var>for all <var>x</var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</p>
+					<p class="noindent">Instantiation of (1) with <var>x</var>:=<var>R</var> yields</p>
+					<blockquote>
+						<p class="noindent"><var>R</var> &#x2208; <var>R</var> = <var>R</var> &#x2209; <var>R</var> ,</p>
+					</blockquote>
+					<p class="noindent">which is a contradiction.</p>
+					<p>This concludes the second presentation of Russell's Paradox. It is so much shorter and simpler than the first one that we had better fully understand how this tremendous gain could be obtained.</p>
+					<p>A major difference between (0) and (1) is that (0) states the equality</p>
+					<blockquote>
+						<p class="noindent"><var>R</var> = { <var>x</var> | <var>x</var> &#x2209; <var>x </var>} ,</p>
+					</blockquote>
+					<p class="noindent">in which <var>x</var> is a &quot;bound variable&quot; &#x2014;i.e., local to the right-hand side&#x2014; whereas (1) states the equality</p>
+					<blockquote>
+						<p class="noindent"><var>x</var> &#x2208; <var>R</var> = <var>x</var> &#x2209; <var>x</var></p>
+					</blockquote>
+					<p class="noindent">in which <var>x</var> is a &quot;free variable&quot; &#x2014;i.e., global to the whole expression&#x2014;. The latter equality can now be instantiated by substituting an arbitrary set for <var>x</var>! The latter manipulative freedom is exploited to great advantage by the instantiation <var>x</var>:=<var>R</var>. Instantiation is a very simple operation, and the example suggests that free variables in definitions (axioms, theorems, etc.) are an asset. (Later examples will confirm this as yet tentative moral: the availability of free variables can significantly contribute to the economy of manipulation.)</p>
+					<p>Another major difference between (0) and (1) is the different status of their equality signs. In (0), the equality sign expresses equality between sets and is only acceptable after sets have been admitted as first-class citizens; in (1), the equality sign expresses equality between boolean expressions and is only acceptable after boolean expressions have been admitted as &quot;first-class citizens&quot;. Let me explain what is meant here by &quot;first-class citizens&quot;.</p>
+			<p>Prior to the introduction of the boolean domain, people used what we now recognize as boolean expressions, but they were viewed as statement of facts &nbsp;&#x2014; 3&lt;4 &#x2014;&nbsp; or as condition &#x2014; <var>x</var>&gt;0 &#x2014;&nbsp; or as equation&nbsp; &#x2014; <var>x</var><sup>2</sup>+<var>bx</var>+<var>c</var>=0 &#x2014;&nbsp; or as laws &nbsp;&#x2014; (<var>a</var>+<var>b</var>)<sup>2</sup>= <var>a</var><sup>2</sup>+2<var>ab</var>+<var>b</var><sup>2</sup> &#x2014;&nbsp; , and things like 3&gt;4, 2+2=5 and <var>n</var>=<var>n</var>+3 were considered &quot;wrong&quot;. All this changed with the introduction of the two-element boolean domain {<var>true</var>, <var>false</var>} which provides the vocabulary needed to assign <u>values</u> to boolean expressions: 3&lt;4 is a way for writing <var>true</var>, 3&gt;4 is a way for writing <var>false</var> , whereas the value of <var>x</var>&gt;0 depends on the value of <var>x</var>: for positive <var>x</var> it yields <var>true</var>, for nonpositive <var>x</var> it yields <var>false</var>. As syntactic units, boolean expressions existed after 1558, when Robert Recorde introduced the now familiar equality sign = as infix operator; they became &quot;first-class citizens&quot; in 1858, when George Boole introduced the possibility of evaluating them.</p>
+			<p>In retrospect, one might be tempted to regard the introduction of something as simple as the boolean domain as a minor invention, but I think that that would be a grave mistake: it is a great invention because, being so simple, it is such a powerful simplifier. It is of the same level as the introduction of natural numbers, which enabled us to add 3 to 5, regardless of whether we are adding apples or pears.</p>
+			<p>George Boole made a radical invention, so radical, in fact, that now, more than a century later, the scientific community has not absorbed it yet. (To stay with the metaphor: officially, boolean expressions may have reached the status of first-class citizens, in practice &#x2014;because old habits and prejudices die hard&#x2014; they are still the victims of discrimination.) Let me give you a few examples.</p>
+					<p>In the programming language FORTRAN, as conceived a century after Boole published his invention, boolean expressions are allowed, but there are no boolean variables! Their introduction into programming had to wait until the design of ALGOL 60. (In fact, the inclusion of boolean variables and operators has been one of the main reasons for the educational significance of ALGOL 60; the inclusion of recursion was another reason.) Very tellingly, their inclusion as first-class citizens did not prevent programmers &#x2014;even programmers that had skipped FORTRAN&#x2014; from writing</p>
+					<blockquote>
+						<p class="noindent"><b>if</b> <var>h</var> &#x2265; <var>N</var> <b>then</b> <var>eq</var>:= <var>true</var> <b>else</b> <var>eq</var>:=<var>false</var></p>
+					</blockquote>
+					<p class="noindent">instead of the so much crisper</p>
+					<blockquote>
+						<p class="noindent"><var>eq</var> := <var>h</var>&#x2265;<var>N</var></p>
+					</blockquote>
+					<p class="noindent">or from writing</p>
+					<blockquote>
+						<p class="noindent"><b>if</b> <var>eq</var> &#x2261; <var>true</var> <b>then</b> . . .</p>
+					</blockquote>
+					<p class="noindent">instead of the simpler</p>
+					<blockquote>
+						<p class="noindent"><b>if</b> <var>eq</var> <b>then</b> . . .</p>
+					</blockquote>
+					<p>Not only as programmers, but also as mathematicians we have to learn to avoid such spurious case analyses and superfluous comparisons.</p>
+					<p>Another example of the slow acceptance of the boolean domain is provided by the tacit assumption of the mathematical community that the Pythagorean Theorem is a theorem about right-angled triangles. But is it? In the usual terminology for sides and angles it states</p>
+					<blockquote>
+						<p class="noindent">&#x03B3;=90&deg; &#x21d2; <var>a</var><sup>2</sup>+<var>b</var><sup>2</sup>=<var>c</var><sup>2</sup></p>
+					</blockquote>
+					<p class="noindent">and the right angle seems to stare you in the face. But everyone familiar with boolean expressions knows that the above has the same value as</p>
+					<blockquote>
+						<p class="noindent"><var>a</var><sup>2</sup>+<var>b</var><sup>2</sup>&#x2260;<var>c</var><sup>2</sup> &#x21d2; &#x03B3;&#x2260;90&deg;</p>
+					</blockquote>
+					<p class="noindent">The Pythagorean Theorem is a theorem about <em>all</em> triangles (and there exists a nice, elementary proof of it for which the complementary picture displays an <em>arbitrary</em> triangle).</p>
+					<p>The last remark to be made about the two presentations of Russell's Paradox is that the instantiation of (1) enabled us to establish the contradiction without the case analysis of the first presentation.</p>
+		</div>
+		<div align="center">
+			<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+				*</p>
+		</div>
+		<div align="left">
+			<p>In the last programming example from ALGOL 60 I wrote <var>eq</var>
+ &#x2261; <var>true</var> , using &#x2261; to denote equality of boolean operands rather than the = I used before. In a moment we shall see why a special equality sign in the case of boolean operands could be justified. For this purpose, I turn to a problem I owe to Roland C. Backhouse.</p>
+			<p>We are shown a golden vase and a silver vase, each carrying an inscription. We are told that one of the two vases contains a treasure, placed so that the two inscriptions don't lead to a contradiction. The two inscriptions are:<br>
+						<br>
+					</p>
+			<table width="390" border="0" cellspacing="2" cellpadding="0">
+				<tr>
+					<td align="left" valign="top" width="140">on the silver vase:</td>
+					<td>&quot;The treasure is not in<br>
+								this vase.&quot;</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" width="140"></td>
+					<td>
+						<div align="right">
+							
+				                                             and </div>
+					</td>
+				</tr>
+				<tr>
+					<td align="left" valign="top" width="140">on the golden vase:</td>
+					<td>&quot;Of these two inscriptions<br>
+								precisely 1 is true.&quot;</td>
+				</tr>
+			</table>
+			<p class="noindent">
+				Can we locate the treasure?</p>
+			<p>Denoting the truth values of these two statements by <var>S</var> and <var>G</var> respectively, the challenge is to determine the value of <var>S</var>. To this end we turn to the inscription on the golden vase, which in this terminology can be rephrased as</p>
+			<p class="noindent">(2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>S</var> &#x2261; &not;<var>G</var></p>
+			<p class="noindent">(The symbol &not; denotes negation, and saying that of two boolean values precisely 1 is true is the same as saying that the one is the negation of the other.)</p>
+					<p>Expression (2) being a formalization of the statement we had defined to have the same value as <var>G</var>, we conclude</p>
+					<blockquote>
+						<p class="noindent">(<var>S</var> &#x2261; &not;<var>G</var>) &#x2261; <var>G</var></p>
+					</blockquote>
+					<p>Besides being symmetric, the operator &#x2261; , denoting equality of boolean operands, has the nice property of being associative, i.e., it does not matter how we place the parentheses, and our conclusion could also have been formulated as</p>
+					<p class="noindent">(3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>S</var> &#x2261; (&not;<var>G</var> &#x2261; <var>G</var>)</p>
+					<p class="noindent">
+				which immediately yields </p>
+					<blockquote>
+						<p class="noindent"><var>S</var> &#x2261; <var>false</var>,</p>
+					</blockquote>
+					<p class="noindent">
+				i.e., the treasure is in the silver vase.</p>
+					<p>Equation (3) in the unkowns <var>S</var> and <var>G</var> determines the value of <var>S</var>, but leaves the value of <var>G</var> undetermined. The above argument is so short because it avoids a spurious case analysis on the irrelevant value of <var>G</var>.</p>
+					<p>In a way, this example is very similar to the previous one: they both employ</p>
+					<blockquote>
+						<p class="noindent">&not;<var>X</var> &#x2261; <var>X</var> &#x2261; <var>false</var> ,</p>
+					</blockquote>
+					<p class="noindent">whatever the value of <var>X</var> (thereby avoiding an avoidable case analysis). It has been included because it illustrates more.</p>
+					<p>I would like you to know that when I called the above argument &#x2014;which has been designed by G. Wiltink&#x2014; &quot;so short&quot;. I did not exaggerate. Backhouse draws attention to the fact that about two dozen steps are required if one tackles this problem in the style of Gentzen's &quot;Natural Deduction&quot;, whereas Wiltink solves the problem in two (no less formal) steps. Backhouse concludes from the two dozen steps &quot;It is clear from this example that a large amount of detail is required in a completely formal proof&quot;.</p>
+			<p>Wiltink's alternative strongly suggests that Gentzen, who tried to formalize &quot;the natural way of drawing conclusions&quot; &#x2014;in German: &quot;das nat&uuml;rliche Schliessen&quot;&#x2014;, neglected the economy of manipulation. (Before having seen Wiltink's alternative, Backhouse already suspected something of this sort: the quoted problem and its cumbersome solution occur in a section, tellingly titled &quot;Natural Deduction?&quot;.) I am afraid that by neglecting the economy of manipulation, Gentzen has done the mathematical community a disservice: calculational proofs have got an undeserved bad name.</p>
+			<p>The fact that equality between boolean operands is associative, i.e., has a property not enjoyed by equality in general, justifies a special name and a special symbol for it. A usual name is &quot;equivalence&quot; and a usual symbol is &quot;&#x2261;&quot;. I adopt both and propose to pronounce the symbol as &quot;equivales&quot;.</p>
+			<p class="noindent"><u>Remark</u> One also encounters the symbol &quot;&#x21D4;&quot;, pronounced as &quot;if and only if&quot;, but I shall not follow that example. Symbol and name promote the view of equivalence as a shorthand for mutual implication, and it is precisely that view that tends to induce the case analyses that I would like to avoid. Moreover the &quot;if and only if&quot; linguistically hides the associativity of the equivalence so effectively that many people are unaware of it. Just try to understand the sentence &quot;John sees with both eyes if and only if he sees with one eye if and only if he is blind.&quot; . According to all linguistic standards, this sentence is, by virtue of its syntactic ambiguity, total gibberish. (End of Remark.)</p>
+			<p>Wiltink's solution for locating the treasure makes one more thing clear. It shows that it does not suffice to be familiar with just the idea of the boolean domain. To really reap the benefits, we also have to be familiar with the boolean operators &#x2014;such as equivalence, negation, etc.&#x2014; and with their algebraic properties &#x2014;such as symmetry, associativity, etc.&#x2014; . Acquiring that familiarity requires what in these financial times is known as &quot;intellectual investment&quot;; you can take my word for it that this investment quickly pays off.</p>
+		</div>
+		<div align="center">
+			<p>Austin 15 November 1989</p>
+		</div>
+				<div align="left">
+					<p class="noindent">prof. dr. Edsger W. Dijkstra<br>
+				
+				Department of Computer Sciences<br>
+				
+				The University of Texas at Austin<br>
+				Austin, TX 78712&#150;1188<br>
+				
+				USA</p>
+					<p class="noindent">_____________<br>
+						Mathematical Methodology</p>
+				</div>
+				<hr>
+				<font size="-1">transcribed by Mario B&eacute;land<br>
+			
+			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="93">Mon, 28 Jan 2008</csobj></font>
+	</body>
+
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+        <title>E.W.Dijkstra Archive: A monotonicity argument (EWD 878)</title>
+        <link href="transcriptions.css" rel="stylesheet" media="screen" />
+        <style type="text/css">
+            .frame {width: 39em;}
+            .underline {text-decoration: underline;}
+            .right {float: right;}
+        </style>
+    <link href="../transcriptions.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="frame" align="right">
+            <div id="header" align="right">
+                <a href="http://www.cs.utexas.edu/%7eEWD/ewd08xx/EWD878.PDF"
+                    title="Link to the PDF version of AvG36 / EWD878">AvG36 / EWD878</a>
+            </div>
+        </div>
+        <div class="frame">
+            <div id="content">
+                <span class="underline">A monotonicity argument</span>
+                <p>
+                    In the following, square brackets denote universal quantification over
+                    <var>x</var> and <var>y</var> ; <var>f</var> is a function of two arguments
+                    such that<br />
+                    &emsp;&emsp;[<var>x</var> &lt; <var>y</var> &#x2261;&gt; <var>f</var>
+                    <var>x</var> <var>y</var> &lt; <var>f</var> <var>y</var> <var>x</var>]&emsp;.
+                    <span class="right">(0)</span>
+                </p>
+                <p>From the above, we derive the following results.</p>
+                <p class="noindent">
+                    Since <var>p</var> &lt; <var>q</var> &#x2261; <var>q</var> &gt; <var>p</var>
+                    from (0):<br />
+                    &emsp;&emsp;[<var>y</var> &gt; <var>x</var> &#x2261;&gt; <var>f</var>
+                    <var>y</var> <var>x</var> &gt; <var>f</var> <var>x</var> <var>y</var>]&emsp;.
+                </p>
+                <p class="noindent">
+                    From the above, by renaming the dummies:<br />
+                    &emsp;&emsp;[<var>x</var> &gt; <var>y</var> &#x2261;&gt; <var>f</var>
+                    <var>x</var> <var>y</var> &gt; <var>f</var> <var>y</var> <var>x</var>]&emsp;.
+                    <span class="right">(1)</span>
+                </p>
+                <p class="noindent">
+                    From [<var>x</var> = <var>y</var> &#x2261;&gt; <var>f</var> <var>x</var>
+                    <var>y</var> = <var>f</var> <var>y</var> <var>x</var>], by taking the term-wise
+                    disjunction with (0) and and (1) respectively:<br />
+                    &emsp;&emsp;[<var>x</var> &#x2264; <var>y</var> &#x2261;&gt; <var>f</var>
+                    <var>x</var> <var>y</var> &#x2264; <var>f</var> <var>y</var> <var>x</var>]
+                    <span class="right">(2a)</span><br />
+                    &emsp;&emsp;[<var>x</var> &#x2265; <var>y</var> &#x2261;&gt; <var>f</var>
+                    <var>x</var> <var>y</var> &#x2265; <var>f</var> <var>y</var>
+                    <var>x</var>]&emsp;. <span class="right">(3a)</span>
+                </p>
+                <p class="noindent">
+                    By taking the counterpositives of (1) and (0) respectively &mdash;which to all
+                    intents and purposes amounts to doing nothing&mdash;<br />
+                    &emsp;&emsp;[<var>f</var> <var>x</var> <var>y</var> &#x2264; <var>f</var>
+                    <var>y</var> <var>x</var> &#x2261;&gt; <var>x</var> &#x2264; <var>y</var>]
+                    <span class="right">(2b)</span><br />
+                    &emsp;&emsp;[<var>f</var> <var>x</var> <var>y</var> &#x2265; <var>f</var>
+                    <var>y</var> <var>x</var> &#x2261;&gt; <var>x</var> &#x2265;
+                    <var>y</var>]&emsp;. <span class="right">(3b)</span>
+                </p>
+                <p class="noindent">
+                    From (2) and (3) respectively:<br />
+                    &emsp;&emsp;[<var>x</var> &#x2264; <var>y</var> &#x2261; <var>f</var>
+                    <var>x</var> <var>y</var> &#x2264; <var>f</var> <var>y</var> <var>x</var>]
+                    <span class="right">(4)</span><br />
+                    &emsp;&emsp;[<var>x</var> &#x2265; <var>y</var> &#x2261; <var>f</var>
+                    <var>x</var> <var>y</var> &#x2265; <var>f</var> <var>y</var>
+                    <var>x</var>]&emsp;. <span class="right">(5)</span>
+                </p>
+                <p class="noindent">
+                    From (4) and (5), by taking the term-wise conjunction:<br />
+                    &emsp;&emsp;[<var>x</var> = <var>y</var> &#x2261; <var>f</var> <var>x</var>
+                    <var>y</var> = <var>f</var> <var>y</var> <var>x</var>] <span
+                    class="right">(6)</span>
+                </p>
+                <p class="noindent">
+                    By negating both sides of (5) and (4) respectively:<br />
+                    &emsp;&emsp;[<var>x</var> &lt; <var>y</var> &#x2261; <var>f</var>
+                    <var>x</var> <var>y</var> &lt; <var>f</var> <var>y</var> <var>x</var>]
+                    <span class="right">(7)</span><br />
+                    &emsp;&emsp;[<var>x</var> &gt; <var>y</var> &#x2261; <var>f</var>
+                    <var>x</var> <var>y</var> &gt; <var>f</var> <var>y</var>
+                    <var>x</var>]&emsp;. <span class="right">(8)</span>
+                </p>
+                <p>
+                    It is nice to see how the five equivalences (4) through (8) follow from the
+                    single implication (0). Note that, since for reasons of symmetry (0) and (1)
+                    are equivalent, all formulae could also have been derived from (1).
+                </p>
+                <p>
+                    We draw attention to the fact that we did not use that <var>f</var> depends on
+                    both its arguments: if <var>f</var> only depends on its first argument, (0)
+                    postulates that <var>f</var> is an increasing function, but if <var>f</var>
+                    only depends on its second argument, (0) postulates that <var>f</var> is a
+                    decreasing function of that argument.
+                </p>
+                <p align="center" class="center">*&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;*<br />
+                *</p>
+<p>
+        The above grew out of our dissatisfaction with the way we were introduced to
+        Euclidean geometry. With congruences, two theorems were proved seperately,
+        viz.
+    </p>
+                <p>
+                    &ldquo;An isosceles triangle has two equal angles.&rdquo;&emsp;and<br />
+                    &emsp;&emsp;&ldquo;A triangle with two equal angles is isosceles.&rdquo;
+                </p>
+                <p class="noindent">
+                    Prior to that it had already been shown that opposite to the larger angle lies
+                    the larger side, in the jargon: &alpha; &gt; &beta; &#x2261;&gt; <var>a</var>
+                    &gt; <var>b</var>. This is a statement of the form (1); for the proofs of the
+                    theorems, congruences are not needed at all, since the theorems are subsumed in
+                    the conclusion corresponding to (6): &alpha; = &beta; &#x2261; <var>a</var> =
+                    <var>b</var>.
+                </p>
+                <p>
+                    We had similar experiences with the two theorems
+                </p>
+                <p>
+                    &ldquo;An isosceles triangle has two angle bisectors of equal
+                    length.&rdquo;&emsp;and<br />
+                    &emsp;&emsp;&ldquo;A triangle with two angle bisectors of equal length is
+                    isosceles.&rdquo;
+                </p>
+                <p class="noindent">
+                    Thanks to the above, both theorems are subsumed in
+                </p>
+                <p>
+                    &ldquo;In a triangle, the larger angle has the shorter bisector.&rdquo;,
+                </p>
+                <p class="noindent">
+                    a theorem that can be proved in a variety of ways. For instance, in a triangle
+                    with sides of lengths <var>a</var>, <var>b</var>, and <var>c</var>, the square
+                    of the length of the bisector of the angle opposite to <var>a</var> equals
+                </p>
+                <p>
+                    <var>b</var> &middot; </var>c</var> &middot; (1 &ndash; (<var>a</var> / (<var>b</var>
+                    + <var>c</var>))<sup>2</sup>)&emsp;.
+                </p>
+                <p class="noindent">
+                    This expression is an increasing function of <var>b</var> and a decreasing
+                    function of <var>a</var>. It is not difficult to show that an <var>f</var> that
+                    is an increasing function of its first argument and a decreasing function of
+                    its second argument satisfies (0).
+                </p>
+            </div>
+            <div>
+                <div class="noindent">
+                    <p class="noindent" style="width: 50%; display: inline-block;">
+                        drs. A.J.M. van Gasteren<br />
+                        BP Venture Research Fellow<br />
+                        Dept. of Mathematics and<br />
+                        &emsp;Computing Science<br />
+                        University of Technology<br />
+                        5600 MB EINDHOVEN<br />
+                        The Netherlands
+                    </p>
+                    <p class="noindent" style="display: inline-block;">
+                        22 February 1984<br /><br />
+                        prof. dr. Edsger W. Dijkstra<br />
+                        Burroughs Research Fellow<br />
+                        Plataanstraat 5<br />
+                        5671 AL NUENEN<br />
+                        The Netherlands
+                    </p>
+                </div>
+            </div>
+            <hr />
+            <div id="footer">
+                <font size="-1">transcribed by Matthew Hill<br />
+                    revised
+                    <csobj format="MedDate" h="13" region="15" t="DateTime" w="96">
+                      <!-- #BeginDate format:En2 -->08-Jan-2015<!-- #EndDate -->
+                    </csobj>
+                </font>
+            </div>
+        </div>
+    </body>
+</html>

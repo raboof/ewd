@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0078)http://www.cs.utexas.edu/users/EWD/transcriptions/transcriptionStationery.html -->
+<HTML lang=en 
+xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<HEAD>
+<TITLE>E.W.Dijkstra Archive: On a gauntlet thrown by David Gries (EWD 502)</TITLE>
+<META http-equiv=content-type content="text/html; charset=ISO-8859-1">
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+		
+
+<META content="Microsoft FrontPage 4.0" name=GENERATOR></HEAD>
+<BODY>
+<DIV id=frame>
+<DIV id=header>
+  <p style="text-indent: 0"><a title="Link to the PDF version of EWD502" href="../../ewd05xx/EWD502.PDF">EWD502</a></DIV>
+<DIV id=content>
+<P style="text-indent: 0">7th July 1975</P>
+
+<P><U>On a gauntlet thrown by David Gries</U>.</P>
+
+<P>Freshly arrived from the U.S.A. &#x2014;they still struggled with the time shift&#x2014; David Gries and his family paid us a visit a few weeks ago. It was not an occasion for &quot;working together&quot;, yet some shoptalk was unavoidable, and David confronted me with the problem how to generate the <var>n</var>! permutations of the numbers 0 through <var>n</var>-1 such that the transition from one permutation to the next would only involve the swapping of two neighbours. He told me the problem because he had found it a non-trivial task to present an algorithm solving this problem in a convincing manner. He &#x2014;good boy!&#x2014; respected my desire not to be told how he had solved the difficulties of presenting his solution, and he granted me the opportunity to think about the problem myself. (He told me, that the problem had been dealt with in the Algorithms Section of the<i> Comm.ACM</i>, but at the level of unintelligibility that is characteristic for that Section, and we agreed wholeheartedly that a tradition of clearer presentation of algorithms is most sorely needed.)</P>
+
+<P class="noindent"><U>Note</U>. Those of my readers who would like to try to solve this problem themselves should 
+stop reading here. (End of Note.)</P>
+
+<P>As the swapping of two neighbours changes the number of inversions &#x2014;i.e. the number of pairs in the wrong order&#x2014; by 1 , it is suggested to try to characterize each permutation by its inversions. If we consider an arbitrary permutation of the numbers 0 through <var>n</var>-1 , each permutation is uniquely characterized by the values <var>inv</var>(<var>i</var>) , with 0 &#x2264; <var>inv</var>(<var>i</var>) &#x2264; <var>i</var> for 0 &#x2264; <var>i</var> &lt; <var>n</var> , where <var>inv</var>(<var>i</var>) equals the number of numbers &lt; <var>i</var> , that are placed at &quot;the wrong side&quot; of <var>i</var> ; <var>inv</var>(<var>i</var>) = the number of inversions between the value <var>i</var> and smaller values. (The total number of inversions of the permutation is the sum of all the <var>inv</var>(<var>i</var>)-values.) That each permutation defines the <var>inv</var>(<var>i</var>)-values uniquely is obvious; that the <var>inv</var>(<var>i</var>)-values define the permutation uniquely is also not difficult to see, when we consider the algorithm constructing the permutation from the <var>inv</var>(<var>i</var>)-values &#x2014;processing these values in the order of increasing <var>i</var> &#x2014;: this is an algorithm that leaves us no choice.</P>
+
+<P>There is, therefore, a one-to-one correspondence between the <var>n</var>! possible <var>inv</var>-values and the <var>n</var>! permutations, and the question becomes, which modifications of the <var>inv</var>-value correspond to a swap of neighbours: each swap of two neighbours changes exactly one <var>inv</var>(<var>i</var>)-value by one, viz. with <var>i</var> = the larger of the two values swapped. The value of <var>inv</var>(<var>i</var>) is to be increased by one if the swap brings the pair into the wrong order, otherwise it has to be decreased by one.</P>
+
+<P>A feasible sequence of <var>inv</var>-values to be generated is now reasonably obvious: it is the generalization of the Grey-code. For <var>n</var> = 4 it would begin</P>
+				<CENTER>
+					<p class="noindent">0&nbsp;&nbsp;0&nbsp;&nbsp;0&nbsp;&nbsp;0<br>
+						
+0&nbsp;&nbsp;0&nbsp;&nbsp;0&nbsp;&nbsp;1<br>
+						
+0&nbsp;&nbsp;0&nbsp;&nbsp;0&nbsp;&nbsp;2<br>
+						
+0&nbsp;&nbsp;0&nbsp;&nbsp;0&nbsp;&nbsp;3<br>
+						
+0&nbsp;&nbsp;0&nbsp;&nbsp;1&nbsp;&nbsp;3<br>
+						
+0&nbsp;&nbsp;0&nbsp;&nbsp;1&nbsp;&nbsp;2<br>
+						
+0&nbsp;&nbsp;0&nbsp;&nbsp;1&nbsp;&nbsp;1<br>
+						
+0&nbsp;&nbsp;0&nbsp;&nbsp;1&nbsp;&nbsp;0<br>
+						
+0&nbsp;&nbsp;0&nbsp;&nbsp;2&nbsp;&nbsp;0<br>
+						
+0&nbsp;&nbsp;0&nbsp;&nbsp;2&nbsp;&nbsp;1<br>
+						
+0&nbsp;&nbsp;0&nbsp;&nbsp;2&nbsp;&nbsp;2<br>
+						
+0&nbsp;&nbsp;0&nbsp;&nbsp;2&nbsp;&nbsp;3<br>
+						
+0&nbsp;&nbsp;1&nbsp;&nbsp;2&nbsp;&nbsp;3<br>
+						0&nbsp;&nbsp;1&nbsp;&nbsp;2&nbsp;&nbsp;2</p>
+					<p class="continue">etc.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+				</CENTER>
+				<P>The rule is as follows: a number is changeable when it may be increased or decreased by one. 
+It may be increased if the sum of the numbers to its left is even and it has not reached its 
+maximum value; it may be decreased if the sum of the numbers to its left is odd and it has not 
+reached its minimum value zero. At each step, always the right-most changeable number is changed.</P>
+				<P>After having established the value <var>i</var> such that <var>inv</var>(<var>i</var>) has to be changed and, also, whether the value <var>i</var> has to be swapped with its left-hand neighbour (because this is a smaller one, <var>inv</var>(<var>i</var>) has to be increased) or with its right-hand neighbour (a decrease of <var>inv</var>(<var>i</var>) by one), we have to establish the place <var>c</var> in the array, where the element i is positioned; this is given by</P>
+				<p><var>c</var> = <var>i</var> &#x2212; <var>inv</var>(<var>i</var>) + (the number of values <var>j</var> such that <var>j</var> &gt; <var>i</var> <U>and</U> <var>inv</var>(<var>j</var>) = [?]</p>
+				<P class="noindent">The reason for this formula: <var>i</var> is its original position, <var>inv</var>(<var>i</var>) is the number of smaller elements to the right of it; we have to add to it the number of larger elements in front of the section with elements &#x2264; <var>i</var> .</P>
+				<P>In the following program we have given <var>inv</var>(0) &#x2014;which should be constantly 0&#x2014; the funny value -2; this is just the usual, mean, little coding trick, in order to let the search for the right-most changeable number terminate artificially when there is no more such a number. The value <var>totinv</var> records the total number of inversions in the array <var>a</var>; the variable <var>linv</var> records the sum of the (non-funny) <var>inv</var>-values to the left of <var>inv</var>(<var>i</var>).</P>
+
+<PRE><U>begin</U> <U>glocon</U> n; <U>privar</U> a, inv, ready, totinv;
+   a <U>vir</U> int <U>array</U> := (0, 0) {a initialized with a(0) = 0};
+   inv <U>vir</U> int <U>array</U> := (0, -2) {inv initialized with inv(0) = - 2};
+   <U>do</U> inv.dom &#8800; n &#x2192; a:hiext(inv.dom); inv:hiext(0) <U>od</U>
+      {a(0),..., a(n-1) = 0,..., n-1   and  inv(0),...,inv(n-1) = -2, 0,...,
+   ready <U>vir</U> bool :=  false; totinv <U>vir</U> int :=  0; 
+   <U>do</U> <U>non</U> ready &#x2192;
+      <U>begin</U> <U>glocon</U> n; <U>glovar</U> a, inv, ready, totinv; 
+         <U>privar</U> i, c, linv;   printarray (a);
+         i <U>vir</U> int := n - 1; c <U>vir</U> int := 0; linv <U>vir</U> int := totinv - inv(i)
+         <U>do</U> inv(i) = i <U>and</U> even(linv) &#x2192; c:= c + 1 ; i:= i - 1 ; 
+               linv := linv - inv(i)
+            &#9647; inv(i) = 0 <U>and</U> odd(linv) &#x2192; i:= i - 1 ; linv := linv - inv(i)
+         <U>od</U>;
+         c := c + i - inv(i);
+         <U>if</U> even(linv) <U>and</U> i &#8805; 1 &#x2192; inv:(i) = inv(i) + 1 ; 
+               totinv := totinv + 1; a:swap(c - 1, c) 
+            &#9647; odd(linv) <U>and</U> i &#8805; 1 &#x2192; inv:(i) = inv(i) - 1 ; 
+               totinv := totinv - 1; a:swap(c, c + 1)
+            &#9647; i = 0 &#x2192; ready := true
+         <U>fi</U>
+      <U>end</U>
+   <U>od</U>
+<U>end</U></PRE>
+				<p></p>
+				<table width="90%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="60%">Plataanstraat 5<BR>
+							
+NL-4565 NUENEN<BR>
+							
+The Netherlands</td>
+						<td>prof.dr.Edsger W.Dijkstra<BR>
+							
+Burroughs Research Fellow</td>
+					</tr>
+				</table>
+				<P style="text-indent: 0"></P>
+				<HR>
+				<!-- name and date -->
+<DIV id=footer>transcribed by Carl Ludwigson<BR>
+revised <CSOBJ w="108" t="DateTime" region="15" h="15" format="MedDate">Thu, 15 Nov 2007</CSOBJ></DIV></DIV>
+</BODY></HTML>
+

@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>E.W.Dijkstra Archive: On a language proposal for the Department of Defence (EWD 514)</title>
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff">
+		<div id="frame">
+			<div id="header">
+				<table width="100%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td>17th of September 1975</td>
+						<td>
+							<div align="right">
+								 <a href="../../ewd05xx/EWD514.PDF">EWD514</a></div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div id="content">
+				<p class="noindent"><u>On a language proposal for the Department of Defence</u></p>
+			</div>
+		</div>
+		<blockquote>
+			<blockquote>
+				<div id="frame" align="left">
+					<p class="noindent">&quot;For fools rush in where angels fear to tread.&quot;&nbsp;<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from &quot;An Essay on Criticism&quot; by Alexander Pope, 1688-1744</p>
+				</div>
+			</blockquote>
+		</blockquote>
+		<div id="frame">
+			<div align="left">
+				<p class="noindent"><u>Introduction</u></p>
+				<p>If some of the following comments sound (unusually) grim, it should be borne in mind that I write these comments not in my native tongue and that combining in English clarity with the subtle use of understatement is not my greatest strength.</p>
+				<p>I have screened the report &quot;strawman&quot; &#x2014;second cut&#x2014; in my usual way, which I have found most effective in the past, asking myself the following questions.</p>
+				<ol>
+					<li type="1">How careful use has been made of the (English) language?<br>
+						This I have found to be one of the most revealing criteria. It has nothing to do with grammatical pedantry or anything of that sort; I firmly believe that no project can result in a product better than the language in which the product has been discussed and carried out. For anything non-trivial careful use of language is not a luxury, but a must.<br>
+						&nbsp;
+					<li type="1">Is the justification of the goals convincing?<br>
+						If it is not, it may mean a number of things. It may mean, that the author is consciously unconvinced of the worthiness of the goals: in that case he should abandon it. It may be, that the author is subconsciously unconvinced of their worthiness, but has been &quot;talked into it&quot;: in that case he should clear up his mind.<br>
+						&nbsp;
+					<li type="1">Are the goals compatible with each other and well-understood?<br>
+						If they are not, early discovery is often possible and then saves a lot of vain effort.<br>
+						&nbsp;
+					<li type="1">Are the most difficult aspects of the project well-identified and is it probable that their difficulties can be surmounted?<br>
+						No chain is stronger than the weakest link so search for the latter.<br>
+						&nbsp;
+					<li type="1">Has the author separated his concerns in a helpful manner?<br>
+						For any complicated undertaking I have learned to appreciate a clear separation of concerns as a (technical) <i>conditio sine qua non</i>; as a result I have learned to appreciate its absence/presence as one of the more telling indications for judging the expected (in)competence for the task at hand.
+				</ol>
+				<p>Whenever on the verge of embarking on a sizeable project &#x2014;before speeding up towards the point-of-no-return, so to speak&#x2014; I myself have always played with respect to my own projects the role of the doubter, of the <i>advocatus diaboli</i>, trying to kill the project. Embarking on an impossible task and failing is a most time-consuming and expensive way to demonstrate its impossibility. What is worse, the failure often fails to convince, because the stubborn optimists will say: &quot;Well, if next time we avoid those and those mistakes, we may succeed.&quot;. In such circumstances a piece of <i>a priori</i> reasoning that argues why a project, even without mistakes in its development, is bound to fail, is, although in itself non-constructive, a rewarding exercise. The project &quot;strawman&quot; seems to be in a stage that justifies such a screening; or is its impetus already so large, that the point-of-no-return has been passed?</p>
+				<p class="noindent"><u>1. The Use of language.</u></p>
+				<p>The spellings &#x2014;they occur with great &quot;consistance&quot;&#x2014; &quot;kernal&quot; and &quot;encapsolation&quot; are somewhat piculier. But it is not only spelling: in section 2 &quot;A Common Programming Language&quot; (page 5) the author writes about &quot;improvements in ... risks&quot;, and he titles a section &quot;Criteria to Aid Existing Software Problems&quot;. He writes &#x2014;&quot;IV. A. Criteria to Satisfy Specialized Application Requirements&quot;&#x2014;</p>
+				<blockquote>
+					<p class="noindent">&quot;... it must be possible to write programs which will continue to operate in the presence of faults.&quot;</p>
+				</blockquote>
+				<p class="noindent">To start with: &quot;it must be possible&quot; is very ambiguous: either this sentence <em>concludes</em> the existence of a possibility, or states the extreme <em>desirability</em> of a possibility, and by using &quot;must&quot; in this way, the author is close to confusing ends and means. My next objection is that programs don't &quot;operate&quot;: a program is as static as a drawing, a proof, a novel or a bill. But, finally, what is meant by &quot;continue to operate&quot;? In a way that we can ensure that a machine will continue to operate by disabling the parity check? I will return to this section later.</p>
+				<p>On the same page is written</p>
+				<blockquote>
+					<p class="noindent">&quot;Applications which must interface with equipment or people in real time must have access to real time programming capability.&quot;</p>
+				</blockquote>
+				<p class="noindent">How can an application interface? How does an application have access to a programming capability? (Reference to &quot;capabilities&quot; in connection with programming is, I am afraid, nearly always a symptom of fuzzy thinking: I, at least, don't have them for understanding them!)</p>
+				<p>I stop my linguistic comments here (but not for lack of further material). Pointing out that signalled linguistic sloppiness is quite usual and accepted in computing circles, is no excuse; for if it is true, that could very well be an explanation for today's sorry state of the art.</p>
+				<p class="noindent"><u>2. Justification of the goals.</u></p>
+				<p>A considerable part of the justification is financial. Now, although coins are very concrete objects, money is a highly abstract notion, and the author does not seem to understand it. How, otherwise can he write &quot;Software is very expensive&quot;? (III The Most Pressing Software Problems. A. High Cost.) As that paragraph continues, we must conclude that the author would agree to the remark that &quot;poetry and platinum are very inexpensive&quot;, because only little money is spent procuring them. As most of the costs involved in the development etc. of software are personnel costs:</p>
+				<ol>
+					<li type="1">the &quot;high price&quot; is due to the great number of programmers engaged; in these times of unemployment, that may not be a bad thing at all.<br>
+						&nbsp;
+					<li type="1">alternatively the DoD could halve the programmers' salaries.
+				</ol>
+				<p class="noindent">I came to the conclusion that money is not the real issue. (I know that those whose unit of thought is the dollar, will not understand this, and will therefore feel entitled to disagree, but never mind that.)</p>
+				<p>At various places &#x2014;and that is a much more forceful justification&#x2014; the author expresses his concern about the quality of today's software (&quot;Programming errors can have catastrophic consequences.&quot;) and in the section &quot;Timeliness&quot; he justly points out &quot;a common reaction is to aggravate the situation by adding additional manpower&quot;. The word &quot;aggravate&quot; is a true one: it is not so much the additional costs involved in adding the additional manpower, it is its degrading effect upon the quality of the final product that should worry us.</p>
+				<p>So I decided to read the document as a proposal aimed at improving the quality of DoD software. If this can be achieved, it can probably only be achieved by making fewer mistakes and from that a cost reduction is only to be expected. (Not software, but mistakes are expensive!) In short: I regard a possible cost reduction as a (possible considerable) fringe benefit, the higher quality as the main goal. I thought that I could do so while doing full justice to the author.</p>
+				<p class="noindent"><u>3. Are the goals compatible and well-understood?</u></p>
+				<p>The author writes &quot;The distinction between high order and low level languages is that between people and machines&quot;. I can enlarge on that: in the past, when we used &quot;low level languages&quot; it was considered to be the purpose of our programs to instruct the machines; now, when using &quot;high order languages&quot; we would like to regard it as the purpose of our machines to execute our programs. Run time inefficiency can be viewed as a mismatch between the program as stated and the machinery executing it. The difference between past and present is that in the past the programmer was always blamed for such a mismatch: he should have written a more efficient, more &quot;cunning&quot; program! With the programming discipline acquiring some maturity, with a better understanding of what it means to write a program so that the belief in its correctness can be justified, we tend to accept such a program as &quot;a good program&quot; if matching hardware is thinkable, and if with respect to a given machine aforementioned mismatch then occurs, we now tend to blame that computer as ill-designed, inadequate and unsuitable for proper usage. In such a situation there are only a few true ways out of the dilemma</p>
+				<ol>
+					<li type="1">accept the mismatch<br>
+						&nbsp;
+					<li type="1">continue bit pushing in the old way, with all the known ill effects<br>
+						&nbsp;
+					<li type="1">reject the hardware, because it has been identified as inadequate.
+				</ol>
+				<p>The author concludes his discussion of High Order vs. Low Level Programming Languages with:</p>
+				<blockquote>
+					<p class="noindent">&quot;The fourth approach, and the one which to our mind is most reasonable when object efficiency is important, acknowledges that the major limitation on automated optimization is lack of information. It may have been a mistake to use programming languages in which the programmer can underspecify his task and hide information from the compiler. [...] High level programs should contain a great deal of information of value to the compiler ...&quot; etc.</p>
+				</blockquote>
+				<p class="noindent">But I have some questions. With &quot;information of value to the compiler&quot; is probably meant, information that will cause the compiler to produce a more efficient object program; what kind of &quot;helpful&quot; information does the author have in mind? Does the author believe, that the notion &quot;helpful&quot; is machine independent? And is also compiler independent? If so, why? If not, the purpose of the high order programming language is defeated, for, in order to write a good program, the programmer must not only know the target machine well, but in addition the HOL compiler for it! Has the author any notion of the algorithms that could be used in the compilers, so as to exploit that additional helpful information? Does the author believe that the desired efficiency can be achieved by such &quot;assisted automated optimization&quot;? At this place &#x2014;where the controversy has to be talked away&#x2014; he suggests so. Later he insists on the possibility to include &quot;machine language&quot;!</p>
+				<p>When mentioning the possibility of inserting machine language, the author does not seem too enthusiastic &#x2014;and rightly so: has he yielded to pressure?&#x2014;: he mentions that it would defeat the purpose of machine independence. I would like to point out that in all probability the mere <em>possibility</em> of inserting machine language &#x2014;whether used or not!&#x2014; will defeat much more!</p>
+				<ol>
+					<li type="1">it may be expected to constrain implementation techniques<br>
+						&nbsp;
+					<li type="1">it may be expected to complicate diagnostics which, remember, should be given in source language components<br>
+						&nbsp;
+					<li type="1">it may be expected to impair security: type checking conventions can be circumvented.<br>
+						&nbsp;
+					<li type="1">it may be expected to impair the ability to exclude in multiprogramming situations <i>a priori</i> a large class of ugly time-dependent bugs. Don't forget that in real time applications, scope rules &#x2014;ruthlessly checked by the compiler&#x2014; are a powerful tool for ensuring that one of the sequential processes will not interfere in an uncontrolled fashion with local variables of one of the other sequential processes of the aggregate. The same holds for a number of independent programs executed in an interleaved fashion; in the latter case it is not unlikely that the correct execution of <em>my</em> program depends on <em>you</em> not having inserted sneaky machine code!				</ol>
+				<p>I cannot suggest strongly enough each time to select one of the three ways out of the dilemma, and not to mix them. When the second alternative &quot;continue bit pushing in the old way, with all the known ill effects&quot; is chosen, let that be an activity with which the HOL project does not concern itself: if it does, the &quot;ill effects&quot; will propagate through the whole system.</p>
+			</div>
+			<div align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					*</p>
+			</div>
+			<div align="left">
+				<p>I agree with the author's remark in &quot;Simplicity vs. Specialization&quot;: &quot;Probably the greatest contributor to unnecessary complexity in programs is the use of overly elaborated languages with large numbers of complex features.&quot; I would like to point out that a vital word in that sentence is the word &quot;unnecessary&quot;: the remark should not seduce us to believing that programming will become easy when we have a simple programming language, because the intrinsic complexity as might follow from the task, will remain. The author has not analyzed what caused the emergence of those baroque tools, nor does he indicate how he proposes to prevent that his &quot;extensible (!) HOL&quot; results in as many baroque horrors as extensions are made. The answer &quot;Yes, but that is not the HOL, that is only an extension&quot; is not adequate!</p>
+				<p>I agree with his remark in &quot;Programming Ease vs. Security&quot;; indeed, many people mistake ease of programming with ease of making undetected errors. His remarks in 3. &quot;Object Efficiency vs. Clarity and Correctness&quot; are inconclusive; so are the ones in section 4. &quot;Machine Independence vs. Machine Dependence&quot;.</p>
+			</div>
+			<div align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					*</p>
+			</div>
+			<div align="left">
+				<p>By the time that I read under the heading Fault Tolerant Programs:</p>
+				<blockquote>
+					<p class="noindent">&quot;In many weapon systems and control programs it must be possible to write programs which will continue to operate in the presence of faults, whether in the computer hardware, in input data, in operator procedures, or in other software. Crucial to fault tolerant programs is the ability of the program to specify the action to be taken at all (!) run time exception conditions.&quot;,</p>
+				</blockquote>
+				<p class="noindent">I wonder, whether the author has read what he has written. You see, we have to write &quot;programs which will continue to operate&quot;. The language should therefore contain as one of the basic primitive building blocks the procedure called &quot;get_me_out_of_the_mess&quot;; its body consists of a faithful copy of the Philosopher's Stone.</p>
+			</div>
+			<div align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					*</p>
+			</div>
+			<div align="left">
+				<p class="noindent"><u>4. Are the most difficult aspects identified?</u></p>
+				<p>I don't think so. The author has a dream about a nice kernel &#x2014;and a lot of things he writes about that kernel are quite sensible&#x2014; but the word &quot;kernel&quot; itself is an OK-word that should make us suspicious. We have already seen that all machine-dependent characteristics &#x2014;special peripherals, etc&#x2014; are pushed into the extensions, and it is not inconceivable that that can be done. (In the great number of cases this has been done quite successfully, e.g. a bunch of standard library procedures manipulating an incremental plotter.) By the time, however, that (9. Standard Extensions, c) I read:</p>
+				<blockquote>
+					<p class="noindent">&quot;Any selected common language must be capable of interfacing with data base systems; and, because standards are limited and there is ongoing research in this area, the data base interface should be designed as an extension which can grow at the user level without inventing a new language.&quot;</p>
+				</blockquote>
+				<p class="noindent">I shudder. This might turn out to be a non-trivial task, and, given a mechanism for &quot;language extension&quot;, it is not clear to me at all that that mechanism will enable us to cater for any conceivable data base interface. In all probability it won't. And that would imply that the design of the extension mechanism implicitly delineates the class of data base interfaces to which the HOL can be extended so as to fit. In this sense we can regard the possibilities and limitations of the extension mechanism as a &quot;downward meta-interface&quot; towards the data base. Nowhere the author gives a hint that, for instance, here the HOL designers have a very serious responsibility. A more careful scrutiny of the proposal, I am afraid, will reveal similar instances of unawareness.</p>
+				<p class="noindent"><u>5. Separation of concerns</u></p>
+				<p>The author makes, for instance, an insufficiently clear separation between the definition of the language and its implementation. At &quot;Source Language Characteristics&quot; 3. Variables, Literals, Constants, c (page 10) 14 lines from below, he writes:</p>
+				<blockquote>
+					<p class="noindent">&quot;Whether a variable will be assigned a value is in general unsolvable at compile time, but in those cases in which it is not easily determined by the translator, it will not be easily determined by the programmer and those who must maintain the program and should therefore be considered an error.&quot;</p>
+				</blockquote>
+				<p>I am all in favour of a programming language that does away with the phenomenon of the possibly uninitialized variable, and I fully agree with the author's remark &#x2014;in the same paragraph&#x2014; that automatic initialization by default is a fake solution. The only solution that I know of introduces the initialization syntactically distinguishable from the assignment to a variable that already has a value and ensures by syntactic means that no uninitialized variable can ever be accessed; in this case the syntactic means are provided by a refinement of the scope rules. (I once designed such a system for a language with a pronounced sequencing discipline; needless to say, the inclusion of go to's &#x2014;another of the requirements in the proposal!&#x2014; makes this problem very much harder if not insolvable.) Under no circumstances, however, the question whether something is an error or not, should be made dependent on the cleverness of a compiler! And this is exactly what the above, quoted paragraph suggests to me.</p>
+				<p class="noindent"><u>6. Additional Remarks</u></p>
+				<p>The section 5 &quot;Scope&quot;, c. suggests that the scope of a variable declared at the beginning of a block automatically extends over inner blocks &#x2014;unless a new declaration for that identifier is given for the inner block&#x2014; like it was done in ALGOL 60. Whether this <em>automatic</em> inheritance by an inner block of the global variables is a very safe convention is subject to serious doubts. I have experimented with a language in which at the beginning of an inner block all global identifiers identifying variables or constants needed in the inner block had to be listed explicitly &#x2014;it even indicated the nature of the inheritance: as a constant, as an initialized variable or as a variable that had to be initialized&#x2014;. I found this form of redundancy very helpful and can even argue why such redundancy is in a sense indispensible.</p>
+			</div>
+			<div align="center">
+				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+					*</p>
+			</div>
+			<div align="left">
+				<p>The most revealing (and also most alarming) passages, however, I found in the recommendations. &quot;The design of a simple, uniform language ... should be do-able in six months using qualified language designers/implementers.&quot; I was flabbergasted! (It taught me, again, that the best way to read documents is often reading them backwards! <i>In cauda venenum</i>.....) The problem is that I happen to know a few people that I would consider to be &quot;qualified language designers/implementers&quot;, but <em>none</em> of them would regard the design of a simple, uniform language as only a six-month job! The design of something worth having really takes many times longer. If the six-month period mentioned does not already reveal what the author has in mind, the word &quot;using&quot; does it: how much nicer the quoted sentence would have been, if he had written &quot;by&quot; instead....</p>
+				<p>The whole document gives me the uneasy feeling that here I see a proposal to concoct yet another nil-solution to an unsolvable problem. The worst shock I got on the next pages &quot;Thus the benefits will grow if the new efforts adopt the standard <em>whatever it is</em>.&quot; (7. my emphasis) and &quot;Research in the design of programming languages ..., in programming methodology ... should continue in parallel with the use of a fixed common language&quot; (10).</p>
+				<p>If the author knows anything about research, he should know that one of the most difficult mental gymnastics is to dissociate oneself from the inadequate experiences and prejudices collected in one's past. Section 6 &quot;..through alteration of extant languages&quot; strongly suggests a conservative effort. And the outcome of that conservative six-month effort should present the framework (constraints?) for research in programming methodology? Now, come on....</p>
+				<p>After having stated (7) that the benefits will grow if the new efforts adopt the standard &quot;whatever it is&quot; the text continues ominously &quot;The ultimate measure of success must be in cost savings and failure of a project to adopt the common language should only be for demonstrable economic reasons.&quot; I don't like that sentence at all. The use of the word &quot;failure&quot; is incriminating in this context, &quot;refusal to adopt the common language&quot; would have made the sentence less offensive. It is perhaps as well that it has been written as it has been: it betrays a dangerous attitude which otherwise could have remained hidden.</p>
+				<p>Is it not amazing that the lack of &quot;management visibility&quot; can become so frustrating for the managers that people are seriously proposing to enforce a standard &quot;whatever it is&quot;? Such an enforcement could easily stifle all progress. It has already been suggested that Red China could win the next war provided that it manages to skip the FORTRAN/COBOL stage, which now paralyses much of computing in the Western hemisphere.</p>
+				<p class="noindent"><u>Note</u>. COBOL has been designed with the intention to eliminate programmers. And what is the result? COBOL is <em>only</em> used by professional programmers (by about 75 percent of them, as a matter of fact). As COBOL has been pushed very strongly by the DoD, this failure of COBOL to meet one of its goals must have been noticed within the DoD, and I expect that some experts at the DoD must have investigated why COBOL has failed so miserably in this respect. Has that same group of experts also studied &quot;strawman&quot;? (End of note.)</p>
+				<p>The burning question that should be considered is, whether the adoption of a common language HOL will really improve &quot;management visibility&quot;. I doubt that it will, I seriously doubt......</p>
+				<p></p>
+				<table width="407" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td align="left" valign="top" width="55%">Plataanstraat 5<br>
+							NL-4565 NUENEN<br>
+							The Netherlands</td>
+						<td align="left" valign="top">prof.dr.Edsger W.Dijkstra<br>
+							Burroughs Research Fellow</td>
+					</tr>
+				</table>
+				<p><u></u></p>
+			</div>
+			<hr>
+			<font size="-1">transcribed by Tristram Brelstaff<br>
+				revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="94">Tue, 18 Dec 2007</csobj></font>
+			<p></p>
+			<p></p>
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Exercises in making programs robust (EWD 482)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd04xx/EWD482.PDF"
+           title="Link to the PDF version of EWD482">EWD482</a></div></div>
+      <div id="frame">
+         <div id="content">
+         <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for 
+producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its 
+searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR
+<hr />
+           <p class="noindent">
+           <p class="noindent">7th March 1975 
+  <p><b>Exercises in making programs robust</b>.
+<p>(This is a sequel to the very exploratory EWD452: &ldquo;About robustness and
+the like&rdquo; which was initiated in September 1974 and closed on 31st January 1975)<p>In this report I shall pursue a very simple idea. Provided that we give
+an adequate formulation of what we admit as &ldquo;a single machine malfunctioning&rdquo;,
+we can interpret the effort as that of making a program in such a way that
+under the assumption of at most a single malfunctioning, the machine will never
+&rsquo;produce a wrong result as if it were the right one. I shall not, however,
+start my considerations with a very precise definition of the class of 
+malfunctionings I am going to allow a single instance of: the probability that
+I have designed a tool of which, after much hard labour, we must conclude that
+it is insufficient for reaching our goal, is then just too high. I shall 
+therefore start at the other end, and investigate the consequences of applying a
+technique which &mdash;with a certain amount of goodwill&mdash; can be viewed as &ldquo;making&rdquo;
+a program more robust&ldquo; and afterwards analyse, which class of malfunctionings
+it catches under the assumption of at most a single instance. The more elaborate
+exercises, I am sorry to announce, will be rather painful ones, because we
+cannot do them with too simple examples: if the example is very simple &mdash;like
+forming the sum of a hundred stored values&mdash; the only way to make the program
+more robust boils (in some way or another) down to doing the computation twice
+and I am &mdash;obviously!&mdash; more interested in what we can achieve without paying
+that price. (All by itself, this observation is already somewhat alarming:
+under assumption of a perfect machine, we are used to break down the whole
+computation as a succesion of little steps, all of them trivial by themselves,
+but if they can only be made more robust by duplication, our robustness concerns
+force us to consider larger &ldquo;units&rdquo;. This seems a warning, that we are tackling
+a nasty subject!)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>A very simple example to start with. A common program structure to 
+establish a relation R is
+<table width=100%><tr><td valign=top width=10%>
+(1)</td><td>establish P; <b>do</b> BB &rarr; S <b>od</b>
+</td></tr>
+<tr><td valign=top>
+where</td><td>(P <b>and</b> BB) => wp(S, P)
+</td></tr>
+<tr><td valign=top>
+and</td><td>(P <b>and</b> <b>non</b> BB) => R
+</td>  </tr>  </table>
+and we could replace (1) by
+<table width=100%><tr><td valign=top width=10%>
+(2)</td><td>establish P; <b>do</b> BB &rarr; S <b>od</b>; <b>if</b> P <b>and</b> <b>non</b> BB &rarr; skip <b>fi</b>
+</td>  </tr>  </table>
+where the added statement causes abortion if the loop terminates with
+<b>non</b> P <b>or</b> BB, i.e. in a state in which we are not entitled to conclude the
+validity of R.
+<p>Time-wise this seems an attractive modification, because it does not
+generate an overhead on the repeatable statement S . An example would be
+(for N &ge; 0) with
+<table width=100%><tr><td valign=top width=10%>
+R:</td><td><b>do</b> a<sup>2</sup> and (a+1)<sup>2</sup> > N and P: a<sup>2</sup> &le; N
+</td>  </tr>  </table>
+to add to the program
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      a:= 0 {P}; <b>do</b> (a+1)<sup>2</sup> &le; N &rarr; a:= a+1 <b>od</b> {R} </td> </tr>
+</table>
+the checking statement
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      <b>if</b> a<sup>2</sup> &le; N <b>and</b> (a+1)<sup>2</sup> > N &rarr; skip <b>fi</b> </td> </tr>
+</table>
+<p>But this example immediately illustrates the very restricted &mdash;i.e.
+nearly empty&mdash; range of applicability of this transformation: it only
+works in those cases where finding the answer may be hard, but checking the
+answer is (always!) easy. These cases seem to be rather the exception than
+the rule, and it would not amaze me if, often, when we think that we have
+found an example, the property that the correctness of a result is so easily
+checked can be used to speed up the process of finding one. (The above square
+root example is, indeed, ridiculously inefficient for larger values of N.)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>What do we do, if &mdash;as for instance, when the correctness proof appeals
+to the Linear Search Theorem&mdash; the verification of P <b>and</b> <b>non</b> BB amounts to
+redoing the computation? Very crudely, if our first program operates on a
+variable (set) x
+<table width=100%><tr><td valign=top width=10%>
+(3)</td><td>establish P(x);
+</td></tr>
+<tr><td valign=top>
+</td><td><b>do</b> BB(x) &rarr; S(x) <b>od</b> .
+</td>  </tr>  </table>
+we could introduce a second set of variables, y say, and duplicate (under
+the assumption of determinacy)
+<table width=100%><tr><td valign=top width=10%>
+(4)</td><td>establish P(x);
+</td></tr>
+<tr><td valign=top>
+</td><td><b>do</b> BB(x) &rarr; S(x) <b>od</b>;
+</td></tr>
+<tr><td valign=top>
+</td><td>establish P(y); 
+</td></tr>
+<tr><td valign=top>
+</td><td><b>do</b> BB(y) &rarr; s(y) <b>od</b>;
+</td></tr>
+<tr><td valign=top>
+</td><td><b>if</b> x = y &rarr; skip <b>fi</b> .
+</td>  </tr>  </table>
+<p>We can also merge the two processes, but
+establish P(x) and P(y)
+<b>do</b> BB(x) &rarr; S(x); S(y) <b>od</b>;
+if x = y &rarr; skip <b>fi</b>
+is a little bit too optimistic if we allow &mdash;and I think that we should&mdash;
+erroneous sequencing as would result from an erroneous evaluation of a guard
+as possible malfunctioning:
+<table width=100%><tr><td valign=top width=10%>
+(5)</td><td>establish P(x) and P(y);
+</td></tr>
+<tr><td valign=top>
+</td><td><b>do</b> BB(x) &rarr; <b>if</b> BB(y) &rarr; S(y) <b>fi</b>; S(x) <b>od</b>;
+</td></tr>
+<tr><td valign=top>
+</td><td><b>if</b> <b>non</b> BB(y) and x = y &rarr; skip <b>fi</b>
+</td>  </tr>  </table>
+is in this sense safe.
+<p>Up till now, there has been no gain by the transition from (4) to (5).
+But a fairly common structure of type (3), however, operates on a state
+space (x, z) and has the general form
+establish P1(z) and P2(x, z);
+<b>do</b> B1(z) and B2(x, z) &rarr; x:= f(x, z); z:= g(z) <b>od</b>
+<p>Here, repeated application of z:= g(z) generates a sequence of 
+z-values &mdash;on account of B1(z) possibly finite&mdash; and in the variable x , some
+function value of this sequence of z-values is computed (collected, if you
+prefer). The relation P1(z) &mdash;which z:= g(z) will keep invariant&mdash; has been
+introduced to represent any possible redundancy in the representation of z.
+(If this redundancy is absent, P1(z) does not depend on z at all, is
+identically true and the remainder of this section &mdash;probably the whole report&mdash;
+is no longer applicable.) If B2(x, z) is identically true, the sequencing
+is independent of x and, therefore, of the function f. If however, we
+are looking for the first z-value (if any) that satisfies some property &mdash;e.g.
+if we are looking for the smallest divisor less than the square root plus one&mdash;
+B2 indicates that the search can be stopped as soon as a z-value satisfying
+the criterion has been found.
+<p>Again, we can merge to two copies, but what about letting the two state
+spaces share the same z ?
+<table width=100%><tr><td valign=top width=10%>
+(6)</td><td>establish P1(z) and P2(x, z) and P2(y, z);                                              
+</td>  </tr>  </table>
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+    <b>do</b> B1(z) <b>and</b> B2(x, z) &rarr;                                                   </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+         <b>if</b> B1(z) <b>and</b> B2(y, z) &rarr; y:= (y, z) <b>fi</b>;                        </td> </tr> <tr> <td></td> <td></td> <td>
+         x:= f(x, z); z:= g(z)                                                                   </td> </tr> <tr> <td></td> <td colspan = 2>
+    <b>od</b>                                                                                    </td> </tr> <tr> <td></td> <td colspan = 2>
+    <b>if</b> <b>non</b> (B1(z) <b>non</b> B2(y, z)) <b>and</b> x = y &rarr; skip <b>fi</b>  .   </td> </tr>
+</table>
+<p>How good is (6)? Suppose that the values of x , y and z are currently
+all correct, but that the evaluation of a guard is incorrect: as this incorrect
+evaluation is supposed to be the only malfunctioning, it will either itself
+cause abortion, or the next guard evaluation will do so. Suppose that the
+value of x has been corrupted and that this was our only malfunctioning,
+which is assumed to imply that y and z are and will remain correct.
+There are three cases: either we will, during x &ne; y , encounter a case that
+B2(x, z) &ne; B2(y, z) and this will cause abortion; the second possibility is
+that, although x &ne; y remains, this will not occur, but then the last guard
+will cause abortion (on account of x = y ). The third possibility is that this
+last abortion will not occur, because in the mean time x = y has been 
+re-established, i.e. the (apparently information destroying) operation x:= f(x, z)
+has absorbed the malfunctioning: apparently, it did not matter! For a corruption
+of y (with the assumption that then x and z are, therefore, correct) the
+same applies. We are left with a corruption of z.
+<p>The operation z:= g(z) is already supposed to satisfy
+<table width=100%><tr><td valign=top width=10%>
+(7)</td><td>(P1(z) <b>and</b> B1(z)) &rArr; wp(&ldquo;z:= (z)&rdquo;, P1(z)) ,
+</td>  </tr>  </table>
+i.e. it is supposed not to destroy the validity of P1(z). If we assume that
+the operation z:= g(z) will, in addition, not destroy the validity of <b>non</b> P1(z)
+<table width=100%><tr><td valign=top width=10%>
+(8)</td><td>(<b>non</b> P1(z) <b>and</b> B1(z)) &rArr; wp(&ldquo;z:= g(z)&rdquo;, <b>non</b> P1(z))
+</td>  </tr>  </table>
+&mdash;i.e. will keep P1(z) invariant in the strict sense&mdash;, then changing the last
+line of (6) into
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      <b>if</b> <b>non</b> (B1(z) <b>and</b> B2(y, z)) <b>and</b> x = y <b>and</b> P1(z) &rarr; skip <b>fi</b> </td> </tr>
+</table>
+will guarantee that a corruption of z will be caught as well, if we assume
+that
+<table width=100%><tr><td valign=top width=10%>
+(9)</td><td>z is represented in such a redundant fashion, that any corruption of
+</td></tr>
+<tr><td valign=top>
+</td><td>it, that would not destroy the validity of P1(z) can be regarded as
+</td></tr>
+<tr><td valign=top>
+</td><td>a multiple malfunctioning, or, to put it in another way, each single
+</td></tr>
+<tr><td valign=top>
+</td><td>malfunctioning affecting z will make P1(z) false.
+</td>  </tr>  </table>
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>I have done extensive exercises with a program solving the following
+problem: generate all cyclic arrangements of 16 zeroes and 16 ones, such
+that all 32 possible configurations of 5 successive bits occur (and therefore:
+exactly once). Another formulation of describing the same problem is: generate
+all permatations h<sub>0</sub> ... h<sub>31</sub> of the numbers 0 through 31 that
+<table width=100%><tr><td valign=top width=10%>
+0)</td><td>h<sub>0</sub>=0 , 
+</td></tr>
+<tr><td valign=top>
+2)</td><td>suc(h<sub>i</sub>, h<sub>i+1</sub>) for 0 &le; i < 31
+</td></tr>
+<tr><td valign=top>
+3)</td><td>suc(h<sub>31</sub>, h<sub>0</sub>) ,
+</td>  </tr>  </table>
+where suc(a, b) = (a <b>mod</b> 16 = b <b>div</b> 2) .
+<p>It is in the latter form that we shall tackle it. First of all:
+because suc(0, x) has only the solutions x = 0 and x = 1, and h<sub>1</sub> &ne; h<sub>0</sub> ,
+it follows that h1 = 1 . Therefore in a permutation satisfying 
+1) and 2) it follows that h<sub>31</sub> = 16, for: suc(16, x) has as only solutions
+x = 0 and x = 1 and thus, for all i < 31 we have h<sub>i</sub>&ne; 16. In short, we
+can drop for the permutation requirement 3) as it is implied by the others.
+-The original inner block as designed by W.H.J.Feijen, was essentially the
+following one:
+<table> <tr> <td>&nbsp; </td> <td colspan = 9>
+ <b>begin</b> <b>virvar</b> x ; <b>privar</b> h,  p;                                                     </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 8>
+   x <b>vir</b> int <b>array</b> :=  (0) ;  h <b>vir</b> int <b>array</b> := (0,  0) ;                   </td> </tr> <tr> <td></td> <td></td> <td colspan = 8>
+   p <b>vir</b> bool <b>array</b> := (0, true); <b>do</b> p.dom &ne; 32 &rarr; p:hiext(false) <b>od</b>; </td> </tr> <tr> <td></td> <td></td> <td colspan = 8>
+   <b>do</b> h(0) = 0 &rarr;                                 ,                                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 6>
+         <b>begin</b> <b>glovar</b> x, h, p; <b>privar</b> c;                                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 5>
+            <b>if</b> h.dom &lt; 32 &rarr; skip                                                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 4>
+             &#x25af; h.dom = 32 &rarr;                                                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 2>
+                  <b>begin</b> <b>glovar</b> x; <b>glocon</b> h; <b>privar</b> j;                        </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
+                     j <b>vir</b> int := 0;                                                              </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>
+                     <b>do</b> j &ne; 32 &rarr; x:hiext(h(j)); j:= j + l <b>od</b>                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                  <b>end</b>                                                                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+            <b>fi</b>;                                                                                   </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+            c <b>vir</b> int := 2 *(h.high <b>mod</b> 16);                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+            <b>do</b> p(c) &rarr;                                                                        </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+                 <b>do</b> odd(c) &rarr; c, h:hipop; p:(c)= false <b>od</b>;                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                  c:·= c + 1                                                                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+            <b>od</b>;                                                                                   </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+            h:hiext(c); p:(c)= true                                                                      </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 6>
+         <b>end</b>                                                                                      </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 7>
+     <b>od</b>                                                                                           </td> </tr> <tr> <td></td> <td colspan = 9>
+ <b>end</b> .                                                                                            </td> </tr>
+</table>
+<p>The extensive exercises, however, have been thrown into the 
+waste-paper basket, because they had a very ad hoc character and the proofs that
+the resulting programs were resistant to a single malfunctioning either
+failed or became so laborious as to become unconvincing. It was that 
+disappointing experience that prompted me to try to formulate &mdash;&ldquo;in abstracto&rdquo;
+so to speak&mdash; what I was really doing, while designing the above robust
+structure (6). My next experiment will therefore be to try the above general
+technique in a hopefully systematic manner to this specific program. (In order
+to keep the experiment fair, I shall not exploit the fact that something more
+about the answer is known: it has been proved that the number of solutions
+equals 2048 , but we continue as if this theorem were unknown to us.)
+<p>To establish the connection: the general x of (6) corresponds to the
+output array x of our example and the role of the general z of (6) has
+been taken over by the pair h, p in our example. Relation P2 is the
+simple (and not too interesting) one: in our example it is
+<table width=100%><tr><td valign=top width=15%>
+P2(x, h, p):</td><td> the value of the array variable x &ldquo;consists&rdquo; of all solutions
+in alphabetical order that precede alphabetically the permutations
+that begin with
+<br>&nbsp; &nbsp; &nbsp; &nbsp; h(0) ... h.high .
+</td>  </tr>  </table>
+(The term &ldquo;consists&rdquo; is loose, but hopefully clear enough. It is further to
+be noted that in the above formulation of P2 , the boolean &ldquo;presence&rdquo; array p
+is not mentioned.)
+<p>Relation P1 is more interesting: it consists of two terms P1.1(h) <b>and</b>
+P1.2(h, p):
+<table width=100%><tr><td valign=top width=15%>
+P1.1(h):</td><td>for all i satisfying h.lob &le; i &lt; h.hib we have suc(h(i),h(i+1)
+</td></tr>
+<tr><td valign=top>
+P1.2(h, p):</td><td>for all k satisfying 0 5 &le; k &lt; 32,
+p(k) implies that there exists 1 value for i, and
+<b>non</b> p(k) implies that there exists no value for i , such that
+<br>&nbsp; &nbsp; &nbsp; &nbsp;h.lob &le; i &le; h.hib <b>and</b> h(i) = k .
+</td>  </tr>  </table>
+<p>According to P1.l , the integer array h contains in general redundant
+information: a boolean array &mdash;manipulating the bits of the original statement
+of the problem would have done the job also&mdash;. Feijen replaced the boolean
+array by an integer array for reasons of efficiency.
+<p>According to P1.2 the boolean presence array p stores purely 
+additional information that follows functionally from h; it has been introduced
+also for reasons of efficiency by Feijen.
+<p>And here lies our hope for gain: the redundancy that we need for the
+robust presentation of z may already be present for efficiency&rsquo;s sake!
+<p>We may wonder, whether the redundancy provided by h and p is 
+sufficient: because p follows uniquely from h , a scrambling of the value of
+p will always violate P1.2 . It is, however possible to scramble h without
+violating P1.1 nor P1.2 (it is difficult, but it can be done). This can
+be remedied by replacing the boolean &ldquo;presence&rdquo; array p by an integer &ldquo;place&rdquo;
+array p, satisfying the new
+<table width=100%><tr><td valign=top width=15%>
+P1.2(h, p):</td><td>for all k satisfying 0 &le; k &lt; 32,
+</td></tr>
+<tr><td valign=top>
+</td><td>either p(k) = -1 and there exists no value i satisfying
+h(i) = k ,
+</td></tr>
+<tr><td valign=top width=10%>
+</td><td>or 0 &le; p(k) &le; h.hib and then i = p(k) is the only value for
+i &ge; 0 (see below), satisfying h(i) = k.
+</td>  </tr>  </table>
+As the cost is negligible and it is our plan to do a thorough job, I propose
+to switch to the integer &ldquo;place&rdquo; array p. (The last requirement i &ge; 0 has
+been added because it is a simplification to extend the array h at the low
+end with h(-1) = 16 for the verification of P1.1 : upon removal of a top
+element the array h does not become empty.)
+<p>The critical operation is now &ldquo;z:= g(z)&rdquo;. We must change it so as to
+satisfy (8) as well. We can, indeed, insert additional tests that would lead
+to abortion if the intended modification of z would lead to a violation
+of <b>non</b> P1(z) , but this is not sufficient, because how do we know that the
+correct new value of z has been assigned to it? (If z:= g(z) would have
+acted as a skip, we might produce the same solution twice!)
+<p>The critical value, of course, is that of &ldquo;c&rdquo;: if the initialization
+of c had erroneously been carried out as
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                  c <b>vir</b> int := 2 *(h.high <b>mod</b> 16) + 1 </td> </tr>
+</table>
+a whole class of solutions could be skipped.
+<p>So we had better concentrate upon the active scope of c and repeat
+our games (or similar ones: wait and see). We have for the active scope of
+c &mdash;i.e. more precisely: until the extension h:hiext(c)&mdash; if all goes wel
+the invariant relation
+<table width=100%><tr><td valign=top width=10%>
+P3(h, c):</td><td>suc(h.high, c) .
+</td>  </tr>  </table>
+<p>Because (<b>non</b> P3(h, c)) &rArr; wp(&ldquo;h:hiext(c)&rdquo;, <b>non</b> P1.1(h))
+<br>it suffices, as far as our obligations versus the invariance of non P1.1(h
+is concerned, to keep during the active scope, besides <b>non</b> P3(h, c) also
+<b>non</b>(P1.1(h) <b>and</b> P3(h, c)) invariant, i.e. we do not need to check, whether
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+           c, h:hipop </td> </tr>
+</table>
+perhaps could destroy <b>non</b> P1.1(h), because that would imply the emergence of
+<b>non</b> P3(h, c), which will not disappear unnoticed.
+<p>As P3(h, c) covers the four most significant digits of c, the least
+significant digit of c seems to be our remaining Achilles heel. I propose
+to count the number of even numbers among
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+    h(0) through h(h.hib), extended with c during the latter&rsquo;s active scop </td> </tr>
+</table>
+<p>This will catch erroneous initialization of c ; if the guard odd(c)
+is erroneously evaluated, an even c will disappear without the count being
+decreased, if the gaurd is erroneously evaluated false, c:= c + 1 will 
+increase the number of even values, while it should decrease them by one. This
+count is a kind of fancy parity bit. The full program is shown 
+<table> <tr> <td colspan = 9>
+<b>begin</b> <b>virvar</b> x, y; <b>privar</b> h, p, n; n <b>vir</b> int := 1;                                              </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 8>
+   x <b>vir</b> int <b>array</b> := (0); y <b>vir</b> int <b>array</b> := (0); h <b>vir</b> int <b>array</b> := (-1, 16, 0) </td> </tr> <tr> <td></td> <td colspan = 8>
+   p <b>vir</b> int <b>array</b> := (0, 0); <b>do</b> p.dom &ne; 32 &rarr; p:hiext(-1) <b>od</b>                            </td> </tr> <tr> <td></td> <td colspan = 8>
+   <b>do</b> h(0) = 0 &rarr;                                                                                                </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 7>
+     <b>begin</b> <b>glovar</b> x, y, h, p, n; <b>privar</b> c;                                                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 5>
+        <b>if</b> h.dom &lt; 32 &rarr; skip                                                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 4>
+         &#x25af; h.dom = 32 &rarr; <b>if</b> p(0) = 0 &rarr; skip <b>fi</b>;                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 3>
+           <b>begin</b> <b>glovar</b> x; <b>glocon</b> h; <b>privar</b> j; j <b>vir</b> int := 0;                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+              <b>do</b> j &ne; 32 &rarr; x:hiext(h(j)); j:= j + 1 <b>od</b>                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
+           <b>end</b>                                                                                                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+        <b>fi</b>                                                                                                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+        <b>if</b> h.dom &lt; 32 &rarr; skip                                                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 4>
+         &#x25af; h.dom = 32 &rarr; <b>if</b> p(0) = 0 &rarr; skip <b>fi</b>;                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
+           <b>begin</b> <b>glovar</b> y; <b>glocon</b> h; <b>privar</b> j; j <b>vir</b> int := 0;                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+              <b>do</b> j &ne; 32 &rarr; y:hiext(h(j)); j:= j + 1 <b>od</b>                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
+           <b>end</b>                                                                                                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+        <b>fi</b>                                                                                                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+        c <b>vir</b> int := 2 *(h.high <b>mod</b> 16); n := n +1;                                                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+        <b>do</b> p(c) &ge; 0 &rarr; <b>if</b> p(c) &ge; 0 &rarr; skip <b>fi</b>;                                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+              <b>do</b> odd(c) &rarr; <b>if</b> suc(h.high, c) &rarr; c, h:hipop <b>fi</b>;                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                          <b>if</b> p(c) = h.hib + 1 &rarr; p:(c)= -1 <b>fi</b>;                                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+              <b>od</b>                                                                                                     </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+              c:= c + 1; n:= n - 1;                                                                                         </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+        <b>od</b>                                                                                                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+        <b>if</b> suc(h.high, c) &rarr; h:hiext(c) <b>fi</b>;                                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+        <b>if</b> p(c) = -1 &rarr; p:(c) = h.hib <b>fi</b>                                                                  </td> </tr> <tr> <td></td> <td></td> <td colspan = 7>
+     <b>end</b>                                                                                                             </td> </tr> <tr> <td></td> <td colspan = 8>
+   <b>od</b>                                                                                                                </td> </tr> <tr> <td></td> <td colspan = 8>
+   <b>if</b> h.dom = 2 <b>and</b> h(0) = 1 <b>and</b> n = 0 .<b>and</b> p(0) = - 1 <b>and</b> p(1) = 0 &rarr;               </td> </tr> <tr> <td></td> <td></td> <td colspan = 7>
+     <b>begin</b> <b>glocon</b> p; <b>privar</b> j; j <b>vir</b> int := 2;                                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+        <b>do</b> p(j) = - l <b>and</b> j < 31 &rarr; j:= j + l <b>od</b>;                                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+        <b>if</b> p(j) = - l &rarr; skip fi                                                                                 </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 6>
+      <b>end</b>                                                                                                            </td> </tr> <tr> <td></td> <td colspan = 8>
+   <b>fi</b>                                                                                                                </td> </tr> <tr> <td colspan = 9>
+<b>end</b>                                                                                                                  </td> </tr>
+</table>
+<p>The comparison of the global values x and y , which should be equal,
+has been delegated to the surroundings.
+
+<p class=noindent>(Warning: the proof reading of the program text on page EWD482 - 6 has not b
+done with the same care as I spent to the pages of my book.)
+<p>Let me give some explanatory notes.
+<br>The outer guard h(0) = 0 is not repeated automatically, if true: it only
+matters, when we think that we have found a solution, and then it should be
+confirmed by p(0) = 0; this means that after the last solution has been found
+and p(1) is already = 1, it would not be detected if the outer repetition we
+on for a while. Why should it?
+<p>The operations, which are essentially of the form x:= f(x, z) and
+y:= f(y, z) are themselves fully unchecked: if something goes wrong there
+that is harmful, different values of x and y will result. Note that
+the test, whether a new solution has been found is repeated: once for x
+and once for y .
+<p>The conclusion that p(c) &ge; 0 holds, has to be confirmed, otherwise
+the erroneous conclusion that extension with c would lead to duplication
+would cause possibly a large collection of solutions to be skipped. (This
+additional confirmation was lacking in my first version of the robust program
+I observed the omission while typing these notes!) The conclusion that on
+account of <b>non</b> p(c) &ge; 0 the repetition has to be terminated is asked for
+confirmation 7 lines lower.
+<p>The test odd(c) in the innermost repetition does not need further
+confirmation, as all erroneous evaluation would leave its traces in a 
+non-correct value of n.
+<p>Finally, at the end of our original program, it is checked &mdash;somewhat
+superfluously&mdash; that h.dom = 2; the test h(0) = 1 is necessary for the 
+confirmation that the outermost repetition has not stopped too early, thereby
+possibly missing a number of the last solutions. Finally P1.2(h, p) is
+fully checked. (We can regard the test h.dom = 2 as part of that test, so
+perhaps its presence is fully justified after all.)
+<p>And this concludes my treatment of this example.
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>As the plurals in my title betray, I had originally in mind to deal wit
+more examples. At second thought I shall confine myself in this report to thi
+single example: I am already on the eighth page, with single space typing.
+Although I had announced, that the exercises would be &ldquo;rather painful ones&rdquo;,
+I did not expect, that it would be so painful. So I think that I should send
+the report now away, as it stands, hoping for helpful comments. Therefore a f
+concluding remarks.
+If the inefficiency of our final program &ldquo;hurts&rdquo;, we should be aware of
+the following considerations. Why does it &ldquo;hurt&rdquo;? Well, because the many test
+that we have inserted, are on the one hand assumed to absorb computer time,
+on the other hand &mdash;unless the machine is completely lousy&mdash; will be very
+skew: of course, for if the machine were perfect, they would not give 
+information at all! The normal reaction to such very skew tests has been to devote
+dedicated hardware to them (vide the parity check or the interrupt circuit).
+If techniques, as displayed in this report, would be applied to general purpo
+programs &mdash;note, that I have not made up my mind, whether-that would be a goo
+thing!&mdash; this conflict could perhaps be solved by the presence of some 
+program-controlled hardware that could do some of the checking in parallel with
+the main computation.
+<p>For the time being, techniques as shown are probably more appropriate
+in special purpose environments, such as, for instance, micro-programs or
+just the instruction cycle. One of the reasons for undertaking all this was
+my growing doubt, whether our techniques for the quality control of both,
+chip design and chip construction, is sufficient. If techniques like the abov
+can be transferred to that more microscopic level, we might feel confident
+to catch in a single stroke both design errors and incidental machine 
+malfunctionings.
+<p><p><table width=100%><tr><td valign=top width=40%>
+20th March 1975</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+Plataanstraat 5</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+NUENEN - 4565</td><td>
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td> 
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-12-08<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

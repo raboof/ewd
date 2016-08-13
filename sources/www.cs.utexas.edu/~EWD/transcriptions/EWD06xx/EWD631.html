@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>E.W.Dijkstra Archive: Re: &quot;Formal Derivation of Strongly Correct Parallel Programs&quot; by Axel van Lamsweerde and M.Sintzoff. (EWD 631)</title>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<div align="right">
+			&nbsp;&nbsp;<a href="../../ewd06xx/EWD631.PDF" target="_blank">EWD631</a></div>
+		<div align="left">
+			<p>Re: &quot;Formal Derivation of Strongly Correct Parallel Programs&quot; by Axel van Lamsweerde and M.Sintzoff.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This paper leaves me with very mixed feelings. I have the greatest sympathy for its goal of applying formal techniques at the stage of program construction rather than at the stage of verification of &quot;given&quot; programs; besides that I have not found any formal error, although I went fairly carefully through considerable portions of the text. Yet I would hate to see this article published in its current form, because in many respects it is so ugly that its publication would fire back on the goals it seeks to promote.</p>
+		</div>
+		<div align="center">
+			<p>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+				*</p>
+		</div>
+		<div align="left">
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The paper is much too long, and as it stands no one is going to read it. It is a rambling paper in the sense that it deals with a number of very different problems. I don't feel that the &quot;unified framework&quot; alluded to in the summary justifies their combination into a single paper. My first recommendation to the authors is to consider to base upon this material, say, three separate articles.</p>
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fairly isolated problems are</p>
+			<p>a) the correct and complete signalling; this is an optimization problem, and its isolation could be considered because only here the notational apparatus of <u>ask</u> and <u>see</u> and the strongest post-condition are needed</p>
+			<p>b) deadlock prevention; this is a logical problem that, in principle, admits a unique solution</p>
+			<p>
+				c) starvation prevention; this is in general a strategic problem that admits infinitely many different solutions.</p>
+		</div>
+		<div align="center">
+			<p>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+				*</p>
+		</div>
+		<div align="left">
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It is a rambling paper in the sense that it is unclear in its objectives: do the authors want to present a set of workable techniques for program construction, or do they want to show that most predicates one is interested in during program construction can be viewed as extremal solutions of derivable equations? Maybe the authors' answer is &quot;Both goals are equally dear to our hearts.&quot; Even if this is true &#x2014;the article makes upon me the impression that the second goal is dearer to their hearts, and &quot;sell&quot; the topic by overstating the degree in which the first goal has been reached&#x2014; it is questionable whether a single article should hit both targets, because many readers interested in the one goal don't care too much about the other, and vice versa.</p>
+		</div>
+		<div align="center">
+			<p>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+				*</p>
+		</div>
+		<div align="left">
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The prose should should be written more carefully, for as it stands it contains too many shaky expressions. I mention: &quot;to statically abstract&quot;, &quot;statically omitted&quot;, &quot;temporarily delayed&quot;, &quot;logical properties&quot;, &quot;logical starvation&quot; &#x2014;these expressions are not made any clearer by typing &quot;logical&quot; in italics!&#x2014; &quot;predicates which verify&quot; (pg.12) instead of &quot;satisfy&quot;, &quot;fixed point equation&quot; (pg.14) instead of &quot;equation&quot;, &quot;fixed point condition&quot; (pg.36) instead of &quot;condition&quot;, &quot;fixed point solution&quot; (pg.30) instead of &quot;solution&quot;, &quot;(global) deadlock-free invariant J&quot; (pg.27) instead of &quot;an invariant J ensuring absence of (global) deadlock&quot;.</p>
+		</div>
+		<div align="center">
+			<p>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+				*</p>
+		</div>
+		<div align="left">
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I was very much amazed when I read (pg.55): &quot;We must confess that our techniques [...] are not [...] based upon a formal model of parallel computation&quot;, amazed because I had been struck all the time by the extremely operational approach. (Each waiting process is &quot;waiting on a queue&quot;: while reading I was associating with each non-rectangular triangle a queue on which Pythagoras's Theorem could wait to become true.) After re-reading the quoted sentence I realized that I had skipped the word &quot;formal&quot;. The quoted sentence continues &quot;perhaps this should be done.&quot;. Personally I doubt that: I suspect that we can only make real progress provided that we define the semantics <u>in</u>dependent of any underlying computational model.</p>
+		</div>
+		<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In this article I find a confirmation of that suspicion. What are the &quot;parallel programs&quot; referred to in the title? What we are &#x2014;or: should be&#x2014; talking about is programs whose implementations allow concurrency. It is not the programs themselves that are &quot;parallel&quot;; parallelism or concurrency are operational concepts that refer not to the program, but to its execution. In this respect that paper is half-hearted: on pg.1 they write &quot;if all components of the parallel program can be executed an arbitrary number of times, they do what the specifications require them to do&quot; but also &quot;good proof techniques [...] should abstract from all these execution paths&quot;. But if you really do a good job of that last abstraction, the operational view would disappear (as would the word &quot;parallel&quot; from the title, a word whose presence is already somewhat hard to defend.)</p>
+		<div align="center">
+			<p>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+				*</p>
+		</div>
+		<div align="left">
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Notation, terminology and formalism are often clumsy, e.g.</p>
+			<p>a) They use &quot;I&quot; for identification of an invariant relation: one should never do so in English texts &#x2014;what about &quot;I cannot be violated&quot;?&#x2014;, nor in texts that also use Roman numerals, see pg.7, line 5 from below:</p>
+			<p>
+				&quot;according to rules based on the truth of I, see Appendix I.&quot;</p>
+			<p>b) Sections 2, 3, and 4 are done with double (quadruple) subscripts, only thereafter the authors simplify. (On page 9, line 11 from below, read &quot;programs of the simpler form&quot;; this was the <u>only</u> typing error I saw! My compliments!)</p>
+			<p>c) What they call &quot;local deadlock&quot; should have been called &quot;(danger of) collective starvation&quot;, because &quot;deadlock&quot; suggests something irreversible, and &quot;local deadlock&quot; should remain reserved for the situation &#x2014;not studied in this paper&#x2014; that a true subset of the processes gets irrevocably stuck, no matter how the remaining processes are thereafter executed.</p>
+			<p>
+				d) They often &quot;unfold and fold again&quot;, but in all cases that I checked it, these operations were not necessary at all, e.g in the derivation of (6.3), where the explicit mentioning of the use of the formula pg.30, line 4 from above, would have been more helpful.</p>
+		</div>
+		<div align="center">
+			<p>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+				*</p>
+		</div>
+		<div align="left">
+			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;From page 26 onwards, where starvation enters the picture, the treatment becomes increasingly unconvincing, because the danger of individual starvation can be exorcized in so many different ways. If we formulate the requirement operationally as a restriction defining a subset of the possible execution paths, I prefer the introduction of (perhaps ghost-) variables recording what is relevant about the path (or: &quot;the past&quot;) so that we can formulate our restriction in terms of (original and) added variables. This being added to the relation to be kept invariant, the problem is reduced to the previous one, viz. the prevention of deadlock. That seems a more &quot;unified&quot; approach, which has the further advantage of making one's design freedom explicit.</p>
+			<p></p>
+			<p>
+				                                         Edsger W.Dijkstra</p>
+			<p>
+			</p>
+		</div>
+		<hr>
+		<font size="-1">transcribed by Tristram Brelstaff<br>
+			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="93">Mon, 22 Jan 2007</csobj></font>
+	</body>
+
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: On W.H.J. Feijen's solution for the lexicographic minimum of a circular list (EWD 723)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd07xx/EWD723.PDF"
+           title="Link to the PDF version of EWD723">EWD723</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+ 
+<b>On W.H.J. Feijen's solution for the lexicographic minimum of a circular list</b>.
+<p>For a given, non-empty &mdash;i.e. with N &ge; 1&mdash; list                     
+    (C[0], C[1], ..., C[N-1])
+we consider the N associated sequences C<sub>i</sub>
+<table width=100%><tr><td valign=top width=10%>
+</td><td>Ci = (C[i], C[i+1], ..., C[i+N-1])
+</td>  </tr>  </table>
+in which all subscripts are reduced modulo N.
+We are asked to design a program determining
+an integer value k satisfying the relation
+<table width=100%><tr><td valign=top width=10%>
+R:</td><td>0 &le; k &lt; N <b>and</b> (&forall;i: 0 &le; i &lt; N: C<sub>i</sub> <u>GE</u> C<sub>k</sub>) ,
+</td>  </tr>  </table>
+in which "<u>GE</u>" should be read as "lexicographically greater or equal than".
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>The lexicographic minimum CC is defined by the following two relations. 
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(&forall;i: 0 &le; i &lt; N: C<sub>i</sub> <u>GE</u> CC)</td><td align=right>(0)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+(&exist;i: 0 &le; i &lt; N: C<sub>i</sub> <u>EQ</u> CC)</td><td align=right>(1)
+</td>  </tr>  </table>
+From the transitivity of the lexicographic ordering we conclude                       
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(&forall;p, q:: C<sub>p</sub> <u>GE</u> C<sub>q</sub> <b>or</b> C<sub>q</sub> <u>GT</u> CC)</td><td align=right>(3)
+</td>  </tr>  </table>
+<b>Note</b>. When, in a quantification, the range is obvious,
+we allow ourselves its omission. Hence the "::". (End of note)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>Let P(k,n) be defined as:       
+<table width=100%>
+<tr><td valign=top width=10%> P: </td><td valign=top>
+0 &le; k &lt; n <b>and</b> (&forall;i; 0 &le; i &lt; n: C<sub>i</sub> <u>GT</u> CC <b>or</b> i = k)</td><td align=right>(4)
+</td>  </tr>  </table>
+We observe immediately         
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(P <b>and</b> n &ge; N) &rArr; R</td><td align=right>(5)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+(&forall;i: 0 &le; i &lt; h: C<sub>i</sub> <u>GT</u> CC) &rArr; P(h, h+1)</td><td align=right>(6)
+</td>  </tr>  </table>
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>Let Q(k, n, l) be defined as            
+<table width=100%>
+<tr><td valign=top width=10%> Q: </td><td valign=top>
+0 &le; k &lt; n &and; (&forall;i: 0 &le; i &lt; l: C[k+i] = C[n+i])</td><td align=right>(7)
+</td>  </tr>  </table>
+<p>Because the lexicographic order of the two sequences with equal leading elements              
+does not change when those leading elements are removed from them, we conclude               
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+Q(k,n,l) &rArr; (Q<sub>a</sub> <b>or</b> Q<sub>b</sub> <b>or</b> Q<sub>c</sub>)</td><td align=right>(8)
+</td>  </tr>  </table>
+with the mutually exclusive terms
+<table width=100%>
+<tr><td valign=top width=10%> Qa: </td><td valign=top>
+(&forall;i: 0 &le; i &lt; N: C<sub>k+i</sub> = C<sub>n+i</sub></td><td align=right> (8a)
+</td></tr>
+<tr><td valign=top> Qb: </td><td valign=top>
+(&forall;i: 0 &le; i &lt; l: C<sub>k+i</sub> <u>LT</u> C<sub>n+i</sub> &and; l &ge; 0</td><td align=right>(8b)
+</td></tr>
+<tr><td valign=top> Qc: </td><td valign=top>
+(&forall;i: 0 &le; i &lt; N: C<sub>k+i</sub> <u>GT</u> C<sub>n+i</sub>  &and; l &ge; 0</td><td align=right>(8c)
+</td>  </tr>  </table>
+<p>We furthermore observe that, for l=0, the                 
+last term of Q(k, n, l) is vacuously true.                 
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>We observe that P&ans;Q can be initialized by               
+<table width=100%><tr><td valign=top width=10%>
+</td><td>k, n, l:= 0, 1, 0                 
+</td>  </tr>  </table>
+and is left invariant by the following three guarded commands.                
+<table width=100%><tr><td valign=top width=10%>
+1)</td><td>C[k + l] = C[n + l] &rarr; l:= l + 1                 
+</td>  </tr>  </table>
+<p>This follows immediatly from (4) &mdash;l does not occur in P&mdash; and (7)                 
+<table width=100%><tr><td valign=top width=10%>
+2)</td><td>C[k + l] &lt; C[n + l] &rarr; {P&and;Qb} n, l:= n + l + 1, 0
+</td>  </tr>  </table>
+<p>Q and the guard imply together Qb, and note that Qb implies
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(&forall;i: n &le; i &lt; n+l+1: C<sub>I</sub> <u>GT</u> CC)
+</td>  </tr>  </table>
+Hence, on account of (4) the invariance of P is guaranteed.
+The assignment l:= 0 ensures the invariance of Q
+<table width=100%><tr><td valign=top width=10%>
+3)</td><td>C[k + l] &gt; C[n + l] &rarr; {P&and;Qc} n, l:= n + l + 1, 0
+</td>  </tr>  </table>               
+<table width=100%><tr><td valign=top width=30%>
+</td><td>h:= max(n, k+l+1);
+</td></tr>
+<tr><td valign=top>
+</td><td>k, n, l:= h, h+1, 0
+</td>  </tr>  </table>
+<p>Q and the guard imply together Qc, and note that Qc implies
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(&forall;i: k &le; i &lt; n+l+1: C<sub>i</sub> <u>GT</u> CC) &and; l &ge; 0 .    
+</td>  </tr>  </table>
+With h = max(n, k+l+1) we conclude from the last result and P
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(&forall;i: 0 &le; i &lt; h: C<sub>i</sub> <u>GT</u> CC)
+</td>  </tr>  </table>
+and, thanks to (6), the invariance of P is guaranteed.
+The assignment l:= 0 ensures the invariance of Q .
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>Finally we show that
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(P &and; Q &and; k + l + 1 &ge; N) &rArr; R</td><td align=right>(9)
+</td>  </tr>  </table>
+ 
+<p class=noindent><table width=100%><tr><td valign=top width=10%>
+1)</td><td>P &and; Qa &and; k + l + 1 &ge; N
+</td>  </tr>  </table>
+<p>From Qa we conclude that the sequence is
+periodic, and that the period divides n - k; hence
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(&exist;i: k &le; i &lt; n: C<sub>i</sub> <u>EQ</u> CC)
+</td>  </tr>  </table>
+Together with &mdash;what follows from P&mdash;
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(&forall;i: k &lt; i &lt; n: C<sub>i</sub> <u>GT</u> CC)                 
+</td>  </tr>  </table>
+we conclude C<sub>k</sub> <u>EQ</u> CC, i.e. R .                 
+<p class=noindent><table width=100%><tr><td valign=top width=10%>
+2)</td><td>P &and; Qb &and; k+l+1 &ge; N    
+</td>  </tr>  </table>
+<p>From Qb we conclude, as before,                 
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(&forall;i: n &le; i &lt; n+l+1: C<sub>i</sub> <u>GT</u> CC);                  
+</td>  </tr>  </table>
+because n &gt; k, n+l+1 &gt; k+l+1; because k+l+1 &ge; N                 
+we conclude, together with P                 
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(&forall;i: 0 &le; i &lt; N: C<sub>i</sub> <u>GT</u> CC <b>or</b> i = k), i.e. R                 
+</td>  </tr>  </table>
+<p class=noindent>    
+<table width=100%><tr><td valign=top width=10%>
+3)</td><td>P &and; Qc &and; k+l+1 &ge; N                      
+</td>  </tr>  </table>
+<p>From Qc we conclude, as before,                 
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(&forall;i: k &le; i &lt; k+l+1: C<sub>i</sub> <u>GT</u> CC);                  
+</td>  </tr>  </table>
+because k+l+1 &ge; N,  we conclude, together with P                 
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(&forall;i: 0 &le; i &lt; N: C<sub>i</sub> <u>GT</u> CC);         
+</td>  </tr>  </table>
+this together with (1) implies <b>false</b>, and <b>false</b> &rArr; R.              
+<p>(End of Proof of (9).)
+<p>Using (5) and (9), we see that the following program establishes R                  
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+   k, n, l:= 0, 1, 0                                                                       </td> </tr> <tr> <td></td> <td colspan = 4>
+   <b>do</b> n &lt; N <b>and</b> k + l + 1 &lt; N &rarr;                                   </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+       <b>if</b> C[k + l] = C[n + l] &rarr; l:= l + 1 {P &and; Q}                          </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 2>
+        &#x25af; C[k + l] &lt; C[n + l] &rarr; n, l:= n + l + 1, 0 {P &and; Q}             </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 2>
+        &#x25af; C[k + l] &gt; C[n + l] &rarr; h:= max(n, k + l + 1);                      </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                               k, n, l:= h, h + 1, 0 {P &and; Q}           </td> </tr> <tr> <td></td> <td></td> <td colspan = 3>
+       <b>fi</b> {P &and; Q}                                                               </td> </tr> <tr> <td></td> <td colspan = 4>
+   <b>od</b> {R}                                                                           </td> </tr>
+</table>
+<p class=noindent><b>Termination</b>. The function t = k + n + l increases by at                
+least one at each iteration. Before the first iteration t = 1,                 
+before the last one t &le; 2N - 3, hence 2N - 3 is an                  
+upper bound for the number of comparisons.                 
+                 
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>The above is &mdash;or will be&mdash; described much more                 
+beautifully by W.H.J. Feyen, including all the heuristics and acknowledgements.                 
+I wrote the above as part of my personal correspondence, for the sake                 
+of quick dissemination: I owe everything of the above to ir. W.H.J. Feijen.                  
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+29th December 1979</td><td>
+</td></tr>
+<tr><td valign=top>
+Plataanstraat 5</td><td> 
+</td></tr>
+<tr><td valign=top>
+5671 AL Nuenen</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>Burroughs Research Fellow
+</td>  </tr>  </table>
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-04-11<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

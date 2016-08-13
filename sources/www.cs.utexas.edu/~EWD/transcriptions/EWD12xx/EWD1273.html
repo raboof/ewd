@@ -1,0 +1,54 @@
+<HTML>
+<HEAD>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<title>E.W. Dijkstra Archive: On Dijkstra's Lemma and Kruskal's Algorithm (EWD1273)</title>
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+	</HEAD>
+
+<BODY>
+    <div id="frame">
+			<div id="header">
+        <a href="../../ewd12xx/EWD1273.PDF" 
+           title="Link to the PDF version of EWD1273">EWD1273</a>
+      </div>
+			<div id="content">
+				<P class="noindent"><U>On Dijkstra's Lemma and Kruskal's Algorithm</U></P>
+				<p class="noindent"><u>Dijkstra's Lemma</u> &nbsp;&nbsp; Consider an undirected graph that consists of a single cycle and in which each vertex is marked to be either an <var>A</var>-node or a <var>B</var>-node. Then the number of <var>AB</var>-edges &#x2014;i.e. edges that connect an <var>A</var>-node with a <var>B</var>-node&#x2014; is even.</p>
+				<p>Let, for a given finite set of vertices, for each pair the length of the edge between them be given; for simplicity's sake all edge lengths are assumed to be distinct. We now give two theorems about &quot;the shortest tree&quot;, i.e. the spanning tree with the smallest length, where the length of a tree is defined as the sum of the lengths of its edges.</p>
+				<p class="noindent"><u>Theorem 0</u> &nbsp;&nbsp; The longest edge of a cyclic path does not belong to the shortest tree.</p>
+				<p class="noindent"><u>Proof</u> &nbsp;&nbsp; Let <var>e</var> be the longest edge of a cyclic path. We prove Theorem 0 by showing that for any spanning tree <var>T</var> that contains <var>e</var> we can construct a shorter spanning tree. Remove edge <var>e</var> from tree <var>T</var> , which thus falls apart into two subtrees which we call <var>A</var> and <var>B</var> respectively; <var>e</var> being an <var>AB</var>-edge in the cyclic path, Dijkstra's Lemma tells us that the cyclic path contains another <var>AB</var>-edge, which we use to reconnect <var>A</var> and <var>B</var> . The resulting tree is shorter than <var>T</var> because <var>e</var> is the longest edge of the cyclic path. (End of Proof.)</p>
+				<p class="noindent"><u>Theorem 1</u> &nbsp;&nbsp; Partition the vertices into <var>A</var>-nodes and <var>B</var>-nodes. Then the shortest <var>AB</var>-edge belongs to the shortest tree.</p>
+				<p class="noindent"><u>Proof</u> &nbsp;&nbsp; Let, for a given partitioning, <var>e</var> be the shortest <var>AB</var>-edge. We prove Theorem 1 by showing that for any spanning tree <var>T</var> that does not contain <var>e</var> , we can construct a shorter spanning tree. Add edge <var>e</var> to tree <var>T</var> , thus creating 1 cyclic path, which contains <var>e</var> ; <var>e</var> being an <var>AB</var>-edge, Dijkstra's Lemma tells us that that cyclic path contains another <var>AB</var>-edge, which we remove. The resulting tree is shorter because <var>e</var> is the shortest <var>AB</var>-edge. (End of Proof.)</p>
+				<p>Kruskal's Algorithm constructs the shortest tree by processing &#x2014;i.e. &quot;rejecting&quot; or &quot;accepting&quot;&#x2014; the edges in the order of increasing length. At any stage, the accepted edges construct a forest &#x2014;to begin with as many isolated roots as there are vertices, and finally 1 big tree of accepted edges&#x2014; . Kruskal's Algorithm rejects a next edge if it forms a cycle with (some of) the edges that have already been accepted, otherwise it accepts it. In terms of the forest: the next edge is rejected if it connects two nodes from the same tree, and accepted if it connects two trees. Rejection is justified by Theorem 0, applied to the cyclic path formed in the tree; acception is justified by Theorem 1 if we partition the forest into <var>A</var>-trees and <var>B</var>-trees such that the edge under consideration is an <var>AB</var>-edge.</p>
+				<div align="center">
+					<p>Austin, 3 May 1998</p>
+				</div>
+				<p class="noindent">prof.dr. Edsger W. Dijkstra<br>
+					Department of Computer Sciences<br>
+					The University of Texas at Austin<br>
+					Austin, TX 78712-1188<br>
+					USA</p>
+				<hr border=0>
+				<p class="noindent"><font size="-1">Transcribed by Jennifer Lu Greene.<br>
+						Last revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="97">Mon, 10 Dec 2007</csobj>.</font></p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		
+			
+		
+			
+				
+			
+
+</BODY>
+</HTML>
+

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><!-- InstanceBegin template="/Templates/EWD transcription.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>E.W.Dijkstra Archive: &ldquo;A book review&rdquo; (EWD 669)</title>
+<!-- InstanceEndEditable -->
+<link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<!-- InstanceParam name="signature" type="boolean" value="true" -->
+</head>
+
+<body>
+<div id="frame" align="right">
+	<div id="header" align="right"><!-- InstanceBeginEditable name="link to PDF" -->
+	  <p>&nbsp;</p>
+	  <p><a href="../../ewd06xx/EWD669.PDF" 
+	title="Link to the PDF version of EWD669">EWD669</a></p>
+	<!-- InstanceEndEditable --></div>
+</div>
+<div id="frame">
+
+<div id="content">
+
+
+
+
+<p class="noindent"><!-- InstanceBeginEditable name="title heading" --><u>A book review.</u><!-- InstanceEndEditable --></p>
+<!-- InstanceBeginEditable name="body" -->
+<p class="noindent">LOVELAND, DONALD W., <i>Automated Theorem Proving: A Logical Basis</i>., Amsterdam etc., North-Holland Publishing Company, 406 pp., Dfl. 100,&mdash; (Fundamental Studies in Computer Science). </p>
+<p> I agreed to review this book in the hope that its study would be an instructive experience, and my highest expectations have been surpassed: the book contains a wealth of information (an average of two definitions per page being a modest estimate). The title covers the contents remarkably  well. </p>
+<p> The book has six chapters: </p>
+<p class="continue">1.&nbsp;The role of logical systems. (51 pp.) </p>
+<p class="continue">2.&nbsp;Basic resolution. (41 pp.) </p>
+<p class="continue">3.&nbsp;Refinements of resolution. (106 pp.) </p>
+<p class="continue">4.&nbsp;Subsumption. (63 pp.) </p>
+<p class="continue">5.&nbsp;Resolution with equality. (60 pp.) </p>
+<p class="continue">6.&nbsp;Resolution and problem reduction format. (58 pp.) plus Appendix, References, Table of Symbols and (in view of the extensive terminology introduced, rather incomplete) Index. </p>
+<p> Chapter 1 covers the standard material to be expected in an introduction to the topic; remarkable is the author&rsquo;s preference for his own &ldquo;more semantic, or model-theoretic, approach&rdquo; to Herbrand&rsquo;s Theorem over Herbrand&rsquo;s &ldquo;purely syntactic argument&rdquo;, a preference that I don't expect to be shared universally. </p>
+<p> Chapter 2 gives a very clear description of the Davis-Putnam Procedure for refutation, and a description of Robinson&rsquo;s Resolution Procedure, which I found somewhat less clear because its essential component &ldquo;unification&rdquo; remains very complicated. (In the one and only more ambitious example &mdash;(2.6.3)&mdash; of resolution the annotation does not mention the substitutions, with the result that I couldn&rsquo;t read it without the help of pencil and paper.) </p>
+<p> The next three chapters discuss at length and in logical depth a variety of strategies and inference rules that have been suggested for the improvement of the efficiency, because a naive mechanical application of Robertson&rsquo;s Resolution Principle leads to unacceptable amounts of manipulation. I said &ldquo;in logical depth&rdquo; because the author&rsquo;s main &mdash;and legitimate!&mdash; concern is here completeness, i.e., the property that, in spite of the proposed constraints in the application of resolution, the algorithm remains in principle capable of detecting any unsatisfiable formula. The systematic attention paid to this concern is the distinctive feature of this book and justifies the second part of its title. </p>
+<p> The last chapter discusses earlier attempts from the perspective gained from the extensive experience with the younger resolution-based attempts at automated theorem proving. </p>
+<p> (For my inability to give in a few paragraphs a more adequate coverage of a 400-page book I offer my apologies to the author.) </p>
+<p class="center">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+  * </p>
+<p> One curious aspect of this book deserves to be mentioned: although its subject matter is the (stylized) application of the first-order predicate calculus, 1) the author hardly uses it himself, and, 2) when he does, he does so clumsily. </p>
+<p class="noindent"> <u>Ad 1</u>. All his proofs are entirely verbal as if the first-order predicate calculus did not exist: proofs of several pages running text are not unusual at all. This is the more amazing as his prose is often obscure or wrong. He refers to (p.14) &ldquo;a distinguished set of elements&rdquo;, although on the next page it is clear that &ldquo;a set of distinguished elements&rdquo; was what he meant. He refers (p.118) to &ldquo;a clause containing all false literals&rdquo; meaning &ldquo;a clause containing only false literals&rdquo;. He writes (p.106): &ldquo;We will be concerned in the following sections with refinements that allow clauses to be ordered. This restricts [should be: &ldquo;These restrict&rdquo;, EWD.] the possible resolvents that can be generated.&rdquo; How, a logician might ask, can one introduce restrictions by allowing something? He writes (p.15): &ldquo;Assignment <i>&phi;</i> is <em>similar</em> mod <var>x</var><span class="subscript">1</span>,...,&thinsp;<var>x<span class="subscript">n</span></var> to <i>&gamma;</i> if the assignments agree except for the elements assigned to <var>x</var><span class="subscript">1</span>,...,&thinsp;<var>x<span class="subscript">n</span></var>.&rdquo; This sentence is obscure as we have to guess what &ldquo;agreeing assignments&rdquo; are. It is also ridiculous, because in a wide environment this is the only use of the Greek letters <i>&phi;</i> and <i>&gamma;</i>, and there is never any sense in using an identifier only once. Etc. </p>
+<p class="noindent"> <u>Ad 2</u>. He writes (p.365) &ldquo;... we have shown ~<var>G</var> &#x21D2; <var>G</var>, and, by using the tautology &ldquo;(~<var>G&nbsp;</var>&#x21D2;&nbsp;<var>G&thinsp;</var>)&nbsp;&#x21D2;&nbsp;<var>G</var>&thinsp;&rdquo;, we have actually established <var>G</var>.&rdquo; People using the first-order predicate calculus regularly can hardly fail to discover for themselves that the implication sign had better be avoided &mdash;its introduction is responsible for the whole avoidable folklore of the &ldquo;contrapositive&rdquo; to which (p.432, etc.) the author devotes several pages&mdash; and, when they encounter it, have learned to regard &ldquo;<var>A</var> &#x21D2; <var>B</var>&thinsp;&rdquo; as a clumsy notation for &ldquo;~<var>A</var> &#x22C1; <var>B</var>&thinsp;&rdquo;. Seeing that &ldquo;we have actually established <var>G</var>&rdquo; is then done at a glance, without invoking that tautology. By referring (p.343) to &ldquo;the naturally [sic!] given implication&rdquo; the author makes upon me the impression of not suspecting that the use of the implication is no more than a bad habit; this is the more amazing because the conceptual streamlining achieved by not using implications is directly reflected in the notational discipline that lies at the root of the resolution procedures that are the core subject matter of his whole book. </p>
+<p class="center">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+* </p>
+<p> This book has been written with extensive experience and intimate knowledge of automated theorem proving, and thereby provides the reader an interesting look into the kitchen of one of the more respectable (or should we say: &ldquo;less disreputable&rdquo;?) branches of Artificial Intelligence. Also from this point of view the book is very interesting. </p>
+<p class="center">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+* </p>
+<p> I found twelve erroneous usages of the word &ldquo;alternate&rdquo; and twelve printing errors, of which several in formulae. The publisher should be blamed for using a type fount that does not distinguish between the digit 1 and the letter l . Apart from this blemish, the printing has been done admirably (in Hungary).</p>
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="EditRegion5" -->
+<p>&nbsp;</p>
+<table width="624" border="0" cellpadding="0" cellspacing="10">
+  <tr>
+    <td width="368" valign="top">Plataanstraat 5<br />
+      5671 AL NUENEN<br />
+      The Netherlands</td>
+    <td width="226" valign="top">10 October 1982<br />
+      prof.dr.Edsger W. Dijkstra<br />
+      Burroughs Research Fellow</td>
+  </tr>
+</table>
+<!-- InstanceEndEditable --></div>
+
+<div id="footer">
+  <p class="noindent"><font size="-1">
+    Transcribed by <!-- InstanceBeginEditable name="name of transcriber" --><font size="-1">Bart Vreugdenhil </font><!-- InstanceEndEditable --><br />
+  </font><font size="-1">
+    Revised 
+    <!-- #BeginDate format:En2 -->20-Feb-2013<!-- #EndDate --></font>  </p>
+</div>
+
+</div>
+</body>
+<!-- InstanceEnd --></html>

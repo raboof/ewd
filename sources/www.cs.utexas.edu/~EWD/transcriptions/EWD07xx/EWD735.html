@@ -1,0 +1,472 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: A mild variant of Combinatory Logic (EWD 735)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd07xx/EWD735.PDF"
+           title="Link to the PDF version of EWD735">EWD735</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+                
+<b>A mild variant of Combinatory Logic</b>.
+<p>The following is written in reaction to the description of Combinatory
+Logic as given in [1] by D.A.Turner. With <b>plus</b> standing for the prefix
+adding operator, Turner defines the successor function suc by
+<table width=100%><tr><td valign=top width=10%>
+</td><td><b>def</b> suc x = <b>plus</b> 1 x .
+</td>  </tr>  </table>
+<p>To the right of the equality sign, juxtaposition is assumed to be 
+associative to the left; more fully bracketed we would have had
+<table width=100%><tr><td valign=top width=10%>
+</td><td><b>def</b> suc x = (<b>plus</b> 1) x .
+</td>  </tr>  </table>
+<p>Because at both sides of the equality sign, the variable x occurs only
+as the very last atom, we can abstract x from both sides by omission, yielding
+<b><b></b>def</b> suc = <b>plus</b> 1 .
+<p>This wouldn&rsquo;t have been possible if suc had been defined by
+<table width=100%><tr><td valign=top width=10%>
+</td><td><b>def</b> suc x = (<b>plus</b> x) 1
+</td>  </tr>  </table>
+because here the right-hand side is not an expression in which x &mdash;i.e. the
+variable to be abstracted from&mdash; occurs only as the very last atom.
+<p>Combinatory logic is a discipline for rewriting, if necessary, such
+right-hand sides in such a way that X &mdash;or, in general: the variable to be
+abstracted from&mdash; only occurs as the last atom of the expression.
+Given 
+<table width=100%><tr><td valign=top width=10%>
+</td><td><b>def</b> f x = E
+</td>  </tr>  </table>
+we derive a G , such that
+<table width=100%><tr><td valign=top width=10%>
+</td><td>G x = E (Law of Abstraction)
+</td>  </tr>  </table>
+from which &ldquo;by omission&rdquo;
+then follows.
+<p>Turner denotes G by [x]E or by ([x]E) &mdash;to be pronounced as &ldquo;abstract
+x from E&rdquo;&mdash; and describes (following Curry) abstraction as a textual operation.
+I almost quote from [1] &mdash;remember that juxtaposition associates to the left,
+at least at both sides of the equality sign&mdash;
+                  
+&ldquo;We introduce three combinators <b>S</b> , <b>K,</b> and <b>I</b> [It is customary to print
+these constants in bold face, EWD] , defined by the equations
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+<b>S</b> f g x =f x (g x)</td><td align=right>(S)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+<b>K</b> y x = y</td><td align=right>(K)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+<b>I</b> x = x</td><td align=right>(I)
+</td>  </tr>  </table>
+and define abstraction as follows
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+     [x](E1 E2) = <b>S</b> ([x]E1) ([x]E2) </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+          [x]x = <b>I</b>                  </td> </tr> <tr> <td></td> <td></td> <td>
+          [X]y = <b>K</b> y                </td> </tr>
+</table>
+where y is a constant or a variable other than x . That the abstraction thus
+defined obeys the Law of Abstraction given above can be proved by an induction
+on the size of the combination E &mdash; we leave this as an exercise for the
+interested reader.&rdquo;
+<p>After having pointed out that this abstraction process leads to very
+long-winded formulae, Turner introduces for brevity&rsquo;s sake two extra combinators
+B and C , defined by
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+<b>B</b> f g x = f (g x)</td><td align=right>(B)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+<b>C</b> f g x = f x g  ;</td><td align=right>(C)
+</td>  </tr>  </table>
+please remember the left-associative juxtaposition: we could have written
+<table width=100%><tr><td valign=top width=10%>
+</td><td>((<b>C</b> f) g) x = (f x) q. 
+</td>  </tr>  </table>
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>So much for Turner&rsquo;s description of combinatory logic. His notational
+conventions have the (potential) technical advantage that each formula can be
+represented by a binary tree with labels &mdash;combinators or identifiers&mdash; in
+its leaves.
+<p>I found the fact that during the abstraction process combinators and
+identifiers (for variables) are treated on the same footing more confusing
+than illuminating. As it stands, the abstraction process also defines how to
+abstract a combinator from an expression; perhaps somewhat rashly I regard
+this, however, as a rather meaningless facility.
+              
+<p class=noindent><b>Note</b>. Not only some abstractions, but also some applications should be regarded
+as meaningless. I owe to C.S.Scholten the following very nasty example. From
+<table width=100%><tr><td valign=top width=10%>
+</td><td><b>def</b> funny x = x x
+</td>  </tr>  </table>
+we derive according to the rules
+<table width=100%><tr><td valign=top width=10%>
+</td><td>x x = <b>S I I </b>x
+</td>  </tr>  </table>
+hence
+<table width=100%><tr><td valign=top width=10%>
+</td><td><b>def</b> funny = <b>S I I</b> .
+</td>  </tr>  </table>
+How well-deserved the name &ldquo;funny&rdquo; is is demonstrated by applying it to itself
+and reducing:
+<table width=100%><tr><td valign=top width=10%>
+</td><td>funny funny=<b>S I I</b> (<b>S I I</b>) =
+</td></tr>
+<tr><td valign=top>
+</td><td><b>I</b> (<b>S I I</b>) (<b>I</b> (<b>S I I</b>))=
+</td></tr>
+<tr><td valign=top>
+</td><td><b>S I I</b> (<b>S I I</b>) = funny funny .
+</td>  </tr>  </table>
+The expression (funny funny) is endlessly reducible! (End of Note.)
+<p>I was also disturbed by the extreme asymmetry introduced by the 
+combination of a) the placing of the combinators and b) the association to the left.
+This is particularly noticeable in the fully bracketed form of rule (<b>S</b>):
+<table width=100%><tr><td valign=top width=10%>
+</td><td>((<b>S</b> f) g) x = (f x) (g x) 
+</td>  </tr>  </table>
+To the right we have two expressions, both containing the variable x . The
+combinator <b>S</b> , though pertaining in a way to both, is placed as a prefix to
+the left-hand one. My gut feeling &mdash;which of course may err&mdash; tells me that
+this is ugly.
+<p class=noindent><b>Note</b>. It could be argued that application is not only asymmetric &mdash;in general
+&ldquo;a b &ne; b a&rdquo;&mdash; but that the two components are very different, being &ldquo;function&rdquo;
+and &ldquo;argument&rdquo; respectively. But two remarks are in order.
+<p>Firstly, the distinction between &ldquo;function&rdquo; and &ldquo;argument&rdquo; is not as
+clear-cut as is often thought. with z standing for a complex number and
+re(z) and im(z) standing for its real and imaginary parts respectively, we
+could regard re and im as real functions defined on a complex domain. With
+z as a record with two fields we would write z.re and z.im respectively,
+i.e. a complex value can be regarded as a real function on the domain {re, im}.
+                     
+<p>Secondly, it is exactly combinatory logic that allows expressions for
+a and b , such that &ldquo;a b&rdquo; and &ldquo;b a&rdquo; , though different, are extremely
+meaningful. (See below.) (End of Note.)
+<p>A third complaint only emerged when exercising it. While abstracting
+and applying I found myself all the time adding and removing bracket pairs.
+This is not to be wondered at: when we look at the S-rule in its fully
+bracketed form, it is not clear at all, how the bracket pairs to the right
+and to the left correspond with each other.
+<p>So I set myself the goal of finding an equivalent notation to which the
+above objections would not apply. Most of the exploratory work was done 
+together with C.S.Scholten; the synthesis to be described below emerged on 8
+April 1980 in a session of the Tuesday Afternoon Club, which screened the
+manuscript for what follows a week later.
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>In the following there is no such thing as association from the left,
+and I shall introduce no redundant or optional bracket pairs. My starting
+point is the set of fully bracketed expressions, satisfying the syntax
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&lt; exp &gt; ::= &lt; identifier &gt; | (&lt; exp &gt; &lt; exp &gt; ) .
+</td>  </tr>  </table>
+<p>I shall not introduce the need to abstract a variable from an expression
+in which that variable does not occur. The formal definition for occurrence
+is the following obvious one: with x and y standing for identifiers and
+E, E1, and E2 standing for expression, we define
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+    x <b>in</b> E = <b>if</b> E = y &rarr; x = y                                   </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td>
+           &#x25af; E = (E1 E2) &rarr; (x <b>in</b> E1) <b>or</b> (x <b>in</b> E2) </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+          <b>fi</b>   .                                                            </td> </tr>
+</table>
+We shall now define how to abstract an identifier x from an expression
+E , provided x <b>in</b> E . We shall do so by defining abstraction from a more
+general class than just expressions, viz. &ldquo;terms&rdquo;. While expressions are built
+from parentheses and identifiers only, terms may also contain so-called 
+combinators; a term may also be empty. In the following coms stands for a
+possibly empty sequence of combinators, and coms+ for a non-empty sequence
+                 
+of combinators. The syntax for terms is (see, however, correction below, originally on the next manuscript page)
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&lt; term &gt; ::= &lt; empty &gt; | &lt; exp &gt; | (&lt; term &gt; coms+ &lt; term &gt; ) .
+</td>  </tr>  </table>
+Correction. The syntax for &lt; term &gt; as given previously is too restrictive:
+according to it the above ((T1 coms+ T2) h) is not a term! The syntax
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&lt; term &gt; ::= &lt; empty &gt; | &lt; exp &gt; | ( &lt; term &gt; coms &lt; term &gt; )
+</td>  </tr>  </table>
+is too broad; it is acceptable provided we rule out from the last alternative
+the forms (), ( &lt; term &gt; <b>C</b>), and (<b>B</b> &lt; term &gt;-) , or state the non-occurrence
+of such terms as a theorem. See previous note. (End of Correction.)
+<br>NB. See Appendix on page EWD735 - 8, etc.!!!!!
+<p class=noindent>Note that each bracket pair always surrounds two terms, separated by a possibly
+empty sequence of&rsquo; combinators, such that neither of the terms is empty or the
+combinator sequence is non-empty. I shall not introduce the need to abstract
+a variable from a term in which that variable does not occur; with furthermore
+T , T1 , and T2 standing for terms, we define
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+      x <b>in</b> T = <b>if</b> T = empty &rarr; false                                      </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td>
+              &#x25af; T = E &rarr; x <b>in</b> E                                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
+              &#x25af; T = (Tl coms+ T2) &rarr; (x <b>in</b> Tl) <b>or</b> (x <b>in</b> T2) </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+             <u>fi</u>       .                                                              </td> </tr>
+</table>
+
+Provided x <b>in</b> T , &ldquo;abstract x from T &rdquo; &mdash;as usual denoted by &ldquo;[x]T&rdquo;&mdash;
+is defined by
+<table> <tr> <td>&nbsp; </td> <td colspan = 8>
+ [x]T = <b>if</b> x <b>in</b> T                                                    </td><td>0.</td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 6>
+           <b>if</b>  T = x &rarr; empty                                           </td><td>1.</td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 5>
+            &#x25af; T = (Tl coms T2) &rarr;                                       </td><td>2.</td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+               <b>if</b> x <b>in</b> Tl &rarr;                                     </td><td>3.</td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 2>
+                  <b>if</b> x <b>in</b> T2 &rarr; ([x]T1 S coms [x]T2)             </td><td>4.</td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
+                   &#x25af; <b>non</b> x <b>in</b> T2 &rarr; ([x]T1 C coms T2)     </td><td>5.</td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                  <u>fi</u>                                                        </td><td>6.</td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 3>
+                &#x25af; <b>non</b> x <b>in</b>  Tl &rarr; {x <b>in</b> T2}        </td><td>7.</td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                  <b>if</b> T = (T1 x) &rarr; Tl                                   </td><td>8.</td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>
+                   &#x25af; T &ne; (Tl x) &rarr; (Tl B coms [x]T2)                 </td><td>9.</td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                  <b>fi</b>                                                        </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 4>
+               <b>fi</b>                                                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 6>
+           <b>fi</b>                                                               </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 7>
+        <b>fi</b>                                                                  </td> </tr>
+</table>
+
+<b>Notes</b>. The guard in line 8 is only true if come is the empty sequence of
+combinators and T2 = x . This line represents the only case in which an
+original bracket pair disappears. No new bracket pairs are introduced; hence,
+the resulting bracket pairs are a subset of the original ones. Line 8 describes
+&ldquo;abstraction by omission&rdquo; .
+                
+<p>Because in line 2 coms = &lt; empty &gt; implies that neither T1 nor T2
+is empty, line 4 represents the only possibility of generating a bracket pair
+containing a single atom: (<b>S</b>) . Therefore, in line 8 T1 is not empty. (End
+of Notes.)
+<p>A reduction rule is applicable whenever we encounter a term of the form
+<table width=100%><tr><td valign=top width=10%>
+</td><td>((T1 coms+ T2) h) ;
+</td>  </tr>  </table>
+in view of the rule of the absence of redundant parentheses this implies that
+h is not the empty term. The nature of the reduction is determined by the
+leading combinator of coms+ :
+<table width=100%><tr><td valign=top width=10%>
+</td><td>((T1 <b>S</b> coms T2) h) = ([T1 h] coms [T2 h])
+</td></tr>
+<tr><td valign=top>
+</td><td>((T1 <b>C</b> coms T2) h) = ([T1 h] coms T2)
+</td></tr>
+<tr><td valign=top>
+</td><td>((T1 <b>B</b> coms T2) h) = (T1 coms [T2 h])
+</td>  </tr>  </table>
+where [T h] is short for
+<table width=100%><tr><td valign=top width=10%>
+</td><td>[T h] = <b>if</b> T= &lt; empty &gt; &rarr; h &#x25af; T &ne; &lt; empty &gt; &rarr; (T h) <b>fi</b> .
+</td>  </tr>  </table>
+Like Turner I leave the verification that
+<table width=100%><tr><td valign=top width=10%>
+</td><td>[[x]T X] = T &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (Law of Abstraction)
+</td>  </tr>  </table>
+as an exercise for the interested reader.
+<p class=noindent><b>Note</b>. We have already observed that in a term derived by abstraction from an
+expression and of the form (T1 <b>S</b> T2) both T1 and T2 may be empty. If
+it is of the form (T1 <b>B</b> T2), T1 will not be empty; if it is of the form
+(T1 <b>C</b> T2), T2 will not be empty. As a result, reduction will never lead
+to a redundant bracket pair. (End of Note.)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+                                     
+<p>Of course the new notation doesn&rsquo;t rule out anomalies like funny.
+We would have
+<table width=100%><tr><td valign=top width=10%>
+</td><td><b>def</b> funny = (S) .
+</td>  </tr>  </table>
+According to the new rules we find in a single reduction step &mdash;the intermediate
+stage with the square brackets has only been given for the sake of completeness&mdash;
+<table width=100%><tr><td valign=top width=10%>
+</td><td>((<b>S</b>)(<b>S</b>)) = ([(<b>S</b>)][(<b>S</b>)]) = ((<b>S</b>)(<b>S</b>)) .
+</td>  </tr>  </table>
+<p>As another example we consider the function twice , given by
+<table width=100%><tr><td valign=top width=10%>
+</td><td>((twice f) x) = (f (f x)) , hence
+</td></tr>
+<tr><td valign=top>
+</td><td>(twice f) = (f <b>B</b> f) , hence
+</td></tr>
+<tr><td valign=top>
+</td><td>twice = (<b>SB</b>)
+</td>  </tr>  </table>
+and similarly the function thrice , given by
+<table width=100%><tr><td valign=top width=10%>
+</td><td>((thrice f) x) = (f (f (f x))) , hence
+</td></tr>
+<tr><td valign=top>
+</td><td>(thrice f) = (r <b>B</b> (F <b>B</b> f)) , hence
+</td></tr>
+<tr><td valign=top>
+</td><td>thrice = (<b>SB</b> (<b>SB</b>))
+</td>  </tr>  </table>
+Now we consider and reduce as far as possible
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(thrice twice) = ((<b>SB</b> (<b>SB</b>)) twice)
+</td></tr>
+<tr><td valign=top>
+</td><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = (twice <b>B</b> (twice <b>B</b> twice))
+</td></tr>
+<tr><td valign=top>
+</td><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = ((<b>SB</b>) <b>B</b> ((<b>SB</b>) <b>B</b> (<b>SB</b>)))
+</td>  </tr>  </table>
+Hence
+<table width=100%><tr><td valign=top width=10%>
+</td><td>((thrice twice) f) = (((<b>SB</b>) <b>B</b> ((<b>SB</b>) <b>B</b> (<b>SB</b>))) f)
+</td></tr>
+<tr><td valign=top>
+</td><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = ((<b>SB</b>) ((<b>SB</b>) (f <b>B</b> f)))
+</td></tr>
+<tr><td valign=top>
+</td><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = ((<b>SB</b>) ((r <b>B</b> f) <b>B</b> (f <b>B</b> f)))
+</td></tr>
+<tr><td valign=top>
+</td><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; = (((f <b>B</b> f) <b>B</b> ( f <b>B</b> f)) <b>B</b> ((f <b>B</b> f) <b>B</b> (f <b>B</b> f))) .
+</td>  </tr>  </table>
+Hence (((thrice twice) f) x) = (f (f (f (f (f (f (f (f x)))))))) i.e. f<sup>8</sup>(x)
+&mdash;where I placed the brackets in the traditional fashion!&mdash;
+<p>As a final example, consider E = ((* ((+ x) y)) y)
+<br>I then derive without further intermediate results
+<table width=100%><tr><td valign=top width=10%>
+</td><td>[x]E = ((* <b>B</b> (+ <b>C</b> y)) <b>C</b> y)
+</td></tr>
+<tr><td valign=top>
+</td><td>[y][x]E = ((* <b>BB</b> (+ <b>BC</b>)) <b>SC</b>)
+</td>  </tr>  </table>
+<p>In Turner&rsquo;s style we would have had E = * (+ x y) y .
+                     
+<br>In that case I had to derive
+<table width=100%><tr><td valign=top width=10%>
+</td><td>[x]<b>E</b> = <b>C</b> [x](* (+ x y)) y
+</td></tr>
+<tr><td valign=top>
+</td><td>&nbsp; &nbsp; &nbsp; &nbsp; = <b>C</b> (<b>B</b> * (<b>C</b> [x](+ x) y)) y
+</td></tr>
+<tr><td valign=top>
+</td><td>&nbsp; &nbsp; &nbsp; &nbsp; = <b>E</b> (<b>B</b> * (<b>C</b> + y)) y .
+</td>  </tr>  </table>
+(Actually I had one intermediate step more.) Skipping the intermediate
+steps I found
+<table width=100%><tr><td valign=top width=10%>
+</td><td>[y][x]E = <b>S</b> (<b>B C B</b> (<b>B</b> *) (<b>C</b> +)) <b>I</b> , or fully bracketed &mdash;almost fully, that is&mdash;
+</td></tr>
+<tr><td valign=top>
+</td><td>&nbsp; &nbsp; &nbsp; &nbsp; = (<b>S</b> ((((<b>B C</b>) <b>B</b>) (<b>B</b> *)) (<b>C</b> +))) <b>I</b>
+</td>  </tr>  </table>
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p>  
+<p>The difference between the two techniques is clearly that I propose to
+attach strings of combinators to internal nodes of the parse tree; the other
+convention expands the binary tree and stores the information of the strings
+of combinators in the leaves thus created. I haven&rsquo;t learned yet, how to
+translate trees of the one type into trees of the other type. I cannot 
+escape the impression that Curry&rsquo;s conventions for &ldquo;tree expansion&rdquo; are in some
+sense more arbitrary than the conventions I have explored here.
+<p>Another moral of the story is that &ldquo;Currying&rdquo; as introduced by Turner
+is from a logical point of view no more than another red herring. Why 
+replace &ldquo;x + y&rdquo; first by &rsquo;<b>plus</b> x y&ldquo;, when we can parse these formulae as
+&rdquo;(x +) y&ldquo; and &rdquo;(<b>plus</b> x) y&ldquo; ? The <b>only</b> justification is that [x](<b>plus</b> x) =
+<b>plus</b> is shorter than [x](x +) = (<b>C I</b>) + &mdash;according to Curry/Turner&mdash; or
+(<b>C</b> +) &mdash;according to the conventions explored here&mdash; : in short, no more than
+a minor optimization if we assume that x is more frequently abstracted from
+(X +) than + .
+<p>I have the feeling that the above explorations should be continued.
+<p class=noindent>NB. Appendix on the next pages!!! (End of NB.)
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>23 April 1980
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN</td><td>prof.dr.Edsger W.Dijkstre
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>Burroughs Research Fellow
+</td>  </tr>  </table>
+               
+<p class=noindent><b>Appendix.</b> (Written after the above had been read together with C.S.Scholten.)
+<p>A first remark is that we can simplify the abstraction process as
+described on page EWD735 - 4 by replacing the alternative construct on lines
+8, 9, and 10 simply by (T1 <b>B</b> coms [X]T2) . Cleaning things up we get
+<table> <tr> <td>&nbsp; </td> <td colspan = 6>
+ [x]T = <b>if</b> x <b>in</b> T &rarr;                                                                      </td> <td>.0</td></tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+           <b>if</b> T = x &rarr; empty                                                                     </td> <td>.1</td></tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 3>
+            &#x25af; T = (Tl coms T2) &rarr;                                                                </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 2>
+              <b>if</b> x <b>in</b> T1 <b>and</b> x <b>in</b> T2 &rarr; ([x]Tl <b>S</b> coms [x]T2)         </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
+               &#x25af; x <b>in</b> Tl <b>and</b> <b>non</b> x <b>in</b> T2 &rarr; ([x]T1 <b>C</b> coms T2) </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>
+               &#x25af; <b>non</b> x <b>in</b> Tl <b>and</b> x <b>in</b> T2 &rarr; (T1 <b>B</b> coms [x]T2) </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+              <b>fi</b>                                                                                     </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 4>
+           <b>fi</b>                                                                                        </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 5>
+        <b>fi</b>  .                                                                                        </td> </tr>
+</table>
+
+From a theoretical point of view, this has two advantages. Firstly, the
+bracket pairs in the resulting term are now the same bracket pairs that
+occurred in the original term. Secondly, &ldquo;abstraction by omission&rdquo; has now
+been confined to line 1 , and in (T1 coms T2) the constituent terms T1
+and T2 are treated on equal footing. Line 8 in the original version is
+no more than saving symbols at the price of symmetry, and that is at this
+level of discussion a doubtful procedure.
+<p>A more important remark is that my correction on page EWD735 - 5 was a
+short-sighted patch. We should have defined the syntax for terms independently
+of that for expression, viz.
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&lt; term &gt; ::= &lt; empty &gt; | &lt; identifier &gt; | ( &lt; term &gt; coms &lt; term &gt;) .
+</td>  </tr>  </table>
+This syntax does not rule out redundant bracket pairs. When we now define
+&rdquo;T is healthy&ldquo; to mean:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+     T is empty <b>or</b>                                                      </td> </tr> <tr> <td></td> <td colspan = 2>
+     T is an identifier <b>or</b>                                              </td> </tr> <tr> <td></td> <td colspan = 2>
+     T is of the form (T1 coms T2) such that                                   </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                (T1 &ne; empty <b>or</b> ooms contains an <b>S</b> or a <b>C</b>) <b>and</b> </td> </tr> <tr> <td></td> <td></td> <td>
+                (T2 &ne; empty <b>or</b> come contains an <b>S</b> or a <b>B</b> <b>and</b>  </td> </tr> <tr> <td></td> <td></td> <td>
+                T1 and T2 are both healthy                                     </td> </tr>
+</table>
+we can observe to start with that each expression is a healthy term. Furthermore 
+                   
+     no healthy term contains a redundant bracket pair &mdash;Either of the form
+&ldquo;()&rdquo; or of the form &ldquo;((...))&rdquo;&mdash; .
+<p>Furthermore &mdash;both in the original form of abstraction and in the
+cleaned up one&mdash; a healthy T implies (when defined) a healthy [x]T .
+Furthermore , for healthy T and healthy, but non-empty h , [T h] as
+defined on page EwD735 - 5 is healthy. In short, neither abstraction nor
+reduction ever introduces an unhealthy term!
+<p>Salvo errore et omissione, the above does the job. By the time that
+we have discovered the significance &mdash;if any&mdash; of our exercise, this text
+has to be rewritten anyhow; hence I think that this rough &ldquo;working document&rdquo;
+has reached the stage to be concluded. Besides that, I am tired.
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>At this stage it is very hard to formulate my acknowledgments. I am
+indebted to D.A.Turner for his article, to Hamilton Richards for having drawn
+my attention to it; I am greatly indebted to C.S.Scholten for joining me in
+my effort to understand combinatory logic in my way: his assistance in all
+stages of the development has been invaluable; I am indebted to the members
+of the Tuesday Afternoon Club for their help and criticism. The initiative
+and the errors are mine.
+<table width=100%><tr><td valign=top width=70%> &nbsp;
+</td><td>(End of Appendix.)
+</td>  </tr>  </table>
+[1] Turner, D.A., &ldquo;A New Implementation Technique for Applicative Languages.&rdquo;
+Software&mdash;Practice and Experience, Vol.9, 31-49 (1979).
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>6 May 1980
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>Burroughs Research Fellow
+</td>  </tr>  </table>
+
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-03-05<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

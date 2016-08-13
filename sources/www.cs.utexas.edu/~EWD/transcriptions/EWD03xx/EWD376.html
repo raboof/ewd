@@ -1,0 +1,430 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Finding the maximum strong components in a directed graph (EWD 376)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd03xx/EWD376.PDF"
+           title="Link to the PDF version of EWD376">EWD376</a></div></div>
+      <div id="frame">
+         <div id="content">
+         <hr />
+  <p class="noindent">  NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+  <hr />
+<P CLASS="noindent" STYLE="margin-bottom: 0.5cm">&nbsp;</P>
+<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial Black, sans-serif"><b>Copyright
+  Notice</b></FONT></P>
+		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>The
+		following manuscript </FONT></FONT>
+		</P>
+		<P STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>EWD
+		376: Finding the maximum strong components in a directed graph </FONT></FONT>
+		</P>
+		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>is
+		held in copyright by Springer-Verlag New York. </FONT></FONT>
+		</P>
+		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>The
+		manuscript was published as pages 22&ndash;30 of </FONT></FONT>
+		</P>
+		<P STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>Edsger
+		W. Dijkstra, Selected Writings on Computing: A Personal
+		Perspective, </FONT></FONT>
+		</P>
+		<P STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>Springer-Verlag,
+		1982. ISBN O&ndash;387&ndash;90652&ndash;5. </FONT></FONT>
+		</P>
+		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Reproduced
+		with permission from Springer-Verlag New York. <BR>Any further
+		reproduction is strictly prohibited.</B></FONT></FONT><FONT SIZE=2>
+		.</FONT></P>
+<b>Finding the maximum strong components in a directed graph.</b>
+<p>This essay records an exercise in orderly program composition. The
+record is not completely truthful in the sense that prior to its writing
+some thinking without pencil and paper was done. As a result, the
+following text contains a few &ldquo;surprises&rdquo; in the sense that suggestions
+are made without an elaborate heuristic justification. When I noticed
+myself doing so, some heuristic justification has been added afterwards.
+The moral of all this is: in case of surprise, please go on reading!
+<p>Given a set of nodes and a set of directed arcs leading from a node
+to a node, it is requested to partition the set of nodes into maximal
+strong components. A strong component is a set of nodes such that the
+arcs between them provide a path from any node of the set to any node of
+the set; a single node is a special case of a strong component: then the
+path can be empty. A maximal strong component is a strong component to
+which no nodes can be added.
+<p>We shall use the acronym &ldquo;sa&rdquo; for a set of arcs, the acronym &ldquo;sn&rdquo;
+for a set of nodes. Our final answer is a partitioning, that is a set of
+sets of nodes with empty intersections: for that latter object we shall
+use the acronym &ldquo;ssn&rdquo;. Similarly, when the need arises, we shall use the
+acronym &ldquo;ssa&rdquo;’for a set of sets of arcs with empty intersection. (Note
+added while typing out the manuscript: this need has not arisen.)
+<p>Let &ldquo;sn&rdquo; be the given set of nodes, let &ldquo;sa&rdquo; be the given set of
+arcs. Let the final value of &ldquo;ssn&rdquo; be the desired answer. We then write
+the desired final relation as
+<table>
+<tr><td valign=top width=20%>  </td></td><td valign=top width=80%>
+ssn = MSC(sa)</td><td>(1)
+</td>  </tr>  </table>
+<p class="noindent">where MSC, the set of Maximal Strong Components, is regarded for constant
+sn as a function of the set of arcs sa.
+<p>We want to inspect the arcs one by one (in a suitable order still
+to be chosen), i.e. we introduce two disjoint subsets of sa, viz. sa1 and
+sa2, such that  
+<table>
+<tr><td valign=top width=20%>  </td></td><td valign=top width=80%>
+sa = sa1 + sa2</td><td>(2)
+</td>  </tr>  </table>
+<p class="noindent">where sa1 comprises the arcs inspected (initially empty, finally = sa)
+and sa2 the arcs uninspected (initially = sa, finally empty) 
+<p>Similarly, we want to build up the final value of ssn. We shall
+do so by maintaining the invariant relation
+<table>
+<tr><td valign=top width=20%>  </td></td><td valign=top width=80%>
+ssn + ssn1 = MSC(sa1)</td><td>(3)
+</td>  </tr>  </table>
+<p class="noindent">Here each node of sn will either occur in an element of ssn or in an element
+of ssn1, but never in both. (Besides that we can, as will be shown later,
+restrict ourselves to ssn1-values being sets of sets of single nodes.) The
+following idea was underlying the introduction of ssn1: ssn is a set of
+maximal strong components, for which -we write an algorithm for a sequential
+machine!- we may expect to establish one after the other that they will
+occur as element of the final value of ssn. Our aim is that at any moment
+in time, ssn will only contain elements of its final value: they are the
+maximal strong component definitely found. Then we need ssn1 for the remaining
+nodes.
+<p>The initialization corresponding to sa1 = empty is ssn = empty and
+ssn1 with each node of sn in a separate element of ssn1. When we succeed
+in establishing
+<table>
+<tr><td valign=top width=20%>  </td></td><td valign=top width=80%>
+ssn1 = empty and sa2 = empty</td><td>(4)
+</td>  </tr>  </table>
+<p class="noindent">under invariance of (3), the desired relation (1) has been established, as
+the second term of (4) implies on account of (2) that sa = sa1.
+<p>We have not established yet the relation between the way in which
+the nodes are divided over ssn and ssn1 on the one hand and the arcs over
+sa1 and sa2 on the other. We shall maintain the following relations (5) and (6):
+<table>
+<tr><td valign=top width=20%>  </td></td><td valign=top width=80%>
+each arc originating in a node of ssn will be in sa1</td><td>(5)
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+each arc terminating in a node of ssn1 will be in sa2 .</td><td>(6)
+</td>  </tr>  </table>
+<p>Relations (5) and (6) are compatible with the initial situation:
+because ssn = empty, there will be no arcs originating in a node of ssn and
+therefore sa1 can be empty (i.e. (5) is not violated) and because ssn1
+comprises all nodes, all arcs should be in sa2, in accordance with the
+initial condition sn2 = sa (i.e. (6) is satisfied).
+<p>Relations (5) and (6) are also compatible with the final situation:
+because then ssn will comprise all nodes, all arcs must be in sa1, in accordance
+with sa1 = sa (i.e. (5) is satisfied) while (6) is satisfied because
+then both ssn1 and sa2 will be empty (see (4)).
+<p>We observe that, because sa1 and sa2 have an empty intersection, there
+will be no arcs originating in a node of ssn and terminating in a node of
+ssn1. On the other hand, an arc originating in a node of ssn1 and terminating
+in a node of ssn may be either in sa1 or in sa2.
+<p>The structure of our program becomes, if we want to apply the fundamental
+invariance theorem for loops:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+      sa1:= empty; sa2:= sa;                                             </td> </tr> <tr> <td></td> <td colspan = 3>
+      ssn:= empty; ssn1:= &ldquo;the set of all single node sets&rdquo;; </td> </tr> <tr> <td></td> <td colspan = 3>
+      <b>while</b> ssn1 &ne; empty <b>or</b> sa2 &ne; empty <b>do</b>    </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+            &ldquo;transfer arc(s) from sa2 to sa1&rdquo; and/or         </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+            &ldquo;transfer node(s) from ssn1 to ssn&rdquo;              </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+            under invariance of (3), (5) and (6)                         </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                        <b>od</b>                        </td> </tr>
+</table>
+<p>Relation (5) allows us to simplify the last boolean expression:
+ssn1 = empty implies that all nodes are in ssn; this implies that all arcs
+are in sa1, which implies that sa2 = empty. Therefore it can be simplified to
+<p><b>while</b> ssn1 &ne; empty <b>do</b>      .
+<p>Relations (5) and (6), which may have come as a surprise, have been
+suggested by
+<p class="noindent"><b>Theorem 1</b>. When the set of nodes are subdivided into two sets nsA and nsB,
+such that there are no arcs originating in a node of nsA and terminating
+in a node of nsB, then the set of strong components is unchanged when the
+arcs (if any) originating in a node of nsB and terminating in a node of nsA
+are removed and, secondly, no strong component comprises nodes from both
+sets.
+<p>Here the nodes in ssn play the role of those in snA and Theorem 1
+tells us that the maximal strong components they will give rise to cannot
+depend on the arcs still in sa2. Therefore they can only depend on the
+arcs in sa1 that have already been inspected. As a result each element
+(i.e. a maximal strong component) of an intermediate value of ssn will be
+an element of its final value.
+<p>In order to detail the repeatable statement we introduce a chain of
+strong components (a chain of sets of nodes), called &ldquo;csn&rdquo;; empty at the
+beginning and at the end of the repeatable statement. The transfer of
+a node from ssn1 to ssn will take place in two steps: first the node will
+be transferred (individually) from ssn1 to csn, at a later stage the node
+will be transferred (together with all the nodes of the same maximal strong
+component) from csn to ssn.
+<p>The strong components in csn are so by virtue of arcs of sa1 and
+their chaining is performed by arcs of sa1, more precisely
+two successive strong components in csn are connected by <b>one</b> arc from sa1
+originating in a node of the predecessor and terminating in a node of the
+successor                                                                        
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>&nbsp;
+</td><td align=right>(7)
+</td>  </tr>  </table>
+<p class="noindent">no arc in sa1 will originate at a node of an element of csn and terminate
+at a node of a preceding element in csn .                                         
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>&nbsp;
+</td><td align=right>(8)
+</td>  </tr>  </table>
+<p>The chain csn has been introduced as a tool for the searching for
+cycles, an activity that is suggested by
+<p class="noindent"><b>Theorem 2</b>. When a number of strong components can be connected via a
+cyclic path, they belong to the same maximal strong component.
+<p>This theorem suggests that we try to extend the chain at one end:
+whenever we encounter an arc leading from its end element to a preceding
+element in the chain, from and including that preceding element up to and
+including the terminal element can be combined to form the new terminal
+element. We shall call this operation &ldquo;combine end elements of csn&rdquo;; its
+purpose is to restore the validity of (8).
+<p>When the chain csn is non-empty, we investigate whether sa2 contains
+an arc f having its origin in (one of the nodes of) the terminal element
+of csn.
+      If such an arc f points to one of the nodes in ssn, it can be ignored
+(on account of Theorem 1).
+      If such an arc f points to a node in the terminal element of csn,
+it can be ignored as well —we knew already that the nodes in this terminal
+element formed a strong component.
+      If such an arc points to (a node in) a preceding element of csn,
+the end elements of csn are combined.
+      If such an arc leads to a node in ssn1, that node is appended to
+the chain and will form, all by itself, the new terminal element of csn.
+      In all four cases the arc t is transferred from sa2 to sa1.
+<p>If no such arc exists, the terminal element of the chain must be
+a maximal strong component of the final graph, will be removed from csn and
+added to ssn, which now grows by one element. This conclusion, again, is
+justified by Theorem 1. (Note. Here Theorem 1 is applied twice: the terminal
+node is a maximal strong component because it has no outgoing arcs in the
+reduced graph that we get by removing all arcs leading back to a node of
+ssn after it has been established that ssn already contains maximal strong
+components for the total graph.)
+<p>The structure of the repeatable statement -only starting when the
+chain csn = empty and ssn1 &ne; empty— can be the following: 
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 7>
+      transfer an arbitrary element of ssn1 and append it to an                            </td> </tr> <tr> <td></td> <td colspan = 7>
+      initially empty chain csn;                                                           </td> </tr> <tr> <td></td> <td colspan = 7>
+      <b>while</b> csn &ne; empty <b>do</b>                                                </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 6>
+         <b>if</b> sa2 contains no arc f originating in a node of csn&rsquo;s terminal     </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 5>
+            element                                                                        </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 5>
+            <b>then</b> transfer csn&rsquo;s terminal element to ssn                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 5>
+            <b>else</b> transfer such an arc f from sa2 to sa1;                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+                 <b>if</b> f terminates in (a node of) an element of ssn1                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 3>
+                   <b>then</b> transfer that element from ssn1 by appending it to csn      </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
+                   <b>else</b> <b>if</b> f leads to (a node of) a preceding element of csn </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td>
+                          <b>then</b> combine end elements of csn                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+                        <b>fi</b>                                                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 4>
+                 <b>fi</b>                                                                 </td> </tr> <tr> <td></td> <td></td> <td colspan = 6>
+         <b>fi</b>                                                                         </td> </tr> <tr> <td></td> <td colspan = 7>
+      <b>od</b>                                                                            </td> </tr>
+</table>
+<p>We have now to choose a way for representing the information. It is
+assumed that the nodes are numbered from 1 through N. Because we intend to
+chain nodes, it is a wise precaution to add &ldquo;a virtual node&rdquo; with number 0.
+<p>In the representation of our sets of nodes we can exploit the fact
+that we know that the elements of ssn1 are single node sets. In ssn and
+csn our elements are strong components, in csn we can number them from
++1 upwards, in ssn we can number them from -1 downwards and thus we come
+to the following representation with an integer array sn[0:N]
+<table> <tr> <td>
+sn[i] > 0 means: node i is a member of element sn[i] of csn </td> </tr> <tr> <td>
+sn[i] < 0 means: node i is a member of element sn[i] of ssn </td> </tr> <tr> <td>
+sn[i] = 0 means: node i is (a node of) an element of ssn1   </td> </tr> <tr> <td>
+sn[0] = 0 .                                                 </td> </tr>
+</table>
+<p>In order to scan nodes we introduce for nodes in csn or ssn an integer
+array pc[1:N], where for node i in one of the two sets of sets
+<table><tr><td valign=top width=20%>
+pc[i]= j means:</td><td>with respect to node i, node j is the next oldest node in
+                the same set of sets; when j = 0, node i is its oldest node.
+</td>  </tr>  </table>
+<p>In order to be able to trace these pc-chains we introduce two handles:
+<table><tr><td valign=top width=10%>
+yc =</td><td>the number of the youngest node in csn; when csn = empty, yc = 0
+</td></tr>
+<tr><td valign=top>
+ys =</td><td>the number of the youngest node in ssn; when ssn = empty, ys = 0 .
+</td>  </tr>  </table>
+<p>In order to speed up the search for an arbitrary node in ssn1 for
+the initialization of csn, we introduce the integer k, such that ssn1
+contains no nodes with a number < k.
+<p>Further we introduce, in order to be able to fix the ordinal number
+of a new element
+<table><tr><td valign=top width=10%>
+ec =</td><td>the number of elements in csn
+</td></tr>
+<tr><td valign=top>
+es =</td><td>the number of elements in ssn
+</td>  </tr>  </table>
+and, in order to decide whether ssn1 is empty
+<table><tr><td valign=top width=10%>
+es1 =</td><td>the number of elements in ssn1.
+</td>  </tr>  </table>
+<p>In our program we have to establish whether sa2 contains an arc f
+originating from the terminal element of csn. We do so by investigating the
+nodes of the terminal element and on account of the pc-chaining we do so in
+order of increasing age in csn. Because quite a number of nodes may be a
+member of the terminal element it seems a bit wasteful in time to start
+this search always at the youngest node and therefore we introduce
+<table><tr><td valign=top width=10%>
+yun =</td><td>the number of &ldquo;the youngest possibly unexhausted node&rdquo; i.e.
+       sa2 contains no arcs originating in a node of csn younger than
+       nr. yun (if any). Again, in the extreme ease, yun may get the value 0.
+</td>  </tr>  </table>
+<p>Our algorithm presupposes that for each node we can find &ldquo;its outgoing
+arcs&rdquo;. We therefore assume that the arcs are sorted in the order of increasing
+starting node and that in that order their terminal nodes are listed in the
+global integer array t[1:number of arcs] while the boundaries are given
+by the integer array b[0:N], such that b[0]= 0, b[N] = number of arcs
+and the nodes at which the arcs originating at node i terminate will be
+t[k], with k ranging
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      b[i-1] < k < b[i] . </td> </tr>
+</table>
+<p>For the representation of the partitioning sa = sa1 + sa2 we introduce
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      <b>integer</b> <b>array</b> c[0:N] </td> </tr>
+</table>
+such that all arcs originating in node i and belonging to sa1 will have
+an ordinal number k satisfying
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      b[i—1] < k &le; c[i] </td> </tr>
+</table>
+and those in sa2 a k satisfying
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      c[i] < k &le; < b[i] . </td> </tr>
+</table>
+We assume c[0] = 0 for the sake of safety (i.e. sa2 contains no arcs
+originating from the virtual node).
+<p>In the following program the variable ft is used to identify the
+terminal node of arc f, while the variable h is used for a wild collection
+of short range purposes. I know that this is a poor style: I too have my
+weak moments!
+
+<table> <tr> <td colspan = 24>
+<b>begin</b> <b>integer</b> <b>array</b> sn, c [0 : N], pc [1 : N];                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 19>
+      <b>integer</b> yc, ys, ec, es, es1, yun, h, ft, k;                                            </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td colspan = 22>
+  {initialize sa1 and sa2}                                                                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 19>
+      c[0]:= 0; h:= 0; <b>while</b> h < N <b>do</b> h:= h + 1; c[h]:= b[h-1] <b>od</b>;             </td> </tr> <tr> <td></td> <td></td> <td colspan = 22>
+  {initialize ssn and ssn1}                                                                         </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 19>
+      h := 0; <b>while</b> h &le; N <b>do</b> sn[h] := 0; h := h +1 <b>od</b>;                      </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 19>
+      ys:= 0; es:= 0; es1:= N; k:= 1;                                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 19>
+      <b>while</b> es1 > 0                                                                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 19>
+      <b>do</b>                                                                                     </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 20>
+     {search for a node k in ssn1}                                                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 17>
+        <b>while</b> sn[k] &ne; 0 <b>do</b> k:=k+1 <b>od</b>;                                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 20>
+     {remove it from ssn1 and initialize csn with node k}                                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 17>
+        es1:= es1 - 1; sn[k]:= 1;                                                                   </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 17>
+        pc[k]:= 0; yc:= k; ec:= 1; yun:= k;                                                         </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 20>
+     {note that at this moment node k is oldest and youngest and youngest                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 19>
+      possibly unexhausted node of csn}                                                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 17>
+        <b>while</b> ec > 0                                                                         </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 17>
+        <b>do</b>                                                                                   </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 18>
+       {search for the youngest unexhausted node of the terminal element                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 17>
+        of csn}                                                                                     </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 15>
+          <b>while</b> sn[yun] = ec <b>and</b> c[yun] &ge; b[yun] <b>do</b> yun:= pc[yun] <b>od</b> </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 18>
+       {this loop will certainly terminate, possibly with yun = 0};                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 15>
+          <b>if</b> sn[yun] &ne; ec                                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 14>
+            <b>then</b> {there is no arc f in sa2 originating in the terminal                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 12>
+               element nr. ec of csn and therefore this terminal element                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 12>
+               will be transported to ssn]                                                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 10>
+                 es:= es + 1;                                                                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 10>
+                 <b>while</b> sn[yc] = ec                                                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 10>
+                 <b>do</b> sn[yc]:= - es: h:= pc[yc]; pc[yc]:= ys;                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 8>
+                    ys:= yc; yc:= h;                                                                </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 10>
+                 <b>od</b>;                                                                         </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 10>
+                 ec:= ec - 1; yun:= yc                                                              </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 14>
+            <b>else</b> { c[yun] < b[yun], therefore the next arc originating at                    </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 12>
+               node nr. yun will be transferred from sa2 to sa1; this is arc f}                     </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 10>
+                 c[yun]:= c[yun] + 1; ft:= t[c[yun]]; h:= sn[ft];                                   </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 13>
+              {now ft is the terminal node of arc f and h = sn[ft] to save                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 12>
+               dynamically a few subscriptions}!                                                    </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 11>
+                <b>if</b> h = 0                                                                     </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 9>
+                  <b>then</b> {node ft has to be removed from ssn1 and to be                        </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 7>
+                     attached to csn}                                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 6>
+                       es1:= es1 - 1; ec:= ec + 1; sn[ft]:= ec;                                     </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 6>
+                       pc[ft]:= yc; yc:= ft; yun:= yc                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 9>
+                  <b>else</b> <b>if</b> 0 < h <b>and</b> h < ec                                     </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 5>
+                         <b>then</b> {ft is a node of the non-terminal element                      </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 3>
+                            nr. h of csn, with which the younger elements                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
+                            have to be combined}                                                    </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 2>
+                              ec:= h                                                                </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 4>
+                           {this ends the use of h as h = sn[ft]};                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                              h:= yc; <b>while</b> sn[h] > ec                                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                      <b>do</b> sn[h]:= ec; h:= pc[h]                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>
+                                      <b>od</b>                                                     </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 4>
+                           { note that in combining, pc, yr: and yun can                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
+                            remain unchanged]                                                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+                         <b>else</b> {arc f points either to csn&rsquo;s terminal                   </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
+                            element or to an element of ssn; in either                              </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
+                            case it can be ignored}                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 6>
+                       <b>fi</b>                                                                    </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 11>
+                <b>fi</b> {the case that arc f existed has been dealt with}                         </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 16>
+         <b>fi</b> {csn&rsquo;s terminal element has been inspected]                                </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 19>
+      <b>od</b> {csn is again empty}                                                                </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 21>
+    <b>od</b> {ssn1 is empty, the computation has been done};                                       </td> </tr> <tr> <td>&nbsp; </td> <td colspan = 23>
+ {print the results; the maximal strong Components appear numbered in                               </td> </tr> <tr> <td></td> <td></td> <td colspan = 22>
+  decreasing order}                                                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 21>
+    <b>while</b> es > 0                                                                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 21>
+    <b>do</b> newline; printtext(&ldquo;maximal strong component nr.&rdquo;);                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 18>
+       printvalue(es); printtext(&ldquo;consists of the nodes:&rdquo;);                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 18>
+       <b>while</b> sn[ys] = - es <b>do</b> printvalue(ys); ys:= pc[ys] <b>od</b>;                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 18>
+       es:= es -1                                                                                   </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 21>
+    <b>od</b>                                                                                       </td> </tr> <tr> <td colspan = 24>
+<b>end</b>                                                                                          </td> </tr>
+</table>
+<p class="noindent"><b>Concluding remarks</b>. 
+<p>In order to avoid the usual misunderstandings it might be a good
+thing to point out, once again, that the approach that has been illustrated
+in this exercise does not pretend to be an infallible cure against fallibility
+We have tried two things: we have tried to develop a program in a way that
+leads to a higher confidence level than the one that can he reached when
+the designer &ldquo;rushes into coding&rdquo; and we have tried to make the reader
+share our conviction —strengthened by the above experience!— that the
+simultaneous development of the correctness proof gives indeed a strong
+heuristic guidance in the process of shaping the program.
+<p>As the reader will have noticed we have not spent a single word of
+explanation on the repeatable statement of the small innermost loops. I
+think that this is in accordance with normal mathematical practice: the
+reasoning has to be broken down in steps so small that they can be made
+&ldquo;in confidence&rdquo; and that a more detailed proof, a more detailed justification
+could be given when they are challenged, but that that should not be done
+without compelling reason. We should not waste our time on trivia!
+<p>The situation at the innermost loops, where we deal with quite
+standard coding techniques, is quite different from the situation at
+the outermost levels where we have to manipulate with concepts and relations
+cooked up and discovered for the specific purpose of solving this specific
+problem: it is at the latter level that the greater explicitness seems most
+urgently needed. Also, it is in that part of the analysis and synthesis
+that the most heavy demands are made upon the programmer&rsquo;s ability to
+express himself effectively.
+<p>Finally we draw attention to the fact that we did not need a single
+example to explain what we were talking about or (even worse!) to discover
+what the program should do. And this, of course, is as it should have been.
+<p class="noindent"><b>Acknowledgements</b>.
+We express our gratitude towards J.A.G.M. Kelbosch and J.C. Wortmann for
+bringing this problem to our attention and thereby presenting the challenge.
+<p class="noindent">30th May 1975 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Edsger W.Dijkstra
+</body></html>
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-11-07<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+
+</body></html>

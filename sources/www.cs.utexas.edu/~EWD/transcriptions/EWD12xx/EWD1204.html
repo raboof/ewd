@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<title>E.W.Dijkstra Archive: Complete DAGs (EWD 1204)</title>
+		<link href="../transcriptions.css" rel="stylesheet" media="screen" />
+	</head>
+
+	<body>
+		<div id="frame">
+			<div id="header">
+				<a title="Link to the PDF version of EWD1204" href="../../ewd12xx/EWD1204.PDF">EWD1204</a></div>
+			<div id="content">
+				<u>Complete DAGs</u>
+				<p>[DAG is just another TLA I don't approve of; it stands for &quot;Directed Acyclic Graph .]</p>
+				<p>In a recent manuscript &#x2014;in the literal sense of the word&#x2014; : &quot;Some properties of the relative converse&quot; (March 1995), Tony Hoare plays with tetrahedra of which the edges may be directed. (As by-product of his considerations he finds, for instance, that &quot;any non-cyclic ascription of directions to any five of the edges can be non-cyclically extended to the sixth edge.&quot;) Here is a little bit of related theory.</p>
+			</div>
+			<div id="content" align="center">
+				<p class="noindent">
+				*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+					
+				 *</p></div>
+			
+				
+			<div id="content">
+				<p>Let <var>K</var> be the complete graph with <var>n</var> vertices, in which each edge has a direction. Then the following 3 statements are equivalent</p>
+				<p class="noindent">
+				(<i>i</i>)&nbsp;&nbsp;&nbsp;&nbsp;<var>K</var> contains no cyclic paths</p>
+				<p class="noindent">(<i>ii</i>)&nbsp;&nbsp;&nbsp;<var>K</var> contains no cyclic paths of length 3 </p>
+				<p class="noindent">(<i>iii</i>)&nbsp;&nbsp;the outdegrees of the vertices of <var>K</var> are the values 0 through <var>n</var>-1
+</p>
+				<p class="noindent">The equivalences hold for <var>n</var>=1, since for <var>n</var>=1, (<i>i</i>), (<i>ii</i>), and (<i>iii</i>) are all true. For general <var>n</var>, the proof proceeds by mathematical induction. The induction step itself is done by cyclic implication: we now consider the complete (<var>n</var>+1)-graph <var>K'</var> with directed edges, and observe for it</p>
+				<p class="noindent"><u>(<i>i</i>) &#x21D2; (<i>ii</i>)</u></p>
+				
+
+				<p>This follows &#x2014;independently of the induction hypothesis&#x2014; from the fact that &quot;of length 3&quot; is a restriction.</p>
+				<p class="noindent"><u>(<i>ii</i>) &#x21D2; (<i>iii</i>)</u></p>
+				<p>Let <var>A</var> be of <var>K'</var> a vertex of maximum outdegree; let <var>K</var> be the <var>n</var>-graph that remains after removal of <var>A</var> and its <var>n</var> connecting edges. Because of (<i>ii</i>), also <var>K</var> contains no cycles of length 3 and, ex hypothese, the outdegrees of its vertices are the values 0 through <var>n</var>-1; consequently we are done when we show that <var>A</var> has outdegree <var>n</var> (note that then the vertices of <var>K</var> have the same outdegree in <var>K</var> as in <var>K'</var>).
+</p>
+				<p>Let <var>B</var> be the vertex with outdegree <var>n</var>-1 in <var>K</var>; since, by construction, <var>A</var> is not a vertex of <var>K</var>, <var>A</var> and <var>B</var> are different vertices. We now first deal with<br />
+					 the edge <var>AB</var>, and then with the remaining edges connecting <var>A</var> to <var>K</var>.</p>
+			</div>
+			<div id="content">
+				<p>The direction of edge <var>AB</var> is <var>A</var>&#x2192;<var>B</var> for the assumption <var>B</var>&#x2192;<var>A</var> &nbsp; leads to a contradiction: then <var>B</var> would have in <var>K'</var> the (maximum) outdegree <var>n</var>, and so would <var>A</var> (by virtue of how it has been chosen: outdegree <var>A</var> &#x2265; outdegree <var>B</var>), but in the directed complete (<var>n</var>+1)-graph, at most 1 vertex has the maximum outdegree <var>n</var>.</p>
+				<p>Let <var>C</var> be a third vertex; then, because <var>C</var> is a vertex of <var>K</var>, in which <var>B</var> has the maximal outdegree <var>n</var>-1, the direction of edge <var>BC</var> is <var>B</var>&#x2192;C. From <var>A</var>&#x2192;<var>B</var>, <var>B</var>&#x2192;<var>C</var>, and the absence of cycles of length 3 in <var>K'</var>, we conclude that the direction of <var>AC</var> is <var>A</var>&#x2192;<var>C</var>. (Note that, so far, we had only used the absence of cycles in <var>K</var>.) Hence, <var>A</var> has outgoing edges only, quod erat demonstrandum.</p>
+				<p class="noindent"><u>(<i>iii</i>) &#x21D2; (<i>i</i>)</u></p>
+				
+
+				<p>Assume (<i>iii</i>) for <var>K'</var>; let <var>A</var> be the vertex of maximum outdegree <var>n</var>; let <var>K</var> be the <var>n</var>-graph that remains after removal of <var>A</var> and its <var>n</var> connecting
+					 edges. Possible cyclic paths in <var>K'</var> are then of two kinds, either they include <var>A</var>, or they lie in <var>K</var>.</p>
+				
+</div>
+			<div id="content">
+				<p>Because <var>A</var> has outgoing edges only, no cyclic path leads through it; because of assumption (<i>iii</i>) for <var>K'</var> and of the fact that <var>A</var> has outgoing edges only, we conclude (<i>iii</i>) for <var>K</var> and, ex hypothese, that no cyclic paths lie in <var>K</var>. So, <var>K'</var> contains no cyclic paths, quod erat demonstrandum.</p>
+			</div>
+			<div id="content" align="center">
+				<p class="noindent">
+				*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+					
+				 *</p></div>
+			
+				
+			<div id="content">
+				<p>The absence of cyclic paths in the complete graph tells us &#x2014;with apologies for the picture!&#x2014; that each triangle is of the form <img src="EWD1204.jpg" alt="triangle with directed arcs AB, BC, and AC" width="10%" align="middle"> , i.e. &#x2192; is a
+					transitive relation. Hiding this fact so far
+					could be considered a conscious obfuscation
+					on my part.</p>
+			</div>
+			<div id="header">Austin, 29 March 1995</div>
+			<div>
+				prof. dr. Edsger W. Dijkstra<br />Department of Computer Sciences<br />The University of Texas at Austin<br />Austin, TX 78712-1188<br />
+				 USA</div>
+			<!-- end signatures -->
+			<hr />
+			<!-- name and date -->
+			<div id="footer">
+				<font size="-1">
+				transcribed by Joel Neely<br />
+					
+
+				 revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="88">Fri, 14 Mar 2008</csobj></font></div>
+		</div>
+	</body>
+
+</html>

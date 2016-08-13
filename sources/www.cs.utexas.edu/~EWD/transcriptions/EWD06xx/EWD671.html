@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Program inversion (EWD 671)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd06xx/EWD671.PDF"
+           title="Link to the PDF version of EWD671">EWD671</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<table> <tr> <td colspan = 2>
+<b>Copyright Notice</b>                                                                </td> </tr> <tr> <td colspan = 2>
+The following manuscript                                                        </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+    EWD 671: Program inversion                                                  </td> </tr> <tr> <td colspan = 2>
+is held in copyright by Springer-Verlag New York.                               </td> </tr> <tr> <td colspan = 2>
+The manuscript was published as pages 351–354 of                                </td> </tr> <tr> <td></td> <td>
+    Edsger W. Dijkstra, Selected Writings on Computing: A Personal Perspective, </td> </tr> <tr> <td></td> <td>
+    Springer-Verlag, 1982. ISBN 0–387–90652–5.                                  </td> </tr> <tr> <td colspan = 2>
+<b>Reproduced with permission from Springer-Verlag New York. </b>                      </td> </tr> <tr> <td colspan = 2>
+<b>Any further reproduction is strictly prohibited.       </b>                         </td> </tr>
+</table>
+                    
+<p class=noindent><b>Program inversion</b>.
+<p>Let the integer array p(0..M-1) be such that the sequence
+p(0), p(1),..., p(M-1) represents a permutation of the numbers from 0
+through M-1 and let the integer array y(0..M-1) be such that
+(<u>A</u> i: 0 &le; i &lt; M: 0 &le; y(i) &le; i) . Under those constraints we are 
+interested in the relation
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+(<u>A</u> i: 0 &le; i &lt; M: y(i) = (<u>N</u> j: 0 &le; j &lt; i: p(j) &lt; p(i))  )</td><td align=right>(1)
+</td>  </tr>  </table>
+(Legenda: &ldquo;(<u>N</u> j: 0 &le; j &lt; i: p(j) &lt; p(i))&rdquo; should be read as &ldquo;the number
+of mutually different values j in the range 0 &le; j &lt; i , such that
+p(j) &lt; p(i)&rdquo;.) 
+<p>We can now consider the two &mdash;solvable&mdash; problems
+<br>A)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given p , assign to y a value such that (1) is satisfied.
+<br>B)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given y , assign to p a value such that (1) is satisfied.
+<br>Because we want to consider programs the execution of which may modify the
+given array, we rephrase:
+<br>A)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given p , assign to y a value such that (1) holds between the
+initial value of p and the final value of y .
+<br>B)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Given y , assign to p a value such that (1) holds between the
+initial value of y and the final value of p .
+<p>If A transforms p into a (standard) value which is its initial
+value in B , and if B transforms y into a (standard) value which is
+its initial value in A , then transformations A and B are inverse
+transformations on the pair (p,y). We are interested in these inverse
+transformations because in general problem A is regarded as easier than
+B : we have solved problem B as soon as we have for A a reversible
+solution!
+<p class=noindent><b>Our first effort</b>.
+<p>Let the standard value for p be such that (<u>A</u> i: 0 &le; i &lt; M: p(i) = i) .
+From (1) we immediately deduce that a permutation of the values p(0), ....,
+p(k-1) does not affect the values of y(i) for i &ge; k . This suggests
+                  
+the computation of the values y(k) in the order of increasing k , each
+time combining the computation of y(k) with a permutation of p(0),...,
+p(k) . Because the final value of p should be sorted, we are led most
+naturally to a bubble sort:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+       k:= 0; {p(0),...,p(k-1)  is ordered}                 </td> </tr> <tr> <td></td> <td colspan = 2>
+       <b>do</b> k &ne; M &rarr; "make  p(0),.., p(k) ordered"; </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                  k:= k + 1 {p(0),..., p(k-1)  is ordered}  </td> </tr> <tr> <td></td> <td colspan = 2>
+       <b>od</b>                                            </td> </tr>
+</table>
+
+The standard program for the bubble sort is
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+       k:= 0;                                                                    </td> </tr> <tr> <td></td> <td colspan = 4>
+       <b>do</b> k &ne; M &rarr; j:= k;                                          </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 2>
+                  <b>do</b> j &gt; 0 <b>cand</b> p(j-1) &gt; p(j) &rarr; p:swap(j-l,j); </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                              j:= j - l                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 2>
+                  <b>od</b> {here j = the value  y(k)  should get};             </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+                 k:= k + 1                                                       </td> </tr> <tr> <td></td> <td colspan = 4>
+       <b>od</b> {<u>A</u> i: 0 &le; i &lt; M :  p(i) = i}                      </td> </tr> <tr> <td colspan = 5>
+                                                                                 </td> </tr>
+</table>
+We initialize via y:=(0) the array variable y as the empty array
+with y.lob = 0, each time extending it with a new value as soon as that
+has been computed. Because k = y.dom would be an invariant, the variable
+k can be eliminated.
+<p class=noindent>Program A1:
+<table> <tr> <td>&nbsp; </td> <td colspan = 3>
+ y:=(0); {y.dom = 0}                                                                   </td> </tr> <tr> <td></td> <td colspan = 3>
+ <b>do</b> y.dom &ne; M &rarr; j:= y.dom {this is an initialization}; {j = y.dom}      </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+                <b>do</b> j &gt; 0 <b>cand</b> p(j-1) &gt; p(j) - p:swap(j-l,j);       </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                                            j:= j - 1 {j &lt; y.dom}                   </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
+                <b>od;</b> y:hiext(j) {j's value is no longer relevant} {y.dom &gt; 0} </td> </tr> <tr> <td></td> <td colspan = 3>
+ <b>od</b> {<u>A</u> i: 0 &le; i &lt; M: p(i) = i}                                     </td> </tr>
+</table>
+
+Inverting it we construct
+Program B1:
+<table> <tr> <td>&nbsp; &nbsp; </td> <td colspan = 3>
+  p:=(0); <b>do</b> p.dom &ne; M &rarr; p:hiext(p.dom) <b>od</b>;· {<u>A</u> i: 0 &le; i &lt; M: p(i) = i } </td> </tr> <tr> <td></td> <td colspan = 3>
+  <b>do</b> y.dom &ne; 0 &rarr; j,y:hipop {this is an initialization of  j };                               </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+                <b>do</b> j &ne; y.dom &rArr;·j:= j + l; p:swap(j-l,j) <b>od</b>                            </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                     {j's value is no longer relevant}                                                      </td> </tr> <tr> <td></td> <td colspan = 3>
+  <b>od</b>                                                                                                 </td> </tr>
+</table>
+
+                            
+<p>This inversion was easy because the post-condition of each repeatable
+statement implies the negation of the stated precondition of the repetitive
+construct as a whole; furthermore we have used that y:hiext(j) and
+j,y:hipop are each other&rsquo;s inverse, that j:= j + 1 and j:= j - 1 are
+each others inverse, and that p:swap(j-1,j) is its own inverse.
+<p>We leave to the reader the insertion of provable assertions in 
+program B1 that would justify the derivation of A1 from B1 by inversion.
+<p class=noindent><b>Our second effort</b>.
+<p>We can also compute the values y(k) in the order of decreasing k .
+(Here it is as if our standard value of p is the empty array with p.lob = 0
+and the standard value of y is the empty array with y.hib = M - 1 .) We
+make three observations:
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As soon as the y(i) for i &ge; k have been computed, the p(i) for
+i &ge; k no longer matter, i.e. we can work with a single array, v(0..M-1)
+say, where in A/B , in relation (1) p refers to the initial/final value
+of v , and y refers to the final/initial value of v .
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Denoting with ï¬‚(k): &ldquo;the sequence p(0), p(1),...,p(k) represents
+a permutation of the numbers 0,...,k&rdquo; we can write Q(k) &rArr; y(k) = p(k).
+<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decreasing in the range 0 fii &lt; k all p(i) such that p(i) &gt; p(k)
+by 1 leaves all y(i) with 0 gli &lt; k unaffected.
+<p>These observations lead to the following program (in which we can
+view the elements v(i) with i &lt; k as the corresponding elements of (a
+changing) p and the v(i) with i &ge; k as the corresponding elements of
+a growing y .)
+<table> <tr> <td>&nbsp; </td> <td colspan = 5>
+ k:= M; {k = M <b>and</b> Q(k-1) <b>and</b> v = p}                                                      </td> </tr> <tr> <td></td> <td colspan = 5>
+ <b>do</b> k &ne; 0 &rarr; k:= k - 1; {Q(k)}                                                            </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+            i:= 0; <b>do</b> i &ne; k &rarr; <b>if</b> v(i) &gt; v(k) &rarr; v:(i)= v(i) - 1  {v(i) &ge; v(k)} </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
+                               &#x25af; v(i) &lt; v(k) &rarr; skip {v(i) &lt; v(k)}                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+                            <b>fi</b>; i:= i + 1                                                        </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+                  <b>od</b> {i = k and Q(k-1)}                                                          </td> </tr> <tr> <td></td> <td colspan = 5>
+ <b>od</b> {k  = 0 <b>and</b> v = y}                                                                    </td> </tr>
+</table>
+
+In the alternative construct the postconditions have been added in order to
+                
+ease the inversion:
+Program B2:
+<table> <tr> <td>&nbsp; </td> <td colspan = 4>
+ k:= 0 {v = y};                                                        </td> </tr> <tr> <td></td> <td colspan = 4>
+ <b>do</b> k &ne; M &rarr; i:= k;                                      </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+            <b>do</b> i &ne; 0 &rarr; i:= i - 1;                              </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+                       <b>if</b> v(i) &ge; v(k) &rarr; v:(i)= v(i) + 1 </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
+                        &#x25af; v(i) &lt; v(k) &rarr; skip            </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 2>
+                       <b>fi</b>                                       </td> </tr> <tr> <td></td> <td></td> <td colspan = 3>
+            <b>od</b> {i = 0};                                         </td> </tr> <tr> <td></td> <td></td> <td colspan = 3>
+            k:= k + 1                                                  </td> </tr> <tr> <td></td> <td colspan = 4>
+ <b>od</b> {k = M <b>and</b> v = p}.                                          </td> </tr>
+</table>
+
+<p>The problems A and B I had invented for examination purposes.
+After the students had handed in their work, it was W.H.J.Feijen who 
+suggested that it would be nice to derive the one program from the other via
+inversion. Because in this case we have a deterministic program in which
+no information is destroyed, the inversion is a straightforward process.
+What remains of these techniques in the general situation remains to be
+seen. Is it possible to show that a program with nondeterministic elements
+leads to a unique answer because in its inverse no information is destroyed?
+who knows.... In the meantime I have derived a program &mdash;B2 to be precise&mdash;
+that was new for me.
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN</td><td>BURROUGHS Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-02-02<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

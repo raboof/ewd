@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0078)http://www.cs.utexas.edu/users/EWD/transcriptions/transcriptionStationery.html -->
+<HTML lang=en 
+xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<HEAD><TITLE>E.W.Dijkstra Archive: The river, the isles and the bridges (EWD 1301)</TITLE>
+<META http-equiv=content-type content="text/html; charset=ISO-8859-1">
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+
+<META content="Microsoft FrontPage 4.0" name=GENERATOR></HEAD>
+<BODY>
+<DIV id=frame>
+<DIV id=header>
+  <p style="text-indent: 0"><a title="PDF scan of EWD 1301" href="../../ewd13xx/EWD1301.PDF" target="_blank">EWD1301</a></DIV>
+<DIV id=content>
+<P style="text-indent: 0"><U>The river, the isles and the bridges</U></P>
+
+<P>In a river lie 6 isles, connected by 13 bridges to each other and the shores as follows:</P>
+
+<CENTER><img alt="diagram showing 6 isles in two rows of 3, rows parallel to the stream" border="0" src="EWD1301_figs/EWD1301-1.png" width="319" height="142"></CENTER>
+
+<P style="text-indent: 0">When in a storm each bridge has a probability 1/2 of being swept away.  What is the probability
+that the shores remain connected?</P>
+
+<CENTER><PRE>
+ *           *
+ *
+</PRE></CENTER>
+
+<P>We propose to associate the 13 bridges with the 13 squares in the following array</P>
+
+<CENTER><img border="0" src="EWD1301_figs/EWD1301-2.png" alt="fig.0: diamons in rows of length 3, 2, 3, 2, 3; top vertices labeled A, bottom B, left C, right D" width="369" height="329"></CENTER>
+<CENTER>fig.0</CENTER>
+<P style="text-indent: 0">such that the original bridges correspond to the diagonals between the marked corners of the 
+squares.</P>
+
+<P>In each square we connect with probability 1/2 either</P>
+				<table width="85%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="10%">(i)</td>
+						<td> the marked corners by a solid diagonal:</td>
+						<td><img src="EWD1301_figs/EWD1301-3.png" alt="solid diagonal running northwest-southeast" width="80" height="88"></td>
+					</tr>
+					<tr>
+						<td width="10%"></td>
+						<td>
+							<div align="center">
+								or</div>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td width="10%">(ii)</td>
+						<td>the unmarked corners by a dotted diagonal</td>
+						<td><img src="EWD1301_figs/EWD1301-4.png" alt="dotted diagonal running southwest-northeast" width="92" height="92"></td>
+					</tr>
+				</table>
+				<P style="text-indent: 0"></P>
+				<P style="text-indent: 0">In the new terminology, we are now asking for the probability that there exists a solid path 
+between the As and the Bs.</P>
+				<P>Paths being continuous we conclude</P>
+
+<P>(As and Bs are connected by a solid path)<br>
+					&#x2262;&nbsp;&nbsp;&nbsp;&nbsp;(Cs and Ds are connected by a dotted path)</P>
+
+<P style="text-indent: 0">and hence</P>
+
+<P style="text-indent: 0">(0) &nbsp;&nbsp;the probability that As and Bs are connected<br>
+					&nbsp;&nbsp;= &nbsp;&nbsp;the probability that Cs and Ds are not connected.</P>
+
+<P>From the symmetry of fig. 0 and the equal probabilities of (i) and (ii) we conclude</P>
+
+<P style="text-indent: 0">(1) &nbsp;&nbsp;the probability that Cs and Ds are not connected<br>&nbsp;&nbsp;= &nbsp;the probability that As and Bs are not connected.</P>
+
+<P style="text-indent: 0">Combining (0) and (1) we conclude that the As and Bs are as likely to be connected as to be
+disconnected.  The answer we were looking for is therefore &#x00BD;   .</P>
+
+<P style="text-indent: 0"><U>Remark</U> The answer is not surprising since &#x00BD; is also the answer in the situations</P>
+
+<CENTER><img src="EWD1301_figs/EWD1301-5.png" alt="two isles, each connected to the other and to both riverbanks" width="202" height="96"></CENTER>
+
+<P>and</P>
+
+<CENTER><img src="EWD1301_figs/EWD1301-6.png" alt="a single bridge from bank to bank" width="122" height="67"></CENTER>
+
+<P style="text-indent: 0">(End of Remark)
+
+<CENTER>
+					                         <br>
+					 *&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+					 *<br>
+				</CENTER>
+
+<P>I learned this problem early June from Dr. Georg Zimmermann at a workshop "Sprache und 
+Mathematik" that the Fachschaft Mathematik of the Bisch&#x00F6;fliche Studienf&#x00F6;rderung "Cusanuswerk" had 
+organized in Uder.  We solved the problem at the next session of the ETAC ( = Eindhoven Tuesday
+Afternoon Club); in particular the contribution of Frans van der Sommen is acknowledged.</P>
+
+<P>And then it took me almost a month to find the time and muster the energy to record the solution.  
+Besides the usual excuses of having other things to do, there was the fact that I still had to 
+invent fig. 0, an invention that helped me &#x2014;I think!&#x2014; in my exposition, but also annoyed me because 
+I needed pencil and paper for it.</P>
+				<P>Eventually I concluded that I did not like the problem too much:  its solution remained an 
+isolated ingenuity.</P>
+				<blockquote>
+					<blockquote>
+						<P>Nuenen, 10 July 2000</P>
+					</blockquote>
+				</blockquote>
+				<P style="text-indent: 0">prof.dr Edsger W.Dijkstra<BR>
+Department of Computer Sciences<BR>
+The University of Texas at Austin<BR>
+Austin, TX  78712-1188<BR>
+USA</P>
+				<HR>
+				<font size="-1"><!-- name and date --></font>
+				<DIV id=footer>
+					<font size="-1">transcribed by Carl Ludwigson<BR>
+						
+revised <CSOBJ w="91" t="DateTime" region="15" h="13" format="MedDate">Sat, 24 Nov 2007</CSOBJ></font></DIV>
+			</DIV>
+</BODY></HTML>
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>E.W.Dijkstra Archive: Seemingly on a problem transmitted by Bengt Jonsson (EWD 1039)</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="../transcriptions.css" rel="stylesheet" media="screen" />
+	</head>
+	<body>
+		<div id="frame">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="../../ewd10xx/EWD1039.PDF"
+					 title="Link to the PDF version of EWD1039">EWD 1039</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>Seemingly on a problem transmitted by Bengt Jonsson</u></p>
+				<p>The other Tuesday, at the end of his lecture, Bengt Jonsson (Swedish Institute for Computer Science/University of Uppsala) left the audience with the following problem. Consider the 8 by 8 square; can it be covered by 21 bars of 3 by 1 and 1 little square of 1 by 1?</p>
+				<p>[In the following, I shall try to ignore that this problem is a variation of a problem I know very well. If the reader knows so too, I ask him to follow my example.]</p>
+				<p>My first proposal is not to try at this stage to cover the big square by the 22 pieces, and this for the following reason: if the answer is "Yes&rdquo;, we could be fortunate and establish this by hitting upon a solution of our jig-saw puzzle; if, however, the answer is &ldquo;No&rdquo;, establishing it by such an exhaustive search is prohibitively expensive.</p>
+				<p>My second proposal is therefore to look whether we can reduce the search space effectively by means of a (preferably simple) argument. Note that we can do so without committing ourselves to whether we are heading for &ldquo;Yes&rdquo; or &ldquo;No&rdquo;: our argument could be so effective in ruling out all sorts of covering efforts that it becomes feasible to try the remaining &#x2014;possible zero&#x2014; efforts.</p>
+				<p>Reducing the search space means being able to characterize <span style="border-bottom: 1px dashed;">barren</span> <span style="border-bottom: 1px dashed;">placements</span>, i.e. a placement of part of the pieces that cannot be extended to a solution of the jig-saw puzzle by placing the remaining pieces in the as yet uncovered part of the 8 by 8 square.</p>
+				<p class="noindent"><u>Remark</u> &nbsp; If 3 &#x00D7; 21 + 1 were different from 8 &#x00D7; 8, the placement of no pieces at all would be barren and the answer would be &ldquo;No&rdquo;, but you have probably already verified that, regrettably, these two expressions have the same value (End of Remark.)</p>
+				<p>Here a general remark about the effectiveness of barren placements is in order. Consider a barren placement that leaves so little of the big square uncovered that it cannot be extended with a single piece; such a barren placement is minimally effective in the sense that rules out itself only. Since extensions of barren placements are barren as well, a barren placement is the more effective, the more extensions it permits. For reasons of effectiveness, we therefore favor barren placements of as few pieces as possible. The placement of no pieces at all &#x2014;see above Remark&#x2014; would be the most effective barren placement for all, but we don't have an argument that it is barren (and perhaps it isn't).</p>
+				<p>My third proposal is therefore to look for barren placements of a single piece. Which piece? The single little square, of course. Had we chosen a bar, then we would need an argument whether the remaining area could be covered by 20 bars and the little square, a question so similar to the original one that it is hardly a conceptual simplification. If we choose as candidate for a barren placement a placement of the single little square, however, we are faced with the question whether the remaining area can be covered with 21 bars; the homogeneity of &ldquo;bars only&rdquo; might create the opportunity for an elegant argument.</p>
+				<p>Our attention having thus been directed to the remaining area to be covered by the 21 bars, I could raise the question &ldquo;What can we say about areas covered by 21 bars?&rdquo;, but in explorations like these, 21 is a very large integer, which would be reached most nicely by an inductive argument of some sort. As we are still hoping for a simple argument, my fourth proposal is to look for what we can say about areas covered by bars only.</p>
+				<p>The obvious remark is that, each bar being 3 by 1, the total number of squares covered by a bunch of bars is a multiple of 3, but &#x2014;see above Remark&#x2014; we have already established that this conclusion is too weak to be helpful. It takes into account the area of a bar. but not its shape, i.e. not the fact that it covers three adjacent squares in a line.</p>
+				<p>So, more precisely, what can we say about areas covered by bars only, taking into account that each bar covers three adjacent squares in a line? Using programmer&rsquo;s jargon (to capture an inductive argument): while placing the bars one by one, can we find a stronger invariant than just that the squares covered can be partitioned into three partitions of the same size? Yes, we can, if we can characterize such partitions independently of the placement of the bars, more precisely, if we succeed in partitioning the 64 little squares of the 8 by 8 square, say by painting each of them red, white, or blue, in such a way that, by virtue of its shape, each bar covers one little square of each colour. Areas covered by bars only then comprise equal numbers of squares of each colour. (The decision to try to partition the 64 little squares represents The Great Leap Forward.)</p>
+				<p>It is possible to colour the 64 squares so that each bar covers each colour once? A little reflection shows that for the 3 squares closest to the bottom-left corner, there are, but for the renaming of colours, essentially only two possibilities</p>
+				<p class="noindent" align="center" style="margin-top: 0;"><img src="ewd1039_fig1.png" alt="EWD1039 figure 1" title="EWD1039 figure 1" /></p>
+				<p class="noindent">A little more reflection shows that each of these two patterns admits a unique extension with monochrome lines parallel to a diagonal: starting from pattern A this runs from top-left to bottom-right, from pattern B from top-right to bottom left. I have chosen the colours in such a way that in each case #r=21, #w=22, #b=21. These numbers tell us that the single little square in a position that is red or blue in at least one of the two colourings is a barren placement. To put it positively: we need investigate those placements only in which the position of the single square is white in both colourings. Apart from symmetry, that position is unique:</p>
+				<p class="noindent" align="center" style="margin-top: 0;"><img src="ewd1039_fig2.png" alt="EWD1039 figure 2" title="EWD1039 figure 2" /></p>
+				<p>We still have not found our answer yet. Since &ldquo;No&rdquo; would, again, need an argument, whereas &ldquo;Yes&rdquo; can be established by a witness, I opt for the latter option, just hoping that the prescribed position of the single little square gives me enough guidance.</p>
+				<p class="noindent" style="margin-top: 0;">By surrounding the prescribed position by a 5 by 5 square I partitioned the remaining area in a way as symmetric as possible;</p>
+				<p class="noindent" style="margin-top: 0;" align="center"><img src="ewd1039_fig3.png" alt="EWD1039 figure 3" title="EWD1039 figure 3" /></p>
+				<p class="noindent" style="margin-top: 0;">moreover, 8-5=3, so that covering II presents no problem. The effort of covering I invites us to maintain its cyclic symmetry:</p>
+				<p class="noindent" style="margin-top: 0;" align="center"><img src="ewd1039_fig4.png" alt="EWD1039 figure 4" title="EWD1039 figure 4" /></p>
+				<p class="noindent" style="margin-top: 0;">So the answer to Jonsson's question is &ldquo;Yes&rdquo;.</p>
+				<p><u>Remark</u> &nbsp; As the reader may have noticed, there was no reason to distinguish between red and blue. I could have rushed ahead, asking &ldquo;Can we colour 22 squares white and 42 black so that each bar covers exactly one white square?&rdquo; I preferred not to do so. (End of Remark.)</p>
+				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+				<p>The problem I alluded to in the beginning is the (well-known) demonstration that the truncated chessboard</p>
+				<p class="noindent" align="center" style="margin-top: 0;"><img src="ewd1039_fig5.png" alt="EWD1039 figure 5" title="EWD1039 figure 5" /></p>
+				<p class="noindent" style="margin-top: 0">cannot be covered by 31 dominos, the two fields removed having the same colour. For anyone knowing that solution it is hard not to use it as a source of inspiration when faced with Jonsson&rsquo;s problem. Those familiar with chessboard/domino problems might even consider Jonsson&rsquo;s problem too trivial to devote a technical note to. If so, they have missed my point: this note is not about Jonsson&rsquo;s problem, but about problem solving. I have tried to remove from the development as many rabbits as possible. With the exception of The Great Leap Forward, I think I have been successful in doing so. I may have another go at that last rabbit by the time I can be more explicit about the structure and role of counting arguments. They are general enough to deserve our attention.</p>
+				<p align="center">Austin, 22 Januari 1989</p>
+				<p class="noindent">
+					prof.dr. Edsger W.Dijkstra<br />
+					Department of Computer Sciences<br />
+					The University of Texas at Austin<br />
+					Austin, TX 78712-1188<br />
+					USA<br />
+				</p>
+			</div>
+			<div>
+        <br/>
+      </div>
+		</div>
+		<hr />
+		<div id="footer">
+         transcribed by Corrado Cantelmi<br />
+          revised 
+          <!-- #BeginDate format:En2 -->27-Nov-2011<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

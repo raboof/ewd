@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>E.W.Dijkstra Archive: The Analysis of Multiprogrammed Systems of Unspecified Degree of Parallelism (EWD 374)</title>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="../transcriptions.css" rel="stylesheet" media="screen" />
+		<style type="text/css">
+			.list td { padding: 0 1em 0.5em 1em; }
+		</style>
+	</head>
+	<body>
+		<div id="frame">
+
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="../../ewd03xx/EWD374.PDF"
+					 title="Link to the PDF version of EWD374">EWD 374</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>The Analysis of Multiprogrammed Systems of Unspecified Degree of Parallelism</u>.</p>
+				<p>Multiprogrammed systems have been tackled by considering them as finite state machines with a considerable amount of non-determinacy, reflecting unspecified speed ratios. This is all right as far as it goes (see<a name="reference" id="reference"></a> <a href="#footnote" title="link to footnote">[1]</a>), but it does not go very far if the reasoning forces us to choose beforehand the number of parallel processes. It is particularly unattractive if the amount of reasoning &mdash;or computing if the proof procedure is mechanized&mdash; rises steeply with the number of participating processes. The following example shows how even for general &ldquo;<var>n</var>&rdquo;, a finite state analysis can suffice, provided that what we call &ldquo;states&rdquo; are carefully chosen.</p>
+				<p>It is the by now classical example of the readers and the writers, where the critical reader activity excludes the critical writer activity and where in addition the critical activity of any one writer excludes the same activity of any other writer. In short, in this example we have an unknown number of participants of two different types.</p>
+				<p>We have chosen a rather unusual solution, not because we have any reason for favouring it, but in order to show the power of our technique for analysing such systems. The chosen solution is rather sophisticated in granting a rather strong priority to writers and in trying to minimize the execution of synchronizing primitives and tests.</p>
+				<p>The common state space is controlled by four integer variables <var>ar</var>, <var>aw</var>, <var>br</var>, <var>bw</var> (short for &ldquo;active or blocked readers or writers&rdquo;) and three semaphores, called <var>R</var>, <var>W</var> and <var>mutex</var>. Their initial values are</p>
+				<p class="noindent"><var>ar = aw = br = bw = R = W =</var> 0 &nbsp; &nbsp; and <var>mutex</var> = 1.</p>
+				<p>The programs for the readers and the writers &mdash;for explanation of the notation see below, after the program texts&mdash; are as follows.<br />&nbsp;</p>
+				<table cellpadding="0" cellspacing="0" border="0">
+					<tr><td colspan="7">READER:</td></tr>
+					<tr><td><b>cycle</b>&nbsp;</td><td colspan="6">non critical reader activity;</td></tr>
+					<tr><td></td><td></td><td colspan="5">P(<var>mutex</var>);</td></tr>
+					<tr><td></td><td></td><td><b>if</b>&nbsp;</td><td colspan="4"><var>aw</var> = 0 <b>and</b> <var>bw</var> = 0</td></tr>
+					<tr><td></td><td></td><td></td><td><b>then</b>&nbsp;</td><td colspan="3"><var>ar</var> <b>plus</b> 1; V(<var>mutex</var>)</td></tr>
+					<tr><td></td><td></td><td></td><td><b>else</b>&nbsp;</td><td colspan="3"><var>br</var> <b>plus</b> 1; V(<var>mutex</var>);</td></tr>
+					<tr><td></td><td>empty&nbsp;</td><td colspan="5">statement 1;</td></tr>
+					<tr><td></td><td></td><td></td><td></td><td colspan="3">P(<var>R</var>);</td></tr>
+					<tr><td></td><td></td><td></td><td></td><td colspan="3"><var>br</var> <b>minus</b> 1; <var>ar</var> <b>plus</b> 1;</td></tr>
+					<tr><td></td><td></td><td></td><td></td><td><b>if</b>&nbsp;</td><td colspan="2"><var>br</var> &gt; 0</td></tr>
+					<tr><td></td><td></td><td></td><td></td><td></td><td><b>then</b>&nbsp;</td><td>V(<var>R</var>)</td></tr>
+					<tr><td></td><td></td><td></td><td></td><td></td><td><b>else</b>&nbsp;</td><td>V(<var>mutex</var>) &nbsp; &nbsp; &nbsp; &nbsp;</td></tr>
+					<tr><td></td><td></td><td></td><td></td><td colspan="3"><b>fi</b></td></tr>
+					<tr><td></td><td></td><td colspan="5"><b>fi</b>;</td></tr>
+					<tr><td></td><td colspan="6">critical reader activity;</td></tr>
+					<tr><td></td><td></td><td colspan="5">P(<var>mutex</var>); <var>ar</var> <b>minus</b> 1;</td></tr>
+					<tr><td></td><td></td><td><b>if</b></td><td colspan="4"><var>ar</var> = 0 <b>and</b> <var>bw</var> &gt; 0</td></tr>
+					<tr><td></td><td></td><td></td><td><b>then</b></td><td colspan="3">V(<var>W</var>)</td></tr>
+					<tr><td></td><td></td><td></td><td><b>else</b></td><td colspan="3">V(<var>mutex</var>)</td></tr>
+					<tr><td></td><td></td><td colspan="5"><b>fi</b></td></tr>
+					<tr><td colspan="7"><b>elcyc</b></td></tr>
+					<tr><td>&nbsp;</td></tr>
+					<tr><td colspan="7">WRITER:</td></tr>
+					<tr><td><b>cycle</b>&nbsp;</td><td colspan="6">non critical writer activity;</td></tr>
+					<tr><td></td><td></td><td colspan="5">P(<var>mutex</var>);</td></tr>
+					<tr><td></td><td></td><td><b>if</b>&nbsp;</td><td colspan="4"><var>ar</var> = 0 <b>and</b> <var>aw</var> = 0</td></tr>
+					<tr><td></td><td></td><td></td><td><b>then</b>&nbsp;</td><td colspan="3"><var>aw</var> <b>plus</b> 1; V(<var>mutex</var>)</td></tr>
+					<tr><td></td><td></td><td></td><td><b>else</b>&nbsp;</td><td colspan="3"><var>bw</var> <b>plus</b> 1; V(<var>mutex</var>);</td></tr>
+					<tr><td></td><td>empty&nbsp;</td><td colspan="5">statement 2;</td></tr>
+					<tr><td></td><td></td><td></td><td></td><td colspan="3">P(<var>W</var>);</td></tr>
+					<tr><td></td><td></td><td></td><td></td><td colspan="3"><var>bw</var> <b>minus</b> 1; <var>aw</var> <b>plus</b> 1; V(<var>mutex</var>)</td></tr>
+					<tr><td></td><td></td><td colspan="5"><b>fi</b>;</td></tr>
+					<tr><td></td><td colspan="6">critical writer activity;</td></tr>
+					<tr><td></td><td></td><td colspan="5">P(<var>mutex</var>); <var>aw</var> <b>minus</b> 1;</td></tr>
+					<tr><td></td><td></td><td><b>if</b>&nbsp;</td><td colspan="4"><var>br</var> &gt; 0</td></tr>
+					<tr><td></td><td></td><td></td><td><b>then</b>&nbsp;</td><td colspan="3">V(<var>W</var>)</td></tr>
+					<tr><td></td><td></td><td></td><td><b>else</b>&nbsp;</td><td><b>if</b>&nbsp;</td><td colspan="2"><var>br</var> &gt; 0</td></tr>
+					<tr><td></td><td></td><td></td><td></td><td></td><td><b>then</b></td><td>V(<var>R</var>)</td></tr>
+					<tr><td></td><td></td><td></td><td></td><td></td><td><b>else</b></td><td>V(<var>mutex</var>)</td></tr>
+					<tr><td></td><td></td><td></td><td></td><td colspan="3"><b>fi</b></td></tr>
+					<tr><td></td><td></td><td colspan="5"><b>fi</b></td></tr>
+					<tr><td colspan="7"><b>elcyc</b></td></tr>
+				</table>
+				<p class="noindent">Note 1. As conditional clause we have used</p>
+				<p><b>if</b> B <b>then</b> statement list <b>else</b> statement list <b>fi</b> &nbsp; .</p>
+				<p class="noindent">thus doing away with <b>begin</b>&rsquo;s and <b>end</b>&rsquo;s; the <b>fi</b> has been written right underneath the corresponding <b>if</b>, the enclosed <b>then</b> and <b>else</b> have been slightly more indented.</p>
+				<p class="noindent">Note 2. We have used &ldquo;<var>ar</var> <b>plus</b> 1&rdquo; instead of &ldquo;<var>ar</var>:= <var>ar</var> + 1&rdquo; etc.</p>
+				<p class="noindent">Note 3. The two empty statements have been inserted for the purpose of the discussion that is to follow.</p>
+				<p class="noindent">Note 4. Instead of &ldquo;<var>aw</var> <b>plus</b> 1&rdquo; the program could have prescribed &ldquo;<var>aw</var>:=&nbsp;1&rdquo; because whenever it is executed, <var>aw</var>&nbsp;=&nbsp;0 holds initially; similarly &ldquo;<var>aw</var>&nbsp;<b>minus</b>&nbsp;1&rdquo; could have been replaced by &ldquo;<var>aw</var>:=&nbsp;0". It is easier not to do so at the start, but to regard this as a possible optimization, permissible when the correctness proof has been given.</p>
+				<p class="noindent">Note 5. The P-operation decreases the semaphore concerned by 1, the V-operation increases it by 1; semaphore values are by definition non-negative and therefore the P-operations represent the potential delays. When a V-operation takes place on a semaphore prohibiting at that moment the progress of more than one (other) process, we assume that the blocked processes are served on a FIFO basis (or any weaker assumption excluding the danger of individual starvation at that level.)</p>
+				<p>We start out considerations by drawing a number of (rather obvious, but vital) conclusions on account of the topology of the programs.</p>
+				<p class="noindent">1) &nbsp; The programs are such that between two successive non-indented statements, control is such that first a P-operation is executed and finally one V-operation. As a result 0&nbsp;&#x2264; <var>R + W + mutex</var> &#x2264;&nbsp;1, the non-indented ones are the only ones that &mdash;as far as the semaphores are concerned&mdash; can take place simultaneously, while at most one process can be engaged in the execution of its indented statements: they, together, form a sort of generalized critical section. It means that modification and inspection of the four common variables can take place without the danger of uncontrolled interference by any of the other processes.</p>
+				<p class="noindent">2) &nbsp; The topology of the reader program is such that each critical reader activity is preceded by one execution of &ldquo;<var>ar</var>&nbsp;<b>plus</b>&nbsp;1&rdquo;, after which no further P-operation can postpone its critical activity; moreover each critical activity &mdash;which is taken to last until the following P-operation takes place&mdash; is then immediately followed by &ldquo;<var>ar</var>&nbsp;<b>minus</b>&nbsp;1&rdquo;. This, together with the initial value of <var>ar</var> and the mutual exclusion of the indented statements, tells us that we are entitled to interpret the value of <var>ar</var> as equal to (or temporarily slightly larger than) the number of critically active readers.</p>
+				<p class="noindent">3) &nbsp; Similarly we can interpret <var>aw</var> as the number of critically active writers (see Note 4 above).</p>
+				<p class="noindent">4) &nbsp; Similarly we can interpret <var>br</var>, the number of blocked readers as the number of readers engaged in &ldquo;empty statement 1&rdquo; and <var>bw</var>, the number of blocked writers, as the number of writers in &ldquo;empty statement 2&rdquo;. As a consequence, at least one reader can proceed when <var>R</var>&nbsp;=&nbsp;1, and at least one writer when <var>W</var>&nbsp;=&nbsp;1.</p>
+				<p>After the above observation we verify that outside critical sections &mdash;i.e. <var>R + W + mutex</var> = 1&mdash; will be in one of the states A through E, characterized by the following table.<br />&nbsp;</p>
+				<table cellpadding="0" cellspacing="0" border="0" class="list">
+					<tr><td><var>ar</var>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+																		<td>&#x2265; 0</td><td>&gt; 0</td>    <td>= 0</td>       <td>&#x2265; 0</td><td>= 0</td></tr>
+					<tr><td><var>aw</var></td><td>= 0</td>       <td>= 0</td>       <td>= 1</td>       <td>= 0</td>       <td>= 0</td></tr>
+					<tr><td><var>br</var></td><td>= 0</td>       <td>&#x2265; 0</td><td>&#x2265; 0</td><td>&gt; 0</td>    <td>&#x2265; 0</td></tr>
+					<tr><td><var>bw</var></td><td>= 0</td>       <td>&gt; 0</td>    <td>&#x2265; 0</td><td>= 0</td>       <td>&gt; 0</td></tr>
+					<tr><td><var>R</var></td> <td>= 0</td>       <td>= 0</td>       <td>= 0</td>       <td>= 1</td>       <td>= 0</td></tr>
+					<tr><td><var>W</var></td> <td>= 0</td>       <td>= 0</td>       <td>= 0</td>       <td>= 0</td>       <td>= 1</td></tr>
+					<tr><td><var>mutex</var></td><td>= 1</td>    <td>= 1</td>       <td>= 1</td>       <td>= 0</td>       <td>= 0</td></tr>
+					<tr><td></td><td align="center">A</td><td align="center">B</td><td align="center">C</td><td align="center">D</td><td align="center">E</td></tr>
+				</table>
+				<p>It is easily verified that each pair of states &mdash;classes of states, if we want to be very precise&mdash; has an empty intersection: D and E have nothing in common with any other on account of the semaphore values, among the remaining three, C is the only one with <var>aw</var>&nbsp;=&nbsp;1 and A and B are distinguished on account of <var>bw</var>&nbsp;=&nbsp;0 or <var>bw</var>&nbsp;&gt;&nbsp;0. The system is started in state A, possible transitions are</p>
+				<table cellpadding="0" cellspacing="0" border="0" style="margin-left: 2em;">
+					<tr><td>from</td><td align="center">&nbsp;A&nbsp;</td><td>to A, B or C</td></tr>
+					<tr><td>from</td><td align="center">&nbsp;B&nbsp;</td><td>to B or E</td></tr>
+					<tr><td>from</td><td align="center">&nbsp;C&nbsp;</td><td>to A, C, D or E</td></tr>
+					<tr><td>from</td><td align="center">&nbsp;D&nbsp;</td><td>to A or D</td></tr>
+					<tr><td>from</td><td align="center">&nbsp;E&nbsp;</td><td>to C .</td></tr>
+				</table>
+				<p class="noindent">Furthermore it is now easily checked that the existence of at least one reader or at least one writer ensures that in each state at least one of the transitions is possible, excluding the case of general deadlock. Assuming FIFO (Note 5), the writers are free of the danger of individual starvation; the readers are exposed to this danger, but that is an essential consequence of the strong priority granted to the writers.</p>
+				<p style="margin-right: 6em; text-align: right;">15th May 1973</p>
+				<p>&nbsp;</p>
+				<p class="noindent"><a name="footnote" id="footnote"></a><a href="#reference" title="link to reference">[1]</a> Gilbert, P. and Chandler, W.J. Interference Between Communicating Parallel Processes. <i>Comm. ACM 15</i>, 6 (June 1972), 427&ndash;437</p>
+
+
+			</div>
+			<div>
+    <br/>
+  </div>
+		</div>
+		<hr />
+		<div id="footer">
+     transcribed by Corrado Cantelmi<br /> 
+     revised 
+     <!-- #BeginDate format:En2 -->14-Mar-2012<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

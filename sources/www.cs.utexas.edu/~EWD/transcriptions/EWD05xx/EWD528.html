@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: More on Hauck’s warning (EWD 528)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd05xx/EWD528.PDF"
+           title="Link to the PDF version of EWD528">EWD528</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<table> <tr> <td colspan = 3>
+<b>Copyright  Notice </b>                                                     </td> </tr> <tr> <td colspan = 3>
+The  following  manuscript                                                    </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
+   EWD 528 More on Hauck’s warning :                                          </td> </tr> <tr> <td colspan = 3>
+is held in copyright by Springer-Verlag New York.                             </td> </tr> <tr> <td colspan = 3>
+The manuscript was published as pages172–173  of                              </td> </tr> <tr> <td>&nbsp; &nbsp; </td> <td colspan = 2>
+  Edsger W. Dijkstra, Selected Writings on Computing: A Personal Perspective, </td> </tr> <tr> <td></td> <td colspan = 2>
+  Springer-Verlag,  1982.  ISBN  0–387–90652–5.                               </td> </tr> <tr> <td colspan = 3>
+<b>Reproduced with permission from Springer-Verlag New York.</b>              </td> </tr> <tr> <td colspan = 3>
+<b>Any further reproduction is strictly prohibited.</b>                       </td> </tr>
+</table>
+
+<p class=noindent><b>More on Hauck&rsquo;s warning.</b>
+<p>In EWD525 &ldquo;On a warning from E.A.Hauck&rdquo; I mentioned without proof that
+with n=2<sup>m</sup> bit there exist 2<sup>n-m-1</sup> different messages &mdash;I called them
+&ldquo;codes&rdquo;, but that is an unusual terminology for which I apologize&mdash; , such
+that any two different messages differ in at least four bit positions, thus
+allowing correction of one-bit errors and detection of two-bit errors. Since
+then I have been shown a proof of that theorem; I report that proof because
+it is so nice, and because it gives some further insights.
+<p>For the sake of brevity I shall demonstrate the theorem for 16:24 bits
+(in a way which is readily generalized for other values of m ). We consider
+16 bits numbered from 0 through 15 , writing their index in binary:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      d<sub>0000</sub>, d<sub>0001</sub>, d<sub>0010</sub>, d<sub>0011</sub>, ..., d<sub>1111</sub> </td> </tr>
+</table>
+With &ldquo;xxx1&rdquo; we denote the set of odd indices, with &ldquo;xx1x&rdquo; the set {0010, 0011,
+0110, 0111, 1010, 1011, 1110, 1111}, in general the set obtained by all
+possible substitutions of a 0 or a 1 at a place marked &ldquo;x&rdquo;, and define
+<br>h0 = parity(d<sub>xxx1</sub> ) , h1 = parity(d<sub>xx1x</sub> ) , h2 = parity(d<sub>x1xx</sub> ) , h3 = parity(d<sub>1xxx</sub> )
+<br>   
+where the function &ldquo;parity&rdquo; is = 0 if among the (8) bits with an index from
+the indicated set, the number of 1&rsquo;s is even, and = 1 if it is odd. Further
+we introduce h = parity(d<sub>xxxx</sub>) , which is just the sum of all the 16 bits
+modulo 2.
+<p>The 2<sup>11</sup> correct messages are then characterized by the equations
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+        h0 = h1 = h2 = h3 = h = 0 . </td> </tr>
+</table>
+<b>Note</b>. The above equations have indeed 2<sup>11</sup> different solutions: the 11 bits
+d<sub>3</sub>, d<sub>5</sub>, d<sub>6</sub>, d<sub>7</sub>, d<sub>9</sub>, d<sub>10</sub>, d<sub>11</sub>, d<sub>12</sub>, d<sub>13</sub>, d<sub>14</sub>, and d<sub>15</sub> can be chosen freely,
+we then solve h0 for d<sub>1</sub>, h1 for d<sub>2</sub>, h2 for d<sub>4</sub>, and h3 for d<sub>8</sub>, and finally
+h for d<sub>0</sub> .
+<p>We now denote by &ldquo;a&rdquo; the binary number formed by &ldquo;h3 h2 h1 h0&rdquo; and
+observe:
+<br>0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for each correct message we have
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h = 0, a = 0
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for a one-bit error at bit position i we have
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h = 1, a = 1
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for a two-bit error at bit positions i and j
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h = 0, a = the bit-wise sum of i and j
+<br>(because i &ne; j , we conclude that a &ne; 0, thereby distinguishing this case
+from a correct message)
+<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for a three-bit error at positions i , j , and k
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h = 1, a = the bit-wise sum of i , j , and k.
+<br>4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for a four-bit error at positions i , j , k , and l
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;h = 0, a = the bit-wise sum of i , j , k , and l .
+<table width=100%>
+<tr><td valign=top width=10%>  </td></td><td valign=top>
+ </td><td align=right>etc.
+</td>  </tr>  </table>
+<p>Under the assumption that one- and two-bit errors are the <b>only</b> errors
+that can occur, the rules are
+<table width=100%><tr><td valign=top width=20%>
+h = 0 and a = 0:</td><td>accept the bit sequence
+</td></tr>
+<tr><td valign=top>
+h = 1 :</td><td>invert bit d<sub>a</sub>
+</td></tr>
+<tr><td valign=top>
+h = 0 and a &ne; 0:</td><td>alarm, as two-bit error has been detected.
+</td>  </tr>  </table>
+<p>From the above, however, we see that all errors in 3, 5, 7, ... bits
+will then erroneously be interpreted as one-bit errors, i.e. in those cases
+our error correction indeed increases the probability of a wrong result being
+produced as if it were a correct one. The above gives a clear demonstration
+of the possible &ldquo;harmfulness&rdquo; of error correction alluded to in EWD525&rsquo;s
+last paragraph. Hence this note.
+<p><p><table width=100%><tr><td valign=top width=30%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+4565 - NUENEN</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-11-27<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

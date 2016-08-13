@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>E.W.Dijkstra Archive: Tentamen "Co-operating Sequential Processes."  (EWD 190)</title>
+		<style type="text/css">
+         p { text-indent: 2.0em; }
+        </style>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<div align="right">
+			&nbsp;&nbsp;<a title="PDF scan of EWD 190" href="../../ewd01xx/EWD190.PDF" target="_blank">EWD 190</a></div>
+		<div align="left">
+			<div>
+<U>Tentamen "Co-operating Sequential Processes."</U>
+<p> Aan een grote ronde tafel zijn de plaatsen cyclisch genummerd van 0 t/m 39; de leden van een gezelschap van 40 personen zijn eveneens genummerd van 0 t/m 39, ieder mag alleen op zijn eigen plaats - dwz. de plaats, die zijn eigen nummer heeft - aan tafel aanzitten.</p>
+<p>Hun gedragspatroon bestaat uit een niet-eindigende cyclische opeenvolging van:</p>
+<blockquote>
+   leven (buitenskamers);<br>
+   borrelen (binnenskamers, maar niet aan tafel);<br>
+   eten (binnenskamers, aan tafel);
+</blockquote>
+<div>en alleen voor de heren </div>
+<blockquote>sigaren (binnenskamers, niet aan tafel).
+</blockquote>
+
+<div>Hun gedragingen moeten zo gesynchroniseerd zijn dat</div>
+<div>1) nimmer drie cyclische opeenvolgende plaatsen aan tafel tegelijkertijd bezet zijn, en</div>
+<div>2) geen dame van tafel opstaat, tenzij er tenminste 1 andere dame in de kamer is.</div>
+
+<p>Voor de dames (die qualitate qua na tafel geen sigaar roken) is het opstaan van tafel en het 
+verlaten van de kamer eenzelfde handeling. Eventuele personen, die met aan tafel gaan moeten wachten (wegens regel 1) op het van tafel opstaan van dame A, die (wegens regel 2) met opstaan moet wachten totdat, zeg, dame B binnenkomt, hebben ten aanzien van het aan tafel gaan voorrang boven dame B.</p>
+
+<p>Er zijn tenminste twee dames in het gezelschap, dat met iedereen buitenskamers levend 
+geinitialiseerd wordt.</p>
+
+<p>De oplossing acht (ik) in het omvattend universum gedeclareerd:</p>
+				<table width="100%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td valign="top" width="4%">1) </td>
+						<td valign="top">de <tt><U>boolean</U> <U>
+procedure</U> dame(<VAR>u</VAR>); <U>value</U> <VAR>u</VAR>; <U>integer</U> <VAR>u</VAR>;</tt> deze heeft de waarde &quot;<U>true</U>" als persoon nr. <VAR>u</VAR> een dame is, de waarde "<U>false</U>"
+als persoon nr. <VAR>u</VAR> een heer is.</td>
+					</tr>
+				</table>
+				<br>
+				<table width="100%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td valign="top" width="4%">2) </td>
+						<td valign="top">de<tt> <U>integer</U> <U>procedure</U> mod40(<VAR>u</VAR>); <U>value</U> <VAR>u</VAR>; <U>integer</U> <VAR>u</VAR>;</tt> deze heeft de waarde van <VAR>u</VAR>, gereduceerd modulo 40.</td>
+					</tr>
+				</table>
+				<p>Gegeven is een oplossing van de volgende structuur.</p>
+				<pre><u>begin</u> <u>semaphore</u> <var>mutex</var>, <var>damutex</var>; <u>semaphore</u> <u>array</u> <var>persem</var> [0:39];
+      <u>boolean</u> <u>array</u> <var>honger</var> [0:39]; <u>integer</u> <u>array</u> <var>eettal</var> [0:39];
+      <u>integer</u> <var>damnr</var>, <var>k</var>;
+      <u>procedure</u> test(<var>u</var>); <u>value</u> <var>u</var>; <u>integer</u> <var>u</var>;
+      <u>begin</u> <u>if</u> <var>honger</var>[<var>u</var>] <u>then</u>
+            <u>begin</u> <u>if</u> <var>eettal</var>[mod40(<var>u</var>-1)] &lt; 2 <u>and</u> 
+                     <var>eettal</var>[<var>u</var>] &lt; 2 <u>and</u> 
+                     <var>eettal</var>[mod40(<var>u</var>+1)] &lt; 2 <u>then</u> 
+                  <u>begin</u> <var>eettal</var>[mod40[<var>u</var>-1)] := <var>eettal</var>[mod40(<var>u</var>-1)] + 1; 
+                        <var>eettal</var>[<var>u</var>] := <var>eettal</var>[<var>u</var>] + 1;
+                        <var>eettal</var>[mod40(<var>u</var>+1)] := <var>eettal</var>[mod40(<var>u</var>+1)] + 1; 
+                        <var>honger</var>[<var>u</var>] := <u>false</u> ; V(<var>persem</var>[<var>u</var>])
+                  <u>end</u> 
+            <u>end</u> 
+      <u>end</u> 
+
+      <u>procedure</u> staop(<var>u</var>); <u>value</u> <var>u</var>; <u>integer</u> <var>u</var>;
+      <u>begin</u> <var>eettal</var>[mod40(<var>u</var>-1)] := <var>eettal</var>[mod40(<var>u</var>-1)] - 1;
+            <var>eettal</var>[<var>u</var>] := <var>eettal</var>[<var>u</var>] - 1;
+            <var>eettal</var>[mod40(<var>u</var>+1)] := <var>eettal</var>[mod40(<var>u</var>+1)] - 1;
+            test(mod40(<var>u</var>-2)); test(mod40(<var>u</var>-1));
+            test(mod40(<var>u</var>+1)); test(mod40(<var>u</var>+2))
+      <u>end</u> 
+      <u>for</u> <var>k</var> := 0 <u>step</u> 1 <u>until</u> 39 <u>do</u> 
+      <u>begin</u> <var>honger</var>[<var>k</var>] := <u>false</u>; <var>eettal</var>[<var>k</var>] := 0; <var>persem</var>[<var>k</var>] := 0 <u>end</u>;
+      <var>mutex</var> := 1; <var>damutex</var> := 1; <var>damnr</var> := -1; <var>k</var> := 0;
+
+      <u>parbegin</u> 
+      persoon 0 : <u>begin</u>..... ..... ..... .....<u>end</u>;
+              &#x22EE;
+      persoon39 : <u>begin</u>..... ..... ..... .....<u>end</u> 
+      <u>parend</u> 
+<u>end</u></pre>
+				
+				waarbij de structuur van persoon <var>h</var> is als volg:
+
+				<p></p>
+				<pre>persoon <var>h</var>:
+<u>begin</u> Lh: leven;
+          <u>if</u> dame(<var>h</var>) <u>then</u> 
+          <u>begin</u> P(<var>damutex</var>); <var>k</var> := <var>k</var> + 1;
+                <u>if</u> <var>damnr</var> &#x2265; 0 <u>then</u> 
+                <u>begin</u> P(<var>mutex</var>); staop(<var>damnr</var>); V(<var>mutex</var>);
+                      V(<var>persem</var>[<var>damnr</var>]); <var>damnr</var> := -1
+                <u>end</u>;
+                V(<var>damutex</var>)
+          <u>end</u>;
+          borrelen;
+          P(<var>mutex</var>); <var>honger</var>[<var>h</var>] := <u>true</u>; test(<var>h</var>); V(<var>mutex</var>); P(<var>persem</var>[<var>h</var>]); 
+          eten;
+          <u>if</u> dame(<var>h</var>) <u>then</u> 
+          <u>begin</u> P(<var>damutex</var>); <var>k</var> := <var>k</var> - 1;
+                <u>if</u> <var>k</var> = 0 <u>then</u> 
+                <u>begin</u> <var>damnr</var> := <var>h</var>; V(<var>damutex</var>); P(<var>persem</var>[<var>h</var>]) <u>end</u> 
+                         <u>else</u> 
+                <u>begin</u> P(<var>mutex</var>); staop(<var>h</var>); V(<var>mutex</var>); V(<var>damutex</var>) <u>end</u> 
+          <u>end</u> 
+                     <u>else</u> 
+          <u>begin</u> P(<var>mutex</var>); staop(<var>h</var>); V(<var>mutex</var>);
+                sigaarroken 
+          <u>end</u>;
+          <u>goto</u> Lh
+<u>end</u></pre>
+				<p></p>
+				<div>
+					<u>Opgave</u>. Bewijs, dat de gegeven oplossing aan alle specificaties voldoet.<br>
+					<br>
+				</div>
+				<div>NB. De tentaminandi wordt verzocht hun papier slechts eenzijdig te beschrijven.<br>
+					<br>
+				</div>
+		<hr>
+				<font size="-1">transcribed by Sam Samshuijzen<br>
+					
+			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="93">Mon, 15 Jan 2007</csobj></font>
+	</body>
+
+</html>

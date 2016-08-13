@@ -1,0 +1,656 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>E.W.Dijkstra Archive: A Sequel to EWD126. (EWD 130)</title>
+		<style type="text/css">
+         p { text-indent: 2.0em; }
+        </style>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<div align="right">
+			&nbsp;&nbsp;<a title="PDF scan of original EWD 130" href="../../ewd01xx/EWD130.PDF" target="_blank">EWD 130</a></div>
+		<div align="left">
+			<div>
+				<u>A Sequel to EWD126.</u></div>
+			<div>
+			
+
+<p>I recall from EWD126 the definitions:
+				<div>p = the total number of segments that are part of the PM's<br>
+					
+i = the total number of segments that are part of the input streams<br>
+					
+o = the total number of segments that are part of the output streams.
+</div>
+				<p>The vital inequalities to be respected are:</p>
+				<table width="50%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="10%">1)</td>
+						<td>i + o + p &lt; tot</td>
+					</tr>
+					<tr>
+						<td width="10%">2)</td>
+						<td> i + o &lt; transput area</td>
+					</tr>
+					<tr>
+						<td width="10%">3)</td>
+						<td>i + p &lt; tot - reso</td>
+					</tr>
+					<tr>
+						<td width="10%">4)</td>
+						<td>i &#x2264; transput area - reso
+</td>
+					</tr>
+				</table>
+				<div>
+					<p>To guarantee these inequalities, we introduce the &quot;differences&quot;:</p>
+					<table width="90%" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td width="10%">fiop</td>
+							<td width="45%">(initially = tot)</td>
+							<td>say: </td>
+							<td align="right">1024</td>
+							<td> - something</td>
+						</tr>
+						<tr>
+							<td width="10%">fio</td>
+							<td width="45%">(initially = transput area)</td>
+							<td>say:</td>
+							<td align="right"> 256</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td width="10%">fip</td>
+							<td width="45%">(initially = tot - reso)</td>
+							<td>say:</td>
+							<td align="right"> 960</td>
+							<td> - something</td>
+						</tr>
+						<tr>
+							<td width="10%">fi</td>
+							<td width="45%">(initially = transput area - reso)</td>
+							<td>say:</td>
+							<td align="right"> 192</td>
+							<td></td>
+						</tr>
+					</table>
+					<p>The operations that perform changes in i, o and/or p do so by changing the value of the four quantities listed:
+					<table width="75%" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td width="10%">SH1</td>
+							<td>p-increase:</td>
+							<td>&quot;dec(fip)&quot; and &quot;dec(fiop)&quot;</td>
+						</tr>
+						<tr>
+							<td width="10%">SH2</td>
+							<td>p-decrease:</td>
+							<td>&quot;inc(fip)&quot; and &quot;inc(fiop)&quot;</td>
+						</tr>
+						<tr>
+							<td width="10%">SH3&nbsp;</td>
+							<td>i-p transition:</td>
+							<td>&quot;inc(fio)&quot; and &quot;inc(fi)&quot;</td>
+						</tr>
+						<tr>
+							<td width="10%">SH4</td>
+							<td>p-o transition:</td>
+							<td>&quot;dec(fio)&quot; and &quot;inc(fip)&quot;</td>
+						</tr>
+						<tr>
+							<td width="10%">SH5</td>
+							<td>i-increase:</td>
+							<td>&quot;dec(fiop)&quot;, &quot;dec(fio)&quot;, &quot;dec(fip)&quot; and &quot;dec(fi)&quot;</td>
+						</tr>
+						<tr>
+							<td width="10%">SH6&nbsp;</td>
+							<td>o-decrease:</td>
+							<td>&quot;inc(fiop)&quot; and &quot;inc(fio)&quot;.</td>
+						</tr>
+					</table>
+					<br>
+					
+Sequencing of the regions of program will be done in such a way, that the four quantities listed never get negative values.
+
+					<p>
+Before going on, we shall first justify the inequalities, then the four quantities.
+
+					<p>
+The first inequality is obvious: it expresses the maximum size of the drum.
+<p>
+The second inequality expresses the existence of transput area: this has been introduced because the SV's of (possible) transput segments will impose a permanent core store occupation.
+<p>
+The third and fourth inequality express that part of transput area (viz reso) is reserved for output exclusively. This is a selfimposed restriction which we exploit in the following way.
+<p>If the third or fourth inequality is in danger of being violated (i.e. when fip or fi is in danger of becoming negative) we signal &quot;disaster&quot; (viz. store exhaustion). Disaster detection must be implemented anyway, we shall see below, that this convention pins down the disaster detection to a few well defined points. The counterpart of this disaster detection is, that when at these few points no disaster has been detected, we must be able to guarantee that the processes will be able to continue. Or more precisely, the operations &quot;dec(fi)&quot; and &quot;dec(fip)&quot; occur only at SH1 (in a PM) and at SH5 (in a CM for input). These are the only points in which disaster can be signalled. If this disaster has not been signalled, dec(fiop) and dec(fio) might force a delay (viz. when fiop = 0 or fio = 0). In order that in due time the desired i- or p-increase indeed becomes possible, we must see to it, that the contents of the output streams are constantly such that, if necessary, the state &quot;o &lt; reso&quot; can be reached without relying on further PM-or input CM activity.<p>
+It is necessary that we can get o &#x2264; reso, in order to be able to effect the
+i- or p-increase that has been requested without disaster signalling, but this condition
+is insufficient. For it means that upon the total size of the output streams, the upper bound reso may be imposed: if now all reso segments, available for output
+buffering, are occupied by output for which at this moment no equipment is available,
+we are still stuck, as we lack the room to keep the "moving streams" going.
+<p>
+We therefore impose upon the so-called "passive output" (for the definition,
+see below) a lower upper bound, called "maxu", where reso = maxu = maxpor (say =4),
+the maximum size of a portion of information to be put in transput area at SH4 and
+taken from it at SH6. Thus we guarantee that, if necessary<br>
+<br>
+a) all but reso segments become available for i and p<br>
+b) the remaining reso segments are sufficient to keep the output going.
+<div>
+Remark. The active output may be confined to maxpor segments in transput area. If
+more than one output CM has to get its food via this narrow buffer, we cannot
+expect them to run at maximum speed. We leave it at that: we could have remedied
+this -without altering maxu- by increasing reso, i.e. by being quicker in signalling
+disaster, but there is nothing to be gained from that.</div>
+<p>
+We make a second use of the boundary maxu: if "maxu &lt; o", there is
+not only active output possible, but we even guarantee active output. This has the
+subsidiary advantage, that in SH1 -a frequent occurrence- we have only to test,
+whether the desired p-increase is possible. If not, and relieve has to come
+from active output, there is no need to inspect, whether now the moment has come
+to activate; output is already going and the PM has only to wait. The secone
+advantage is that SH2 (i.e. p-decrease), also a frequent occurrence, is never an
+occurrence upon which other processes may be waiting for their relieve.
+<p>
+So much for the inequalities. Now for the equalities.
+<p>
+They have been introduced for two reasons: the minor reason is that they
+enable us to test for danger situations at a zero value, instead of comparing with
+some bound. The main reason, however, is the following. Note, that we have carefully
+avoided to define "fiop = tot - i - o - p" etc., although their initial values
+and the dec- and inc-operations to which
+they are subjected in SH1 to SH6 are consistent with these definitions: these
+definitions would only be correct, if in SH1, say, "dec(fip)" and "dec(fiop)"
+were performed simultaneously. But this is not the case!
+In SH1, disaster is signalled if fip = 0, otherwise, dec(fip) is performed.
+After that, fiop = 0 is tested, if <u>false</u>, dec(fiop) is done immediately, if <u>true</u>,
+however, the PM has to be delayed, the p-increase has to be postponed. (Without
+the "predecrease" of fip, we should have to face the situation, that also
+the completion of a delayed p-increase could generate the disaster condition.)
+<p>
+Now we come to the definition of passive output, i.e. output in the buffer,
+of which we are not sure whether we can get rid of it (or even: are sure that we
+cannot get rid of it) without further PM-activity. It is closely connected to the
+banker's algorithm and only applies to documents for the plunchers.
+<p>
+(Use of the printer is not subjected to the banker's approval; accordingly,
+printer forms in the buffer never contribute to the passive output. We recall
+that the PM's offer the printer information in SH4 form wise and that we allow
+the printer CM to change information stream after each form, if necessary. We call
+a from inmage in a printer stream "a (printer) portion".)
+<p>
+For the pluncher streams, however, the PM's produce so-called "documents"
+of a priori unknown length. They attach (in SH4) then information portion wise,
+here a portion being a segment. The concept of "a document" is a restriction for
+the plunchers. As soon as a pluncher has selected a document (i.e. irrevocably
+decided that now the output of a certain document will be initiated), it will not
+become available for any other purpose until the document in question has been
+processed completely. If a pluncher selects a finished document, it sets itself
+to an already well defined task; the document is in its entirety available in the
+output buffer and the pluncher can go on at full speed.
+<p>
+The situation is drastically changed, however, if a pluncher selects an unfinished
+document, for then it becomes tied up until the PM will finish the
+document. The critical situation in which a pluncher has selected an unfinished
+document may only arise under the banker's approval. We describe it
+as the pluncher being tied up to the PM, or rather in the banker's terminology
+"being borrowed by the PM". The PM starts the loan of a pluncher at the moment
+that the pluncher selects an unfinished document, it ends the loan at SH8
+"Finish Pluncher Document" (This is a PM-action). If the document has been finished
+before it has been selected, there is no loan involved and the banker's algorithm
+is not applied.
+<p>
+We introduce, for the banker, but also for the definition of passive output<br>
+<br>
+plocash = the number of plotters that are not borrowed<br>
+puncash = the number of punches that are not borrowed.
+<div>
+These two quantities tell us "How much the banker has in cash". (Mind that
+"unborrowed" does not mean "idle": a pluncher engaged in the processing of a
+finished document is unborrowed, but certainly not idle!)</div>
+<p>
+To the passive output belong<br>
+<br>
+a) all unfinised, unselected pluncher documents<br>
+b) all finished unselected plotter documents of plocash = 0 and all finished
+unselected punch documents of puncash = 0.
+<p>
+Category a) represents the information of which we are not sure, whether we
+can get rid of it via the output (for this would imply selection of the unfinished
+document, an action which is subjected to the banker's approval);  category b)
+represents the information of which we are sure that we cannot get rid of it with
+stopped PM's: the banker has no corresponding equipment in cash, i.e. the
+corresponding equipment has all been borrowed.
+<p>
+The total size of the passive output may not exceed maxu, growth of the
+passive output must therefore be carefully watched. We propose to restrict the
+growth of passive output to increasing the length (in SH4) of a document in category
+a) and rule out that passive output increases, due to the fact that finished
+documents, first outside category b) come to fall inside category b), due to
+"cash" going from 1 to 0.
+<p>
+For the single plotter this just means "never select an unfinished document
+if there is still a finished plotter document"; for the (more) punches this means
+"if you are the last unborrowed punch, then never select an unfinished document
+in the presence of a finished one." (The rule is certainly obeyed, if also
+punches only select an unfinished document, when no finished ones are available,
+as we may program them.)
+<p>To keep track of passive output we introduce for each pluncher stream:</p>
+					<table width="90%" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td valign="top" width="8%">lufd&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td valign="top">(=length of unfinished, unselected document). This quantity gives the length (in segments) of the document under construction provided it is unselected. Otherwise,&nbsp;lufd&nbsp;=&nbsp;0.</td>
+						</tr>
+					</table>
+					<br>
+					
+The contribution to passive output of category a) is therefore SIGMA(lufd),
+taken over all pluncher streams.
+
+					<p>
+For the contribution to passive output of category b) we introduce for
+finished pltter documents "plofp" and for finished punch documents "punfp"
+(...fp : <u>f</u>inished <u>p</u>assive documents).</p>
+					<table width="60%" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td valign="top">Naturally:&nbsp;</td>
+							<td valign="top">0 &lt; plocash implies plofp = 0<br>
+								0 &lt; puncash implies punfp = 0. </td>
+							<td valign="top">and</td>
+						</tr>
+					</table>
+					<br>
+					
+					Passive output will be equal to
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>&nbsp;SIGMA(lufd) + plofp + punfp</code><br>
+					</p>
+				</div>
+			</div>
+			<div align="left">
+				<div align="left">
+					
+				</div>
+			</div>
+			<div>
+				<div>
+					
+					and as this may not exceed the upper bound maxu we introduce again the difference, the number of segments free for passive output<br>
+					<br>
+					<code>
+					fpas (initially = max)</code><br>
+					<br>
+					
+					a quantity which is not allowed to have a negative value.
+
+					<p>In order to describe the modification of the quantities introduced we mention the variable (per pluncher stream)</p>
+					<table width="90%" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td valign="top">unfsel&nbsp;&nbsp;</td>
+							<td valign="top">=1&nbsp;</td>
+							<td valign="top">means: the unfinished document in this stream has been selected (i.e. the corresponding PM has borrowed the corresponding output CM)</td>
+						</tr>
+						<tr>
+							<td valign="top"></td>
+							<td valign="top">=0&nbsp;</td>
+							<td valign="top">otherwise.</td>
+						</tr>
+					</table>
+					<br>
+					
+					In SH4: (p-o transition)
+
+					<p><code><u>if</u> unfsel = 0 <u>then</u> <u>begin</u> inc(lufd); dec(fpas) <u>end</u>; &nbsp;&nbsp;&nbsp;dec(fio)</code></p>
+					
+					Thus, if the document is unselected (category a) the corresponding changes in passive output control are booked.<br>
+					<br>
+					
+					In SH7: (document selection) in the case of selection of an unfinished document (under banker' approval!):
+
+					<p><code>dec(...cash); INC(fpas, lufd); lufd:= 0; unfsel:=1</code></p>
+					The document selected leaves passive output from category a. No finished documents shall enter passive output in category b) (see previous remark).<br>
+					<br>
+					In SH8: (Finish Pluncher Document)<br>
+					<br>
+					<code><u>if</u> unfsel = 1 <u>then</u><br>
+						<u>begin</u> unfsel:= 0; inc(...cash);<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> ...cash = 1 <u>and</u> 0 &lt; ...cash <u>then</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> INC(fpas,...fp); ...fp:= 0 <u>end</u><br>
+						<u>end</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u><br>
+						<u>begin</u> <u>if</u> ...cash = 0 <u>then</u> INC(...fp,lufd) <u>else</u> INC(fpas,lufd);<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lufd:= 0<br>
+						<u>end</u></code>
+					<p>If a selected document is finished, this ends a loan; if now cash changes from 0 to 1, there may be documents in category b) now leaving passive output. If an unselected document (by definition in category a) is finished, it either goes to category b or it leaves passive output.</p>
+					<p>This far we have described the clerical variables and shown how we can operate upon them, consistently with their meaning. Now we shall describe the structure of the programs that together see to it, that the five basic quantities that must remain non-negative, indeed remain non-negative. For the present moment we restrict ourselves to the PM's and the output CM's.</p>
+					<p>Each PM has a private semaphore, called &quot;pmsem&quot; and a private state variable called &quot;pmshr&quot;. In their homing position, they have both the value &quot;0&quot;. Analogously, each output CM has a private semaphore, called &quot;ocmsem&quot; and a private state variable, called &quot;plovar&quot; for a plotter, &quot;punvar&quot; for a punch and &quot;privar&quot; for a printer. (If we wish to talk about the statevariables for the combined plunchers, we may call them &quot;pluvar&quot;). Also here, the homing position = 0.</p>
+					<p>Over these we have a universal, binary semaphore, called &quot;SHS&quot;, which caters for the mutual exclusion of the inspection and modification of the common clerical variables.</p>
+					<p>The easiest operation is <code>SH2: p-decrease</code>. If the number of non-empty segments killed equals &quot;killed&quot;, the program runs:<br>
+						<br>
+						<code>
+						SH2: P(SHS); INC(fip, killed); INC(fiop, killed); V(SHS)</code></p>
+					<p>(Note: in the present description we shall not investigate, whether in trivial cases the P(SHS) and V(SHS) can be omitted and replaced by disabling and abling the interrupts.)</p>
+					<p>The next easiest operation is SH1: p-increase. In a PM this always occurs for a single segment. Here fip and fiop have to be decreased both, but this is done in two steps. The program is as follows:<br>
+						<br>
+						<code>
+						P(SHS);<br>
+							<u>if</u> fip = 0 <u>then</u> disaster <u>else</u> dec(fip);<br>
+							<u>if</u> fiop = 0 <u>then</u><br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> pmshr := 3; V(SHS); P(pmsem) <u>end</u><br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u><br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> dec(fiop); V(SHS) <u>end</u></code><br>
+						<br>
+						
+						after which the PM has got the permission to fill an empty segment.</p>
+					<p>The PM tries to do dec(fip) and then dec(fiop); if the first one is unsuccessful, disaster is signalled, otherwise it is done. If the second one is also successful, we are immediately ready, otherwise the PM leaves the critical section after having set</p>
+					<table width="100%" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td>pmshr = 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td>&quot;The PM is waiting on account of inability to perform dec(fiop)&nbsp;in SH1&quot;</td>
+						</tr>
+					</table>
+					<br>
+					After having left the critical section it waits.
+					<p>The complementary action takes place in the critical section of a process that has increased fiop. After having done so it has to inspect, whether any pmshr = 3 is present. If so, it performs for the PM concerned</p>
+					<p>&quot;dec(fiop); pmshr:= 0; V(pmsem)&quot;</p>
+					i.e. the decrease, which the PM was unable to do; then it sets pmshr = 0, as the decrease requested has been performed and finally it signals to the waiting PM that it can go on.
+					<p><u>Note</u>. if &quot;fiop&quot; is the limiting factor, total output must exceed reso (otherwise, namely, disaster would have been signalled). On the other hand we shall guarantee that there will be active output already, if the total output exceeds maxu. Therefore: 1) the task to resolve &quot;pmshr =3&quot; can be delegated to o-decrease in active output only and 2) the PM has nothing else to do because there will be active output and the o-decrease will occur.</p>
+					<p>The other operation with possibly two decreases is SH4: p-o-transition in the case of an unselected document for a pluncher. If so, the two decreases will again be a two stage affair. We give the raw outline of the program, the discussion of &quot;desire&quot; (a stream variable), &quot;banker&quot; (a universal procedure) the constant &quot;maxpor&quot; and the PM-variables &quot;bsn&quot; and &quot;request&quot; will be postponed.<br>
+						<br>
+						<code>
+						SH4: P(SHS); bsn:= &quot;stream identification&quot;;<br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> unfsel = 0 <u>then</u><br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>if</u> fpas = 0 <u>then</u><br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> pmshr:= 1; desire:= 1; banker;<br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(SHS); P(pmsem); P(SHS) <u>end</u><br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u><br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> inc(lufd); dec(fpas) <u>end</u><br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;<br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> fio &lt; maxpor <u>then</u><br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> pmshr:= 2; request:= 1;<br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(SHS); P(pmsem); P(SHS) <u>end</u><br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dec(fio);<br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;Now the p-o-transition can be effectuated, followed by:&quot;<br>
+							
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inc(fip).</code></p>
+					<p>The quantity desire is a stream variable, its usual value is zero. For a pluncher stream its sole purpose is to influence the procedure &quot;banker&quot; which compares the lengths of various unfinished, unselected documents, but it then takes</p>
+				</div>
+				<div align="center">
+					&quot;lufd + desire&quot; .<br>
+					<br>
+				</div>
+				<div>
+					The main point is the distinction between desire = 0 and desire = 1, both with lufd = 0; the difference between a document being empty for lack of interest or for lack of space. In the first case it is not a suitable candidate for selection, in the second case it might be.
+					<p>The next state, described by the state variable pmshr is<br>
+						<br>
+						
+						pmshr = 1&nbsp;&nbsp;&nbsp;&nbsp;The PM is waiting on account of inability to perform dec(fpas) in SH4.</p>
+					<p>It implies that the blocking stream is a pluncher stream, containing an unselected document. The existence of one or more &quot;pmshr = 1&quot; implies &quot;fpas = 0&quot;.</p>
+					<p>There are two ways, in which the PM can be helped over this barrier<br>
+						<br>
+						
+						a) After increase of fpas. The processes increasing fpas have the duty to investigate whether now PM's sleeping have to be woken up. Waking up then consists (within a section, critical to SHS)<br>
+						<br>
+						<code>
+						&quot;pmshr:= 0; dec(fpas); inc(lufd); desire:= 0; V(pmsem)&quot;<br>
+						</code><br>
+						
+						(Here the initial choice is the waiting PM; a variable bsn (blocking stream number) tells, in which stream &quot;lufd&quot; and &quot;desire&quot; have to be selected. &quot;bsn&quot; is superfluous: it points to the one and only pluncher stream of this PM with &quot;desire = 1&quot;)<br>
+						<br>
+						
+						b) By selection of the stream in question. For this makes the desired &quot;dec(fpas)&quot; unnecessary. The actions comprise:<br>
+						<br>
+						
+						(for the selection) &quot;INC(fpas, lufd); lufd:= 0; unfsel:= 1&quot;<br>
+						<br>
+						
+						and, provided desire = 1 (then pmshr = 1 as well)<br>
+						
+						for waking up) &quot;pmshr:= 0; desire:= 0; V(pmsem)&quot;</p>
+					<p>When the first barrier has been passed, the second comes: instead of asking whether the current value of fio allows the decrease wished for this time, we always decide on</p>
+				</div>
+				<div align="center">
+					fio &lt; maxpor</div>
+				<div>
+					following a suggestion by C.Ligtmans.
+					<p>The price paid is that the last maxpor-1 available output segments remain unused, when the printer is unused. The advantage, however, becomes apparent, as soon as we investigate what happens when plunchers decide on &quot;fio &lt; 1&quot; and only the printer on &quot;fiop &lt; maxpor&quot;. In that case output limitation might easily lead to stopping of the printer stream. Also, we can now state, that the existence of one or more &quot;pmshr = 2&quot; implies &quot;fio &lt; maxpor&quot;; if fio increases we can select the PM with pmshr = 2, regardless the type of the blocking stream.</p>
+					<p>We have the meaning</p>
+					<table width="80%" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td valign="top">pmshr&nbsp;=&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td valign="top">&quot;The PM is waiting on account of the inability to perform DEC(fio, request) for request &#x2264 maxpor.</td>
+						</tr>
+					</table>
+					<p>If some process decides to wake up a PM with pmshr = 2, it does so by<br>
+						<br>
+						<code>&quot;pmshr:= 0; DEC(fio, request); request:= 0; V(pmsem)&quot;</code></p>
+					<p>It is the function of the procedure &quot;banker&quot; to try to wake up PM's with pmshr = 1. It will always be called from within a critical section, it may be called from a PM, but also from a CM.</p>
+					<p>Its total action may end in two ways:<br>
+						either there are no pmshr = 1 any more (fpas may have any value) or there are still pmshr = 1 (and fpas = 0) but it has not been able to remedy the situation.<br>
+						This last thing can happen in two ways<br>
+						<br>
+						a) an unfinished document may be unselectable on account of absence of an idle pluncher of the correct type<br>
+						b) an unfinished document may be unselectable on account of disapproval of the banker's algorithm.</p>
+					<p>Waking up a PM with pmshr = 1 will imply &quot;pmshr:= 0; V(pmsem)&quot;, waking up an idle pluncher (characterized by &quot;pluvar = 1&quot;) will imply &quot;pluvar:= 0; V(ocmsem)&quot;. Note that waking up may be applied to the abstract machine (either PM or CM) from which the banker happens to be called.</p>
+					<p>The only tool available for the banker is to make an unfinished document selected; this may have a double effect.<br>
+						1) The stream is question may be a blocking stream for a PM with pmshr = 1; this makes the requested dec(fpas) no longer necessary and the PM has to be woken up<br>
+						2) Furthermore fpas may increase on account of which pmshr = 1 can be removed.</p>
+					Roughly, the procedure &quot;banker&quot; has the following body:<br>
+					<br>
+					<code>L0: <u>if</u> fpas &gt; 0 <u>then</u> <u>goto</u> finish;<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> <u>non</u> exist(pmshr = 1) <u>then</u> <u>goto</u> finish;<br>
+						L1: <u>if</u> <u>non</u> exist(pluvar = 1) <u>then</u> <u>goto</u> finish;<br>
+						L3: <u>if</u> &quot;there exists an unfinished document in an otherwise empty stream with lufd + desire &gt; 0 and a corresponding pluvar = 1, selection of which is allowed by the banker's algorithm&quot; <u>then</u><br>
+						select the document:<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> dec(plucash);<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pluvar:= 0; etc. for pluncher; V(ocmsem);<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INC(fpas, lufd); lufd:= 0; unfsel:= 1;<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> desire = 1 <u>then</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>comment</u> a blocking stream happens to be selected;<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pmshr:= 0; desire:= 0; V(pmsem) <u>end</u>;<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;use fpas for waking; <u>goto</u> L0<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u><br>
+						finish:</code>
+					<p><code>with the <u>procedure</u> use fpas for waking;<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> LL: <u>if</u> fpas &gt; 0 <u>and</u> exist(pmshr = 1) <u>then</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> pmshr:= 0; dec(fpas) inc(lufd); desire:= 0; V(pmsem);<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> LL <u>end</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u></code></p>
+					<p>In the conditional clause labelled &quot;L3&quot; the banker inspects the streams with &quot;nfd = 0&quot; (nfd = number of finished documents. &quot;nfd = 0&quot; means that the stream contains at most an unfinished document) for which a corresponding pluncher is idle (pluvar = 1) and inspects them in order of decreasing &quot;lufd + desire&quot;. The first allowed by the banker's algorithm but still with &quot;lufd + desire &gt; 0&quot; is taken. As a rule the banker will select at most one unfinished document; as it looks for the longest one it will cause the maximum increase of fpas possible. Note, that in SH4 the banker is called after the PM has set pmshr and desire; it may be this very document, that needs to be selected.</p>
+					<p>Further the banker is called whenever a change in circumstances occurs, that may create the possibility for succesful action.</p>
+					<p>A more complete version of SH8 (Finish Pluncher Document) is therefore:<br>
+						<br>
+						<code>SH8:<br>
+							P(SHS); inc(nfd);<br>
+							<u>if</u> unfsel = 1 <u>then</u><br>
+							<u>begin</u> unfsel:= 0; inc(...cash);<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> ...cash = 1 <u>and</u> ...fp &lt; 0 <u>then</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> INC(fpas,...fp);...fp:=0; use fpas for waking <u>end</u>;<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;banker<br>
+							<u>end</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u><br>
+							<u>begin</u> <u>if</u> ...cash = 0 <u>then</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> INC(...fp,lufd); lufd:= 0 <u>end</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> INC(fpas,lufd); lufd:= 0; use fpas for waking;<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> exist(...var = 1) <u>then</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> ...var:= 0; etc. for pluncher; V(ocmsem) <u>end</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u><br>
+							<u>end</u>;<br>
+							V(strsem); V(SHS)</code><br>
+						<br>
+						Remark 1. &quot;strsem&quot; is a streamsemaphore that is also increased at ever new portion added to the stream. It is used to synchronize the output CM, when it has selected this stream.<br>
+						<br>
+						Remark 2. It is felt that the choice of the PM in the case of multiple &quot;pmshr = 1&quot; in &quot;use fpas for waking&quot; is highly irrelevant.</p>
+					<p>When the pluncher has finished the processing of a document, it will do a final &quot;P(strsem) -as the complement of the V(strsem) in SH8- in order to guarantee that the pluncher will never look for a new job, before the corresponding SH8 is duly completed.</p>
+					<p>If it then finds a finished document on top of one of its (unselected) streams, it takes it, otherwise it does<br>
+						<br>
+						<code>&quot;pluvar:= 1; banker; V(SHS); P(ocmsem)&quot;<br>
+						</code><br>
+						When this last P-operation has been completed, a new document (finished or not) has been selected.</p>
+					<p>We shall now give a short description of the high speed printer. It may be used from wise, so we are independent of the banker's algorithm. Nevertheless it is unattractive to have the printer forms from different sources all mixed up: it should like to print a number of successive forms from the same program successively. Therefore: if the different printer streams contain very few forms, the printer will delay selection, if possible, in order to wait, until one of the streams has a reasonable amount available. This delay is no longer necessary, if one of the programs has produced its last form, it is no longer possible, if the total output increases beyond maxu, without other output being active. (Below, we shall use an other criterion to regulate printer activity.)</p>
+					<p>In each printer stream the final form, produced by a program is marked as such; the number of such final forms is counted (we may use &quot;nfd&quot; for this purpose, now meaning &quot;number of final documents&quot;). It is increased at the chaining on of the final form (by the PM), it is decreased by the printer CM, at processing of the final form.</p>
+					<p>The printer may be idle in two different ways:</p>
+					<table width="100%" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td valign="top">privar&nbsp;=&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td valign="top">dependent on past history: the last form printed was not a final document, the stream in question, however, is empty, and the printer prefers to wait -as long as possible- for the next form from the same stream.</td>
+						</tr>
+						<tr>
+							<td valign="top">&nbsp;</td>
+							<td valign="top"></td>
+						</tr>
+						<tr>
+							<td valign="top">privar = 2</td>
+							<td valign="top">independent of past history: the printer has not printed yet, or the last form printed was a final document (or one program is in danger of monopolizing the printer).</td>
+						</tr>
+					</table>
+					<br>
+					We must prevent one very active PM from monopolizing the printer; we propose to do so, by &quot;forgetting the past history&quot; after, say 20 consecutive forms from the same stream.
+					<p>Idleness of the printer can always be removed for two different reasons<br>
+						1) there is a form available that the printer should love to select<br>
+						2) there is no such attractive form, but the printer should get in action on account of the maxu barrier.</p>
+					<p>In the case of &quot;privar = 1&quot; the attractive reason is a form in the current stream, in the case of privar = 2, the attractive reason is, in some printer stream, a positive nfd.</p>
+					<p>The unattractive reason is -under both circumstances- something of the nature of total output exceeding maxu, and no other output active. Let us construct this criterion a little bit more carefully.</p>
+					<p>For the plunches we have passive output and the active output. We can leave the active output out of consideration, because that will disappear: without further PM activity, the passive output will remain, and the printer activity must be such, that yet the total amount of growth of buffered output will in due time not exceed maxu. As fpas is the amount of growth of passive information, that we can admit, the criterion for activity of the printer is</p>
+				</div>
+			</div>
+			<div align="left">
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fpas &lt; sump</p>
+			</div>
+			<div>
+				<div>
+					where &quot;sump&quot; is the sum of the lengths of the printer streams (measured in segments).
+					<p>The quantity &quot;sump&quot; is increased as part of the SH4 for a printer document and it is decreased as part of the printer form processing by the printer CM.</p>
+					<p>Similar to &quot;banker&quot;, that caters for pluncher document selection, we have a procedure &quot;printer selection&quot;; it will only be called from within section, critical with respect to SH5 and will have no effect, when the printer is not idle. First it looks for attractive reasons to go on printing, then it looks for the unattractive ones.</p>
+					<code>printer selection:<br>
+						<u>if</u> privar = 1 <u>then</u><br>
+						<u>begin</u> <u>if</u> current printer stream non empty <u>then</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> privar:= 0; V(prisem) <u>end</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>if</u> fpas &lt; sump <u>then</u> privar:= 2 <u>end</u><br>
+						<u>end</u>;<br>
+						<u>if</u> privar = 2 <u>then</u><br>
+						<u>begin</u> <u>if</u> exist (0 &lt; nfd) <u>then</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> privar:= 0; select stream with positive nfd etc; V(prisem) <u>end</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>if</u> fpas &lt; sump <u>then</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> select stream with printer information etc; V(prisem) <u>end</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u><br>
+						<u>end</u></code>
+					<p>This routine is called<br>
+						1) after dec(fpas) in SH4 for pluncher documents (as now fpas &lt; sump might hold)<br>
+						2) in SH4 for printer documents as sump has been increased and now, again, fpas &lt; sump might hold; furthermore the current printer stream may have become non empty.<br>
+						3) at program exit, where &quot;nfd&quot; is increased<br>
+						4) by the printer CM itself, after processing of a form:<br>
+						<br>
+						<code>P(SH5);<br>
+							<u>if</u> previous form final <u>or</u> number of successive forms of the same program more than, say 20 <u>then</u> privar:=2 <u>else</u> privar:= 1;<br>
+							printer selection; V(SH5); P(prisem)</code></p>
+					After completion of this last P-operation there will be a next form in the now current stream.<br>
+					<br>
+					SH4 for the printer forms will have the form:<br>
+					<br>
+					<code>P(SH5);<br>
+						<u>if</u> fio &lt; maxpor <u>then</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> pmshr:=2; request:= current form size; V(SH5); P(pmsem); P(SH5) <u>end</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u><br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DEC(fio, current form size);<br>
+						&quot;now the p-o transition can be effectuated, followed by&quot;<br>
+						INC(fip, current form size);<br>
+						INC(sump, current form size);<br>
+						printer selection;<br>
+						V(SH5)</code>
+					<p>Remark. In the procedure &quot;use fpas for waking&quot; a &quot;dec(fpas)&quot; may occur, but nevertheless, there is no need to call the &quot;printer selection&quot; there. For this routine &quot;use fpas for waking&quot; has only an effect when &quot;exist(pmshr = 1)&quot;, that is, while at some earlier stage, fpas was = 0. The final value of fpas will be = 0 or more: as a result this cannot be responsible for the <u>creation</u> of the situation</p>
+					<p>&quot;fpas &lt; sump&quot;.</p>
+					<blockquote>
+						<u>Afterthought</u>. The 20 successive forms rule had probably better be overruled if &quot;0 &lt; nfs of current stream&quot;; the program has ended its activity and the danger of monopolization canot persist very long any more.<br>
+						<br>
+						Remark on the safety of printer activity control.
+						<p>A PM may be blocked after the succesful performance of &quot;dec(fpas)&quot; but before succesful performance of &quot;dec(fio)&quot;; the decrease of fpas may be ahead of that of fio. In that case the printer is sooner urged to activity, the out-of-phaseness can therefore never give rise to output blocking, due to the printer failing to recognize its duty to go to work. On the other hand, it can never be urged to go to work too soon, i.e. without printer forms actually present in the buffer for sump must be positive. The increase of sump takes place in the same critical section as the chaining on, it can be regarded as &quot;in phase&quot;.</p>
+					</blockquote>
+					<u>Strategy and output limitation</u>
+					<p>Only in one case -selection of unfinished pluncher documents- we have specified in which order the documents are scanned: in that of decreasing length. But we have more to specify:<br>
+						1) if a pluncher makes a choice between finished documents, from which stream will it select?<br>
+						2) if the printer (with privar = 2) finds streams with positive nfd, from which one does it select?<br>
+						3) if the printer (with privar = 2) has to select a stream on account of &quot;fpas &lt; sump&quot;, which one has to be selected?<br>
+						<br>
+						and, as counter part<br>
+						<br>
+						4) if in SH6 it is inspected which PM with pmshr = 2 can be woken up, which one is selected?</p>
+					<p>First we remark, that our targets are twofold: we wish to keep the output equipment as busy as possible and should avoid that in some &quot;active streams&quot; the actual speed is zero, because all available outputarea has been usurped by another stream. This can be remedied by keeping the streams as much as possible, equally long; P.A.Voorhoeve has suggested to achieve this via favouring in the removal of pmshr = 2 (building up of the stream) the shortest one and by selection by the CM's favouring the longest ones. This seems to have attractive properties, if all PM are filled with output producing programs. However: if a PM has processed a program that produced a little bit of output in an empty stream, and no next program produces further output in this stream, the stream length may be so short, that it is never selected for consumption. To remedy this, we could try to introduce a kind of &quot;ageing factor&quot;.</p>
+					<p>We introduce a universal &quot;portion clock&quot; which is increased by a fixed amount &quot;alpha&quot; at each completed SH4; furthermore we note for each stream the value of the portion clock at the latest SH4 completion with respect to this stream; call this stream variable &quot;attachment time&quot;. Furthermore, we keep track of the stream length, measured in portions.</p>
+					<p>If the CM has the freedom to select finished documents or forms, it selects the stream with the maximum value of</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>&quot;length in portions - attachment time&quot;</code></p>
+					If a production at a stream stops, so that the stream may be very short, the CM's will in due time select this stream: the stream will get empty as desired.
+					<p>When we have to select which pmshr = 2 has to be removed, we take the stream with minimal</p>
+					<p><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;length in portions + attachment time&quot;</code></p>
+					thus giving some preference to the stream to which the previous completed SH4 was longest ago. The behaviour with, say &quot;alpha = 1/4&quot; seems, up till now, very reasonable.
+					<p><br>
+						<u>Speed regulation of the input CM's</u></p>
+					<p>At the moment of i-increase, all four quantities fi, fip, fio and fiop have to be decreased. The idea is that<br>
+						a) the input CM tries to perform &quot;dec(fi)&quot; and &quot;dec(fip)&quot; immediately; if unsuccesful, there will be a distaster signalling.<br>
+						b) then the desirability of &quot;dec(fio)&quot; and &quot;dec(fiop)&quot; is investigated. If these latter decreases are undesirable, the input CM will be retarded on this criterion.</p>
+					<p>We must bear in mind, that &quot;disaster&quot; may be unavoidable, because the readers are kept outside the banker's algorithm. We have put two requirements on our strategy<br>
+						1) in granting &quot;dec(fio)&quot; and &quot;dec(fiop)&quot; the system should be somewhat conservative, in order to avoid tapes running in quite unnecessarily and thus provoking a quite unnecessary &quot;fi&quot; or &quot;fip&quot;-disaster. (Or even: hindering output buffering much more than defendable.)<br>
+						2) in case of effective disaster, however, the speed regulation of the input CM's must be such, that the fi- and fip-alarm's must get the opportunity to signal it. (If one slows down the speed of the input CM's so that fi- and fip-alarm is too carefully avoided, one has to build in another mechanism to detect, that the complete system has got stuck.) We have chosen the following rules:<br>
+						1) If not request for a free tape reader is pending, an input CM, wishing to perform &quot;dec(fio)&quot; and &quot;dec(fiop)&quot; will get permission to do so if &quot;2 * current length of information stream &lt; min(fio, fiop)&quot;<br>
+						2) if at least one request for a free tape reader is pending, an input CM, wishing to decrease fio and fiop will get permission to do so if </p>
+					<p><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;0 &lt; min(fio, fiop)&quot;.</code></p>
+					<p>The points at which the need for input CM reactivation must be inspected are<br>
+						1) at the end of the i-p-transition (where the current length of the information stream has been decreased).<br>
+						2) at SH6 (o-decrease), where both inc(fio) and inc(fiop) have been performed.<br>
+						3) at the moment where free tape reader request has been refused.</p>
+					Remark 1. The first cause of removal will never get an opportunity if the stream is empty. Then, however, it will only stop if fio = 0 or fiop = 0, conditions which, after succesfull dec(fi) and Dec(fip), imply active output.<br>
+					<br>
+					Remark 2. At SH6 the output CM will first inspect, whether input CM's that require decrease of both fio and fiop- should be reactivated; after that the fiop is used to help PM's waiting at SH1 and the fio is used to help PM's waiting at SH4.
+					<p>Remark 3. If an input CM builds up a new portion, it might simultaneously request a portion in transput area:<br>
+						<br>
+						<code>P(SH5);<br>
+							<u>if</u> fi = 0 <u>or</u> fip = 0 <u>then</u> <u>goto</u> disaster;<br>
+							dec(fi); dec(fip);<br>
+							<u>if</u> (<u>if</u> free tape reader requested <u>then</u> 0 <u>else</u> 2 * lenght of current stream) &lt; min(fio,fiop) <u>then</u><br>
+							<u>begin</u> dec(fio); dec(fiop); V(icmsem) <u>end</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u><br>
+							<u>begin</u> icmvar:= &quot;characteristic value&quot; <u>end</u>;<br>
+							V(SH5);<br>
+							<br>
+							build up next portion<br>
+							<br>
+							P(icmsem)<br>
+						</code><br>
+						now the i-increase can be effected.</p>
+					<p>Every process, granting a segment to an input CM must perform (within a section critical to SH5)<br>
+						<br>
+						<code>&quot;icmvar:= 0; dec(fio); dec(fiop); V(icmsem)&quot; ;</code></p>
+					this may take place during the whole period of building up the next portion. (this technique of a pending request, already pending during the activity of the input CM is a noverlt; it is however perfectly sound.)<br>
+					<br>
+					Remark 4. If a request for a free tape reader is pending, both readers will read at maximum speed. This is somewhat naieve, but we could not convince ourselves that more elaborate constructions were significantly better.
+					<p>The description of document selection for input CM's, although already designed, will be postponed, being closely related to the structure of the keyboard program.</p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<font size="-1">transcribed by  Ike Naar<br>
+			
+			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="96">Tue, 15 Aug 2006</csobj></font>
+	</body>
+
+</html>

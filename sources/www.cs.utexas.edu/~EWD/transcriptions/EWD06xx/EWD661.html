@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>E.W.Dijkstra Archive: On the RED Language submitted to theDoD (EWD 661)</title>
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff">
+	
+	    <div id="frame" align="left">
+			<div id="header" align="left">
+				<table width="100%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td>Team Identification 142-48</td>
+						<td>
+							<div align="right">
+								<a href="../../ewd06xx/EWD661.PDF" target="_blank">EWD661</a></div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		<div id="frame">
+			<div id="content">
+				<div align="left">
+					<p class="noindent"><u>On the RED Language submitted to theDoD</u>.</p>
+					<p>Having decided to study the languages in the alphabetic order &#x2014;i.e. BLUE, GREEN, RED (or PINK), YELLOW&#x2014; the RED Language was number three. Was I getting tired or was it my allergy for pictorial representations? When I picked up the Informal Language Specification (ILS) of the RED Language I was initially repelled, and when I studied the RED proposal for the type FIXED, not even my great love of Euclid's Algorithm for the GCD could soften my feelings. It was only after several days of study when I observed &#x2014;with some amazement, for I still remembered my initial reactions&#x2014; that a certain sympathy had been built up. Its authors had earned this sympathy by their obvious efforts to keep the language simple and systematic:</p>
+					<ol>
+						<li type="1">&quot;REDL prohibits all instances of dangerous aliasing.&quot; (ILS p.7-14)<br>
+							&nbsp;
+						<li type="1">&quot;At run-time the effect of an invocation of a routine declared with the &lt;inline directive&gt; is the same as if this &lt;directive&gt; were absent except that the execution times and/or code space requirements may differ.&quot; (ILS p.7-7)<br>
+							&nbsp;
+						<li type="1">&quot;To prevent side effects from occurring in functions, ...&quot; (ILS p.7-18)<br>
+							&nbsp;
+						<li type="1">&quot;A fundamental principle of REDL's data facility is that the type of any data element is always named explicitly, i.e., it is always given by a single identifier, and distinct identifiers denote distinct types.&quot; (ILS p.5-4)
+					</ol>
+					<p class="noindent">Questions to be asked, however, are &quot;How successful have they been, and at what costs?&quot; We may remark</p>
+					<p class="noindent">ad 1) Because array elements can be passed as VAR parameters, the prohibition of aliasing in general requires run-time checks (ILS p.7-15), while the compile time checks seem to require access administration that could become pretty complicated.</p>
+					<p class="noindent">ad 2) Regretfully, the &lt;inline directive&gt; refers to the routine and not to the invocation, not all of which need to be time-critical.</p>
+					<p class="noindent">ad 3) Regretfully the restrictions on functions are so severe that they exclude the so-called &quot;benevolent side effect&quot; and I have some fear that the child has been thrown away with the bath water. (Think about virtual storage implementations in which a simple access may have on a lower level the side effect of a rearrangement of primary store.)</p>
+					<p class="noindent">ad 4) The notion of &quot;type&quot; has been weakened &#x2014;by the additional introduction of attributes&#x2014;. It may be my fault, but I did not find the RED Language's discussion of types as clear as I hoped on account of the quoted sentence. For instance:</p>
+					<blockquote>
+						<p class="noindent">&quot;REDL is <em>strongly typed</em>: each data object has a unique <em>type</em>, determinable at compile-time, which defines the possible values for the object and its set of behavioural properties.&quot; (ILS p.5-1)</p>
+					</blockquote>
+					<p class="noindent">but on the next page we read that the values of some attributes &#x2014;and as a result: &quot;the possible values for the object&quot;!&#x2014; can only be determined at run-time!</p>
+					<p>At first I was totally puzzled by section 5.1.2 (ILS p.5-3) where assignment requires source and target to &quot;have the same type&quot;, whereas for VAR parameter passing they are required to have &quot;both the same type and the same representation (i.e. the same values for each attribute)&quot;. It was only later &#x2014;section 5.6.4.1 (ILS p.5-53)&#x2014; that I got the impression that the difference only deals with the attribute GROUPING. It was only still later &#x2014;section 5.8 (ILS p.5-59)&#x2014; that I realized that I couldn't understand the attribute GROUPING and hence, failed to understand how variables can have &quot;the sane type&quot; &#x2014;in the sense of uniquely identified&#x2014; and yet may differ in their GROUPING attribute. I decided to try whether I could make sense out of the proposal after omission of the GROUPING attribute.</p>
+					<p>It was then that I encountered a strange inconsequence. Section 5.1.3 (ILS p.5-4) is quite explicit: there are no anonymous types</p>
+					<blockquote>
+						<p class="noindent">VAR V: ARRAY(1..16) OF BOOLEAN INIT ?;</p>
+					</blockquote>
+					<p class="noindent">is illegal, it should be:</p>
+					<blockquote>
+						<p class="noindent">TYPE V_TYPE: ARRAY(1..16) OF BOOLEAN;<br>
+							VAR V: V_TYPE INIT ?;</p>
+					</blockquote>
+					<p class="noindent">and a variable W is <i>only</i> of the same type as V provided W is declared to be of V_TYPE: it is the repeated reference to the type identifier that does the trick. That seems sound. Note that in spite of the bounds to be supplied the declaration of an array type as such &#x2014;section 5.5.2 (ILS p.5-30)&#x2014; is a &lt;simple type declaration&gt; and <i>not</i> a &lt;parameterized type declaration&gt;.</p>
+					<p>I then turned to Section 5.6 (ILS p.5-50) and found the declaration</p>
+					<blockquote>
+						<p class="noindent">TYPE SQUARE_MATRIX(N): ARRAY(1..N,1..N) OF FLOAT(5, -1.0..1.0);</p>
+					</blockquote>
+					<p class="noindent">and on the next page in terms of the above declared type the declaration of the variable X</p>
+					<blockquote>
+						<p class="noindent">VAR X: SQUARE_MATRIX(2) INIT etc;</p>
+					</blockquote>
+					<p class="noindent">I was very much amazed, because now the type of X again seems to be of the anonymous type that has been abolished by making</p>
+					<blockquote>
+						<p class="noindent">VAR V: ARRAY(1..16) OF BOOLEAN INIT ?;</p>
+					</blockquote>
+					<p class="noindent">illegal! My first impression was that it was a misprint, that the authors had forgotten to replace the above declaration of X by</p>
+					<blockquote>
+						<p class="noindent">TYPE TWO_BY_TWO: SQUARE_MATRIX(2);<br>
+							VAR X: TWO_BY_TWO INIT ?;</p>
+					</blockquote>
+					<p class="noindent">but according to the syntax diagram 11 &#x2014;section 5.3 (ILS p.5-10) my type declaration for the type TWO_BY_TWO is illegal!</p>
+					<p>I may be very dumb, but I fail to understand why the authors haven't carried their principle of named types to its logical conclusion. Not having done so, they have to resort to the subsidiary condition of &quot;equal values of the attributes&quot; and, hence,</p>
+					<blockquote>
+						<p class="noindent">VAR Y: SQUARE_MATRIX(1+1) INIT ?;</p>
+					</blockquote>
+					<p class="noindent">introduces a variable Y of the same type as the X declared above.</p>
+					<p>A possible source of their confusion may be found in their position that the possible set of values ideally should be determinable at compile-time or, more precisely, that the type should be determinable at compile-time: only type identity needs to be established at compile-time. For the time being I regard the fact that the notion of identified types has not been carried out to its logical conclusion as a regrettable mistake that seems easy to remedy.</p>
+				</div>
+				<div align="center">
+					<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+						*</p>
+				</div>
+				<div align="left">
+					<p>A more serious source of worry I encountered with the study of the &quot;Multipath Facilities&quot;. In the Preliminary Design Phase Report (PDPR p.3-15) I read that semaphores were rejected because they were so &quot;highly error-prone&quot;. Full of interest I continued to read and saw that the authors propose to introduce EVENTs instead, i.e. nonnegative integers that can be increased and decreased by 1. What is in a name?</p>
+					<p>In two respects, I am afraid, I am not certain that the replacement of semaphores by EVENTs is such an improvement.</p>
+					<p>First of all, the operations on semaphores had the advantage of being extremely cheap to implement; in the case of EVENTs we have in addition the rule of the priorities, compounded with the rule that within each priority the blocked processes will be served on a first come first served basis. Add to this that while a path is being blocked, its priority may be changed: it seems vain to hope that such an elaborate scheme is equally simple to implement.</p>
+					<p>Secondly, EVENTs are not data types. &quot;To avoid <i>ad</i> <i>hoc</i> and complex restrictions, we chose not to treat EXCEPTIONs and EVENTs as data types [...]&quot; (PDPR p.2-5). As a result it is impossible to declare an array of EVENTs, and as a result &#x2014;but again: I may be dumb&#x2014; I did <em>not</em> succeed in coding the first nontrivial monitor I tried to write in the RED Language. (I tried to write a monitor that would grant exclusive access to a single resource, but would schedule it on a last come first served basis; the monitor should be able to serve N contenders.)</p>
+				</div>
+				<div align="center">
+					<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+						*</p>
+				</div>
+				<div align="left">
+					<p>I had my next problem with the Compile Time Procedures, section 14.4 (ILS p.14-16 in particular). I had some problem with $DECLARE CAPSULE_ID on the top line of p.14-16. When used it requires the introduction of the identifiers INT_STACK_CAPSULE and BOOL_STACK_CAPSULE, for which I see no use. This is probably not serious.</p>
+					<p>I was more worried by the fact that I did not see a way of introducing two integer stacks of different lengths without writing $CALL STACK_GENERATOR twice. I am perfectly willing to believe that supplying the type INTEGER as actual parameter requires something the designers of the RED Language would call a compile-time facility; is it unrealistic to expect something like a parameterized type declaration as the result, to which a parameter like stack size can be supplied at run-time?</p>
+				</div>
+				<div align="center">
+					<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+						*</p>
+				</div>
+				<div align="left">
+					<p>I was somewhat alarmed by the underlying attitude of the designers that made them introduce the directives RECURSIVE and REENTRANT. The idea is clearly that nonrecursive, nonreentrant routines can be implemented more efficiently. (Personally I prefer machines in which this difference in efficiency is absent or can be ignored. They do exist!) The explicit introduction of these two directives requires from the implementation that it is checked that they are present where needed; hence in some stage of the compilation, a complete call graph has to be constructed in order to check the appropriateness of these directives. But, if that call graph is generated anyhow, we don't need the directives! The introduction of these directives forces all implementations to generate the call graph, even those in which we don't care at all whether the routine is used recursively or reentrantly or not. In short: the two directives are only an efficiency gain &#x2014;but a risk increase!&#x2014; if the implementation omits the check.</p>
+					<p>It may even be a burden. Via EVENTs it is possible to program different paths of a &lt;fork statement&gt; in such a way that certain parts exclude each other in time; the language requires a routine called from a few of such paths to be given the directive REENTRANT, although it is absolutely irrelevant. (Note that a monitor is not always the proper vehicle to implement mutual exclusion.) Are all the routines in the library REENTRANT?</p>
+				</div>
+				<div align="center">
+					<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+						*</p>
+				</div>
+					<div align="left">
+					<p>I wasn't pleased at all by the sentence (ILS p.7-5)</p>
+						<blockquote>
+						<p class="noindent">&quot;We note that a compiler can choose (for efficiency reasons) to implement CONST binding as a call &quot;by reference&quot; as opposed to &quot;copy&quot; provided it can guarantee that the effect of the routine is as though the parameter were passed by copy&#x2014;-viz., that the value of the actual parameter remains unchanged during execution of the routine.&quot;</p>
+					</blockquote>
+						<p class="noindent">I didn't like it because, unless such an analysis is trivial and always gives the result &quot;yes, OK&quot;, the language seems a very unsafe tool for use; but the design of the RED Language doesn't indicate why the analysis is trivial. On the contrary: the suggested REDL Language Support Facilities are of a frightening complexity (PDPR, section 4.4).</p>
+					</div>
+					<div align="center">
+					<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+						*</p>
+				</div>
+					<div align="left">
+					<p>The documentation should be written in a way which is superior to the way in which the Informal Language Specifications have been written. I refer the reader for example to section 12.4.3 (ILS p.12-13) that begins with</p>
+					<blockquote>
+						<p class="noindent">&quot;The effect of the &lt;wait statement&gt; is to perform the following actions in an indivisible manner:&quot;</p>
+					</blockquote>
+					<p class="noindent">(Presumably the authors meant something like &quot;The effect of executing the &lt;wait statement&gt; is the effect of performing the following actions, in an indivisible manner:&quot;).</p>
+					<p>The follow five actions numbered (1), (2), (3), (4), and (5). Action (1) is empty (but refers to &quot;step&quot; (3)). Action (2) is obscure in its last sentence: &quot;If the path executing the &lt;wait statement&gt; holds the named monitor, then it releases the monitor.&quot; As the previous sentence has postulated that the &lt;wait statement&gt; must be lexically contained in the named monitor, it is hard to see &#x2014;at least for me&#x2014; how the path executing the &lt;wait statement&gt; can fail to hold the named monitor; the word &quot;then&quot; in the quoted sentence is superfluous; I failed to find the definition of &quot;releasing&quot; a monitor. Actions (3) and (4) exclude each other; besides that, in action (3) &quot;execution continues in the scope which contains the &lt;wait statement&gt;&quot; is wrong: because we have still actions (4) and (5), it should be something like &quot;execution will continue after completion of action (5) etc.&quot; Action (4) describes how the path will be suspended; in view of the fact that action (5) is still to follow, it is hard to reconcile that suspension with the usual interpretation of &quot;in an indivisible manner&quot;. The description of action (5) is linguistically OK (but for another superfluous &quot;then&quot; and the fact that the last two sentences had better be separated by a weaker separator than the period.)</p>
+				</div>
+				<div align="center">
+					<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+						*</p>
+				</div>
+				<div align="left">
+					<p>The reports dealing with the RED Language are as disturbingly inhomogeneous as those for the GREEN Language. Again one must fear that they have been produced by an incoherent team. While the design has tackled a number of fundamental design issues, in a way we should appreciate, we also encounter irrelevant remarks such as &#x2014;section 4.3.1.2 (PDPR p.4-12)&#x2014; &quot;The entire interpreter together with its tables will be resident in main memory.&quot;; a few lines lower the text refers to &quot;overlays&quot;. I don't know what to do with such remarks; on the one hand I can skip them as irrelevant and suppose that some underling has imported them into the text without the real authors &#x2014;due to lack of time&#x2014; really noticing it, on the other hand I can assume that the authors really think this remark important enough to be included. In the latter case it betrays an almost medieval attitude towards programming that would justify the questioning of most of their design justifications that are based upon implementation considerations. The proposal is both advanced and backward in such an incongruous manner that I am baffled.</p>
+				</div>
+				<div align="center">
+					<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+						*</p>
+				</div>
+				<div align="left">
+					<p>Have I failed to do the designers of the RED Language justice? Perhaps: the above has been written despite a mounting headache. Whether my feelings towards the RED Language are the result of the headache, or the headache is the result of the RED Language remains an open question.....</p>
+						<p></p>
+						<table width="400" border="0" cellspacing="2" cellpadding="0">
+						<tr>
+							<td valign="top">Plantaanstraat 5<br>
+								5671 AL NUENEN<br>
+								The Netherlands</td>
+							<td valign="top">prof.dr.Edsger W.Dijkstra<br>
+								Burroughs Research Fellow</td>
+						</tr>
+					</table>
+					<p></p>
+					<p><u></u></p>
+				</div>
+				<hr>
+				<font size="-1">transcribed by Tristram Brelstaff<br>
+					revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="94">Tue, 18 Dec 2007</csobj></font>
+				<p></p>
+				</td>
+				<td width="20" height="5589"></td>
+				<td width="1" height="5589"><spacer type="block" width="1" height="5589"></td>
+				</tr>
+				<tr height="1" cntrlrow>
+					<td width="478" height="1"><spacer type="block" width="478" height="1"></td>
+					<td width="20" height="1"><spacer type="block" width="20" height="1"></td>
+					<td width="1" height="1"></td>
+				</tr>
+				</table>
+				<p></p>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		</div>
+	</body>
+
+</html>

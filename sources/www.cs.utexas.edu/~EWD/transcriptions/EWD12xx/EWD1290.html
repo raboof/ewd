@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>E.W.Dijkstra Archive: Eliminating cascading carries (EWD 1290)</title>
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff">
+		    <div id="frame">
+			<div id="header">
+        <a href="../../ewd12xx/EWD1290.PDF" 
+           target="_blank"
+           title="Link to the PDF version of EWD 1290">EWD1290</a>
+      </div>
+			<div id="content">
+				<p class="noindent"><u>Eliminating cascading carries</u></p>
+				<p>In this note we describe an adder for numbers in the following decimal representation</p>
+				<p class="noindent">(0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>n</var> = &#x3008; &#x03A3; <var>i</var> : 0&#x2264;<var>i</var> : <var>d<sub>i</sub></var>&#x2219;10<sup><var>i</var></sup><i><sup> </sup></i>&#x3009;</p>
+				<p class="noindent">(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2212;5 &#x2264; <var>d<sub>i</sub></var><i><sub> </sub></i>&#x2264; 6 for all <var>i</var><i> </i>&nbsp;&nbsp;&nbsp;.</p>
+				<p class="noindent">All integers can be represented this way, but note that the representation is not necessarily unique: for instance, 26 can be represented in two decimals by (2,6) as well as by (3,&#x2212;4).</p>
+				<p>In our &quot;adder&quot;, which can calculate &plusmn;<var>a</var>&plusmn;<var>b</var><i><var>,</var></i> the sum of two digits ranges from &#x2212;12 through +12; its addition table represents these values as <var>c</var>&#x2219;10 + <var>s</var> &#x2014;from &quot;carry&quot; and &quot;sum digit&quot;&#x2014;, with <var>c</var>, <var>s</var> satisfying</p>
+				<p class="noindent">(2)&nbsp;&nbsp;&nbsp;&nbsp;&#x2212;1 &#x2264; <var>c</var><i> </i>&#x2264; +1 and &#x2212;4 &#x2264; 5 &#x2264; +5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,</p>
+				<p class="noindent"></p>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td width="8%">i.e.,</td>
+						<td width="9%">from</td>
+						<td align="right" width="8%">&#x2212;12&nbsp;</td>
+						<td align="center" width="15%">through</td>
+						<td width="9%">&nbsp;&#x2212;5,</td>
+						<td width="5%"><var>c</var><i> </i>=</td>
+						<td align="right" width="5%">&#x2212;1</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td width="8%"></td>
+						<td width="9%">from</td>
+						<td align="right" width="8%">&#x2212;4&nbsp;</td>
+						<td align="center" width="15%">through</td>
+						<td width="9%">&nbsp;+5,</td>
+						<td width="5%"><var>c</var><i> </i>=</td>
+						<td align="right" width="5%">0</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,</td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and</td>
+					</tr>
+					<tr>
+						<td width="8%"></td>
+						<td width="9%">from</td>
+						<td align="right" width="8%">+6&nbsp;</td>
+						<td align="center" width="15%">through</td>
+						<td width="9%">&nbsp;+12,</td>
+						<td width="5%">c<i> </i>=</td>
+						<td align="right" width="5%">+1</td>
+						<td></td>
+						<td>&nbsp;&nbsp;.</td>
+					</tr>
+				</table>
+				<p>Because (2) excludes for <var>s</var> the extreme digit values &#x2212;5 and +6 and |<var>c</var>| &#x2264; 1, each sum digit can absorb a carry from the right without generating a new one. In long parallel adders the problem of carry propagation has thus been eliminated; alternatively we can add from left to right with a &quot;look-ahead&quot; of only 1 position.</p>
+				<p class="noindent"><u>Remark</u> If we so desire, we may replace (1) by the weaker, symmetric &#x2212;6 &#x2264; <var>d</var><sub><var>i</var></sub> &#x2264; +6. with (2) weakened accordingly, some freedom in the addition table is introduced. (End of Remark)<br>
+				</p>
+				<p>Please note that (<i>i</i>) the representation of zero is unique, and (<i>ii</i>) the sign of a non-zero value is determined by the sign of its most-significant non-zero digit.</p>
+				<p>The above, which was designed decades ago, was inspired by the implementation of the end-around carry in the serial adder of the ARMAC. Since the advent of systolic arrays it must look like something familiar.</p>
+			</div>
+			<div align="center">
+			<p>Austin, 23 September 1999</p>
+		</div>
+			<div align="left">
+			<p class="noindent">Prof.dr Edsger W. Dijkstra<br>
+				
+				Department of Computer Sciences<br>
+				
+				The University of Texas at Austin<br>
+				
+				Austin, TX 78712&#150;1188<br>
+				
+				USA</p>
+		</div>
+		<hr>
+		<font size="-1">transcribed by Hai Zhou<br>
+			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="97">Wed, 28 Nov 2007</csobj></font>
+	</body>
+
+</html>

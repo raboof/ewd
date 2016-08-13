@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: On well-shaped mathematical arguments. (EWD 729)</title>
+    <style type="text/css">
+      body {
+        color: black;
+        background-color: white;
+      }
+      hr {
+        height: 1px;
+        color: black;
+        background-color: black;
+        border: 0;
+      }
+      a {
+        color: blue;
+        background-color: transparent;
+      }
+      a:hover, a:active {
+        color: white;
+        background-color: blue;
+        text-decoration: none;
+      }
+      h1, h2 {
+        font-size: 100%; 
+        text-align: center;
+      }
+      p {text-indent: 2em;}
+      #frame {width: 39em;}
+      #header {text-align: right;}
+      #footer {font-size: 90%;}
+    </style>
+  </head>
+   <body>
+    <div id="frame">
+			<div id="header">
+        <a href="http://www.cs.utexas.edu/users/EWD/ewd07xx/EWD729.PDF" 
+          title="Link to the PDF version of EWD729">EWD 729</a>
+      </div>
+		</div>
+		<div id="frame" align="left">
+			<div id="content" align="left">
+				<u>On well-shaped mathematical arguments.</u></div>
+		</div>
+		<div id="frame">
+			<div id="content">
+				<p>
+          The following is not written with the intention of making myself popular.
+          On the contrary, I am afraid that I can think of sizeable subcultures
+          &#x2014;mathematicians, logicians, philosophers, psychologists, and pedagogues,
+          to name just a few&#x2014; whose primary reaction will be to be annoyed rather
+          than amused or enlightened.
+</p>
+				<p>
+          This text is written in the firm conviction that there is a profound
+          difference between the notions "convenient" and "conventional". Its 
+          actual writing has been prompted by the observation that many people
+          have great difficulty in making the distinction. Convenience should be
+          an objective notion, independent of our personal habits and educational 
+          pasts, but many people, while intellectually agreeing that performing
+          computations in decimal (Arabic) notation is more convenient in such an
+          objective sense than doing it in Roman numerals, will make a moment later
+          their notion of convenience again dependent on "what you are used to" (and
+          this appeal to personal taste will be defended with adjectives such as
+          "natural" and "intuitive"). But our tastes are formed by our habits, and
+          our mathematical tastes are no exception: they are formed by our 
+          mathematical habits. Hence my desire to subject the latter to a closer
+          scrutiny.
+</p>
+			</div>
+			<div id="content" align="center">
+				*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+				*</div>
+			<div id="content">
+				<p>
+          When I was a pupil at the Gymnasium Erasmianum in Rotterdam, Euclidean
+          Geometry was a major component of the curriculum. As far as I was 
+          concerned this needed no further justification, for I liked the topic. 
+          It was, however, explicitly justified on the grounds that Euclidean 
+          Geometry was an excellent topic to be used to teach us how to think
+          logically. In a way it was, but were <ins>all</ins> the accompanying habits wholesome? I don't think so. We learned how to prove theorems, and that was good. We also learned the profound difference between an unproved conjecture and a proven theorem, and that was good too. But in retrospect I have equally profound objections to the way in which the theorems used to be formulated: they used to follow the pattern &quot;if P, then Q&quot; or, equivalently, &quot;given P, prove Q&quot;. And this has strange consequences.</p>
+				<p>
+          In one of the first chapters of a recent (!) book on geometry I found
+          the following two theorems (I quote by heart):<br />
+					
+<ins>Theorem 1</ins>. If, in a triangle, two angles are equal, then these two 
+          angles have bisectors of equal length.<br />
+					
+<ins>Theorem 2</ins>. If, in a triangle, two angles have bisectors of equal 
+          length, then these two angles are equal.<br />
+					
+          The authors need a full page for the explanation why the second theorem is
+          much harder to prove than the first one. While the first theorem can be
+          proved "directly", the second theorem can be better proved "indirectly",
+          i.e. it is easier to prove Theorem 2' "instead":<br />
+					
+<ins>Theorem 2'</ins>. If, in a triangle, two angles are different, then these
+          two angles have bisectors of different length.
+          After having proved Theorem 2' &#x2014;the so called "counterpositive"&#x2014; the proof
+          of the original theorem follows immediately. Suppose that Theorem 2 were
+          false; then there would exist a triangle with two angles with bisectors of
+          equal length that would be two different angles; Theorem 2' then tells us
+          that their bisectors would be of different length. Because two bisectors
+          cannot be simultaneously of equal and of different length, we have reached
+          a contradiction. Hence our assumption that Theorem 2 was false is untenable,
+          and, hence Theorem 2 is true.
+</p>
+				<p>
+          What a terrible smokescreen! The authors failed to stress that Theorem 2 and
+          Theorem 2' are exactly the <ins>same</ins> theorem, only formulated differently.
+          With Theorem 2 of the form "if P, then Q", Theorem 2' is of the form "if 
+          (<ins>non</ins> Q), then (<ins>non</ins> P)", or, using the implication sign, they
+          are of the forms
+</p>
+				<blockquote>
+					<p class="continue">
+            "P => Q" and "(<ins>non</ins> Q) => (<ins>non</ins> P)"
+</p>
+				</blockquote>
+				respectively. Remembering that the implication A =&gt; B is only an asymmetric way of writing the disjunction (<ins>non</ins> A) <ins>or</ins> B, we can equate the two formulations to
+				<blockquote>
+					<p class="continue"> 
+          "(<ins>non</ins> P) <ins>or</ins> Q" and "Q <ins>or</ins> (<ins>non</ins> P)"
+</p>
+				</blockquote>
+				respectively; the disjunction being symmetric, the two expressions are clearly equivalent.
+				<p>
+          The whole folklore about "direct proofs" and "indirect proofs" and the medieval
+          relic of "the counterpositive" could have been disposed of by formulating
+          the theorems as disjunctions to start with!
+</p>
+				<p><u>Theorem I</u>. Two angles of a triangle are different <ins>or</ins> they have
+          bisectors of equal length.
+</p>
+				<p><u>Theorem II</u>. Two angles of a triangle are equal <ins>or</ins> they have bisectors
+          of different length.
+</p>
+				<p>
+          It is my contention that it is (objectively!) more convenient to represent the
+          symmetric relation A <ins>or</ins> B by "A <ins>or</ins> B&quot;  (or by &quot;B <ins>or</ins> A")
+          than by one of the asymmetric expression "(<ins>non</ins> A) => B" and 
+          "(<ins>non</ins> B) => A". Here one of my beliefs &#x2014;or if you prefer: one of my 
+          considered opinions&#x2014; surfaces: an asymmetric notation for a symmetric relation is
+          a pain in the neck, and the pain is misleading.
+</p>
+				<p>
+          The apparent "greater difficulty" of Theorem 2 is no more than an artefact, 
+          created by an inadequate notation. How utterly misleading that notation is I
+          learned when I confronted an elderly mathematician (for whom I have nothing
+          but the greatest respect) with Theorem 1 and Theorem I. It was for him not 
+          easy at all to "admit" their equivalence, because emotionally he processed the
+          two quite differently: Theorem 1 was for him a theorem concerned with 
+          triangles with equal angles, while Theorem I was about <ins>any</ins> triangle.
+          Though logically equivalent, they managed to "mean" different things for him.
+</p>
+				<p>
+          When we have to demonstrate the truth of theorems of the form A <ins>or</ins> B or
+          A <ins>or</ins> B <ins>or</ins> C, we have to show that under any circumstances at least
+          one of the (two or three) terms is true. The general pattern of such proofs is
+          the exhaustive investigation of the situations that are possible when all the
+          terms but one are false; when we can show that in all these situations the
+          remaining term is true, we have proved the theorem. With a theorem of the
+          form A <ins>or</ins> B we have two different proof strategies, with a theorem
+          of the form A <ins>or</ins> B <ins>or</ins> C we have the choice the choice between
+          three different strategies. The point is that the choice is absolutely free
+          and should be made consciously. We should always ponder about the question
+          which set of situations to be investigated is the most manageable. (In the
+          case of the theorems I and II, they are the situations in which something about
+          the angles has been given.)
+</p>
+				<p>
+          It is, for instance, exactly this freedom that should be wisely exploited
+          in many of the problems posed in the Mathematical Olympics. Let me give you
+          one example &#x2014;again I quote by heart&#x2014;
+</p>
+				<p>
+          "Nine mathematicians meet at an international congress. When it is given
+          that of any three of them, at least two can communicate in a common
+          language, and no mathematician masters more than three languages, show
+          that there exists a language common to at least three of them."
+</p>
+				<p>
+          Well, this is a theorem of the form "A <ins>or</ins> B <ins>or</ins> C" with<br />
+					<br />A:&nbsp;&nbsp;&nbsp;there exists a triple of the mathematicians that is incommunicado (i.e. such that no two of the triple have a language in common)<br />
+					<br />B:&nbsp;&nbsp;&nbsp;there exists a mathematician mastering more than three languages<br />
+					<br />C:&nbsp;&nbsp;&nbsp;there exists a language mastered by at least three mathematicians.</p>
+				<p>
+          The asymmetric way in which the problem has been stated suggests to investigate
+          the "given" situations, characterized by "(<ins>non</ins> A) <ins>and</ins> 
+          (<ins>non</ins> B)". Condition A being the most awkward one &#x2014;concerning, as it does,
+          pairs from triples&#x2014; we may expect the set of possible situations satisfying
+          (<ins>non</ins> B) <ins>and</ins> (<ins>non</ins> C) to be the most manageable one. So we
+          find ourselves invited to investigate the situations that are possible under<br />
+					
+<ins>non</ins> B: each mathematician masters at most three languages, <ins>and</ins><br />
+					
+<ins>non</ins> C: each language is mastered by at most two mathematicians.
+</p>
+				<p>
+          In the case <ins>non</ins> C, each mathematician communicates in different
+          languages with the other mathematicians he can communicate with; together
+          with <ins>non</ins> B, we conclude that each mathematician can communicate with
+          at most three other mathematicians. From this and the fact that the number
+          of mathematicians exceeds 4 we derive the existence of a pair of 
+          mathematicians X and Y that cannot communicate with each other. 
+          Mathematician X can communicate with at most 3 of the remaining 7, and
+          so can Y. Therefore, because 3 + 3 &lt; 7, among those remaining seven there
+          exists at least one mathematician Z that can communicate neither with X,
+          nor with Y. The triple XYZ demonstrates the existence of a triple that is
+          incommunicado, hence the truth of A. (End of Solution.)
+</p>
+				<p>
+          I have shown the above example for several reasons. It is a further
+          confirmation that the sooner the medieval relic "the counterpositive" is
+          forgotten, the better. (You see, in the case of "(A <ins>and</ins> B) => C"
+          we don't have a unique counterpositive! We have at least "(A <ins>and</ins>
+<ins>non</ins> C) => (<ins>non</ins> B)", "(B <ins>and</ins> <ins>non</ins> C) => 
+          (<ins>non</ins> A)", and "(<ins>non</ins> C) => (<ins>non</ins> A <ins>or</ins> <ins>non</ins> B)". But is "(A) => (C <ins>or</ins> <ins>non</ins> B)" a 
+          counterpositive as well?)
+</p>
+				<p>
+          But a more disturbing observation can be made. Of course we could
+          conclude that the inclusion of this problem in the Mathematical
+          Olympics &#x2014; traditionally solvable by an unusual solution requiring
+          very little specialized knowledge&#x2014; was a mistake, because standard
+          heuristics lead to a straightforward solution. Indeed, the problem
+          would have been regarded as trivial, had it been phrased as folows:
+</p>
+				<p>
+            "Nine mathematicians meet at an international conference. When it is
+            given that each mathematician masters at most three languages and
+            each language is mastered by at most two mathematicians, show that
+            there exists a triple of mathematicians, no two of which have a
+            language in common."
+</p>
+				<p class="continue">
+          Composers of the Mathematical Olympics are, however, traditionally no
+          fools, and as a result I am disturbed by the observation that, evidently,
+          people are not supposed to see that the second phrasing states exactly the
+          same theorem as the first one. I can only draw two conclusions.
+</p>
+				<p>
+          Firstly, it is not the theorem itself that presents any problems, it is only
+          the first formulation that should be regarded as a mystification. And, secondly,
+          the systematic demystification of such misleading formulations is in all probability
+<ins>not</ins> a standard component of our mathematical curricula (for, if it had been,
+          the problem would never have been admitted). And that conclusion is a cruel exposure
+          of our standard mathematical curricula: if we don't teach how to avoid avoidable
+          complications our teaching must waste a lot of energy teaching clumsiness.
+</p>
+				<p>
+          This is a very sad conclusion, but I am afraid that is is unavoidable.
+</p>
+				<table width="100%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td width="50%">
+				
+        Plataanstraat 5<br />
+							
+				
+        5671 AL NUENEN<br />
+							
+				
+        The Netherlands
+</td>
+						<td>
+				
+        18th February 1980<br />
+							
+				
+        prof.dr.Edsger W.Dijkstra<br />
+							
+				
+        Burroughs Research Fellow
+</td>
+					</tr>
+				</table>
+			</div>
+			<div class="lsignature">
+				</div>
+			<div class="rsignature">
+				</div>
+			<hr />
+			<div id="footer">
+				
+         transcribed by
+<a href="http://stavridis.org/eleftherios/">eleftherios g stavridis</a><br /> revised <csobj format="MedDate" h="15" region="15" t="DateTime" w="107">Wed, 20 Jun 2007</csobj></div>
+		</div>
+	</body>
+</html>
+
