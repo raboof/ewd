@@ -8,6 +8,7 @@ TARGET_BRANCH="gh-pages"
 
 function doCompile {
   ./convert.sh
+  cp -r target/* out
 }
 
 
