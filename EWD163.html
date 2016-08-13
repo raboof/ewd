@@ -1,22 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
 <html>
+<head>
+  <title>Eerste verkenning over de dood van programma's.</title>
+  <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+  <link href="assets/transcriptions.css" rel="stylesheet">
+  <meta name="generator" content="convertArticle.pl">
+</head>
+<body>
+<h1>Eerste verkenning over de dood van programma's.</h1>
 
-	<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
-		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
-		<meta name="generator" content="convertArticle.pl">
-		<title>E.W.Dijkstra Archive: Eerste verkenning over de dood van programma's. (EWD 163)</title>
-		<style type="text/css">
-         p { text-indent: 2.0em; }
-        </style>
-	</head>
-
-	<body bgcolor="#ffffff"><div id="title"><h1>Eerste verkenning over de dood van programma's.</h1></div>
-		<div align="right">
-			&nbsp;&nbsp;<a title="PDF scan of EWD 163" href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD163.PDF" target="_blank">EWD 163</a></div>
-		<div align="left">
-			<div>
-				<u>Eerste verkenning over de dood van programma's.</u>
 				<div><br>1. De processen, die door de CM's worden uitgevoerd, zijn onsterfelijk. Dit rapportje handelt dus duidelijk over een PM-aangelegenheid.<br>
 					&nbsp;</div>
 					<div>2. Een PM heeft een onsterfelijk buitenste blok, het PM-blok. Dit wordt nooit verlaten, het is in dit blok, dat de in- en uitvoerstromen thuishoren; evenzo hoort hier thuis de statusinteger &quot;runnumber&quot;. De PM bevindt zich in dit blok, wanneer op standaardband gewacht wordt. (Deze toestand, ook in een statusvariabele voor de bandlezerselectie vastgelegd, zou ook in &quot;runnumber = 0&quot; kunnen worden vastgelegd.) Zodra een vermeende standardband wordt gevonden, wordt het runnumber ingevuld; als het een algolprogramma blijkt wordt op grond van de buiten het programma vermelde pluncherbehoefte de acceptabiliteit getest; zo ja, dan gaat de PM een binnenblok in, waarin de globalen voor de vertaler gedeclareerd worden, wordt de vertaler als procedure aangeroepen en als we daaruit terugkomen (en het programma was goed vertaald) dan roepen we het programma aan. Komen we hier helemaal legitiem uit terug, dan doet de standaardtekst van de PM de blokexit van het ingegane blok, we zijn terug op het niveau van het PM-blok. De eigen informatie (segmenten, heiligingen etc.) van het algolprogramma zijn hiermee afgehandeld, de PM hoeft niet meer te doen, dan de in- en uitvoerstromen tot hun nuchtere staat terug te brengen. Als er nog iets in een invoerstroom zit (of zit te komen), dan moet &quot;skip until end of tape&quot; gedaan worden (inclusief &quot;geen interesse meer&quot;, zie de tape reader CM), als in een pluncherstroom een unfinished document zit, moet dit worden voltooid en aangehaakt, als in de printerstroom nog een unfinished form zit (hier zit een WC-rol conventie: ik neem aan, dat deze erin zit, zo er ueberhaupt van de printer gebruik gemaakt is) wordt deze als de laatste gemarkeerd en &quot;number of final documents nfd&quot; wordt met 1tje opgehoogd. (Dit even met Coen opnemen.)
@@ -97,4 +88,6 @@
 			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">Sun, 14 Jan 2007</csobj></font>
 	</body>
 
+</html>
+</body>
 </html>

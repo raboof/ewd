@@ -1,23 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title>Fair gambling with a biased coin</title>
+  <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+  <link href="assets/transcriptions.css" rel="stylesheet">
+  <meta name="generator" content="convertArticle.pl">
+</head>
+<body>
+<h1>Fair gambling with a biased coin</h1>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
-		<title>E.W.Dijkstra Archive: Fair gambling with a biased coin (EWD 1069)</title>
-    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
-		<link href="assets/transcriptions.css" rel="stylesheet" media="screen" />
-		<link href="../formulas.css" rel="stylesheet" media="screen" />
-	</head>
-	<body><div id="title"><h1>Fair gambling with a biased coin</h1></div>
-		<div id="frame">
-			<table width="100%" cellpadding="0" cellspacing="0" border="0">
-				<tr>
-					<td align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd10xx/EWD1069.PDF"
-					 title="Link to the PDF version of EWD1069">EWD 1069</a></td>
-				</tr>
-			</table>
-			<div id="content">
-				<p class="noindent"><u>Fair gambling with a biased coin</u></p>
 				<p>Given a coin such that the two faces show up with probabilities <var>p</var> and <var>q</var> &nbsp;(<var>p</var>+<var>q </var>= 1), can we generate a fair random sequence of 0s and 1s? If the coin is fair, i.e., <var>p</var>=½, <var>q</var>=½, the answer is simple: associate 0 with the one face and 1 with the other, and throw the coin once per digit to be produced. But what if the coin could be biased? Note that we are only given the possibly biassed coin, and not the actual <var>p</var>,<var>q</var>-values.</p>
 				<p>The only thing we can do with the coin is throwing it repeatedly. Our task is to design an experiment with two possible outcomes of equal probability.</p>
 				<p>Our first observation is that this endeavour is bound to fail if the coin is so extremely biased that one of the faces <em>never</em> shows up &#x2014;i.e. <span class="inlineformula"><var>p</var>&#x2022;<var>q</var>=0&#x2014; ,</span> because in that case only <em>one</em> sequence of throws is possible and there cannot be <em>two</em> possible outcomes of the experiment. To phrase it differently: we have to design a deterministic algorithm intended to produce a 0 or a 1 when fed with a sufficiently long sequence of faces, but on a <em>constant</em> input sequence &#x2014;i.e., all heads or all tails&#x2014; the algorithm should fail to terminate. Because there are many such algorithms, we do some more observing.</p>
@@ -60,4 +50,7 @@
 		</div>
 	</body>
 
+</html>
+
+</body>
 </html>

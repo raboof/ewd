@@ -1,21 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
 <html>
+<head>
+  <title>A challenge to memory designers?</title>
+  <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+  <link href="assets/transcriptions.css" rel="stylesheet">
+  <meta name="generator" content="convertArticle.pl">
+</head>
+<body>
+<h1>A challenge to memory designers?</h1>
 
-	<head><link href="assets/transcriptions.css" rel="stylesheet" media="screen"><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
-		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
-		<meta name="generator" content="convertArticle.pl">
-		<title>E.W.Dijkstra Archive: A challenge to memory designers? (EWD 497)</title>
-	</head>
-
-	<body bgcolor="#ffffff"><div id="title"><h1>A challenge to memory designers?</h1></div>
-		<table width="499" border="0" cellspacing="0" cellpadding="0" cool gridx="16" gridy="16" height="1112" showgridx showgridy usegridx usegridy>
-			<tr height="1111">
-				<td content csheight="1111" width="472" height="1111" valign="top" xpos="0">
-					<div align="right">
-						 <a href="https://www.cs.utexas.edu/~EWD/ewd04xx/EWD497.PDF" target="_blank">EWD497</a></div>
-					<div align="left">
-						<p><u>A challenge to memory designers?</u></p>
 						<p>In the good old sequential days memory accesses took place one after the other, and a memory technique (such as ferrite core technology) that could accommodate one access at a time was adequate. When independent I/O-channels were introduced, the memory access mechanism became a resource shared between the central processor and the channel(s), and a switch was introduced which --usually on a priority basis-- granted mutually exclusive accesses to the various competitors. (&quot;Cycle stealing&quot; was the term then introduced to describe that arrangement.) It seems worthwhile to point out that originally the need for mutual exclusion was a purely <u>technical</u> one, dictated by ferrite core technology: as program areas, working space and buffers were at any moment in time disjoint, there was <u>no logical</u> reason.</p>
 						<p>Or: hardly so, to say the honest truth. This disjointness of these areas of concurrent activity could only be guaranteed thanks to a macroscopic synchronization of computing and I/O-activities, and for the implementation of such synchronization constraints, it was sometimes exploited that the mutually exclusive storage cycle consisted of a &quot;read&quot;, followed by a &quot;write&quot;. Examples are the test-and-set instruction, the swap (between a memory location and a register) or the indivisible &quot;add-to-memory&quot;. The mutual exclusion, i.e. the indivisibility of these operations on memory words was suddenly <u>a logical necessity</u>: nothing prevented different processors to attempt to access the same location simultaneously.</p>
 						<p>The difference is pointed out in connection with the solution described in EWD496 &quot;on-the-fly garbage collection: an exercise in cooperation.&quot;, in which two processors are supposed to operate in the same memory: as long as they access different words in memory, there is no logical objection at all to have these different accesses overlap in time. The possibility of simultaneous attempts to access the same storage location --all the time and all through memory-- is the rule, the actual coincidence of such attempts will be the exception.</p>
@@ -53,4 +45,6 @@
 		<p></p>
 	</body>
 
+</html>
+</body>
 </html>

@@ -1,35 +1,13 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title>Making a fair roulette from a possibly biased coin (EWD 1071a)</title>
+  <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+  <link href="assets/transcriptions.css" rel="stylesheet">
+  <meta name="generator" content="convertArticle.pl">
+</head>
+<body>
+<h1>Making a fair roulette from a possibly biased coin (EWD 1071a)</h1>
 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-	<head><link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
-		<title>E.W.Dijkstra Archive: Making a fair roulette from a possibly biased coin (EWD 1071a)</title>
-    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
-		<link href="assets/transcriptions.css" rel="stylesheet" media="screen" />
-		<link href="../formulas.css" rel="stylesheet" media="screen" />
-	</head>
-	<body><div id="title"><h1>Making a fair roulette from a possibly biased coin (EWD 1071a)</h1></div>
-		<div id="frame">
-			<h3>Copyright Notice</h3>
-			<p class="noindent"> The following manuscript,</p>
-			<p>EWD 1071: Making a fair roulette from a possibly biased coin</p>
-			<p class="noindent">was published as</p>
-			<blockquote>
-				<p class="noindent"><a href="http://www.elsevier.com/locate/ipl" style="border: 1px dashed; text-decoration: none; color: black; background: none;"><i>Information Processing Letters</i></a> <i>36</i>: 193, copyright © 1990.</p>
-			</blockquote>
-			<p class="noindent">It is reproduced here by permission of the publisher, Elsevier Science.</p>
-			<p class="noindent">Single copies of the manuscript may be downloaded and printed for the reader’s personal research and study.</p>
-
-			<hr />
-			<p>&nbsp;</p>
-
-			<table width="100%" cellpadding="0" cellspacing="0" border="0">
-				<tr>
-					<td align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd10xx/EWD1071a.PDF"
-					 title="Link to the PDF version of EWD1071a">EWD 1071a</a></td>
-				</tr>
-			</table>
-			<div id="content">
 				<p class="noindent"><u>Making a fair roulette from a possibly biased coin.</u></p>
 				<p>We are given a possibly biased coin, i.e., a coin that, when flipped, shows head or tail with the probabilities <var>p</var> and <var>q</var> respectively, with <var>p</var>+<var>q</var> = 1, but not necessarily <var>p</var>=<var>q</var>. We don't know the values of <var>p</var> and <var>q</var>, we only know that the coin remains &ldquo;the same&rdquo;, i.e., that <var>p</var> and <var>q</var> are constant in time. The problem is to design an experiment with 37 different outcomes of equal probability.</p>
 				<p>In a variable <var>B</var> of type &ldquo;sequence of 37 faces&rdquo;, we record 37 successive flippings of the coin; if all the faces in <var>B</var> are the same, we start afresh, otherwise we accept the value of <var>B</var>. This first stage of the design has been inspired by (i) the consideration that the experiment has to fail (to terminate) if the coin is so extremely biased that one of the faces <em>never</em> shows up, and (ii) the fact that <span class="inlineformula">2<sup>37</sup>-2</span> is a multiple of 37. (One of Fermat's theorems states that for prime <var>p</var>, <span class="inlineformula"><var>n</var><sup><var>p</var></sup>-<var>n</var></span> is divisible by <var>p</var>.)</p>
@@ -49,4 +27,7 @@
 		</div>
 	</body>
 
+</html>
+
+</body>
 </html>
