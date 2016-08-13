@@ -1,0 +1,10 @@
+language: generic
+
+script: bash ./deploy.sh
+
+before_install: openssl aes-256-cbc -K $encrypted_1a3a04ae536e_key -iv $encrypted_1a3a04ae536e_iv -in deploy_key.enc -out deploy_key -d
+
+env:
+  global:
+  - ENCRYPTION_LABEL: "1a3a04ae536e"
+  - COMMIT_AUTHOR_EMAIL: "github@bzzt.net"
