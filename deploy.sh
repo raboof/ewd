@@ -60,7 +60,12 @@ ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
 openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in deploy_key.enc -out deploy_key -d
 chmod 600 deploy_key
 eval `ssh-agent -s`
-ssh-add deploy_key
+expect << EOF
+  spawn ssh-add deploy_key
+  expect "Enter passphrase"
+  send "veez9ToJ\r"
+  expect eof
+EOF
 
 # Now that we're all set up, we can push.
 git push $SSH_REPO $TARGET_BRANCH
