@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	<title>E.W.Dijkstra Archive: &ldquo;There is no &lsquo;royal road&rsquo; to geometry&rdquo; (EWD 841)</title>
+	<link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+</head>
+
+<body>
+<div id="frame" align="right">
+	<div id="header" align="right">
+	<a href="http://www.cs.utexas.edu/~EWD/ewd08xx/EWD841.PDF" 
+	title="Link to the PDF version of EWD841">EWD841</a>
+	</div>
+</div>
+<div id="frame">
+
+<div id="content">
+
+
+
+
+<p class="noindent">
+<u>
+&ldquo;There is no &lsquo;royal road&rsquo; to geometry&rdquo;
+</u>
+</p>
+<p>
+It rains all evening; I walked with the dogs with raincoat, boots and my new self-thinking umbrella (which I bought for less then $3.00 at the Shell filling station). But this note is not about tonight or the rain: it is about my spoiled breakfast. This morning&rsquo;s mail brought me a folder of the Savant Institute, &ldquo;including all the latest works of James Martin&rdquo;. Hence.
+</p>
+<p>
+My attention was drawn by the announcement of his &ldquo;Program design which is provably correct &mdash; a quantum leap in software&rdquo;. From the blurb I only reproduce the quotation from the author himself:
+</p>
+<blockquote>
+<p class="noindent">
+&ldquo;This report describes a mathematically based approach which is really usable because the mathematics are hidden under the cover of a user-friendly set of tools [a set of user-friendly tools?]. It is one of today&rsquo;s most important breakthroughs in the technology of designing systems.
+</p>
+<p class="noindent">
+While it was generally thought that mathematically provable software was a long way in the future, a new technique has now emerged from the work of Margaret Hamilton and Saydean Zeldin which is both highly powerful and practical. The technique has been automated so that provably correct systems can be designed by persons with no knowledge of either mathematics or programming. The software automatically generates logically guaranteed code. Whereas mathematics like that of Dijkstra has been applied to only small programs [by the way, how does J.M. know?], Hamilton and Zeldin&rsquo;s technique has been used successfully with highly complex systems. [Etc.]&rdquo;
+</p>
+</blockquote>
+<p class="noindent">
+(A warning for eager buyers of this marvel: in contrast to my self-thinking umbrella, the book is not cheap, for Savant Institute charges $200.00 per copy.)
+</p>
+<p>
+I cannot judge the book, for it has not appeared yet. But we can judge the above quotation!
+</p>
+<p>
+I have still to encounter the first &ldquo;correct&rdquo; system &mdash; i. e. meeting its specifications &mdash; which is not &ldquo;provably&rdquo; so, but in view of his intentions and (his perception of) his &ldquo;target audience&rdquo; I propose to forgive James Martin his seemingly pleonastic &ldquo;provably correct&rdquo;. The core of his claim then boils down to his statement that, thanks to automation, &ldquo;correct systems can be designed by persons with no knowledge of either mathematics or programming&rdquo;.
+</p>
+<p>
+This is, indeed, a very important breakthrough in the technology of system design that should entirely change the educational practice at our best Universities, where the Departments of Computing Science now waste most of their time teaching their students mathematics and programming. The moral of James Martin&rsquo;s message is that, at the modest price of $200.00 per student, these Departments can be folded up. His claim therefore deserves our full attention.
+</p>
+<p>
+If the designer provides no bit of information, he has had no choice and can therefore &ldquo;design&rdquo; only one &mdash;presumably trivial &mdash; system. By providing <var>N</var> bits of information he can express his choice between 2<sup><var>N</var></sup> systems, the coding system employed determining between which 2<sup><var>N</var></sup> systems he can choose.
+</p>
+<p>
+Such a coding system has to satisfy the essential requirement that, by allowing <var>N</var> to grow sufficiently, any conceivable system can be designed. The trouble, of course, is that most conceivable systems &mdash; almost all conceivable systems &mdash; are utterly nonsensical in one way or another.
+</p>
+<p>
+Furthermore the coding system must be such that the designer can know which system corresponds to the bit stream he is providing: without that knowledge he would not know how to build up the latter. This means that the coding system must be such that the designer can combine in some way or another &ldquo;sensical&rdquo; substreams into a larger &ldquo;sensical&rdquo; (sub)stream of bits. (It is here that coding in machine code, but probably also in COBOL or FORTRAN, shows one of its major shortcomings.)
+</p>
+<p>
+Should the coding system be such that the designer can provide a bit stream to which corresponds no system at all? The answer is yes, human fallibility being what it is. Ideally each minor modification &mdash; whatever that may be &mdash; of an acceptable bitstream should turn it into one that is rejected but the implied redundancy should not be of the trivial nature of duplication or the addition of parity bits, for then the designer would automate the generation of the redundancy. Type-checking is a well-known example of successful mechanical exploitation of redundancy. So are all checks of the context-free syntax.
+</p>
+<p>
+Another form of non-trivial redundancy is together with an algorithm its functional specification. Whether we should include it in the bitstream provided by the system designer is a reasonable question since this form of redundancy is so non-trivial that it requires a theorem prover to check it.
+</p>
+<p>
+Avoiding it by omission of one of the two is not a good proposal. Giving the algorithm and ignoring its functional specification is what has led to the software crisis; furthermore the functional specification cannot be mechanically derived from the algorithm. Giving the functional specification and leaving the derivation of an algorithm satisfying it to the machinery &mdash; the dream of PROLOG &mdash; is no solution either: first of all it requires a (this time mechanized!) theorem prover to generate an algorithm, secondly the functional specification, when satisfyable, can be satisfied by infinitely many algorithms, most of which are highly undesirable for other reasons. Without the designer going into that reasons and their consequences, the machinery would require magic as a built-in feature to make the appropriate choice &mdash; this in addition to the magic required for a general mechanical theorem prover! &mdash; .
+</p>
+<p>
+Viable mechanical verification that an algorithm satisfies its functional specification requires that the proof be broken down by the designer to lemmata for which a decision procedure exists: the moral of the story is that in any case &mdash; whether the proof is mechanically verified or not &mdash; the designer has to design the correctness proof if he wishes to go beyond providing algorithms and hoping for the best.
+</p>
+<p>
+It is a consoling thought that for all this neither a training in mathematics &mdash; to understand what you are doing &mdash; nor a training in programming &mdash; to prevent the amount of formal labour required from exploding &mdash; is necessary. It is an alarming thought that quite a few gullible managers, who, like our James, don&rsquo;t understand what he is talking about, are only too ready to believe in this next promise of salvation.
+</p>
+<p>
+In my title I quoted Euclid&rsquo;s alleged rebuttal to King Ptolemy I. Does it help if I translate it into contemporary American:
+</p>
+<blockquote>
+<p>
+&ldquo;There is no such thing as a free lunch.&rdquo; ?
+</p>
+</blockquote>
+<p class="center">
+*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+* </p>
+<p>
+As any logician knows &mdash; since G&#x00F6;del and Turing &mdash; there are such things as provably undecidable questions and provably uncomputable functions. People that don&rsquo;t know that will believe anything. There is the lovely story of the IBM-employee &mdash; I shall not divulge his name &mdash; whose research proposal mentioned uncomputable functions. When the proposal was discussed he was asked in disbelief &ldquo;Do you mean to say that there exist functions that our equipment cannot compute?&rdquo; Upon which, tongue in cheek, the scientist answered: &ldquo;Indeed, in their current form IBM computers cannot compute all functions&rdquo;, upon which answer his proposal was approved!
+</p>
+<p>
+In a way, the 30&rsquo;s were more enlightened than the 60&rsquo;s, 70&rsquo;s, and perhaps the 80&rsquo;s. In my very young days, impossibility results could be published and were not completely ignored. With the increased economic significance of technology, such scientific results are now too unwelcome.
+</p>
+<p>&nbsp;</p>
+
+<table width="624" border="0" cellpadding="0" cellspacing="10">
+<tr>
+<td width="368" valign="top">Plataanstraat 5<br>
+5671 AL NUENEN<br>
+The Netherlands</td>
+<td width="226" valign="top">10 October 1982<br>
+prof.dr.Edsger W. Dijkstra<br>
+Burroughs Research Fellow</td>
+</tr>
+</table>
+</div>
+
+<div id="footer">
+  <p class="noindent"><font size="-1">
+    Transcribed by Roman Beslik <a href="http://www.beroal.in.ua/">beroal<br />
+    </a>Revised 
+    <!-- #BeginDate format:En2 -->14-Sep-2012<!-- #EndDate --></font>
+  </p>
+</div>
+
+</div>
+
+</body>
+</html>

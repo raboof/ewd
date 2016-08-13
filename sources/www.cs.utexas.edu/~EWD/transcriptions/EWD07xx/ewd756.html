@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">         
+      
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">         
+  <head>        
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />        
+    <title>E.W.Dijkstra Archive: A PostScript to EWD755. (EWD 756)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>  
+   </head>      
+  <body>        
+    <div id="frame" align="right">  
+      <div id="header" align="right">      
+        <a href="../../ewd07xx/EWD756.PDF"    
+           title="Link to the PDF version of EWD756">EWD756</a></div></div> 
+        <div id="frame">    
+           <div id="content">         
+             <hr />  
+
+           <p class="noindent">                                                                                                      
+<p class="noindent"><b>A postScript to EWD755.</b> 
+<p>While presenting my proof of Theorem 2 in <a href="EWD755.html" title="EWD755.html">EWD755</a> I had forgotten my own preaching 
+(in <a href="EWD731.html" title="EWD731.html">EWD731</a>):
+with explicitly named predicates a more symmetric presentation is possible. With 
+<table width=100%><tr><td width=10% height="20" valign=top>
+C <var>n</var> <var>p</var> =</td><td><var>n</var> is the product of a bag of primes containing <var>p</var></td>  </tr>  </table>
+<table width=100%>
+  <tr>
+  <td valign=top width=10%>
+D <var>n</var> <var>p</var> =</td><td><var>n</var> is the product of a bag of primes not containing <var>p</var></td>  </tr>  </table>
+
+<p class="noindent">we have (as obviously as before) for 
+  positive integers <var>p</var>, <var>x</var>, and <var>y</var>&thinsp;:
+</p>
+<table width=100%><tr><td valign=top width=10%>
+1)</td><td>&not;(prime <var>p</var>) &or; &not;(<var>p</var>|(<var>x</var>.<var>y</var><var></var>)) &or; (C(<var>x</var>.<var>y</var>) <var>p</var>) </td></tr><tr><td valign=top>
+2)</td>
+<td><var>p</var>|<var>x</var> &or; <var>p</var>|<var>y</var> &or; (D(<var>x</var>.<var>y</var>) <var>p</var>) </td></tr><tr><td valign=top>
+3)</td><td>&not;(C(<var>x</var>.<var>y</var><var></var>) <var>p</var>) &or; &not;(D(<var>x</var>.<var>y</var>) <var>p</var>) &or; &not;(UPF(<var>x</var>.<var>y</var>)) </td>  </tr>  </table>
+Theorem 2 now follows by the standard inference rule. Note that for 1) and for 2) we need Theorem 0.
+(In <a href="EWD755.html" title="EWD755.html">EWD755</a> I failed to mention this.)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+The above I regard as a different (and preferable) presentation of the same proof as in <a href="EWD755.html" title="EWD755.html">EWD755</a>. 
+The following alternative
+ proof of theorem 0 from <a href="EWD755.html" title="EWD755.html">EWD755</a> I consider (perhaps somewhat arbitrarily) different.
+<p>Consider, for <var>n</var>&thinsp;&ge;<var></var>&thinsp;1, the following program 
+<table> 
+<table width="66%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="7%"><b>if</b></td>
+    <td width="93%"><var>n</var> = 1 &rarr; <var>bag</var> := &empty; <b>&#11007;</b> <var>n</var>&thinsp;&gt;1 &rarr; <var>bag</var> := {<var>n</var>} <b>fi</b>;</td>
+  </tr>
+  <tr>
+    <td><b>do</b></td>
+    <td><var>bag</var> contains a composite multiple &rarr; </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>replace each occurrence of the largest composite multiple              <var>c</var> in <var>bag</var> by the multiples <var>x</var> and <var>y</var>, where <var>x</var>.<var>y</var> = <var>c</var></td> </tr> 
+  <tr>
+    <td><b>od</b></td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+<p>The repetition leaves the product of the numbers in <var>bag</var> equal to <var>n</var>. On account of (3') from 
+  <a href="EWD755.html" title="EWD755.html">EWD755</a> &mdash;which is, of 
+  course, again needed&mdash; the lowest upper bound for composite multiples in <var>bag</var> can be taken as 
+  variant function, and termination is 
+  guaranteed. This proof is more constructive; Euclid would have liked it (if he did not 
+  prove it that way!). </p>
+<p class="noindent"><table width=100%><tr><td valign=top width=50%>
+Plantaanstraat 5</td><td>23 October 1980
+</td></tr><tr><td valign=top>
+5671 AL NUENEN</td><td>prof. dr. Edsger W. Dijkstra
+</td></tr><tr><td valign=top>
+The Netherlands</td><td>Burroughs Research Fellow
+</td>  </tr>  </table>
+          
+<hr /> 
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />   
+    Last revision  
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">   
+    <!&mdash; #BeginDate format:IS1 &mdash;><!-- #BeginDate format:En2 -->10-Nov-2015<!-- #EndDate -->
+    </csobj> 
+  .</font></p>    
+  <p>&nbsp;</p>
+</body></html> 

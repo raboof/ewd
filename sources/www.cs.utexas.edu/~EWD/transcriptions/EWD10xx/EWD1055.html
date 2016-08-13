@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>E.W.Dijkstra Archive: On the problem of the calissons (EWD 1055)</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="../transcriptions.css" rel="stylesheet" media="screen" />
+	</head>
+	<body>
+		<div id="frame">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="../../ewd10xx/EWD1055.PDF"
+					 title="Link to the PDF version of EWD1055">EWD 1055</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>On the problem of the calissons</u></p>
+				<p>In the <i>American Mathematical Monthly</i> (May 1989, pp 429-431), and under the title &ldquo;The Problem of the Calissons&rdquo;, Guy David and Carlos Tomei present the following theorem.</p>
+				<p>Let a &ldquo;calisson&rdquo; be a diamond formed by two equilateral triangles with sides of length 1 that share a side. Let a regular hexagon with sides of length <var>n</var> be covered by (3<var>n</var>²) calissons; in such a covering the calissons occur in the three possible orientations in equal numbers.</p>
+				<p>In the following, a placed calisson is identified with a pair of adjacent equilateral triangles of the regular triangularization of the plane. Generalizing the hexagon, we call the set of triangles covered by a set of calissons a &ldquo;box&rdquo; that is &ldquo;filled&rdquo; by those calissons. A filling of a box has a &ldquo;spectrum&rdquo;, i.e., the triple of natural numbers counting the numbers of calissons in the three orientations. The theorem presented by David and Tomei is an immediate consequence of the more general</p>
+				<p class="noindent"><u>Theorem</u> &nbsp; All fillings of the same box have the same spectrum.</p>
+				<p class="noindent">(Because of the rotational symmetry of the hexagon, the theorem tells us that the spectrum of a hexagon filling remains unchanged under cyclic permutation of its elements.)</p>
+				<p>To prove the theorem we consider an arbitrary box with two possibly different fillings. We partition the triangles of the box into the smallest subboxes that are common to both fillings; the theorem then follows from the fact that each subbox has the same spectrum in either filling, a fact we shall now demonstrate. In this demonstration we shall encounter two types of subboxes and for each type of subbox we shall argue separately that it has the same spectrum in either filling.</p>
+				<p>The one possible type of smallest common subbox is a pair of adjacent triangles: it corresponds to a calisson occurring in both fillings. Such a subbox admits only one filling, and hence all its fillings trivially have the same spectrum. This deals with any triangle that both fillings cover by the same calisson.</p>
+				<p>To investigate the other possible type of smallest common subbox, we consider a triangle that the two fillings cover by different calissons. For such a triangle we can identify two of its (three) adjacent triangles as its &ldquo;neighbours&rdquo; in the sense that they belong to the same subbox, the triangle being paired to the one neighbour in the one filling and to the other neighbour in the other filling, and each neighbour has again the property that the two fillings cover it by different calissons. The total number of triangles being finite, we conclude that the other possible type of smallest common subbox is a cyclic path of triangles such that neighbours on the path are adjacent.</p>
+				<p>We next observe that &#x2014;in analogy to the chess board&#x2014; the triangles of the regular triangularization can be coloured black and white, such that adjacent triangles differ in colour. This gives triangles in the same orientation the same colour and each calisson covers two differently coloured triangles. On the cyclic path the colours alternate, hence the cyclic path contains an even number of triangles and allows precisely two fillings: traversing the cyclic path in some direction, each black triangle is either paired to its white predecessor or to its white successor.</p>
+				<p>Consider now a grid line that cuts the cyclic path. Because the path is cyclic, the grid line cuts the path an even number of times and traversal of the path crosses the grid line as many times in the one direction as in the other direction, i.e., as many times from black to white as from white to black (triangles at one side of the grid line adjacent to it having the same orientation, and hence the same colour). Associating with each crossing the calisson that &ldquo;sits astride&rdquo; we now see that half of them belong to the one filling and half of them belong to the other filling. As all calissons astride the same grid line have the same orientation we conclude that the two possible fillings of a cyclic path have the same spectrum. And this observation concludes the proof.</p>
+				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+				<p>David and Tomei give a very unsatisfactory treatment of this problem. I quote</p>
+				<p>&ldquo;The idea of the proof is to reduce the problem to a very intuitive fact in three dimensions. We do not give complete details of a formal proof for two reasons. First, we do not want to spoil the simplicity of the basic intuitive idea. Furthermore, the result is an example of a proof by picture that does not translate immediately into precise mathematics.&rdquo; Etc.</p>
+				<p class="noindent">And then they come with an elaborate nonproof.</p>
+				<p>Their whole idea of interpreting the plane figure as a picture of a simple three-dimensional structure is, however, misguided as is shown when we generalize the hexagon to, for instance, the following ring-like structure:</p>
+				<p class="noindent" align="center" style="margin-top: 0;"><img src="ewd1055_fig1.png" alt="EWD1055 figure 1" title="EWD1055 figure 1" /></p>
+				<p class="noindent">M.C. Escher would be delighted.</p>
+				<p>I am indebted to the members of the Eindhoven Tuesday Afternoon Club, in particular to R.W. Bulterman for drawing our attention to the problem and to J.C.S.P. van der Woude for introducing the spectrum and conjecturing our theorem.</p>
+				<p align="right" style="margin-right: 2em;">Nuenen, 5th of July 1989</p>
+				<p class="noindent">
+					prof.dr. Edsger W.Dijkstra<br />
+					Department of Computer Sciences<br />
+					The University of Texas at Austin<br />
+					Austin, TX 78712-1188<br />
+					USA<br />
+				</p>
+			</div>
+			<div>
+        <br/>
+      </div>
+		</div>
+		<hr />
+		<div id="footer">
+         transcribed by Corrado Cantelmi<br />
+          revised 
+          <!-- #BeginDate format:En2 -->27-Nov-2011<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

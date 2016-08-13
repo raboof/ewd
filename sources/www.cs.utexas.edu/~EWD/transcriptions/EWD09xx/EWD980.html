@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML lang="en">
+<Head>
+<Title>E.W. Dijkstra Archive: The strange case of The Pigeon-hole Principle (EWD 980)</Title>
+<LINK media="print" title="The article in pdf" type="application/pdf" rel="alternate" href="../../ewd09xx/EWD980.PDF">
+
+<META name="Author" content="prof.dr. Edsger W. Dijkstra">
+<META http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+		
+</Head>
+<Body>
+<div id="frame">
+			<div id="header">
+        <a href="../../ewd09xx/EWD980.PDF" 
+           title="Link to the PDF version of EWD980">EWD980</a>
+      </div>
+      <div id="content">
+
+<H2>The strange case of The Pigeon-hole Principle</H2>
+
+<P>If you come to think about it, The Pigeon-hole Principle presents a case that is curious in more than one respect.</p>
+
+<P>It has a remarkably high status: it has a special name, under which it is well-known; Ross Honsberger even calls it &quot;A fundamental tool of combinatorics&quot;.</p>
+
+<P>It is surrounded by some mystique. Proofs using it are often regarded as something special, something particularly ingenious. This feeling of awe is, for instance, nicely reflected by Honsberger when he concludes one of his examples with &quot;(Another triumph of the pigeonhole principle.)&quot;.</p>
+
+<P>Its usual formulation is &#x2014;as we shall see in a moment&#x2014; unfortunate. Let me quote Honsberger once more &#x2014;there is nothing special about me quoting Honsberger all the time: one of his books just happens to lie on my desk&#x2014;:
+<BLOCKQUOTE>&quot;if more than <CODE><var>n</var></CODE> objects are distributed into a set of <CODE><var>n</var></CODE> compartments, some compartment must receive [ for &quot;must receive&quot; read &quot;receives&quot;, EWD] more than one of the objects.&quot;</BLOCKQUOTE>
+(Instead of &quot;more than <CODE><var>n</var></CODE>&quot; one often encounters the more specific &quot;<var>n</var> + 1&quot;.)
+				<P>My feeling is that these three observations are not unrelated.</p>
+				<p></p>
+				<div align=center><SUP>*</SUP>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SUB>*</SUB>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SUP>*</SUP></div>
+
+<P>To begin with, let me formulate the Purified Pigeon-hole Principle (<ABBR>PPP</ABBR>):
+
+		<BLOCKQUOTE>&quot;For a non-empty, finite bag of numbers, the maximum value is at least the average value.&quot;</BLOCKQUOTE>
+		<P>It is a generalization, because in the old formulation, it would be (<ABBR>OFPP</ABBR>)
+
+		<BLOCKQUOTE>
+					&quot;If more than <var>n</var>&middot;<var>k</var> objects are distributed into a set of <CODE><var>n</var></CODE> compartments, some compartment receives more than <CODE><var>k</var></CODE> of the objects.&quot;</BLOCKQUOTE>
+		<P>I think it is illuminating to analyze the differences between those two formulations (in what I consider increasing order of seriousness):
+
+		<ul>
+<li><ABBR>PPP</ABBR> does not mention <CODE><var>n</var></CODE> and <CODE><var>k</var></CODE> explicitly; this eases the application, because the conscientious application of <ABBR>OFPP</ABBR> would require explicit instantiations of <CODE><var>n</var></CODE> and <CODE><var>k</var></CODE>.</li>
+<li><ABBR>OFPP</ABBR> is very operational; it would have been less so, had &quot;are distributed&quot; and &quot;receives&quot; had been replaced by &quot;have been distributed&quot; and &quot;contains&quot; respectively. The metaphor drags a process into the picture, where only the final state matters. (This is really serious, for what if &quot;the objects are already in the compartments&quot;? Well, of course we could have put them there, but then some people feel obliged to argue that we could have done so in &quot;arbitrary&quot; order: irrelevantia in the formulation of a theorem have the awkward consequence that the conscientious user of the theorem has to demonstrate their irrelevance.)</li>
+<li><ABBR>OFPP</ABBR> mentions &quot;objects&quot; and &quot;compartments&quot;, things that have nothing to do with the theorem. I know that some people believe that the introduction of such things &quot;ease the visualisation&quot;, but I think the price too heavy to pay. When dealing with natural numbers, we should be able to deal with them in their own right and not be forced to introduce &quot;objects&quot; counted by them! (It is really like representing natural numbers in a unary number system, with the well-known difficulty of &quot;the invisible zero&quot;.) Also, one may have to invent &quot;compartments&quot; that don't &quot;look&quot; like compartments at all. The &quot;mystique&quot; of the Pigeon-hole Principle is partly due the sometimes surprising invention of &quot;objects&quot; and the &quot;compartments&quot;.</li>
+</ul>
+		<div align=center><SUP>*</SUP>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SUB>*</SUB>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SUP>*</SUP></div>
+		<P>Let me now relate to you two stories about the Pigeon-hole Principle that both amazed me; for me &#x2014;but perhaps I am sensitive to the point of allergy&#x2014; they suggest that the traditional Pigeon-hole Principle is a focal point of how mathematics is (but not should be) taught.</p>
+
+<P>A few weeks ago I was told &quot;The Problem of the Soccer Toto&quot;. (Not knowing the rules of the soccer toto, I got the explanation; for your benefit I shall repeat them.)</p>
+
+<P>On a given Sunday, <CODE>13</CODE> soccer matches will be played. Each match has one of three possible outcomes, denoted by &quot;1&quot;, &quot;2&quot; and &quot;X&quot; respectively. Hence there are 3<sup>13</sup> possible Sundays. For our purpose &quot;Sunday&quot; will be one of those 3<sup>13</sup> possible &quot;columns&quot; of height 13, with in each line one of the three permissible entries 1, 2 or X.</p>
+
+<P>A toto form consists of a row of blanc columns of height 13; its user is free in his choice of the number of columns he is going to fill in. The question is to devise a strategy for filling in the minimal number of columns so that at least 1 column coincides with Sunday in at least <CODE>5</CODE> entries. Here we go.</p>
+
+<P>Forget about the 5: what if at least 1 column should coincide with Sunday in at least 1 entry? Two columns won't do, for Sunday then could contain for each line an outcome missing in the corresponding line of the toto form. With 3 columns such that at least one row contains all three outcomes, at least one coincidence &#x2014;in that row&#x2014; is guaranteed. So far we needed 3 columns and have used only one row. Can we use the remaining 12 rows to increase the score? By filling those each with some permutation of the three outcomes, we force in each row precisely one coincidence with Sunday. Make in each column the count of coincidences: their sum being 13, their average is 4&#x2153;. and their maximum (<ABBR>PPP</ABBR>) is &#x2265;5. End of argument (heuristics included). Notice that there was no need at all to interpret the form as a table defining how, indeed, each object (=match) was placed in one compartment (=column).</p>
+
+<P>But suppose that the question had been different: given a form in which 4 columns have been filled in such that each row contains each of the three possible outcomes, can you show that at least 1 column coincides in at least 4 entries with Sunday? Now the total number of coincidences is &#x2265;13, the average count is &#x2265;3&#x00bc;, and hence the maximum count is &#x2265;4. Please notice that in this case the metaphor of putting objects (=matches) into compartments (=columns) creates problems: an object may &quot;occupy&quot; two compartments! (It is utterly predictable how the average mathematician will save his face: &quot;Sure! If generalize the problem, I don't take the matches but the coincidences as my objects! I would have done so right at the start, would I have known that you would generalize the problem!&quot;) So much for the avoidable obligation of identifying the &quot;objects&quot;.</p> 
+
+<P>But now the sad part of the story. The colleague that posed me this problem had been challenged with it by one of his graduate students. When we met again he was utterly amazed to hear that the problem could be solved without pen and paper, and when I told him my solution, he looked so puzzled that I am not sure he understood it. &quot;Of course I know the Pigeon-hole Principle, but I never.....&quot;, and then wandering thoughts prevented him from completing the sentence. Was he still looking for the objects and the compartments? The way he had been introduced to the principle and all the imaginations that went with it was obviously a barrier to its straight-forward application. I felt that I had had a glimpse of something frightening.</p>
+
+<P>The second story concerns my preparation of a lecture on the Pigeon-hole Principle: I wanted to show my students the most spectacular application of it I had ever encountered. I scratched my memory, and then I remembered: the lower bound for the length of the longest monotonic subsequence! I remembered my thrill, but had forgotten the argument, which I then set out to construct.</p>
+
+<P>Let me state the problem first. We consider a sequence of numbers <var>a</var>.<var>i</var> with 0 &#x2264; <var>i</var> &lt; <var>N</var>. We get a subsequence of length <var>n</var> by removing some <var>N</var> - <var>n</var> elements from the sequence and retaining the remaining ones in their original order. It is called &quot;an upsequence&quot; provided for any <var>a</var>.<var>i</var> and <var>a</var>.<var>j</var> in the subsequence we have<BLOCKQUOTE>
+					<var>i</var> &lt; <var>j</var> &#x21D2; <var>a</var>.<var>i</var> &#x2264; <var>a</var>.<var>j</var> ;</BLOCKQUOTE>
+in the case that we have 
+<BLOCKQUOTE>
+					<var>i</var> &lt; <var>j</var> &#x21D2; <var>a</var>.<var>i</var> &#x2265; <var>a</var>.<var>j</var> ;</BLOCKQUOTE>
+		
+it is called &quot;a downsequence&quot;.
+		<P>Let <var>U</var> be the length of a longest upsequence contained in the given sequence, and let <var>D</var> be the length of a longest downsequence contained in it. Prove that <var>N</var> &#x2264; <var>U</var>&middot;<var>D</var> holds.</p>
+		<P>The argument I came up with went as follows. Let us construct <var>U</var>&middot;<var>D</var> different labels; if we can now devise a regime that assigns to each element a distinct label, then <var>N</var> &#x2014;being the number of labels used&#x2014; is at most <var>U</var>&middot;<var>D</var> &#x2014;being the number of labels available.</p>
+
+<P>How do we construct <var>U</var>&middot;<var>D</var> different labels? The simplest way I can think of is all the integer pairs (<var>u</var>,<var>d</var>), with 1&nbsp;&#x2264;&nbsp;<var>u</var>&nbsp;&#x2264;&nbsp;<var>U</var> and 1&nbsp;&#x2264;&nbsp;<var>d</var>&nbsp;&#x2264;&nbsp;<var>D</var>. How do we devise a regime that assigns for <var>i</var> &lt; <var>j</var> different labels to <var>a</var>.<var>i</var> and <var>a</var>.<var>j</var>? In order to relate the regime to up- and downsequences, we observe<BLOCKQUOTE>
+					<var>i</var> &lt; <var>j</var> &#x21D2; <var>a</var>.<var>i</var> &#x2264; <var>a</var>.<var>j</var> &#x2228; <var>a</var>.<var>i</var> &#x2265; <var>a</var>.<var>j</var></BLOCKQUOTE>
+				i.e. <var>a</var>.<var>j</var> can be used to extend either an upsequence or a downsequence ending at <var>a</var>.<var>i</var>. This observation reveals the regime: assign to <var>a</var>.<var>i</var> the pair (<var>u</var>,<var>d</var>) with <var>u</var> (and <var>d</var>) the maximum length of an upsequence (and a downsequence respectively) that ends at <var>a</var>.<var>i</var>. This guarantees
+				<ol type="i">
+<li>that distinct elements get distinct labels</li>
+<li>that each label (<var>u</var>,<var>d</var>) needed satisfies 1&nbsp;&#x2264;&nbsp;<var>u</var>&nbsp;&#x2264;&nbsp;<var>U</var> and 1&nbsp;&#x2264;&nbsp;<var>d</var>&nbsp;&#x2264;&nbsp;<var>D</var>.</li>
+</ol>
+				<P>I was quite pleased with the reconstruction of this argument, until I realized that what used to be &quot;a triumph of the Pigeon-hole Principle&quot; no longer used the Pigeon-hole Principle at all!</p>
+		<P>I could reintroduce an appeal to the Pigeon-hole Principle, but only by a contorted rephrasing. [ Identify the elements with objects, the labels with compartments; assume <var>N</var> &#x2014;the number of objects&#x2014; to exceed <var>U</var>&middot;<var>D</var> &#x2014;the number of compartments&#x2014;; then &#x2014;<ABBR>PP</ABBR>&#x2014; at least one compartment would contain more than one objects, which contradicts that distinct elements get distinct labels. Hence <var>N</var> does not exceed <var>U</var>&middot;<var>D</var>. ]</p>
+
+<P class="noindent"><u>Remark</u> It is in this connection noteworthy that no one I asked formulated the Pigeon-hole Principle as follows: &quot; With objects distributed into compartments such that each compartment contains at most one object, the number of objects is at most the number of compartments&quot;. It is logically equivalent to the original formulation, but looks quite different. And that, presumably, is precisely the trouble. (End of Remark.)</p>
+
+<P>With its physical, object-oriented formulation, the classical Pigeon-hole Principle is very vivid, almost catchy. And there lie precisely its major shortcomings: the problem caused by such object-oriented formulation is that <var>A</var> &#x21D2; <var>B</var> and the logically equivalent &quot;counter-positive&quot; &not;<var>B</var> &#x21D2; &not;<var>A</var> invite completely different visualisations. The moral of the story seems to be that we should sharply distinguish between good mathematics and public relations.</p>
+
+<div align=right>
+					<p>Austin, 19 September 1986</p>
+				</div>
+		<P class="noindent">prof. dr. Edsger W. Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin<br>Austin, TX 78750&#150;1188<br>
+			
+United States of America</P>
+		<hr>
+		<font size="-1">transcribed by Martijn van der Veen<br>
+			revised <csobj format="MedDate" h="16" region="15" t="DateTime" w="113">Thu, 27 May 2010</csobj></font>
+		<p></p>
+	</body>
+</html>

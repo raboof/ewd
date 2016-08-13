@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: On two types of infinite sets of infinite sequences (EWD 730)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd07xx/EWD730.PDF"
+           title="Link to the PDF version of EWD730">EWD730</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+                
+<b>On two types of infinite sets of infinite sequences</b>.
+<center>by the Tuesday Afternoon Club.</center>
+<p>In the following x will stand for the infinite sequence
+(x(0), x(1), x(2), ...........)
+where the x(i) are taken from a finite alphabet of at least two characters,
+say {0, 1}
+<p>Let us consider the sets of sequences S1 and S2 , defined as the
+solution sets of the equations P1(x) and P2(x), respectively, with
+<table width=100%><tr><td valign=top width=10%>
+Pl(x):</td><td>(<u>E</u> i: i &ge; 0: (<u>A</u> j: 0 &le; j &lt; i: x(j) = 0) <b>and</b> (<u>A</u> j: i &le; j: x(j) = 1))
+</td></tr>
+<tr><td valign=top>
+P2(x):</td><td>(<u>A</u> i: i &ge; 0: x(i) = 0 <b>or</b> (<u>A</u> j: j &ge; i: x(j) = 1))      .
+</td>  </tr>  </table>
+<p>Because P1(x) &rArr; P2(x) , S1 is a subset of S2 , even a proper subset:
+there exists one solution of P2(x) <b>and</b> <b>non</b> P1(x) , viz. the sequence with
+x(1) = 0 for all i &ge; 0.
+<p>The set S2 has the property that for any non-member of S2 &mdash;i.e.
+any solution of <b>non</b> P2(x)&mdash; non-membership can be established on account
+of an initial segment of it. As a matter of fact, in this particular case
+only two elements suffice for this evidence, as follows from <b>non</b> P2(x):
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(<u>E</u> i: i &gt; 0: x(i) &ne; 0 <b>and</b> (<u>E</u> j: j &gt; i: x(j) &ne; 1)) .
+</td>  </tr>  </table>
+<p>The set S1 doesn&rsquo;t have this property because there exists a 
+non-member &mdash;viz. x(i) = 0 for all i &ge; 0&mdash; with the property that any initial
+segment of it is also the initial segment of a member of S1 . We call S2
+&ldquo;closed&rdquo; and S1 &ldquo;non-closed&rdquo;, that is:
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&ldquo;The set S is closed&rdquo; means &ldquo;any non-member of S has an initial 
+segment that is not the initial segment of any member of S&rdquo;.
+</td></tr>
+<tr><td valign=top>
+</td><td>&ldquo;The set S is non-closed&rdquo; means &ldquo;there exists a non-member of S
+such that any initial segment of it is also the initial segment of
+some member of S &rdquo;.
+</td>  </tr>  </table>
+                    
+From the above it follows
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that a set of sequences is either closed or non-closed,
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that any finite set &mdash;in particular the empty set&mdash; is closed,
+<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that the (uncountably infinite) universe of all possible sequences is
+closed.
+ <p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>The notion of a closed set is of significance in connection with 
+non-deterministic infinite computations. Consider the set of possible output
+sequences y corresponding to
+<table width=100%>
+<tr><td valign=top width=10%>  </td><td valign=top>
+&ldquo;initialize; i:= 0;</td><td align=right>(1)
+</td></tr>
+<tr><td valign=top>  </td><td valign=top>
+<b>do</b> true &rarr; compute; print(y(i)); i:= i + 1 <b>od</b>&rdquo;</td><td align=right>
+</td>  </tr>  </table>
+Here &ldquo;initialize&rdquo; and &ldquo;compute&rdquo; stand for terminating computations not 
+affecting the value of i . If &ldquo;initialize&rdquo; and &ldquo;compute&rdquo; stand for 
+deterministic computations, the set of possible output sequences consists of a single
+element; if &ldquo;initialize&rdquo; and (in particular) &ldquo;compute&rdquo; are non-deterministic,
+the corresponding set of possible output sequences can be infinite.
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&ldquo;Program (1) is a continuous machine&rdquo; means &ldquo;in program (1) &rdquo;initialize&ldquo;
+and &rdquo;compute&ldquo; are both of bounded non-determinacy&rdquo;.
+</td>  </tr>  </table>
+<p class=noindent>We can now prove the following
+<p class=noindent><b>Theorem 1</b>. The possible output sequences of program (1) form a closed set
+or program (1) is not a continuous machine.
+<p class=noindent><b>Proof</b>. Let S be the set of possible output sequences of program (1).
+Either S is closed &mdash;in which case Theorem 1 holds&mdash; or S is non-closed.
+In the latter case, let x be a non-member of S such that each initial
+segment of x is also an initial segment of some member of S . Consider
+now the following program:
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&ldquo;initialize; i=: 0;</td><td align=right> (2)
+</td></tr>
+<tr><td valign=top>
+</td><td><b>do</b> &rdquo;y(0),...,y(i-1) is an initial segment of x &ldquo; &rarr;
+</td></tr>
+<tr><td valign=top>
+</td><td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; compute; print(y(i)); i:= i + 1
+</td></tr>
+<tr><td valign=top>
+</td><td><b>od</b>; print(i)&rdquo;
+</td>  </tr>  </table>
+                                   
+<p>Non-termination of (2) is excluded because x is not a member of S
+Because <b>each</b> initial segment of x is also the initial segment of some
+member of S , the final value of i is unbounded. Hence, program (2)
+is a (weakly) terminating program of unbounded non-determinacy; hence
+&ldquo;initialize&rdquo; or &ldquo;compute&rdquo; is of unbounded non-determinacy, i.e. program (1)
+is not a continuous machine. (End of Proof.)
+<p class=noindent><b>Theorem 2</b>. A set of sequences is non-closed <b>or</b> is the set of possible output
+sequences of some continuous machine.
+<p class=noindent>Proof. Let S be the set of sequences. Either set S is non-closed &mdash;in
+which case Theorem 2 holds&mdash; or it is closed. In the latter case consider
+program (1) with &ldquo;initialize&rdquo; deterministic and &ldquo;compute&rdquo; only constrained
+by the requirement that the next y(i) leads to an initial segment of some
+element of S . Because the alphabet is finite, &ldquo;compute&rdquo; need not be of
+unbounded non-determinacy. By virtue of its construction program (1) may
+then generate <b>any</b> member of S , and, S being closed, it cannot generate
+any non-member of S . (End of Proof.)
+<p>Having identified closed sets of possible output sequences with 
+continuous machines, we propose to ignore for the time being non-deterministic
+infinite computations to which non-closed sets correspond.
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>19th February 1980
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>Burroughs Research Fellow
+</td>  </tr>  </table>
+
+<hr />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-02-28<!-- #EndDate -->
+<table> <tr> <td></td> <td></td> <td colspan = 0>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />        </td> </tr>
+</table>
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

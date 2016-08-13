@@ -1,0 +1,212 @@
+<html>
+<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<title>E.W. Dijkstra Archive: An experiment in mathematical exposition (EWD 731)</title>
+</head>
+<body>
+<div align="right">
+<a href="../../ewd07xx/EWD731.PDF">EWD731</a> - 
+<a href="../../ewd07xx/EWD731.PDF#page=1">0</a></div>
+<p>
+<u>An experiment in mathematical exposition.</u>
+<p>
+Many people feel attracted to the implication on account of the simplicity of the associated inference rules
+<p><pre>
+           A &#x21d2; B          (1)
+           B &#x21d2; C
+        -----------
+           A &#x21d2; C
+
+           A &#x21d2; B          (2)
+           C &#x21d2; D
+        -----------
+        A &#x2227; C &#x21d2; B &#x2227; D
+
+           A &#x21d2; B          (3)
+           C &#x21d2; D
+        -----------
+        A &#x2228; C &#x21d2; B &#x2228; D
+<p></pre>
+The transitivity of (1), and the symmetry of (2) and of (3) are clearly appealing. Rule (1), however, is a direct consequence of, and rules (2) and (3) are merely two different transcriptions of the same
+<p><pre>
+           A &#x2228; B          (4)
+           C &#x2228; D
+        -------------
+        A &#x2228; C &#x2228; (B &#x2227; D)       ,
+<p></pre>a rule, which --on account of the symmetry of the disjunction-- can be applied in <u>four</u> different ways to the two given antecedents. Rules (2) and (3) give only two of the four. Rule (1) emerges as the special case
+<p>
+<div align="right">
+<a href="../../ewd07xx/EWD731.PDF">EWD731</a> - 
+<a href="../../ewd07xx/EWD731.PDF#page=2">1</a></div>
+		<p>
+		<div align="left">
+			<pre>
+           A &#x2228; B
+           C &#x2228; &not;B
+        -------------
+           A &#x2228; C       .
+</pre>
+		</div>
+		<pre>
+			<p>
+		</pre>
+		I called this &quot;a direct consequence&quot; because --perhaps somewhat arbitrarily-- I would like to distinguish between inference rules (different applications of which may yield results that are not equivalent) and simplifications that are possible according to boolean algebra --such as replacing B &#x2227; &not;B by <u>false</u> and A &#x2228; C &#x2228; <u>false</u> by A &#x2228; C-- , but never change the value of the boolean expression.
+		<div align="center">
+			<table width="180" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="center" valign="top">*</td>
+					<td align="center" valign="top"></td>
+					<td align="center" valign="top">*</td>
+				</tr>
+				<tr>
+					<td align="center" valign="top"></td>
+					<td align="center" valign="top">*</td>
+					<td align="center" valign="top"></td>
+				</tr>
+			</table>
+		</div>
+		<p>
+The above caused me to revisit the problem of the nine mathematicians visiting an international congress, and about whom we are invited to prove
+
+		<div align="left">
+			<pre>          A &#x2228; B &#x2228; C                     (5)</pre>
+		</div>
+		<p>with</p>
+		<table width="100%"><tr><td align="left" valign="top" width="5%">
+A:</td><td align="left" valign="top">there exists a triple of mathematicians that is incommunicado (i.e. such that no two of them have a language in common)
+</td></tr>
+<tr><td align="left" valign="top">
+B:</td><td align="left" valign="top">there exists a mathematician mastering more than three languages
+</td></tr>
+<tr><td align="left" valign="top">
+C:</td><td align="left" valign="top">there exists a language mastered by at least three mathematicians.
+</td></tr>
+</table>
+<p>
+Very much like the introduction of (named!) auxiliary lines or points in geometry proofs, I propose to introduce named <u>auxiliary propositions</u>, such that
+<p>
+<div align="right">
+<a href="../../ewd07xx/EWD731.PDF">EWD731</a> - 
+<a href="../../ewd07xx/EWD731.PDF#page=3">2</a></div>
+<p>
+we can prove lemmata connecting them to the above propositions, such as
+<table width="100%"><tr><td align="left" valign="top" width="5%">
+D:</td><td align="left" valign="top">there exists a mathematician that can communicate with more others than he masters languages,
+</td></tr>
+</table>
+for which we can prove
+<br><u>Lemma 1</u> C &#x2228; &not;D.<br><u>Proof</u> Obvious. With this qualification we mean here that we can start as well with observing
+<table><tr valign="top"><td align="right" width="10%">C &#x2228; </td><td>"each mathematician communicates in different languages with those others he can communicate with", etc.</td></tr>
+<tr><td colspan="2">as with observing</tr>
+<tr valign="top"><td align="right">&not;D &#x2228; </td><td>"there exists a mathematician that shares a language with at least two others", etc.</td></tr>
+</table>
+(End of proof of Lemma 1.)
+<p>
+With
+<table width="100%"><tr><td align="left" valign="top" width="5%">
+E:</td><td>there exists a mathematician that can communicate with more than three others,
+</td></tr>
+</table>
+we can prove
+<br><u>Lemma 2</u>. A &#x2228; E.<br><u>Proof</u> Let &quot;x | y&quot; here stand for &quot;x and y are two different mathematicians that have no language in common. With<table width="100%"><tr><td align="left" valign="top" width="5%">
+G:</td><td>for each x, the equation x | u has at least five different solutions for u,</td></tr>
+</table>
+		
+we observe (obviously)
+
+		<pre>        E &#x2228; G                  (6)</pre>
+		<p>With</p>
+		<p>
+<div align="right">
+<a href="../../ewd07xx/EWD731.PDF">EWD731</a> - 
+<a href="../../ewd07xx/EWD731.PDF#page=4">3</a></div>
+<p>
+<table width="100%"><tr><td align="left" valign="top" width="5%">
+H:</td><td align="left" valign="top">with y and z constrained to belong to an arbitrary quintuple, the equation y|z has at least one solution in y and z,
+</td></tr>
+</table>
+we observe (equally obviously)
+<p><pre>
+        E &#x2228; H        .        (7)
+<p></pre>Applying rule (4) to assertions (6) and (7) we find &nbsp;&nbsp;&nbsp; E &#x2228; (G &#x2227; H) &nbsp; ,<br>hence
+<table><tr><td align="right" valign="top" width="10%">E &#x2228; </td><td valign="top">&quot;for each x, the equation x | y &#x2227; x | z &#x2227; y | z has at least one solution in y and z&quot;.</td></tr>
+</table>
+(End of proof of Lemma 2.)
+<p>
+Applying rule (4) to Lemmata 1 and 2 we infer the
+<br><u>Corollary.</u> &nbsp;&nbsp;&nbsp; A &#x2228; C &#x2228; (E &#x2227; &not;D) &nbsp; .
+		<p>Remembering rule (4) we see that (5) has been proved when we can prove B &#x2228; &not;(E &#x2227; &not;D)<br>or, equivalently
+<br><u>Lemma 3.</u> B &#x2228; D &#x2228; &not;E.<br><u>Proof.</u> Obvious. (End of proof of Lemma 3).
+
+		<div align="center">
+			<table width="180" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="center" valign="top">*</td>
+					<td align="center" valign="top"></td>
+					<td align="center" valign="top">*</td>
+				</tr>
+				<tr>
+					<td align="center" valign="top"></td>
+					<td align="center" valign="top">*</td>
+					<td align="center" valign="top"></td>
+				</tr>
+			</table>
+		</div>
+		<p>
+Note that in the above the Corollary was only used for heuristic purposes. Once Lemmata 1, 2, and 3 have been established we could have inferred
+
+		<p>
+<table width="500"><tr><td width="40%">
+<pre>
+          A &#x2228; E
+          B &#x2228; D &#x2228; &not;E
+        ---------------
+          A &#x2228; B &#x2228; D
+</pre>
+</td><td width="20%" align="center" valign="middle">and</td><td width="40%">
+<pre>
+          A &#x2228; B &#x2228; D
+          C &#x2228; &not;D
+     ---------------
+          A &#x2228; B &#x2228; C
+</pre>
+</td></tr></table>
+<p></pre>
+<div align="right">
+<a href="../../ewd07xx/EWD731.PDF">EWD731</a> - 
+<a href="../../ewd07xx/EWD731.PDF#page=5">4</a></div>
+		<p>and our two individual inferences would have been of the traditional form of the transitive implication.
+		<div align="center">
+			<table width="180" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="center" valign="top">*</td>
+					<td align="center" valign="top"></td>
+					<td align="center" valign="top">*</td>
+				</tr>
+				<tr>
+					<td align="center" valign="top"></td>
+					<td align="center" valign="top">*</td>
+					<td align="center" valign="top"></td>
+				</tr>
+			</table>
+		</div>
+		<p>I know that firm believers in the so-called &quot;natural deduction&quot; will state that, in the case of Lemma 2, I am just &quot;deducing naturally&quot; that A follows from the &quot;assumption&quot; &not;E. In this appreciation they will find themselves strengthened by the observation that in that proof all assertions start with &quot;E &#x2228;". They have a point, but the point is weak. Look at the structure of the proof as a whole. Lemmata 1, 2, and 3 capture it; from there rule (4) does the job, and at that level it is very arbitrary to subdivide assertions into assumptions and conclusions.
+
+		<p>
+<u>Remark.</u> Observing the seven triples xyz for a pair (x,y) such that x | y , the argument proving Lemma 2 can equally well be phrased in terms of assertions starting with &quot;A &#x2228;". In the sense used above also Lemma 2 is obvious. (End of remark.)
+<p>
+<table  width="100%" border="0">
+<tr>
+<td valign="top" width="50%">
+Plataanstraat 5<br>
+5671 AL NUENEN<br>
+The Netherlands</td>
+<td valign="top">
+27 February 1980<br>
+prof.dr. Edsger W. Dijkstra<br>
+Burroughs Research Fellow</td>
+</tr></table>
+<hr>
+Transcription by John C Gordon
+<p>Last revised on <csobj format="MedDate" h="16" region="15" t="DateTime" w="106">Tue, 24 Jun 2003</csobj>.
+</body></html>

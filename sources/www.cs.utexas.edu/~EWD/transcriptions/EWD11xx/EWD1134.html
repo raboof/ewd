@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>E.W.Dijkstra Archive: The checkers problem told to me by M.O.Rabin (EWD 1134)</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="../transcriptions.css" rel="stylesheet" media="screen" />
+		<link href="../formulas.css" rel="stylesheet" media="screen" />
+	</head>
+	<body>
+		<div id="frame">
+			<div id="header">
+				<a href="../../ewd11xx/EWD1134.PDF"
+					 title="Link to the PDF version of EWD1134">EWD 1134</a>
+			</div>
+			<div id="content">
+				<p class="noindent"><u>The checkers problem told to me by M.O.Rabin</u></p>
+				<p>Last week, during the annual seminar at the University of Newcastle-upon-Tyne, Michael O. Rabin told me the following problem.</p>
+				<p>Consider an infinite checkers board, of which the columns and rows are identified by the integer coordinates &nbsp;<var>x</var>&nbsp; and &nbsp;<var>y</var>&nbsp; respectively. Initially, there is a piece on each square whose coordinates satisfy &nbsp; <span class="inlineformula">(<var>even</var>.<var>x</var> &#x2261; <var>even</var>.<var>y</var>) <span class="unicode">&#x2227;</span> <var>y</var> <span class="unicode">&#x2264;</span> 0.</span> &nbsp; Pieces can be moved "upwards" by the usual "capturing moves": from <img src="EWD1134_fig1.png" alt="EWD1134 figure 1" title="EWD1134 figure 1" /> to <img src="EWD1134_fig2.png" alt="EWD1134 figure 2" title="EWD1134 figure 2" /> and from <img src="EWD1134_fig3.png" alt="EWD1134 figure 3" title="EWD1134 figure 3" /> to <img src="EWD1134_fig4.png" alt="EWD1134 figure 4" title="EWD1134 figure 4" />. The question posed is whether there is an upper bound on the y-coordinates of the squares that may be occupied.</p>
+
+				<p align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+				<p>Because the question asked is about <var>y</var>-coordinates, we abstract for a moment from the <var>x</var>-coordinate. The two original moves then become one and the same move: from <img src="EWD1134_fig5.png" alt="EWD1134 figure 5" title="EWD1134 figure 5" /> to <img src="EWD1134_fig6.png" alt="EWD1134 figure 6" title="EWD1134 figure 6" />. In order to capture that a high piece is created from ("is as good as", "corresponds to") its two successors &mdash;those who know him see Fibonacci lurking around the corner!&mdash; , we give a piece (on a square) at height &nbsp;<var>y</var>&nbsp; a <span style="border-bottom: thin dashed #000000;">weight</span> &nbsp;<var>&#x03c6;</var><sup><var>y</var></sup>&nbsp; with &nbsp;<var>&#x03c6;</var>&nbsp; the positive root of &nbsp; <span class="inlineformula"><var>&#x03c6;</var><sup>2</sup> = <var>&#x03c6;</var> + 1 .</span> The equation is chosen so that the weight of the new piece equals the weight of the two pieces it replaces, i.e. a move is neutral as far as total weight is concerned. By restricting ourselves to the positive root, we keep all weights positive, i.e. total weight a monotonic function of the number of pieces involved. Solving the equation yields</p>
+				<table class="numfor"><tr><td class="numforleft"><br />
+		      <var>&#x03c6;</var> = (1 + &#x221A;5)/2 &nbsp; &nbsp; &nbsp; .<br /></td></tr></table>
+				<p>The fact that a move is neutral as far as total weight is concerned, means that the creation of a piece at height &nbsp;<var>Y</var>&nbsp; (with <var>Y</var>&gt;0) uses from the original configuration a set of pieces with total weight <var>&#x03c6;</var><sup><var>Y</var></sup>. This "target weight", being <var>&#x03c6;</var><sup><var>Y</var></sup> and <var>&#x03c6;</var> being positive, grows <span style="border-bottom: thin dashed #000000;">exponentially</span> with <var>Y</var>. We shall next observe that, in view of the shape of the two moves &mdash;<var>x</var> re-enters the picture&mdash; , the original pieces involved in the creation of a piece at height &nbsp;<var>Y</var>&nbsp; come from a restricted area. Calling their total weight the "available weight", we shall show that the latter grows <span style="border-bottom: thin dashed #000000;">linearly</span> with <var>Y</var>. Hence, the condition</p>
+				<p align="center">target weight &#x2264;  available weight</p>
+				<p class="noindent">imposes an upper bound on <var>Y</var>: the answer to the question posed is "Yes".</p>
+				<p>In order to establish the available weight we observe the moves for small values of <var>Y</var>.</p>
+				<p class="noindent"><var>Y</var>=1 requires a single move, say <img src="EWD1134_fig7.png" alt="EWD1134 figure 7" title="EWD1134 figure 7" style="	position: relative; bottom: -32px;" />&nbsp; &nbsp;.</p>
+				<p class="noindent" style="position: relative; top: -30px;"><var>Y</var>=2 requires two moves, say <img src="EWD1134_fig8.png" alt="EWD1134 figure 8" title="EWD1134 figure 8" style="	position: relative; bottom: -72px;" />&nbsp; &nbsp;,<br />the one thin dot above the<br />line indicating a square<br />that has been temporarily<br />occupied.</p>
+				<p class="noindent" style="position: relative; top: -70px;"><var>Y</var>=3 requires two moves more. <img src="EWD1134_fig9.png" alt="EWD1134 figure 9" title="EWD1134 figure 9" style="	position: relative; bottom: -70px;" />&nbsp; &nbsp;</p>
+				<p>For the restricted areas from which the original pieces have to be recruited we take infinite (truncated) triangles</p>
+				<table cellpadding="10" cellspacing="0" border="0"><tr><td><img src="EWD1134_fig10.png" alt="EWD1134 figure 10" title="EWD1134 figure 10" /></td><td><img src="EWD1134_fig11.png" alt="EWD1134 figure 11" title="EWD1134 figure 11" /></td><td><img src="EWD1134_fig12.png" alt="EWD1134 figure 12" title="EWD1134 figure 12" /></td></tr></table>
+				<p>For <var>Y</var>=1&nbsp;, the available weight <span class="inlineformula">(&#x2211;<var>n</var>: <var>n</var>&#x2265;0: (<var>n</var>+1)<span class="unicode">&#x2217;</span><var>&#x03C6;</var><sup>-<var>n</var></sup>)</span> is finite, and so is the increment <span class="inlineformula">(&#x2211;<var>n</var>: a&#x2265;0: <var>&#x03C6;</var><sup>-<var>n</var></sup>)</span>. Summing the sequences one finds for the available weight</p>
+				<p align="center" class="noindent"><u>&nbsp;4 + 2&#x221A;5 + <var>Y</var><span class="unicode">&#x2217;</span>(3 + &#x221A;5)&nbsp;</u><br />2</p>
+				<p>The smallest value for &nbsp;<var>Y</var>&nbsp; such that the target weight <var>&#x03C6;</var><sup><var>Y</var></sup> exceeds the available weight is &nbsp;7&nbsp;: then the target weight equals <span class="inlineformula">(29+13&#x221A;5)/2,</span> the available weight is only <span class="inlineformula">(25+9&#x221A;5)/2</span> .</p>
+				<p>For <var>Y</var>=6, the target weight <span class="inlineformula"> (18+8&#x221A;5)/2 </span> is less than the available weight <span class="inlineformula"> (22+8&#x221A;5)/2 ,</span> but this does not justify the conclusion that Y=6 is attainable. <var>Y</var>=6 can be achieved, but the only way of showing this that I know of is showing a game that does the job. The required game turns out to have 53 moves, which makes finding it and reporting it somewhat of a challenge. I could convince myself that <var>Y</var>=6 could be reached only</p>
+				<p class="noindent">(i) after having realized that the constraint of at most 1 piece per square is inessential and can be stopped</p>
+				<p class="noindent">(ii) after having decided to play the game backwards</p>
+				<p>Below, we show successive stages of the backwards game: in the centre the configuration of the pieces, to the left the <var>y</var>-coordinates of the rows in question and &mdash;by way of check&mdash; to the right for each row the total number of pieces in it.</p>
+				<pre>
+ 6                               1                            1
+
+ 5                             1                              1
+ 4                           1                                1
+
+ 4                           1   1                            2
+ 3                                 1                          1
+
+ 3                         1   1   1                          3
+ 2                       1   1                                2
+
+ 2                         1   2   1   1                      5
+ 1                               1   1   1                    3
+
+ 1                       1   1   2   2   2                    8
+ 0                     1   1       1   1   1                  5
+
+ 0                     2   2   2   2   3   2                 13
+-1                   1   1   2   1   1   1   1                8
+
+ 0                     1   1   1   1   1   1                  6
+-1                   2   2   3   2   2   2   2               15
+-2                 1   1   1   1   1       1   1              7
+
+ 0                     1   1   1   1   1   1                  6
+-1                   1   1   1   1   1   1   1                7
+-2                 2   2   2   2   2   1   2   2             15
+-3               1   1   1       1   1   1   1   1            8
+
+and now not repeating all the constant rows
+
+-1                   1   1   1   1   1   1   1                7
+-2                 1   1   1   1   1   1   1   1              8
+-3               2   1   2   1   2   2   1   2   2           15
+-4             1           1   1   1   1       1   1          7
+
+-2                 1   1   1   1   1   1   1   1              8
+-3               1   1   1   1   1   1   1   1   1            9
+-4             2       1   1   2   2   1   1   1   2         13
+-5           1       1       1   1       1           1        6
+
+-3               1   1   1   1   1   1   1   1   1            9
+-4             1   0   1   1   1   1   1   1   1   1          9
+-5           1   1   1       2   1   1   1       1   1       10
+-6                 1       1           1       1              4
+
+-4             1   0   1   1   1   1   1   1   1   1          9
+-5           1   1   1       1   1   1   1       1   1        9
+-6                 1       1   1       1       1              5
+-7                               1                            1
+</pre>
+				<p>There may exist a game of 51 moves, but I am not interested in that optimization. The above is already more elaborate than I had hoped.</p>
+
+				<p align="right">Austin, 20 September 1992</p>
+
+			</div>
+			<div>
+
+				<table width="100%" border="0" cellspacing="2" cellpadding="0">
+					<tr>
+						<td>prof.dr. Edsger W. Dijkstra<br />
+							Department of Computer Sciences<br />
+							The University of Texas at Austin<br />
+							Austin, TX 78712-1188, USA<br />
+						</td>
+					</tr>
+				</table>
+        <br/>
+        <br/>
+      </div>
+		</div>
+		<hr />
+		<div id="footer">
+         transcribed by Corrado Cantelmi<br />
+          revised 
+          <!-- #BeginDate format:En2 -->20-Sep-2011<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,874 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>E.W.Dijkstra Archive: Cooperating sequential processes (EWD 123)</title>
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff">
+	    <div id="frame">
+			<div id="header">
+        <a href= "../../ewd01xx/EWD123.PDF" target="_blank"
+           title="PDF scan of EWD 123">EWD 123</a>
+      </div>
+      <div id="content">
+				<div>
+					<u>Cooperating sequential processes</u>
+					<p class="noindent"><a href="EWD123.html#Anchor-Table-49575">Table of Contents.</a></p>
+					<p class="noindent"><a href="EWD123.html#preface">Preface</a>.</p>
+					<p class="noindent">0. <a href="EWD123.html#0. introduction">Introduction</a></p>
+					<p class="noindent">1. <a href="EWD123.html#On the Nature of Sequential Processes">On the Nature of Sequential Processes.</a></p>
+					<p class="noindent">2.<a href="EWD123.html#2. Loosely Connected Processes"> Loosely Connected Processes.</a></p>
+					<blockquote>
+						<p class="noindent">2.1.<a href="EWD123.html#2.1. A Simple Example."> A Simple Example.</a></p>
+						<p class="noindent">2.2. <a href="EWD123.html#2.2. The Generalized Mutual Exclusion Problem">The Generalized Mutual Exclusion Problem</a>.</p>
+						<p class="noindent">2.3. <a href="EWD123.html#2.3. A Linguistic Interlude">A Linguistic Interlude</a>.</p>
+					</blockquote>
+					<p class="noindent">3. <a href="EWD123.html#3. The Mutual Exclusion Problem Revisited.">The Mutual Exclusion Problem Revisited.</a></p>
+					<blockquote>
+						<p class="noindent">3.1.<a href="EWD123.html#3.1. The Need for a More Realistic Solution."> The Need for a More Realistic Solution.</a></p>
+						<p class="noindent">3.2. <a href="EWD123.html#3.2.%20The%20Synchronizing%20Primitives.">The Synchronizing Primitives.</a></p>
+						<p class="noindent">3.3. <a href="EWD123.html#3.3. The Synchronizing Primitives Applied to the Mutual Exclusion Problem.">The Synchronizing Primitives Applied to the Mutual Exclusion Problem.</a></p>
+					</blockquote>
+					<p class="noindent">4. <a href="EWD123.html#4. The General Semaphore.">The General Semaphore.</a></p>
+					<blockquote>
+						<p class="noindent">4.1.<a href="EWD123.html#4.1. Typical Uses of the General Semaphore."> Typical Uses of the General Semaphore.</a></p>
+						<p class="noindent">4.2. <a href="EWD123.html#4.2. The Superfluity of the General Semaphore.">The Superfluity of the General Semaphore.</a></p>
+						<p class="noindent">4.3. <a href="EWD123.html#4.3. The Bounded Buffer.">The Bounded Buffer.</a></p>
+					</blockquote>
+					<p class="noindent">5. <a href="#5. Cooperation via Status Variables">Cooperation via Status Variables.</a></p>
+					<blockquote>
+						<p class="noindent">5.1. <a href="#5.1. An Example of a Priority Rule.">An Example of a Priority Rule.</a></p>
+						<p class="noindent">5.2. <a href="#5.2. An Example of Conversations.">An Example of Conversations</a></p>
+						<blockquote>
+							<p class="noindent">5.2.1. <a href="#5.2.1. Improvements of the Previous Program.">Improvements of the Previous Program.</a></p>
+							<p class="noindent">5.2.2. <a href="#5.2.2. Provinq the Correctness.">Proving the Correctness.</a></p>
+						</blockquote>
+					</blockquote>
+					<p class="noindent">6. <a href="#6. The Problem of the Deadly Embrace.">The Problem of the Deadly Embrace.</a></p>
+					<blockquote>
+						<p class="noindent">6.1. <a href="#6.1. The Banker's Algorithm.">The Banker's Algorithm.</a></p>
+						<p class="noindent">6.2. <a href="#6.2. The Banker's Alqorithm Applied.">The Banker's Algorithm Applied</a></p>
+					</blockquote>
+					<p class="noindent">7. <a href="#7. Concluding Remarks.">Concluding Remarks.</a></p>
+					<p class="noindent"></p>
+					<hr>
+					<p class="noindent">&nbsp;&nbsp;</p>
+					<p class="noindent"><a name="5. Cooperation via Status Variables"></a><u>5. Cooperation via Status Variables</u>.</p>
+					<p>In sections 4.1 and 4.3 we have illustrated the use of the general semaphore. It proved an adequate tool, be it as implementation of a rather trivial form of interaction. The rules for the consumer are very simple: if there is something in the buffer, consume it. They are of the same simplicity as the behaviour rules of the wage earner who spends all his money as soon as he has been paid and is broke until the next pay day.</p>
+					<p>In other words: when a group of cooperating sequential processes have to be constructed and the overall behaviour of these processes combined has to satisfy more elaborate requirements &#x2014;community, formed by them, has, as a whole, to be well-behaved in some sense&#x2014; we can only expect to be able to do so, if the individual processes themselves and the ways in which they can interact will get more refined. We can no longer expect a ready made solution as the general semaphore to do the job. In general, we need the flexibility as can be expressed in a program for a general purpose computer.</p>
+					<p>We now have the raw material, we can define the individual processes, they can communicate with each other via the common variables and finally we have the synchronizing primitives. How we can compose from it what we might want is, however, by no means obvious. We must now train ourselves to use the tools, we must develop a style of programming, a style of &quot;parallel programming&quot; I might say.</p>
+					<p>In advance I should like to stress two points.</p>
+					<p>We shall be faced with a great amount of freedom. Interaction may imply decisions bearing upon more than one process and it is not always obvious, which of the processes should do it. If we cannot find a guiding priciple (e.g. efficiency considerations), then we must have the courage to impose some rule in the name of clarity.</p>
+					<p>Secondly, if we are interested in systems that really work, we should be able to convince ourselves and anybody else who takes the trouble to doubt, of the correctness of our constructions. In uniprogramming one is already faced with the task of program verification &#x2014;a task, the difficulty of which is often underestimated&#x2014; but there one can hope to debug by testing of the actual program. In our case the system will often have to work under irreproducible circumstances and from field tests we can hardly expect any serious help. The duty of verification should concern us right from the start.</p>
+					<p>We shall attack a more complicated example in the hope that this will give us some of the experience which might oe used as guiding principle.</p>
+					<p class="noindent"><a name="5.1. An Example of a Priority Rule."></a><u>5.1. An Example of a Priority Rule.</u></p>
+					<p>In section 4.3 we have used the general semaphore to couple a producer and a consumer via a bounded buffer. The solution given there is extendable to more producers and/or more consumers; it is applicable when the &quot;portion&quot; is at the same time a convenient unit of information, i.e. when we can regard the different portions as all being of the same size.</p>
+					<p>In the present problem we consider producers that offer portions of different sizes; we assume the size of these portions to be expressed in portions units. The consumers, again, will process the successive portions from the buffer and will, therefore, have to be able to process portions, the size of which is not given a priori. A maximum portion size, however, will be known.</p>
+					<p>The size of the portions is given in information units, we assume also that the maximum capacity of the buffer is given in information units: the question whether the buffer will be able to accomodate the next portion will therefore depend on the size of the portion offered. The requirement, that &quot;adding a portion to&quot; and &quot;taking a portion from the buffer&quot; are still conceivable operations implies that the size of the buffer is not less than the maximum portion size.</p>
+					<p>We have a bounded buffer and therefore a producer may have to wait before it can offer a portion. With fixed size portions this could only occur when the buffer was full to the brim, now it can happen, because free space in the buffer, although present, is insufficient for the portion concerned.</p>
+					<p>Furthermore, when we have more than one producer and one of them is waiting, then the other ones may go an and reach the state that they wish to offer a portion. Such a portion from a next producer may also be too large or it may be smaller and it may fit in the available free space of the buffer.</p>
+					<p>Somewhat arbitrarily, we impose on our solution the requirement, that the producer wishing to offer the larger portion gets priority over the producer wishing to offer the smaller portion to the buffer. (When two or more producers are offering portions that happen to be of the same size, we just don't care.)</p>
+					<p>When a producer has to wait, because the buffer cannot accomodate its portion, no other producers can therefore add their portions until further notice: they cannot when the new portion is larger (for then it will also not fit), they may not when the new portion is smaller, for then they have a lower priority and must leave the buffer for the earlier request.</p>
+					<p>Suppose at a moment a completely filled buffer and three producers, waiting to offer portions of 1, 2 and 3 units respectively. When a consumer now consumes a five-unit portion, the priority rule implies that the producers with the 2-unit portion and the 3-unit portion respectively will get the opportunity to go on and not the one offering the 1-unit portion. It is <em>not</em> meant to imply, that then the 3-unit portion will actually be offered before the 2-unit portion!</p>
+					<p>We shall now try to introduce so-called &quot;status variables&quot; for the different components of the system, with the aid of which we can characterize the state of the system at any moment. Let us try.</p>
+					<p>For each producer we introduce a variable named &quot;<code>desire</code>&quot;: this variable will denote the number of buffer units needed for the portion it could not add to the buffer. As this number is always positive, we can attach to &quot;<code>desire</code> = 0&quot; the meaning, that no request from this buffer is pending. Furthermore we shall introduce for each producer a private binary &quot;<code>producer semaphore</code>&quot;.</p>
+					<p>For the buffer we introduce the binary semaphore &quot;<code>bufman</code>&quot;, which takes care of the mutual exclusion of buffer manipulations in the widest sense (i.e. not only the adding to and taking from the buffer, but also inspection and modification of the status variables concerned.)</p>
+					<p>Next we need a mechanism to signal the presence of a next portion to the consumers. As soon as a next portion is in the buffer, it can be consumed and as we do not care, which of the consumers takes it, we can hope, that a general semaphore &quot;<code>number of queuing portions</code>&quot; will do the job. (Note, that it counts portions queuing in the buffer and not number of filled information units in the buffer.)</p>
+					<p>Freecoming buffer space must be signalled back to the producers, but the possible consequences of free coming buffer space are more intricate and we cannot expect that a general semaphore will be adequate. Tentatively we introduce an integer status variable &quot;<code>number of free buffer units</code>&quot;. Note, that this variable counts units and not portions.</p>
+					<p><u>Remark</u>. The value of &quot;<code>number of free buffer units</code>&quot; will at most be equal to the size of the buffer diminished by the total size of the portions counted in &quot;<code>number of queuing portions</code>&quot;, but it may be less! I refer to the program given in section 4.3; there the sum</p>
+					<p><code>number of queuing portions + number of empty positions</code></p>
+					<p class="noindent">is initially (and usually) = <var>N</var>, but it may be = <var>N</var> -1, because the P-operation on one of the semaphores always precedes the V-operation on the other. (Verify, that in the program of section 4.3 the sum can even be = <var>N</var> - 2 and that this value can even be lower, when we have more producers and/or consumers.) Here we may expect the same phenomenon: the semaphore &quot;<code>number of queuing portions</code>&quot; will count the portions actually and completely filled and still unnoticed by the consumers, &quot;<code>number of free buffer units</code>&quot; will count the completely free, unallocated units in the buffer. But the units which have been reserved for filling, which have been granted to a (waiting) producer, without already being filled, will not be counted in either of them,</p>
+					<p>Finally we introduce the integer &quot;<code>buffer blocking</code>&quot;, the value of which equals the number of quantities &quot;<code>desire</code>&quot;? that are positive. Obviously, this variable is superfluous; it has been introduced as a recognition of one of our earlier remarks, that as soon as one of the desires is positive, no further additions to the buffer can be made, until further notice. At the same time this variable may act as a warning to the consumers, that such a &quot;further notice&quot; is wanted.</p>
+					<p>We now propose the following program, written for <var>N</var> producers and <var>M</var> consumers. (&quot;<code>N</code>&quot;, &quot;<code>M</code>&quot;, &quot;<code>Buffer size</code>&quot; and all that concerns the buffer is assumed to be declared in the surroundings of this program.)</p>
+					<pre><code><u>begin</u> <u>integer</u> <u>array</u> desire, producer semaphore [1 : N];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>integer</u> number of queuing portions, number of free buffer units,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buffer blocking, bufman, loop;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>for</u> loop:= 1 <u>step</u> 1 <u>until</u> N <u>do</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> desire[loop]:= 0; producer semaphore[loop]:= 0 <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number of queuing portions:= 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number of free buffer units:= Buffer size;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;buffer blocking:= 0; bufman:= 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>parbegin</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;producer 1: <u>begin</u>.........................end;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;producer n: <u>begin</u> <u>integer</u> portion size;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     again n: produce next portion and set portion size;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     P(bufman);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     <u>if</u> buffer blocking = O <u>and</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        number of free buffer units&nbsp;&#x2265; portion size
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     number of free buffer units:=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     number of free buffer units - portion size
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     <u>begin</u> buffer blocking:= buffer blocking - 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     desire[n]:= portion size; V(bufman)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     P(producer semaphore[n]); P(bufman) <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     add portion to buffer; V(bufman);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     V(number of queuing portions); <u>goto</u> again n
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;producer N: <u>begin</u>.................<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;consumer 1: <u>begin</u>.................<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;consumer m: <u>begin</u> <u>integer</u> portion size, n, max, nmax;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      again m: P(number of queuing portions); P(bufman);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      take portion from buffer and set portion size;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      number of free buffer units:=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       number of free buffer units + portion size;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      test:    <u>if</u> buffer blocking &gt; 0 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          <u>begin</u> max:= 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          <u>for</u> n:= 1 <u>step</u> 1 <u>until</u> N <u>do</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          <u>begin</u> <u>if</u> max &lt; desire[n] <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          <u>begin</u> max:= desire[n]; nmax:= n <u>end</u> <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          <u>if</u> max &#x2264; number of free buffer units <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          <u>begin</u> number of free buffer units:=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;           number of free buffer units - max;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          desire[nmax]:= 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          buffer blocking:= buffer blocking - 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;          V(producer semaphore[nmax]); <u>goto</u> test
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         <u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         V(bufman); process portion taken;&nbsp;<u>goto</u> again m
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     &nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    &nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    &nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;consumer M: begin.................<u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>parend</u>
+<u>end</u></code>
+</pre>
+					<p>In the outermost block the common variables are declared and initialized; I hope -and trust that this part of the program presents no difficulties to the reader that has followed me until here.</p>
+					<p>Let us first try to understand the behaviour of the producer. When it wishes to add a new portion to the buffer, there are essentially two cases: either it can do so directly, or not. It can add directly under the combined condition:</p>
+					<blockquote>
+						<p class="noindent"><code>buffer blocking = 0 <u>and<br>
+								</u>number of free buffer units &#x2265; portion size;</code></p>
+					</blockquote>
+					<p class="noindent">if so, it will decrease &quot;number of free buffer units&quot; and &#x2014;dynamically speaking in the same critical section&#x2014; it will add the portion to the buffer. The two following V-operations (the order of which is immaterial) close the critical section and signal the presence of the next portion to the combined consumers. If it cannot add directly, i.e. if (either)</p>
+					<blockquote>
+						<p class="noindent"><code>buffer blocking</code> &gt; 0 <u>or</u> <br>
+							<code>number of free buffer units</code> &lt; <code>portion size</code>&quot;</p>
+					</blockquote>
+					<p class="noindent">(or both), then the producer decides to wait, &quot;to go to sleep&quot;, and delegates to the combined consumers the task to wake it up again in due time. The fact that it is waiting is coded by &quot;<code>desire[n]</code> &gt; O&quot;, &quot;<code>buffer blocking</code>&quot; is increased by 1 accordingly. After all clerical operations on the common variables have been carried out, the critical section is left (by <code>V(bufman)</code>&quot;) and the producer initiates a P-operation on its private semaphore. When it has completed this P-operation, it reenters the critical section, merges dynamically with the first case and adds the portion to the buffer. (See also the consumer in the second program of section 4.2, where we have already met the cutting open of a critical section.) Note that in the case of waiting, the producer has skipped the decrease of &quot;<code>number of free buffer units</code>&quot;. Note also, that the producer initiates the P-operation on its private semaphore at a moment, that the latter may already be = 1, i.e. this P-operation, again, is only a potential delay.</p>
+					<p>Let us now inspect, whether the combined consumers fulfill the tasks delegated to them. The presence of a next portion is correctly signalled to them via the general semaphore &quot;<code>number of queuing portions</code>&quot; and as the P-operation on it occurs outside any critical section, there is no danger of consumers not initiating it. After this P-operation, the consumer enters its critical section, takes a portion and increases the number of free buffer units. If &quot;<code>buffer blocking</code> = 0&quot; holds, the following compound statement is skipped completely and the critical section is left immediately; this is correct, for &quot;<code>buffer blocking</code> = 0&quot; means that none of the quantities &quot;<code>desire</code>&quot; is positive, i.e. that none of the producers is waiting for the free space just created in the buffer. If, however, it finds &quot;<code>buffer blocking</code> &gt; 0&quot;, it knows that at least one of the producers has gone to sleep and it will inspect, whether one or more producers have to be woken up. It looks for the maximum value of &quot;<code>desire</code>&quot;. If this is not too large, it decides, that the corresponding producer has to go on. This decision has three effects:</p>
+					<p>the &quot;number of free buffer units&quot; is decreased by the number of units desired. Thus we guarantee that the same free space in the buffer cannot be granted to mare than one producer. Furthermore this decrease is in accordance with the producer behaviour.</p>
+					<p>&quot;desire&quot; of the producer in question is set to zero; this is correct, for its request has now been granted; buffer blocking is decreased by 1 accordingly.</p>
+					<p>a V-operation on the producer semaphore concerned wakes the sleeping producer.</p>
+					<p>After that, control of the consumer returns to &quot;<code>test</code>&quot; to inspect, whether more sleeping producers should be woken up. The inspection process can end in one of two ways: either there are no sleeping producers anymore (&quot;<code>buffer blocking</code> = 0) or there are still sleeping processes, but the free space is insufficient to accommodate the maximum desire. The final value of &quot;<code>buffer blocking</code>&quot; is correct in both cases. After the waking up of the producers is done, the critical section is left.</p>
+					<p class="noindent"><a name="5.2. An Example of Conversations."></a><u>5.2. An Example of Conversations.</u></p>
+					<p>In this section we shall discuss a more complicated example, in which one of the cooperating processes is not a machine but a human being, the &quot;operator&quot;.</p>
+					<p>The operator is connected with the processes via a so-called &quot;semi-duplex channel&quot; (say &quot;telex connection&quot;). It is called a duplex channel because it conveys information in either direction: the operator can use a keyboard to type in a message for the processes, the processes can use the teleprinter to type out a message for the operator. It is called a semi-duplex channel, because it can only transmit information in one direction at a time.</p>
+					<p>Let us now consider the requirements to the total construction. (I admit, that they are somewhat simplified. I hope, that they are sufficiently complicated to pose to us a real problem, yet sufficiently simple as not to drown the basic pattern of our solution in a host of inessential details. The trees should not prevent us from seeing the forest!)</p>
+					<p>We have <var>N</var> identical processes (numbered from 1 through <var>N</var>) and essentially they can ask a single question, called &quot;Ql&quot;, meaning &quot;How shall I go on?&quot;, to which the operator may give one of two possible answers, called &quot;A1&quot; and &quot;A2&quot;. We assume, that the operator must know, which of the processes is asking the question &#x2014;as his answer might depend on this knowledge&#x2014; and we therefore specify, that the <var>i</var>-th process identifies itself when posing the question; we indicate this by saying that it transmits the question &quot;Ql(<var>i</var>)&quot;. In a sense this is a consequence of the fact, that all <var>N</var> processes use the same communication channel.</p>
+					<p>A next consequence of this channel sharing between the different processes is that no two processes can ask their question simultaneously: behind the scenes some form of mutual exclusion must see to this. If only Q1-questions are mutually exclusive, the operator may meet the following situation: a question &#x2014;say &quot;Ql(3)&#x2014; is posed, but before he has decided how to answer it, a next question &#x2014;say&quot;Ql(7)&quot;&#x2014; is put to him. Then the single answer &quot;A1&quot; is no longer sufficient, because now it is no longer clear, whether this answer is intended for &quot;process 7&quot; or for &quot;process 3&quot;. This could be overcome by adding to the answers the identification of the process concerned, say, &quot;A(<var>i</var>)&quot; and &quot;A2(<var>i</var>)&quot; with the appropriate value of <var>i</var>.</p>
+					<p>But this is only one way of doing it: an alternative solution is to make the question, followed by its answer, together a critical occurence: it relieves the operator from the task to identify the process and we therefore select the latter arrangement. So we stick to the answers &quot;Al&quot; and &quot;A2&quot;. We have two kinds of conversations &quot;Ql(<var>i</var>), A1&quot; and &quot;Ql(<var>i</var>), A2&quot; and the next conversation can only be initiated when the previous one has been completed.</p>
+					<p>We shall now complicate the requirements threefold.</p>
+					<p>Firstly, the individual processes may wish to use the communication channel for single-shot messages &#x2014;&quot;M(<var>i</var>)&quot; say&#x2014; which do not require any answer from the operator.</p>
+					<p>Secondly, we wish to give the operator the possibility to postpone an answer. Of course, he can do so by just not answering, but this would have the undesirable effect,that the communication channel remains blocked for the other <var>N</var>-1 processes. We introduce a next answer &quot;A3&quot;, meaning: &quot;The channel becomes free again, but the conversation with the process concerned remains unfinished.&quot; Obviously, the operator must have the opportunity to reopen the conversation again. He can do so via &quot;~A(<var>i</var>)&quot;or &quot;A5(<var>i</var>)&quot;, where &quot;<var>i</var>&quot; runs from 1 through <var>N</var> and identifies the process concerned, where &quot;A4&quot; indicates that the process should continue in the same way as after &quot;A1&quot;, while &quot;A5&quot; prescribes the reaction as to &quot;A2&quot;. Possible forms of conversation are now:<br>
+						a) &quot;Q1(<var>i</var>), A1&quot;<br>
+						b) &quot;Q1(<var>i</var>), A2&quot;<br>
+						c) &quot;Q1(<var>i</var>), AT3&quot; - - - &quot;A4(<var>i</var>)&quot;<br>
+						d) &quot;Q1(<var>i</var>), AT3&quot; - - - &quot;A5(<var>i</var>)&quot;<br>
+						As far as process <var>i</var> is concerned a) is equivalent with c) and b) is equivalent with d).<br>
+					</p>
+					<p>The second requirement has a profound influence: without it &#x2014;i.e. only<br>
+						&quot;A1&quot; and &quot;A2&quot; permissible answers&#x2014; the process of incoming message interpretation can always be subordinate to one of the <var>N</var> processes, viz. the one, that has put the question: this can wait for an answer and can act accordingly. We do not know beforehand, however, when the message &quot;A4(<var>i</var>)&quot; or &quot;A5(<var>i</var>)&quot; comes and we cannot delegate the interpretation of it to the <var>i</var>-th process, because the discovery that this incoming message is concerned with the <var>i</var>-th process is part of the message interpretation itself!</p>
+					<p>Thirdly, A4-and A5-messages must have priority over Q1- and M-messages, i.e. while the communication channel is occupied (in a Q1-or M-message), processes might reach the state, that they want to use the channel, but also the operator might come to this conclusion. As soon as the channel becomes available, we wish, that the operator can use it and that it won't be snatched away by one of the processes. This implies that the operator has a means to express this desire &#x2014;a rudimentary form of input&#x2014; even if the channel itself is engaged in output.</p>
+					<p>We assume that</p>
+					a) the operator can give externally a
+					<p><code>V(incoming message</code>),</p>
+					<p class="noindent">which he can use to announce a message (A1, A2, A3, A4, or A5)</p>
+					<p class="noindent">b) can detect by the machines reaction, whether the message is accepted or ignored.</p>
+					<p>Remark. The situation is not unlike the school teacher shouting &quot;Now children, listen!&quot;. If this is regarded as a normal message, it is nonsensical: either the children are listening and it is therefore superfluous, or they are not listening, and therefore they do not hear it. It is, in fact a kind of &quot;meta-message&quot;, which only tells, that a normal message is coming and which should also penetrate if the children are not listening (talking, for instance).</p>
+					<p>This priority rule may make the communication channel reserved for an announced A4 - or A5 message. By the time that the operator gets the opportunity to give it, the situation or his mood may have changed, and therefore we extend the list of answers with &quot;A6&quot; &#x2014;the dummy opening&#x2014; which enables the operator to withhold, upon further consideration, the A4 or A5.<br>
+					</p>
+					<p>A final feature of the message interpreter is the applicability test. The operator is a human being and we may be sure that he will make mistakes. The states of the message interpreter are such that at any moment, not all incoming massages are applicable; when a message has been rejected as non-applicable, the interpreter should return to such a state that the operator can now give the correct version.</p>
+					<p>Our attack will be along the following lines:<br>
+						1)&nbsp;&nbsp;&nbsp;&nbsp;Besides the <var>N</var> processes we introduce another process, called &quot;message interpreter&quot;; this is done because it is difficult to make the interpretation of the messages &quot;A4&quot;, &quot;A5&quot; and &quot;A6&quot; subordinate to one of the <var>N</var> processes.<br>
+						2)&nbsp;&nbsp;&nbsp;&nbsp;Interpretation of a message always implies, besides the message itself, a state of the interpreter.(ln the trivial case this is a constant state, viz. the willingness to understand the message.) We have seen that not all incoming messages are always acceptable, so our message interpreter will be in different states. We shall code them via the (common) state variable &quot;<code>comvar</code>&quot;. The private semaphore, which can delay the action of the message interpreter, is the semaphore &quot;<code>incoming message</code>&quot;, already mentioned.<br>
+						3)&nbsp;&nbsp;&nbsp;&nbsp;For the <var>N</var> processes we shall introduce an array &quot;<var>procsem</var>&quot; of private semaphores and an array &quot;<code>procvar</code>&quot; of state variables, through which the the different processes can communicate with each other, with the message interpreter and vice versa.<br>
+						4)&nbsp;&nbsp;&nbsp;&nbsp;Finally we introduce a single binary semaphore &quot;<code>mutex</code>&quot; which caters for the mutual exclusion during inspection and/or modification of the common variables.<br>
+						5)&nbsp;&nbsp;&nbsp;&nbsp;We shall use the binary semaphore &quot;<code>mutex</code>&quot; only for the purpose just described and never, say, will &quot;<code>mutex</code> = 0&quot; be used to code, that the channel is occupied. Such a convention would be a dead alley in the sense that the technique used would fall into pieces as soon as the <var>N</var> processes would have two channels (and two operators) at their disposal. We aim to make the critical sections, governed by &quot;<code>mutex</code>&quot; rather short and we won't shed a tear if some critical section is shorter than necessary.</p>
+					<p>Well, the above five points, articles of faith, I might say, are of some help and I hope that in view of our previous experiences they seem a set of reasonable principles. I do one part of my job if I present a solution along the lines just given and show that it is correct. I would do a better job if I could show as well, how such a solution is found. Admittedly by trial and error, but even so, we could try to make the then prevailing guiding principle (in mathematics usually called &quot;The feeling of the genius&quot;) somewhat more explicit. For we are still faced with problems:<br>
+						a)&nbsp;&nbsp;&nbsp;&nbsp;what structure should we give to the <var>N</var> + 1 processes?<br>
+						b)&nbsp;&nbsp;&nbsp;&nbsp;what states should we introduce (i.e. how many possible values should the state variables have and what should be their meanings)?</p>
+					<p>The problem (both in constructing and in presenting the solution) is, that the two points just mentioned are interdependent. For the values of the state variables have only an unambiguous, describable meaning, when &quot;<code>mutex</code> = 1&quot; holds, i.e. none of the processes is inside a critical section, in which they are subject to change. In other words: the conditions under which the meaning of the state variable values should be applicable is only known, when the programs are finished, but we can only make the programs if we know what inspections of and operations on the state variables are to be performed. In my experience one starts with a rough picture of both programs and state variables, one then starts to enumerate the different states and then tries to build the programs. Then two different things may happen: either one finds that one has introduced too many states or one finds that &#x2014;having overlooked a need for cutting a critical section into parts&#x2014; one has not introduced enough of them. One modifies the states and then the program and with luck and care the design process converges. Usually I found myself content with a working solution and I did not bother to minimize the number of states introduced.</p>
+					<p>In my experience it is easier to conceive first the states (being statically interpretable) and then the programs. In conceiving the states we have to bear three points in mind.</p>
+					<p class="noindent">a)&nbsp;&nbsp;&nbsp;&nbsp;State variables should have a meaning when <code>mutex</code> is = 0; on the other hand a process must leave the critical section before it starts to wait for a private semaphore. We must be very keen on all those points where a process may have to wait for something more complicated than permission to complete &quot;<code>P(mutex)</code>&quot;,</p>
+					<p class="noindent">b)&nbsp;&nbsp;&nbsp;&nbsp;The combined state variables specify the total state of the system. Nevertheless it helps a great deal if we can regard some state variable as &quot;belonging to that and that process&quot;. If some aspect of the total state increases linearly with <var>N</var>, it is easier to conceive that part as equally divided among the <var>N</var> processes.</p>
+					<p class="noindent">c)&nbsp;&nbsp;&nbsp;&nbsp;If a process decides to wait on account of a certain (partial) state, each process that makes the system leave this partial state should inspect whether on account of this change, some waiting process should go on. (This is only a generalization of the principle, already illustrated in The Sleeping Barber.)</p>
+					<p>The first two points are mainly helpful in the conception of the different states, the last one is an aid to make the programs correct.</p>
+					<p>Let us now try to find a set of appropriate states. We starts with the element &quot;<code>procvar[i]</code>&quot;, describing the state of process <code>i</code>.</p>
+					<p class="noindent"><code>procvar[i] = 0</code></p>
+					<p class="nospace">This we call &quot;the homing position&quot;. It will indicate that none of the following situations applies, that process <code>i</code> does not require any special service from either the message interpreter or one of the other processes.</p>
+					<p class="noindent"><code>procvar[i] = 1</code></p>
+					<p class="nospace">&quot;On account of non-availability of the communication channel, process <code>i</code> has decided to wait on its private semaphore.&quot; This decision can be taken independently in each process, it is therefore reasanable to represent it in the state of the process. Up till now there is no obvious reason to distinguish between waiting upon availability for a M-message and for a Q1-question, so let us try to do it without this distinction.</p>
+					<p class="noindent"><code>procvar[i] = 2</code></p>
+					<p class="nospace">&quot;Question &quot;<code>Q1(i)</code>&quot; has been answered by &quot;<code>A3</code>&quot;, viz. with respect to process <code>i</code> the operator has postponed his final decision.&quot; The fact of the postponement must be represented because it can hold for an undefinitely long period of time (observation a); it should be regarded as a state variable of the process in question as it can hold in <var>N</var>-fold (observation b). Simultaneously, &quot;<code>procvar[i] = 2</code>&quot; will act as applicability criterion for the operator messages &quot;<code>A4[i]</code>&quot;and &quot;<code>A5[i]</code>&quot;.</p>
+					<p class="noindent"><code>procvar[i] = 3</code></p>
+					<p class="nospace">&quot;&quot;<code>Ql[i]</code>&quot; has been answered by &quot;<code>A1</code>&quot; or by &quot;<code>A3</code>&quot;- - -&quot;<code>A4[i]</code>&quot;.&quot;</p>
+					<p class="noindent"><code>procvar[i] = </code></p>
+					<p class="nospace">&quot;&quot;<code>Ql[i]</code>&quot; has been answered by &quot;<code>A2</code>&quot; or by &quot;<code>A3</code>&quot;- - -&quot;<code>A5[i]</code>&quot;.&quot;</p>
+					<p>First of all we remark, that it is of no concern to the individual process, whether the operator has postponed his final answer or not. The reader may wonder, however, that the answer given is coded in &quot;<code>procvar</code>&quot;, while only one answer is given at a time. The reason is that we do not know how long it will take the individual process to react to this answer: before it has done so, a next process may have received its final answer to the <code>Q1</code>- question.</p>
+					<p>Let us now try to list the possible states of the communication organisation. We introduce a single variable, called &quot;<code>comvar</code>&quot; to distinguish between these states. We have to bear in mind three different aspects<br>
+						1)&nbsp;&nbsp;&nbsp;&nbsp;availability of the communication possibility for M-messages, Q1-questions and the spontaneous message of the operator.<br>
+						2)&nbsp;&nbsp;&nbsp;&nbsp;acceptability &#x2014;more general: interpretability&#x2014; of the incoming messages.<br>
+						3)&nbsp;&nbsp;&nbsp;&nbsp;operator priority for incoming messages.<br>
+						In order not to complicate matters immediately too much, we shall start by ignoring the third point. Without operator priority we can see the following states.</p>
+					<p class="noindent"><code>comvar = 0</code></p>
+					<p class="nospace">&quot;The communication facility is idle&quot;, i.e. equally available for both processes and operator. For the processes &quot;<code>comvar = 0</code>&quot; means that the communication facility is available, for the message interpreter it means that an incoming message need not be ignored, but must be of type A4, A5 or A6.</p>
+					<p class="noindent"><code>comvar = 1</code></p>
+					<p class="nospace">&quot;The communication facility is used for a M-message or a Q1-question&quot;.<br>
+						In this period of time the value of &quot;<code>comvar</code>&quot; must be &#x2260; 0, because the communication facility is not available for the processes; for the message interpreter it means, that incoming messages have to be ignored.</p>
+					<p class="noindent"><code>comvar = 2</code></p>
+					<p class="nospace">&quot;The communication facility is reserved for an A1-,A2- or A3-answer.&quot; When the M-message has been finished, the communication facility becomes available again, after a Q1-question, however, it must remain reserved. During this period, characterized by &quot;<code>comvar = 2</code>&quot;, the message interpreter must know to which process the operator answer applies. At the end of the answer, the communication facility becomes again available.</p>
+					<p class="noindent">Let us now take the third requirement into consideration. This will lead to a duplication of (certain) states. When &quot;<code>comvar = 0</code>&quot; holds, an incoming message is accepted, when &quot;<code>comvar = 1</code>&quot;, an incoming message must be ignored. This occurence must be noted down, because at the end of this occupation of the communication facility, the operator must get his priority. We can introduce a new state:</p>
+					<p class="noindent"><code>comvar = 3</code></p>
+					<p class="nospace">&quot;As &quot;<code>comvar = 1</code>&quot; with operator priority requested.&quot;</p>
+					<p>When the transition to &quot;<code>comvar = 3</code>&quot; occurred during a M-message, the operator could get his opportunity immediately at the end of it; if, however, the transition to &quot;<code>comvar = 3</code>&quot; took place during a Q1-question, the priority can only be given to the operator after the answer to the Ql-question. Therefore, also state 2 is duplicated:</p>
+					<p class="noindent"><code>comvar = 4</code></p>
+					<p class="nospace">&quot;As &quot;<code>comvar = 2</code>&quot;, with operator priority requested.&quot;</p>
+					<p class="noindent">Finally we have the state:</p>
+					<p class="noindent"><code>comvar = 5</code></p>
+					<p class="nospace">&quot;The communication facility is reserved for, or used upon instigation of the operator.&quot; For the processes this means non-availability, for the message interpreter the acceptability of the incoming messages of type A4, A5 and A6. Usually, these messages will be announced to the message interpreter while &quot;<code>comvar</code>&quot; is = 0. If we do not wish that the entire collection and interpretation of these messages is done within the same critical section, the message interpreter can break it open.It is then necessary, that &quot;<code>comvar</code>&quot; is &#x2260; 0. We may try to use the same value 5 for this purpose: for the processes it just means non-availability, while the control of the message interpreter knows very well, whether it is waiting for a spontaneous operator message (i.e. &quot;reserved for..&quot;) or interpreting such a message (i.e. &quot;used upon instigation of. .&quot;).</p>
+					<p>Before starting to try to make the program, we must bear in mind point c: remembering that availability of the communication facility is the great (and only) bottleneck, we must see to it, that every process that ends a communication facility occupation decides upon its future usage. This is in the processes at the end of the M-message (and not so much at the end of the Q1-question, for then the communication facility remains reserved for the answer) and in the message interpreter at the end of each massage interpretation.</p>
+					<p>The proof of the pudding is the eating, let us try, whether we can make the program. (In the program, the sequence of characters starting with &quot;<code>comment</code>&quot; and up to and including the first semicolon are inserted for explanatory purposes only. In ALGOL 60, such a comment is only admitted only immediately after &quot;<code>begin</code>&quot; but I do not promise, to respect this (superfluous) restriction. The following program should be interpreted to be embedded in a universe in which the operator, the communication facility and the semaphore &quot;incoming message&quot; &#x2014;initially = 0&#x2014; are defined.</p>
+					<pre><code><u>begin</u> integer mutex, comvar, asknum, loop;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>comment</u> The integer &quot;asknum&quot; is a state variable of the message
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interpreter, primarily during interpretation of the answers A1, A2
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and A3. It is a common variable, as its value is set by the asking
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;process.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>integer</u> <u>array</u> procvar, procsem [1 : N]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>for</u> loop:= 1 <u>step</u> 1 <u>until</u> N <u>do</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> procvar[loop]:= 0; procsem[loop]:= 0 <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comvar:= 0; mutex:= 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>parbegin</u>
+process 1: <u>begin</u>....................end;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+process n: <u>begin</u> <u>integer</u> i; <u>comment</u> The integer &quot;i&quot; is a local variable,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;very much like &quot;loop&quot;.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;M message:P(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> comvar = 0 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>comment</u> When the communication facility is available,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it is taken.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comvar:= 1; V(mutex)<u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>comment</u> Otherwise the process books itself as sleeping
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and goes to sleep.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;procvar[n]:= 1; V(mutex); P(procsem[n])
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>comment</u> At the completion of this P-operation,
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;procsem[n]&quot; will again be = 0, but comvar -still
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;untouched by this process- will be =l or =3.; <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;send M message;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>comment</u> Now the process has to analyse, whether the operator
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(first!) or one of the other processes should get the commu-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nication facility or not.; P(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> comvar = 3 <u>then</u> comvar:= 5
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>comment</u> Otherwise &quot;comvar = 1&quot; will hold and process n
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;has to look whether one of the other processes is waiting.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note that &quot;procvar[n] = 0&quot; holds.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>for</u> i:= 1 <u>step</u> 1 <u>until</u> N <u>do</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>if</u> procvar[i]= 1 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> procvar[i]:= 0; V(procsem[i]); <u>goto</u> ready
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comvar:= 0
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ready: V(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code>.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;Q1 Question: P(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> comvar = 0 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> comvar:= 1; V(mutex) <u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u> else</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> procvar[n]:= 1; V(mutex); P(procsem[n]) <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>comment</u> This entry is identical to that of the M message.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Note that we are out of the critical section, nevertheless
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this process will set &quot;asknum&quot;. It can do so safely, for no
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;other process, nor the message interpreter, will access
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;asknum&quot; as long as &quot;comvar = 1 &quot; holds.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;asknum:= n; send question Q1(n);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>comment</u> &quot;comvar&quot; will be = 1 or = 3.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> comvar = 1 <u>then</u> comvar:= 2 <u>else</u> comvar:= 4;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(mutex); P(procsem[n]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>comment</u> After completion of this P-operation, procvar[n]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;will be = 3 or = 4. This process can now inspect and reset
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;its procvar, although we are outside a critical section.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> procvar[n] = 3 <u>then</u> Reaction 1 <u>else</u> Reaction 2;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;procvar[n]:= 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>comment</u> This last assignment is superfluous.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+process N: <u>begin</u>....................<u>end</u>;
+message interpreter:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> integer i;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;wait: P(incoming message);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> comvar = 1 <u>then</u> comvar:= 3;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> comvar = 3 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>comment</u> The message interpreter ignores the incoming
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message, but in due time the operator will get the
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opportunity.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(mutex); <u>goto</u> wait <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> comvar = 2 <u>or</u> comvar = 4 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>comment</u> Only A1, A2 and A3 are admissible. The inter-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pretation of the message need not be done inside a
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;critical section;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interpretation of the message coming in;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> message = A1 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> procvar[asknum]:= 3; V(procsem[asknum]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> after correct answer <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> message = A2 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> procvar[asknum]:= 4; V(procsem[asknum]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> after correct answer <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> message = A3 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> procvar[asknum]:= 2; <u>goto</u> after correct answer <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>comment</u> The operator has given an erroneous answer
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and should repeat the message; <u>goto</u> wait;
+after correct answer: P(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> comvar = 4 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>comment</u> The operator should now get his opportunity;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comvar:= 5; V(mutex); <u>goto</u> wait <u>end</u>;
+perhaps comvar to zero:<u>for</u> i:=1 <u>step</u> 1 <u>until</u> N <u>do</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>if</u> procvar[i] = 1 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> procvar[i]:= 0; comvar:= 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(procsem[i]); <u>goto</u> ready <u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comvar:= 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ready: V(mutex); <u>goto</u> wait
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>comment</u> The cases &quot;comvar = 0&quot; and &quot;comvar = 5&quot; remain.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Messages A4, A5 and A6 are admissible.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> comvar = 0 <u>then</u> comvar:= 5;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>comment</u> See Remark 1 after the program.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;interpretation of the message coming in
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> message = A4[process number] <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> i:= &quot;process number given in the message&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> procvar[i] = 2 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> procvar[i]:= 3; V(procsem[i]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> perhaps comvar to zero <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>comment</u> Otherwise process not waiting for postponed
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;answer.; <u>goto</u> wrong message
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> message = A5[process number] <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> i:= &quot;process number given in the message&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> procvar[i] = 2 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> procvar[i]:= 4; V(procsem[i]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> perhaps comvar to zero <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>comment</u> Otherwise process not waiting for postponad
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;answer.; <u>goto</u> wrong message
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> message = A6 <u>then</u> <u>qoto</u> perhaps comvar to zero;
+wrong message: &nbsp;&nbsp;<u>comment</u>&quot;comvar = 5&quot; holds, giving priority to the operator
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;to repeat his message.;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(mutex); <u>goto</u> wait
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>parend</u>
+<u>end</u></code>
+</pre>
+					<p><u>Remark 1.</u> If the operator, while &quot;<code>comvar = 0</code>&quot; or &quot;<code>comvar = 5</code>&quot; originally holds, gives an uninterpretable (or inappropriate) message, the communication facility will remain reserved for his next trial.</p>
+					<p><u>Remark 2.</u> The final interpretation of the A4 and A5 messages is done within the critical section, as their admissibility depends on the state of the process concerned. If we have only one communication channel and one operator, this precaution is rather superfluous.</p>
+					<p><u>Remark 3</u>. The for-loops in the program scan the processes in order, starting by process 1; by scanning them cyclically, starting at an arbitrary process (selected by means of a (pseudo) random number generator) we could have made the solution more symmetrical in the <var>N</var> processes.</p>
+					<p><u>Remark 4.</u> In this sectinn we have first given a rather thorough exploration of the possible states and then the program. The reader might be interested to know that this is the true picture &#x2014;&quot;a life recording&quot;&#x2014; of the birth of this solution. When I started to write this section, the problem posed was for me as new as for the reader: the program given is my first version, constructed on account of the considerations and explorations given. I hope that this section may thus give a hint as how one may find such solutions.</p>
+					<p class="noindent"><a name="5.2.1. Improvements of the Previous Program."></a><u>5.2.1. Improvements of the Previous Program.</u></p>
+					<p>In section 5.2 we have given a first version of the program; this version has been included in the text, not because we are content with it, but because its inclusion completes the picture of the birth of a solution. Let us now try to embellish, in the name of greater conciseness, clarity and, may be, efficiency. Let us try to discover in what respects we have made a mess of it.</p>
+					<p>Let us compare the information flows from a process to the message interpreter and vice versa. In the one direction we have the common variable &quot;<code>asknum</code>&quot; to tell the message interpreter, which process is asking the question. The setting and the inspection of &quot;<code>asknum</code>&quot; can safely take place outside the critical sections, governed by &quot;<code>mutex</code>&quot;, because at any moment at most one of the <var>N</var> + 1 processes will try to access &quot;<code>asknum</code>&quot;. In the inverse information flow, where the message interpreter has to signal back to the <var>i</var>-th process the nature of the final operator answer, this answer is coded in &quot;<code>procvar</code>&quot;. This is mixing things up, as is shown<br>
+						a) by the &quot;<code>procvar</code>&quot;-inspection (whether <code>procvar</code> is = 3 or = 4), which is suddenly allowed to take place outside a critical section<br>
+						b) by the superfluity of its being reset to zero.</p>
+					<p>The suggestion is to introduce a new</p>
+					<blockquote>
+						<p><code><u>integer</u> <u>array</u> operanswer[l:N]</code>&nbsp;&nbsp;&nbsp;,</p>
+					</blockquote>
+					<p class="noindent">the elements of which will be used in a similar fashion as &quot;<code>asknum</code>&quot;. (An attractive consequence is that the number of possible values of &quot;<code>procvar</code>&quot; &#x2014;the more fundamental quantity(see below)&#x2014; does not increase any more, if the number of possible answers to the question Q1 is increased.)</p>
+					<p>I should like to investigate whether we can achieve a greater clarity by separating the common variables into two (or perhaps more?) distinct groups, in order to reflect an observable hierarchy in the way in which they are used. Let us try to order them in terms of &quot;basicness&quot;.</p>
+					<p>The semaphore &quot;<code>incoming message</code>&quot; seems at first sight a fairly basic one, being defined by the surrounding universe. This is, however, an illusion: within the parallel compound we should have programmed (as <var>N</var> + 2nd process) the operator himself, and the semaphore &quot;<code>incoming message</code>&quot; is the private semaphore for the message interpreter just as &quot;<code>procsem[i]</code>&quot; is for the <var>i</var>-th process.)</p>
+					<p>Thus the most basic quantity is the semaphore &quot;<code>mutex</code>&quot; taking care of the mutual exclusion of the critical sections.</p>
+					<p>Then come the state variables &quot;<code>comvar</code>&quot; and &quot;<code>procvar</code>&quot; which are inspected and can be modified within the critical sections.</p>
+					<p>The quantities just mentioned share the property that their values must be set before entering the parallel compound. This property is also shared by the semaphores &quot;<code>procsem</code>&quot; (and &quot;<code>incoming message</code>&quot; see above), if we stick to the rules that parallel statements will access common semaphores via P- and V-operations exclusively.</p>
+					(Without this restriction, request for the communication facility by process n could start with
+					<pre><code>P(mutex);
+
+<u>if</u> comvar = 0 <u>then</u>
+<u>begin</u> comvar:= 1; V(mutexj <u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u>
+<u>begin</u> procvar[n]:= 1; procsem[n]:= 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(mutexj; P(procsem[n]) <u>end</u></code> .</pre>
+					<p class="noindent">We reject this solution on the further observation, that the assignment &quot;<code>procsem[n]</code>&quot; is void, except for the first time that it is executed; the initialization of <code>procsem</code>'s outside the parallel compound seems therefore appropriate).</p>
+					<p>For the common variables, listed thus far I should like to reserve the name &quot;status variables&quot;, to distinguish them from the remaining ones, &quot;<code>asknum</code>&quot; and &quot;<code>operanswer</code>&quot;, which I should like to call &quot;transmission variables&quot;.</p>
+					<p>I call the latter &quot;transmission variables&quot; because, whenever one of the processes assigns a value to such a variable, the information just stored is destinated for a well known &quot;receiving party&quot;. They are used to transmit information between well-known parties.</p>
+					<p>Let us now turn our attention from the common variables towards the programs. Within the programs we have learnt to distinguish the so-called &quot;critical sections&quot;, for which the semaphore &quot;<code>mutex</code>&quot; caters for the mutual exclusion. Besides these, we can distinguish regions, in which relevant actions occur, such as:</p>
+					<p class="noindent">in the i-th process:<br>
+						Region 1: sending an M-message<br>
+						Region 2: sending a <code>Q1(i)</code>-question<br>
+						Region 3: reacting to <code>operanswer[i]</code> (this region is somewhat open-ended)</p>
+					<p class="noindent">and in the message interpreter:<br>
+						Region 4: ignoring incoming messages<br>
+						Region 5: expecting <code>A1</code>, <code>A2</code> or <code>A3</code><br>
+						Region 6: expecting <code>A4(i)</code>, <code>A5(i)</code> or <code>A6</code><br>
+					</p>
+					<p>We come now to the following picture. In the programs we have critical sections, mutually excluded by the semaphore &quot;<code>mutex</code>&quot;. The purpose of the critical sections is to resolve any ambiguity in the inspection and modification of the remaining state variables, inspection and modification performed for the purpose of more intricate &quot;sequencing patterns&quot; of the regions, sequencing patterns, that make the unambiguous use of the transmission variables possible. (If one process has to transmit information to another, it can now do so via a transmission variable, provided that the execution of the assigning region is always followed by that of the inspecting region before that of the next assigning region!)</p>
+					<p>In the embellished version of the program we shall stick to the rule that the true state variables will only be accessed in critical sections (if they are not semaphores) or via P- and V-operations (if they are semaphores), while the transmission variables will only be accessed in the regions. (In more complicated examples this rule might prove too rigid and duplication might be avoided by allowing transmission variables at least to be inspected within the critical section. In this example, however, we shall stick to it.)</p>
+					<p>The remaining program improvements are less fundamental.</p>
+					<p>Coding goes more smoothly if we represent the fact of requested operator priority not in additional values of &quot;<code>comvar</code>&quot; but in an additional two-valued state variable:</p>
+					<p><u>Boolean</u> operator priority</p>
+					<p class="noindent">(Quantities of type &quot;Boolean&quot; can take on the two values denoted by &quot;<u>true</u>&quot; and &quot;<u>false</u>&quot; respectively, viz. the same domain as &quot;conditions&quot; such as we have met in the if-clause.)</p>
+					<p>Furthermore we shall introduce two procedures; they are declared outside the compound and therefore at the disposal of the different constituents of the parallel compound.</p>
+					<p>We shall first give a short description of the new meanings of the values of the state variables &quot;<code>procvar</code>&quot; and &quot;<code>comvar</code>&quot;:</p>
+					<p></p>
+					<table width="90%" border="0" cellspacing="5" cellpadding="0">
+						<tr>
+							<td valign="top" width="30%"><code>procvar[i] = 0</code></td>
+							<td valign="top">homing position</td>
+						</tr>
+						<tr>
+							<td valign="top" width="30%"><code>procvar[i] = 1</code></td>
+							<td valign="top">waiting for availability of the communication facility<br>
+								for <code>M</code> or <code>Ql(i)</code></td>
+						</tr>
+						<tr>
+							<td valign="top" width="30%"><code>procvar[i] = 2</code></td>
+							<td valign="top">waiting for the answer &quot;<code>A4(i)</code>&quot; or &quot;<code>A5(i)</code>&quot;.</td>
+						</tr>
+						<tr>
+							<td valign="top" width="30%"><code>comvar = 0</code></td>
+							<td valign="top">homing position (communication facility free)</td>
+						</tr>
+						<tr>
+							<td valign="top" width="30%"><code>comvar = 1</code></td>
+							<td valign="top">communication facility for <code>M</code> or <code>Q1</code></td>
+						</tr>
+						<tr>
+							<td valign="top" width="30%"><code>comvar = 2</code></td>
+							<td valign="top">communication facility for <code>A1</code>, <code>A2</code> or <code>A3</code></td>
+						</tr>
+						<tr>
+							<td valign="top" width="30%"><code>comvar = 3</code></td>
+							<td valign="top">communication facility for <code>A4</code>, <code>A5</code> or <code>A6</code>.</td>
+						</tr>
+					</table>
+					<p>We give the program without comments and shall do it in two stages: first the program outside the parallel compound and then the constituents of the parallel compound.</p>
+					<pre><code><u>begin</u> <u>integer</u> mutex, comvar, asknum, loop;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Boolean</u> operator priority;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>integer</u> <u>array</u> procvar, procsem, operanswer[l:N];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>procedure</u> M or Q entry(u); <u>value</u> u; <u>integer</u> u;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> P(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> comvar = 0 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> comvar:= 1; V(mutex) <u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u> else</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> procvar[u]:= 1; V(mutex); P(procsem[u]) <u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>procedure</u> select new comvar value;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>integer</u> i;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> operator priority <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> operator priority:= <u>false</u>; comvar:= 3 <u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u> else</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>for</u> i:=1 <u>step</u> 1 <u>until</u> N <u>do</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>if</u> procvar[i] = 1 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> procvar[i]:= 0; comvar:= 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(procsem[i]); <u>goto</u> ready <u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comvar:= 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ready: <u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;
+</code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code><u>for</u> loop:= 1 <u>step</u> 1 <u>until</u> N <u>do</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> procvar[loop]:= 0; procsem[ioop]:= 0 <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comvar:= 0; mutex:= 1; operator priority:= <u>false</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>parbegin</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;process 1: <u>begin</u>....................<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;process N: <u>begin</u>....................<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message interpreter:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u>....................<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>parend</u>
+<u>end</u>
+</code></pre>
+					<p>Here the <var>n</var>-th process will be of the form</p>
+					<p><code>process n: <u>begin</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							M message: M or Q entry(n);<br>
+							Region 1: send M message;<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(mutex); select new comvar value; V(mutex);<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							Q1 question:M or Q entry(n);<br>
+							Region 2: &nbsp;&nbsp;asknum:= n;<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;send Ql(n);<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(mutex); comvar:= 2; V(mutex); P(procsem[n]);<br>
+							Region 3: &nbsp;&nbsp;<u>if</u> operanswer[n] = 1 <u>then</u> Reaction 1<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u> Reaction 2;<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u><br>
+							<br>
+						</code>When the message interpreter decides to enter Region 6 it copies, before doing so, the array &quot;<code>procvar</code>&quot;: if an answer <code>A4(i)</code> should be acceptable, then &quot;<code>procvar[i] = 2</code>&quot; should already hold at the moment of announcement of the answer.</p>
+					<pre><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;message interpreter:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>integer</u> i; <u>integer</u> <u>array</u>[1:N];
+wait: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(incoming message); P(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> comvar = 1 <u>then</u>
+Region 4:&nbsp;&nbsp; <u>begin</u> operator priority:= <u>true</u>;
+leave: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(mutex); <u>goto</u> wait; <u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> comvar &#x2260; 2 <u>then</u> <u>goto</u> Region 6;
+Region 5: &nbsp;&nbsp;V(mutex); collect message;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> message &#x2260; A1 <u>and</u> message &#x2260; A2 <u>and</u> message &#x2260; A3 <u>then</u> <u>goto</u> wait;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i:= asknum;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> message = A1 <u>then</u> operanswer[i]:= 1 <u>else</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> message = A2 <u>then</u> operanswer[i]:= 2;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> message = A3 <u>then</u> procvar[i]:= 2 <u>else</u>
+signal to i: &nbsp;&nbsp;V(procsem[i]);
+preleave: &nbsp;&nbsp;select new comvar value; <u>goto</u> leave;
+Region 6: &nbsp;&nbsp;<u>if</u> comvar = 0 <u>then</u> comvar:= 3;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>for</u> i:= 1 <u>step</u> 1 <u>until</u> N <u>do</u> pvcopy[i]:= procvar[i];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(mutex); collect message;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> message = A6 <u>then</u> <u>begin</u> P(mutex); <u>goto</u> preleave <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> message &#x2260; A4(prmcess number) <u>and</u> message &#x2260; A5(process number) <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;goto wait;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i:= &quot;process number given in the message&quot;;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> pvcopy[i] &#x2260; 2 <u>then</u> <u>goto</u> wait;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;operanswer[i]:= <u>if</u> message = A4 <u>then</u> 1 <u>else</u> 2;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(mutex); procvar[i]:= 0; <u>goto</u> signal to i
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u></code>
+</pre>
+					<p>As an exercise we leave to the reader the version, where pending requests for Q1-questions have priority over those for M-messages. As a next extension we suggest a two console configuration with the additional restriction that an A4- or A5-message is only acceptable via the console over which the conver- sation has been initiated. (Otherwise we have to exclude simultaneous, contradicting messages &quot;<code>A4(i)</code>&quot; and &quot;<code>A5(i)</code>&quot; via the two different consoles. The solution without this restriction is left for the really fascinated reader.)</p>
+					<p class="noindent"><a name="5.2.2. Provinq the Correctness."></a><u>5.2.2. Provinq the Correctness.</u></p>
+					<p>In this section title I have used the word &quot;proving&quot; in an informal way. I have not defined what formal conditions must be satisfied by a &quot;legal proof&quot; and I do not intend to do so. When I can find a way to discuss the program of section 5.2.1, by which I can convince myself &#x2014;and hopefully anybody else that takes the trouble to doubt!&#x2014; of the correctness of the overall performance of this aggregate of processes, I am content.</p>
+					<p>In the following &quot;state picture&quot; we make a diagram of a1 the states in which a process may find itself &quot;for any length of time&quot;, i.e. outside sections, critical to mutex. In arrows we describe the transitions taking place within the critical sections; accompanying these arrows, we give the modifications of comvar or the conditions, under which the transition from one state to another is made.</p>
+					<p>Calling the neutral region of a process before entry into a Region 1 or Region 2: &quot;Region O&quot;, we can give the state picture</p>
+				</div>
+				<blockquote>
+				<blockquote>
+					<img src="EWD123figs/EWD123_Pic03.png" alt="" width="342" height="260" border="0"></blockquote>
+			</blockquote>
+				<div>
+					<p class="noindent">Leaving Region 1 can be pictured as:</p>
+					<blockquote>
+						<p><img src="EWD123figs/EWD123_Pic04.png" alt="" width="442" height="164" border="0"></p>
+					</blockquote>
+					<p class="noindent">Leaving Region 2, with the possibility of a delayed answer, can be pictured as:</p>
+					<blockquote>
+						<blockquote>
+							<p class="noindent"><img src="EWD123figs/EWD123_Pic05.png" alt="" width="484" height="440" border="0"></p>
+						</blockquote>
+					</blockquote>
+					<p>We can try to do the same for the message interpreter. Here we indicate along the arrows the relevant occurrences, such as changes of a procvar and the kind of message. We use &quot;WIM&quot; as abreviation for &quot;Waiting for Incoming Message&quot;.</p>
+					<blockquote>
+						<blockquote>
+							<img src="EWD123figs/EWD123_Pic06.png" alt="" width="588" height="816" border="0"></blockquote>
+					</blockquote>
+					<p>These schemes, of course, teach us nothing new, but they may be a powerful aid in the program inspection.</p>
+					<p>We verify first, that &quot;<code>comvar = 0</code>&quot; represents indeed the homing position of the communication facility, i.e. available for either entrance into Region 1 or Region 2 (by one of the processes) or entrance into Region 6 (by the message interpreter, as result of an incoming message for which it is waiting).</p>
+					<p>If <code>comvar</code> = 0 and one of the processes wants to enter Region 1 or Region 2, or a message comes from the operator, Region 1, 2 or 6 is entered; furthermore this entrance is accompanied by either &quot;<code>comvar:= 1</code>&quot; or &quot;<code>comvar:= 3</code>&quot; and in this way care is taken of the mutual exclusion of the Regions 1, 2 and 6.</p>
+					<p>The mutual exclusion implies that processes may fail to enter Region 1 or 2 immediately, or that an incoming message must be rejected, coming at an inacceptable moment. In the first case, the process sets &quot;<code>procvar:= 1</code>&quot;, in the second case (in Region 4) the message interpreter sets &quot;<code>operator priority:= <u>true</u></code>&quot;.</p>
+					<p>These assignments are only performed under the condition &quot;<code>comvar &#x2260; 0</code>&quot;; furthermore the assignment &quot;<code>comvar:= 0</code>&quot; &#x2014;only occurring in the procedure &quot;select new comvar value&quot;&#x2014; is only performed provided &quot;<code><u>non</u> operator priority <u>and</u> all procvar &#x2260; 1</code>&quot;. From these two observations and the initial values, we can conclude:</p>
+					<p class="noindent">&quot;<code>comvar = 0</code>&quot; excludes &quot;<code>operator priority</code>&quot; as well as the occurrence of one<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or more &quot;<code>procvar = 1</code>&quot;.</p>
+					<p>As all ends of occupation of the communication facility (i.e. the end of Region 1, 5 and 6) call &quot;<code>select new comvar value</code>&quot; we have established<br>
+						a) that entrance into the Region 1, 2 and 6 is only delayed when necessary<br>
+						b) that such a delay is guaranteed to be resolved at the earliest opportunity.</p>
+					<p>The structure of the message interpreter shows clearly that<br>
+						a)&nbsp;&nbsp; it can execute Region 3 only if &quot;<code>comvar = 2</code>&quot;<br>
+						b)&nbsp;&nbsp; it can only execute Region 5 if &quot;<code>comvar = 2</code>&quot;<br>
+						c)&nbsp;&nbsp; execution of Region 5 is the only way to make <code>comvar</code> again &#x2260; 2.<br>
+					</p>
+					<p>The only assignment &quot;<code>comvar:= 2</code>&quot; occurs at the end of Region 2. As a result each Region 2 can only be followed by a Region 5 and, conversely, each Region 5 must be preceded by a Region 2. This sequencing allows us to use the transmission variable &quot;<code>asknum</code>&quot;, which is set in Region 2 and inspected in Region 5.</p>
+					<p>For the uses of the transmission variables &quot;<code>operanswer</code>&quot; an analogous analysis can be made. Region 2 will be followed by Region 5 (see above); if here the final answer (A1 or A2) is interpreted, <code>operanswer[i]</code> is set before &quot;<code>V(procsem[i])</code>&quot;, so that the transmission variable has been set properly before the process can (and will) enter Region 3, where its &quot;<code>operanswer</code>&quot; will be inspected. If in Region 5 the answer A3 is detected, the message interpreter set for this process &quot;<code>procvar[i]:= 2</code>&quot;, thus allowing <em>once</em> in Region 6 the answer A4 or A5 for this process. Again &quot;<code>V(procsem[i])</code>&quot; is only performed after the assignment to <code>operanswer</code>. Thus we have verified that<br>
+						a) <code>operanswer</code> is only set once by the message interpreter after a request in Region 2.<br>
+						b) this <code>operanswer</code> will only be inspected in the following Region 3 after the request to set it has been fulfilled (in Region 5 or Region 6).<br>
+						This completes the soundness of the use of the transmission variables &quot;operanswer&quot;.</p>
+					<p>Inspection of the message interpreter (particularly the scheme of its states) shows<br>
+						a) that a rejected message (Region 4) sooner or later is bound to give rise to Region 6<br>
+						b) that wrong messages are ignored, giving the operator the opportunity to correct.</p>
+					<p>By the above analysis we hope to have created sufficient confidence in the correctness of our construction. The analysis fallowed the steps already hinted at in section 5.2.1: after creation of the critical sections (with the aid of <code>mutex</code>), the latter are used to sequence Regions properly, thanks to which sequencing the transmission variables can be used unambiguously.</p>
+					<p class="noindent"><a name="6. The Problem of the Deadly Embrace."></a><u>6. The Problem of the Deadly Embrace.</u></p>
+					<p>In the introductory part of this section I shall draw attention to a rather logical problem that arises in the cooperation between various processes, when they have to share the same facilities. We have selected this problem for various reasons. Firstly it is a straightforward extension af the sound principle that no two persons can use a single compartment of a revolving door simultaneously. Seondly, its solution, which I regard as non-trivial and that will be given in section 6.1, gives us a nice example of more subtle cooperation rules than we have met before. Thirdly. it gives us the opportunity to illustrate (in section 6.2) a programming technique by which a further gain in clarity can be achieved.</p>
+					<p>Let me first give an example of the kind of sharing I have in mind.</p>
+					<p>As &quot;processes&quot; we might take &quot;programs&quot;, describing some computational process to be performed by a computer. Execution of such a computational process takes time, during which information must be stored in the computer. We restrict ourselves to thoses processes of which is known in advance<br>
+						1)&nbsp; the maximum demand on storage space and<br>
+						2)&nbsp; that the computational process will end, provided that storage space requested by the process will be put at the disposal of the computational process. The ending of the computational process will imply that its demand on storage space will reduce to zero.</p>
+					<p>We assume that the available store has been subdivided into fixed size &quot;pages&quot; which, from the point of view of the programs can be regarded as equivalent.</p>
+					<p>The actual demand on storage space, needed by a process, may be a function varying in time as the process proceeds &#x2014;subject, of course, to the a priori known upper bound. We assume that the individual processes request from and return to &quot;available store&quot; in single page units. With &quot;equivalence&quot; (see the last word of the previous paragraph) is meant that a process, requiring a new page only asks for &quot;a new page&quot; but never for a special one or one out of a special group.</p>
+					<p>We now request that a process, once initiated, will get the opportunity &#x2014;sooner or later&#x2014; to complete its action and reject any organization in which it may happen that a process may have to be killed half way its activity, thereby throwing away the computation time already invested in it.</p>
+					<p>If the computer has to perform the different processes one after the other, the only condition that must be satisfied by a process is that its maximum demand does not exceed the total storage capacity.</p>
+					<p>If, however, the computer can serve more than one process simultaneously, one can adhere to the rule that one only admits programs as long as the sum of their maximum demands does not exceed the total storage capacity. This rule, safe though it is, is unnecessarily restrictive, for it means that each process effectively occupies its maximum demand during the complete time of its execution. When we consider the following table (in which we regard the processes as &quot;borrowing&quot; pages from available store)</p>
+					<table width="90%" border="0" cellspacing="5" cellpadding="0">
+						<tr>
+							<td width="15%">process</td>
+							<td align="center" width="35%">maximum demand</td>
+							<td align="center" width="20%">present loan</td>
+							<td align="center">further claim</td>
+						</tr>
+						<tr>
+							<td width="15%">P1</td>
+							<td align="center" width="35%">80</td>
+							<td align="center" width="20%">&nbsp;40&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="center">40</td>
+						</tr>
+						<tr>
+							<td width="15%">P2</td>
+							<td align="center" width="35%">60</td>
+							<td align="center" width="20%"><u>&nbsp;20 +&nbsp;</u></td>
+							<td align="center">40</td>
+						</tr>
+						<tr>
+							<td width="15%"></td>
+							<td align="center" width="35%">available store = 100 </td>
+							<td align="center" width="20%">- &nbsp;60&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="left">= 40</td>
+						</tr>
+					</table>
+					<p class="noindent"> (a total store of 100 pages is assumed), we have a situation in which is still nothing wrong. If, however, both process request their next page and they should both get it, we should get the following situation:</p>
+					<table width="90%" border="0" cellspacing="5" cellpadding="0">
+						<tr>
+							<td width="15%">process</td>
+							<td align="center" width="35%">maximum demand</td>
+							<td align="center" width="20%">present loan</td>
+							<td align="center">further claim</td>
+						</tr>
+						<tr>
+							<td width="15%">P1</td>
+							<td align="center" width="35%">80</td>
+							<td align="center" width="20%">&nbsp;41&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="center">39</td>
+						</tr>
+						<tr>
+							<td width="15%">P2</td>
+							<td align="center" width="35%">60</td>
+							<td align="center" width="20%"><u>&nbsp;21 +&nbsp;</u></td>
+							<td align="center">39</td>
+						</tr>
+						<tr>
+							<td width="15%"></td>
+							<td align="center" width="35%">available store = 100</td>
+							<td align="center" width="20%">- &nbsp;62&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td align="left">= 38</td>
+						</tr>
+					</table>
+					<p>This is an unsafe situation, for both processes might want to realize their full further claim before returning a single page to available store. So each of them may first need a further 39 pages, while there are only 38 available.</p>
+					<p>This situation, when one process can only continue provided the other one is killed first, is called &quot;The Deadly Embrace&quot;. The problem to be solved is: how can we avoid the danger of the Deadly Embrace without being unrecessarily restrictive.</p>
+					<p class="noindent"><a name="6.1. The Banker's Algorithm."></a><u>6.1. The Banker's Algorithm.</u></p>
+					<p>A banker has a finite capital expressed in florins. He is willing to accept customers, that may borrow florins from him on the following conditions.</p>
+					<p class="noindent">1. The customer makes the loan for a transaction that will be completed in a finite period of time.</p>
+					<p class="noindent">2. The customer must specify in advance his maximum &quot;need&quot; for florins for this transaction.</p>
+					<p class="noindent">3. As long as the &quot;loan&quot; does not exceed the &quot;need&quot; stated in advance, the customer can increase or decrease his loan florin wise.</p>
+					<p class="noindent">4. A customer may not complain, if he asks for an increase of the current loan and receives from the banker the answer &quot;If I gave you the florin you ask for you would not exceed your stated need and therefore you are entitled to a next florin. At present, however, it is somewhat inconvenient for me to pay you, but I promise to send you the florin in due time.&quot;</p>
+					<p class="noindent">5. His guarantee that this moment will indeed arrive is founded on the banker's cautiousness and the fact that his co-customers are subjected to the same condition as he: that as soon as a customer has got the florin he asked for he will proceed with his transactions at a non-zero speed, i.e. within a finite period of time he will ask for a next florin or will return a florin or will finish the transaction, which implies that his complete loan has been returned (florin by florin).</p>
+					<p>The primary questions are</p>
+					<p class="noindent">a) under which conditions can the banker make the contract with a new customer?</p>
+					<p class="noindent">b) under which conditions can the banker pay a (next) florin to a requesting customer without running into the danger of the Deadly Embrace?</p>
+					<p>The answer to question a) is simple: he can accept any customer, whose stated need does not exceed the banker's capital.</p>
+					<p>To answer question b) we introduce the following terminology.</p>
+					<p>The banker has a fixed &quot;capital&quot; at his disposal; each new customer states in advance his maximum &quot;need&quot; and for each customer will hold</p>
+					<blockquote>
+						<blockquote>
+							<p><code>need[i] &#x2264; capital&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>(for all <code>i</code>).</p>
+						</blockquote>
+					</blockquote>
+					<p>The current situation for each customer is characterized by his &quot;<code>loan</code>&quot;. Each <code>loan</code> is initially = 0 and shall satisfy at any instant</p>
+					<blockquote>
+						<blockquote>
+							<p><code>0 &#x2264; loan[i] &#x2264; need[i]&nbsp;&nbsp;&nbsp;&nbsp;</code> (for all <code>i</code>).</p>
+						</blockquote>
+					</blockquote>
+					<p>A useful quantity to be derived from this is the maximum further &quot;<code>claim</code>&quot;, given by</p>
+					<blockquote>
+						<blockquote>
+							<p><code>claim[i] = need[i] - 1oan[i]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (for all i).</code></p>
+						</blockquote>
+					</blockquote>
+					<p>Finally the banker notes the amount in &quot;cash&quot;, given by</p>
+					<blockquote>
+						<blockquote>
+							<p><code>cash = capital - sum of the loans</code>.</p>
+						</blockquote>
+					</blockquote>
+					Obviously
+					<blockquote>
+						<blockquote>
+							<p><code>0 &#x2264; cash &#x2264; capital</code></p>
+						</blockquote>
+					</blockquote>
+					has to hold.
+					<p>In order to decide, whether a requested florin can be paid to the customer, the banker essentially inspects the situation that would arise if he had paid it. If this situation is &quot;safe&quot;, then he pays the florin, if the situation is not &quot;safe&quot;, he has to say: &quot;Sorry, but you have to wait.&quot;.</p>
+					<p>Inspection, whether a situation is safe amounts to inspection, whether all customer transactions can be guaranteed to be able to finish. The algorithm starts to investigate whether at least one customer has a claim not exceeding <code>cash</code>. If so, this customer can complete his transactions and therefore the algorithm investigates the remaining customers as if the first one had finished and returned its complete loan. Safety of the situation means, that all transactions can be finished, i.e. that the banker sees a way of getting all his money back.</p>
+					<p>If the customers are numbered from 1 through <var>N</var>, the routine inspecting a situation can be written as follows:</p>
+					<pre><code><u>integer</u> free money; <u>Boolean</u> safe; <u>Boolean</u> <u>array</u> finish doubtful[l:N];
+free money:= cash;
+<u>for</u> i:= 1 <u>step</u> 1 <u>until</u> N <u>do</u> finish doubtful[i]:= <u>true</u>;
+L:<u>for</u> i:= 1 <u>step</u> 1 <u>until</u> N <u>do</u>
+<u>begin</u> <u>if</u> finish doubtful[i] <u>and</u> claim[i] &#x2264; free money <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> finish doubtful[i]:= <u>false</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;free money:= free money + loan[i]; <u>goto</u> L
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>
+<u>end</u>;
+<u>if</u> free money = capital <u>then</u> safe:= <u>true</u> <u>else</u> safe:= <u>false</u>&quot;.</code></pre>
+					<p>The above routine inspects any situation. An improvement of the Algorithm has been given by L.Zwanenburg, who takes into account that the only situations to be investigated are those, where, starting from a <u>safe</u> situation, a florin has been tentatively given to <code>customer[j]</code>. As soon as &quot;<code>finish doubtful[j]:= <u>false</u></code>&quot; can be executed the algorithm can decide directly on safety of the situation, for apparently this tempted payment was reversible: This short cut will be implemented in the program in the next section.</p>
+					<p class="noindent"><a name="6.2. The Banker's Alqorithm Applied."></a><u>6.2. The Banker's Alqorithm Applied.</u></p>
+					<p>In this example, the florins are processes as well. (Each florin, say, represents the use of a magnetic tape deck; the loan of a florin is then the permission to use one of the tape decks.)</p>
+					<p>We assume, that the customers are numbered from 1 through <var>N</var> and that the florins are numbered from 1 through <var>M</var>. Each customer has a variable &quot;florin number&quot; in which, after each granting of a florin, it can find the number of the florin it has just borrowed; also each florin has a variable &quot;customer number&quot; in which it can find by which customer it has been borrowed.</p>
+					<p>Each customer has a state variable &quot;<code>cusvar</code>&quot;, where &quot;<code>cusvar</code> = 1&quot; means &quot;I am anxious to borrow.&quot; (otherwise &quot;<code>cusvar</code> = 0); each florin has a state variable &quot;<code>flovar</code>&quot;, where &quot;<code>flovar</code> = 1&quot; means &quot;I am anxious to get borrowed, i.e. I am in cash.&quot; (otherwise &quot;<code>flovar</code>= 0&quot;). Each customer has a binary semaphore &quot;<code>cussem</code>&quot;, each florin has a binary semaphore &quot;<code>flosem</code>&quot;, which will be used in the usual manner.</p>
+					<p>We assume that each florin is borrowed and returned upon customer indication, but that he cannot finish the loan of a florin immediately. After the customer has indicated that he has no further use for this florin, the florin may not be instantaneously available for a next use. It is, as if the customer can say to a borrowed florin &quot;run home to the banker&quot;. The actual loan will only be ended after the florin has indeed returned into cash: of its return into the banker's cash it will signal the customer from which it came via a customer semaphore &quot;<code>florin returned</code>&quot;. A P-operation on this semaphore should guard the customer for an inconscious overdraft. Before each florin request the customer will perform a P-operation on its &quot;<code>florin returned</code>&quot;; the initial value of &quot;<code>florin returned</code>&quot; will be &quot;= <code>need</code>&quot;.</p>
+					<p>We assume that the constant integers &quot;<code>N</code>&quot; and &quot;<code>M</code>&quot; (=<code>capital</code>) and the constant integer array &quot;<code>need</code>&quot; are declared and defined in the universe in which the following program is embedded.</p>
+					<p>The procedure &quot;<code>try to give to</code>&quot; is made into a Boolean procedure, the value of which indicates whether a delayed request for a florin has been granted. In the florin program it is exploited that returning a florin may at most give rise to a single delayed request now being granted. (If more than one type of facility is shared under control of the banker, this will no longer hold. Jumping out of the for loop to the statement labeled &quot;leave&quot; at the end of the florin program is then not permissible.)</p>
+					<pre><code><u>begin</u> <u>integer</u> <u>array</u> loan, claim, cussem, cusvar, florin number, florin
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returned[l :N],
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flosem, flovar, customer number[l:M];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>integer</u> mutex, cash, k;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Boolean</u> <u>procedure</u> try to give to (j); <u>value</u> j; <u>integer</u> j;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>if</u> cusvar[j] = 1 <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>integer</u> i, free money;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>Boolean</u> finish doubtful[l:N];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;free money:= cash - 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;claim[j]:= claim[j] - 1; loan[j]:= loan[j] + 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>for</u> i:= 1 <u>step</u> 1 <u>until</u> N <u>do</u> finish doubtful[i]:= <u>true</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LO: <u>for</u> i:= l <u>step</u> l <u>until</u> N <u>do</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>if</u> finish doubtful[i] <u>and</u> claim[i] [lte] free money then
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>if</u> &#x2260; j <u>then</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> finish doubtful[i]:= <u>false</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;free money:= free money + loan[i];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> LO
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>comment</u> Here more sophisticated ways for
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;selecting a free florin may be implemented;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i:= 0;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ll: i:= i + 1; <u>if</u> flovar[i] = 0 <u>then</u> <u>qoto</u> Ll;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;florin number[j]:= i;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;customer number[i]:= j;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cusvar[j]:= 0; flovar[i]:= 0:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cash:= cash - 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try to give to:= <u>true</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(cussem[j]); V(flosem[i]); <u>goto</u> L2
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;claim[j]:= claim[j] + 1; loan[j]:= loan[j] -1
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;try to give to:= <u>false</u>;
+L2:&nbsp;&nbsp;&nbsp;<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mutex:= 1; cash:= M;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>for</u> k:= 1 <u>step</u> 1 <u>until</u> N <u>do</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> loan[k]:= 0; cussem[k]:= 0; cusvar[k]:= 0; claim[k]:= need[k];
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;florin returned[k]:= need[k]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>for</u> k:= 1 <u>step</u> 1 <u>until</u> M <u>do</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> flosem[k]:= 0; flovar[k]:= 1 <u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>parbegin</u>
+customer 1: <u>begin</u>....................<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+customer N: <u>begin</u>....................<u>end</u>;
+florin 1: &nbsp;&nbsp;<u>begin</u>....................<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.
+florin M: <u>begin</u>....................<u>end</u>;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>parend</u>
+<u>end</u>
+</code></pre>
+					<p>In customer &quot;<code>n</code>&quot;, the request for a new florin consists of the following sequence of statements:</p>
+					<blockquote>
+						<blockquote>
+							<pre><code>P(florin returned[n]);
+P(mutex);
+cusvar[n]:= 1; try to give to (n);
+V(mutex);
+P(cussem[n]) ;</code></pre>
+						</blockquote>
+					</blockquote>
+					after completion of the last statement &quot;<code>florin number[n]</code>&quot; gives the identity of the florin just borrowed, the customer has the opportunity to use it and the duty to return it in due time to the banker.
+					<p>The structure of a florin is as follows:</p>
+					<pre><code>florin m:
+<u>begin</u> <u>integer</u> h;
+start:P(flosem[m]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code>&quot;Now &quot;customer number[m]&quot; identifies the customer that has borrowed it.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The florin can serve that customer until it has finished the task
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;required from it during this loan. To return itself to the cash, the
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;florin proceeds as follows:&quot;</code>
+<code>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;claim[customer number[m]]:= claim[customer number[m]] + 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loan[customer number[m]]:= loan[customer number[m]] - 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;flovar[m]:= 1 ; cash:= cash + 1;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(florin returned[customer number[m]]);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>for</u> h:= 1 <u>step</u> 1 <u>until</u> N <u>do</u>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> <u>if</u> try to give to(h) <u>then</u> <u>goto</u> leave <u>end</u>;
+leave:V(mutex);
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> start
+<u>end</u></code></pre>
+					<p class="noindent"><u>Remark.</u> Roughly speaking a successful loan can only take place when two conditions are satisfied: the <code>florin</code> must be requested and the <code>florin</code> must be available. In this program the mechanism of <code>cusvar</code> and <code>cussem</code> is also used (by the customer), when the requested <code>florin</code> is immediately available, likewise the mechanism of <code>flovar</code> and <code>flosem</code> is also used (by the <code>florin</code>) if, after its return to cash, it can immediately be borrowed again by a waiting customer. This programming technique has been suggested by C.Ligtmans and P.A.Voorhoeve, and I mention it because in the case of more intricate rules of cooperation it has given rise to a simplification that proved to be indispensable. The underlying cause of this increase in simplicity it that the dynamic way through the topological structure of the program no longer distinguishes between an actual delay or not, just as in the case of the P-operation itself.</p>
+					<p class="noindent"><a name="7. Concluding Remarks."></a><u>7. Concluding Remarks.</u></p>
+					<p>In the literature one sometimes finds a sharp distinction between &quot;concurrent programming&quot; &#x2014;more than one central processor operating on the same job&#x2014; and &quot;multiprogramming&quot; &#x2014;a single processor dividing its time between different jobs&#x2014;. I have always felt that this distinction was rather artificial and therefore confusing. In both cases we have, macroscopically speaking, a number of sequential processes that have to cooperate with each other and our discussions on this cooperation apply equally well to &quot;concurrent programming&quot; as to &quot;multiprogramming&quot; or any mixture of the two. What in concurrent programming is spread out in space (e.g. equipment) is in multiprogramming spread out in time: the two present themselves as different implementations of the same logical structure and I regard the development of a tool to describe and form such structures themselves, i.e. independent of these implementational differences, as one of the major contributions of the work from which this monograph has been born. As a specific example of this unifying train of thought I should like to mention &#x2014;for those that are only meekly interested in multiprocessors, multiprogramming and the like&#x2014; the complete symmetry between a normal sequential computer on the one hand and its periferal gear on the other (as displayed, for instance, in Section 4.3: &quot;The Bounded Buffer&quot;).</p>
+					<p>Finally I should like to express, once more, my concern about the correctness of programs, because I am not too sure, whether all of it is duly reflected in what I have written.</p>
+					<p>If I suggest methods by which we could try to attain a greater security, then this is of course more psychology than, say, mathematics. I have the feeling that for the Human Mind it is just terribly hard to think in terms of processing evolving in time and that our greatest aid in controling them is by attaching meanings to the values of identified quantities. For instance, in the program section</p>
+					<blockquote>
+						<blockquote>
+							<blockquote>
+								<pre><code>&nbsp;&nbsp;&nbsp;&nbsp;i:= 10;
+LO: x:= sqrt(x); i:=i - 1;
+&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> i &gt; 0 <u>then</u> <u>goto</u> LO</code></pre>
+							</blockquote>
+						</blockquote>
+					</blockquote>
+					<p class="noindent">we conclude that the operation &quot;<code>x:=sqrt(x)</code>&quot; is repeated ten times, but I have the impression that we can do so by attaching to &quot;<code>i</code>&quot; the meaning of &quot;the number of times that the operation &quot;<code>x:=sqrt(x)</code>&quot; still has to be repeated&quot;. (I know that in discussing progran' verification, Dr.P.Maur has introduced the term &quot;the general snapshot&quot;; in all probability we have here a trivial example of it.) But we should be aware of the fact that such a timeless meaning (a statement of fact or relation) is not permanently correct: immediately after the execution of &quot;<code>x:=sqrt(x)</code>&quot; but before that of the subsequent &quot;<code>i:= i - 1</code>&quot; the value of &quot;<code>i</code>&quot; is &quot;one more than the number of times that the operation &quot;<code>x:= sqrt(x)</code>&quot; still has to be repeated&quot;. In other words: we have to specify at what stages of the process such a meaning is applicable and, of course, it must be applicable in every situation where we rely on this meaning in the reasoning that convinces us of the desired overall performance of the program.</p>
+					<p>In purely sequential programming, as in the above example, the regions of applicability of such meanings are usually closely connected with places in the program text (if not, we have just a tricky and probably messy program). In multiprogramming we have seen &#x2014;in particular in Section 5.2.1&#x2014; that it is a worth-while effort to create such regions of applicability of meaning very consciously. The recognition of the hierarchical difference between the presence of a message and the message itself, here forced upon us, might give a clue even to clearer uniprogramming.</p>
+					<p>For example. if I am married to one out of ten wives, numbered from 1 through 10, this fact may be represented by the value of a variable &quot;<var>wife number</var>&quot;, associated with me. If I may also be single, it is a commonly used programmer's device to code the state of the bachelor as an eleventh value, say &quot;<var>wife number</var> = 0&quot;. The meaning of the value of this variable then becomes 'If my <var>wife number</var> is = 0, then I am single, otherwise it gives the number of my wife.&quot; The moral is that the introduction of a separate Boolean variable &quot;<var>married</var>&quot; might have been more honest.</p>
+					<p>We know that the von Neumann type machine derives its power and flexibility from the fact that it treats all words in store on the same footing. It is often insufficiently realized that, thereby, it gives the user the duty to impose structure wherever recognizable.<br>
+					</p>
+					<p>Sometimes it is. It has often been quoted as The Great Feature of the Von Neumann type machine that it can modify its own instructions, but most modern algorithmic translators, however, create an object program that remains in its entire execution phase just as constant as the original source text. Instead of chaotically modifying its own instructions just before or after their execution, creation of instructions and execution of these instructions now occur in different sequenced regions: the translation phase and the execution phase. And this for the benefit of us all.</p>
+					<p>It is my firm belief that in each process of some complexity the variables occurring in it admit analogous hierarchical orderings and that, when these hierarchies are clearly recognizable in the program text, the gain in clarity of the program and in efficiency of the implementation will be considerable. If this monograph gives any reader a clearer indication of what kind of hierarchical ordering can be expected to be relevant, I have reached one of my dearest goals. And may we not hope, that a confrontation with the intricacies of Multiprogramming gives us a clearer understanding of what Uniprogramming is all about?</p>
+					<p></p>
+				</div>
+			</div>
+		<hr>
+		<font size="-1">transcribed by Nick James and Ham Richards<br>
+			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="87">Tue, 4 Dec 2007</csobj></font>
+	</body>
+
+</html>

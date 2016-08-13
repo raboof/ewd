@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Letter to the referees of EWD4l8 (EWD 470)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+  <a href="../../ewd04xx/EWD470.PDF"
+           title="Link to the PDF version of EWD 470">EWD470</a></div></div>
+      <div id="frame">
+         <div id="content">
+         <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR
+<hr />
+<p class="noindent">           
+           <p class="noindent"><u>Letter to the referees of EWD4l8</u>.
+  <p class="noindent">(I refer to the referee who started with &ldquo;I think this...&rdquo; as Referee A, to
+the one starting with &ldquo;OPINION This paper contains...&rdquo; as Referee B.)
+<p>In response to Referee A&rsquo;s remark (2): it was not my intention to introduce
+a terminological innovation when using the word &ldquo;calculus&rdquo;. On the contrary! I
+wanted to be in step with common usage --which I felt obliged to explain, because
+many people are confused about it-- . I shall change the last sentence of the
+introduction, as that seems to be the source of the erroneous impression.
+Referee B suggested that the word &ldquo;calculus&rdquo; should be removed from the title
+because &ldquo;nowhere a calculus for the derivation of programs is defined&rdquo;. Instead
+of defining, I thought --and still think-- that I have &ldquo;shown&rdquo; it, at least in
+my sense of the word &ldquo;calculus&rdquo; --and in very much the same sense in which
+D.E.Knuth uses the term (between quotes!) on page 283 of his recent article
+in the December 1974 issue of the ACM Computing Surveys--. In order not to
+arouse false hopes I shall, however, remove the word &ldquo;calculus&rdquo; from the title.
+(Besides that, I prefer underselling above overselling.)
+<p>Referee A asks (3) &ldquo;Why have the notes on page 2 as notes?&rdquo; Simply because
+I do not propose to allow empty guarded command sets; they are conclusions,
+irrelevant for the rest of the story, that have been included as redundant
+material so that the reader can check his understanding of the two constructs.
+Referee A&rsquo;s suggestion (4) will be followed: as the note on page 5 stands,
+it contains indeed too many negations. I shall also follow his suggestion (5)
+--to combine the hypotheses of Theorem 3-- and ::although with some 
+reluctance-suggestion (6) &ldquo;either don&rsquo;t mention personal feeling [...] or elaborate the
+reasons&rdquo;. I know that his suggestion is in full accordance with the scientific
+tradition (and that tradition is not without wisdom, as it eliminates, for
+instance, unsubstantiated slander!) But we loose by it too, for even scientists
+have, besides a head, a heart as well and there is no point in denying the latter
+one its right of existence. (More than once I have given advice or formulated
+an expectation while, when asked &ldquo;to elaborate the reasons&rdquo;, I found myself
+unable to do so: I just felt it in my bones.) In this case elaboration would
+fall outside the scope of the article and the mentioning of my feelings will
+be removed.
+<p>The note on page 6 --referee A&rsquo;s remark (10)-- is hard to understand:
+the relation between wp and wdec is, although formally simple, conceptually
+hard to understand. I have to leave it as it stands, because it says as well as
+I can manage what I want to say and from Referee A&rsquo;s remark I cannot deduce
+a suggestion for improvement. (I don&rsquo;t see how his &ldquo;Q(X)&rdquo; suddenly enters
+the picture.) May I ask him to try to read the note on page 6 another time?
+<p>Referee A&rsquo;s remark that the four properties of wp are derivable was a
+remark that I expected. The point, however, is this:
+      either one postulates that our wp&rsquo;s describe an input/output relation
+and then they follow from more fundamental axioms of relations
+      or one introduca the wp&rsquo;s as a formal game and groves -by structural
+induction-- that our wp&rsquo;s enjoy those properties (which are then used for
+proving formally assertions about composite wp&rsquo;s ). That the wp&rsquo;s can be
+interpreted as describing input/output relations then follows.
+My preference is for the second position, but --intentionally, because it is
+not a key issue in this paper-- I have used the non-committing term &ldquo;properties&rdquo;,
+and have left the option open whether &ldquo;by definition&rdquo; refers to the definition
+of the notion &ldquo;weakest pre-condition&rdquo; --for those readers who prefer the first
+position-- or to the definition of the specific wp&rsquo;s I have introduced. I
+shall mention, however, the issue of non-determinacy versus determinacy in
+relation to the 4th Property.
+<p>(As a matter of fact, the 2nd property is a special case of a more
+general property --call it &ldquo;continuity&rdquo; if you 
+prefer-If for k &ge; 0 we have C<sub>k</sub> &rArr; C<sub>k+1</sub>   , then we have for any S
+      wp(S, (<u>E</u> k: k &ge; 0: C<sub>k</sub>)) &rArr; (<u>E</u> r: r &ge; 0: wp(S, C<sub>r</sub>)) .
+Also this is proved by structural induction. I did not consider its inclusion,
+although it is fundamental in demonstrating that computations guaranteed to
+terminate only embody <u>bounded</u> non-detetminacy.)
+<p>Referee B makes two comments: he states that &ldquo;theorem 3 is not entirely
+obvious and there ought to be a quick proof of it from Fix Point Induction
+(which ought to be given).&rdquo; I thought it fairly obvious, for a guarded list
+is only invoked under such initial condition that P remains invariant and t
+is decreased by at least 1 . But then it cannot do so indefinitely, because
+that same condition is stated to imply t &ge; O . It is easily proved by mathematical
+induction with k --from the definition of the semantics of the repetitive 
+construct (3.3)-- as induction variable. I shall add a remark to that effect. (I
+shall not remark explicitly that one of the reasons why the formalism introduced
+in section 3.1, 3.2 and 3.3 attracts me is that all those properties and theorems
+are quite easily proved without using the Fix Point machinery. I don&rsquo;t like to
+crack eggs with sledgehammers, even if the sledgehammer is very good at it.)
+Referee B further remarks &ldquo;It is the semantics of guarded statements that are
+ostensibly discussed, but in fact the major point is really the use of wp(S, R)
+to &rdquo;tighten things up a bit&ldquo; from Hoare&rsquo;s treatment.&rdquo; I am glad to hear that he
+regards this &ldquo;tightening things up a bit&rdquo; really as &ldquo;a major point&rdquo; --so do I
+myself in my more exalted moments-- but that part of, shall we call it &ldquo;theory
+of programming semantics&rdquo; was not the subject of this paper, which was meant to
+be of pratical assistance for the programming process. So I just mentioned the
+necessary results, and proceeded to show how they can be exploited while programming
+<p>Referee B&rsquo;s second remark &ldquo;It is not pointed out that wp(S, R) need
+not be a decidable statement. That fact might help some readers to see the
+disadvantages of the concept.&rdquo; reveals the nigger in the woodpile that I had thougt
+to have hidden so carefully! I have taken the point of view that as long as we
+have not proved that an initial state satisfies wp(S, T) , the semantics are
+not defined and that a machine, embarking upon the execution of S in
+such an initial state may do as it pleases in the sense that, whatever it does,
+we have no right to complain. As an immediate consequence I must reject the follow
+program for trying to refute Goldbach&rsquo;s Conjecture that every natural number &ge; 2
+is the average of two primes: 
+      <b>begin</b> <b>integer</b> n, x, y; <b>boolean</b> refuted;
+         n:= 1; refuted:= false;
+         <b>do</b> <b>non</b> refuted &rarr;
+            n:= n + 1; x:= 2; y:= 2 * n;
+            <b>do</b> x &lt; y <b>and</b> x + y &lt; 2 * n &rarr; x:= smallestprime larger than(x)
+             &#x25af; x &lt; y <b>and</b> x + y &gt; 2 * n &rarr; y:= largest prime smaller than(y)
+            <b>od</b>;
+            refuted:= (x + y &ne; 2 * n)
+         <b>od</b>;
+         printbool(refuted)
+      <b>end</b>
+<p>Because I have not proved that Goldbach&rsquo;s Conjecture is false, I have
+not proved that wp(S, T) is initially true, therefore the machine may act as
+it pleases and I am, therefore, not allowed to conclude that Eoldbach&rsquo;s Conjecture
+is wrong when it prints &ldquo;true&rdquo; and stops! I would be allowed to draw that
+surprising conclusion, however, if the third line had been changed into
+      &ldquo;<b>do</b> <b>non</b> refuted <b>and</b> n &lt; 1 O00 O00 000 &rarr;&rdquo; ,
+i.e. we must be willing to state beforehand &ldquo;howlong&rdquo; we are willing to wait
+for the answer. Now the nigger is out, I shall insert --between parentheses,
+so as not to alarm the reader who would like to skip the 
+remark-&ldquo;We consider the semantics of S only-defined for those initial states
+for which has been established a priori that they satisfy &rdquo;wp(S, T).&ldquo; ,
+leaving to the reader to decide for himself whether he regards this way of
+running away from the halting problem a wise restriction or a sneaky way out.
+Is referee B, after the above still convinced that it is &rdquo;a disadvantage of the
+concept&ldquo;? I guess, that he is still convinced of the &rdquo;disadvantages&ldquo;. But to
+quote from a personal letter from one of our greatest colleagues &rdquo;Some problems
+are better evaded than solved, such as the problem how many angels can dance
+on the pin of a needle (for instance by denying the existence of angels).&ldquo;
+<p>I shall do justice to Referee B&rsquo;s remark about &rdquo;less efficiency at run
+time (e.g. unnecessary tests).&ldquo;. It greatly depends on the question whether
+we view the fuards of a guarded command set to be evaluated concurrently, 
+something that is entirely permitted. But even when we think of evaluating them
+sequentially, the expectation value of the number of tests to be performed
+may be less: compare the published version of Euclid&rsquo;s Algorithm with
+      x, y:= X, Y;
+      <b>while</b> x &ne; y <b>do</b> if x &gt; y <b>then</b> x:= x - y <b>else</b> y:= y - x <b>fi</b> <b>od</b> .
+<p>Referee B&rsquo;s QUESTION, whether we can confine the <b>do</b> ... <b>od</b> construction
+to guarded command sets of a single guarded command --that is what his question
+boils down to-- is answered by &rdquo;In principle, yes&ldquo;. but it could be harmful
+to the efficiency (see the above example). It would, furthermore, be an arbitrary
+restriction that would destroy the symmetry between the repetitive and the 
+alternative construct and from which I, therefore, do not expect a simplification.
+<p>I shall include a further example --I think computing XY for a binary
+and a decimal machine-- to put some meat into the assertion of the ability to
+&rdquo;map otherwise (trivially) different programs on the same program text&ldquo;, in the
+hope of also meeting Referee A&rsquo;s general request about-the practical use.
+(Although I am not sure that I can convince everybody of the &rdquo;practical&ldquo;
+significance: norms of practicality tend to be heavily dependent on personal
+circumstances.)
+<p>I regret that only one suggestion has been made to shorten the paper
+--needless to say: it will be followed-- and thank my referees also for minor
+remarks as typing errors: your sets of typing errors pointed out to me had
+an empty intersection! In order to reduce the probability of introducing new
+typing errors, I shall produce the final version of the manuscript with
+scissors and paste.
+<p> With feelings of gratitude,
+                                           yours ever
+                                                   signature
+22nd January 1975                          prof.dr.Edsger W.Dijkstra
+Plataanstraat S                            Burroughs Research Fellow
+NUENEN - 4555
+The Netherlands
+<p class="noindent">Post-scriptum d.d. 28th January 1975: EWD418 has been rebuilt into EWD472.
+Efforts to include other examples have been abandoned as I discovered that
+they would lengthen the article considerably. I have tried, instead, to
+formulate explicitly what would be concluded from those examples. The
+lower half of EWD472 makes one of the advantages of the guarded command
+set explicit by comparing my version of Euclid&rsquo;s Algorithm with conventional
+ways of writing it down. On that same example I could graft some remarks
+about efficience. The paragraph extending from EWD472 - 12 to EWD472 - 13
+gives a further description of why they are useful. As far as contents is
+concerned I think that the additions are improvements; the English of the
+new sections seems to run less smoothly, I am sorry to say!
+<p>                            EWD.

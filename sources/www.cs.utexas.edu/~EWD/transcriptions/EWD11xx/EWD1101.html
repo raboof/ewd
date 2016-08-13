@@ -1,0 +1,76 @@
+<html>
+
+<head>
+<meta name=Title content="Triangles in graphs: a sharp bound">
+<meta name=Keywords content="">
+<meta http-equiv=Content-Type content="text/html;charset=ISO-8859-1">
+
+
+<title>E.W. Dijkstra Archive: Triangles in graphs: a sharp bound (EWD1101)</title>
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+<body>
+
+    <div id="frame">
+			<div id="header">
+        <a href="../../ewd11xx/EWD1101.PDF" 
+           title="Link to the PDF version of EWD1101">EWD1101</a>
+      </div>
+			<div id="content">
+				<div>
+					<p class="noindent"><u>Triangles in graphs; a sharp bound</u></p>
+					<p>We consider undirected graphs without autoloops and without multiple edges&#x2014;i.e. each edge connects a pair of different vertices, and a pair of vertices is connected by at most 1 edge&#x2014;. A triangle is a set of 3 vertices such that any two of them are connected by an edge of the graph; the graph is then said to &quot;contain&quot; that triangle.</p>
+					<p class="noindent"><u>Theorem</u>&nbsp;&nbsp;&nbsp;&nbsp; Let <var>M.V</var> be the maximum number of edges of a graph with <var>V</var> vertices such that the graph need not contain a triangle; then <var>M</var>.(2<var>k</var>) = <var>k</var><sup>2</sup> and <var>M</var>.(2<var>k</var>-1) = <var>k</var>&#x2219;(<var>k</var>-1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .</p>
+					<p class="noindent"><u>Proof</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Both equations for <var>M</var> have the form <var>M</var>.(<var>a</var>+<var>b</var>) = <var>a</var>&#x2219;<var>b</var>.&nbsp; Showing that a graph with <var>a</var>+<var>b</var> vertices and <var>a</var>&#x2219;<var>b</var> edges need not contain a triangle is done by constructing a witness. Paint <var>a</var> of the vertices red and the remaining <var>b</var> vertices blue; introduce <var>a</var>&#x2219;<var>b</var> edges by connecting each red vertex with each blue vertex. Since in the resulting (bipartite) graph colours along a path alternate, cycles have even length and hence the graph contains no triangle.</p>
+					<p>That a graph with more edges &#x2014;if feasible&#x2014; contains a triangle is shown by mathematical inductions.</p>
+					<p>We confine our attention to graphs with at least 3 vertices, and for the base of the induction we consider (<var>a</var>, <var>b</var>) = (1, 2) and (<var>a</var>, <var>b</var>) = (2, 2).&nbsp; In the first case, we have to show that a graph with #vertices = 1+2 and #edges &gt; 1&#x2219;2 contains a triangle: such a graph has 3 vertices and 3 edges and is a triangle. In the second case, we have to show that a graph with #vertices = 2+2 and #edges &gt; 2&#x2219;2 contains a triangle:&nbsp; such a graph has at least 5 edges and hence contains the complete 4-graph with 1 edge missing, which contains even 2 triangles.</p>
+					<p>For the induction step we show for any <var>a</var>, <var>b</var>:</p>
+					<blockquote>
+						<p class="noindent">(any graph with #vertices = <var>a</var>+<var>b</var> and #edges &gt; <var>a</var>&#x2219;<var>b</var> contains a triangle)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x21d2;</p>
+						<p class="continue">(any graph with #vertices = (<var>a</var>+1)+(<var>b</var>+1) and #edges &gt; (<var>a</var>+1)&#x2219;(<var>b</var>+1) contains a triangle).</p>
+					</blockquote>
+					<p>To this end we consider a graph with (<var>a</var>+1)+(<var>b</var>+1)&nbsp;&nbsp; &#x2014;= <var>a</var>+<var>b</var>+2&#x2014;&nbsp;&nbsp; vertices and more than (<var>a</var>+1)&#x2219;(<var>b</var>+1) &nbsp;&nbsp;&#x2014;= <var>a</var>&#x2219;<var>b</var>+<var>a</var>+<var>b</var>+1&#x2014;&nbsp;&nbsp; edges and focus our attention on one of its edges <var>e</var>.&nbsp; Now we consider two cases: <var>e</var> is or is not an edge of a triangle. In the former case the graph obviously contains a triangle. If <var>e</var> is not the edge of a triangle, however, it is connected by at most <var>a</var>+<var>b</var> edges to the subgraph spanned by the remaining <var>a</var>+<var>b</var> vertices; the total graph having more than&nbsp; <var>a</var>&#x2219;<var>b</var>+<var>a</var>+<var>b</var>+1 edges, we conclude that in this case the subgraph of <var>a</var>+<var>b</var> vertices has more than <var>a</var>&#x2219;<var>b</var> edges and, according to the antecedent of the demonstrandum, contains a triangle. In view of the base we have demonstrated the presence of a triangle for <var>a</var>+1=<var>b</var> or <var>a</var>=<var>b</var> and <var>b</var>&#x2265;2.</p>
+				</div>
+				<div align="right">
+					<p class="continue">(End of Proof).</p>
+				</div>
+				<div>
+					<p>The above proof is noteworthy for two reasons, firstly because even and odd number of vertices could share the same induction step, and secondly because the presence of a triangle in a graph with 4 vertices and 5 edges has been demonstrated without case analysis. (Take the experiment and ask your friends.)</p>
+					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Austin, 5 May 1991</p>
+					<p></p>
+					<p class="noindent">prof.dr. Edsger W.Dijkstra,</p>
+					<p class="continue">Department of Computer Sciences,</p>
+					<p class="continue">The University of Texas at Austin,</p>
+					<p class="continue">Austin, TX 78712 &#150; 1188</p>
+					<p class="continue">USA</p>
+					<p></p>
+					<hr>
+					<p class="noindent"><font size="-1">Transcribed by Guy Haworth</font></p>
+					<p class="continue"><font size="-1">Revised <csobj format="LongDate" h="13" region="15" t="DateTime" w="126">Sunday, 
+					      <!-- #BeginDate format:En2 -->29-Dec-2013<!-- #EndDate -->
+					</csobj>
+				    .</font></p>
+					<p></p>
+				</div>
+			</div>
+		
+		
+			
+			
+			
+			
+				
+			
+			
+			
+			
+		
+			
+		
+			
+				
+			
+	</body>
+
+</html>

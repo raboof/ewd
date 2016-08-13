@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: A great improvement (EWD 573)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd05xx/EWD573.PDF"
+           title="Link to the PDF version of EWD573">EWD573</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<table> <tr> <td colspan = 2>
+<b>Copyright Notice  </b>                                                        </td> </tr> <tr> <td colspan = 2>
+The following manuscript                                                         </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+     EWD 573 A great improvement                                               </td> </tr> <tr> <td colspan = 2>
+is held in copyright by Springer-Verlag New York.                                </td> </tr> <tr> <td colspan = 2>
+The manuscript was published as pages 217–219 of                                 </td> </tr> <tr> <td></td> <td>
+     Edsger W. Dijkstra, <i>Selected Writings on Computing: A Personal Perspective</i>, </td> </tr> <tr> <td></td> <td>
+     Springer-Verlag, 1982. ISBN 0–387–90652–5.                                  </td> </tr> <tr> <td colspan = 2>
+<b>Reproduced with permission from Springer-Verlag New York. </b>                </td> </tr> <tr> <td colspan = 2>
+<b>Any further reproduction is strictly prohibited.</b>                          </td> </tr>
+</table>
+<p class=noindent><b>A great improvement.</b>
+<p>After my return from my last trip the first thing W.H.J.Feijen en M.Rem
+showed me was a much improved definition of &ldquo;wdec&rdquo;, for which they gave the credit
+to my colleague F.E.J.Kruseman Aretz. In [1] I had written:
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&ldquo;More specifically: we shall use the notation wp(S, R), where S denotes
+a statement list and R some condition on the state of the system, to
+denote the weakest pre-condition for the initial state of the system such
+that activation of S is guaranteed to lead to a properly terminating
+activity leaving the system in a final state satisfying the post-condition
+R .&rdquo;
+</td>  </tr>  </table>
+For a well-chosen programming language the article continues by defining how
+for any given S and R the pre-condition wp(S, R) is derived. One page
+later, when dealing with a repetitive construct and its termination, [1] continues:
+<table width=100%><tr><td valign=top width=10%>
+</td><td>&ldquo;Let t denote some integer function, defined on the state space, and
+let wdec(S, t) denote the weakest pre-condition such that activation
+of S is guaranteed to lead to a properly terminating activity leaving
+the system in a final state such that the value of t is decreased by
+at least 1 (compared to its initial value). [...] The relation between
+wp and wdec is as follows. For any point X in state space we can
+regard wp(S, t &le; t0) as an equation with t0 as the unknown. Let its
+smallest solution for t0 be tmin(X). (Here we-have added the explicit
+dependence on the state X .) Then tmin(X) can be interpreted as the
+lowest upper bound for the final value of t if the mechanism S is
+activated with x as initial state. Then, by definition, wdec(S, t) =
+(tmin(X) &le; t(x) - 1) = (tmin(X) &lt; t(x)).&rdquo;
+</td>  </tr>  </table>
+<p>Kruseman Aretz&rsquo;s definition is
+<table width=100%><tr><td valign=top width=10%>
+</td><td>wdec(S, t) = wp(S, t &lt; t0)<sub>t</sub><sup>t0</sup>
+</td>  </tr>  </table>
+where the notation R<sub>x</sub><sup>y</sup> is used to denote a copy of the expression R in which
+each occurrence of the variable x is replaced by y (or by (y) if necessary).
+<table width=100%><tr><td valign=top width=20%>
+Example. Let S be</td><td><b>if</b> true &rarr; x:= x - y
+</td></tr>
+<tr><td valign=top>
+</td><td>&nbsp; &#x25af; true - x:= x - z
+</td></tr>
+<tr><td valign=top>
+</td><td><b>fi</b>
+</td>  </tr>  </table>
+and let t = x .
+<br>Then &mdash;see [1]&mdash; we have:
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+      wp(S, t &lt; t0) =                                                                         </td> </tr> <tr> <td></td> <td colspan = 2>
+      (true <b>or</b> true) <b>and</b> (true &rArr; wp(&ldquo;x:= x - y&rdquo;, x &lt; t0)       </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                   <b>and</b> (true &rArr; wp(&ldquo;x:= x - z&rdquo;, x &lt; t0) =              </td> </tr> <tr> <td></td> <td colspan = 2>
+      wp(&ldquo;x:= x - y&rdquo;, x &lt; t0) <b>and</b> wp(&ldquo;x:= x - z&rdquo;, x &lt; t0) = </td> </tr> <tr> <td></td> <td colspan = 2>
+      (x - y &lt; t0) <b>and</b> (x - z &lt; t0) .                                               </td> </tr>
+</table>
+Hence wdec(S, t) = wp(S, t &lt; t0)<sub>t</sub><sup>t0</sup> = (x - y &lt; x) <b>and</b> (x - z &lt; x) = y &gt; 0 <b>and</b> z &gt; 0
+<p>This is much simpler than my original treatment. Analogous to the first
+five lines, we would have to derive first
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      wp(S, t &le; t0) = (x - y &le; t0) <b>and</b> (x - z &le; t0) . </td> </tr>
+</table>
+Then we would have to find the smallest solution for t0 satisfying that equation
+&mdash;and that is not a very standard operation!&mdash;; in this case we would find
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      tmin = max(x - y, x - z) </td> </tr>
+</table>
+and then we would derive
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+      wdec(S, t) = tmin &lt; t = max(x - y, x - z) &lt; x = max(- y, - 2) &lt; 0 = min(y, z) &gt; 0 .</td> </tr> <tr> <td></td> <td>
+                                                              </td> </tr>
+</table>
+(End of example.)
+<p>The example shows that Kruseman Aretz&rsquo;s alternative definition does not
+only embody a conceptual simplification, but that it also smooths the formal
+labour to be performed. It couples in a very direct way the derived condition
+wdec with the fundamental condition wp in a way that is very familiar from
+the axiom of assignment.
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>In retrospect I blame myself for acquiescing in my ugly original definition.
+I knew quite well that it was ugly: it was preceded in [1] by &ldquo;Note (which can be
+skipped at first reading).&rdquo; But I have failed to hear my own warning!
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>It was only after the above had been typed that I was told about the
+heuristics that had led to the new formulation of wdec . For that part, Kruseman
+Aretz gave the credit to M.Rem: it seems to have been the typical multi-person
+achievement, in which it is very hard to reconstruct later who has contributed what.
+The argument is the following. Let us introduce an auxiliary variable,
+t0 say, in which the value of t is recorded prior to the execution of S .
+(For the sake of&rsquo; this recording we assume that the value of t can be &ldquo;computed&rdquo;,
+so that it can be assigned to t0 .) Then we define
+      wdec(S, t) = wp(&ldquo;t0:= t; S&rdquo;, t &lt; t0)
+because the weakest pre-condition that &ldquo;t0:= t; S&rdquo; is guaranteed to establish
+t &lt; t0 is, indeed, the weakest pre-condition for S such that S is guaranteed
+to decrease t (by at least one, because t is an integer-valued function).
+But, thanks to the axiom of concatenation, this right-hand side reduces to
+         = wp(t0:= t, wp(S, t &lt; t0)
+which, thanks to the axiom of assignment, reduces to
+         = wp(S, t &lt; t0):<sub>t</sub><sup>t0</sup>
+and that is exactly the expression I gave on EWD573 - 0 .
+<p class=noindent>
+<table width=100%><tr><td valign=top width=10%>
+[1]</td><td>Dijkstra, Edsger W., Guarded Commands, Nondeterminacy and Formal
+</td></tr>
+<tr><td valign=top>
+</td><td>Derivation of Programs. Comm.ACM 18, 8 (Aug. 1975) 453 - 457.
+</td>  </tr>  </table>
+<p>
+<table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger: W.Dijkstra
+</td></tr>                  
+<tr><td valign=top>
+NL-4565 NUENEN</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-01-23<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Primes once more (re Kac &amp; Ulam) (EWD 1203)</title>
+		<link href="../transcriptions.css" rel="stylesheet" media="screen" />
+	</head>
+  <body>
+    <div id="frame">
+			<div id="header">
+				<a href="../../ewd12xx/EWD1203.PDF">EWD1203</a></div>
+		</div>
+		<div id="frame" align="left">
+			<div id="content" align="left">
+				<u>Primes once more (re Kac &amp; Ulam)</u></div>
+				
+			
+				
+				
+			
+		</div>
+		<div id="frame">
+			<div id="content">
+				<p>The 
+					<emph>plurals</emph>
+					 are defined as the integers &#x2265; 2.
+	  The plurals come in two sorts, the 
+					<emph>
+						<u>composite</u></emph>
+					
+					
+	  numbers, i.e. the plurals divisible by a smaller plural, and
+	  the 
+					<emph>
+						<u>prime</u></emph>
+					
+					 numbers, i.e. the plurals not
+	  divisible by a smaller plural.</p>
+				<p class="noindent"><a name="lemma0" id="lemma0"></a>
+					<emph>
+						<u>Lemma 0</u></emph>
+					
+						
+					
+					
+				&nbsp;&nbsp;&nbsp; Each plural has a prime divisor.</p>
+				<p class="noindent">
+					<emph>
+						<u>Proof</u></emph>
+					
+						
+					
+					
+				&nbsp;&nbsp;&nbsp; By mathematical induction over the plurals. Consider plural <var>n</var>. Either <var>n</var> is prime, in which case it has the prime divisor <var>n</var>, or it is composite, in which case it has a smaller plural divisor <var>x</var> which (because <var>x</var> &lt; <var>n</var>) has &quot;ex hypothese&quot; a prime divisor that (since <var>x</var> divides <var>n</var>) is a prime divisor of <var>n</var> as well. (End of Proof.)<br />
+				</p>
+				<p class="noindent">
+					<emph>
+						<u>Remark</u></emph>
+					
+						
+					
+					
+				&nbsp;&nbsp;&nbsp;
+	  The above is a nice example of what is sometimes called
+	  &quot;course-of-values induction&quot;, in which the proof
+	  obligation is (for arbitrary <var>n</var>)
+</p>
+				<p>&#x3008&#x2200;<var>x</var>: <var>x</var> &lt; <var>n</var>: hyp.<var>x</var>&#x3009; &#x21D2; hyp.<var>n</var></p>
+				<p class="noindent">
+				Notice in the above proof the absence of separate treatments of &quot;base&quot; and &quot;step&quot;. (End of Remark.)</p>
+				<p class="noindent"><a name="lemma1" id="lemma1" ></a>
+					<emph>
+						
+							<u>Lemma 1</u>
+
+					</emph>
+					&nbsp;&nbsp;&nbsp; There is no finite set of all primes.</p>
+				<p class="noindent">
+					<emph>
+						<u>Proof</u></emph>
+					
+						
+					
+					 &nbsp;&nbsp;&nbsp; Let <var>S</var> be a finite set of prime numbers and consider <var>k</var> given by <var>k</var>&nbsp;=&nbsp;1&nbsp;+&#x3008;&Pi;<var>x</var>:&nbsp;<var>x</var>&nbsp;&#x2208;&nbsp;<var>S</var>:&nbsp;x&#x3009; &#151;because <var>S</var> is finite, the product of the numbers in <var>S</var> is defined&#151;. By construction, <var>k</var> is not divisible by any of the primes in <var>S</var> &#151;notice&#x3008;&#x2200;<var>x</var>: <var>x</var>&#x2208; <var>S</var>: 2&#x2264;<var>x</var>&#x3009;&#151;; by <a href="#lemma0">Lemma 0</a>, however, <var>k</var> has a prime divisor that is not an element of <var>S</var>. (End of Proof.)</p>
+				<p class="noindent">(Courtesy A. J. M. van Gasteren)</p>
+			</div>
+			<div id="content" align="center">
+				<p class="noindent">
+				*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+					
+				*</p></div>
+			
+				
+			<div id="content">
+				<p>The above has been written down so that we may compare it
+	with how Mark Kac and Stanslaw M. Ulam treat the matter on the
+	1st page of Chapter 1 of their &quot;Mathematics and
+	Logic&quot;:</p>
+				<blockquote>
+					<p class="noindent"><a name="quote1" id="quote1"></a>
+	  The following proof, probably still the simplest, asserts
+	  the mere existence of arbitrarily large primes.  Suppose the
+	  number were finite; there would then be a largest
+	  prime <var>p</var>.  Consider now the number <var>n</var>
+	  = <var>p</var>! + 1 (<var>p</var>! is read &quot;<var>p</var>
+	  factorial&quot; and equals 1 &#x2219; 2 &#x2219; 3 &#x2026; <var>p</var>).  This number is not divisible by any
+	  prime up to <var>p</var>.  If there is no prime between <var>p</var>
+	  and <var>n</var>, as we have assumed, then <var>n</var> itself would
+	  be prime, contrary to our assumption that <var>p</var> is the
+	  largest one.
+</p></blockquote>
+				
+					
+				<p>The authors hesitate between dealing with the number of
+	primes and the value of primes: the first sentence deals with
+	their values, the second one mentions their number.  The
+	conclusion of the second sentence is unwarranted: suppose
+	there were no primes at all, then their number would have been
+	finite (viz. zero), but there would not have been a largest
+	prime <var>p</var>.  (I would like the reader to appreciate that
+	the argument in our proof of <a href="#lemma1">Lemma 1</a> is perfectly valid when <var>S</var> is empty.) The second sentence would have been better had they just written: &quot;Suppose there were a largest prime <var>p</var>.&quot;.</p>
+				<p>The third sentence introduces <var>n</var>, the fourth sentence
+	is the first one whose correctness depends on the concept
+	&quot;prime&quot;.  Unfortunately, the authors opened their
+	chapter a little earlier with:</p>
+				<blockquote>
+					<p class="noindent"><a name="quote2" id="quote2"></a>
+	  1.&nbsp;&nbsp;<var>The Infinity of Primes</var><br />
+						
+					
+	  Among the so-called natural numbers (1, 2, 3, and so on) are
+	  some that are divisible only by 1 and by themselves; these are
+	  called the <var>prime numbers</var>.  The prime numbers are the
+	  building blocks of all the numbers in the sense that every
+	  natural number is the product of powers of the primes that
+	  divide it.  For instance 60 = 2<sup>2</sup>&#x2219;3&#x2219;5. The first several primes are 1, 2, 3, 5, 7, 11, 13, 17. It can be asked whether the series goes on forever, or, in other words, whether there is a largest prime. The answer is that there is no largest prime. This has been known since the golden age of Greece. It was proved by Euclid in the 3rd century B.C. His argument is as clear and fresh today as ever.</p></blockquote>
+				
+					
+				So, 1 is included in their primes, and the conclusion in their fourth sentence is just wrong. [This is another illustration of the fact that including 1 among the prime numbers is an unfortunate interface.]
+				<p>The fifth sentence is supposed to conclude the proof, but
+	it is very elliptic as it does not mention which property of
+	prime numbers should justify the conclusion.  It looks as if
+	we are invited to conclude from the fact that none of the
+	numbers between <var>p</var> and <var>n</var> is prime that none of
+	these numbers divides <var>n</var>, and I hope that we are not supposed to use that &quot;Every natural number is the product of [positive] powers of the primes that divide it&quot;, for otherwise we could apply the possibility of that factorization to <var>n</var> directly and conclude, without the
+	assumption that <var>p</var> was the largest prime,
+	because <var>n</var> &#x2265; 2 the existence of a prime larger
+	than <var>p</var>.  The last step of the <a href="#quote1">quoted
+	proof</a> needs a possibly unstated and in any case unproven
+	lemma (whose proof almost certainly requires mathematical
+	induction).  What an awful mess!  And that in a book with the
+	title &quot;Mathematics and Logic&quot;!</p>
+				<p>Now we are at it, I draw the reader's attention to the
+	following sentence from the <a href="#quote2">second
+	quotation</a>:</p>
+				<blockquote>
+					<p class="noindent">
+					
+	  &quot;It can be asked whether the series [of primes] goes on
+	  forever, or, in other words, whether there is a largest
+	  prime.&quot;
+</p></blockquote>
+				However, the answer to the first question is &quot;yes&quot;, and to the second one &quot;no&quot;.
+				<p class="noindent">Mark Kac and Stanislaw M. Ulam, &quot;Mathematics and Logic&quot;, originally published: New York: Praeger, 1968, in series: Brittanica perspective. Dover Publications, Mineola, NY, 1992.</p>
+				<p style="width: 100%; text-align: right">Austin, 17 March 1995</p>
+			</div>
+			<div>
+				
+	prof. dr. Edsger W. Dijkstra<br />Department of Computer Sciences<br />The University of Texas at Austin<br />Austin, TX 78712-1188<br />USA</div>
+			<hr />
+			<div id="footer">
+				<font size="-1">
+				
+	transcribed by Ben Bacarisse<br />
+					revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="93">Mon, 28 Jan 2008</csobj></font></div>
+		</div>
+	</body>
+</html>
+

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	<title>E.W.Dijkstra Archive: The Mathematical Divide (EWD 1268)</title>
+		<link href="../transcriptions.css" rel="stylesheet" media="screen" />
+</head>
+
+<body>
+		<div id="frame">
+		<div id="header">
+				<a title="PDF scan of EWD 1268" href="../../ewd12xx/EWD1268.PDF">EWD 1268</a>
+</div>
+
+		<div id="content">
+
+
+<u>The Mathematical Divide</u>
+
+				<p>  This note uses the simplest example I could think of to illustrate an old
+issue &#x2014;a bone of contention, one might say&#x2014; that tends to divide the mathematical world. I shall present two proofs of the well-known equality.</p>
+				<p class="noindent">
+				(0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<var>a</var>+<var>b</var>)<sup>2</sup> = <var>a</var><sup>2</sup> + 2&#x2219;<var>a</var>&#x2219;<var>b</var> + <var>b</var><sup>2</sup></p>
+				
+
+				<p>  We give the intuitive proof first:
+
+				<center>
+					<p class="noindent"><b>&lt;</b>&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;<b> </b><var>a</var> + <var>b</var><b> </b>&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;<b><var>&gt;</var></b></p>
+					<table width="400" height="400" border="1">
+						<tr height="300">
+							<td valign="top" width="300">
+								<center>
+									&lt;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219; <var>a </var>&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&#x2219;&gt;<br />
+									<br />
+									<br />
+									<br />
+									<br />
+									<br />
+									<br />
+									<br />
+									<br />
+									<var>a</var><sup>2</sup></center>
+							</td>
+							<td valign="top">
+								<center>
+									&lt;&#x2219;&#x2219;&#x2219; <var>b </var>&#x2219;&#x2219;&#x2219;&gt;<br />
+									<br />
+									<br />
+									<br />
+									<br />
+									<br />
+									<br />
+									<br />
+									<br />
+									<var>a</var>&#x2219;<var>b</var></center>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<center>
+									<var>a</var>&#x2219;<var>b</var></center>
+							</td>
+							<td>
+								<center>
+									<var>b</var><sup>2</sup></center>
+							</td>
+						</tr>
+					</table>
+					</center>
+				<p class="noindent">
+				
+
+The lefthand side of (0) represents the area of the undivided big square; the righthand side represents the sum of the areas of the four parts as in the above picture.  In short: equality (0) stares you in the face!
+</p>
+				<div align=right>
+					
+</div>
+				<p>Now we turn to the calculational proof. As usual, we shall exploit the associativity of the addition &#x2014;i.e. the equality
+
+				<p>(<var>p</var> + <var>q</var>) + <var>r</var> = <var>p</var> + (<var>q</var> + <var>r </var>) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for all <var>p</var>, <var>q</var>, <var>r &nbsp;</var> &#x2014;</p>
+				<p class="noindent">
+				implicitly by omitting such semantically redundant parenthesis. Here we go! For any <var>a</var>, <var>b</var>,</p>
+				<p class="p0">(<var>a</var> + <var>b</var>)<sup>2</sup></p>
+				<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ definition of exponentiation }</p>
+				<p class="p0">(<var>a</var> + <var>b</var>) &#x2219; (<var>a</var> + <var>b</var>)</p>
+				<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ distribution <var>p</var>&#x2219;(<var>q</var> + <var>r </var>) = <var>p</var>&#x2219;<var>q</var> + <var>p</var>&#x2219;<var>r </var>}</p>
+				<p class="p0">(<var>a</var> + <var>b</var>) &#x2219; <var>a</var> + (<var>a</var> + <var>b</var>) &#x2219; <var>b</var></p>
+				<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ distribution (<var>p</var> + <var>q</var>) &#x2219; <var>r</var> = <var>p</var>&#x2219;<var>r</var> + <var>q</var>&#x2219;<var>r</var>, twice }</p>
+				<p class="p0"><var>a</var>&#x2219;<var>a</var> + <var>b</var>&#x2219;<var>a</var> + <var>a</var>&#x2219;<var>b</var> + <var>b</var>&#x2219;<var>b</var></p>
+				<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ symmetry of &#x2219; : <var>p</var>&#x2219;<var>q</var> = <var>q</var>&#x2219;<var>p </var>}</p>
+				<p class="p0"><var>a</var>&#x2219;<var>a</var> + <var>a</var>&#x2219;<var>b</var> + <var>a</var>&#x2219;<var>b</var> + <var>b</var>&#x2219;<var>b</var></p>
+				<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { definition of exponentiation twice; property of 2: <var>p</var> + <var>p</var> = 2&#x2219;<var>p </var>}</p>
+				<p class="p0"><var>a</var><sup>2</sup> + 2&#x2219;<var>a</var>&#x2219;<var>b</var> + <var>b</var><sup>2</sup></p>
+				<p class="noindent">(In the very last line &#x2014;as in (0)&#x2014; we have implicitly used that also multiplication is associative.) Compared with the calculational proof, our former intuitive proof is seductively simple, but, though a great lover of simplicity, I think that the temptation should be resisted.</p>
+				<p>The traditional objection to the intuitive, pictorial arguments is that they raise more questions than they answer because pictures are always over specific. In our example, for instance, we have in the picture the case 0&lt;<var>b</var>&lt;<var>a</var>. Does (0) also hold when 0&lt;<var>a</var>&lt;<var>b</var>? When <var>b</var>&lt;0&lt;<var>a</var>? Or, more precisely, when 0&nbsp;&lt;&nbsp;<var>a</var>+<var>b&nbsp;</var>&lt;&nbsp;<var>a</var> and when <var>a</var>+<var>b</var>&nbsp;&lt;&nbsp;0&nbsp;&lt;&nbsp;<var>a</var>? The intuitive argument does not answer these questions. Because its silent assumptions obscure what is purportedly demonstrated, we can question whether the intuitive argument should be considered a proof at all.
+
+				<div align=right>
+					
+</div>
+				
+
+				<p>  With respect to the above questions, the calculational proof does much better: the transformations used are value-preserving, whatever the signs involved, and, hence, the calculational argument demonstrates at one fell swoop that (0) is valid for all possible sign combinations.</p>
+
+<p>There is one further advantage of this calculational proof. And that concerns the question whether (0) also holds if <var>a</var>, <var>b</var> are matrices. (Not an unreasonable question, for matrices can be added, squared, and multiplied, just like real numbers.) To the answer of this question, the intuitive proof cannot contribute at all. The calculational proof immediately tells us that in general, (0) does not hold for matrices since matrix multiplication is not symmetric (i.e. in general, <var>p</var>&#x2219;<var>q</var> &#x2260; <var>q</var>&#x2219;<var>p</var> for matrices <var>p</var>, <var>q</var>). In the intuitive argument, (0)'s dependence on symmetry of multiplication is swept under the rug, and the intuitive argument is error-prone, because its apparent simplicity has been obtained by committing the sin of omission.
+				<div align=right>
+					
+</div>
+				
+
+				<p>  So much for the nature of the Mathematical Divide.</p>
+
+<center>
+					<br />
+					*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+					*<br />
+				</center>
+				<p> Each side of this Mathematical Divide has its fervent advocates.  Pictorial arguments are praised for being natural and intuitive, for being short and simple, for providing insight, and for aiding and guiding in the discovery of new mathematics; finally, pictures are deemed less error-prone than calculations.  Calculational arguments are praised for their rigour, for their completeness, for their brevity, and lately for their amenability to mechanical verification or even generation; finally, calculations are deemed less error-prone than pictorial arguments. </p>
+				<div align=right>
+					
+</div>
+				<p>  To the discussion of the pros and the cons I would like to add two remarks, because I do not notice them being made while I do think they are relevant.</p>
+
+<p>  The first remark is that, no matter how surprising, tickling, or charming "intuitive proofs" may be, we do not know how to teach their design, this in contrast to calculation, whose design to a very large extent can be taught.</p>
+
+<p>  When this alien resident of the USA sees a publisher's catalogue of mathematical textbooks, he cannot fail to notice that "intuitive" occurs as an almost universal recommendation.  But these blurbs make him very doubtful, for he knows his Concise Oxford Dictionary, which describes "intuition" as
+
+<blockquote>
+    "immediate apprehension by the mind, without reasoning"
+</blockquote>
+				
+
+which almost forces one to conclude that either the thing apprehended is totally trivial or the apprehension does not amount to very much.
+
+				<p>Another thing this alien resident of the USA cannot fail to notice [is] how the American mathematical community is obsessed with mathematical pedagogy and educational reform. I am not making this up. In the Fall, 1997, Newsletter of the Texas Section of the Mathematical Association of America, the Department of Mathematics and Statistics of Texas Tech University, Lubbock, TX 79409, invites applications for two tenure track assistant professor positions. So far, so good, but the 1st (!) requirement starts with
+				<div align=right>
+					
+</div>
+				<blockquote>
+    "The applicant must show strong evidence of research potential in collegiate level mathematics education."
+</blockquote>
+				
+
+(Anyone interested?)  This pedagogical obsession is not just a modern product of Political Correctness ("How to keep girls and other minorities in the mathematical fold", etc.), it already showed its ugly face a hundred years ago, when academic mathematics was hardly established in the USA.  I quote
+
+<blockquote>
+    "By 1897, the University [of Chicago] had promoted Jacob Young to an assistant professorship specifically in mathematical pedagogy."
+</blockquote>
+				(from Karen Hunger Parshall and David E. Rowe, &quot;The Emergence of the American Mathematical Research Community, 1876&#x2013;1900: J.J. Sylvester, Felix Klein, and E. H. Moore&quot;). This was shortly after the period that American mathematics had been heavily influenced by Felix Klein, an ardent advocate of intuition and visualization (&quot;Anschauung&quot;). Could it be that America's attraction to the unteachable form of doing mathematics and its persistent but ineffective obsession with mathematical pedagogy are related?
+				<div align=right>
+					
+</div>
+				
+
+				<p>  My second remark concerns the extent to which the problems of computing, programming, and digital systems design in general are amenable to mathematical treatment.  The answer is "Hardly" when we identify the doing of mathematics with its intuitive, pictorial style, because the latter does not scale up.  To return to our earlier example, a pictorial proof of
+
+				<p>(<var>a</var> + <var>b</var>)<sup>3</sup> = <var>a</var><sup>3</sup> + 3&#x2219;<var>a</var><sup>2</sup>&#x2219;<var>b</var> + 3*<var>a</var>&#x2219;<var>b</var><sup>2</sup> + <var>b</var><sup>3</sup></p>
+				<p class="noindent">
+				has lost most of the attraction of simplicity, while a pictorial proof of the expansion of (<var>a</var>&nbsp;+&nbsp;<var>b</var>)<sup>4</sup> baffles the imagination. Also in a nonpictorial setting, &quot;immediate apprehension by the mind, without reasoning&quot; does not scale up.
+</p>
+				<div align=right>
+					
+</div>
+				<p>  But computing's successful designs are highly sophisticated logical constructs; they are unavoidably large, and a major design concern is always to structure them in such a way that the amount of reasoning needed for their justification remains doable.  The use of techniques that do scale up is an essential aspect, which, for instance, has been addressed explicitly under the heading "compositionality".  We are getting more and more successful at learning how to keep sophisticated, ambitious systems under control, but invariably (and not surprisingly) this requires the kind of formal calculations Felix Klein disliked and attention to detail he despised.</p>
+
+<p>You see, another thing this alien resident of the USA could not fail to notice was the strong scepticism evoked over here by his &#x2014;I thought eloquent and convincing&#x2014; pleas for a more mathematical approach to computing science and programming. An implication of that story is that, in the USA, the term &quot;mathematics&quot; has a meaning that differs from the one I grew up with. I am getting a feeling for how that divergence could occur; the role of education, which differs from country to country, has a lot to do with it.
+				<div align=right>
+					
+</div>
+				
+
+				<center>
+					<br />
+					*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br />
+					*<br />
+				</center>
+
+<p>  The Mathematical Divide also manifests itself in what is considered the role of proofs.  At the intuitive side, proofs have to be convincing; at the calculational side, proofs have to be correct.</p>
+
+<p>At the intuitive side there is a whole &quot;philosophy&quot; of mathematics &#x2014;I guess it has a name, but I don't know it&#x2014; that pushes mathematics as a social activity: a proof is acceptable if enough people accept it. (Names like Imre Lakatos, Philip J. Davis and Reuben Hersch come to mind.) It is an attitude very similar to the one, not unpopular in software engineering circles, for which &quot;user satisfaction&quot; is the primary quality criterion for a piece of software. The problem with the goal of &quot;user satisfaction&quot;, however, is that it provides no technical guidance to the program designer.
+				<div align=right>
+					
+</div>
+				
+
+				<p>In programming, the answer has been the introduction of the functional specification as the embodiment of a separation of concerns: the functional specification acts as a logical firewall between what are now known as the pleasantness problem and the correctness problem. The pleasantness problem deals with the question how satisfactory a system meeting a given functional specification would be; the correctness problem deals with the question whether a given system meets that functional specification. The correctness problem being an entirely technical one, the functional specification can provide strong heuristic guidance for the system designer. (This separation of concerns has provoked strong objections; correctness concerns have been blamed for stifling the programmer's creativity .....).</p>
+
+<p>In the last 120 years or so, an analogous development has taken place in mathematics, where the wooly quality criterion of &quot;convincing enough of your fellow mathematicians&quot; has been replaced by the requirement that the result be derived, according to the rules of an explicitly stated logic, from explicitly stated postulates. Logic and postulates act as the firewall, shielding the proof-designing mathematician from the psychological preferences of his colleagues. And again the formalization provides strong heuristic guidance.
+				<div align=right>
+					
+</div>
+				
+
+				<p>The moral of this story is that the introduction of the functional specification in programming is strongly analogous to, and has undoubtedly been inspired by the transition from the intuitive to the calculational side of the Mathematical Divide. That example is one more debt we owe the mathematical culture, but I should add that not all computer scientists share such feelings of gratitude. The title of the infamous 1977-paper by DeMillo, Lipton and Perlis &quot;Social Processes and Proofs of Theorems and Programs&quot; is revealing. Staying firmly at the intuitive side of the Mathematical Divide, they argue the futility of trying to treat programs as mathematical objects and boldly postulate: &quot;... the transition between specification and program <em>must</em> be left unformalized&quot;.				<div align=right>
+					
+</div>
+				
+
+				<p>I cannot resist to quote E. T. Bell (<i>The Development of Mathematics</i>, 1940, 1945) on the topic. He leaves no doubt as to which side of the Mathematical Divide has his preference.</p>
+				<blockquote>  
+"Mathematicians and scientists of the conservative persuasion may feel that a science constrained by an explicitly formulated set of assumptions has lost some of its freedom and is almost dead.  Experience shows that the only loss is denial of the privilege of making avoidable mistakes in reasoning.  As is perhaps but humanly natural, each new encroachment of the postulational method is vigorously resisted by some as an invasion of hallowed tradition.  Objection to the method is neither more nor less than objection to mathematics."
+</blockquote>
+				Amen.
+				<p align=right>Austin, 10 December 1997</p>
+			</div>
+			<div>
+			prof. dr. Edsger W. Dijkstra<br />Department of Computer Sciences<br />The University of Texas at Austin<br />Austin, TX 78712-1188<br />USA		</div>
+			<font size="-1">
+				<hr /></font>
+			
+			<div id="footer">
+				<font size="-1">
+			transcribed by Kevin Beckwith Bush<br />
+					revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="97">Mon, 10 Dec 2007</csobj></font></div>
+		</div>
+	</body>
+</html>
+

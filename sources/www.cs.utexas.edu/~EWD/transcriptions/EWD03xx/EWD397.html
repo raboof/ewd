@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>E.W.Dijkstra Archive: Self-stabilizing systems with distributed control (EWD 397)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd03xx/EWD397.PDF"
+           title="Link to the PDF version of EWD397">EWD397</a></div></div>
+      <div id="frame">
+         <div id="content">
+         <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR
+<hr />
+<p class="noindent">
+<p class="noindent"><b>Self-stabilizing systems with distributed control</b>.   
+  <p class="noindent">
+<div align=center>                    by Edsger W.Dijkstra *)  </div>
+<p class="noindent"><b>Abstract.</b> In a system with distributed control the local rules of behaviour
+can guarantee convergence of the system as a whole towards satisfying a global
+requirement.
+<p class=noindent><b>Keywords:</b> multiprocessing, networks, self-stabilization, synchonization,
+mutual exclusion, robustness, starting, error recovery.
+<br>CR Category: 4.32
+<table> <tr> <td>
+*) Authors address: </td><td>BURROUGHS       </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+                    Plataanstraat 5 </td> </tr> <tr> <td></td> <td>
+                    NUENEN - 4565   </td> </tr> <tr> <td></td> <td>
+                    The Netherlands </td> </tr>
+</table>
+<b>Self-stabilizing systems with distributed control.</b>
+<p>We consider a connected graph in which the majority of the possible edges
+are missing and with a finite state machine placed at each node; machines placed
+in directly connected nodes are called each other&rsquo;s &ldquo;neighbours&rdquo;. For each
+machine one or more so-called &ldquo;privileges&rdquo; are defined, i.e. boolean functions
+of its own state and the states of its neighbours; when such a boolean function
+is true, we say that the privilege is &ldquo;present&rdquo;. If a privilege is present, it
+can be &ldquo;selected&rdquo; and the corresponding &ldquo;move&rdquo; is then made, i.e. the machine
+enjoying the selected privilege is brought into a new state that is a function
+of its old state and the states of its neighbours; if for such a machine more
+than one privilege has been defined, that function may also depend on the
+privilege selected.
+<p>Furthermore there is a global criterion, telling whether the system as
+a whole is in a &ldquo;legitimate&rdquo; state. We require that
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in each legitimate state one or more privileges will be present, and
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in each legitimate state each possible move will bring the system again
+in a legitimate state, and
+<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;each privilege must be present in at least one legitimate state, and
+<br>4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for any pair of legitimate states there exists a sequence of moves
+transferring the system from the one into the other.
+<p>We call the system self-stabilizing if and only if regardless of the
+initial state and regardless of the privilege selected for the next move,
+always at least one privilege will be present and the system is guaranteed
+to find itself in a legitimate state after a finite number of moves. For a
+long time it has been an open question whether non-trivial (e.g. all states
+legitimate is considered trivial) self-stabilizing systems could exist. It is
+not directly obvious whether the local moves can assure convergence towards
+satisfaction of such a global criterion; the non-determinacy of the privilege
+selected is an added complication. The question is settled by each of the
+following three constructs. For brevity&rsquo;s sake the heuristics that lead me
+to find them the proofs that they satisfy the requirements have been omitted
+and &mdash;to quote Douglas T.Ross&rsquo;s comment on an earlier draft&mdash; &ldquo;the appreciation
+is left as an exercise for the reader&rdquo;.
+<p>In all three solutions I consider N+1 machines, numbered from 0 through N.
+In order to avoid avoidable subscripts I shall use for machine nr.i:
+<table><tr><td valign=top width=10%>
+L:</td><td>to refer to the state of its lefthand neighbour, machine nr.(i-1)<b>mod</b>(N+1),
+</td></tr>
+<tr><td valign=top>
+S:</td><td>to refer to the state of itself, machine nr.i,
+</td></tr>
+<tr><td valign=top>
+R:</td><td>to refer to the state of its righthand neighbour, machine nr.(i+1)<b>mod</b>(N+1).
+</td>  </tr>  </table>
+In other words, we confine ourselves to machines placed in a ring; machine
+nr.0 will also be called &ldquo;the bottom machine&rdquo;, machine nr.N will also be called
+&ldquo;the top machine&rdquo;. For the legitimate states we have chosen those states in
+which exactly one privilege is present. In describing the designs we shall use
+the format: &ldquo;<b>if</b> privilege <b>then</b> corresponding move <b>fi</b>&rdquo;
+<p class="noindent"><b>Solution with K-state machines (K &ge; N).</b>
+<p>Here each machine state is represented by an integer value S, satisfying
+0 &lt; S &lt; K. For each machine, one privilege is defined, viz.
+<br>for the bottom machine: <b>if</b> L = S <b>then</b> S:= (S + 1)<b>mod</b> K <b>fi</b>
+<br>for the other machines: <b>if</b> L &ne; S <b>then</b> S:= L <b>fi</b> .
+<p class="noindent"><b>Solution with four-state machines.</b>
+<p>Here each machine state is represented by two booleans xS and upS. For
+the bottom machine upS = <b>true</b> by definition, for the top machine upS = <b>false</b>
+by definition: these two machines are therefore only two-state machines.
+The privileges are defined as follows:
+<br>for the bottom machine: <b>if</b> xS = xR <b>and</b> <b>non</b> upR <b>then</b> xS:= <b>non</b> xS <b>fi</b>
+<br>for the top machine: <b>if</b> xS &ne; xL <b>then</b> xS:= <b>non</b> XS <b>fi</b>
+<br>for the other machines: <b>if</b> xS &ne; xL <b>then</b> xS:= <b>non</b> xS; upS:= <b>true</b> <b>fi</b>;
+                        <b>if</b> xS = xR <b>and</b> upS <b>and</b> <b>non</b> upR <b>then</b> upS:= <b>false</b> <b>fi</b> .
+<p>The four-state machines may enjoy two privileges. The neighbour relation
+between bottom and top machine is not exploited; we may merge them into a single
+machine which is then also a four-state machine for which also two privileges
+have been defined.
+<p class="noindent"><b>Solution with three-state machines.</b>
+Here each machine state is represented by an integer value S, satisfying
+0 &le; S &lt;3. The privileges are defined as follows:
+<table>
+<tr><td valign=top width=30%> for the bottom machine: </td></td><td valign=top width=80%>
+<b>if</b> (S + 1)<b>mod</b> 3 = R <b>then</b> S:= (S - 1)<b>mod</b> 3 <b>fi</b></td><td>
+</td></tr>
+<tr><td valign=top> for the top machine: </td></td><td valign=top>
+<b>if</b> L = R <b>and</b> (L + 1)<b>mod</b> 3 &ne; S <b>then</b> S:= (L + 1)<b>mod</b> 3 <b>fi</b></td><td>
+</td></tr>
+<tr><td valign=top> for the other machines: </td></td><td valign=top>
+<b>if</b> (S + 1)<b>mod</b> 3 = L <b>then</b> S:= L <b>fi</b>;</td><td>
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+<b>if</b> (S+1)<b>mod</b> 3 = R <b>then</b> S:= R <b>fi</b></td><td>.
+</td>  </tr>  </table>
+<p>Again the machines nr.i with 0 &lt; i &lt; N may enjoy two privileges, the
+neighbour relation between bottom and top machine has been exploited.
+<p class="noindent">Acknowledgements are due to C.S.Scholten who unmasked an earlier effort as
+fallacious and since then has found a nice proof for solutions of the first
+type and to M.Woodger whose fascination by the first two solutions was an
+incentive to find the third.
+<table>
+<tr><td valign=top width=40%> NUENEN, 5th November 1973 </td></td><td valign=top width=80%>
+prof.dr.Edsger W.Dijkstra</td><td>
+</td></tr>
+<tr><td valign=top>  </td></td><td valign=top>
+Research Fellow</td><td>
+</td>  </tr>  </table>
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2014-11-15<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+</body></html>
+

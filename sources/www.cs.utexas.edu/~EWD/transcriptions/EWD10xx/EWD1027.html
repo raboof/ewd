@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>E.W.Dijkstra Archive: My methodological blunder with grid polygons (EWD 1027)</title>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+		<link href="../transcriptions.css" rel="stylesheet" media="screen" />
+	</head>
+	<body>
+		<div id="frame">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="../../ewd10xx/EWD1027.PDF"
+					 title="Link to the PDF version of EWD1027">EWD 1027</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>My methodological blunder with grid polygons</u></p>
+				<p>A "grid polygon&rdquo; is defined as a plane polygon whose vertices are the only grid points on its edges.</p>
+				<p class="noindent"><u>Lemma</u> &nbsp; Consider a grid triangle with 1 interior grid point; the interior point is the centre of gravity of the triangle.</p>
+				<p>I thought for a while and constructed</p>
+				<table cellpadding="0" cellspacing="0" border="0" align="center">
+					<tr>
+						<td><img src="ewd1027_fig1.png" alt="EWD1027 figure 1" title="EWD1027 figure 1" /></td>
+						<td> &nbsp; &nbsp; &nbsp; &nbsp; and &nbsp; &nbsp; &nbsp; &nbsp; </td>
+						<td><img src="ewd1027_fig2.png" alt="EWD1027 figure 2" title="EWD1027 figure 2" /></td>
+						<td valign="bottom"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;.</td>
+					</tr>
+				</table>
+				<p class="noindent">Asked about my progress, I showed these two, adding &ldquo;but I hate the case analysis and have as yet not shown that it is exhaustive&rdquo;. How right was I about my caveat! The above case analysis is <em>not</em> exhaustive &#x2014;there are infinitely many such triangles&#x2014; and, moreover, it is totally superfluous.</p>
+				<p>I constructed these examples with the intention of convincing myself that grid triangles with 1 interior grid point do indeed exist. A stupid exercise, for if they don&rsquo;t exist, the theorem is vacuously correct; furthermore, it is notoriously ineffective to study a non-empty set by looking at some of its members.</p>
+				<p>So we start afresh. The antecedent is about a grid triangle with 1 interior grid point, and the consequent is about a triangle and its centre of gravity. Start at the least familiar side, which is the antecedent. What can we say about a grid triangle with 1 interior point? By connecting the interior point with the vertices, we partition the original triangle into three grid triangles without interior grid points? A simpler concept!</p>
+				<p>What can we say about a grid triangle without interior grid points? In a way, it should not be too big, but if we are at a loss as how to make this constraint more precise, we can look at the consequent: what can we say about the size of the three triangles a big triangle is partitioned into when the centre of gravity is connected to the three vertices? The three small triangles have the same area, and, conversely, when a triangle is thus partitioned into three triangles of equal area, the interior point is the centre of gravity.</p>
+				<p>Since a grid triangle cannot be too small either we make a leap of faith and try to prove our theorem by showing that <em>all</em> grid triangles without interior grid points have the <em>same</em> area. Looking at the simplest example</p>
+				<p class="noindent" align="center" style="margin-top: 0;"><img src="ewd1027_fig3.png" alt="EWD1027 figure 3" title="EWD1027 figure 3" /></p>
+				<p class="noindent">we conclude that that area would have to be ½. This fractional value begs to be eliminated, for, after all, grid points are about integer values. Fortunately, each grid triangle is half of a grid parallelogram</p>
+				<p class="noindent" align="center" style="margin-top: 0;"><img src="ewd1027_fig4.png" alt="EWD1027 figure 4" title="EWD1027 figure 4" /></p>
+				<p class="noindent">and if the grid triangle is without interior grid point, so is the grid parallelogram. So we are left with the obligation to show that a grid parallelogram without interior grid points has an area 1. This is most briefly shown by tiling the plane by such parallelograms, thus establishing a one-to-one correspondence between parallelograms and grid points &#x2014; say, each parallelogram and its top-right vertex.</p>
+				<p>I am endebted to Wolfgang Hinderer (from Karlsruhe) for drawing my attention to this argument.</p>
+				<p align="center">Nuenen, 23 August 1988</p>
+				<p class="noindent">
+					prof.dr. Edsger W.Dijkstra<br />
+					Department of Computer Sciences<br />
+					The University of Texas at Austin<br />
+					Austin, TX 78712-1188<br />
+					United States of America<br />
+				</p>
+			</div>
+			<div>
+        <br/>
+      </div>
+		</div>
+		<hr />
+		<div id="footer">
+         transcribed by Corrado Cantelmi<br />
+          revised 
+          <!-- #BeginDate format:En2 -->27-Nov-2011<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

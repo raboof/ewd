@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>E.W.Dijkstra Archive: [A letter to C.A.R. Hoare, 13 July 1974] (EWD 432)</title>
+	</head>
+
+	<body bgcolor="#ffffff">
+		<div align="right">
+			&nbsp;&nbsp; <a href="../../ewd04xx/EWD432.PDF" target="_blank">EWD 432</a></div>
+		<div align="left">
+			<p><font size="+2"><b>
+				Burroughs</b></font></p>
+			<hr>
+		</div>
+		<div align="right">
+			<p><font size="-1">PLATAANSTRAAT 5 NUENEN THE NETHERLANDS</font></p>
+		</div>
+		<div align="left">
+			<p><font size="-1">DR. EDSGER W. DIJKSTRA</font></p>
+			<p>
+				</p>
+			<p>
+				Professor C.A.R.Hoare<br>
+				
+				Department of Computer Science<br>
+				
+				The Queen's University of Belfast<br>
+				
+				BELFAST  BT7 1NN<br>
+				Northern Ireland&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;13 July 1974</p>
+			<p>
+				Dear Tony,</p>
+			<p>
+				I feel guilty for not having given you my reactions to your Stanford report &quot;STAN-CS-73-400: Recursive Data Structures&quot;, although I have it already for six months in my possession.  I have read it many times, I liked most of it very much and should have told you so much earlier. Please forgive my long reaction time.</p>
+			<p>
+				In a quite different context I had already used very tentatively &quot;equations&quot; as a kind of &quot;guards&quot; that are to be considered true when the equation has a solution, which then can be used in its guarded statement.  I had done so successfully, but only in a very restricted environment; to see you doing something very similar in a much more general environment, was a great encouragement for me, for which I am thankful.</p>
+			<p>
+				Last week I was doing all sorts of little experiments, introducing new data types with a BNF-notation, like</p>
+			<blockquote>
+				<p><tt>
+				  &lt;record-file&gt; ::= {&lt;record&gt;} &lt;final record&gt;<br>
+						&lt;transaction&gt; ::= &lt;deletion&gt; | &lt;update&gt; | &lt;insertion&gt;</tt> ;</p>
+			</blockquote>
+			<p>it seemed to work after a fashion, but as soon as I tried to find the correct generalization of the instance I had constructed, I got in a hopeless mess. So, in utter despair, I picked up again your report &quot;Recursive Data Structures&quot; and immediately saw the trap I had fallen into &#x2014;in spite of having studied your report a number of times: I am very slow-witted and it takes a lot of time to sink in!&#x2014;. The trap of BNF, of course, being that all <u>generators</u>, as introduced by you, are kept anonymous. And very quickly I found myself dragged into the adhoccery of introducing all sorts of implied transfer functions and the mess was complete. Yet the stupid exercise taught me something, that I would like to try to explain to you.</p>
+			<p>I started thinking &quot;why introduce such data type definitions in the first place?&quot;. For after all, one only introduces an enumerable set of distinct values, and why not just identify them with the integers 0, 1, 2...? The answer is obvious: because we want to introduce operations and functions of these values, operations and functions which become utterly chaotic, when expressed in terms of these identifying integers. It is for <u>that</u> purpose that one needs a more adequate terminology for the description of these values. The first moral is, that the introduction of a new data type can only be justified after the set of operations and functions has been decided upon. (You probably knew this already a long time ago, I even may have read it in your writings; for me it was a good thing to discover this obvious truth in all clarity for myself.)</p>
+			<p>The next thing I realized is that many such function &#x2014;see, for instance, EWD428&#x2014; are not mutually independent, and that the separation between &quot;primitive&quot; and &quot;derived&quot; functions, which is then always possible, is often too arbitrary to be attractive. And it is exactly such an arbitrary choice that your data type definitions force upon us, as long as we insist upon each value being generated in a unique way. For instance, with</p>
+			<blockquote>
+				<p><tt><u>type</u> string = simple(letter) | conc(string, letter)</tt></p>
+			</blockquote>
+			<p>the function &quot;<tt>last</tt>&quot; &#x2014;<tt>last(abcd) = d</tt>&#x2014; is much better catered for by the syntax than the function &quot;<tt>first</tt>&quot; &#x2014;<tt>first(abcd) = a</tt>&#x2014;. It does, of course, not help to switch to</p>
+			<blockquote>
+				<p><tt><u>type</u> string = simple(letter) | conc(letter, string)</tt></p>
+			</blockquote>
+			<p>for then we have the misery the other way round. So, I searched for a syntax that would cater equally well for <u>both</u> functions &quot;<tt>first</tt>&quot; and &quot;<tt>last</tt>&quot;.</p>
+			<p>The answer is that our syntax <u>must</u> be ambiguous, that our data type definitions <u>must</u> be able to generate the same value in more than one way. This seems in full accordance with well-known types, such as &quot;integer&quot; where we really do not care whether the state x = 21 has been brought about by 17 + 4 or by 13 + 8: its value is more interesting than the history that created it, the fact that different histories can lead to the same value is exactly the sort of information destruction that seems so characteristic of all meaningful computing.</p>
+			<p>
+				So I would venture</p>
+			<blockquote>
+				<p><tt><u>type</u> string = simple(letter) | <u>ass</u> conc(string, string)</tt></p>
+			</blockquote>
+			<p>
+				indicating explicitly that the generator &quot;conc&quot; is associative; as a result I shall admit in my equations &quot;conc&quot; with more than two arguments, when that is convenient.  Then</p>
+			<table width="619" border="0" cellspacing="2" cellpadding="0">
+				<tr>
+					<td width="261"> <tt>last(s:string):letter;<br>
+							last:= <u>case</u> s <u>of</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(simple(v) </tt>&#x2192;<tt> v<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt>[]<tt> conc(u, simple(v)) </tt>&#x2192;<tt> v<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</tt></td>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					<td> <tt>first(s:string):letter;<br>
+							first:= <u>case</u> s <u>of</u><br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(simple(v) </tt>&#x2192;<tt> u<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt>[]<tt> conc(simple(u), v) </tt>&#x2192;<tt> u<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</tt></td>
+				</tr>
+			</table>
+			<p>
+				and finally</p>
+			<p><tt>
+				  sym(s:string):boolean;<br>
+					sym:= <u>case</u> s <u>of</u><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(simple(x) </tt>&#x2192;<tt> true<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt>[]<tt> conc(simple(x), simple(y)) </tt>&#x2192;<tt> x = y<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt>[]<tt> conc(simple(x), y, simple(z)) </tt>&#x2192;<tt> x = z <u>and</u> sym(y)<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</tt></p>
+			<p>
+				With the unique syntax of the previous page, the coding of the body of &quot;sym&quot; becomes a glorious horror, its execution becomes orders of magnitude worse.  You should code it, if you have not already done so yourself.  (My guess is that the true LISP-addict won't complain, or, still more foolish, will proudly show his optimizing LISP compiler!)</p>
+			<p>Instead of inserting the reserved character &quot;<u><tt>ass</tt></u>&quot;, telling that the generator &quot;<tt>conc</tt>&quot; is associative, one could also insert the axiom, say</p>
+			<blockquote>
+				<p><tt>
+				conc(conc(x, y), z) = conc(x, conc(y, z)),</tt></p>
+			</blockquote>
+			<p>
+				but I don't know what Pandora's Box we then have opened!  It then begins to smell like artificial intelligence, a subject, my safe distance from which I have never had reasons to regret.</p>
+			<p>
+				As you will realize without me pointing that out, we have now non-deterministic functions like</p>
+			<p><tt>
+				  rot(s:string):string;<br>
+					rot:= <u>case</u> s <u>of</u> (conc(u, v) </tt>&#x2192;<tt> conc(v, u))</tt></p>
+			<p>(leading to abortion in the case<tt> s=simple(x)</tt>, for which we have not catered;<tt> rot(abc) = bca </tt>or<tt> cab</tt>.) Is it the traditional fear for non-deterministic programming languages that has made LISP the way it is?</p>
+			<p>The above ideas emerged when I tried to tell Carel S.Scholten &#x2014;with whom I work now quite regularly for more than 20 years!&#x2014; what I liked about your report and in what respect I had my hesitations. The above ideas are therefore perhaps as much his as mine. The possibility of indicating that a generator is a symmetric function has been mentioned, but not explored.</p>
+			<p>
+				I hope that in terms of &quot;inspiration&quot; I have repaid some of my debt to you!</p>
+			<p></p>
+			<p></p>
+			<table width="520" border="0" cellspacing="2" cellpadding="0">
+				<tr>
+					<td valign="top">cc.: &nbsp;</td>
+					<td>R.D.Merrell<br>
+						
+				      D.E.Knuth<br>
+						
+				      C.S.Scholten<br>
+						
+				      M.Woodger</td>
+					<td valign="top">
+						<div align="center">
+							
+				Yours ever</div>
+					</td>
+					<td>
+				Edsger
+						<p>prof.dr.Edsger W.Dijkstra<br>
+							Burroughs Research Fellow</p>
+					</td>
+				</tr>
+			</table>
+			<p>
+				(list not necessarily exhaustive)</p>
+		</div>
+		<hr>
+		<font size="-1">transcribed by Tristram Brelstaff<br>
+			revised <csobj format="MedDate" h="12" region="15" t="DateTime" w="86">Fri, 3 Jun 2005</csobj></font>
+	</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: An examination exercise, designed by W.H.J.Feijen (EWD 700)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd07xx/EWD700.PDF"
+           title="Link to the PDF version of EWD700">EWD700</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+                      
+<p class=noindent><b>An examination exercise, designed by W.H.J.Feijen</b>.
+<p>The problem posed to the students that had followed last fall&rsquo;s
+course &ldquo;An Introduction to the Art of Programming&rdquo; boiled down to the 
+following:
+<p>&ldquo;Given an integer value N (N &ge; 3) and a monotonically increasing
+sequence of integer values X(0),...,X(N) with X(0) = 0 . For 0 &le; i &lt; N ,
+the value X(i) represents the clockwise distance along a circle with
+circumference X(N) of the point P<sub>i</sub> from the point P<sub>0</sub> Given also
+an integer value K (K &ge; 3). Design a program determining whether among
+the points P<sub>0</sub> through P<sub>N-1</sub> , K different points can be selected that
+are the vertices of a regular K-gon. Because the answer is clearly &ldquo;no&rdquo;
+if X(N) <b>mod</b> K &ne; 0 , X(N) <b>mod</b> K = 0 may be assumed.&rdquo;
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+Let d = X(N)/ K : d is then the distance between successive vertices
+of such a K-gon. We propose to inspect the P<sub>i</sub> in the order of increasing
+i . Our answer is &ldquo;yes&rdquo; if in the so-called &ldquo;last segment&rdquo; &mdash;i.e. 
+consisting of the points with a distance y from P<sub>0</sub> that satisfies
+X(N) - d &le; y &lt; X(N) &mdash; a point can be found such that its K-1 &ldquo;predecessors&rdquo;
+&mdash;i.e. points at distances d, 2d, 3d, ... smaller&mdash; <b>all</b> occur. That is,
+our answer can be expressed as
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(<u>E</u> y: x(N) - d &le; y &lt; x(N): v(y)) ,
+</td>  </tr>  </table>
+in which the predicate v(y) is defined for 0 &le; y &lt; X(N) by
+<table width=100%><tr><td valign=top width=10%>
+</td><td>v(y) = (<u>E</u> i: 0 &le; i &lt; N: X(i) = y) <b>and</b> (0 &le; y &lt; d <b>or</b> v(y - d))
+</td>  </tr>  </table>
+a recursive definition that is suggested by the above &ldquo;<b>all</b>&rdquo; . The first
+term expresses that y must be the distance of one of the given points,
+the second term expresses that <b>all</b> its &ldquo;predecessors&rdquo; must be present as well.
+<p>The idea of the algorithm is to keep track of a set
+<table width=100%><tr><td valign=top width=10%>
+</td><td>s = { y | b &le; y &lt; b + d <b>and</b> v(y)}
+</td>  </tr>  </table>
+                    
+initialized for b = 0 &mdash;where the term 0 &le; y &lt; d settles the membership&mdash;
+and to increase b until the range from b to b + d covers all the points
+in the last segment for which v(y) holds. The final answer is then 
+established by                
+<table width=100%><tr><td valign=top width=10%>
+</td><td>yes:= <b>non</b> empty(s) .
+</td>  </tr>  </table>
+<p>To begin with, b = the smallest element in s ; we propose to 
+maintain that relation as long as s is not empty. Because the size of s is
+a monotically non-increasing function of b , empty(s) for b &lt; X(N) - d
+implies empty(s) for b = X(N) - d .
+<p>With b defined for non empty(s) as the smallest element of s ,
+a first sketch of our program is
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+      d:= X(N)/ K; s:= empty set; i:= 0;                                  </td> </tr> <tr> <td></td> <td colspan = 4>
+      <b>do</b> X(i) &lt; d &rarr; add X(i) to  s ;  i:= i + 1 <b>od</b>; </td> </tr> <tr> <td></td> <td colspan = 4>
+      <b>do</b> <b>non</b> empty(s) <b>cand</b> X(N) &gt; b + d &rarr;    </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 2>
+            q:= (<u>E</u> i: 0 &le; i &lt; N: X(i) = b + d);              </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+           <b>if</b> q &rarr; replace in  s  the value  b  by  b + d      </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
+             &#x25af; <b>non</b> q &rarr; remove from  s  the value  b    </td> </tr> <tr> <td></td> <td></td> <td colspan = 3>
+           <b>fi</b>                                                      </td> </tr> <tr> <td></td> <td colspan = 4>
+      <b>od</b>                                                           </td> </tr> <tr> <td></td> <td colspan = 4>
+      yes:= <b>non</b> empty(s).                                          </td> </tr>
+</table>
+
+<p>When we represent the set s by the array ms, the elements of which
+are the members of s in the order of increasing magnitude, the value b ,
+when defined, equals ms.low .
+<p>The assignment to q can be achieved by
+<table width=100%><tr><td valign=top width=10%>
+</td><td>q:= (X(i) = b + d)
+</td>  </tr>  </table>
+provided i is the smallest solution of X(i) &ge; b + d . Introducing the
+proposed representation for s and eliminating b and q we get the
+somewhat more &ldquo;official&rdquo; program
+                    
+<table> <tr> <td>&nbsp; </td> <td colspan = 4>
+ <b>begin</b> <b>glocon</b> N, X, K; <b>vircon</b> yes; <b>pricon</b> d; <b>privar</b> ms, i;    </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+       d <b>vir</b> int:= X(N)/ K; ms <b>vir</b> int <b>array</b> := (0); i v<b>i</b>r int := 0; </td> </tr> <tr> <td></td> <td></td> <td colspan = 3>
+       <b>do</b> X(i) &lt; d &rarr; ms:hiext(X(i)); i:= i + l <b>od</b>;                         </td> </tr> <tr> <td></td> <td></td> <td colspan = 3>
+       <b>do</b> ms.dom &gt; 0 cand X(N) &gt; ms.low + d &rarr;                                  </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+             i:= "the smallest solution of  X(i) &ge; ms.low + d";                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 2>
+             <b>if</b> X(i) = ms.low + d &rarr; ms:lorem; ms:hiext(X(i))                         </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
+              &#x25af; X(i) &gt; ms.low + d &rarr; ms:lorem                                      </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 2>
+             <b>fi</b>                                                                           </td> </tr> <tr> <td></td> <td></td> <td colspan = 3>
+       <b>od</b>;                                                                                </td> </tr> <tr> <td></td> <td></td> <td colspan = 3>
+       yes <b>vir</b> bool := ms.dom &gt; 0                                                      </td> </tr> <tr> <td></td> <td colspan = 4>
+ <b>end</b>                                                                                      </td> </tr>
+</table>
+
+Note that the guard &ldquo;X(N) &gt; ms.low + d&rdquo; guarantees the existence of an i
+satisfying X(i) &ge; ms.low + d . The minimal solution of x(i) &ge; ms.low + d
+can be found by a linear search, the invariant relation of which
+<table width=100%><tr><td valign=top width=10%>
+</td><td>(<u>A</u> j: 0 &le; j &lt; i: X(i) &lt; ms.low + d)
+</td>  </tr>  </table>
+is not destroyed by the alternative construct and can, therefore, be taken
+outside the repetitive construct. Note that this relation already holds
+after the first repetitive construct, where we have ms.low = 0 . The
+assignment 
+i:= &ldquo;the smallest solution of X(i) &lt; ms.low + d&rdquo;
+in the above program can be replaced by the repetitive construct of the
+linear search
+<table width=100%><tr><td valign=top width=10%>
+</td><td><b>do</b>  X(i) &lt; ms.low + d &rarr; i:= i + l <b>od</b>            .
+</td>  </tr>  </table>
+       
+In the time and space requirements of its execution, the resulting program
+is linear in N . None of the 44 students found this solution. They had
+three hours. Although the outcome was disappointing, the exercise served
+its purpose very well, and W.H.J.Feijen deserves our compliments.
+<p class=noindent>8 February 1979
+<table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-02-06<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

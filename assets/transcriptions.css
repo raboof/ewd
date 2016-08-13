@@ -1,0 +1,15 @@
+body {
+  font-family: Raleway, sans-serif;
+  width: 700px;
+  margin: 0 auto
+}
+
+h1 {
+  font-family: Lobster, cursive;
+  font-size: 3em;
+  text-align: center;
+}
+
+p.noindent {
+  text-indent: 0pt
+}

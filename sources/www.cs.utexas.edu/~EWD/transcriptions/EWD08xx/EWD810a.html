@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><!-- InstanceBegin template="/Templates/EWD transcription.dwt" codeOutsideHTMLIsLocked="false" -->
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+<!-- InstanceBeginEditable name="doctitle" -->
+<title>E.W.Dijkstra Archive: &ldquo;There is no &lsquo;royal road&rsquo; to geometry&rdquo; (EWD 841)</title>
+<!-- InstanceEndEditable -->
+<link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+<!-- InstanceBeginEditable name="head" -->
+<!-- InstanceEndEditable -->
+<!-- InstanceParam name="signature" type="boolean" value="true" -->
+</head>
+
+<body>
+<div id="frame" align="right">
+	<div id="header" align="right"><!-- InstanceBeginEditable name="link to PDF" --><a href="../../ewd08xx/EWD810a.PDF" 
+	title="Link to the PDF version of EWD810a">EWD810a</a><!-- InstanceEndEditable --></div>
+</div>
+<div id="frame">
+
+<div id="content">
+
+
+
+
+<p class="noindent"><!-- InstanceBeginEditable name="title heading" --><u>Fast image construction in computerized axial tomography (CAT)</u><!-- InstanceEndEditable --></p>
+<!-- InstanceBeginEditable name="body" -->
+<p>The purpose of computerized axial tomography is to approximate the distribution of the absorption density in a cross-section of a specimen probed by many X-rays in the plane of the cross-section. This approximation, which is a non-negative function on a circular domain, is called the &ldquo;image&rdquo; because it is usually displayed on a screen, brightness representing the function value.</p>
+<p>For the sake of discretization, the circular domain is subdivided into so-called &ldquo;pixels&rdquo;, i.e. little picture elements in each of which the approximating function is constant. The required resolution imposes an upper bound on the size of the pixels and hence a lower bound on their number. Each pixel requires the computation of a scalar value and, these computations being elaborate, there is a premium on not introducing many pixels more than needed for the resolution. (For each pixel the value to be computed is, in fact, a linear compositum of all the measurements.)</p>
+<p>This note describes the structure of a special-purpose machine that could compute the image on the fly, i.e. during the few seconds the X-ray scanning of the cross-section takes. In medical applications in particular, such immediate availability of the image is deemed important.</p>
+<p>The specimen is probed with rays in <var>N</var> homogeneously distributed directions. (Practical values of <var>N</var> would be 2400 or 2520 , the least common multiple of the integers up to 10 : we shall show later why it is desirable for <var>N</var> to have many small factors.) The rays in one direction are not necessarily equidistant; the same pattern of parallel rays is used for all <var>N</var> directions by rotating it in the plane of the cross-section around the centre of the circular domain. (Hence the name &ldquo;axial&rdquo; tomography.)</p>
+<p>With <var>M</var> rays in each direction, the complete probing of the specimen yields <var>M</var>*<var>N</var> scalar measurements, viz, one for each ray traversing the specimen. Each measurement yields an additive contribution to each point of the image and this contribution &mdash;for a justification we refer to the literature&mdash; is<br>
+(<i>i</i>) proportional to the measurement<br>
+(<i>ii</i>) constant along lines in the direction of the ray with which the measurement was taken.<br>
+The contribution is, in fact, positive along the ray and negative everywhere else (but monotonically approaching 0 as the distance from the ray increases); beyond (<i>i</i>) and (<i>ii</i>) the precise shape of the contribution is of no importance in what follows. The number of pixels is large, say 50,000; the number of measurements is a few times larger and, with each of the measurements contributing to each pixel value, we conclude that image construction is a very sizeable computation indeed. The ensuing severity of the real-time requirement calls for special purpose equipment with a high degree of concurrency.</p>
+<p>We shall first describe the processing of a single measurement, i.e. how its additive contribution to the image is approximated. To that end the circular domain is covered by a pattern of narrow stripes in the direction of the ray from which the measurement was derived; for all measurements from rays in the same direction we shall use the same pattern of stripes. Contributions are approximated by functions that are constant in each stripe and the widths of the stripes must be small enough to make this approximation adequate. Thus we have taken (<i>ii</i>) into account. For each measurement/stripe pair the contribution value requires one multiplication: the value measured has to be multiplied by a constant whose value is determined by the positions of the stripe and of the ray of the measurement. (With a multiplier per stripe, the multiplications for a single measurement can be performed simultaneously.) Thus we have taken (<i>i</i>) into account.</p>
+<p>In the second phase each stripe contributes to the pixels (partially) covered by it: the pixel value is increased by the product of the stripe value and the fraction of the pixel that is covered by the stripe. This requires a few constants per pixel. (If no pixel is covered by more than two stripes, in fact one fraction of coverage and one multiplication suffice.)</p>
+<p class="noindent"><u>Note</u>. Since the coverage fractions only depend on the pixels and the stripes, the measurements in the same direction can, if so desired, share the second phase: for each stripe the contributions from the individual measurements are added and this sum is multiplied by the coverage fractions. This reduces the amount of computation per pixel by a factor <var>M</var> (= the number of rays in each direction). Depending on the type of scanner, collecting the measurements in the same direction may require a considerable amount of high-speed storage. (End of Note.)</p>
+<p>Our next purpose is to choose the pixels so as to exploit the rotational symmetry of the measuring device. To this end the pixels are arranged in concentric rings with <var>N</var>/<var>k</var> equal pixels in each ring. In the outermost rings the required resolution implies a small value for <var>k</var>, 3 say. The smaller the ring, the larger the value for <var>k</var> that the resolution allows; note, however, that <var>k</var> is restricted to the divisors of <var>N</var>.</p>
+<p>Finally we decide to use the same stripe pattern for all directions. All through the image construction, the stripe pattern has <var>N</var> different positions relative to the image, and hence relative to each ring. A ring with <var>N</var>/<var>k</var> (equal!) pixels and the same ring after a rotation of <var>k</var> steps&mdash;i.e. a rotation over 2&pi;&nbsp;<var>k</var>/<var>N</var>&mdash; are, however, congruent. In a ring with <var>N</var>/<var>k</var> pixels, the same coverage fractions therefore reappear after a rotation of k steps, but shifted over one pixel. Hence the total number of converage fractions pertaining to the pixels of a single ring is of order <var>N</var>.</p>
+<p>A ring of <var>N</var>/<var>k</var> pixels is taken care of by a cyclic arrangement of <var>N</var>/<var>k</var> computational elements, called &ldquo;nodes&rdquo;, with a node for each pixel. In the ring, the node/pixel correspondence is, however, not constant. After a rotation of <var>k</var> steps, the pixel values are cyclically transferred to the next node in the cycle. (The direction in which pixel values are transferred is opposite to the direction of the rotation of the rays through the specimen.) In other words, with respect to the pixels the cycle of nodes acts as a &mdash;possibly two-way&mdash; cyclic shift register.</p>
+<p>The arrangement has two important consequences. To each node belong precisely <var>k</var> (sets of) coverage fractions, corresponding to <var>k</var> successive directions, and to each node pertain only a few fixed stripes. The ring has &mdash;at least conceptually&mdash; a phase counter <var>q</var> ; at each rotation over 2&pi;/<var>N</var>, <var>q</var> is stepped up or down mod <var>K</var> by 1 . At its transition between 0 and <var>k</var>&ndash;1 the pixel values are shifted (in the appropriate direction) to the next node. In actual fact, the value <var>q</var> is duplicated so that under control of it each node can select the appropriate set of coverage fractions. Thus we have achieved the distribution of the main computation over a sparsely connected network of nodes with modest traffic between them.</p>
+<p>Intentionally we have not called our nodes &ldquo;microprocessors&rdquo;, since a single microprocessor might take care of a number of nodes corresponding to a number of adjacent pixels. The pixels may also be taken from adjacent rings; if these rings have the same number of pixels &mdash;i.e. the same value for <var>k</var> &mdash; the cyclic traffic between microprocessors can be smoothed by choosing a homo- geneous distribution of their phases. It should be stressed that neither the decision what phase to assign to a ring nor the decision which nodes to combine in the same microprocessor affects in any way the freedom of choosing the pixels for the discretization of the circular domain. The only two constraints for that discretization are, firstly, that in each ring the number of pixels is a divisor of <var>N</var> and, secondly, that all pixels in the same ring are congruent.</p>
+<p>(I invented the above design while explaining the problem at a privatissimum &mdash;known as &ldquo;The Tuesday Afternoon Club&rdquo;&mdash; ; the above description is a joint effort of drs.A.J.M. van Gasteren and me.)</p>
+<!-- InstanceEndEditable --><!-- InstanceBeginEditable name="EditRegion5" -->
+<p>&nbsp;</p>
+<table width="624" border="0" cellpadding="0" cellspacing="10">
+  <tr>
+    <td width="313" valign="top">11 February 1982 </td>
+    <td width="281" valign="top">prof.dr.Edsger W.Dijkstra,<br />
+      Burroughs Research Fellow/<br />
+      Buitengewoon Hoogleraar THE,<br />
+      Plataanstraat 5<br />
+      5671 AL NUENEN</td>
+  </tr>
+</table>
+<!-- InstanceEndEditable --></div>
+
+<div id="footer">
+  <p class="noindent"><font size="-1">
+    Transcribed by <!-- InstanceBeginEditable name="name of transcriber" -->Hamilton Richards<!-- InstanceEndEditable --><br />
+  </font><font size="-1">
+    Revised 
+    <!-- #BeginDate format:En2 -->06-May-2016<!-- #EndDate --></font>  </p>
+</div>
+
+</div>
+</body>
+<!-- InstanceEnd --></html>

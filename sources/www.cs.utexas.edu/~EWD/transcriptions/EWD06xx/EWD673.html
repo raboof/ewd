@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: On weak and strong termination (EWD 673)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd06xx/EWD673.PDF"
+           title="Link to the PDF version of EWD673">EWD673</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<b>Copyright Notice </b>
+<table> <tr> <td colspan = 2>
+The following manuscript                                                         </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+     EWD 673 On weak and strong termination                                      </td> </tr> <tr> <td colspan = 2>
+is held in copyright by Springer-Verlag New York.                                </td> </tr> <tr> <td colspan = 2>
+The manuscript was published as pages 355–357 of                                 </td> </tr> <tr> <td></td> <td>
+     Edsger W. Dijkstra, Selected Writings on Computing: A Personal Perspective, </td> </tr> <tr> <td></td> <td>
+     Springer-Verlag, 1982. ISBN 0–387–90652–5.                                  </td> </tr> <tr> <td colspan = 2>
+<b>Reproduced with permission from Springer-Verlag New York. </b>                </td> </tr> <tr> <td colspan = 2>
+<b>Any further reproduction is strictly prohibited.  </b>                        </td> </tr>
+</table>
+
+<p class=noindent><b>On weak and strong termination</b>.
+<p>In the literature we find two concepts of &ldquo;termination&rdquo;; we shall
+call them &ldquo;weak termination&rdquo; and &ldquo;strong termination&rdquo; respectively, equivalent
+within the realm of continuous functions, but different in the presence of
+unbounded nondeterminacy. It will be shown that in the realm of continuous
+functions the generality of (infinite) well-founded sets is of no essential
+use for proofs of termination, as partially ordered finite sets will do just
+as nicely. 
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p>In a proof of weak termination we demonstrate the impossibility that
+a computation will continue &ldquo;forever&rdquo;, although an upper bound on the &ldquo;time&rdquo;
+it will take need not exist; in a proof of strong termination we demonstrate
+that the computation will have terminated within a certain amount of &ldquo;time&rdquo;.
+<p>For proofs of strong termination the conceptually simplest tool is
+the so-called &ldquo;variant function&rdquo;, an integer-valued function of the state
+which is bounded from below ( &ge; 0, say), and decreased by at least 1 at
+each &ldquo;step&rdquo; of the computation.
+<p>For proofs of weak termination Floyd [1967] has suggested to replace,
+as range of the variant function, the natural numbers by the elements of a
+so-called &ldquo;well-founded set&rdquo;. A well-founded set is a set on which a 
+(partial) ordering has been defined such that no element is the first of an
+infinite decreasing sequence of elements from the set. A well-known example
+of a well-founded set is the one consisting of the pairs (x,y) of natural
+numbers with the ordering defined as
+<table>
+<tr><td valign=top> (x',y') &lt; (x,y) </td><td>&nbsp; =<br>def
+</td><td valign=top>x' &lt; x <b>or</b> (x'= x <b>and</b> y' &lt; y)   .
+</td>  </tr>  </table>
+This well-founded set would be the proper vehicle for proving the weak
+termination of &mdash; X and Y being natural constants&mdash;
+<table> <tr> <td>S:&nbsp; &nbsp; </td> <td colspan = 2>
+   x, y := X, Y;                                             </td> </tr> <tr> <td></td> <td colspan = 2>
+   <b>do</b> x &gt; 0 &rarr; x, y := x-1, any natural number </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
+    &#x25af; s &gt; 0 &rarr; y:= y - 1                       </td> </tr> <tr> <td></td> <td colspan = 2>
+   <b>od</b>                                                 </td> </tr>
+</table>
+where &ldquo;any natural number&rdquo; denotes a function of unbounded nondeterminacy,
+                       
+i.e. such that
+<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+     wp(&ldquo;y:= any natural number&rdquo;, y &ge; 0) = T and               </td> </tr> <tr> <td></td> <td>
+     wp(&ldquo;y:= any natural number&rdquo;, y &le;k) = F for <b>all</b> k . </td> </tr>
+</table>
+Note that in general program S does not enjoy the property of strong
+termination, because for X &gt; 0 no upper bound for y can be given.
+<p>The well-founded set of the pairs (x,y) used above nicely illustrates
+the way in which well-founded sets are a true generalization of the natural
+numbers. Each natural number n is the first element of only finite 
+decreasing sequences, but only of a finite number of them &mdash; 2<sup>n</sup> , to be
+precise&mdash; that, therefore, have a maximum length &mdash; n+1 , to be precise&mdash; .
+In the more general well-founded set we considered, each element (x,y)
+with x &ge; 1 is the first element of only finite decreasing sequences, but
+of infinitely many of them, whose lengths have no maximum. Our example
+also suggests that the generality the well-founded sets offer over and
+above the natural numbers is the last thing we need.
+<p>With program S we showed how, under assumption of the availability
+of the function &ldquo;any natural number&rdquo; of unbounded nondeterminacy, we could
+implement a weakly terminating program that was not strongly terminating.
+On the other hand it is quite easy to derive from <b>any</b> weakly terminating
+program that does not terminate strongly a computation of &ldquo;any natural
+number&rdquo;: just add to it a count of the number of &ldquo;steps&rdquo; executed. 
+Therefore the availability of the function &ldquo;any natural number&rdquo; of unbounded
+nondeterminacy is equivalent to the existence of programs that terminate
+weakly, but not strongly. Furthermore it is known &mdash;see, for instance,
+Dijkstra [1976], Chapter 9 &mdash; that unbounded nondeterminacy is 
+incompatible with the constraint of continuity.
+<p>Several conclusions present themselves:
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Within the realm of continuous functions, where nondeterminacy is
+bounded, weak termination and strong termination are equivalent.
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We only need the greater generality of the well-founded sets over
+and above the natural numbers, when we decide to leave the realm of the
+continuous functions. As long as there is very little incentive to do so,
+                   
+that greater generality of (infinite) well-founded sets is of no essential
+use, and (partially) ordered finite sets will do just as nicely. (As a
+partial order on a finite set can always be embedded in a total order, the
+prevalence of the use of the range of natural numbers &mdash;the first K , for
+some sufficiently large K , to be precise&mdash; becomes now fully understandable.)
+<p class=noindent>Dijkstra, Edsger W. [1976] &ldquo;A Discipline of Programming&rdquo;, Prentice-Hall,
+Englewood Cliffs, NJ, U.S.A.
+<br>Floyd, R.W. [1967] &ldquo;Assigning Meanings to Programs&rdquo;. Proc. Symp. in Applied
+Mathematics, vol. 19 (J.T.Schwartz, ed.), American Mathematical Society,
+Providence, RI, U.5.A.
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN</td><td>BURROUGHS Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-02-05<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

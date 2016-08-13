@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<meta name="generator" content="Adobe GoLive 6">
+		<title>E.W.Dijkstra Archive: The ladder theorem (EWD 1258a)</title>
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+	</head>
+
+	<body bgcolor="#ffffff">
+	    <div id="frame">
+			<div id="header">
+        <a href="../../ewd12xx/EWD1258a.PDF" 
+           title="Link to the PDF version of EWD 1258a">EWD1258a</a>
+      </div>
+			<div id="content">
+				<p class="noindent"><u>The ladder theorem</u></p>
+				<p>Let <var>p</var> and <var>q</var> be two column vectors of the same (finite) length. Let [<var>p</var> &#x2265; <var>q</var>] denote that in each row, the <var>p</var>-element is at least the <var>q</var>-element , i.e.</p>
+				<blockquote>
+					<p>[<var>p</var> &#x2265; <var>q</var>] &#x2261; &#x3008;&#x2200;i :: <var>p</var>.<var>i</var> &#x2265; <var>q</var>.<var>i </var>&#x3009;</p>
+				</blockquote>
+				<p>Let sort.<var>w</var> denote the result of sorting column vector <var>w</var> in ascending order. Then the ladder theorem states</p>
+				<p>(0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<var>p</var> &#x2265; <var>q</var>] &#x21d2; [sort.<var>p</var> &#x2265; sort.<var>q</var>]</p>
+				<p class="noindent"><u>Proof</u>&nbsp;&nbsp;&nbsp;We observe for any <var>x</var> and positive <var>n</var></p>
+				<p class="p0">the <var>n</var>th element of sort.<var>p</var> is &#x2264; <var>x</var></p>
+				<p class="p1">				&#x2261;<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt>{ sort.<var>p</var> is in ascending order }</p>
+				<p class="p0">sort.<var>p</var> contains at least <var>n</var> elements &#x2264; <var>x</var></p>
+				<p class="p1">				&#x2261;<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt>{ <var>p</var> is a permutation of sort.<var>p</var> }</p>
+				<p class="p0"><var>p</var> contains at least <var>n</var> elements &#x2264; <var>x</var></p>
+				<p class="p1">	&#x21D2;<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt>{ [<var>p</var> &#x2265; <var>q</var>], the antecedent of (0) }</p>
+				<p class="p0"><var>q</var> contains at least <var>n</var> elements &#x2264; <var>x</var></p>
+				<p class="p1">					&#x2261;<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt>{ <var>q</var> is a permutation of sort.<var>q</var> }</p>
+				<p class="p0">sort.<var>q</var> contains at least <var>n</var> elements &#x2264; <var>x</var></p>
+				<p class="p1">					&#x2261;<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt>{ sort.<var>q</var> is in ascending order }</p>
+				<p class="p0">the <var>n</var>th element of sort.<var>q</var> is &#x2264; <var>x</var> ,</p>
+				<p class="noindent">and since the above calculation derives that, as a consequence of [<var>p</var> &#x2265; <var>q</var>], its first line implies its last line for any x , it captures by &quot;indirect order&quot; the elementwise demonstration of [sort.<var>p</var> &#x2265; sort.<var>q</var>] .</p>
+			</div>
+			<div align="right">
+			<p> (End of Proof.)</p>
+		</div>
+			<div align="left">
+			<p>The ladder theorem is well-known.  It tells us that if,  in a matrix with sorted rows,  we sort all the columns,  the rows remain sorted.  The above proof of the ladder theorem has been recorded (i) because there are such messy proofs of it  &#x2014;I saw one the other month&#x2014; ,  (ii) because I don't succeed in viewing it as &quot;intuitively obvious&quot;,  and (iii) because the above proof is so nicely disentangled:  Sorting is permuting and making ascending,  and please note the separate appeals to these two properties.</p>
+			<p>My thanks to the ETAC for turning my first version into a proof by indirect order.</p>
+		</div>
+		<div align="center">
+			<p>Austin, 19 March 1997</p>
+		</div>
+		<div align="left">
+			<p>prof. dr Edsger W.Dijkstra<br>
+				Department of Computer Sciences<br>
+				The University of Texas at Austin<br>
+				Austin, TX 78712&#150;1188<br>
+				USA</p>
+		</div>
+		<hr>
+		<font size="-1">transcribed by Diethard Michaelis<br>
+			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="97">Mon, 10 Dec 2007</csobj></font>
+	</body>
+
+</html>

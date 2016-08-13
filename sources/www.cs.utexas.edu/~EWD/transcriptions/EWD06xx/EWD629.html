@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: On two beautiful solutions designed by Martin Rem  (EWD 629)</title>
+      <link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+   </head>
+  <body>
+    <div id="frame" align="right">
+         <div id="header" align="right">
+        <a href="../../ewd06xx/EWD629.PDF"
+           title="Link to the PDF version of EWD629">EWD629</a></div></div>
+      <div id="frame">
+         <div id="content">
+        <hr />
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
+transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
+accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
+<hr />
+           <p class="noindent">
+<b>Copyright Notice </b>
+<table> <tr> <td colspan = 2>
+The following manuscript                                                       </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td>
+   EWD 629 On two beautiful solutions designed by Martin Rem                </td> </tr> <tr> <td colspan = 2>
+is held in copyright by Springer-Verlag New York.                              </td> </tr> <tr> <td colspan = 2>
+The manuscript was published as pages 313–318 of                               </td> </tr> <tr> <td></td> <td>
+   Edsger W. Dijkstra, <i>Selected Writings on Computing: A Personal Perspective</i>, </td> </tr> <tr> <td></td> <td>
+   Springer-Verlag, 1982. ISBN 0–387–90652–5.                                  </td> </tr> <tr> <td colspan = 2>
+<b>Reproduced with permission from Springer-Verlag New York.   </b>            </td> </tr> <tr> <td colspan = 2>
+<b>Any further reproduction is strictly prohibited.    </b>                    </td> </tr>
+</table>
+<p class=noindent>
+<b>On two beautiful solutions designed by Martin Rem</b>.
+<p>(In recent correspondence with dr. Martin Rem &mdash;currently at the Department
+of Computer Science (mail code: 256-80), California Institute of Technology,
+PASADENA, California 91109, U.S.A.&mdash; he sent me two solutions which I think
+both so beautiful, that they deserve a wider distribution; hence their inclusion
+in the EWD-series; apart from some historical information and formal elaborations
+that have been added, and some cosmetic changes, I have essentially presented
+Rem&rsquo;s solutions.) .
+<p class=noindent><p><b>A P/V-implementation of conditional critical regions</b>.
+<p>Since (by an accident of history) the P- and V-operations on semaphores 
+have more or less acquired the status of &ldquo;canonical&rdquo; synchronization primitives,
+inventors of new synchronization concepts have related their inventions to 
+P- and V-operations in two different ways. Either &mdash;see, for instance, Hoare[1],
+concerning monitors&mdash; the new concept is shown to be equally powerful by 
+demonstrating that it can be used to implement the P-and V-operations; or &mdash;see,
+for instance, Hoare [2] , when introducing the (simple) critical region
+&ldquo;<b>with</b> r <b>do</b> S <b>od</b>&rdquo;&mdash; the feasibility of its implementation is argued by showing
+how to implement it with P- and V-operations. The latter possibility has now
+been demonstrated by Rem for the conditional critical region &ldquo;<b>with</b> r <b>when</b> B <b>do</b> S <b>od</b>&rdquo;
+as well. (In [2] , Hoare remarks about the simple critical region &ldquo;If we assume
+that a Boolean semaphore mechanism is &ldquo;built-in&rdquo;, the implementation is trivial.&rdquo;
+(as indeed it is). When in [2] Hoare introduces the conditional critical regions,
+he adds &ldquo;Some care must be exercised in the implementation of this new feature.&rdquo;
+and follows with a two paragraph verbal sketch, explaining what has to be done
+with a queue of processes waiting for r . In [3] , Brinch Hansen gives a slightly
+more detailed sketch of an implementation involving two queues &mdash;&ldquo;queues&rdquo; that
+can be recognized in Rem&rsquo;s solution (if looked at abstractly enough)&mdash; but it
+is still no more than a sketch. Ironically enough, Rem now solves the problem
+by a method &mdash;later called &ldquo;splitting a binary semaphore&rdquo;&mdash; that a few years
+ago.... Hoare has taught us!)
+<p>In processes so-called &ldquo;conditional critical regions&rdquo; may occurr of the
+form
+ &ldquo;<b>with</b> r <b>when</b> Bi <b>do</b> S1 <b>od</b>&rdquo; .
+Here r denotes a shared variable &mdash;or more generally: a cluster of shared
+             
+variables&mdash; , such that r is only accessible from within sections of the text
+of the form &ldquo;<b>when</b> Bi <b>do</b> Si <b>od</b>&rdquo; that are prefixed by &ldquo;<b>with</b> r&rdquo;. (That this 
+constraint is not violated is easily checked by a compiler, a circumstance that is
+its major justification.)
+<p>As with the simple critical regions &ldquo;<b>with</b> r <b>do</b> Si <b>od</b>&rdquo;, the implementation
+has to ensure that the executions of the statements Si &mdash;prefixed by the same
+&ldquo;<b>with</b> r&rdquo;&mdash; as they may occur in the different processes, <b>exclude each other in</b>
+<b>time</b>. In addition, a statement Si &mdash;like what later would become known as
+&ldquo;a guarded command&rdquo;&mdash; is only eligible for execution in those initial states
+where Bi holds. The implementation has to ensure that these constraints are
+met by delaying, if necessary,  the further execution of the process in which
+Si occurs.
+<p>A further requirement is that no such delay occurs without justification,
+more precisely:
+<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if no statement Si is under execution &mdash;i.e. the requirement of mutual
+exclusion would not constrain the selection of a next &rdquo;Si for execution&mdash;,and
+<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if for one or more processes the Si of a conditional critical region
+is the next statement to be executed and at least one of the corresponding Bi&rsquo;s
+is true,
+<br>then the selection of such an Si with a true Bi is obligatory.
+<p>To make the implementation of this last requirement feasible, a further
+constraint ensures that activity of one process, but well outside its regions
+critical with respect to r leaves the &ldquo;<b>non</b> Bi&rdquo; for all other processes 
+invariantly true. This further constraint is that r is the <b>only</b> shared variable
+Bi may depend upon. The whole set of constraints now ensures that the obligation
+to inspect whether a false Bi of a delayed process has turned true, can be
+concentrated at the point where the execution of an Sj (of another process!)
+has been carried to completion.
+<p>The technique of the &ldquo;split binary semaphore&rdquo; consists of the introduction
+of a set of binary semaphores &mdash;in this example of the three semaphores m , bl ,
+and b2 &mdash; of which at most one equals 1 .This can obviously be ensured by
+seeing to it that in each program P- and V-operations &mdash;regardless of on which
+                
+of the three semaphores they operate&mdash; alternate dynamically: each P-operation
+decreases their sum by 1 , each V-operation increases their sum by 1 . Furthermore
+we can assert that between each P-operation and dynamically subsequent 
+V-operation the sum m + b1 + b2 = 0 ; hence the executions of the program sections
+between such a P-operation and its subsequent V-operation can be viewed as 
+excluding each other mutually in time (if so desired by the traditional argument
+of Dijkstra [4]).
+<p>Rem&rsquo;s solution uses three semaphores m (=1), b1(=0), and b2(=0), and two
+counters n(=0), and nt(=0) &mdash;initial values being given between parentheses&mdash; .
+The integer n counts the number of processes &ldquo;eager&rdquo; to perform their Si&rsquo;s ;
+during testing, the counter nt is equal to the number of Bi&rsquo;s , the falsity
+of which is not guaranteed. The whole critical activity can only end with nt = 0
+&mdash;otherwise impermissible delays could result&mdash; . When an Si has been 
+performed &mdash;and, therefore, all Bi may have become true&mdash; nt has to be increased
+until nt = n before testing can begin. In this latter process the semaphore b1
+plays a signalling role; the semaphore b2 is used to admit processes to their
+Bi-test one at a time. With this informal sketch of meaning and function of the
+semaphores and variables I shall present Rem&rsquo;s solution without further 
+annotation; thereafter I shall present a more formal treatment.
+<table> <tr> <td colspan = 3>
+P(m); n:= n + 1;                                                                                   </td> </tr> <tr> <td colspan = 3>
+<b>do</b> <b>non</b> Bi &rarr; <b>if</b> nt = 0 &rarr; V(m) &#x25af; nt > 0 &rarr; V(b2) <b>fi</b> </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+            P(b1); nt:= nt + 1;                                                                    </td> </tr> <tr> <td></td> <td></td> <td>
+            <b>if</b> nt < n &rarr; V(bl) &#x25af; nt = n &rarr; V(b2) <b>fi</b>;                  </td> </tr> <tr> <td></td> <td></td> <td>
+            P(b2); nt:= nt - l                                                                     </td> </tr> <tr> <td colspan = 3>
+<b>od</b>;                                                                                         </td> </tr> <tr> <td colspan = 3>
+n:= n - 1;  Si;                                                                                    </td> </tr> <tr> <td colspan = 3>
+<b>if</b> n = 0 &rarr; V(m)                        ·                                               </td> </tr> <tr> <td>&nbsp; </td> <td colspan = 2>
+ &#x25af; n > 0 &rarr; if nt < n &rarr; V(bl) &#x25af; nt = n &rarr; V(b2) <b>fi</b>               </td> </tr> <tr> <td colspan = 3>
+<b>fi</b>                                                                                          </td> </tr>
+</table>
+<p>For our more formal treatment we introduce angle brackets in order to
+indicate that each action extending from an opening bracket until a next (closing)
+angle bracket denotes an atomic action. Atomic actions can be viewed as excluding
+each other in time. This is OK if each atomic action starts with a P-operation,
+ends with a V-operation and has no such operations in between.
+                  
+<p>For each process we introduce two boolean ghost-variables ai (&ldquo;in the
+antichambre&rdquo;) and wi (&ldquo;in the waitingroom&rdquo;). They are initially &rsquo;false; we
+shall use the notations (<u>N</u> j: aj) and (<u>N</u> j: wj) respectively to denote the
+number of processes for which ai and wi respectively are true. Furthermore
+we introduce a global ghost-boolean c &mdash;initally false;- , the truth of which
+marks the states in which the implications aj &rArr; <b>non</b> Bj need not hold. Labels
+have been inserted for later discussion. The annotated text of the program is
+as follows: .
+<table> <tr> <td colspan = 8>
+L0: &lt; P(m) {<b>non</b> c <b>and</b> 0 = nt &le; n}; n:= n + 1 {<b>non</b> c <b>and</b> 0 &le; nt &lt; n};         </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 6>
+       <b>do</b> <b>non</b> Bi &rarr; {<b>non</b> c <b>and</b> 0 &le; nt &lt; n <b>and</b> <b>non</b> Bi} ai:= true; </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
+                   <b>if</b> nt = 0 &rarr; {<b>non</b> c <b>and</b> 0 = nt &le; n} V(m)                              </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 2>
+                    &#x25af; nt &gt; 0 &rarr; {<b>non</b> c <b>and</b> 0 &lt; nt &le; n} V(b2)                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
+                   <b>fi</b> &gt; ;                                                                                </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
+             Ll: &lt; P(b1) {c <b>and</b> 0 &le; nt &lt; n}; ai:= false; wi:= true;                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
+                     nt:= nt + 1  { c <b>and</b> 0 &lt; nt &le; n};                                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
+                   <b>if</b> nt &lt; n &rarr; { c <b>and</b> 0 &le; nt &lt; n} V(bl)                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                    &#x25af; nt = n &rarr; c:= false; {<b>non</b> c <b>and</b> 0 &lt; nt &le; n} V(b2)               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
+                   <b>fi</b>  &gt; ;      .·                                                                         </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 4>
+             L2: &lt; P(b2) {<b>non</b> c <b>and</b> 0 &lt; nt &le; n}; wi:= false;                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                    nt:= nt - l  {<b>non</b> c <b>and</b> 0 &le; nt &lt; n}                                          </td> </tr> <tr> <td></td> <td></td> <td colspan = 6>
+       <b>od</b>;                                                                                                    </td> </tr> <tr> <td></td> <td></td> <td colspan = 6>
+       n:= n - 1 {Bi <b>and</b> 0 &le; nt &le; n};                                                                   </td> </tr> <tr> <td></td> <td></td> <td colspan = 6>
+       Si; c:= (nt &lt; n);                                                                                          </td> </tr> <tr> <td></td> <td></td> <td colspan = 6>
+       <b>if</b> n = 0 &rarr; {<b>non</b> c <b>and</b> 0 = nt &le; n} V(m)                                           </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 5>
+        &#x25af; n &gt; 0 &rarr; <b>if</b> nt &lt; n &rarr; {c <b>and</b> 0 &le; nt &lt; n} V(bl)                    </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
+                    &#x25af; nt = n &rarr; {<b>non</b> c <b>and</b> 0 &lt; nt &le; n} V(b2)                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
+                   <b>fi</b>                                                                                         </td> </tr> <tr> <td></td> <td></td> <td colspan = 6>
+       <b>fi</b>   &gt;                                                                                              </td> </tr> <tr> <td>&nbsp; </td> <td colspan = 7>
+ L3:                                                                                                                 </td> </tr>
+</table>
+<p>Indicating atomic actions by start- and end-label, we can denote the five
+atomic actions we have to consider as follows: L0-L1, L0-L3, L1-L2, L2-L1, and
+L2-L3. with the initialization m = 1 , b1 =  b2 = 0 , we readily establish for
+all five the invariance of
+<table width=100%><tr><td valign=top width=10%>
+P0:</td><td>m + b1 + b2 = 1 .
+</td>  </tr>  </table>
+                 
+This establishes the property of the &ldquo;split boolean semaphore&rdquo; and tells us that,
+indeed, we are entitled to regard the five actions &mdash;each of which starts with
+a P-operation on one of the three semaphores and ends (dynamically) with a 
+V-operation on one of the semaphores&mdash; as &ldquo;atomic&rdquo;. In particular it guarantees
+that the Si are executed under mutual exclusion and under the initial truth
+of Bi .
+<p>Having established the atomicity, and taking the further initial values
+nt = n = 0 and c = false into account, we next establish the invariant truth
+of 
+<table width=100%><tr><td valign=top width=10%>
+Pl:</td><td>(m = 1 &rArr; (<b>non</b> c <b>and</b> 0 = nt &le; n ))   <b>and</b>
+</td></tr>
+<tr><td valign=top>
+</td><td>(bl = 1  &rArr; (c <b>and</b> 0 &le; nt &lt; n))   <b>and</b>
+</td></tr>
+<tr><td valign=top>
+</td><td>(b2 = 1  &rArr; (<b>non</b> c <b>and</b> 0 &lt; nt &le; n))
+</td>  </tr>  </table>
+The invariance of P1 is easily established, as is indicated by the assertions
+that annotate the program text. (Note that it seems to be the function of the
+ghost-boolean c to make the three consequents mutually exclusive.)
+<p>With the further knowledge that initially all the wi are false, we easily
+establish the invariant truth of
+<table width=100%><tr><td valign=top width=10%>
+P2:</td><td>(<u>N</u> j: wj) = nt .
+</td>  </tr>  </table>
+Because (<u>N</u> j: wj) = the number of processes at L2, ready to perform P(b2) ,
+we conclude now that on account of the third implication of P1 , a deadlock
+cannot occur after the execution of V(b2) .
+<p>With the further knowledge that initially all the ai are false, we easily
+establish the invariant truth of
+<table width=100%><tr><td valign=top width=10%>
+P3:</td><td>(<u>N</u> j: aj) = n - nt .
+</td>  </tr>  </table>
+Because (<u>N</u> j: aj) = the number of processes at L1, ready to perform P(b1) ,
+we conclude now that on account of the second implication of P1 , a deadlock
+cannot occur after the execution of V(b1) .
+<p>(A &ldquo;temporary&rdquo; or &ldquo;partial&rdquo; deadlock can occur after the execution of V(m) ;
+&rsquo;then, however, the state m = 1 holds, and the assumption is that sooner or
+later another process will &ldquo;join the game&rdquo; via L0 .)
+EWD629 - 5
+<p>Finally we establish the invariant truth of
+<table width=100%><tr><td valign=top width=10%>
+P4:</td><td>(<u>A</u> j: aj &rArr; (<b>non</b> B <b>or</b> c)) ,
+</td>  </tr>  </table>
+which holds initially because then all antecedents are false. We shall check
+its invariance explicitly.
+<br>L0-L3 and L2-L3 could make all Bj&rsquo;s true as a result of Si&rsquo;s modification
+of r ; the assignment c:= (nt &lt; n) , however, makes all implications of F4
+hold: if c is established by it, all consequents are true, if <b>non</b> c is
+established by it, we conclude nt = n , and P3 then tells us, that all 
+antecedents are false; in both cases all implications of P4 hold vacuously.
+L0-L1 and L2-L1 could only affect the i&rsquo;th implication, but they don&rsquo;t do
+so as ai:= true is executed under the truth of its consequent, viz. <b>non</b> Bi.
+In L1-L2 , the assignment ai:= false strengthens an antecedent, and therefore
+is safe; the assignment c:= false may strengthen any consequent, but &mdash;see
+P3&mdash; is executed under falsity of all antecedents and, therefore, is safe as
+well. This concludes our demonstration of the invariance of P4 .
+<p>Combining (the first implication of) P1, P3, and P4 we conclude
+<table width=100%><tr><td valign=top width=10%>
+</td><td>m = 1 &rArr; ((<u>N</u> j: aj) = n <b>and</b> (<u>A</u> j: aj &rArr; <b>non</b> Bj)).
+</td>  </tr>  </table>
+thus expressing that no avoidable delay is introduced. 
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
+<p class=noindent>
+<table width=100%><tr><td valign=top width=10%>
+[1]</td><td>Hoare, C.A.R. &ldquo;Monitors: an Operating System Structuring Concept&rdquo;,
+STAN-CS-73-401, November 1973
+</td></tr>
+<tr><td valign=top>
+[2]</td><td>Hoare, C.A.R. &ldquo;Towards a Theory of Parallel Programming&rdquo;, in Operating
+Systems Techniques, C.A.R.Hoare and R.H.Perrott (Eds.) London and New
+York, Academic Press, 1972
+</td></tr>
+<tr><td valign=top>
+[3]</td><td>Brinch Hansen, Per, &ldquo;Operating System Principles&rdquo;, Englewood Cliffs,
+Prentice-Hall, 1973
+</td></tr>
+<tr><td valign=top>
+[4]</td><td>Dijkstra, Edsger W., &ldquo;Hierarchical Ordering of Sequential Processes&rdquo; in
+Operating System Techniques, C.A.R.Hoare and R.H.Perrott (Eds.) London
+and New York, Academic Press, 1972
+</td>  </tr>  </table>
+Note. I have changed my mind and postpone the other solution&rsquo;s presentation to
+a later EWD-report. (End of note.)
+<p class=noindent><table width=100%><tr><td valign=top width=50%>
+Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
+</td></tr>
+<tr><td valign=top>
+5671 AL NUENEN .</td><td>Burroughs Research Fellow
+</td></tr>
+<tr><td valign=top>
+The Netherlands</td><td>
+</td>  </tr>  </table>
+
+<hr />
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
+    Last revision
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
+      <!-- #BeginDate format:IS1 -->2015-01-24<!-- #EndDate -->
+    </csobj>
+  .</font></p>
+  <p>&nbsp;</p>
+</body></html>

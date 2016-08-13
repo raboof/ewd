@@ -1,0 +1,55 @@
+<html>
+<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+		<title>E.W. Dijkstra Archive: The analysis of a two-person game (EWD 793)</title>
+</head>
+<body>
+<div align="right">
+			 <a href="../../ewd07xx/EWD793.PDF">EWD793</a> - <a href="../../ewd07xx/EWD793.PDF#page=1">0</a></div>
+<p>
+<u>The analysis of a two-person game.</u>
+<p>
+As long as possible, two players make a move in turn; the player faced with a situation in which no move is possible has lost the game.
+<p>
+The situation is given by two natural numbers (i.e. integers &#x2265;0). A move being possible means that both numbers are positive; a move then consists in decreasing one of the numbers one or more times by the other, but such that the number decreased remains &#x2265;0.
+<p>
+It as asked to characterize those initial situations in which the player who has the first move can guarantee to win.
+<p>
+<center>* * *</center>
+<p>
+Our first observation is that, since no move affects the greatest common divisor of the two numbers, only their ratio matters. Our second observations is that, since the situation is symmetric in the two numbers, we can confine ourselves when moves are possible to a ratio &#x2265;1. Our third observation is that, to start with, a move consists in decreasing the ratio by an integer; if then 0 &lt; ratio &lt; 1, the roles of smallest and largest number have been interchanged, and we should replace the ratio by its inverse. And this suggests to characterize the ratio by its finite expansion as continued fraction, more precisely by the sequence of positive integers
+<p>
+<div align="right">
+			<a href="../../ewd07xx/EWD793.PDF">EWD793</a> - <a href="../../ewd07xx/EWD793.PDF#page=2">1</a></div>
+<p>
+<table><tr><td width="20%">(0)</td><td>k<sub>0</sub>, k<sub>1</sub>, ... , k<sub>n</sub></td></tr></table>
+<p>
+such that the ratio equals r<sub>n</sub>, given by
+<p>
+r<sub>0</sub> = k<sub>0</sub> and r<sub>i+1</sub> = k<sub>i+1</sub> + 1 / r<sub>i</sub>&nbsp;&nbsp;&nbsp;&nbsp;.
+<p>
+A move with a non-maximal decrease decreases k<sub>n</sub> by an amount &lt; k<sub>n</sub> ; a move with a maximal decrease decreases n by 1 ("drops k<sub>n</sub>").
+<p>
+The state n=0 &#x2227; k<sub>0</sub>=1 corresponds to a ratio =1, which is a winning situation for the initial player. It is exceptional in the sense that all ratios &gt;1 can be represented with k<sub>0</sub> &#x2265;2 . For such states we define
+<p>
+<table><tr><td width="20%"></td><td>trail = n - ( MAX i : 0&#x2264;i&#x2264;n &#x2227; k<sub>i</sub> &#x2265;2 : i )</td></tr></table>
+<p>
+i.e. the length of the train of ones on which (0) ends. Handing your opponent a situation with trail odd forces him to return a situation with trail even. With trail even you can either hand your opponent a situation with trail odd or terminate the game and win. Hence trail even characterizes the remaining winning situations, i.e. the ratio &gt; (1 + &#x221A;5) / 2 .
+<table  width="100%" border="0">
+<tr>
+<td valign="top" width="50%">
+Plataanstraat 5<br>
+5671 AL NUENEN<br>
+The Netherlands</td>
+<td valign="top">
+
+17 June 1981
+
+<br>
+prof.dr. Edsger W. Dijkstra<br>
+Burroughs Research Fellow</td>
+</tr></table>
+<hr>
+Transcription by John C Gordon
+<p>Last revised on <csobj format="MedDate" h="16" region="15" t="DateTime" w="102">Sun, 13 Jul 2003</csobj>.
+</body></html>

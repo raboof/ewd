@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+	<head>
+		<title>E.W.Dijkstra Archive: The argument about the arithmetic mean and the geometric mean, heuristics included (EWD 1171)</title>
+		<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+		<link href="../formulas.css" rel="stylesheet" media="screen">
+	</head>
+	<body>
+		<div id="frame">
+			<table width="100%" cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td align="right"><a href="../../ewd11xx/EWD1171.PDF"
+					 title="Link to the PDF version of EWD1171">EWD 1171</a></td>
+				</tr>
+			</table>
+			<div id="content">
+				<p class="noindent"><u>The argument about the arithmetic mean and the geometric mean, heuristics included</u>.</p>
+				<p>We consider nonempty bags of <var>n</var> non-negative numbers. A bag <var>B</var>&rsquo;s &ldquo;arithmetic mean&rdquo; AM.<var>B</var> is defined as one <var>n</var>-th of the sum of the numbers in bag <var>B</var>; a bag <var>B</var>&rsquo;s &ldquo;geometric mean&rdquo; GM.<var>B</var> is defined as the <var>n</var>-th root of the product of the numbers in bag <var>B</var>. An immediate consequence of these definitions is that if we modify the values in a bag without changing their sum (product), the arithmetic (geometric) mean of the bag remains unchanged. The theorem to be proved is</p>
+				<p class="noindent">(0) &nbsp; &nbsp; &nbsp; &nbsp; AM.<var>B</var> &#x2265; GM.<var>B</var> &nbsp; &nbsp; for any <var>B</var> &nbsp; .</p>
+				<p class="noindent"><u>Note</u>. &nbsp; The  way to remember which of the two means is the greater one, is to consider a bag (with <var>n</var>&nbsp;&#x2265;&nbsp;2) that contains exactly one zero. (End of Note.)</p>
+				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+				<p>The first thing we ask ourselves is if &nbsp; AM.<var>B</var>&nbsp;=&nbsp;GM.<var>B</var> &nbsp; is possible.</p>
+				<p class="noindent"><u>Note</u> &nbsp; If not, the theorem could be strengthened to AM.<var>B</var>&nbsp;&gt;&nbsp;GM.<var>B</var>; inspection if a theorem can trivially be strengthened should be a routine matter. (End of Note.)</p>
+				<p class="noindent">Because</p>
+				<p class="noindent" style="text-align: center; margin-top: -1em;">
+					<table class="frac"><tr><td><var>n</var> · <var>c</var><br>&#x2013;&#x2013;&#x2013;&#x2013;<br><var>n</var></td></tr></table> = <var>c</var> &nbsp; &nbsp; &nbsp; and &nbsp; &nbsp; &nbsp; 
+					<table class=supsub style="bottom: -0.1em;"><tr><td><var>n</var><br>&#x221A;</table><span style="border-top: 1px solid;">&nbsp;<var>c</var><sup><var>n</var></sup>&nbsp;</span> = <var>c</var> &nbsp; &nbsp; ,
+				<p class="noindent">the answer is affirmative: for a bag containing equal values, arithmetic and geometric mean are both equal to that value and hence equal to each other.</p>
+				<p>But this observation gives us a strong hint as how to compare AM.<var>B</var> with GM.<var>B</var>: we create a bag <var>B</var>´ of equal elements, so that we can compare AM.<var>B</var>´ with GM.<var>B</var>´, but create <var>B</var>´ in such a fashion that AM.<var>B</var> can be related to AM.<var>B</var>´ and GM.<var>B</var> to GM.<var>B</var>´. In diagram</p>
+				<table cellspacing="0" cellpadding="0" border="0" align="center" style="margin-top: 1em;">
+					<tr>  <td>AM.<var>B</var></td>  <td style="padding: 0 1em 0 1em; line-height: 1.5em;">?</td>  <td>GM.<var>B</var></td>  </tr>
+					<tr align="center">   <td style="line-height: 0.7em;">|</td>  <td style="line-height: 0.7em;"></td>    <td style="line-height: 0.7em;">|</td>  </tr>
+					<tr align="center">   <td style="line-height: 0.7em;">|</td>  <td style="line-height: 0.7em;"></td>    <td style="line-height: 0.7em;">|</td>  </tr>
+					<tr>  <td>AM.<var>B</var>´</td> <td style="padding: 0 1em 0 1em; line-height: 1.8em;">?</td>  <td>GM.<var>B</var>´</td>  <td>&nbsp; &nbsp; &nbsp; &nbsp; .</td> </tr>
+				</table>
+				<p class="noindent">The existence of <var>B</var>´ enables us to replace (0), i.e. the comparison of the different means of the same bag, by (twice) the comparison of the same mean of different bags.</p>
+				<p>We try the simplest thing, and try to construct a <var>B</var>´ such that <var>B</var> and <var>B</var>´ have one of the means equal. Arbitrarily we choose the geometric mean for that purpose.</p>
+				<p class="noindent"><u>Note</u> &nbsp; In <a href="EWD1140.html">EWD1140</a>, the arithmetic mean was chosen. (End of Note.)</p>
+				<p>The overall structure of our proof is now<br>
+					<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; AM.<var>B</var><br>
+					&#x2265; &nbsp; &nbsp; &nbsp; &nbsp; {by virtue of the construction of <var>B</var>´}<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; AM.<var>B</var>´<br>
+					=  &nbsp; &nbsp; &nbsp; &nbsp; {all elements of <var>B</var>´ are equal to <var>c</var>}<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; GM.<var>B</var>´<br>
+					=  &nbsp; &nbsp; &nbsp; &nbsp; {by virtue of the construction of <var>B</var>´}<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; GM.<var>B</var> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .
+				</p>
+				<p>Our remaining task is to construct a program operating on a variable of type bag with <var>B</var> as initial and <var>B</var>´ as final values. In order to justify AM.<var>B</var>&nbsp;&#x2265;&nbsp;AM.<var>B</var>´, we require</p>
+				<p class="noindent">(1) &nbsp; &nbsp; &nbsp; &nbsp; no step increases the sum.</p>
+				<p class="noindent">In order to justify GM.<var>B</var>´ = GM.<var>B</var>, we require</p>
+				<p class="noindent">(2) &nbsp; &nbsp; &nbsp; &nbsp; no step changes the product.</p>
+				<p class="noindent">In order to assume termination, we require</p>
+				<p class="noindent">(3) &nbsp; &nbsp; &nbsp; &nbsp; each step decreases the number of elements &#x2260;&nbsp;<var>c</var> by at least 1.</p>
+				<p class="noindent">Note that, in view of GM.<var>B</var>´ = GM.<var>B</var> and GM.<var>B</var>´ = <var>c</var>, <var>c</var> is defined as GM.<var>B</var>. Let <var>c</var>&#x2260;0.</p>
+				<p>Taking (2) and (3) into account, a first approximation of the program is</p>
+				<table cellpadding="0" cellspacing="0" border="0" style="margin-top: 1em;">
+					<tr> <td><b>do</b>&nbsp;</td> <td>&#x00AC; (all elements in the bag are equal to <var>c</var>) &#x2192;</td> </tr>
+					<tr> <td></td> <td>increase the number of elements = <var>c</var></td> </tr>
+					<tr> <td></td> <td>by 1 under invariance of the product</td> </tr>
+					<tr> <td><b>od</b></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; .</td> </tr>
+				</table>
+				<p>Increasing the number of elements =&nbsp;<var>c</var> is done by only changing elements &#x2260;&nbsp;<var>c</var>. Because the product has to remain constant, increasing one element implies decreasing another, Fortunately, because <var>c</var> is the geometric mean of the bag, the presence of an element different from <var>c</var> implies the existence of an element at <var>c</var>&rsquo;s other side. The step therefore replaces a pair (<var>x,y</var>) such that <var>c</var> lies between <var>x</var> and <var>y</var>; it replaces the pair (<var>x,y</var>) by the pair (<var>c, x·y/c</var>). Note that, because originally <var>c</var> was between the elements of the pair, the minimum of the pair has been increased, the maximum of the pair has been decreased, in short: it has been a contraction, i.e. the elements of the pair have become closer to each other.</p>
+				<p>The program now becomes</p>
+				<table cellpadding="0" cellspacing="0" border="0" style="margin-top: 1em;">
+					<tr> <td><b>do</b>&nbsp;</td> <td>&#x00AC; (all elements in the bag are equal to <var>c</var>) &#x2192;</td> </tr>
+					<tr> <td></td> <td>select a pair (<var>x,y</var>) such that <var>c</var> lies between them;</td> </tr>
+					<tr> <td></td> <td>replace this pair by (<var>c, x·y/c</var>)</td> </tr>
+					<tr> <td><b>od</b></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; .</td> </tr>
+				</table>
+				<p>Our remaining proof obligation is (1): we have to show that above step does not increase the sum. (In fact it decreases it.) We have to find a relation between</p>
+				<ul style="margin-top: 0;">
+					<li>the sum, because we have to show that the step decreases it</li>
+					<li>the product, because the step leaves it invariant</li>
+					<li>the difference, because its decrease distinguishes the step from its inverse.</li>
+				</ul>
+				<p>In view of the product we are talking about a relation of the second degree, in view of the unsigned difference, we have its square, and we come up with</p>
+				<p class="noindent">(4) &nbsp; &nbsp; &nbsp; &nbsp; (<var>x</var> + <var>y</var>)² = (<var>x</var> &#x2212; <var>y</var>)² + 4·<var>x</var>·<var>y</var> &nbsp; &nbsp; &nbsp; &nbsp; ,</p>
+				<p class="noindent">which is the rabbit with which EWD1140 started. It expresses that, for positive <var>x,y</var>, under constant product, shrinking difference and shrinking sum go hand in hand.</p>
+				<p>And this concludes our proof of (0).</p>
+				<p class="noindent"><u>Apology</u> &nbsp; I am sorry I was too late in seeing that here (in contrast to EWD1140) the case <var>c</var>&nbsp;=&nbsp;0 has to be treated separately. (End of Apology.)</p>
+				<p>I am grateful to Wim H.J.Feijen for having drawn my attention to the underlying heuristics.</p>
+				<p align="right" style="margin-right: 4em;">Austin, 19 January 1994</p>
+				<p class="noindent">
+					prof.dr. Edsger W.Dijkstra<br>
+					Department of Computer Sciences<br>
+					The University of Texas at Austin<br>
+					Austin, TX 78712-1188<br>
+					USA
+				</p>
+			</div>
+			<div>
+    <br>
+  </div>
+		</div>
+		<hr>
+		<div id="footer">
+     transcribed by Corrado Cantelmi<br>
+      revised 
+      <!-- #BeginDate format:En2 -->24-Dec-2011<!-- #EndDate -->
+		</div>
+	</body>
+
+</html>

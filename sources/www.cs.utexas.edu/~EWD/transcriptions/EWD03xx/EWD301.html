@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+    <title>E.W.Dijkstra Archive: Over de bewijsbaarheid van programmacorrectheid. (EWD 301)</title>
+		<link href="../transcriptions.css" rel="stylesheet" media="screen"/>
+	</head>
+<body>
+<div id="frame" align="right">
+			<div id="header" align="right">
+        <a href="../../ewd03xx/EWD301.pdf" 
+           title="Link to the PDF version of EWD301">EWD301</a>
+      </div>
+	  </div>
+	  <div id="frame">
+		  <div id="content">
+		    <p><u>Over de bewijsbaarheid van programmacorrectheid.</u></p>
+
+<p class="noindent">1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Omdat "Verdeel en Heers" in eerste instantie het enige principe is, waarmee 
+  we iets groots aankunnen, zal een programma naarmate het groter is uit meer
+  componenten opgebouwd moeten worden. Willen we voor het totale programma een
+  zeker betrouwbaarheidsniveau bereiken, dan dient het betrouwbaarheidsniveau van
+  de individuele programmacomponenten hoger te zijn naarmate het aantal componenten
+  groter is.
+</p>
+<p class="noindent">2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Testen van programma's kan een zeer overtuigende methode zijn om de aanwezigheid 
+  van fouten aan te tonen, maar is hopeloos inadequaat om hun afwezigheid
+  aan te tonen. De enige mogelijkheid die ons rest is de correctheid van het programma 
+te bewijzen. </p>
+<p class="noindent">3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aangezien de (bv. intellectuele) inspanning nodig voor de bewijsvoering
+  critisch afhangt van de structuur van het programma, dient de programmeur zijn
+  programma zo te structureren, dat bewijsvoering nog wel mogelijk is. Ik ga er
+  hierbij van uit dat programma's behalve voor de machine uitvoerbaar voor de mens
+  leesbaar moeten zijn. In het bijzonder dient de programmeur er voor te waken, dat
+  het aantal gevallen, dat onderscheiden moet worden, additief en vooral niet mul-
+tiplicatief combineert. </p>
+<p class="noindent">4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In dit licht dient het gebruik van de goto-statement ten sterkste afgeraden 
+  te worden: de goto-statement is als combinatorische complexiteitsgenerator
+  ontmaskerd. </p>
+<p class="noindent">5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De (bekende) sequentieringsclausules belichamen een aspect van programmeringsdiscipline, 
+  waardoor bewijsvoering profiteren kan van de postulaten van
+  C.A.R.Hoare. Van het gebruik van deze postulaten zal een voorbeeld gegeven worden.
+  Aan de hand hiervan zal het begrip "operationele abstractie" als middel ter beknotting 
+  van de hoeveelheid bewijswerk worden toegelicht.
+</p>
+<p class="noindent">6)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aan de hand van een volgend voorbeeld zal het begrip "representationele
+  abstractie" worden toegelicht. Ook dit dient ter beknotting van de hoeveelheid 
+  bewijswerk.
+</p>
+<p class="noindent">7)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Betoogd zal worden dat wij om de correctheid van programma's bewijsbaar te
+  houden, programma's moeten leren zien niet als op zichzelf staande objecten, maar
+  als leden van een familie aanverwante programma's: aequivalente programma's kunnen 
+  zich hier presenteren als alternatieve verfijningen van eenzelfde abstract
+programma. </p>
+<p class="noindent">8)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tenslotte zal de hoop uitgesproken (en naar vermogen gerechtvaardigd worden)
+  dat de bewijslast geen taakverzwaring voor de programmeur hoeft in te houden. 
+  Integendeel: als hij de bewijsvoering hand in hand met het programma laat groeien
+  lijkt hij een waardevol rìchtsnoer bij de opbouw van zijn programma gevonden te
+  hebben.
+</p>
+<p class="noindent">&nbsp;</p>
+<p class="center">Edsger W.Dijkstra </p>
+</body></html>

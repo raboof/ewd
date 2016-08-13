@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML lang="en">
+<Head>
+<Title>E.W. Dijkstra Archive: A solution designed by A. Blokhuis (EWD 979)</Title>
+<LINK media="print" title="The article in pdf" type="application/pdf" rel="alternate" href="../../ewd09xx/EWD979.PDF">
+
+<META name="Author" content="prof.dr. Edsger W. Dijkstra">
+<META http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+		<link href="../transcriptions.css" rel="stylesheet" media="screen">
+		<style>
+h2 { font-size:100%; font-weight:normal; text-decoration:underline; }
+li { margin-top: 10px; }
+</style>
+</Head>
+<Body>
+<div id="frame">
+			<div id="header">
+        <a href="../../ewd09xx/EWD979.PDF" 
+           title="Link to the PDF version of EWD979">EWD979</a>
+      </div>
+      <div id="content">
+
+<H2>A solution designed by A. Blokhuis</H2>
+
+<P>Consider all the chords between n distinct points on the perimeter of a circle, the points having been chosen such that each point inside the circle lies on at most 2 chords. Into how many regions is the area inside the circle divided by those chords?</P>
+
+<div align=center>
+<IMG SRC="EWD979_0_1.png" width=15% alt="example n=1: no chords, 1 region">
+<IMG SRC="EWD979_0_2.png" width=15% alt="example n=2: one chord, 2 regions">
+<IMG SRC="EWD979_0_4.png" width=15% alt="example n=3: 3 chords, 4 regions">
+<IMG SRC="EWD979_0_8.png" width=15% alt="example n=4: 6 chords, 8 regions">
+</div>
+
+<P>The guess that for <var>n</var> = 5 the number equals 16 is correct; for <var>n</var> = 6, the number equals 31. (It is a very convincing example of the inadequacy of what is known as &quot;Poor Man's Induction&quot;.)</P>
+<div align=center >
+			<p><SUP>*</SUP>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SUB>*</SUB>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<SUP>*</SUP></p>
+		</div>
+
+<P>The following argument derives an expression for the number of regions as a function of <var>n</var>.</P>
+
+<P>In an effort of disentanglement we try not to use all our data simultaneously, in particular we temporarily ignore that eventually we will deal with all chords between <var>n</var> points. What can we say about the number of regions when a number of chords has been drawn?</P>
+
+<p>
+<DIV align=center><IMG SRC="EWD979_1.png" width=15% alt="example 3 chords, 2 intersections"></DIV>
+Let us draw another chord:
+
+		<DIV align=center><IMG SRC="EWD979_2.png" width=15% alt="example 3 + 1 chords, 2 + 2 intersections"></DIV>
+		<table>
+			<tr>
+				<td>Let&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+				<td><var>R</var> = the number of regions</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><var>C</var> = the number of chords</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><var>I</var> = the number of intersections inside the circle</td>
+			</tr>
+		</table>
+		
+
+and let us investigate the relation between their increments for the case
+
+				<BLOCKQUOTE>
+					&Delta;<var>C</var> = 1 ;</BLOCKQUOTE>
+				&Delta;<var>R</var> is the number of segments into which the new chord is divided by the others, which is one more than the number of its intersections, i.e.
+				<BLOCKQUOTE>
+					&Delta;<var>R</var> = 1 + &Delta;<var>I</var> ;</BLOCKQUOTE>
+				
+from the above we derive
+<BLOCKQUOTE>
+					&Delta;<var>R</var> = &Delta;<var>C</var> + &Delta;<var>I</var> ;</BLOCKQUOTE>
+				and, since <var>I</var> = 0 and <var>C</var> = 0 corresponds to <var>R</var> = 1, by induction over <var>C</var>
+				<BLOCKQUOTE>
+					<var>R</var> = <var>1</var> + <var>C</var> + <var>I</var> .</BLOCKQUOTE>
+				So we are done if we can determine <var>C</var> and <var>I</var>.
+				<P>This is the moment to remember that we were considering <var>n</var> &quot;peripheral&quot; points and all chords between them.</P>
+				<P>Each chord determines two distinct peripheral points, and vice versa, hence
+		<BLOCKQUOTE>
+<table><tr><td>
+<table border=0><tr><td><var>C</var> = (</td><td><var>n</var><br>
+												2</td><td>)</td>
+</tr></table></td>
+<td>.</td></tr></table>
+</BLOCKQUOTE>
+		<P>Each intersection, by determining two distinct chords, determines 4 distinct *) peripheral points, and vice versa **), hence
+		<BLOCKQUOTE>
+<table><tr><td>
+<table border=0><tr><td><var>I</var> = (</td><td><var>n</var><br>
+												4</td><td>)</td>
+</tr></table></td>
+<td>.</td></tr></table>
+</BLOCKQUOTE>
+		<table>
+<tr><td valign=top align=right>*)&nbsp;</td><td>Intersecting each other already inside the circle, the two chords don't share a peripheral point.</td></tr>
+<tr><td valign=top align=right>**)&nbsp;</td><td>For any 4 peripheral points, only 1 of the 3 possible pairings leads to chords intersecting inside the circle.</td></tr>
+</table>
+				<p></p>
+				<table width="38%" border="0" cellspacing="2" cellpadding="0">
+			<tr>
+				<td>So&nbsp;&nbsp;</td>
+				<td>
+					<table>
+						<tr>
+							<td>
+									<table border=0>
+										<tr>
+											<td>
+												<div align="right">
+															<var>R</var> = 1 + (</div>
+											</td>
+											<td><var>n</var><br>
+														
+												2</td>
+											<td>) + (</td>
+											<td><var>n</var><br>
+														
+												4</td>
+											<td>)</td>
+										</tr>
+									</table>
+								</td>
+							<td>.</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+				<p></p>
+				<table width="90%" border="0" cellspacing="2" cellpadding="0">
+			<tr>
+				<td>Since&nbsp;&nbsp;&nbsp;</td>
+				<td>
+					<table>
+						<tr>
+							<td width="40%">
+									<table width="90%" border=0>
+										<tr>
+											<td>(</td>
+											<td><var>n</var><br>
+													<var>
+														
+												k</var></td>
+											<td align="center" valign="middle">
+												<div align="center">
+													) = (</div>
+											</td>
+											<td align=center width="20%"><var>n</var> &#150; 1<br>
+														<var>k</var> &#150; 1</td>
+											<td>
+												<div align="center">
+													) + (</div>
+											</td>
+											<td align=center width="20%"><var>n</var> &#150; 1<br>
+														<var>
+												k</var></td>
+											<td>)</td>
+										</tr>
+									</table>
+								</td>
+						</tr>
+					</table>
+				</td>
+				<td width="40%">, &nbsp;&nbsp;we can rewrite</td>
+			</tr>
+		</table>
+		<BLOCKQUOTE>
+<table><tr><td>
+<table border=0><tr><td><var>R</var> = 1 + (</td><td align=center><var>n</var> &#150; 1<br>1</td><td>) + 
+(</td><td align=center><var>n</var> &#150; 1<br>2</td><td>) + 
+(</td><td align=center><var>n</var> &#150; 1<br>3</td><td>) + 
+(</td><td align=center><var>n</var> &#150; 1<br>4</td><td>)</td>
+</tr></table></td>
+<td width="74">
+						<div align="right">
+							,</div>
+					</td></tr></table>
+</BLOCKQUOTE>
+		
+		
+
+i.e. the sum of the first 5 entries of a line of the triangle of Pascal. The full lines adding up to the successive powers of 2, we now understand the misleading observations with which this note started.
+		<p>The above argument is due to A. Blokhuis.</p>
+		<div align=right>
+					<p>Austin, 16 September 1986</p>
+				</div>
+		<P class="noindent">prof. dr. Edsger W. Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin<br>
+Austin, TX 78712 - 1188<br>
+United States of America</P>
+		<hr>
+		<font size="-1">transcribed by Martijn van der Veen<br>
+			revised <csobj format="MedDate" h="16" region="15" t="DateTime" w="113">Thu, 27 May 2010</csobj></font>
+		<p></p>
+	
+	
+	
+	
