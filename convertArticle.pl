@@ -1,23 +1,50 @@
 #!/usr/bin/perl
 
+sub getbody {
+  my ($article, $title) = @_;
+
+  if ($article =~ /<div id="content">(.*)/mis) {
+    $article = $1;
+  }
+  if ($article =~ /.*(<p class="noindent">)?<u>\Q$title\E<\/u>(<\/p>)?(.*)/mis) {
+    $article = $3;
+  }
+
+  return $article;
+}
+
+sub parse {
+  my $article = shift;
+  my %result = {};
+
+  $article =~ s/href="..\/..\//href="https:\/\/www.cs.utexas.edu\/~EWD\/$1/gi;
+
+  if ($article =~ /<title>(E.W.\s*Dijkstra Archive: )?(.*?)( \(EWD\s*\d+\))?<\/title>/mi) {
+    $result{'title'} = $2;
+    $article =~ s/<h1>\Q$result{'title'}\E<\/h1>//mi;
+  }
+
+  $result{'body'} = getbody($article, $result{'title'});
+
+  return \%result;
+}
+
 $/ = undef;
 my $article = <STDIN>;
 
-$article =~ s/href="..\/..\//href="https:\/\/www.cs.utexas.edu\/~EWD\/$1/gi;
-$article =~ s/..\/transcriptions.css/assets\/transcriptions.css/gi;
+my $parsed = parse($article);
 
-$article =~ s/meta name="generator" content="Adobe GoLive 6"/meta name="generator" content="convertArticle.pl"/gi;
-
-if ($article =~ /<title>(E.W.\s*Dijkstra Archive: )?(.*?)( \(EWD\s*\d+\))?<\/title>/mi) {
-  my $title = $2;
-  # print STDERR $title;
-  $article =~ s/(<body.*?>)/$1<div id="title"><h1>$title<\/h1><\/div>/gi;
-}
-
-$article =~ s/<head>/<head><link href="https:\/\/fonts.googleapis.com\/css\?family=Lobster|Raleway" rel="stylesheet">/gi;
-
-if ($article !~ /transcriptions.css/) {
-  $article =~ s/<head>/<head><link href="assets\/transcriptions.css" rel="stylesheet" media="screen">/gi;
-}
-
-print $article;
+print <<EOF;
+<html>
+<head>
+  <title>$parsed->{'title'}</title>
+  <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+  <link href="assets/transcriptions.css" rel="stylesheet">
+  <meta name="generator" content="convertArticle.pl">
+</head>
+<body>
+<h1>$parsed->{'title'}</h1>
+$parsed->{'body'}
+</body>
+</html>
+EOF
