@@ -1,13 +1,38 @@
 body {
+  margin: 0;
+}
+
+.body {
   font-family: Raleway, sans-serif;
   width: 700px;
-  margin: 0 auto
+  margin: 0 auto;
 }
 
 h1 {
   font-family: Lobster, cursive;
   font-size: 3em;
   text-align: center;
+  margin-top: 1em;
+}
+
+div.metabar {
+  background-color: purple;
+  position: absolute;
+  display: block;
+  width: 100%;
+  top: 0;
+  color: white;
+  padding: 10px;
+}
+
+div.metabar a {
+  color: white;
+  text-decoration: none;
+  font-family: Raleway, sans-serif;
+}
+
+div.metabar a:hover {
+  text-decoration: underline;
 }
 
 p.noindent {

@@ -6,8 +6,11 @@
   <meta name="generator" content="convertArticle.pl">
 </head>
 <body>
+<div class="metabar">
+  <a href="index.html">HOME</a>
+</div>
 <h1>On-the-fly garbage collection: an exercise in cooperation</h1>
-.</p>
+<div class='body'>.</p>
 				<p class="noindent"><u>Introduction</u>.</p>
 				<p>In any large-scale computer installation today, a considerable amount of time of the (general purpose) processor is spent on &ldquo;operating the system&rdquo;. With the emerging advent of multiprocessor installations the question arises to what extent such &ldquo;housekeeping activities&rdquo; can be carried out concurrently with the computation(s) proper. Because the more intimate the interference, the harder the organization of the cooperation between the concurrent processes, the problem of garbage collection was selected as one of the most challenging &#x2014;and, hopefully, most instructive!&#x2014; problems. (Our exercise has not only been very instructive, but at times even humiliating, as we have fallen into nearly every logical trap that we could possibly fall into.) In our treatment we have tried to blend a condensed design history &#x2014;in order not to hide the heuristics completely&#x2014; with a rather detailed justification of our final solution. Whether the following solution, which is the result of many iterations, is of any economic significance, is a question beyond the scope of this paper.</p>
 				<p>We tackled the problem as it presents itself in the traditional implementation environment for pure LISP (and shall describe our solution in the usual terminology, leaving the natural generalizations to the reader). The data structure to be stored consists of a directed graph in which each node has at most two outgoing edges, more precisely: may have a left-hand outgoing edge and may have a right-hand outgoing edge. In the original problem statement, either of them or both could be missing; for the sake of homogeneity we follow the &#x2014;not unusual&#x2014; practice of introducing a special purpose node called &ldquo;NIL&rdquo; and we represent an originally missing outgoing edge by an edge with the node called NIL as its target. As a result, each node had now always exactly two outgoing edges; the outgoing edges from NIL point to NIL itself. At any moment in time all the nodes must be &ldquo;reachable&rdquo; (via a directed path along the directed edges) from one or more fixed nodes &#x2014;called &ldquo;the roots&rdquo;&#x2014; with a constant place in memory. The storage allocated to each node is constant in time and equal in size, viz. sufficient to accommodate two pointers &#x2014;one for each outgoing edge&#x2014; pointing to the node&rsquo;s immediate successors. Given (the address of) a node, finding (the address of) its left- or right-hand successor node can be regarded as an atomic, primitive action; finding its predecessor nodes, however, would imply a search through memory.</p>
@@ -158,6 +161,6 @@
 	</body>
 
 </html>
-
+</div>
 </body>
 </html>

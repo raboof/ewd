@@ -6,8 +6,11 @@
   <meta name="generator" content="convertArticle.pl">
 </head>
 <body>
+<div class="metabar">
+  <a href="index.html">HOME</a>
+</div>
 <h1>Making a fair roulette from a possibly biased coin</h1>
-
+<div class='body'>
 				<p>We are given a possibly biased coin, that is, a coin that, when flipped, shows head or tail with the probabilities <var>p</var> and <var>q</var> respectively, with <var>p</var>+<var>q</var> = 1 but not necessarily <var>p</var>=<var>q</var>. We don't know the values of <var>p</var> and <var>q</var>, we only know that the coin remains &ldquo;the same&rdquo;, i.e., that <var>p</var> and <var>q</var> are constant in time. The problem is to design an experiment with 37 different outcomes of equal probability.</p>
 				<p>In a variable <var>A</var> of type &ldquo;sequence of 37 faces&rdquo;, we record 37 flippings of the coin; if all the faces in <var>A</var> are the same, we start afresh, otherwise we accept the value of <var>A</var>. This first stage of the design is inspired by (i) the consideration that the experiment has to fail (to terminate) if the coin is so extremely biased that one of the faces <em>never</em> shows up, and (ii) the fact that (Fermat) <span class="inlineformula">2<sup>37</sup>-2</span> is a multiple of 37.</p>
 				<p>With <var>A</var> thus determined, we consider the sequences &nbsp; rot.<var>k</var>.<var>A</var> &nbsp; for 0&nbsp;&#x2264;&nbsp;<var>k</var>&nbsp;&lt;&nbsp;37, where &nbsp; rot.<var>k</var>.<var>A</var> &nbsp; is obtained by rotating <var>A</var> over <var>k</var> positions (to the left say). Because <var>A</var> is not periodic with period 1 and 37 is prime, the 37 sequences &nbsp; rot.<var>k</var>.<var>A</var> &nbsp; (0&nbsp;&#x2264;&nbsp;<var>k</var>&nbsp;&lt;&nbsp;37) are all different. Moreover, since they all contain the same number of heads (and the same number of tails), they are 37 equally likely <var>A</var>-values. And this solves our problem but for a convention that establishes a 1&ndash;1 correspondence between those 37 sequences and the numbers from 0 to 36, e.g. the value of <var>k</var> for which &nbsp; rot.<var>k</var>.<var>A</var> &nbsp; is the lexical minimum, i.e., with <var>A</var> thus determined, we deliver &nbsp; <var>r</var> &nbsp; satisfying</p>
@@ -35,6 +38,6 @@
 	</body>
 
 </html>
-
+</div>
 </body>
 </html>
