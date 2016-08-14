@@ -67,6 +67,8 @@ sub convertArticle {
     <link href="assets/transcriptions.css" rel="stylesheet">
     <meta name="generator" content="convertArticle.pl">
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="\@raboofje" />
+    <meta name="twitter:description" content="From the Edsger Dijkstra EWD archive: $parsed->{'title'}" />
     <meta name="twitter:title" content="$parsed->{'title'}" />
     <meta name="twitter:image" content="http://raboof.github.io/ewd/assets/dijkstra.jpeg" />
   </head>
