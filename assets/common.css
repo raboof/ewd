@@ -30,6 +30,9 @@ div.metabar {
   width: 100%;
   top: 0;
   color: white;
+}
+
+div.metabar-inner {
   padding: 10px;
 }
 

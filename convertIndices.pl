@@ -58,10 +58,12 @@ print INDEX <<EOF;
 </head>
 <body>
 <div class="metabar">
+  <div class="metabar-inner">
   <a id="nl" class="lang" href="#" onclick="disableLang('nl')">NL</a>
   <a id="nonl" class="inactive" href="#" onclick="enableLang('nl')">NL</a>
   <a id="en" class="lang" href="#" onclick="disableLang('en')">EN</a>
   <a id="noen" class="inactive" href="#" onclick="enableLang('en')">EN</a>
+  </div>
 </div>
 <h1>Edsger W. Dijkstra</h1>
 <div class="body">

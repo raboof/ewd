@@ -66,7 +66,9 @@ print STDOUT <<EOF;
 </head>
 <body>
 <div class="metabar">
-  <a href="index.html">HOME</a>
+  <div class="metabar-inner">
+    <a href="index.html">HOME</a>
+  </div>
 </div>
 <h1>$parsed->{'title'}</h1>
 <div class='body'>$parsed->{'body'}</div>
