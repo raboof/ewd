@@ -16,6 +16,9 @@ while (<LANG> =~ /(.*)\t(.*)/g) {
   $language{"$1.html"} = $2;
 }
 
+my %skip = {};
+$skip{'EWD645.html'} = true; # missing/empty upstream
+
 $/ = undef;
 
 foreach my $file (@files) {
@@ -37,7 +40,7 @@ foreach my $file (@files) {
         'file' => $file,
         'language' => $language{$file}
       );
-      if ($ewd{'file'} !~ /^\s*$/) {
+      if ($ewd{'file'} !~ /^\s*$/ && !$skip{$ewd{'file'}}) {
         push(@ewds, \%ewd);
       }
     }
