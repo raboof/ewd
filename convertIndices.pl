@@ -28,6 +28,7 @@ foreach my $file (@files) {
     foreach $row ($ts->rows) {
       my $file = trim($$row[2]);
       $file =~ s/(.*)\.html?.*/\1.html/mis;
+      $file =~ s/\s//g;
       my $title = trim($$row[1]);
       $title =~ s/ \(English\)//;
       my %ewd = (
