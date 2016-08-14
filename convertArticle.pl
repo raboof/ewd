@@ -3,18 +3,19 @@
 use strict;
 
 use Encode qw(decode encode);
-use HTML::Tidy;
-use HTML::Entities;
 
-my $tidy = HTML::Tidy->new();
+# TODO https://github.com/travis-ci/apt-package-whitelist/issues/3290
+# use HTML::Tidy;
+# my $tidy = HTML::Tidy->new();
 
 sub tidySnippet {
   my $snippet = shift;
-  my $document = $tidy->clean($snippet);
-  if ($document =~ /<body>(.*)<\/body>/mis) {
-    return $1;
-  }
-  return $document;
+  return $snippet;
+  # my $document = $tidy->clean($snippet);
+  # if ($document =~ /<body>(.*)<\/body>/mis) {
+  #   return $1;
+  # }
+  # return $document;
 }
 
 sub getbody {
