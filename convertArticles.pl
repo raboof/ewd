@@ -85,8 +85,10 @@ sub targetName {
   if ($source =~ /EWD978/) {
     return "EWD978.html"
   }
-  if ($source =~ /.*\/(.*)/) {
-    return $1;
+  if ($source =~ /.*\/(.*)\.html?/) {
+    my $file = $1;
+    $file =~ s/ewd/EWD/;
+    return $file . ".html";
   }
   die "Could not determine output filename for $source";
 }
