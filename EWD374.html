@@ -14,7 +14,7 @@
   </div>
 </div>
 <h1>The Analysis of Multiprogrammed Systems of Unspecified Degree of Parallelism</h1>
-<div class='body'>.</p>
+<div class='body'>
 				<p>Multiprogrammed systems have been tackled by considering them as finite state machines with a considerable amount of non-determinacy, reflecting unspecified speed ratios. This is all right as far as it goes (see<a name="reference" id="reference"></a> <a href="#footnote" title="link to footnote">[1]</a>), but it does not go very far if the reasoning forces us to choose beforehand the number of parallel processes. It is particularly unattractive if the amount of reasoning &mdash;or computing if the proof procedure is mechanized&mdash; rises steeply with the number of participating processes. The following example shows how even for general &ldquo;<var>n</var>&rdquo;, a finite state analysis can suffice, provided that what we call &ldquo;states&rdquo; are carefully chosen.</p>
 				<p>It is the by now classical example of the readers and the writers, where the critical reader activity excludes the critical writer activity and where in addition the critical activity of any one writer excludes the same activity of any other writer. In short, in this example we have an unknown number of participants of two different types.</p>
 				<p>We have chosen a rather unusual solution, not because we have any reason for favouring it, but in order to show the power of our technique for analysing such systems. The chosen solution is rather sophisticated in granting a rather strong priority to writers and in trying to minimize the execution of synchronizing primitives and tests.</p>
