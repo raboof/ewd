@@ -1,13 +1,5 @@
-body {
-  font-family: Raleway, sans-serif;
-  width: 700px;
-  margin: 0 auto
-}
-
 h1 {
-  font-family: Lobster, cursive;
   font-size: 3em;
-  text-align: center;
 }
 
 li.ewd {
@@ -15,10 +7,9 @@ li.ewd {
   padding: .5em;
 }
 
-.ewd a {
-  text-decoration: none;
-  color: black;
+#nonl {
+  display: none;
 }
-.ewd a:hover {
-  text-decoration: underline;
+#noen {
+  display: none;
 }

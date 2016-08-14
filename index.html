@@ -3,805 +3,815 @@
 <head>
   <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+  <link href="assets/common.css" rel="stylesheet">
   <link href="assets/index.css" rel="stylesheet">
+  <script src="assets/index.js"></script>
 </head>
 <body>
+<div class="metabar">
+  <a id="nl" class="lang" href="#" onclick="disableLang('nl')">NL</a>
+  <a id="nonl" class="inactive" href="#" onclick="enableLang('nl')">NL</a>
+  <a id="en" class="lang" href="#" onclick="disableLang('en')">EN</a>
+  <a id="noen" class="inactive" href="#" onclick="enableLang('en')">EN</a>
+</div>
 <h1>Edsger W. Dijkstra</h1>
+<div class="body">
 <ul>
-<li class='ewd'><a href='EWD1318.html'>Coxeter’s rabbit</a></li>
-<li class='ewd'><a href='EWD1317.html'>From van IJzeren’s correspondence to my aunt & uncle</a></li>
-<li class='ewd'><a href='EWD1316.html'>Philips and I: a few snapshots</a></li>
-<li class='ewd'><a href='EWD1315.html'>Indirect equality enriched (and a proof by Netty)</a></li>
-<li class='ewd'><a href='EWD1313.html'>The GCD and the minimum</a></li>
-<li class='ewd'><a href='EWD1312.html'>On disjoint binary numbers</a></li>
-<li class='ewd'><a href='EWD1311.html'>Another look at a problem from Hugo Steinhaus</a></li>
-<li class='ewd'><a href='EWD1310.html'>Three trip reports rolled into one: 2001.04.16 – 2001.07.06</a></li>
-<li class='ewd'><a href='EWD1309a.html'>Zuckerman’s problem and the ETAC</a></li>
-<li class='ewd'><a href='EWD1308.html'>What led to “Notes on Structured Programming”</a></li>
-<li class='ewd'><a href='EWD1307.html'>An unavoidable case analysis</a></li>
-<li class='ewd'><a href='EWD1306a.html'>The chessboard covered with dominoes</a></li>
-<li class='ewd'><a href='EWD1306.html'>The chessboard covered with dominoes</a></li>
-<li class='ewd'><a href='EWD1305.html'>Answers to questions from students of Software Engineering</a></li>
-<li class='ewd'><a href='EWD1304.html'>The end of computing science?</a></li>
-<li class='ewd'><a href='EWD1303.html'>My recollections of operating system design</a></li>
-<li class='ewd'><a href='EWD1302.html'>Once more bichrome triangles in complete graphs</a></li>
-<li class='ewd'><a href='EWD1301.html'>The river, the isles and the bridges</a></li>
-<li class='ewd'><a href='EWD1300.html'>The notational conventions I adopted, and why</a></li>
-<li class='ewd'><a href='EWD1298.html'>Under the spell of Leibniz’s Dream</a></li>
-<li class='ewd'><a href='EWD1297.html'>Triggered by a high-school exercise</a></li>
-<li class='ewd'><a href='EWD1292.html'>When a symmetric operator distributes over (up) and (down)</a></li>
-<li class='ewd'><a href='EWD1290.html'>Eliminating cascading carries</a></li>
-<li class='ewd'><a href='EWD1288.html'>Ulrich Berger’s argument rephrased</a></li>
-<li class='ewd'><a href='EWD1287.html'>Dear Tony, dearest Jill, and other people, dear or not</a></li>
-<li class='ewd'><a href='EWD1285.html'>To Cambridge by mistake (13–18 April 1999)</a></li>
-<li class='ewd'><a href='EWD1284.html'>Computing Science: Achievements and Challenges</a></li>
-<li class='ewd'><a href='EWD1283.html'>How “they” try to corrupt “us”</a></li>
-<li class='ewd'><a href='EWD1282.html'>On graphs whose nodes are Black or White</a></li>
-<li class='ewd'><a href='EWD1277.html'>Society’s role in mathematics</a></li>
-<li class='ewd'><a href='EWD1273.html'>On Dijkstra’s Lemma and Kruskal’s Algorithm</a></li>
-<li class='ewd'><a href='EWD1268.html'>The Mathematical Divide</a></li>
-<li class='ewd'><a href='EWD1260.html'>The marked coins and the scale</a></li>
-<li class='ewd'><a href='EWD1258a.html'>The ladder theorem</a></li>
-<li class='ewd'><a href='EWD1256.html'>Mathematical Methodology, Spring 1997</a></li>
-<li class='ewd'><a href='EWD1255.html'>Pruning the search tree</a></li>
-<li class='ewd'><a href='EWD1253.html'>Mathematical induction’s fixpoint</a></li>
-<li class='ewd'><a href='EWD1252.html'>Convocation speech, December 8, 1996</a></li>
-<li class='ewd'><a href='EWD1250.html'>The couples, the river, and the little boat</a></li>
-<li class='ewd'><a href='EWD1248.html'>Homework #1 (See EWD996)</a></li>
-<li class='ewd'><a href='EWD1243a.html'>The next fifty years</a></li>
-<li class='ewd'><a href='EWD1243.html'>The next fifty years</a></li>
-<li class='ewd'><a href='EWD1239.html'>A first exploration of effective reasoning</a></li>
-<li class='ewd'><a href='EWD1238.html'>Foreword</a></li>
-<li class='ewd'><a href='EWD1237.html'>Elegance and effective reasoning (Fall 1996)</a></li>
-<li class='ewd'><a href='EWD1235.html'>Een scheve schaats (English)</a></li>
-<li class='ewd'><a href='EWD1232.html'>My simplest theorem</a></li>
-<li class='ewd'><a href='EWD1231.html'>The arithmetic and geometric means once more</a></li>
-<li class='ewd'><a href='EWD1229.html'>Nondeterministic construction of an arbitrary witness</a></li>
-<li class='ewd'><a href='EWD1228.html'>Sylvester’s theorem used (see EWD1016)</a></li>
-<li class='ewd'><a href='EWD1227.html'>A somewhat open letter to David Gries</a></li>
-<li class='ewd'><a href='EWD1226.html'>A simple geometrical theorem I did not know</a></li>
-<li class='ewd'><a href='EWD1224.html'>Hm++, a new Professional Standard (From the desk of the chairman of the Board of Mathematics Inc.)</a></li>
-<li class='ewd'><a href='EWD1220.html'>Honors course “Mathematical Methodology”, Spring 1996</a></li>
-<li class='ewd'><a href='EWD1219.html'>“I have a proof that ....”</a></li>
-<li class='ewd'><a href='EWD1216.html'>The equation x: [x]</a></li>
-<li class='ewd'><a href='EWD1215.html'>Courtesy Dr. Birgit Schieder</a></li>
-<li class='ewd'><a href='EWD1214.html'>The marriage agency</a></li>
-<li class='ewd'><a href='EWD1213.html'>Introducing a course on calculi</a></li>
-<li class='ewd'><a href='EWD1212.html'>For the record: painting the squared plane</a></li>
-<li class='ewd'><a href='EWD1210.html'>The non-unique node multiplicity</a></li>
-<li class='ewd'><a href='EWD1209.html'>Why American Computing Science seems incurable</a></li>
-<li class='ewd'><a href='EWD1207.html'>A theorem about “factors” perhaps worth recording</a></li>
-<li class='ewd'><a href='EWD1206.html'>An unfortunate use of symbols</a></li>
-<li class='ewd'><a href='EWD1205.html'>A trip to Harvard Law School, 10–11 April 1995</a></li>
-<li class='ewd'><a href='EWD1204.html'>Complete DAGs</a></li>
-<li class='ewd'><a href='EWD1203.html'>Primes once more (re Kac & Ulam)</a></li>
-<li class='ewd'><a href='EWD1202.html'>The complete (n + 1)-graph in n-dimensional space</a></li>
-<li class='ewd'><a href='EWD1200.html'>Only a matter of style?</a></li>
-<li class='ewd'><a href='EWD1199.html'>A supplement to EWD1140 and EWD1171</a></li>
-<li class='ewd'><a href='EWD1198.html'>Jan van de Snepscheut’s tiling problem</a></li>
-<li class='ewd'><a href='EWD1194.html'>Z.P. Su’s second problem</a></li>
-<li class='ewd'><a href='EWD1193.html'>On arcs and angles</a></li>
-<li class='ewd'><a href='EWD1190.html'>Problem 10406 from The American Mathematical Monthly, Volume 101, Number 8 / October 1994</a></li>
-<li class='ewd'><a href='EWD1188.html'>A problem from Zhendong Patrick Su (including an alternative solution by R.Boute</a></li>
-<li class='ewd'><a href='EWD1181.html'>Don’t mix unary pre- and postfix operators</a></li>
-<li class='ewd'><a href='EWD1180.html'>Heuristics for a very simple Euclidean proof</a></li>
-<li class='ewd'><a href='EWD1179.html'>A sorry parade</a></li>
-<li class='ewd'><a href='EWD1177.html'>In Memoriam Jan L.A. van de Snepscheut</a></li>
-<li class='ewd'><a href='EWD1175.html'>The strengths of the academic enterprise</a></li>
-<li class='ewd'><a href='EWD1171.html'>The argument about the arithmetic mean and the geometric mean, heuristics included</a></li>
-<li class='ewd'><a href='EWD1170.html'>Equilateral triangles and rectangular grids</a></li>
-<li class='ewd'><a href='EWD1166.html'>“From my Life”</a></li>
-<li class='ewd'><a href='EWD1165.html'>There is still a war going on</a></li>
-<li class='ewd'><a href='EWD1161.html'>How promiscuous are the French ?</a></li>
-<li class='ewd'><a href='EWD1157.html'>Introducing a course on program design and presentation</a></li>
-<li class='ewd'><a href='EWD1156.html'>Voorwoord (voor jaarboek studievereniging UT)</a></li>
-<li class='ewd'><a href='EWD1155a.html'>A prime is in at most 1 way the sum of 2 squares</a></li>
-<li class='ewd'><a href='EWD1155.html'>A prime is in at most 1 way the sum of 2 squares</a></li>
-<li class='ewd'><a href='EWD1152.html'>Het intellectuele gehalte van informatica</a></li>
-<li class='ewd'><a href='EWD1151.html'>A terrible Thursday</a></li>
-<li class='ewd'><a href='EWD1145.html'>A somewhat open letter to Cathleen Synge Morawetz</a></li>
-<li class='ewd'><a href='EWD1142.html'>It is all distributivity</a></li>
-<li class='ewd'><a href='EWD1140.html'>The arithmetic mean and the geometric mean</a></li>
-<li class='ewd'><a href='EWD1137.html'>Computing the future?</a></li>
-<li class='ewd'><a href='EWD1135.html'>The knight’s tour</a></li>
-<li class='ewd'><a href='EWD1134.html'>The checkers problem told to me by M.O. Rabin</a></li>
-<li class='ewd'><a href='EWD1132.html'>Introducing a course on the design and use of calculi</a></li>
-<li class='ewd'><a href='EWD1131.html'>Bulterman’s theorem on shortest tree</a></li>
-<li class='ewd'><a href='EWD1129.html'>Why “heavy-weight” bits are unavoidable</a></li>
-<li class='ewd'><a href='EWD1126.html'>Who failed?</a></li>
-<li class='ewd'><a href='EWD1121.html'>Covering rectangles with bars of length 3</a></li>
-<li class='ewd'><a href='EWD1117.html'>Monotonic demonstranda and dummy introduction</a></li>
-<li class='ewd'><a href='EWD1113.html'>A somewhat open letter to Ben Kuipers</a></li>
-<li class='ewd'><a href='EWD1112.html'>Why “up to equivalence”</a></li>
-<li class='ewd'><a href='EWD1110.html'>To the members of the budget council (Confidential)</a></li>
-<li class='ewd'><a href='EWD1109.html'>Simplifying a proof in our book</a></li>
-<li class='ewd'><a href='EWD1108.html'>Too much PSST in Texas</a></li>
-<li class='ewd'><a href='EWD1105.html'>For Bill Walker a sequel to EWD1099</a></li>
-<li class='ewd'><a href='EWD1104.html'>So much for scientific visualization</a></li>
-<li class='ewd'><a href='EWD1103.html'>For the record: ETAC and the couples</a></li>
-<li class='ewd'><a href='EWD1101.html'>Triangles in graphs: a sharp bound</a></li>
-<li class='ewd'><a href='EWD1100.html'>The computing habit</a></li>
-<li class='ewd'><a href='EWD1096.html'>Potter’s proof of disjunction’s symmetry</a></li>
-<li class='ewd'><a href='EWD1095.html'>Are “systems people” really necessary?</a></li>
-<li class='ewd'><a href='EWD1094.html'>The undeserved status of the pigeon-hole principle (Mathematical Methodology)</a></li>
-<li class='ewd'><a href='EWD1092.html'>Two ways of determining an expectation value</a></li>
-<li class='ewd'><a href='EWD1085.html'>Proving the theorem of Menelaos</a></li>
-<li class='ewd'><a href='EWD1083.html'>The balance and the coins</a></li>
-<li class='ewd'><a href='EWD1076.html'>From “Discrete Mathematics with Applications” by Susanna S. Epp</a></li>
-<li class='ewd'><a href='EWD1073.html'>How Computing Science created a new mathematical style</a></li>
-<li class='ewd'><a href='EWD1072.html'>On covering a figure with diamonds</a></li>
-<li class='ewd'><a href='EWD1071a.html'>Making a fair roulette from a possibly biased coin</a></li>
-<li class='ewd'><a href='EWD1071.html'>Making a fair roulette from a possibly biased coin</a></li>
-<li class='ewd'><a href='EWD1070.html'>For brevity’s sake (Mathematical Methodology)</a></li>
-<li class='ewd'><a href='EWD1069.html'>Fair gambling with a biased coin</a></li>
-<li class='ewd'><a href='EWD1068.html'>On the quality criteria for mathematical writing (Mathematical Methodology)</a></li>
-<li class='ewd'><a href='EWD1067.html'>A very first introductory example (Mathematical Methodology)</a></li>
-<li class='ewd'><a href='EWD1066.html'>Hungry? Have a byte ....</a></li>
-<li class='ewd'><a href='EWD1060.html'>“Predicate Calculus and Program Semantics”, fall 1989</a></li>
-<li class='ewd'><a href='EWD1059.html'>0 Preface (Mathematical Methodology)</a></li>
-<li class='ewd'><a href='EWD1058.html'>In reply to comments</a></li>
-<li class='ewd'><a href='EWD1057.html'>Andrei P. Ershov in Nuenen</a></li>
-<li class='ewd'><a href='EWD1056.html'>Hoe onbelangrijk het is of duikboten kunnen zwemmen</a></li>
-<li class='ewd'><a href='EWD1055c.html'>On covering a figure with diamonds</a></li>
-<li class='ewd'><a href='EWD1055A.html'>untitled (advice to a young scientist)</a></li>
-<li class='ewd'><a href='EWD1055.html'>On the problem of the calissons</a></li>
-<li class='ewd'><a href='EWD1054.html'>On hygiene, intellectual and otherwise</a></li>
-<li class='ewd'><a href='EWD1053.html'>Monochrome pairs in the three-coloured plane</a></li>
-<li class='ewd'><a href='EWD1051.html'>The next forty years</a></li>
-<li class='ewd'><a href='EWD1050.html'>On the design of a simple proof for Morley’s Theorem</a></li>
-<li class='ewd'><a href='EWD1049.html'>A somewhat open letter to Uri Leron</a></li>
-<li class='ewd'><a href='EWD1046.html'>A tale of two winters</a></li>
-<li class='ewd'><a href='EWD1044.html'>To hell with “meaningful identifiers”!</a></li>
-<li class='ewd'><a href='EWD1043.html'>A few comments on “Computing as a discipline”</a></li>
-<li class='ewd'><a href='EWD1041a.html'>Factorizing the factorial</a></li>
-<li class='ewd'><a href='EWD1041.html'>By way of introduction</a></li>
-<li class='ewd'><a href='EWD1039.html'>Seemingly on a problem transmitted by Bengt Jonsson</a></li>
-<li class='ewd'><a href='EWD1036.html
+<li class='ewd en'><a href='EWD1318.html'>Coxeter’s rabbit</a></li>
+<li class='ewd en'><a href='EWD1317.html'>From van IJzeren’s correspondence to my aunt & uncle</a></li>
+<li class='ewd en'><a href='EWD1316.html'>Philips and I: a few snapshots</a></li>
+<li class='ewd en'><a href='EWD1315.html'>Indirect equality enriched (and a proof by Netty)</a></li>
+<li class='ewd en'><a href='EWD1313.html'>The GCD and the minimum</a></li>
+<li class='ewd en'><a href='EWD1312.html'>On disjoint binary numbers</a></li>
+<li class='ewd en'><a href='EWD1311.html'>Another look at a problem from Hugo Steinhaus</a></li>
+<li class='ewd en'><a href='EWD1310.html'>Three trip reports rolled into one: 2001.04.16 – 2001.07.06</a></li>
+<li class='ewd en'><a href='EWD1309a.html'>Zuckerman’s problem and the ETAC</a></li>
+<li class='ewd en'><a href='EWD1308.html'>What led to “Notes on Structured Programming”</a></li>
+<li class='ewd en'><a href='EWD1307.html'>An unavoidable case analysis</a></li>
+<li class='ewd en'><a href='EWD1306a.html'>The chessboard covered with dominoes</a></li>
+<li class='ewd en'><a href='EWD1306.html'>The chessboard covered with dominoes</a></li>
+<li class='ewd en'><a href='EWD1305.html'>Answers to questions from students of Software Engineering</a></li>
+<li class='ewd en'><a href='EWD1304.html'>The end of computing science?</a></li>
+<li class='ewd en'><a href='EWD1303.html'>My recollections of operating system design</a></li>
+<li class='ewd en'><a href='EWD1302.html'>Once more bichrome triangles in complete graphs</a></li>
+<li class='ewd en'><a href='EWD1301.html'>The river, the isles and the bridges</a></li>
+<li class='ewd en'><a href='EWD1300.html'>The notational conventions I adopted, and why</a></li>
+<li class='ewd en'><a href='EWD1298.html'>Under the spell of Leibniz’s Dream</a></li>
+<li class='ewd en'><a href='EWD1297.html'>Triggered by a high-school exercise</a></li>
+<li class='ewd en'><a href='EWD1292.html'>When a symmetric operator distributes over (up) and (down)</a></li>
+<li class='ewd en'><a href='EWD1290.html'>Eliminating cascading carries</a></li>
+<li class='ewd en'><a href='EWD1288.html'>Ulrich Berger’s argument rephrased</a></li>
+<li class='ewd en'><a href='EWD1287.html'>Dear Tony, dearest Jill, and other people, dear or not</a></li>
+<li class='ewd en'><a href='EWD1285.html'>To Cambridge by mistake (13–18 April 1999)</a></li>
+<li class='ewd en'><a href='EWD1284.html'>Computing Science: Achievements and Challenges</a></li>
+<li class='ewd en'><a href='EWD1283.html'>How “they” try to corrupt “us”</a></li>
+<li class='ewd en'><a href='EWD1282.html'>On graphs whose nodes are Black or White</a></li>
+<li class='ewd en'><a href='EWD1277.html'>Society’s role in mathematics</a></li>
+<li class='ewd en'><a href='EWD1273.html'>On Dijkstra’s Lemma and Kruskal’s Algorithm</a></li>
+<li class='ewd en'><a href='EWD1268.html'>The Mathematical Divide</a></li>
+<li class='ewd en'><a href='EWD1260.html'>The marked coins and the scale</a></li>
+<li class='ewd en'><a href='EWD1258a.html'>The ladder theorem</a></li>
+<li class='ewd en'><a href='EWD1256.html'>Mathematical Methodology, Spring 1997</a></li>
+<li class='ewd en'><a href='EWD1255.html'>Pruning the search tree</a></li>
+<li class='ewd en'><a href='EWD1253.html'>Mathematical induction’s fixpoint</a></li>
+<li class='ewd en'><a href='EWD1252.html'>Convocation speech, December 8, 1996</a></li>
+<li class='ewd en'><a href='EWD1250.html'>The couples, the river, and the little boat</a></li>
+<li class='ewd en'><a href='EWD1248.html'>Homework #1 (See EWD996)</a></li>
+<li class='ewd en'><a href='EWD1243a.html'>The next fifty years</a></li>
+<li class='ewd en'><a href='EWD1243.html'>The next fifty years</a></li>
+<li class='ewd en'><a href='EWD1239.html'>A first exploration of effective reasoning</a></li>
+<li class='ewd en'><a href='EWD1238.html'>Foreword</a></li>
+<li class='ewd en'><a href='EWD1237.html'>Elegance and effective reasoning (Fall 1996)</a></li>
+<li class='ewd nl'><a href='EWD1235.html'>Een scheve schaats</a></li>
+<li class='ewd en'><a href='EWD1232.html'>My simplest theorem</a></li>
+<li class='ewd en'><a href='EWD1231.html'>The arithmetic and geometric means once more</a></li>
+<li class='ewd en'><a href='EWD1229.html'>Nondeterministic construction of an arbitrary witness</a></li>
+<li class='ewd en'><a href='EWD1228.html'>Sylvester’s theorem used (see EWD1016)</a></li>
+<li class='ewd en'><a href='EWD1227.html'>A somewhat open letter to David Gries</a></li>
+<li class='ewd en'><a href='EWD1226.html'>A simple geometrical theorem I did not know</a></li>
+<li class='ewd en'><a href='EWD1224.html'>Hm++, a new Professional Standard (From the desk of the chairman of the Board of Mathematics Inc.)</a></li>
+<li class='ewd en'><a href='EWD1220.html'>Honors course “Mathematical Methodology”, Spring 1996</a></li>
+<li class='ewd en'><a href='EWD1219.html'>“I have a proof that ....”</a></li>
+<li class='ewd en'><a href='EWD1216.html'>The equation x: [x]</a></li>
+<li class='ewd en'><a href='EWD1215.html'>Courtesy Dr. Birgit Schieder</a></li>
+<li class='ewd en'><a href='EWD1214.html'>The marriage agency</a></li>
+<li class='ewd en'><a href='EWD1213.html'>Introducing a course on calculi</a></li>
+<li class='ewd en'><a href='EWD1212.html'>For the record: painting the squared plane</a></li>
+<li class='ewd en'><a href='EWD1210.html'>The non-unique node multiplicity</a></li>
+<li class='ewd en'><a href='EWD1209.html'>Why American Computing Science seems incurable</a></li>
+<li class='ewd en'><a href='EWD1207.html'>A theorem about “factors” perhaps worth recording</a></li>
+<li class='ewd en'><a href='EWD1206.html'>An unfortunate use of symbols</a></li>
+<li class='ewd en'><a href='EWD1205.html'>A trip to Harvard Law School, 10–11 April 1995</a></li>
+<li class='ewd en'><a href='EWD1204.html'>Complete DAGs</a></li>
+<li class='ewd en'><a href='EWD1203.html'>Primes once more (re Kac & Ulam)</a></li>
+<li class='ewd '><a href='EWD1202.html'>The complete (n + 1)-graph in n-dimensional space</a></li>
+<li class='ewd en'><a href='EWD1200.html'>Only a matter of style?</a></li>
+<li class='ewd en'><a href='EWD1199.html'>A supplement to EWD1140 and EWD1171</a></li>
+<li class='ewd en'><a href='EWD1198.html'>Jan van de Snepscheut’s tiling problem</a></li>
+<li class='ewd en'><a href='EWD1194.html'>Z.P. Su’s second problem</a></li>
+<li class='ewd en'><a href='EWD1193.html'>On arcs and angles</a></li>
+<li class='ewd en'><a href='EWD1190.html'>Problem 10406 from The American Mathematical Monthly, Volume 101, Number 8 / October 1994</a></li>
+<li class='ewd en'><a href='EWD1188.html'>A problem from Zhendong Patrick Su (including an alternative solution by R.Boute</a></li>
+<li class='ewd en'><a href='EWD1181.html'>Don’t mix unary pre- and postfix operators</a></li>
+<li class='ewd en'><a href='EWD1180.html'>Heuristics for a very simple Euclidean proof</a></li>
+<li class='ewd en'><a href='EWD1179.html'>A sorry parade</a></li>
+<li class='ewd en'><a href='EWD1177.html'>In Memoriam Jan L.A. van de Snepscheut</a></li>
+<li class='ewd en'><a href='EWD1175.html'>The strengths of the academic enterprise</a></li>
+<li class='ewd en'><a href='EWD1171.html'>The argument about the arithmetic mean and the geometric mean, heuristics included</a></li>
+<li class='ewd en'><a href='EWD1170.html'>Equilateral triangles and rectangular grids</a></li>
+<li class='ewd en'><a href='EWD1166.html'>“From my Life”</a></li>
+<li class='ewd en'><a href='EWD1165.html'>There is still a war going on</a></li>
+<li class='ewd en'><a href='EWD1161.html'>How promiscuous are the French ?</a></li>
+<li class='ewd en'><a href='EWD1157.html'>Introducing a course on program design and presentation</a></li>
+<li class='ewd nl'><a href='EWD1156.html'>Voorwoord (voor jaarboek studievereniging UT)</a></li>
+<li class='ewd en'><a href='EWD1155a.html'>A prime is in at most 1 way the sum of 2 squares</a></li>
+<li class='ewd en'><a href='EWD1155.html'>A prime is in at most 1 way the sum of 2 squares</a></li>
+<li class='ewd nl'><a href='EWD1152.html'>Het intellectuele gehalte van informatica</a></li>
+<li class='ewd en'><a href='EWD1151.html'>A terrible Thursday</a></li>
+<li class='ewd en'><a href='EWD1145.html'>A somewhat open letter to Cathleen Synge Morawetz</a></li>
+<li class='ewd en'><a href='EWD1142.html'>It is all distributivity</a></li>
+<li class='ewd en'><a href='EWD1140.html'>The arithmetic mean and the geometric mean</a></li>
+<li class='ewd en'><a href='EWD1137.html'>Computing the future?</a></li>
+<li class='ewd en'><a href='EWD1135.html'>The knight’s tour</a></li>
+<li class='ewd en'><a href='EWD1134.html'>The checkers problem told to me by M.O. Rabin</a></li>
+<li class='ewd en'><a href='EWD1132.html'>Introducing a course on the design and use of calculi</a></li>
+<li class='ewd en'><a href='EWD1131.html'>Bulterman’s theorem on shortest tree</a></li>
+<li class='ewd en'><a href='EWD1129.html'>Why “heavy-weight” bits are unavoidable</a></li>
+<li class='ewd en'><a href='EWD1126.html'>Who failed?</a></li>
+<li class='ewd en'><a href='EWD1121.html'>Covering rectangles with bars of length 3</a></li>
+<li class='ewd en'><a href='EWD1117.html'>Monotonic demonstranda and dummy introduction</a></li>
+<li class='ewd en'><a href='EWD1113.html'>A somewhat open letter to Ben Kuipers</a></li>
+<li class='ewd en'><a href='EWD1112.html'>Why “up to equivalence”</a></li>
+<li class='ewd en'><a href='EWD1110.html'>To the members of the budget council (Confidential)</a></li>
+<li class='ewd en'><a href='EWD1109.html'>Simplifying a proof in our book</a></li>
+<li class='ewd en'><a href='EWD1108.html'>Too much PSST in Texas</a></li>
+<li class='ewd en'><a href='EWD1105.html'>For Bill Walker a sequel to EWD1099</a></li>
+<li class='ewd en'><a href='EWD1104.html'>So much for scientific visualization</a></li>
+<li class='ewd en'><a href='EWD1103.html'>For the record: ETAC and the couples</a></li>
+<li class='ewd en'><a href='EWD1101.html'>Triangles in graphs: a sharp bound</a></li>
+<li class='ewd en'><a href='EWD1100.html'>The computing habit</a></li>
+<li class='ewd en'><a href='EWD1096.html'>Potter’s proof of disjunction’s symmetry</a></li>
+<li class='ewd en'><a href='EWD1095.html'>Are “systems people” really necessary?</a></li>
+<li class='ewd en'><a href='EWD1094.html'>The undeserved status of the pigeon-hole principle (Mathematical Methodology)</a></li>
+<li class='ewd en'><a href='EWD1092.html'>Two ways of determining an expectation value</a></li>
+<li class='ewd en'><a href='EWD1085.html'>Proving the theorem of Menelaos</a></li>
+<li class='ewd en'><a href='EWD1083.html'>The balance and the coins</a></li>
+<li class='ewd en'><a href='EWD1076.html'>From “Discrete Mathematics with Applications” by Susanna S. Epp</a></li>
+<li class='ewd en'><a href='EWD1073.html'>How Computing Science created a new mathematical style</a></li>
+<li class='ewd en'><a href='EWD1072.html'>On covering a figure with diamonds</a></li>
+<li class='ewd en'><a href='EWD1071a.html'>Making a fair roulette from a possibly biased coin</a></li>
+<li class='ewd en'><a href='EWD1071.html'>Making a fair roulette from a possibly biased coin</a></li>
+<li class='ewd en'><a href='EWD1070.html'>For brevity’s sake (Mathematical Methodology)</a></li>
+<li class='ewd en'><a href='EWD1069.html'>Fair gambling with a biased coin</a></li>
+<li class='ewd en'><a href='EWD1068.html'>On the quality criteria for mathematical writing (Mathematical Methodology)</a></li>
+<li class='ewd en'><a href='EWD1067.html'>A very first introductory example (Mathematical Methodology)</a></li>
+<li class='ewd en'><a href='EWD1066.html'>Hungry? Have a byte ....</a></li>
+<li class='ewd en'><a href='EWD1060.html'>“Predicate Calculus and Program Semantics”, fall 1989</a></li>
+<li class='ewd en'><a href='EWD1059.html'>0 Preface (Mathematical Methodology)</a></li>
+<li class='ewd en'><a href='EWD1058.html'>In reply to comments</a></li>
+<li class='ewd en'><a href='EWD1057.html'>Andrei P. Ershov in Nuenen</a></li>
+<li class='ewd nl'><a href='EWD1056.html'>Hoe onbelangrijk het is of duikboten kunnen zwemmen</a></li>
+<li class='ewd en'><a href='EWD1055c.html'>On covering a figure with diamonds</a></li>
+<li class='ewd en'><a href='EWD1055A.html'>untitled (advice to a young scientist)</a></li>
+<li class='ewd en'><a href='EWD1055.html'>On the problem of the calissons</a></li>
+<li class='ewd en'><a href='EWD1054.html'>On hygiene, intellectual and otherwise</a></li>
+<li class='ewd en'><a href='EWD1053.html'>Monochrome pairs in the three-coloured plane</a></li>
+<li class='ewd en'><a href='EWD1051.html'>The next forty years</a></li>
+<li class='ewd en'><a href='EWD1050.html'>On the design of a simple proof for Morley’s Theorem</a></li>
+<li class='ewd en'><a href='EWD1049.html'>A somewhat open letter to Uri Leron</a></li>
+<li class='ewd en'><a href='EWD1046.html'>A tale of two winters</a></li>
+<li class='ewd en'><a href='EWD1044.html'>To hell with “meaningful identifiers”!</a></li>
+<li class='ewd en'><a href='EWD1043.html'>A few comments on “Computing as a discipline”</a></li>
+<li class='ewd en'><a href='EWD1041a.html'>Factorizing the factorial</a></li>
+<li class='ewd en'><a href='EWD1041.html'>By way of introduction</a></li>
+<li class='ewd en'><a href='EWD1039.html'>Seemingly on a problem transmitted by Bengt Jonsson</a></li>
+<li class='ewd '><a href='EWD1036.html
 
 										  Español'>On the cruelty of really teaching computing science</a></li>
-<li class='ewd'><a href='EWD1033.html'>Trip report E.W.Dijkstra, Zürich, 1520 Oct. 1988</a></li>
-<li class='ewd'><a href='EWD1027.html'>My methodological blunder with grid polygons</a></li>
-<li class='ewd'><a href='EWD1026.html'>Trip report E.W.Dijkstra, Marktoberdorf 1988</a></li>
-<li class='ewd'><a href='EWD1024.html'>A new science, from birth to maturity</a></li>
-<li class='ewd'><a href='EWD1019.html'>Another filler of the YoP Institute</a></li>
-<li class='ewd'><a href='EWD1018.html'>To the members of the Budget Council</a></li>
-<li class='ewd'><a href='EWD1016.html'>A computing scientist’s approach to a once-deep theorem of Sylvester’s</a></li>
-<li class='ewd'><a href='EWD1013.html'>Position paper on “fairness”</a></li>
-<li class='ewd'><a href='EWD1012.html'>“Real mathematicians don’t prove”</a></li>
-<li class='ewd'><a href='EWD1011.html'>Introducing my fall 1987 course on Mathematical Methodology</a></li>
-<li class='ewd'><a href='EWD1009.html'>On a somewhat disappointing correspondence</a></li>
-<li class='ewd'><a href='EWD1008.html'>What computing science is about</a></li>
-<li class='ewd'><a href='EWD1006.html'>Trip report E.W.Dijkstra, Stanford/Palo Alto, 26–29 March l987</a></li>
-<li class='ewd'><a href='EWD1003.html'>Graphs of modest diameter and degrees</a></li>
-<li class='ewd'><a href='EWD1000.html'>Twenty-eight years</a></li>
-<li class='ewd'><a href='EWD997.html'>Computing Science in the United Kingdom</a></li>
-<li class='ewd'><a href='EWD996.html'>Courtesy A.J.M. van Gasteren, C.S.Scholten and J.G.Wiltink</a></li>
-<li class='ewd'><a href='EWD993.html'>The nature of my research and why I do it</a></li>
-<li class='ewd'><a href='EWD992.html'>Difficult is easy</a></li>
-<li class='ewd'><a href='EWD991.html'>Why Johnny can’t understand</a></li>
-<li class='ewd'><a href='EWD989.html'>Proving Gupta’s Theorem</a></li>
-<li class='ewd'><a href='EWD988a.html'>How experimental is computing science?</a></li>
-<li class='ewd'><a href='EWD988.html'>On the phenomenon of scientific disciplines</a></li>
-<li class='ewd'><a href='EWD987a.html'>On a class of graphs with modest diameter</a></li>
-<li class='ewd'><a href='EWD987.html'>On a class of graphs with modest diameter</a></li>
-<li class='ewd'><a href='EWD983.html'>How do we contribute? (30.9.1986)</a></li>
-<li class='ewd'><a href='EWD981.html'>Address to my students (23.9.1986)</a></li>
-<li class='ewd'><a href='EWD980.html'>The strange case of The Pigeon-hole Principle</a></li>
-<li class='ewd'><a href='EWD979.html'>A solution designed by A. Blokhuis</a></li>
-<li class='ewd'><a href='EWD978.html'>A sequel to EWD977 (18.9.1986)</a></li>
-<li class='ewd'><a href='EWD977.html'>An address to my students (16.9.1986)</a></li>
-<li class='ewd'><a href='EWD976.html'>Who is your “target audience”?</a></li>
-<li class='ewd'><a href='EWD975.html'>On the theorem of Pythagoras</a></li>
-<li class='ewd'><a href='EWD974.html'>The longer side is opposite to the greater angle</a></li>
-<li class='ewd'><a href='EWD973.html'>The cosine rule</a></li>
-<li class='ewd'><a href='EWD968.html'>Trip report E.W.Dijkstra, Marktoberdorf,
+<li class='ewd en'><a href='EWD1033.html'>Trip report E.W.Dijkstra, Zürich, 1520 Oct. 1988</a></li>
+<li class='ewd en'><a href='EWD1027.html'>My methodological blunder with grid polygons</a></li>
+<li class='ewd en'><a href='EWD1026.html'>Trip report E.W.Dijkstra, Marktoberdorf 1988</a></li>
+<li class='ewd en'><a href='EWD1024.html'>A new science, from birth to maturity</a></li>
+<li class='ewd en'><a href='EWD1019.html'>Another filler of the YoP Institute</a></li>
+<li class='ewd en'><a href='EWD1018.html'>To the members of the Budget Council</a></li>
+<li class='ewd en'><a href='EWD1016.html'>A computing scientist’s approach to a once-deep theorem of Sylvester’s</a></li>
+<li class='ewd en'><a href='EWD1013.html'>Position paper on “fairness”</a></li>
+<li class='ewd en'><a href='EWD1012.html'>“Real mathematicians don’t prove”</a></li>
+<li class='ewd en'><a href='EWD1011.html'>Introducing my fall 1987 course on Mathematical Methodology</a></li>
+<li class='ewd en'><a href='EWD1009.html'>On a somewhat disappointing correspondence</a></li>
+<li class='ewd en'><a href='EWD1008.html'>What computing science is about</a></li>
+<li class='ewd en'><a href='EWD1006.html'>Trip report E.W.Dijkstra, Stanford/Palo Alto, 26–29 March l987</a></li>
+<li class='ewd en'><a href='EWD1003.html'>Graphs of modest diameter and degrees</a></li>
+<li class='ewd en'><a href='EWD1000.html'>Twenty-eight years</a></li>
+<li class='ewd en'><a href='EWD997.html'>Computing Science in the United Kingdom</a></li>
+<li class='ewd en'><a href='EWD996.html'>Courtesy A.J.M. van Gasteren, C.S.Scholten and J.G.Wiltink</a></li>
+<li class='ewd en'><a href='EWD993.html'>The nature of my research and why I do it</a></li>
+<li class='ewd en'><a href='EWD992.html'>Difficult is easy</a></li>
+<li class='ewd en'><a href='EWD991.html'>Why Johnny can’t understand</a></li>
+<li class='ewd en'><a href='EWD989.html'>Proving Gupta’s Theorem</a></li>
+<li class='ewd en'><a href='EWD988a.html'>How experimental is computing science?</a></li>
+<li class='ewd en'><a href='EWD988.html'>On the phenomenon of scientific disciplines</a></li>
+<li class='ewd en'><a href='EWD987a.html'>On a class of graphs with modest diameter</a></li>
+<li class='ewd en'><a href='EWD987.html'>On a class of graphs with modest diameter</a></li>
+<li class='ewd en'><a href='EWD983.html'>How do we contribute? (30.9.1986)</a></li>
+<li class='ewd en'><a href='EWD981.html'>Address to my students (23.9.1986)</a></li>
+<li class='ewd en'><a href='EWD980.html'>The strange case of The Pigeon-hole Principle</a></li>
+<li class='ewd en'><a href='EWD979.html'>A solution designed by A. Blokhuis</a></li>
+<li class='ewd '><a href='EWD978.html'>A sequel to EWD977 (18.9.1986)</a></li>
+<li class='ewd en'><a href='EWD977.html'>An address to my students (16.9.1986)</a></li>
+<li class='ewd en'><a href='EWD976.html'>Who is your “target audience”?</a></li>
+<li class='ewd en'><a href='EWD975.html'>On the theorem of Pythagoras</a></li>
+<li class='ewd en'><a href='EWD974.html'>The longer side is opposite to the greater angle</a></li>
+<li class='ewd en'><a href='EWD973.html'>The cosine rule</a></li>
+<li class='ewd en'><a href='EWD968.html'>Trip report E.W.Dijkstra, Marktoberdorf,
 												29 July – 10 Aug l986</a></li>
-<li class='ewd'><a href='EWD966.html'>Management and Mathematics</a></li>
-<li class='ewd'><a href='EWD963.html'>Visuals for BP’s Venture Research Conference</a></li>
-<li class='ewd'><a href='EWD962.html'>Introducing a course on mathematical methodology</a></li>
-<li class='ewd'><a href='EWD958.html'>On naming (with A.J.M. van Gasteren)</a></li>
-<li class='ewd'><a href='EWD956.html'>Address to my students</a></li>
-<li class='ewd'><a href='EWD952.html'>Science fiction and science reality in computing</a></li>
-<li class='ewd'><a href='EWD951.html'>Trip report E.W.Dijkstra, Europe, 13.12.1985 – 10.1.1986</a></li>
-<li class='ewd'><a href='EWD947.html'>A letter to a typewriter manufacturer</a></li>
-<li class='ewd'><a href='EWD936.html'>On anthropomorphism in science</a></li>
-<li class='ewd'><a href='EWD932c.html'>The streamlining of the mathematical argument</a></li>
-<li class='ewd'><a href='EWD930.html'>For the record: the Linear Search</a></li>
-<li class='ewd'><a href='EWD927.html'>The ATAC ( = Austin Tuesday Afternoon Club)</a></li>
-<li class='ewd'><a href='EWD926.html'>A computer to think about</a></li>
-<li class='ewd'><a href='EWD925.html'>Trip report E.W.Dijkstra, London, 25–27 June 1985</a></li>
-<li class='ewd'><a href='EWD924.html'>On a cultural gap</a></li>
-<li class='ewd'><a href='EWD923a.html'>Where is Russell’s “Paradox”?</a></li>
-<li class='ewd'><a href='EWD923.html'>Trip report E.W.Dijkstra, Ithaca, Newport, 30 May – 13 June 1985</a></li>
-<li class='ewd'><a href='EWD921.html'>A correction of EWD914–15</a></li>
-<li class='ewd'><a href='EWD920.html'>Can computing science save the computer industry?</a></li>
-<li class='ewd'><a href='EWD918.htm'>A summary of a year’s impressions</a></li>
-<li class='ewd'><a href='EWD917.html'>Another misguided effort</a></li>
-<li class='ewd'><a href='EWD913.html'>On a cultural gap (Draft)</a></li>
-<li class='ewd'><a href='EWD911.html'>Trip report E.W.Dijkstra, Tulsa, 1–6 March 1985</a></li>
-<li class='ewd'><a href='EWD909.html'>Trip report E.W.Dijkstra, Westboro-Boston,
+<li class='ewd en'><a href='EWD966.html'>Management and Mathematics</a></li>
+<li class='ewd en'><a href='EWD963.html'>Visuals for BP’s Venture Research Conference</a></li>
+<li class='ewd en'><a href='EWD962.html'>Introducing a course on mathematical methodology</a></li>
+<li class='ewd en'><a href='EWD958.html'>On naming (with A.J.M. van Gasteren)</a></li>
+<li class='ewd en'><a href='EWD956.html'>Address to my students</a></li>
+<li class='ewd en'><a href='EWD952.html'>Science fiction and science reality in computing</a></li>
+<li class='ewd en'><a href='EWD951.html'>Trip report E.W.Dijkstra, Europe, 13.12.1985 – 10.1.1986</a></li>
+<li class='ewd en'><a href='EWD947.html'>A letter to a typewriter manufacturer</a></li>
+<li class='ewd en'><a href='EWD936.html'>On anthropomorphism in science</a></li>
+<li class='ewd en'><a href='EWD932c.html'>The streamlining of the mathematical argument</a></li>
+<li class='ewd en'><a href='EWD930.html'>For the record: the Linear Search</a></li>
+<li class='ewd en'><a href='EWD927.html'>The ATAC ( = Austin Tuesday Afternoon Club)</a></li>
+<li class='ewd en'><a href='EWD926.html'>A computer to think about</a></li>
+<li class='ewd en'><a href='EWD925.html'>Trip report E.W.Dijkstra, London, 25–27 June 1985</a></li>
+<li class='ewd en'><a href='EWD924.html'>On a cultural gap</a></li>
+<li class='ewd en'><a href='EWD923a.html'>Where is Russell’s “Paradox”?</a></li>
+<li class='ewd en'><a href='EWD923.html'>Trip report E.W.Dijkstra, Ithaca, Newport, 30 May – 13 June 1985</a></li>
+<li class='ewd en'><a href='EWD921.html'>A correction of EWD914–15</a></li>
+<li class='ewd en'><a href='EWD920.html'>Can computing science save the computer industry?</a></li>
+<li class='ewd '><a href='EWD918.htm'>A summary of a year’s impressions</a></li>
+<li class='ewd en'><a href='EWD917.html'>Another misguided effort</a></li>
+<li class='ewd en'><a href='EWD913.html'>On a cultural gap (Draft)</a></li>
+<li class='ewd en'><a href='EWD911.html'>Trip report E.W.Dijkstra, Tulsa, 1–6 March 1985</a></li>
+<li class='ewd en'><a href='EWD909.html'>Trip report E.W.Dijkstra, Westboro-Boston,
 												14–17 Feb. 1985</a></li>
-<li class='ewd'><a href='EWD907.html'>Trip report E.W.Dijkstra, Netherlands, Austria,
+<li class='ewd en'><a href='EWD907.html'>Trip report E.W.Dijkstra, Netherlands, Austria,
 												23–31 Jan. 1985</a></li>
-<li class='ewd'><a href='EWD906.html'>Trip report E.W.Dijkstra, Nuenen & London,
+<li class='ewd en'><a href='EWD906.html'>Trip report E.W.Dijkstra, Nuenen & London,
 												10 Dec.’84 – 10 Jan.’85</a></li>
-<li class='ewd'><a href='EWD904.html'>A problem solved by my nephew Sybrand L. Dijkstra</a></li>
-<li class='ewd'><a href='EWD903.html'>A short sequel to EWD863</a></li>
-<li class='ewd'><a href='EWD898.html'>The threats to computing science</a></li>
-<li class='ewd'><a href='EWD896.html'>On the nature of computing science</a></li>
-<li class='ewd'><a href='EWD895.html'>Trip report E.W.Dijkstra, Marktoberdorf, 30 July – 12 Aug. 1984</a></li>
-<li class='ewd'><a href='EWD893.html'>Trip report E.W.Dijkstra, USA, 17–26 June 1984</a></li>
-<li class='ewd'><a href='EWD892.html'>Trip report E.W.Dijkstra, London, 12–14 June 1984</a></li>
-<li class='ewd'><a href='EWD889.html'>User-friendly Mathematics</a></li>
-<li class='ewd'><a href='EWD888.html'>Trip report E.W.Dijkstra, Zürich, 22–24 May 1984</a></li>
-<li class='ewd'><a href='EWD887.html'>Trip report E.W.Dijkstra, USA, 23 April –10 May 1984</a></li>
-<li class='ewd'><a href='EWD885.html'>Trip report E.W.Dijkstra, Muenchen, 12–14 April 1984</a></li>
-<li class='ewd'><a href='EWD881.html'>A review of “The Evolution of Programs”</a></li>
-<li class='ewd'><a href='EWD879.html'>Trip report E.W.Dijkstra, London, 14–17 February 1984</a></li>
-<li class='ewd'><a href='EWD878.html'>A monotonicity argument (with A.J.M. van Gasteren)</a></li>
-<li class='ewd'><a href='EWD877.html'>Some useful formulae (with A.J.M. van Gasteren)</a></li>
-<li class='ewd'><a href='EWD876.html'>De microprocessor als lollie</a></li>
-<li class='ewd'><a href='EWD873.html'>Trip report E.W.Dijkstra, London and Colchester, 16–20 Jan. 1984</a></li>
-<li class='ewd'><a href='EWD872.html'>The little essay I could not write</a></li>
-<li class='ewd'><a href='EWD869.html'>Ter afsluiting van de “Inleiding tot de Kunst van het Programmeren”</a></li>
-<li class='ewd'><a href='EWD868.html'>Computers and General Education: a position paper</a></li>
-<li class='ewd'><a href='EWD865.html'>Trip report E.W.Dijkstra, Brasil & USA, 17 Oct.– 6 Nov. 1983</a></li>
-<li class='ewd'><a href='EWD864a.html'>The Distributed Snapshot of K.M.Chandy and L. Lamport</a></li>
-<li class='ewd'><a href='EWD864.html'>The distributed snapshot of Chandy/Lamport/Misra</a></li>
-<li class='ewd'><a href='EWD862.html'>A sequence with |x[n]| = x[n–1] + x[n+1] has period 9</a></li>
-<li class='ewd'><a href='EWD858.html'>Trip report E.W.Dijkstra, USA, 10 June–3 July 1983</a></li>
-<li class='ewd'><a href='EWD857.html'>Generalizing an old formula</a></li>
-<li class='ewd'><a href='EWD856.html'>On maximizing a product</a></li>
-<li class='ewd'><a href='EWD855.html'>Trip report E.W.Dijkstra, Barcelona 5–7 June 1983</a></li>
-<li class='ewd'><a href='EWD854.html'>The fruits of misunderstanding</a></li>
-<li class='ewd'><a href='EWD852.html'>Judging “HOS” from a distance</a></li>
-<li class='ewd'><a href='EWD850.html'>Trip report E.W.Dijkstra, Helsinki, 1–4 March 1983</a></li>
-<li class='ewd'><a href='EWD847.html'>Trip report E.W.Dijkstra, Australia, 19 Jan.1983 – 12 Feb.1983</a></li>
-<li class='ewd'><a href='EWD841.html'>“There is no ‘royal road’ to geometry”</a></li>
-<li class='ewd'><a href='EWD839.html'>Trip report E.W.Dijkstra, Utrecht 30 Sep.–1 Oct. 1982</a></li>
-<li class='ewd'><a href='EWD838.html'>Trip report E.W.Dijkstra, Copenhagen, 10–16 Sep. 1982</a></li>
-<li class='ewd'><a href='EWD837.html'>Trip report E.W.Dijkstra, Newcastle-upon Tyne, 6–10 Sep. 1982</a></li>
-<li class='ewd'><a href='EWD833.html'>An In-Depth Seminar on Proven Tools & Techniques of Structured Methodology for Effective Software Configuration Management</a></li>
-<li class='ewd'><a href='EWD832.html'>A theorem about infinite sequences of numbers</a></li>
-<li class='ewd'><a href='EWD831.html'>Why numbering should start at zero</a></li>
-<li class='ewd'><a href='EWD829.html'>De software crisis, ontstaan en hardnekkigheid</a></li>
-<li class='ewd'><a href='EWD827.html'>A very simple exercise in SASL</a></li>
-<li class='ewd'><a href='EWD826.html'>Trip report E.W.Dijkstra, USA, 20 May 1982 – 14 June 1982</a></li>
-<li class='ewd'><a href='EWD824.html'>Linearization of a two-dimensional search</a></li>
-<li class='ewd'><a href='EWD821.html'>From predicate transformers to predicates (Dedicated by the Tuesday Afternoon Club to C.A.R. Hoare at the occasion of his being elected Fellow of the Royal Society.)</a></li>
-<li class='ewd'><a href='EWD818.html'>A nice theorem on monotonic predicate sequences</a></li>
-<li class='ewd'><a href='EWD814.html'>A review of a book on PEARL</a></li>
-<li class='ewd'><a href='EWD811.html'>An alternative ending for AvG16/ EWD809</a></li>
-<li class='ewd'><a href='EWD810a.html'>Fast image construction in computerized axial tomography (CAT) (with A.J.M. van Gasteren)</a></li>
-<li class='ewd'><a href='EWD808.html'>Canonical string reduction</a></li>
-<li class='ewd'><a href='EWD806.html'>Trip report E.W.Dijkstra, USA, 1–27 Nov. 1981</a></li>
-<li class='ewd'><a href='EWD805.html'>Trip report E.W.Dijkstra, Amsterdam, 26–29 Oct. 1981</a></li>
-<li class='ewd'><a href='EWD804.html'>On equality of propositions</a></li>
-<li class='ewd'><a href='EWD802.html'>Trip report E.W.Dijkstra, Scotland, Newcastle 31 Aug.–15 Sep. 1981</a></li>
-<li class='ewd'><a href='EWD801.html'>Distances from the root in skew trees (with C.S.Scholten)</a></li>
-<li class='ewd'><a href='EWD800.html'>A bagatelle for the left hand</a></li>
-<li class='ewd'><a href='EWD799.html'>Trip report E.W.Dijkstra, Marktoberdorf, 26/7–10/8/81</a></li>
-<li class='ewd'><a href='EWD798.html'>Trip report E.W.Dijkstra, Newcastle, 19–25 July 1981</a></li>
-<li class='ewd'><a href='EWD797.html'>Fibonacci numbers and Leonardo numbers</a></li>
-<li class='ewd'><a href='EWD796a.html'>Smoothsort, an alternative for sorting in situ</a></li>
-<li class='ewd'><a href='EWD793.html'>The analysis of a two-person game</a></li>
-<li class='ewd'><a href='EWD791.html'>The psychology of the user</a></li>
-<li class='ewd'><a href='EWD790.html'>Trip report E.W.Dijkstra, München, 19 May 1981</a></li>
-<li class='ewd'><a href='EWD788.html'>What we seem to have learned (with A.J.M. van Gasteren)</a></li>
-<li class='ewd'><a href='EWD787.html'>A (new?) proof of a theorem of Euler’s on partitions</a></li>
-<li class='ewd'><a href='EWD786a.html'>Sets are Unibags</a></li>
-<li class='ewd'><a href='EWD786.html'>Trip report E.W.Dijkstra, England, 23 April 1981</a></li>
-<li class='ewd'><a href='EWD783.html'>The administration as social disease</a></li>
-<li class='ewd'><a href='EWD782.html'>A stupid notation</a></li>
-<li class='ewd'><a href='EWD778.html'>A somewhat open letter to Nils J.Nilsson</a></li>
-<li class='ewd'><a href='EWD777.html'>A word of welcome (Draft)</a></li>
-<li class='ewd'><a href='EWD776.html'>Lambek and Moser revisited</a></li>
-<li class='ewd'><a href='EWD775.html'>On Kleinrock’s Theorem</a></li>
-<li class='ewd'><a href='EWD774.html'>Trip report E.W.Dijkstra, California, 1731 January 1981</a></li>
-<li class='ewd'><a href='EWD773.html'>Trip report E.W.Dijkstra, Han-sur-Lesse, 712 Jan. 1981</a></li>
-<li class='ewd'><a href='EWD772.html'>A methodological sequel to EWD771</a></li>
-<li class='ewd'><a href='EWD771.html'>About 2-coloured 6-graphs</a></li>
-<li class='ewd'><a href='EWD770.html'>D.A.Turner’s reply</a></li>
-<li class='ewd'><a href='EWD768.html'>Largely on nomenclature</a></li>
-<li class='ewd'><a href='EWD767.html'>A.J.Martin’s solution of the Hungarian problem</a></li>
-<li class='ewd'><a href='EWD766.html'>An educational stupidity</a></li>
-<li class='ewd'><a href='EWD765.html'>A Hungarian problem</a></li>
-<li class='ewd'><a href='EWD764.html'>Repaying our debts</a></li>
-<li class='ewd'><a href='EWD763.html'>A proof by Rutger M.Dijkstra and me</a></li>
-<li class='ewd'><a href='EWD762.html'>We mathematicians are losing the race</a></li>
-<li class='ewd'><a href='EWD761.html'>Een kanttekening</a></li>
-<li class='ewd'><a href='EWD760.html'>A somewhat open letter to F.Kroeger</a></li>
-<li class='ewd'><a href='EWD759.html'>A somewhat open letter to D.A.Turner</a></li>
-<li class='ewd'><a href='EWD758.html'>An intriguing example</a></li>
-<li class='ewd'><a href='EWD757.html'>A misguided educational effort</a></li>
-<li class='ewd'><a href='EWD756.html'>A postscript to EWD755</a></li>
-<li class='ewd'><a href='EWD755.html'>Very elementary number theory redone</a></li>
-<li class='ewd'><a href='EWD754.html'>An error in EWD744</a></li>
-<li class='ewd'><a href='EWD753.html'>On a theorem by Lambek and Moser</a></li>
-<li class='ewd'><a href='EWD752.html'>Distributed Arbitration (DRAFT, with C.S.Scholten)</a></li>
-<li class='ewd'><a href='EWD751.html'>Mainly on the omission of parentheses</a></li>
-<li class='ewd'><a href='EWD750.html'>American programming’s plight</a></li>
-<li class='ewd'><a href='EWD749.html'>On the productivity of recursive definitions</a></li>
-<li class='ewd'><a href='EWD748.html'>A somewhat open letter to Wladislaw M.Turski</a></li>
-<li class='ewd'><a href='EWD747.html'>Comments on MIL–STD–1862, 28 May 1980</a></li>
-<li class='ewd'><a href='EWD746.html'>Trip report E.W.Dijkstra, Newcastle-upon-Tyne, 15 Sep. 1980</a></li>
-<li class='ewd'><a href='EWD745.html'>Trip report E.W.Dijkstra, Los Angeles, Austin (Texas), and Portland, 628 August 1980</a></li>
-<li class='ewd'><a href='EWD744.html'>A short note on symmetric distributed arbitration</a></li>
-<li class='ewd'><a href='EWD743.html'>A new policy for Mathematics Inc.?</a></li>
-<li class='ewd'><a href='EWD742.html'>A sequel to EWD740</a></li>
-<li class='ewd'><a href='EWD741.html'>Partitioning the edges of the complete graphs into trees or cycles (by the Tuesday Afternoon Club)</a></li>
-<li class='ewd'><a href='EWD740.html'>A short proof of one of Fermat’s theorems</a></li>
-<li class='ewd'><a href='EWD739.html'>A somewhat open letter to the Editor-in-Chief of Acta Informatica</a></li>
-<li class='ewd'><a href='EWD738.html'>More mathematical folklore</a></li>
-<li class='ewd'><a href='EWD737.html'>A notational alternative for quantification</a></li>
-<li class='ewd'><a href='EWD736.html'>Recording the structure of trees in their leaves</a></li>
-<li class='ewd'><a href='EWD735.html'>A mild variant of Combinatory Logic</a></li>
-<li class='ewd'><a href='EWD734.html'>The superfluity of the general semaphore</a></li>
-<li class='ewd'><a href='EWD733.html'>Naar aanleiding van Experimentele post-propadeuse opleiding voor informatica-ingenieur aan de THE” (Eindhoven februari 1980 SOO/jc/sdb)</a></li>
-<li class='ewd'><a href='EWD732.html'>The teachability of mathematical thinking (Draft contribution to “Mathematics Tomorrow”)</a></li>
-<li class='ewd'><a href='EWD731.html'>An experiment in mathematical exposition</a></li>
-<li class='ewd'><a href='EWD730.html'>On two types of infinite sets of infinite sequences (by the Tuesday Afternoon Club)</a></li>
-<li class='ewd'><a href='EWD729.html'>On well-shaped mathematical arguments</a></li>
-<li class='ewd'><a href='EWD728.html'>A problem solved by Netty van Gasteren and me</a></li>
-<li class='ewd'><a href='EWD727.html'>Trip report E.W.Dijkstra, U.S.A. 12 Jan.  2 Feb. 1980</a></li>
-<li class='ewd'><a href='EWD726.html'>How Dutch Informatics fell between two chairs</a></li>
-<li class='ewd'><a href='EWD725.html'>Trip report E.W.Dijkstra, Liege, Nov.Dec.1979</a></li>
-<li class='ewd'><a href='EWD724E.html'>A chutspa</a></li>
-<li class='ewd'><a href='EWD724.html'>Een gotspe</a></li>
-<li class='ewd'><a href='EWD723.html'>On W.H.J.Feijen’s solution for the lexicographic minimum of a circular list</a></li>
-<li class='ewd'><a href='EWD722.html'>A book review for the IBM Systems Journal</a></li>
-<li class='ewd'><a href='EWD721.html'>The design of a state space with a useful structure (I)</a></li>
-<li class='ewd'><a href='EWD720.html'>Why correctness must be a mathematical concern</a></li>
-<li class='ewd'><a href='EWD719.html'>On not duplicating volatile information</a></li>
-<li class='ewd'><a href='EWD718.html'>Assembly conventions for the EDSAC</a></li>
-<li class='ewd'><a href='EWD717.html'>An exercise in exposition</a></li>
-<li class='ewd'><a href='EWD716.html'>A short talk to my students about money</a></li>
-<li class='ewd'><a href='EWD715.html'>Trip report E.W.Dijkstra, Munich – London, 1629 September 1979</a></li>
-<li class='ewd'><a href='EWD714.html'>Trip report E.W.Dijkstra, Mission Viejo, Santa Cruz, Austin, 29 July  8 September 1979</a></li>
-<li class='ewd'><a href='EWD713.html'>On a problem posed by W.H.J.Feijen</a></li>
-<li class='ewd'><a href='EWD712.html'>Trip report E.W.Dijkstra, Antwerp, 2429 June 1979</a></li>
-<li class='ewd'><a href='EWD711.html'>Trip report E.W.Dijkstra, Ithaca, Albany, Austin (Texas), 26/5 – 10/6 1979</a></li>
-<li class='ewd'><a href='EWD710.html'>When messages may crawl, II (A sequel to EWD708)</a></li>
-<li class='ewd'><a href='EWD709.html'>My hopes of computing science</a></li>
-<li class='ewd'><a href='EWD708.html'>When messages may crawl</a></li>
-<li class='ewd'><a href='EWD707.html'>Dear Mr.X of Company Y</a></li>
-<li class='ewd'><a href='EWD706.html'>Image reconstruction in two-dimensional tomography</a></li>
-<li class='ewd'><a href='EWD705.html'>Verkavelde berekeningen, hun mogelijkheden en moeilijkheden</a></li>
-<li class='ewd'><a href='EWD704.html'>A machine for image construction in tomography</a></li>
-<li class='ewd'><a href='EWD703.html'>A tutorial on the split binary semaphore</a></li>
-<li class='ewd'><a href='EWD702.html'>In reaction to Ernest Chang’s “Deadlock Detection”</a></li>
-<li class='ewd'><a href='EWD701.html'>Two theorems on (what I have called) continuously mixed sequences</a></li>
-<li class='ewd'><a href='EWD700.html'>An examination exercise, designed by W.H.J.Feijen</a></li>
-<li class='ewd'><a href='EWD699.html'>Een reactie</a></li>
-<li class='ewd'><a href='EWD698.html'>Trip report E.W.Dijkstra, Oxford University, 1015 Jan. 1979</a></li>
-<li class='ewd'><a href='EWD697.html'>Some beautiful arguments using mathematical induction</a></li>
-<li class='ewd'><a href='EWD696.html'>Written in anger</a></li>
-<li class='ewd'><a href='EWD695.html'>Mathematics in an easy chair</a></li>
-<li class='ewd'><a href='EWD694.html'>Tripreport E.W.Dijkstra, Detroit, Austin, Philadelphia, 25 Nov.  9 Dec. 1978</a></li>
-<li class='ewd'><a href='EWD693.html'>About polygons in Detroit</a></li>
-<li class='ewd'><a href='EWD692.html'>A review of the 1977 Turing Award Lecture by John Backus</a></li>
-<li class='ewd'><a href='EWD691.html'>On improving the state of the art (A somewhat open letter to dr. Martin Rem)</a></li>
-<li class='ewd'><a href='EWD690.html'>The pragmatic engineer versus the scientific designer</a></li>
-<li class='ewd'><a href='EWD689.html'>Tripreport E.W.Dijkstra, Valley Forge, 28 Oct.  2 Nov. 1978</a></li>
-<li class='ewd'><a href='EWD688.html'>A trifle</a></li>
-<li class='ewd'><a href='EWD687a.html'>Termination detection for diffusing computations (with C.S.Scholten)</a></li>
-<li class='ewd'><a href='EWD687.html'>Termination detection for diffusing computations (with C.S.Scholten)</a></li>
-<li class='ewd'><a href='EWD685.html'>The problem of the Swiss football players</a></li>
-<li class='ewd'><a href='EWD684.html'>Termination detection for diffusing computations (with C.S.Scholten)</a></li>
-<li class='ewd'><a href='EWD683.html'>To a new member of The Tuesday Afternoon Club</a></li>
-<li class='ewd'><a href='EWD682.html'>The nature of Computer Science (first draft)</a></li>
-<li class='ewd'><a href='EWD680.html'>A book review</a></li>
-<li class='ewd'><a href='EWD679.html'>Tripreport E.W.Dijkstra, Newcastle-London-Lancaster, 413 Sep. 1978</a></li>
-<li class='ewd'><a href='EWD678.html'>A story that starts with a very good computer</a></li>
-<li class='ewd'><a href='EWD677.html'>On one of Cayley's theorems</a></li>
-<li class='ewd'><a href='EWD676.html'>Tripreport E.W.Dijkstra, Marktoberdorf 24 July  6 August 1978</a></li>
-<li class='ewd'><a href='EWD675.html'>The equivalence of bounded nondeterminacy and continuity</a></li>
-<li class='ewd'><a href='EWD674.html'>Tripreport E.W.Dijkstra, Zürich, 27 July 1978</a></li>
-<li class='ewd'><a href='EWD673.html'>On weak and strong termination</a></li>
-<li class='ewd'><a href='EWD672.html'>More on A.J.Martin's design (A sequel to EWD668)</a></li>
-<li class='ewd'><a href='EWD671.html'>Program inversion</a></li>
-<li class='ewd'><a href='EWD670.html'>Sequencing and the discriminated union</a></li>
-<li class='ewd'><a href='EWD669.html'>A book review</a></li>
-<li class='ewd'><a href='EWD668.html'>On the correctness of a design by Alain J.Martin</a></li>
-<li class='ewd'><a href='EWD667.html'>On the foolishness of “natural language programming”</a></li>
-<li class='ewd'><a href='EWD666.html'>A problem solved in my head</a></li>
-<li class='ewd'><a href='EWD665.html'>Trip report E.W.Dijkstra, U.K. – Bahamas – U.S.A., 1130 April 1978</a></li>
-<li class='ewd'><a href='EWD663.html'>The summing-up</a></li>
-<li class='ewd'><a href='EWD662.html'>On the YELLOW Language submitted to the DoD</a></li>
-<li class='ewd'><a href='EWD661.html'>On the RED Language submitted to the DoD</a></li>
-<li class='ewd'><a href='EWD660.html'>On the GREEN Language submitted to the DoD</a></li>
-<li class='ewd'><a href='EWD659.html'>On the BLUE Language submitted to DoD</a></li>
-<li class='ewd'><a href='EWD658.html'>On language constraints enforceable by translators (An open letter to Lt.Col. William A.Whitaker)</a></li>
-<li class='ewd'><a href='EWD657.html'>On leaves and nodes: a simplification of EWD653</a></li>
-<li class='ewd'><a href='EWD656.html'>An introduction to implementation issues</a></li>
-<li class='ewd'><a href='EWD655.html'>Essays on the nature and role of mathematical elegance (3): On notation (A sequel to EWD619)</a></li>
-<li class='ewd'><a href='EWD654.html'>In honour of Fibonacci</a></li>
-<li class='ewd'><a href='EWD653.html'>Exploiting contiguity in a linear store</a></li>
-<li class='ewd'><a href='EWD652.html'>A correction on EWD651</a></li>
-<li class='ewd'><a href='EWD651.html'>A strong P/V-implementation of conditional critical regions</a></li>
-<li class='ewd'><a href='EWD650.html'>A theorem about odd powers of odd integers</a></li>
-<li class='ewd'><a href='EWD649.html'>A supplement to EWD591 “The problem of the maximum length of an ascending subsequence”</a></li>
-<li class='ewd'><a href='EWD648.html'>“Why is software so expensive?” An explanation to the hardware designer</a></li>
-<li class='ewd'><a href='EWD647.html'>Commentaar op een ontwikkeling binnen de TH's</a></li>
-<li class='ewd'><a href='EWD646.html'>A not so simple theorem about undirected graphs</a></li>
-<li class='ewd'><a href='EWD645.html'>Tripreport E.W.Dijkstra, USA 19–30 October 1977</a></li>
-<li class='ewd'><a href='EWD644.html'>Letter to J. Arsac</a></li>
-<li class='ewd'><a href='EWD643.html'>A class of simple communication patterns (with C.S.Scholten)</a></li>
-<li class='ewd'><a href='EWD642.html'>A special sorting elephant</a></li>
-<li class='ewd'><a href='EWD641.html'>On the interplay between mathematics and programming</a></li>
-<li class='ewd'><a href='EWD640a.html'>Finding the correctness proof of a concurrent program</a></li>
-<li class='ewd'><a href='EWD640.html'>Finding the correctness proof of a concurrent program</a></li>
-<li class='ewd'><a href='EWD639.html'>The introduction of MAES®</a></li>
-<li class='ewd'><a href='EWD638.html'>A political pamphlet from the Middle Ages</a></li>
-<li class='ewd'><a href='EWD637.html'>The Three Golden Rules for Successful Scientific Research</a></li>
-<li class='ewd'><a href='EWD636.html'>Why naive program transformation systems are unlikely to work</a></li>
-<li class='ewd'><a href='EWD635.html'>Tripreport E.W.Dijkstra, Newcastle-upon-Tyne, 510 Sept. 1977</a></li>
-<li class='ewd'><a href='EWD634.html'>Position paper on the impact of microprocessors (IFIP77)</a></li>
-<li class='ewd'><a href='EWD633.html'>Tripreport E.W.Dijkstra, 29 July  21 August 1977</a></li>
-<li class='ewd'><a href='EWD631.html'>Re: “Formal derivation of strongly correct parallel programs” by Axel van Lamsweerde and M.Sintzoff</a></li>
-<li class='ewd'><a href='EWD630.html'>On-the-fly garbage collection: an exercise in cooperation (with L. Lamport, A.J. Martin, C.S.Scholten, E.F.M. Steffens)</a></li>
-<li class='ewd'><a href='EWD629.html'>On two beautiful solutions designed by Martin Rem</a></li>
-<li class='ewd'><a href='EWD628.html'>Naar aanleiding van een eigenlijk wat beledigend stukje</a></li>
-<li class='ewd'><a href='EWD627.html'>A position paper on Software Reliability</a></li>
-<li class='ewd'><a href='EWD626.html'>WASSERMAN, Antony I. en Peter FREEMAN (Eds.). Software Engineering Education. Needs and Objectives. Proceedings of an Interface Workshop. New York/Heidelberg/Berlin. Springer-Verlag, 1976.</a></li>
-<li class='ewd'><a href='EWD625.html'>Two starvation-free solutions of a general exclusion problem</a></li>
-<li class='ewd'><a href='EWD624.html'>Stationary behaviour of some ternary networks</a></li>
-<li class='ewd'><a href='EWD623.html'>The mathematics behind the Banker's Algorithm</a></li>
-<li class='ewd'><a href='EWD622.html'>On making solutions more and more fine-grained (In gratitude dedicated to C.A.R.Hoare, D.E.Knuth, and J.F.Traub.)</a></li>
-<li class='ewd'><a href='EWD621.html'>Achtste toespraak tot mijn studenten, voorjaar 1977</a></li>
-<li class='ewd'><a href='EWD620.html'>Zevende toespraak tot mijn studenten, voorjaar 1977</a></li>
-<li class='ewd'><a href='EWD619.html'>Essays on the nature and role of mathematical elegance</a></li>
-<li class='ewd'><a href='EWD618.html'>On Webster, users, bugs and Aristotle</a></li>
-<li class='ewd'><a href='EWD617.html'>Zesde toespraak tot mijn studenten, voorjaar 1977</a></li>
-<li class='ewd'><a href='EWD616.html'>Vijfde toespraak tot mijn studenten, voorjaar 1977</a></li>
-<li class='ewd'><a href='EWD615.html'>Vierde toespraak tot mijn studenten, voorjaar 1977</a></li>
-<li class='ewd'><a href='EWD614.html'>A somewhat open letter to EAA or: why I proved the boundedness of the non-determinacy in the way I did</a></li>
-<li class='ewd'><a href='EWD613.html'>Tripreport E.W.Dijkstra, Australia, 16 February 1977  21 March 1977</a></li>
-<li class='ewd'><a href='EWD612.html'>Derde toespraak tot mijn studenten, voorjaar 1977</a></li>
-<li class='ewd'><a href='EWD611.html'>On the fact that the Atlantic Ocean has two sides</a></li>
-<li class='ewd'><a href='EWD609.html'>Tweede toespraak tot mijn studenten, voorjaar 1977</a></li>
-<li class='ewd'><a href='EWD608.html'>An elephant inspired by the Dutch National Flag</a></li>
-<li class='ewd'><a href='EWD607.html'>A correctness proof for communicating processes: a small exercise</a></li>
-<li class='ewd'><a href='EWD606.html'>Eerste toespraak tot mijn studenten, voorjaar 1977</a></li>
-<li class='ewd'><a href='EWD605.html'>Tripreport E.W.Dijkstra, Columbus - Pittsburgh - Paoli, 12–22 January 1977</a></li>
-<li class='ewd'><a href='EWD604.html'>Paying logical conscience-money to the fair demon</a></li>
-<li class='ewd'><a href='EWD603.html'>Tripreport E.W.Dijkstra, St.Pierre-de-Chartreuse, 1219 Dec.1976</a></li>
-<li class='ewd'><a href='EWD602.html'>Comments on Arbeitsblatt 3 from o.Prof.Dr.F.L.Bauer (with C.S.Scholten)</a></li>
-<li class='ewd'><a href='EWD601.html'>Tripreport E.W.Dijkstra, Munich 2426 November 1976</a></li>
-<li class='ewd'><a href='EWD600.html'>A sequel to EWD592</a></li>
-<li class='ewd'><a href='EWD599.html'>Achtste toespraak tot mijn studenten, najaar 1976</a></li>
-<li class='ewd'><a href='EWD598.html'>A bug in my book!</a></li>
-<li class='ewd'><a href='EWD597.html'>Yet another note about termination</a></li>
-<li class='ewd'><a href='EWD596a.html'>Tripreport E.W.Dijkstra, Copenhagen 10–12 Nov. 1976</a></li>
-<li class='ewd'><a href='EWD595.html'>On-the-fly garbage collection: an exercise in cooperation (with Leslie Lamport, A.J.Martin, C.S.Scholten, E.F.M.Steffens)</a></li>
-<li class='ewd'><a href='EWD594.html'>A parable</a></li>
-<li class='ewd'><a href='EWD593.html'>Zesde toespraak tot mijn studenten, najaar 1976</a></li>
-<li class='ewd'><a href='EWD592.html'>A small note on the additive composition of variant functions</a></li>
-<li class='ewd'><a href='EWD591.html'>The problem of the maximum length of an ascending subsequence</a></li>
-<li class='ewd'><a href='EWD590.html'>A first investigation of the crossflow computer</a></li>
-<li class='ewd'><a href='EWD589.html'>Vijfde toespraak tot mijn studenten, najaar 1976</a></li>
-<li class='ewd'><a href='EWD588.html'>Vierde toespraak tot mijn studenten, najaar 1976</a></li>
-<li class='ewd'><a href='EWD587.html'>Derde toespraak tot mijn studenten, najaar 1976</a></li>
-<li class='ewd'><a href='EWD586.html'>Tweede toespraak tot mijn studenten, najaar 1976</a></li>
-<li class='ewd'><a href='EWD585.html'>Tripreport E.W.Dijkstra, Tokyo, 28 Sep.—3 Oct. 1976</a></li>
-<li class='ewd'><a href='EWD584.html'>Tripreport E.W.Dijkstra, Poland and USSR, 4-25 September 1976</a></li>
-<li class='ewd'><a href='EWD583.html'>Eerste toespraak tot mijn studenten, najaar 1976</a></li>
-<li class='ewd'><a href='EWD582.html'>A proof of a theorem communicated to us by S.Ghosh (with C.S.Scholten)</a></li>
-<li class='ewd'><a href='EWD581.html'>A somewhat open letter to Professor John McCarthy</a></li>
-<li class='ewd'><a href='EWD580.html'>Waarom de onderafdeling der wiskunde zich met de informatica moet bezighouden</a></li>
-<li class='ewd'><a href='EWD578.html'>More about the function “fusc” (A sequel to EWD570)</a></li>
-<li class='ewd'><a href='EWD577.html'>Tripreport E.W.Dijkstra, ECI-conference 9–12 August 1976, Amsterdam</a></li>
-<li class='ewd'><a href='EWD576.html'>On subgoal induction</a></li>
-<li class='ewd'><a href='EWD575.html'>To H.D.Mills, Chairman Software Methodology Panel</a></li>
-<li class='ewd'><a href='EWD 574.html'>A letter to Professor Zohar Manna, 26 July 1976</a></li>
-<li class='ewd'><a href='EWD 573.html'>A great improvement</a></li>
-<li class='ewd'><a href='EWD572.html'>Tripreport E.W.Dijkstra, U.S.A. and U.K., 8 June - 10 July 1976</a></li>
-<li class='ewd'><a href='EWD571.html'>A simple consideration with far-reaching consequences (DRAFT)</a></li>
-<li class='ewd'><a href='EWD570.html'>An exercise for Dr.R.M.Burstall</a></li>
-<li class='ewd'><a href='EWD569.html'>Dertiende en laatste toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD568.html'>A programmer’s early memories</a></li>
-<li class='ewd'><a href='EWD567.html'>Twaalfde toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD566.html'>Programming: from craft to scientific discipline</a></li>
-<li class='ewd'><a href='EWD565.html'>Elfde toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD564a.html'>Aan de Raad van Advies, in tweede ronde.</a></li>
-<li class='ewd'><a href='EWD564.html'>A superficial book</a></li>
-<li class='ewd'><a href='EWD563.html'>Formal techniques and sizeable programs</a></li>
-<li class='ewd'><a href='EWD562.html'>The effective arrangement of logical systems</a></li>
-<li class='ewd'><a href='EWD561.html'>A “non trip report” from E.W.Dijkstra</a></li>
-<li class='ewd'><a href='EWD560.html'>Tiende toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD559.html'>Negende toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD558.html'>Achtste toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD557.html'>Zevende toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD556.html'>Zesde toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD555.html'>Aan de Raad van Advies</a></li>
-<li class='ewd'><a href='EWD554.html'>A personal summary of the Gries-Owicki theory</a></li>
-<li class='ewd'><a href='EWD553.html'>On a gauntlet thrown by David Gries</a></li>
-<li class='ewd'><a href='EWD552.html'>Vijfde toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD551.html'>Vierde toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD550.html'>A more formal treatment of a less simple example</a></li>
-<li class='ewd'><a href='EWD549.html'>Derde toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD548.html'>Tweede toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD547.html'>Tripreport E.W.Dijkstra, England and USA, 3-26 January 1976</a></li>
-<li class='ewd'><a href='EWD544.html'>An open letter to Ross Honsberger</a></li>
-<li class='ewd'><a href='EWD543.html'>Eerste toespraak tot mijn studenten, voorjaar 1976</a></li>
-<li class='ewd'><a href='EWD542.html'>[Toespraak tot twee afstudeerders]</a></li>
-<li class='ewd'><a href='EWD541.html'>Dertiende en laatste toespraak, najaar 1975</a></li>
-<li class='ewd'><a href='EWD540.html'>Two views of programming</a></li>
-<li class='ewd'><a href='EWD539.html'>Mathematics Inc., a private letter from its chairman</a></li>
-<li class='ewd'><a href='EWD538.html'>A collection of beautiful proofs</a></li>
-<li class='ewd'><a href='EWD537.html'>Twaalfde toespraak, najaar 1975</a></li>
-<li class='ewd'><a href='EWD536.html'>A sequel to EWD535</a></li>
-<li class='ewd'><a href='EWD535.html'>An answer to Jack Mazola</a></li>
-<li class='ewd'><a href='EWD534.html'>Elfde toespraak, najaar 1975</a></li>
-<li class='ewd'><a href='EWD533.html'>HOMO COGITANS</a></li>
-<li class='ewd'><a href='EWD532.html'>An open letter to L.Bass</a></li>
-<li class='ewd'><a href='EWD531.html'>Tiende toespraak, najaar 1975</a></li>
-<li class='ewd'><a href='EWD530.html'>Negende toespraak, najaar 1975</a></li>
-<li class='ewd'><a href='EWD529.html'>Achtste toespraak, najaar 1975</a></li>
-<li class='ewd'><a href='EWD528.html'>More on Hauck's warning</a></li>
-<li class='ewd'><a href='EWD527.html'>On units of consistency</a></li>
-<li class='ewd'><a href='EWD526.html'>Comments on “Woodenman” HOL Requirements for the DoD</a></li>
-<li class='ewd'><a href='EWD525.html'>On a warning from E.A.Hauck</a></li>
-<li class='ewd'><a href='EWD524.html'>Review of “On the Feasibility of Software Certification”</a></li>
-<li class='ewd'><a href='EWD523.html'>Zevende toespraak, najaar 1975</a></li>
-<li class='ewd'><a href='EWD522.html'>Zesde toespraak, najaar 1975</a></li>
-<li class='ewd'><a href='EWD521.html'>Vijfde toespraak, najaar 1975</a></li>
-<li class='ewd'><a href='EWD520.html'>On-the-fly garbage collection: an exercise in cooperation (with Leslie Lamport, A.J.Martin, C.S.Scholten, E.F.M.Steffens)</a></li>
-<li class='ewd'><a href='EWD518.html'>Vierde toespraak, najaar 1975</a></li>
-<li class='ewd'><a href='EWD516.html'>Derde toespraak, najaar 1975</a></li>
-<li class='ewd'><a href='EWD515.html'>Tweede toespraak, najaar 1975  (English)</a></li>
-<li class='ewd'><a href='EWD514.html'>On a language proposal for the Department of Defense</a></li>
-<li class='ewd'><a href='EWD513.html'>Tripreport E.W.Dijkstra Newcastle, 8–12 September 1975</a></li>
-<li class='ewd'><a href='EWD512.html'>Comments at a symposium</a></li>
-<li class='ewd'><a href='EWD511.html'>Tripreport E.W.Dijkstra W.G.2.3, Baden, 1–5 September 1975</a></li>
-<li class='ewd'><a href='EWD509.html'>Eerste toespraak, najaar 1975  (English)</a></li>
-<li class='ewd'><a href='EWD508.html'>A synthesis emerging?</a></li>
-<li class='ewd'><a href='EWD507.html'>On a gauntlet thrown by David Gries</a></li>
-<li class='ewd'><a href='EWD506.html'>Tripreport E.W.Dijkstra: NATO Summer School Marktoberdorf 1975</a></li>
-<li class='ewd'><a href='EWD504.html'>Erratum and embellishments of EWD503</a></li>
-<li class='ewd'><a href='EWD503.html'>A post-scriptum to EWD501</a></li>
-<li class='ewd'><a href='EWD502.html'>On a gauntlet thrown by David Gries</a></li>
-<li class='ewd'><a href='EWD501.html'>Variations on a theme: an open letter to C.A.R. Hoare</a></li>
-<li class='ewd'><a href='EWD500.html'>After many a sobering experience</a></li>
-<li class='ewd'><a href='EWD499.html'>[toespraak tot een student bij uitreiking ir-diploma]</a></li>
-<li class='ewd'><a href='EWD498.html'>How do we tell truths that might hurt?</a></li>
-<li class='ewd'><a href='EWD497.html'>A challenge to memory designers?</a></li>
-<li class='ewd'><a href='EWD496B.html'>On-the-fly garbage collection: an exercise in cooperation (with Leslie Lamport, A.J.Martin, C.S.Scholten, and E.F.M.Steffens)</a></li>
-<li class='ewd'><a href='EWD496A.html'>On-the-fly garbage collection: an exercise in cooperation (preliminary version) (with Leslie Lamport, A.J.Martin, C.S.Scholten, and E.F.M.Steffens)</a></li>
-<li class='ewd'><a href='EWD495.html'>Achtste toespraak tot mijn studenten</a></li>
-<li class='ewd'><a href='EWD494a.html'>Zevende toespraak tot mijn studenten</a></li>
-<li class='ewd'><a href='EWD494.html'>Trip report E.W.Dijkstra 16th April/7th May, U.S.A. and Canada</a></li>
-<li class='ewd'><a href='EWD493.html'>[Toespraak tot een afstudeerder]</a></li>
-<li class='ewd'><a href='EWD492.html'>On-the-fly garbage collection: an exercise in multiprocessing</a></li>
-<li class='ewd'><a href='EWD489.html'>Zesde toespraak tot mijn studenten</a></li>
-<li class='ewd'><a href='EWD487.html'>Letter to the Burroughs recipients of the EWD-series</a></li>
-<li class='ewd'><a href='EWD486.html'>Vijfde toespraak tot mijn studenten</a></li>
-<li class='ewd'><a href='EWD485.html'>Marketing questionnaire “A Discipline of Programming”</a></li>
-<li class='ewd'><a href='EWD484.html'>Tripreport E.W.Dijkstra, London, 9–10 March 1975</a></li>
-<li class='ewd'><a href='EWD483.html'>Vierde toespraak tot mijn studenten</a></li>
-<li class='ewd'><a href='EWD482.html'>Exercises in making programs robust</a></li>
-<li class='ewd'><a href='EWD481.html'>Derde toespraak tot mijn studenten</a></li>
-<li class='ewd'><a href='EWD480.html'>“Craftsman or scientist?”</a></li>
-<li class='ewd'><a href='EWD479.html'>Commentaar op “Structuurplan Informatica (W.O.)” van de ARSI</a></li>
-<li class='ewd'><a href='EWD478.html'>On one-sided smoothing of event sequences</a></li>
-<li class='ewd'><a href='EWD477.html'>Tweede toespraak tot mijn studenten</a></li>
-<li class='ewd'><a href='EWD476.html'>Concurrent programming: a preliminary investigation</a></li>
-<li class='ewd'><a href='EWD475.html'>A letter to my old friend Jonathan
+<li class='ewd en'><a href='EWD904.html'>A problem solved by my nephew Sybrand L. Dijkstra</a></li>
+<li class='ewd en'><a href='EWD903.html'>A short sequel to EWD863</a></li>
+<li class='ewd en'><a href='EWD898.html'>The threats to computing science</a></li>
+<li class='ewd en'><a href='EWD896.html'>On the nature of computing science</a></li>
+<li class='ewd en'><a href='EWD895.html'>Trip report E.W.Dijkstra, Marktoberdorf, 30 July – 12 Aug. 1984</a></li>
+<li class='ewd en'><a href='EWD893.html'>Trip report E.W.Dijkstra, USA, 17–26 June 1984</a></li>
+<li class='ewd en'><a href='EWD892.html'>Trip report E.W.Dijkstra, London, 12–14 June 1984</a></li>
+<li class='ewd en'><a href='EWD889.html'>User-friendly Mathematics</a></li>
+<li class='ewd en'><a href='EWD888.html'>Trip report E.W.Dijkstra, Zürich, 22–24 May 1984</a></li>
+<li class='ewd en'><a href='EWD887.html'>Trip report E.W.Dijkstra, USA, 23 April –10 May 1984</a></li>
+<li class='ewd en'><a href='EWD885.html'>Trip report E.W.Dijkstra, Muenchen, 12–14 April 1984</a></li>
+<li class='ewd en'><a href='EWD881.html'>A review of “The Evolution of Programs”</a></li>
+<li class='ewd en'><a href='EWD879.html'>Trip report E.W.Dijkstra, London, 14–17 February 1984</a></li>
+<li class='ewd en'><a href='EWD878.html'>A monotonicity argument (with A.J.M. van Gasteren)</a></li>
+<li class='ewd en'><a href='EWD877.html'>Some useful formulae (with A.J.M. van Gasteren)</a></li>
+<li class='ewd nl'><a href='EWD876.html'>De microprocessor als lollie</a></li>
+<li class='ewd en'><a href='EWD873.html'>Trip report E.W.Dijkstra, London and Colchester, 16–20 Jan. 1984</a></li>
+<li class='ewd en'><a href='EWD872.html'>The little essay I could not write</a></li>
+<li class='ewd nl'><a href='EWD869.html'>Ter afsluiting van de “Inleiding tot de Kunst van het Programmeren”</a></li>
+<li class='ewd en'><a href='EWD868.html'>Computers and General Education: a position paper</a></li>
+<li class='ewd en'><a href='EWD865.html'>Trip report E.W.Dijkstra, Brasil & USA, 17 Oct.– 6 Nov. 1983</a></li>
+<li class='ewd en'><a href='EWD864a.html'>The Distributed Snapshot of K.M.Chandy and L. Lamport</a></li>
+<li class='ewd en'><a href='EWD864.html'>The distributed snapshot of Chandy/Lamport/Misra</a></li>
+<li class='ewd en'><a href='EWD862.html'>A sequence with |x[n]| = x[n–1] + x[n+1] has period 9</a></li>
+<li class='ewd en'><a href='EWD858.html'>Trip report E.W.Dijkstra, USA, 10 June–3 July 1983</a></li>
+<li class='ewd en'><a href='EWD857.html'>Generalizing an old formula</a></li>
+<li class='ewd en'><a href='EWD856.html'>On maximizing a product</a></li>
+<li class='ewd en'><a href='EWD855.html'>Trip report E.W.Dijkstra, Barcelona 5–7 June 1983</a></li>
+<li class='ewd en'><a href='EWD854.html'>The fruits of misunderstanding</a></li>
+<li class='ewd en'><a href='EWD852.html'>Judging “HOS” from a distance</a></li>
+<li class='ewd en'><a href='EWD850.html'>Trip report E.W.Dijkstra, Helsinki, 1–4 March 1983</a></li>
+<li class='ewd en'><a href='EWD847.html'>Trip report E.W.Dijkstra, Australia, 19 Jan.1983 – 12 Feb.1983</a></li>
+<li class='ewd en'><a href='EWD841.html'>“There is no ‘royal road’ to geometry”</a></li>
+<li class='ewd en'><a href='EWD839.html'>Trip report E.W.Dijkstra, Utrecht 30 Sep.–1 Oct. 1982</a></li>
+<li class='ewd en'><a href='EWD838.html'>Trip report E.W.Dijkstra, Copenhagen, 10–16 Sep. 1982</a></li>
+<li class='ewd en'><a href='EWD837.html'>Trip report E.W.Dijkstra, Newcastle-upon Tyne, 6–10 Sep. 1982</a></li>
+<li class='ewd en'><a href='EWD833.html'>An In-Depth Seminar on Proven Tools & Techniques of Structured Methodology for Effective Software Configuration Management</a></li>
+<li class='ewd en'><a href='EWD832.html'>A theorem about infinite sequences of numbers</a></li>
+<li class='ewd en'><a href='EWD831.html'>Why numbering should start at zero</a></li>
+<li class='ewd nl'><a href='EWD829.html'>De software crisis, ontstaan en hardnekkigheid</a></li>
+<li class='ewd en'><a href='EWD827.html'>A very simple exercise in SASL</a></li>
+<li class='ewd en'><a href='EWD826.html'>Trip report E.W.Dijkstra, USA, 20 May 1982 – 14 June 1982</a></li>
+<li class='ewd en'><a href='EWD824.html'>Linearization of a two-dimensional search</a></li>
+<li class='ewd en'><a href='EWD821.html'>From predicate transformers to predicates (Dedicated by the Tuesday Afternoon Club to C.A.R. Hoare at the occasion of his being elected Fellow of the Royal Society.)</a></li>
+<li class='ewd en'><a href='EWD818.html'>A nice theorem on monotonic predicate sequences</a></li>
+<li class='ewd en'><a href='EWD814.html'>A review of a book on PEARL</a></li>
+<li class='ewd en'><a href='EWD811.html'>An alternative ending for AvG16/ EWD809</a></li>
+<li class='ewd en'><a href='EWD810a.html'>Fast image construction in computerized axial tomography (CAT) (with A.J.M. van Gasteren)</a></li>
+<li class='ewd en'><a href='EWD808.html'>Canonical string reduction</a></li>
+<li class='ewd en'><a href='EWD806.html'>Trip report E.W.Dijkstra, USA, 1–27 Nov. 1981</a></li>
+<li class='ewd en'><a href='EWD805.html'>Trip report E.W.Dijkstra, Amsterdam, 26–29 Oct. 1981</a></li>
+<li class='ewd en'><a href='EWD804.html'>On equality of propositions</a></li>
+<li class='ewd en'><a href='EWD802.html'>Trip report E.W.Dijkstra, Scotland, Newcastle 31 Aug.–15 Sep. 1981</a></li>
+<li class='ewd en'><a href='EWD801.html'>Distances from the root in skew trees (with C.S.Scholten)</a></li>
+<li class='ewd en'><a href='EWD800.html'>A bagatelle for the left hand</a></li>
+<li class='ewd en'><a href='EWD799.html'>Trip report E.W.Dijkstra, Marktoberdorf, 26/7–10/8/81</a></li>
+<li class='ewd en'><a href='EWD798.html'>Trip report E.W.Dijkstra, Newcastle, 19–25 July 1981</a></li>
+<li class='ewd en'><a href='EWD797.html'>Fibonacci numbers and Leonardo numbers</a></li>
+<li class='ewd en'><a href='EWD796a.html'>Smoothsort, an alternative for sorting in situ</a></li>
+<li class='ewd en'><a href='EWD793.html'>The analysis of a two-person game</a></li>
+<li class='ewd en'><a href='EWD791.html'>The psychology of the user</a></li>
+<li class='ewd en'><a href='EWD790.html'>Trip report E.W.Dijkstra, München, 19 May 1981</a></li>
+<li class='ewd en'><a href='EWD788.html'>What we seem to have learned (with A.J.M. van Gasteren)</a></li>
+<li class='ewd en'><a href='EWD787.html'>A (new?) proof of a theorem of Euler’s on partitions</a></li>
+<li class='ewd en'><a href='EWD786a.html'>Sets are Unibags</a></li>
+<li class='ewd en'><a href='EWD786.html'>Trip report E.W.Dijkstra, England, 23 April 1981</a></li>
+<li class='ewd en'><a href='EWD783.html'>The administration as social disease</a></li>
+<li class='ewd en'><a href='EWD782.html'>A stupid notation</a></li>
+<li class='ewd en'><a href='EWD778.html'>A somewhat open letter to Nils J.Nilsson</a></li>
+<li class='ewd en'><a href='EWD777.html'>A word of welcome (Draft)</a></li>
+<li class='ewd en'><a href='EWD776.html'>Lambek and Moser revisited</a></li>
+<li class='ewd '><a href='EWD775.html'>On Kleinrock’s Theorem</a></li>
+<li class='ewd en'><a href='EWD774.html'>Trip report E.W.Dijkstra, California, 1731 January 1981</a></li>
+<li class='ewd en'><a href='EWD773.html'>Trip report E.W.Dijkstra, Han-sur-Lesse, 712 Jan. 1981</a></li>
+<li class='ewd en'><a href='EWD772.html'>A methodological sequel to EWD771</a></li>
+<li class='ewd en'><a href='EWD771.html'>About 2-coloured 6-graphs</a></li>
+<li class='ewd '><a href='EWD770.html'>D.A.Turner’s reply</a></li>
+<li class='ewd '><a href='EWD768.html'>Largely on nomenclature</a></li>
+<li class='ewd en'><a href='EWD767.html'>A.J.Martin’s solution of the Hungarian problem</a></li>
+<li class='ewd en'><a href='EWD766.html'>An educational stupidity</a></li>
+<li class='ewd '><a href='EWD765.html'>A Hungarian problem</a></li>
+<li class='ewd en'><a href='EWD764.html'>Repaying our debts</a></li>
+<li class='ewd en'><a href='EWD763.html'>A proof by Rutger M.Dijkstra and me</a></li>
+<li class='ewd en'><a href='EWD762.html'>We mathematicians are losing the race</a></li>
+<li class='ewd nl'><a href='EWD761.html'>Een kanttekening</a></li>
+<li class='ewd '><a href='EWD760.html'>A somewhat open letter to F.Kroeger</a></li>
+<li class='ewd en'><a href='EWD759.html'>A somewhat open letter to D.A.Turner</a></li>
+<li class='ewd '><a href='EWD758.html'>An intriguing example</a></li>
+<li class='ewd '><a href='EWD757.html'>A misguided educational effort</a></li>
+<li class='ewd '><a href='EWD756.html'>A postscript to EWD755</a></li>
+<li class='ewd en'><a href='EWD755.html'>Very elementary number theory redone</a></li>
+<li class='ewd en'><a href='EWD754.html'>An error in EWD744</a></li>
+<li class='ewd en'><a href='EWD753.html'>On a theorem by Lambek and Moser</a></li>
+<li class='ewd en'><a href='EWD752.html'>Distributed Arbitration (DRAFT, with C.S.Scholten)</a></li>
+<li class='ewd en'><a href='EWD751.html'>Mainly on the omission of parentheses</a></li>
+<li class='ewd en'><a href='EWD750.html'>American programming’s plight</a></li>
+<li class='ewd en'><a href='EWD749.html'>On the productivity of recursive definitions</a></li>
+<li class='ewd en'><a href='EWD748.html'>A somewhat open letter to Wladislaw M.Turski</a></li>
+<li class='ewd en'><a href='EWD747.html'>Comments on MIL–STD–1862, 28 May 1980</a></li>
+<li class='ewd en'><a href='EWD746.html'>Trip report E.W.Dijkstra, Newcastle-upon-Tyne, 15 Sep. 1980</a></li>
+<li class='ewd en'><a href='EWD745.html'>Trip report E.W.Dijkstra, Los Angeles, Austin (Texas), and Portland, 628 August 1980</a></li>
+<li class='ewd en'><a href='EWD744.html'>A short note on symmetric distributed arbitration</a></li>
+<li class='ewd en'><a href='EWD743.html'>A new policy for Mathematics Inc.?</a></li>
+<li class='ewd en'><a href='EWD742.html'>A sequel to EWD740</a></li>
+<li class='ewd en'><a href='EWD741.html'>Partitioning the edges of the complete graphs into trees or cycles (by the Tuesday Afternoon Club)</a></li>
+<li class='ewd en'><a href='EWD740.html'>A short proof of one of Fermat’s theorems</a></li>
+<li class='ewd en'><a href='EWD739.html'>A somewhat open letter to the Editor-in-Chief of Acta Informatica</a></li>
+<li class='ewd en'><a href='EWD738.html'>More mathematical folklore</a></li>
+<li class='ewd en'><a href='EWD737.html'>A notational alternative for quantification</a></li>
+<li class='ewd en'><a href='EWD736.html'>Recording the structure of trees in their leaves</a></li>
+<li class='ewd en'><a href='EWD735.html'>A mild variant of Combinatory Logic</a></li>
+<li class='ewd en'><a href='EWD734.html'>The superfluity of the general semaphore</a></li>
+<li class='ewd nl'><a href='EWD733.html'>Naar aanleiding van Experimentele post-propadeuse opleiding voor informatica-ingenieur aan de THE” (Eindhoven februari 1980 SOO/jc/sdb)</a></li>
+<li class='ewd en'><a href='EWD732.html'>The teachability of mathematical thinking (Draft contribution to “Mathematics Tomorrow”)</a></li>
+<li class='ewd en'><a href='EWD731.html'>An experiment in mathematical exposition</a></li>
+<li class='ewd en'><a href='EWD730.html'>On two types of infinite sets of infinite sequences (by the Tuesday Afternoon Club)</a></li>
+<li class='ewd en'><a href='EWD729.html'>On well-shaped mathematical arguments</a></li>
+<li class='ewd en'><a href='EWD728.html'>A problem solved by Netty van Gasteren and me</a></li>
+<li class='ewd en'><a href='EWD727.html'>Trip report E.W.Dijkstra, U.S.A. 12 Jan.  2 Feb. 1980</a></li>
+<li class='ewd en'><a href='EWD726.html'>How Dutch Informatics fell between two chairs</a></li>
+<li class='ewd en'><a href='EWD725.html'>Trip report E.W.Dijkstra, Liege, Nov.Dec.1979</a></li>
+<li class='ewd en'><a href='EWD724E.html'>A chutspa</a></li>
+<li class='ewd nl'><a href='EWD724.html'>Een gotspe</a></li>
+<li class='ewd en'><a href='EWD723.html'>On W.H.J.Feijen’s solution for the lexicographic minimum of a circular list</a></li>
+<li class='ewd en'><a href='EWD722.html'>A book review for the IBM Systems Journal</a></li>
+<li class='ewd en'><a href='EWD721.html'>The design of a state space with a useful structure (I)</a></li>
+<li class='ewd en'><a href='EWD720.html'>Why correctness must be a mathematical concern</a></li>
+<li class='ewd en'><a href='EWD719.html'>On not duplicating volatile information</a></li>
+<li class='ewd en'><a href='EWD718.html'>Assembly conventions for the EDSAC</a></li>
+<li class='ewd en'><a href='EWD717.html'>An exercise in exposition</a></li>
+<li class='ewd en'><a href='EWD716.html'>A short talk to my students about money</a></li>
+<li class='ewd en'><a href='EWD715.html'>Trip report E.W.Dijkstra, Munich – London, 1629 September 1979</a></li>
+<li class='ewd en'><a href='EWD714.html'>Trip report E.W.Dijkstra, Mission Viejo, Santa Cruz, Austin, 29 July  8 September 1979</a></li>
+<li class='ewd en'><a href='EWD713.html'>On a problem posed by W.H.J.Feijen</a></li>
+<li class='ewd en'><a href='EWD712.html'>Trip report E.W.Dijkstra, Antwerp, 2429 June 1979</a></li>
+<li class='ewd en'><a href='EWD711.html'>Trip report E.W.Dijkstra, Ithaca, Albany, Austin (Texas), 26/5 – 10/6 1979</a></li>
+<li class='ewd en'><a href='EWD710.html'>When messages may crawl, II (A sequel to EWD708)</a></li>
+<li class='ewd en'><a href='EWD709.html'>My hopes of computing science</a></li>
+<li class='ewd en'><a href='EWD708.html'>When messages may crawl</a></li>
+<li class='ewd en'><a href='EWD707.html'>Dear Mr.X of Company Y</a></li>
+<li class='ewd en'><a href='EWD706.html'>Image reconstruction in two-dimensional tomography</a></li>
+<li class='ewd nl'><a href='EWD705.html'>Verkavelde berekeningen, hun mogelijkheden en moeilijkheden</a></li>
+<li class='ewd en'><a href='EWD704.html'>A machine for image construction in tomography</a></li>
+<li class='ewd en'><a href='EWD703.html'>A tutorial on the split binary semaphore</a></li>
+<li class='ewd en'><a href='EWD702.html'>In reaction to Ernest Chang’s “Deadlock Detection”</a></li>
+<li class='ewd en'><a href='EWD701.html'>Two theorems on (what I have called) continuously mixed sequences</a></li>
+<li class='ewd en'><a href='EWD700.html'>An examination exercise, designed by W.H.J.Feijen</a></li>
+<li class='ewd nl'><a href='EWD699.html'>Een reactie</a></li>
+<li class='ewd en'><a href='EWD698.html'>Trip report E.W.Dijkstra, Oxford University, 1015 Jan. 1979</a></li>
+<li class='ewd en'><a href='EWD697.html'>Some beautiful arguments using mathematical induction</a></li>
+<li class='ewd en'><a href='EWD696.html'>Written in anger</a></li>
+<li class='ewd en'><a href='EWD695.html'>Mathematics in an easy chair</a></li>
+<li class='ewd en'><a href='EWD694.html'>Tripreport E.W.Dijkstra, Detroit, Austin, Philadelphia, 25 Nov.  9 Dec. 1978</a></li>
+<li class='ewd en'><a href='EWD693.html'>About polygons in Detroit</a></li>
+<li class='ewd en'><a href='EWD692.html'>A review of the 1977 Turing Award Lecture by John Backus</a></li>
+<li class='ewd en'><a href='EWD691.html'>On improving the state of the art (A somewhat open letter to dr. Martin Rem)</a></li>
+<li class='ewd en'><a href='EWD690.html'>The pragmatic engineer versus the scientific designer</a></li>
+<li class='ewd en'><a href='EWD689.html'>Tripreport E.W.Dijkstra, Valley Forge, 28 Oct.  2 Nov. 1978</a></li>
+<li class='ewd en'><a href='EWD688.html'>A trifle</a></li>
+<li class='ewd en'><a href='EWD687a.html'>Termination detection for diffusing computations (with C.S.Scholten)</a></li>
+<li class='ewd en'><a href='EWD687.html'>Termination detection for diffusing computations (with C.S.Scholten)</a></li>
+<li class='ewd en'><a href='EWD685.html'>The problem of the Swiss football players</a></li>
+<li class='ewd en'><a href='EWD684.html'>Termination detection for diffusing computations (with C.S.Scholten)</a></li>
+<li class='ewd en'><a href='EWD683.html'>To a new member of The Tuesday Afternoon Club</a></li>
+<li class='ewd en'><a href='EWD682.html'>The nature of Computer Science (first draft)</a></li>
+<li class='ewd en'><a href='EWD680.html'>A book review</a></li>
+<li class='ewd en'><a href='EWD679.html'>Tripreport E.W.Dijkstra, Newcastle-London-Lancaster, 413 Sep. 1978</a></li>
+<li class='ewd en'><a href='EWD678.html'>A story that starts with a very good computer</a></li>
+<li class='ewd en'><a href='EWD677.html'>On one of Cayley's theorems</a></li>
+<li class='ewd en'><a href='EWD676.html'>Tripreport E.W.Dijkstra, Marktoberdorf 24 July  6 August 1978</a></li>
+<li class='ewd en'><a href='EWD675.html'>The equivalence of bounded nondeterminacy and continuity</a></li>
+<li class='ewd en'><a href='EWD674.html'>Tripreport E.W.Dijkstra, Zürich, 27 July 1978</a></li>
+<li class='ewd en'><a href='EWD673.html'>On weak and strong termination</a></li>
+<li class='ewd en'><a href='EWD672.html'>More on A.J.Martin's design (A sequel to EWD668)</a></li>
+<li class='ewd en'><a href='EWD671.html'>Program inversion</a></li>
+<li class='ewd en'><a href='EWD670.html'>Sequencing and the discriminated union</a></li>
+<li class='ewd en'><a href='EWD669.html'>A book review</a></li>
+<li class='ewd en'><a href='EWD668.html'>On the correctness of a design by Alain J.Martin</a></li>
+<li class='ewd en'><a href='EWD667.html'>On the foolishness of “natural language programming”</a></li>
+<li class='ewd en'><a href='EWD666.html'>A problem solved in my head</a></li>
+<li class='ewd en'><a href='EWD665.html'>Trip report E.W.Dijkstra, U.K. – Bahamas – U.S.A., 1130 April 1978</a></li>
+<li class='ewd en'><a href='EWD663.html'>The summing-up</a></li>
+<li class='ewd en'><a href='EWD662.html'>On the YELLOW Language submitted to the DoD</a></li>
+<li class='ewd en'><a href='EWD661.html'>On the RED Language submitted to the DoD</a></li>
+<li class='ewd en'><a href='EWD660.html'>On the GREEN Language submitted to the DoD</a></li>
+<li class='ewd en'><a href='EWD659.html'>On the BLUE Language submitted to DoD</a></li>
+<li class='ewd en'><a href='EWD658.html'>On language constraints enforceable by translators (An open letter to Lt.Col. William A.Whitaker)</a></li>
+<li class='ewd en'><a href='EWD657.html'>On leaves and nodes: a simplification of EWD653</a></li>
+<li class='ewd en'><a href='EWD656.html'>An introduction to implementation issues</a></li>
+<li class='ewd en'><a href='EWD655.html'>Essays on the nature and role of mathematical elegance (3): On notation (A sequel to EWD619)</a></li>
+<li class='ewd en'><a href='EWD654.html'>In honour of Fibonacci</a></li>
+<li class='ewd en'><a href='EWD653.html'>Exploiting contiguity in a linear store</a></li>
+<li class='ewd en'><a href='EWD652.html'>A correction on EWD651</a></li>
+<li class='ewd en'><a href='EWD651.html'>A strong P/V-implementation of conditional critical regions</a></li>
+<li class='ewd en'><a href='EWD650.html'>A theorem about odd powers of odd integers</a></li>
+<li class='ewd en'><a href='EWD649.html'>A supplement to EWD591 “The problem of the maximum length of an ascending subsequence”</a></li>
+<li class='ewd en'><a href='EWD648.html'>“Why is software so expensive?” An explanation to the hardware designer</a></li>
+<li class='ewd nl'><a href='EWD647.html'>Commentaar op een ontwikkeling binnen de TH's</a></li>
+<li class='ewd en'><a href='EWD646.html'>A not so simple theorem about undirected graphs</a></li>
+<li class='ewd '><a href='EWD645.html'>Tripreport E.W.Dijkstra, USA 19–30 October 1977</a></li>
+<li class='ewd en'><a href='EWD644.html'>Letter to J. Arsac</a></li>
+<li class='ewd en'><a href='EWD643.html'>A class of simple communication patterns (with C.S.Scholten)</a></li>
+<li class='ewd en'><a href='EWD642.html'>A special sorting elephant</a></li>
+<li class='ewd en'><a href='EWD641.html'>On the interplay between mathematics and programming</a></li>
+<li class='ewd en'><a href='EWD640a.html'>Finding the correctness proof of a concurrent program</a></li>
+<li class='ewd en'><a href='EWD640.html'>Finding the correctness proof of a concurrent program</a></li>
+<li class='ewd en'><a href='EWD639.html'>The introduction of MAES®</a></li>
+<li class='ewd en'><a href='EWD638.html'>A political pamphlet from the Middle Ages</a></li>
+<li class='ewd en'><a href='EWD637.html'>The Three Golden Rules for Successful Scientific Research</a></li>
+<li class='ewd en'><a href='EWD636.html'>Why naive program transformation systems are unlikely to work</a></li>
+<li class='ewd en'><a href='EWD635.html'>Tripreport E.W.Dijkstra, Newcastle-upon-Tyne, 510 Sept. 1977</a></li>
+<li class='ewd en'><a href='EWD634.html'>Position paper on the impact of microprocessors (IFIP77)</a></li>
+<li class='ewd en'><a href='EWD633.html'>Tripreport E.W.Dijkstra, 29 July  21 August 1977</a></li>
+<li class='ewd en'><a href='EWD631.html'>Re: “Formal derivation of strongly correct parallel programs” by Axel van Lamsweerde and M.Sintzoff</a></li>
+<li class='ewd en'><a href='EWD630.html'>On-the-fly garbage collection: an exercise in cooperation (with L. Lamport, A.J. Martin, C.S.Scholten, E.F.M. Steffens)</a></li>
+<li class='ewd en'><a href='EWD629.html'>On two beautiful solutions designed by Martin Rem</a></li>
+<li class='ewd nl'><a href='EWD628.html'>Naar aanleiding van een eigenlijk wat beledigend stukje</a></li>
+<li class='ewd en'><a href='EWD627.html'>A position paper on Software Reliability</a></li>
+<li class='ewd nl'><a href='EWD626.html'>WASSERMAN, Antony I. en Peter FREEMAN (Eds.). Software Engineering Education. Needs and Objectives. Proceedings of an Interface Workshop. New York/Heidelberg/Berlin. Springer-Verlag, 1976.</a></li>
+<li class='ewd en'><a href='EWD625.html'>Two starvation-free solutions of a general exclusion problem</a></li>
+<li class='ewd en'><a href='EWD624.html'>Stationary behaviour of some ternary networks</a></li>
+<li class='ewd en'><a href='EWD623.html'>The mathematics behind the Banker's Algorithm</a></li>
+<li class='ewd en'><a href='EWD622.html'>On making solutions more and more fine-grained (In gratitude dedicated to C.A.R.Hoare, D.E.Knuth, and J.F.Traub.)</a></li>
+<li class='ewd nl'><a href='EWD621.html'>Achtste toespraak tot mijn studenten, voorjaar 1977</a></li>
+<li class='ewd nl'><a href='EWD620.html'>Zevende toespraak tot mijn studenten, voorjaar 1977</a></li>
+<li class='ewd en'><a href='EWD619.html'>Essays on the nature and role of mathematical elegance</a></li>
+<li class='ewd en'><a href='EWD618.html'>On Webster, users, bugs and Aristotle</a></li>
+<li class='ewd nl'><a href='EWD617.html'>Zesde toespraak tot mijn studenten, voorjaar 1977</a></li>
+<li class='ewd nl'><a href='EWD616.html'>Vijfde toespraak tot mijn studenten, voorjaar 1977</a></li>
+<li class='ewd nl'><a href='EWD615.html'>Vierde toespraak tot mijn studenten, voorjaar 1977</a></li>
+<li class='ewd en'><a href='EWD614.html'>A somewhat open letter to EAA or: why I proved the boundedness of the non-determinacy in the way I did</a></li>
+<li class='ewd en'><a href='EWD613.html'>Tripreport E.W.Dijkstra, Australia, 16 February 1977  21 March 1977</a></li>
+<li class='ewd nl'><a href='EWD612.html'>Derde toespraak tot mijn studenten, voorjaar 1977</a></li>
+<li class='ewd en'><a href='EWD611.html'>On the fact that the Atlantic Ocean has two sides</a></li>
+<li class='ewd nl'><a href='EWD609.html'>Tweede toespraak tot mijn studenten, voorjaar 1977</a></li>
+<li class='ewd en'><a href='EWD608.html'>An elephant inspired by the Dutch National Flag</a></li>
+<li class='ewd en'><a href='EWD607.html'>A correctness proof for communicating processes: a small exercise</a></li>
+<li class='ewd nl'><a href='EWD606.html'>Eerste toespraak tot mijn studenten, voorjaar 1977</a></li>
+<li class='ewd en'><a href='EWD605.html'>Tripreport E.W.Dijkstra, Columbus - Pittsburgh - Paoli, 12–22 January 1977</a></li>
+<li class='ewd en'><a href='EWD604.html'>Paying logical conscience-money to the fair demon</a></li>
+<li class='ewd en'><a href='EWD603.html'>Tripreport E.W.Dijkstra, St.Pierre-de-Chartreuse, 1219 Dec.1976</a></li>
+<li class='ewd en'><a href='EWD602.html'>Comments on Arbeitsblatt 3 from o.Prof.Dr.F.L.Bauer (with C.S.Scholten)</a></li>
+<li class='ewd en'><a href='EWD601.html'>Tripreport E.W.Dijkstra, Munich 2426 November 1976</a></li>
+<li class='ewd en'><a href='EWD600.html'>A sequel to EWD592</a></li>
+<li class='ewd nl'><a href='EWD599.html'>Achtste toespraak tot mijn studenten, najaar 1976</a></li>
+<li class='ewd en'><a href='EWD598.html'>A bug in my book!</a></li>
+<li class='ewd en'><a href='EWD597.html'>Yet another note about termination</a></li>
+<li class='ewd en'><a href='EWD596a.html'>Tripreport E.W.Dijkstra, Copenhagen 10–12 Nov. 1976</a></li>
+<li class='ewd en'><a href='EWD595.html'>On-the-fly garbage collection: an exercise in cooperation (with Leslie Lamport, A.J.Martin, C.S.Scholten, E.F.M.Steffens)</a></li>
+<li class='ewd en'><a href='EWD594.html'>A parable</a></li>
+<li class='ewd nl'><a href='EWD593.html'>Zesde toespraak tot mijn studenten, najaar 1976</a></li>
+<li class='ewd en'><a href='EWD592.html'>A small note on the additive composition of variant functions</a></li>
+<li class='ewd en'><a href='EWD591.html'>The problem of the maximum length of an ascending subsequence</a></li>
+<li class='ewd en'><a href='EWD590.html'>A first investigation of the crossflow computer</a></li>
+<li class='ewd nl'><a href='EWD589.html'>Vijfde toespraak tot mijn studenten, najaar 1976</a></li>
+<li class='ewd nl'><a href='EWD588.html'>Vierde toespraak tot mijn studenten, najaar 1976</a></li>
+<li class='ewd nl'><a href='EWD587.html'>Derde toespraak tot mijn studenten, najaar 1976</a></li>
+<li class='ewd nl'><a href='EWD586.html'>Tweede toespraak tot mijn studenten, najaar 1976</a></li>
+<li class='ewd en'><a href='EWD585.html'>Tripreport E.W.Dijkstra, Tokyo, 28 Sep.—3 Oct. 1976</a></li>
+<li class='ewd en'><a href='EWD584.html'>Tripreport E.W.Dijkstra, Poland and USSR, 4-25 September 1976</a></li>
+<li class='ewd nl'><a href='EWD583.html'>Eerste toespraak tot mijn studenten, najaar 1976</a></li>
+<li class='ewd en'><a href='EWD582.html'>A proof of a theorem communicated to us by S.Ghosh (with C.S.Scholten)</a></li>
+<li class='ewd en'><a href='EWD581.html'>A somewhat open letter to Professor John McCarthy</a></li>
+<li class='ewd nl'><a href='EWD580.html'>Waarom de onderafdeling der wiskunde zich met de informatica moet bezighouden</a></li>
+<li class='ewd en'><a href='EWD578.html'>More about the function “fusc” (A sequel to EWD570)</a></li>
+<li class='ewd en'><a href='EWD577.html'>Tripreport E.W.Dijkstra, ECI-conference 9–12 August 1976, Amsterdam</a></li>
+<li class='ewd en'><a href='EWD576.html'>On subgoal induction</a></li>
+<li class='ewd en'><a href='EWD575.html'>To H.D.Mills, Chairman Software Methodology Panel</a></li>
+<li class='ewd '><a href='EWD 574.html'>A letter to Professor Zohar Manna, 26 July 1976</a></li>
+<li class='ewd '><a href='EWD 573.html'>A great improvement</a></li>
+<li class='ewd en'><a href='EWD572.html'>Tripreport E.W.Dijkstra, U.S.A. and U.K., 8 June - 10 July 1976</a></li>
+<li class='ewd en'><a href='EWD571.html'>A simple consideration with far-reaching consequences (DRAFT)</a></li>
+<li class='ewd en'><a href='EWD570.html'>An exercise for Dr.R.M.Burstall</a></li>
+<li class='ewd nl'><a href='EWD569.html'>Dertiende en laatste toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd en'><a href='EWD568.html'>A programmer’s early memories</a></li>
+<li class='ewd nl'><a href='EWD567.html'>Twaalfde toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd en'><a href='EWD566.html'>Programming: from craft to scientific discipline</a></li>
+<li class='ewd nl'><a href='EWD565.html'>Elfde toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd nl'><a href='EWD564a.html'>Aan de Raad van Advies, in tweede ronde.</a></li>
+<li class='ewd en'><a href='EWD564.html'>A superficial book</a></li>
+<li class='ewd en'><a href='EWD563.html'>Formal techniques and sizeable programs</a></li>
+<li class='ewd en'><a href='EWD562.html'>The effective arrangement of logical systems</a></li>
+<li class='ewd en'><a href='EWD561.html'>A “non trip report” from E.W.Dijkstra</a></li>
+<li class='ewd nl'><a href='EWD560.html'>Tiende toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd nl'><a href='EWD559.html'>Negende toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd nl'><a href='EWD558.html'>Achtste toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd nl'><a href='EWD557.html'>Zevende toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd nl'><a href='EWD556.html'>Zesde toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd nl'><a href='EWD555.html'>Aan de Raad van Advies</a></li>
+<li class='ewd en'><a href='EWD554.html'>A personal summary of the Gries-Owicki theory</a></li>
+<li class='ewd en'><a href='EWD553.html'>On a gauntlet thrown by David Gries</a></li>
+<li class='ewd nl'><a href='EWD552.html'>Vijfde toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd nl'><a href='EWD551.html'>Vierde toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd en'><a href='EWD550.html'>A more formal treatment of a less simple example</a></li>
+<li class='ewd nl'><a href='EWD549.html'>Derde toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd nl'><a href='EWD548.html'>Tweede toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd en'><a href='EWD547.html'>Tripreport E.W.Dijkstra, England and USA, 3-26 January 1976</a></li>
+<li class='ewd en'><a href='EWD544.html'>An open letter to Ross Honsberger</a></li>
+<li class='ewd nl'><a href='EWD543.html'>Eerste toespraak tot mijn studenten, voorjaar 1976</a></li>
+<li class='ewd nl'><a href='EWD542.html'>[Toespraak tot twee afstudeerders]</a></li>
+<li class='ewd nl'><a href='EWD541.html'>Dertiende en laatste toespraak, najaar 1975</a></li>
+<li class='ewd en'><a href='EWD540.html'>Two views of programming</a></li>
+<li class='ewd en'><a href='EWD539.html'>Mathematics Inc., a private letter from its chairman</a></li>
+<li class='ewd en'><a href='EWD538.html'>A collection of beautiful proofs</a></li>
+<li class='ewd nl'><a href='EWD537.html'>Twaalfde toespraak, najaar 1975</a></li>
+<li class='ewd en'><a href='EWD536.html'>A sequel to EWD535</a></li>
+<li class='ewd en'><a href='EWD535.html'>An answer to Jack Mazola</a></li>
+<li class='ewd nl'><a href='EWD534.html'>Elfde toespraak, najaar 1975</a></li>
+<li class='ewd en'><a href='EWD533.html'>HOMO COGITANS</a></li>
+<li class='ewd en'><a href='EWD532.html'>An open letter to L.Bass</a></li>
+<li class='ewd nl'><a href='EWD531.html'>Tiende toespraak, najaar 1975</a></li>
+<li class='ewd en'><a href='EWD530.html'>Negende toespraak, najaar 1975</a></li>
+<li class='ewd nl'><a href='EWD529.html'>Achtste toespraak, najaar 1975</a></li>
+<li class='ewd en'><a href='EWD528.html'>More on Hauck's warning</a></li>
+<li class='ewd en'><a href='EWD527.html'>On units of consistency</a></li>
+<li class='ewd en'><a href='EWD526.html'>Comments on “Woodenman” HOL Requirements for the DoD</a></li>
+<li class='ewd en'><a href='EWD525.html'>On a warning from E.A.Hauck</a></li>
+<li class='ewd en'><a href='EWD524.html'>Review of “On the Feasibility of Software Certification”</a></li>
+<li class='ewd nl'><a href='EWD523.html'>Zevende toespraak, najaar 1975</a></li>
+<li class='ewd nl'><a href='EWD522.html'>Zesde toespraak, najaar 1975</a></li>
+<li class='ewd nl'><a href='EWD521.html'>Vijfde toespraak, najaar 1975</a></li>
+<li class='ewd en'><a href='EWD520.html'>On-the-fly garbage collection: an exercise in cooperation (with Leslie Lamport, A.J.Martin, C.S.Scholten, E.F.M.Steffens)</a></li>
+<li class='ewd nl'><a href='EWD518.html'>Vierde toespraak, najaar 1975</a></li>
+<li class='ewd nl'><a href='EWD516.html'>Derde toespraak, najaar 1975</a></li>
+<li class='ewd nl'><a href='EWD515.html'>Tweede toespraak, najaar 1975  (English)</a></li>
+<li class='ewd en'><a href='EWD514.html'>On a language proposal for the Department of Defense</a></li>
+<li class='ewd en'><a href='EWD513.html'>Tripreport E.W.Dijkstra Newcastle, 8–12 September 1975</a></li>
+<li class='ewd en'><a href='EWD512.html'>Comments at a symposium</a></li>
+<li class='ewd en'><a href='EWD511.html'>Tripreport E.W.Dijkstra W.G.2.3, Baden, 1–5 September 1975</a></li>
+<li class='ewd nl'><a href='EWD509.html'>Eerste toespraak, najaar 1975  (English)</a></li>
+<li class='ewd en'><a href='EWD508.html'>A synthesis emerging?</a></li>
+<li class='ewd en'><a href='EWD507.html'>On a gauntlet thrown by David Gries</a></li>
+<li class='ewd en'><a href='EWD506.html'>Tripreport E.W.Dijkstra: NATO Summer School Marktoberdorf 1975</a></li>
+<li class='ewd en'><a href='EWD504.html'>Erratum and embellishments of EWD503</a></li>
+<li class='ewd en'><a href='EWD503.html'>A post-scriptum to EWD501</a></li>
+<li class='ewd en'><a href='EWD502.html'>On a gauntlet thrown by David Gries</a></li>
+<li class='ewd en'><a href='EWD501.html'>Variations on a theme: an open letter to C.A.R. Hoare</a></li>
+<li class='ewd en'><a href='EWD500.html'>After many a sobering experience</a></li>
+<li class='ewd nl'><a href='EWD499.html'>[toespraak tot een student bij uitreiking ir-diploma]</a></li>
+<li class='ewd en'><a href='EWD498.html'>How do we tell truths that might hurt?</a></li>
+<li class='ewd en'><a href='EWD497.html'>A challenge to memory designers?</a></li>
+<li class='ewd en'><a href='EWD496B.html'>On-the-fly garbage collection: an exercise in cooperation (with Leslie Lamport, A.J.Martin, C.S.Scholten, and E.F.M.Steffens)</a></li>
+<li class='ewd en'><a href='EWD496A.html'>On-the-fly garbage collection: an exercise in cooperation (preliminary version) (with Leslie Lamport, A.J.Martin, C.S.Scholten, and E.F.M.Steffens)</a></li>
+<li class='ewd nl'><a href='EWD495.html'>Achtste toespraak tot mijn studenten</a></li>
+<li class='ewd nl'><a href='EWD494a.html'>Zevende toespraak tot mijn studenten</a></li>
+<li class='ewd en'><a href='EWD494.html'>Trip report E.W.Dijkstra 16th April/7th May, U.S.A. and Canada</a></li>
+<li class='ewd nl'><a href='EWD493.html'>[Toespraak tot een afstudeerder]</a></li>
+<li class='ewd en'><a href='EWD492.html'>On-the-fly garbage collection: an exercise in multiprocessing</a></li>
+<li class='ewd nl'><a href='EWD489.html'>Zesde toespraak tot mijn studenten</a></li>
+<li class='ewd en'><a href='EWD487.html'>Letter to the Burroughs recipients of the EWD-series</a></li>
+<li class='ewd nl'><a href='EWD486.html'>Vijfde toespraak tot mijn studenten</a></li>
+<li class='ewd en'><a href='EWD485.html'>Marketing questionnaire “A Discipline of Programming”</a></li>
+<li class='ewd en'><a href='EWD484.html'>Tripreport E.W.Dijkstra, London, 9–10 March 1975</a></li>
+<li class='ewd nl'><a href='EWD483.html'>Vierde toespraak tot mijn studenten</a></li>
+<li class='ewd en'><a href='EWD482.html'>Exercises in making programs robust</a></li>
+<li class='ewd nl'><a href='EWD481.html'>Derde toespraak tot mijn studenten</a></li>
+<li class='ewd en'><a href='EWD480.html'>“Craftsman or scientist?”</a></li>
+<li class='ewd nl'><a href='EWD479.html'>Commentaar op “Structuurplan Informatica (W.O.)” van de ARSI</a></li>
+<li class='ewd en'><a href='EWD478.html'>On one-sided smoothing of event sequences</a></li>
+<li class='ewd nl'><a href='EWD477.html'>Tweede toespraak tot mijn studenten</a></li>
+<li class='ewd en'><a href='EWD476.html'>Concurrent programming: a preliminary investigation</a></li>
+<li class='ewd en'><a href='EWD475.html'>A letter to my old friend Jonathan
 
 											Jonathan's response (Brian Randell)</a></li>
-<li class='ewd'><a href='EWD474.html'>Trip report visit ETH Zurich, 3–4 February 1975 by E.W.Dijkstra</a></li>
-<li class='ewd'><a href='EWD473.html'>On the teaching of programming, i.e. on the teaching of thinking</a></li>
-<li class='ewd'><a href='EWD472.html'>Guarded commands, non-determinacy and formal derivation of programs</a></li>
-<li class='ewd'><a href='EWD471.html'>Bij de aanvang van het semester</a></li>
-<li class='ewd'><a href='EWD470.html'>Letter to the referees of EWD418</a></li>
-<li class='ewd'><a href='EWD469.html'>Programming methodologies, their objectives and their nature</a></li>
-<li class='ewd'><a href='EWD466.html'>Trip report E.W.Dijkstra, Meeting IFIP W.G.2.3., Munich, 8–14 December 1974</a></li>
-<li class='ewd'><a href='EWD465.html'>Monotonic replacement algorithms and their implementation</a></li>
-<li class='ewd'><a href='EWD464.html'>A new elephant built from mosquitos humming in harmony</a></li>
-<li class='ewd'><a href='EWD463.html'>Some questions</a></li>
-<li class='ewd'><a href='EWD462.html'>A time-wise hierarchy imposed upon the use of a two-level store</a></li>
-<li class='ewd'><a href='EWD459.html'>The pattern matching problem.</a></li>
-<li class='ewd'><a href='EWD458.html'>On non-determinacy being bounded.</a></li>
-<li class='ewd'><a href='EWD456.html'>Determinism and recursion versus non-determinism and the transitive closure</a></li>
-<li class='ewd'><a href='EWD454.html'>[Letter to Dr. H.Bekic, 8 October 1974]</a></li>
-<li class='ewd'><a href='EWD435.html'>Finding the maximal strong components in a directed graph.</a></li>
-<li class='ewd'><a href='EWD452.html'>About robustness and the like</a></li>
-<li class='ewd'><a href='EWD451.html'>Heer, verlos ons van de charlatans! (English)</a></li>
-<li class='ewd'><a href='EWD450.html'>Correctness concerns and, among other things, why they are resented</a></li>
-<li class='ewd'><a href='EWD449.html'>Het curriculum informatica aan de THE</a></li>
-<li class='ewd'><a href='EWD448.html'>Trip report E.W.Dijkstra, Edinburgh and Newcastle, 16 September 1974</a></li>
-<li class='ewd'><a href='EWD447.html'>On the role of scientific thought</a></li>
-<li class='ewd'><a href='EWD443.html'>A multidisciplinary approach to mathematics</a></li>
-<li class='ewd'><a href='EWD442.html'>Inside “Mathematics Inc”</a></li>
-<li class='ewd'><a href='EWD440.html'>The problem of the most isolated villages.</a></li>
-<li class='ewd'><a href='EWD439.html'>Associons continued (with W.H.J.Feijen and M.Rem)</a></li>
-<li class='ewd'><a href='EWD435.html'>Associons: an effort towards accomodating potentially ultra-high concurrency (with W.H.J.Feijen and M.Rem)</a></li>
-<li class='ewd'><a href='EWD432.html'>[A letter to C.A.R. Hoare, 13 July 1974]</a></li>
-<li class='ewd'><a href='EWD429.html'>A generalization of the Sheffer Stroke for n-valued logic (by C.S.Scholten)</a></li>
-<li class='ewd'><a href='EWD428.html'>Array variables. [see EWD417]</a></li>
-<li class='ewd'><a href='EWD427.html'>Speech at the occasion of an anniversary</a></li>
-<li class='ewd'><a href='EWD426.html'>Self-stabilizing systems in spite of distributed control</a></li>
-<li class='ewd'><a href='EWD425.html'>Trip report E.W.Dijkstra, USA and Canada, 5th–25th May 1974</a></li>
-<li class='ewd'><a href='EWD423.html'>Trip report E.W.Dijkstra, W.G.2.3 Meeting “Boldern” 28th April–3rd May 1974</a></li>
-<li class='ewd'><a href='EWD420.html'>Tripreport E.W.Dijkstra, Luxembourg, 712 April 1974</a></li>
-<li class='ewd'><a href='EWD418.html'>Guarded commands, non-determinacy and a calculus for the derivation of programs</a></li>
-<li class='ewd'><a href='EWD417.html'>On the abolishment of the subscripted variable [see EWD428]</a></li>
-<li class='ewd'><a href='EWD416.html'>On avoiding the infinite</a></li>
-<li class='ewd'><a href='EWD415.html'>A beautiful proof of a probably useless theorem (with W.H.J.Feijen)</a></li>
-<li class='ewd'><a href='EWD413.html'>The formal treatment of some small examples.</a></li>
-<li class='ewd'><a href='EWD408.html'>A time-wise hierarchy imposed upon the use of a two-level store</a></li>
-<li class='ewd'><a href='EWD407.html'>Acceptance speech for the AFIPS Harry Goode Memorial Award 1974</a></li>
-<li class='ewd'><a href='EWD406.html'>A trip to the U.S.A., 5th–25th January 1974</a></li>
-<li class='ewd'><a href='EWD404.html'>A trip to France: 13th–20th December 1973</a></li>
-<li class='ewd'><a href='EWD401.html'>The characterization of semantics</a></li>
-<li class='ewd'><a href='EWD399.html'>An immediate sequel to EWD398: “Sequencing primitives revisited”</a></li>
-<li class='ewd'><a href='EWD398.html'>Sequencing primitives revisited</a></li>
-<li class='ewd'><a href='EWD397.html'>Self-stabilizing systems with distributed control</a></li>
-<li class='ewd'><a href='EWD396.html'>Self-stabilization with three-state machines</a></li>
-<li class='ewd'><a href='EWD395.html'>Trip report E.W.Dijkstra IFIP Working Group W.G.2.3 “On Programming Methodology”, 21st–26th October 1973, Blanchland, England</a></li>
-<li class='ewd'><a href='EWD393.html'>On representational abstraction</a></li>
-<li class='ewd'><a href='EWD392.html'>Self-stabilization with four-state machines</a></li>
-<li class='ewd'><a href='EWD391.html'>Self-stabilization in spite of distributed control</a></li>
-<li class='ewd'><a href='EWD389.html'>Trip report I.U.C.C. Colloquium, Canterbury, 18th–21st Sept. 1973</a></li>
-<li class='ewd'><a href='EWD387.html'>Trip report IBM Seminar “Communication and Computers”, Newcastle, Sept. 1973</a></li>
-<li class='ewd'><a href='EWD386.html'>The solution to a cyclic relaxation problem</a></li>
-<li class='ewd'><a href='EWD385.html'>Trip report E.W.Dijkstra Summer School Munich, July 25 to August 4, 1973</a></li>
-<li class='ewd'><a href='EWD384.html'>Betrouwbaarheid van programma's</a></li>
-<li class='ewd'><a href='EWD379.html'>On a connection pattern between 2**N elements</a></li>
-<li class='ewd'><a href='EWD376.html'>Finding the maximum strong components in a directed graph [see EWD453]</a></li>
-<li class='ewd'><a href='EWD375.html'>A non algebraic example of a constructive correctness proof</a></li>
-<li class='ewd'><a href='EWD374.html'>The analysis of multiprogrammed systems of unspecified degree of parallellism</a></li>
-<li class='ewd'><a href='EWD368.html'>Verslag van bezoek aan Washington, maart 1973</a></li>
-<li class='ewd'><a href='EWD366.html'>Waarom ik niet gewoon hoogleraar wil blijven</a></li>
-<li class='ewd'><a href='EWD365.html'>A parabel</a></li>
-<li class='ewd'><a href='EWD364.html'>Weledelgestrenge Heer, Ingenieur Swinkels</a></li>
-<li class='ewd'><a href='EWD363.html'>Reisverslag E.W.Dijkstra: Open house on semantics, Aarhus, 7–18 jan. 1973</a></li>
-<li class='ewd'><a href='EWD362.html'>Bezoek van E.W.Dijkstra aan l’Alpe d’Huez, 8–15 december 1972</a></li>
-<li class='ewd'><a href='EWD361.html'>Programming as a discipline of mathematical nature</a></li>
-<li class='ewd'><a href='EWD356.html'>Advanced Course on Computer Systems Architecture (Grenoble, December 1972)</a></li>
-<li class='ewd'><a href='EWD353.html'>Elementen ener afstudeerrichting in de informatica</a></li>
-<li class='ewd'><a href='EWD351.html'>Verslag bezoek Engeland 30 augustus – 9 september 1972</a></li>
-<li class='ewd'><a href='EWD349.html'>Ontwikkelingsplan Informatica</a></li>
-<li class='ewd'><a href='EWD348.html'>Verslag van de reis van E.W.Dijkstra naar Boston, 12–18 augustus 1972</a></li>
-<li class='ewd'><a href='EWD345.html'>Ter zake van wiskundige modelvorming</a></li>
-<li class='ewd'><a href='EWD343.html'>Reisverslag betreffende het bezoek aan de USA van 14 tot 30 mei 1972 door E.W.Dijkstra</a></li>
-<li class='ewd'><a href='EWD341.html'>[Toespraak over de noodzaak van programmeermethodologie]</a></li>
-<li class='ewd'><a href='EWD340.html'>The humble programmer</a></li>
-<li class='ewd'><a href='EWD338.html'>Parallelism in multi-record transactions (with C.S.Scholten)</a></li>
-<li class='ewd'><a href='EWD330.html'>[Book review of: Bauer-Goos, Informatik, Zweiter Teil]</a></li>
-<li class='ewd'><a href='EWD325.html'>Poging tot plaatsbepaling van de Informatica</a></li>
-<li class='ewd'><a href='EWD319.html'>A class of allocation strategies inducing bounded delays only</a></li>
-<li class='ewd'><a href='EWD317.html'>On a methodology of design</a></li>
-<li class='ewd'><a href='EWD316a.html'>Reisverslag van Edsger W.Dijkstra aan Summer School Marktoberdorf, juli 1971</a></li>
-<li class='ewd'><a href='EWD316.html'>A short introduction to the art of programming</a></li>
-<li class='ewd'><a href='EWD312.html'>Verslag van reis van E.W.Dijkstra naar Noord Amerika</a></li>
-<li class='ewd'><a href='EWD311.html'>[Review of] Bauer, Goos: “Informatik, Erster Teil” Heidelberger Taschenbuecher, Band 80 Springer Verlag, 1971</a></li>
-<li class='ewd'><a href='EWD310.html'>Hierarchical ordering of sequential processes</a></li>
-<li class='ewd'><a href='EWD309.html'>(over een voorgestelde configuratie van een P1400 en vier P880’s)</a></li>
-<li class='ewd'><a href='EWD308.html'>Reisverslag bezoek van E.W.Dijkstra aan IFIP W.G.2.3 te Warwick, Engeland</a></li>
-<li class='ewd'><a href='EWD307.html'>(over een voorgestelde configuratie van een P1400 en vier P880’s)</a></li>
-<li class='ewd'><a href='EWD306.html'>Over het gewicht van een informatica-opleiding</a></li>
-<li class='ewd'><a href='EWD303.html'>On the reliability of programs</a></li>
-<li class='ewd'><a href='EWD302.html'>Design considerations in more detail</a></li>
-<li class='ewd'><a href='EWD301.html'>Over de bewijsbaartheid van programmacorrectheid</a></li>
-<li class='ewd'><a href='EWD300.html'>Exit “The Programming Laboratory”</a></li>
-<li class='ewd'><a href='EWD298.html'>Informatica als wiskundige discipline</a></li>
-<li class='ewd'><a href='EWD295.html'>Reisverslag van bezoek aan het Seminar on the Teaching of Programming at University Level</a></li>
-<li class='ewd'><a href='EWD292.html'>Letter to professor C.A.R. Hoare (31 August 1970)</a></li>
-<li class='ewd'><a href='EWD288a.html'>Recensie voor het tijdschrift “Informatie”</a></li>
-<li class='ewd'><a href='EWD288.html'>Concern for correctness as a guiding principle for program construction</a></li>
-<li class='ewd'><a href='EWD287.html'>Sans titre (but most definitely a predecessor to EWD316, “A short introduction into the art of programming”)</a></li>
-<li class='ewd'><a href='EWD286.html'>Verslag van mijn reis naar California</a></li>
-<li class='ewd'><a href='EWD282.html'>A tree-structured system</a></li>
-<li class='ewd'><a href='EWD281.html'>Aan de Commissie Wetenschapsbeleid</a></li>
-<li class='ewd'><a href='EWD279.html'>The programming laboratory project</a></li>
-<li class='ewd'><a href='EWD278.html'>Organisatie van onderzoek en onderwijs van Fundamentele Programmering</a></li>
-<li class='ewd'><a href='EWD275.html'>Structure of an extendable operating system</a></li>
-<li class='ewd'><a href='EWD273.html'>The programming task considered as an intellectual challenge</a></li>
-<li class='ewd'><a href='EWD272.html'>Verslag van de tweede “Conference on Software Engineering”, georganiseerd door de NATO Science Committee te Rome, 27–31 oktober 1969</a></li>
-<li class='ewd'><a href='EWD270.html'>Aan de keuzecommissie rekenmachine</a></li>
-<li class='ewd'><a href='EWD268.html'>Structured programming</a></li>
-<li class='ewd'><a href='EWD267.html'>Over de toekomst van Computer Science</a></li>
-<li class='ewd'><a href='EWD264.html'>On understanding programs</a></li>
-<li class='ewd'><a href='EWD261.html'>Hoe wiskundig programmeren is</a></li>
-<li class='ewd'><a href='EWD260.html'>Plotting a curve with a printer</a></li>
-<li class='ewd'><a href='EWD259.html'>Toekomstverwachting Fundamentele Programmering</a></li>
-<li class='ewd'><a href='EWD257.html'>Verslag bezoek aan MIT</a></li>
-<li class='ewd'><a href='EWD255.html'>Over de IBM360 (English)</a></li>
-<li class='ewd'><a href='EWD254a.html'>Hoger orde adressering</a></li>
-<li class='ewd'><a href='EWD254.html'>Computer Science of enkel Software Engineering?</a></li>
-<li class='ewd'><a href='EWD253a.html'>Ontwerp Collegebeschrijving “Inleiding tot de kunst van het programmere</a></li>
-<li class='ewd'><a href='EWD253.html'>Tentamen Co-operating Sequential Processes (jan. 1969)</a></li>
-<li class='ewd'><a href='EWD252a.html'>Ontwerp voorwoord [afstudeerrichting Fundamentele Programmering]</a></li>
-<li class='ewd'><a href='EWD252.html'>Mijn laatste verslag van een bijeenkomst van W.G.2.1.</a></li>
-<li class='ewd'><a href='EWD251.html'>Requirements of programming tools</a></li>
-<li class='ewd'><a href='EWD247a.html'>[Beantwoording ener enquete]</a></li>
-<li class='ewd'><a href='EWD247.html'>[“Journal for half-baked Ideas”]</a></li>
-<li class='ewd'><a href='EWD246.html'>Verslag van het bezoek aan de NATO Conference on Software Engineering</a></li>
-<li class='ewd'><a href='EWD245.html'>On useful structuring</a></li>
-<li class='ewd'><a href='EWD244.html'>Een educatief dilemma</a></li>
-<li class='ewd'><a href='EWD243.html'>Bijdrage voor de subcommissie Aanschaffingsbeleid Rekenautomaten</a></li>
-<li class='ewd'><a href='EWD241.html'>Towards correct programs</a></li>
-<li class='ewd'><a href='EWD240.html'>The moral of EWD237 – EWD239</a></li>
-<li class='ewd'><a href='EWD239.html'>On trading storage against computation time</a></li>
-<li class='ewd'><a href='EWD238.html'>Computation versus program</a></li>
-<li class='ewd'><a href='EWD237.html'>A preliminary investigation into Computer Assisted Programming</a></li>
-<li class='ewd'><a href='EWD236.html'>Complexity controlled by hierarchical ordering of function and variability</a></li>
-<li class='ewd'><a href='EWD235.html'>Contractie en expansie</a></li>
-<li class='ewd'><a href='EWD232.html'>Pretentie en doelstelling van het THE multiprogrammeringsproject</a></li>
-<li class='ewd'><a href='EWD231.html'>De Rekenautomaat als Gebruiksvoorwerp</a></li>
-<li class='ewd'><a href='EWD230.html'>To the EDITOR ALGOL 68</a></li>
-<li class='ewd'><a href='EWD229.html'>Aan de leden van de Commissie Wetenschapsbeleid</a></li>
-<li class='ewd'><a href='EWD227.html'>Stepwise program construction</a></li>
-<li class='ewd'><a href='EWD224.html'>HEEL VERTROUWELIJK</a></li>
-<li class='ewd'><a href='EWD222.html'>Verslag van het bezoek aan Grenoble en Parijs (6–11 december 1967)</a></li>
-<li class='ewd'><a href='EWD221.html'>[Raw code for computing De Bruijn-sequences]</a></li>
-<li class='ewd'><a href='EWD215.html'>A case against the GO TO statement</a></li>
-<li class='ewd'><a href='EWD214.html'>ACM Symposium in Gatlinburg “Operating System Principles”</a></li>
-<li class='ewd'><a href='EWD209A.html'>A constructive approach to the problem of program correctness</a></li>
-<li class='ewd'><a href='EWD209.html'>A constructive approach to the problem of program correctness</a></li>
-<li class='ewd'><a href='EWD206.html'>A sequel to EWD201</a></li>
-<li class='ewd'><a href='EWD201.html'>A sequel to EWD200</a></li>
-<li class='ewd'><a href='EWD200.html'>The variable size machine</a></li>
-<li class='ewd'><a href='EWD198.html'>An effort towards structuring of programmed processes</a></li>
-<li class='ewd'><a href='EWD196.html'>The structure of the “THE”-multiprogramming system</a></li>
-<li class='ewd'><a href='EWD194.html'>Het einde van een ambacht</a></li>
-<li class='ewd'><a href='EWD191.html'>Aan de Commissie Wetenschapsbeleid ter zake van Automatiseringswiskunde aan de THE</a></li>
-<li class='ewd'><a href='EWD190.html'>Tentamen “Co-operating Sequential Processes”</a></li>
-<li class='ewd'><a href='EWD188.html'>Over een academische opleiding tot “Computer Scientist”</a></li>
-<li class='ewd'><a href='EWD184.html'>Ir.Medema, Ir.Hendriks, weledelgestrenge heren!</a></li>
-<li class='ewd'><a href='EWD167.html'>Aan de leden van de onderafdelingsvergadering</a></li>
-<li class='ewd'><a href='EWD164.html'>Keuze tussen symcharf en symchart</a></li>
-<li class='ewd'><a href='EWD163.html'>Eerste verkenning over de dood van programa’s</a></li>
-<li class='ewd'><a href='EWD161.html'>Sequentiele interpretatie van ponsband</a></li>
-<li class='ewd'><a href='EWD158.html'>Tentamenopgave “Cooperating Sequential Processes” (april 1966)</a></li>
-<li class='ewd'><a href='EWD157.html'>Over de sequentiele interpretatie van een ponsband</a></li>
-<li class='ewd'><a href='EWD155.html'>Context dependent names</a></li>
-<li class='ewd'><a href='EWD150.html'>Tentamenopgave “Cooperating Sequential Processes”</a></li>
-<li class='ewd'><a href='EWD149.html'>Documentatie over de communicatieapparatuur aan de EL X8 (vervanging van EWD140)</a></li>
-<li class='ewd'><a href='EWD147.html'>Proposal for the input and the notation of the system</a></li>
-<li class='ewd'><a href='EWD145.html'>Globale beschrijving van de drijvende arithmetiek van de EL X8</a></li>
-<li class='ewd'><a href='EWD140.html'>Documentatie over de communicatie apparatuur aan de EL X8</a></li>
-<li class='ewd'><a href='EWD139.html'>Appreciatie van ponskaarten</a></li>
-<li class='ewd'><a href='EWD137.html'>Heel kort verslag bezoek aan het symposium over Multi Access Computers, 2–4 november 1965 in het NPL</a></li>
-<li class='ewd'><a href='EWD132.html'>An Experiment with the “record class” as suggested by C.A.R.Hoare</a></li>
-<li class='ewd'><a href='EWD131.html'>Verslag van bezoek aan de Arbeitstagung fuer Automatentheorie te Hanover.</a></li>
-<li class='ewd'><a href='EWD130.html'>A sequel to EWD126</a></li>
-<li class='ewd'><a href='EWD126.html'>The multiprogramming system for the EL X8 THE</a></li>
-<li class='ewd'><a href='EWD123.html'>Cooperating sequential processes</a></li>
-<li class='ewd'><a href='EWD118.html'>Communicatiebuffering voor de EL-X8 - T.H.E.</a></li>
-<li class='ewd'><a href='EWD117.html'>Programming considered as a human activity</a></li>
-<li class='ewd'><a href='EWD116.html'>De bankiersalgorithme en verfijningen daarvan</a></li>
-<li class='ewd'><a href='EWD113.html'>Segment control</a></li>
-<li class='ewd'><a href='EWD112.html'>Ruwe schets vertaalproces</a></li>
-<li class='ewd'><a href='EWD111.html'>Error checking</a></li>
-<li class='ewd'><a href='EWD108.html'>Een algorithme ter voorkoming van de dodelijke omarming</a></li>
-<li class='ewd'><a href='EWD105.html'>Description of the object program (a sequel to EWD102)</a></li>
-<li class='ewd'><a href='EWD102.html'>Description of the object program, II</a></li>
-<li class='ewd'><a href='EWD101.html'>Description of the object program</a></li>
-<li class='ewd'><a href='EWD96.html'>Embedding complex arithmetic</a></li>
-<li class='ewd'><a href='EWD91.html'>Samenvatting van oordeel over het “Voorstel tot aanschaffing van een digitale informatieverwerkende machine voor de afdeling der elektrotechniek”</a></li>
-<li class='ewd'><a href='EWD89.html'>Over formal locations</a></li>
-<li class='ewd'><a href='EWD86.html'>Bezettingsadministratie der trommelpagina’s</a></li>
-<li class='ewd'><a href='EWD84.html'>Over paginaadministratie</a></li>
-<li class='ewd'><a href='EWD82.html'>Een ponsbandorganisatie voor de X8</a></li>
-<li class='ewd'><a href='EWD77.html'>Het controlerende communicatieapparaat</a></li>
-<li class='ewd'><a href='EWD75.html'>Over standaardroutines</a></li>
-<li class='ewd'><a href='EWD74.html'>Over seinpalen</a></li>
-<li class='ewd'><a href='EWD72.html'>Over trommelpaginatransporten</a></li>
-<li class='ewd'><a href='EWD71.html'>Over pagina-administratie</a></li>
-<li class='ewd'><a href='EWD70.html'>Over stapeladministratie. II</a></li>
-<li class='ewd'><a href='EWD69.html'>Over stapeladministratie</a></li>
-<li class='ewd'><a href='EWD68.html'>Some comments on the aims of MIRFAC</a></li>
-<li class='ewd'><a href='EWD65.html'>Over Jansen</a></li>
-<li class='ewd'><a href='EWD62.html'>Notitie over de aansluiting en de programmering van de teleprinter</a></li>
-<li class='ewd'><a href='EWD57.html'>Multiprogrammering en de X8 (Vervolg van EWD54)</a></li>
-<li class='ewd'><a href='EWD54.html'>Multiprogrammering en de X8 (Vervolg van EWD51)</a></li>
-<li class='ewd'><a href='EWD51.html'>Multiprogrammering en de X8</a></li>
-<li class='ewd'><a href='EWD41.html'>Het vectorgeheugen</a></li>
-<li class='ewd'><a href='EWD37.html'>A review of the IBM 1620 Data Processing System</a></li>
-<li class='ewd'><a href='EWD35.html'>Over de sequentialiteit van procesbeschrijvingen  (English)</a></li>
-<li class='ewd'><a href='EWD32.html'>Some meditations on Advanced Programming</a></li>
-<li class='ewd'><a href='EWD28.html'>Substitution processes</a></li>
+<li class='ewd en'><a href='EWD474.html'>Trip report visit ETH Zurich, 3–4 February 1975 by E.W.Dijkstra</a></li>
+<li class='ewd en'><a href='EWD473.html'>On the teaching of programming, i.e. on the teaching of thinking</a></li>
+<li class='ewd en'><a href='EWD472.html'>Guarded commands, non-determinacy and formal derivation of programs</a></li>
+<li class='ewd nl'><a href='EWD471.html'>Bij de aanvang van het semester</a></li>
+<li class='ewd en'><a href='EWD470.html'>Letter to the referees of EWD418</a></li>
+<li class='ewd en'><a href='EWD469.html'>Programming methodologies, their objectives and their nature</a></li>
+<li class='ewd en'><a href='EWD466.html'>Trip report E.W.Dijkstra, Meeting IFIP W.G.2.3., Munich, 8–14 December 1974</a></li>
+<li class='ewd en'><a href='EWD465.html'>Monotonic replacement algorithms and their implementation</a></li>
+<li class='ewd en'><a href='EWD464.html'>A new elephant built from mosquitos humming in harmony</a></li>
+<li class='ewd en'><a href='EWD463.html'>Some questions</a></li>
+<li class='ewd en'><a href='EWD462.html'>A time-wise hierarchy imposed upon the use of a two-level store</a></li>
+<li class='ewd en'><a href='EWD459.html'>The pattern matching problem.</a></li>
+<li class='ewd en'><a href='EWD458.html'>On non-determinacy being bounded.</a></li>
+<li class='ewd en'><a href='EWD456.html'>Determinism and recursion versus non-determinism and the transitive closure</a></li>
+<li class='ewd en'><a href='EWD454.html'>[Letter to Dr. H.Bekic, 8 October 1974]</a></li>
+<li class='ewd en'><a href='EWD435.html'>Finding the maximal strong components in a directed graph.</a></li>
+<li class='ewd en'><a href='EWD452.html'>About robustness and the like</a></li>
+<li class='ewd nl'><a href='EWD451.html'>Heer, verlos ons van de charlatans!</a></li>
+<li class='ewd en'><a href='EWD450.html'>Correctness concerns and, among other things, why they are resented</a></li>
+<li class='ewd nl'><a href='EWD449.html'>Het curriculum informatica aan de THE</a></li>
+<li class='ewd en'><a href='EWD448.html'>Trip report E.W.Dijkstra, Edinburgh and Newcastle, 16 September 1974</a></li>
+<li class='ewd en'><a href='EWD447.html'>On the role of scientific thought</a></li>
+<li class='ewd en'><a href='EWD443.html'>A multidisciplinary approach to mathematics</a></li>
+<li class='ewd en'><a href='EWD442.html'>Inside “Mathematics Inc”</a></li>
+<li class='ewd en'><a href='EWD440.html'>The problem of the most isolated villages.</a></li>
+<li class='ewd en'><a href='EWD439.html'>Associons continued (with W.H.J.Feijen and M.Rem)</a></li>
+<li class='ewd en'><a href='EWD435.html'>Associons: an effort towards accomodating potentially ultra-high concurrency (with W.H.J.Feijen and M.Rem)</a></li>
+<li class='ewd en'><a href='EWD432.html'>[A letter to C.A.R. Hoare, 13 July 1974]</a></li>
+<li class='ewd en'><a href='EWD429.html'>A generalization of the Sheffer Stroke for n-valued logic (by C.S.Scholten)</a></li>
+<li class='ewd en'><a href='EWD428.html'>Array variables. [see EWD417]</a></li>
+<li class='ewd en'><a href='EWD427.html'>Speech at the occasion of an anniversary</a></li>
+<li class='ewd en'><a href='EWD426.html'>Self-stabilizing systems in spite of distributed control</a></li>
+<li class='ewd en'><a href='EWD425.html'>Trip report E.W.Dijkstra, USA and Canada, 5th–25th May 1974</a></li>
+<li class='ewd en'><a href='EWD423.html'>Trip report E.W.Dijkstra, W.G.2.3 Meeting “Boldern” 28th April–3rd May 1974</a></li>
+<li class='ewd en'><a href='EWD420.html'>Tripreport E.W.Dijkstra, Luxembourg, 712 April 1974</a></li>
+<li class='ewd en'><a href='EWD418.html'>Guarded commands, non-determinacy and a calculus for the derivation of programs</a></li>
+<li class='ewd en'><a href='EWD417.html'>On the abolishment of the subscripted variable [see EWD428]</a></li>
+<li class='ewd en'><a href='EWD416.html'>On avoiding the infinite</a></li>
+<li class='ewd en'><a href='EWD415.html'>A beautiful proof of a probably useless theorem (with W.H.J.Feijen)</a></li>
+<li class='ewd en'><a href='EWD413.html'>The formal treatment of some small examples.</a></li>
+<li class='ewd en'><a href='EWD408.html'>A time-wise hierarchy imposed upon the use of a two-level store</a></li>
+<li class='ewd en'><a href='EWD407.html'>Acceptance speech for the AFIPS Harry Goode Memorial Award 1974</a></li>
+<li class='ewd en'><a href='EWD406.html'>A trip to the U.S.A., 5th–25th January 1974</a></li>
+<li class='ewd en'><a href='EWD404.html'>A trip to France: 13th–20th December 1973</a></li>
+<li class='ewd en'><a href='EWD401.html'>The characterization of semantics</a></li>
+<li class='ewd en'><a href='EWD399.html'>An immediate sequel to EWD398: “Sequencing primitives revisited”</a></li>
+<li class='ewd en'><a href='EWD398.html'>Sequencing primitives revisited</a></li>
+<li class='ewd en'><a href='EWD397.html'>Self-stabilizing systems with distributed control</a></li>
+<li class='ewd en'><a href='EWD396.html'>Self-stabilization with three-state machines</a></li>
+<li class='ewd en'><a href='EWD395.html'>Trip report E.W.Dijkstra IFIP Working Group W.G.2.3 “On Programming Methodology”, 21st–26th October 1973, Blanchland, England</a></li>
+<li class='ewd en'><a href='EWD393.html'>On representational abstraction</a></li>
+<li class='ewd en'><a href='EWD392.html'>Self-stabilization with four-state machines</a></li>
+<li class='ewd en'><a href='EWD391.html'>Self-stabilization in spite of distributed control</a></li>
+<li class='ewd en'><a href='EWD389.html'>Trip report I.U.C.C. Colloquium, Canterbury, 18th–21st Sept. 1973</a></li>
+<li class='ewd en'><a href='EWD387.html'>Trip report IBM Seminar “Communication and Computers”, Newcastle, Sept. 1973</a></li>
+<li class='ewd en'><a href='EWD386.html'>The solution to a cyclic relaxation problem</a></li>
+<li class='ewd en'><a href='EWD385.html'>Trip report E.W.Dijkstra Summer School Munich, July 25 to August 4, 1973</a></li>
+<li class='ewd nl'><a href='EWD384.html'>Betrouwbaarheid van programma's</a></li>
+<li class='ewd en'><a href='EWD379.html'>On a connection pattern between 2**N elements</a></li>
+<li class='ewd en'><a href='EWD376.html'>Finding the maximum strong components in a directed graph [see EWD453]</a></li>
+<li class='ewd en'><a href='EWD375.html'>A non algebraic example of a constructive correctness proof</a></li>
+<li class='ewd en'><a href='EWD374.html'>The analysis of multiprogrammed systems of unspecified degree of parallellism</a></li>
+<li class='ewd nl'><a href='EWD368.html'>Verslag van bezoek aan Washington, maart 1973</a></li>
+<li class='ewd nl'><a href='EWD366.html'>Waarom ik niet gewoon hoogleraar wil blijven</a></li>
+<li class='ewd en'><a href='EWD365.html'>A parabel</a></li>
+<li class='ewd nl'><a href='EWD364.html'>Weledelgestrenge Heer, Ingenieur Swinkels</a></li>
+<li class='ewd nl'><a href='EWD363.html'>Reisverslag E.W.Dijkstra: Open house on semantics, Aarhus, 7–18 jan. 1973</a></li>
+<li class='ewd nl'><a href='EWD362.html'>Bezoek van E.W.Dijkstra aan l’Alpe d’Huez, 8–15 december 1972</a></li>
+<li class='ewd en'><a href='EWD361.html'>Programming as a discipline of mathematical nature</a></li>
+<li class='ewd en'><a href='EWD356.html'>Advanced Course on Computer Systems Architecture (Grenoble, December 1972)</a></li>
+<li class='ewd nl'><a href='EWD353.html'>Elementen ener afstudeerrichting in de informatica</a></li>
+<li class='ewd nl'><a href='EWD351.html'>Verslag bezoek Engeland 30 augustus – 9 september 1972</a></li>
+<li class='ewd nl'><a href='EWD349.html'>Ontwikkelingsplan Informatica</a></li>
+<li class='ewd nl'><a href='EWD348.html'>Verslag van de reis van E.W.Dijkstra naar Boston, 12–18 augustus 1972</a></li>
+<li class='ewd nl'><a href='EWD345.html'>Ter zake van wiskundige modelvorming</a></li>
+<li class='ewd nl'><a href='EWD343.html'>Reisverslag betreffende het bezoek aan de USA van 14 tot 30 mei 1972 door E.W.Dijkstra</a></li>
+<li class='ewd nl'><a href='EWD341.html'>[Toespraak over de noodzaak van programmeermethodologie]</a></li>
+<li class='ewd en'><a href='EWD340.html'>The humble programmer</a></li>
+<li class='ewd en'><a href='EWD338.html'>Parallelism in multi-record transactions (with C.S.Scholten)</a></li>
+<li class='ewd en'><a href='EWD330.html'>[Book review of: Bauer-Goos, Informatik, Zweiter Teil]</a></li>
+<li class='ewd nl'><a href='EWD325.html'>Poging tot plaatsbepaling van de Informatica</a></li>
+<li class='ewd en'><a href='EWD319.html'>A class of allocation strategies inducing bounded delays only</a></li>
+<li class='ewd en'><a href='EWD317.html'>On a methodology of design</a></li>
+<li class='ewd nl'><a href='EWD316a.html'>Reisverslag van Edsger W.Dijkstra aan Summer School Marktoberdorf, juli 1971</a></li>
+<li class='ewd en'><a href='EWD316.html'>A short introduction to the art of programming</a></li>
+<li class='ewd nl'><a href='EWD312.html'>Verslag van reis van E.W.Dijkstra naar Noord Amerika</a></li>
+<li class='ewd en'><a href='EWD311.html'>[Review of] Bauer, Goos: “Informatik, Erster Teil” Heidelberger Taschenbuecher, Band 80 Springer Verlag, 1971</a></li>
+<li class='ewd en'><a href='EWD310.html'>Hierarchical ordering of sequential processes</a></li>
+<li class='ewd nl'><a href='EWD309.html'>(over een voorgestelde configuratie van een P1400 en vier P880’s)</a></li>
+<li class='ewd nl'><a href='EWD308.html'>Reisverslag bezoek van E.W.Dijkstra aan IFIP W.G.2.3 te Warwick, Engeland</a></li>
+<li class='ewd nl'><a href='EWD307.html'>(over een voorgestelde configuratie van een P1400 en vier P880’s)</a></li>
+<li class='ewd nl'><a href='EWD306.html'>Over het gewicht van een informatica-opleiding</a></li>
+<li class='ewd en'><a href='EWD303.html'>On the reliability of programs</a></li>
+<li class='ewd en'><a href='EWD302.html'>Design considerations in more detail</a></li>
+<li class='ewd nl'><a href='EWD301.html'>Over de bewijsbaartheid van programmacorrectheid</a></li>
+<li class='ewd nl'><a href='EWD300.html'>Exit “The Programming Laboratory”</a></li>
+<li class='ewd nl'><a href='EWD298.html'>Informatica als wiskundige discipline</a></li>
+<li class='ewd nl'><a href='EWD295.html'>Reisverslag van bezoek aan het Seminar on the Teaching of Programming at University Level</a></li>
+<li class='ewd en'><a href='EWD292.html'>Letter to professor C.A.R. Hoare (31 August 1970)</a></li>
+<li class='ewd nl'><a href='EWD288a.html'>Recensie voor het tijdschrift “Informatie”</a></li>
+<li class='ewd en'><a href='EWD288.html'>Concern for correctness as a guiding principle for program construction</a></li>
+<li class='ewd en'><a href='EWD287.html'>Sans titre (but most definitely a predecessor to EWD316, “A short introduction into the art of programming”)</a></li>
+<li class='ewd nl'><a href='EWD286.html'>Verslag van mijn reis naar California</a></li>
+<li class='ewd en'><a href='EWD282.html'>A tree-structured system</a></li>
+<li class='ewd nl'><a href='EWD281.html'>Aan de Commissie Wetenschapsbeleid</a></li>
+<li class='ewd en'><a href='EWD279.html'>The programming laboratory project</a></li>
+<li class='ewd nl'><a href='EWD278.html'>Organisatie van onderzoek en onderwijs van Fundamentele Programmering</a></li>
+<li class='ewd en'><a href='EWD275.html'>Structure of an extendable operating system</a></li>
+<li class='ewd en'><a href='EWD273.html'>The programming task considered as an intellectual challenge</a></li>
+<li class='ewd nl'><a href='EWD272.html'>Verslag van de tweede “Conference on Software Engineering”, georganiseerd door de NATO Science Committee te Rome, 27–31 oktober 1969</a></li>
+<li class='ewd nl'><a href='EWD270.html'>Aan de keuzecommissie rekenmachine</a></li>
+<li class='ewd en'><a href='EWD268.html'>Structured programming</a></li>
+<li class='ewd nl'><a href='EWD267.html'>Over de toekomst van Computer Science</a></li>
+<li class='ewd en'><a href='EWD264.html'>On understanding programs</a></li>
+<li class='ewd nl'><a href='EWD261.html'>Hoe wiskundig programmeren is</a></li>
+<li class='ewd en'><a href='EWD260.html'>Plotting a curve with a printer</a></li>
+<li class='ewd nl'><a href='EWD259.html'>Toekomstverwachting Fundamentele Programmering</a></li>
+<li class='ewd nl'><a href='EWD257.html'>Verslag bezoek aan MIT</a></li>
+<li class='ewd nl'><a href='EWD255.html'>Over de IBM360 (English)</a></li>
+<li class='ewd nl'><a href='EWD254a.html'>Hoger orde adressering</a></li>
+<li class='ewd nl'><a href='EWD254.html'>Computer Science of enkel Software Engineering?</a></li>
+<li class='ewd nl'><a href='EWD253a.html'>Ontwerp Collegebeschrijving “Inleiding tot de kunst van het programmere</a></li>
+<li class='ewd nl'><a href='EWD253.html'>Tentamen Co-operating Sequential Processes (jan. 1969)</a></li>
+<li class='ewd nl'><a href='EWD252a.html'>Ontwerp voorwoord [afstudeerrichting Fundamentele Programmering]</a></li>
+<li class='ewd en'><a href='EWD252.html'>Mijn laatste verslag van een bijeenkomst van W.G.2.1.</a></li>
+<li class='ewd en'><a href='EWD251.html'>Requirements of programming tools</a></li>
+<li class='ewd nl'><a href='EWD247a.html'>[Beantwoording ener enquete]</a></li>
+<li class='ewd en'><a href='EWD247.html'>[“Journal for half-baked Ideas”]</a></li>
+<li class='ewd nl'><a href='EWD246.html'>Verslag van het bezoek aan de NATO Conference on Software Engineering</a></li>
+<li class='ewd en'><a href='EWD245.html'>On useful structuring</a></li>
+<li class='ewd nl'><a href='EWD244.html'>Een educatief dilemma</a></li>
+<li class='ewd nl'><a href='EWD243.html'>Bijdrage voor de subcommissie Aanschaffingsbeleid Rekenautomaten</a></li>
+<li class='ewd en'><a href='EWD241.html'>Towards correct programs</a></li>
+<li class='ewd en'><a href='EWD240.html'>The moral of EWD237 – EWD239</a></li>
+<li class='ewd en'><a href='EWD239.html'>On trading storage against computation time</a></li>
+<li class='ewd en'><a href='EWD238.html'>Computation versus program</a></li>
+<li class='ewd en'><a href='EWD237.html'>A preliminary investigation into Computer Assisted Programming</a></li>
+<li class='ewd en'><a href='EWD236.html'>Complexity controlled by hierarchical ordering of function and variability</a></li>
+<li class='ewd nl'><a href='EWD235.html'>Contractie en expansie</a></li>
+<li class='ewd nl'><a href='EWD232.html'>Pretentie en doelstelling van het THE multiprogrammeringsproject</a></li>
+<li class='ewd nl'><a href='EWD231.html'>De Rekenautomaat als Gebruiksvoorwerp</a></li>
+<li class='ewd en'><a href='EWD230.html'>To the EDITOR ALGOL 68</a></li>
+<li class='ewd en'><a href='EWD229.html'>Aan de leden van de Commissie Wetenschapsbeleid</a></li>
+<li class='ewd en'><a href='EWD227.html'>Stepwise program construction</a></li>
+<li class='ewd nl'><a href='EWD224.html'>HEEL VERTROUWELIJK</a></li>
+<li class='ewd nl'><a href='EWD222.html'>Verslag van het bezoek aan Grenoble en Parijs (6–11 december 1967)</a></li>
+<li class='ewd en'><a href='EWD221.html'>[Raw code for computing De Bruijn-sequences]</a></li>
+<li class='ewd en'><a href='EWD215.html'>A case against the GO TO statement</a></li>
+<li class='ewd nl'><a href='EWD214.html'>ACM Symposium in Gatlinburg “Operating System Principles”</a></li>
+<li class='ewd en'><a href='EWD209A.html'>A constructive approach to the problem of program correctness</a></li>
+<li class='ewd en'><a href='EWD209.html'>A constructive approach to the problem of program correctness</a></li>
+<li class='ewd en'><a href='EWD206.html'>A sequel to EWD201</a></li>
+<li class='ewd en'><a href='EWD201.html'>A sequel to EWD200</a></li>
+<li class='ewd en'><a href='EWD200.html'>The variable size machine</a></li>
+<li class='ewd en'><a href='EWD198.html'>An effort towards structuring of programmed processes</a></li>
+<li class='ewd en'><a href='EWD196.html'>The structure of the “THE”-multiprogramming system</a></li>
+<li class='ewd nl'><a href='EWD194.html'>Het einde van een ambacht</a></li>
+<li class='ewd nl'><a href='EWD191.html'>Aan de Commissie Wetenschapsbeleid ter zake van Automatiseringswiskunde aan de THE</a></li>
+<li class='ewd nl'><a href='EWD190.html'>Tentamen “Co-operating Sequential Processes”</a></li>
+<li class='ewd nl'><a href='EWD188.html'>Over een academische opleiding tot “Computer Scientist”</a></li>
+<li class='ewd nl'><a href='EWD184.html'>Ir.Medema, Ir.Hendriks, weledelgestrenge heren!</a></li>
+<li class='ewd nl'><a href='EWD167.html'>Aan de leden van de onderafdelingsvergadering</a></li>
+<li class='ewd nl'><a href='EWD164.html'>Keuze tussen symcharf en symchart</a></li>
+<li class='ewd nl'><a href='EWD163.html'>Eerste verkenning over de dood van programa’s</a></li>
+<li class='ewd nl'><a href='EWD161.html'>Sequentiele interpretatie van ponsband</a></li>
+<li class='ewd nl'><a href='EWD158.html'>Tentamenopgave “Cooperating Sequential Processes” (april 1966)</a></li>
+<li class='ewd nl'><a href='EWD157.html'>Over de sequentiele interpretatie van een ponsband</a></li>
+<li class='ewd en'><a href='EWD155.html'>Context dependent names</a></li>
+<li class='ewd nl'><a href='EWD150.html'>Tentamenopgave “Cooperating Sequential Processes”</a></li>
+<li class='ewd nl'><a href='EWD149.html'>Documentatie over de communicatieapparatuur aan de EL X8 (vervanging van EWD140)</a></li>
+<li class='ewd en'><a href='EWD147.html'>Proposal for the input and the notation of the system</a></li>
+<li class='ewd nl'><a href='EWD145.html'>Globale beschrijving van de drijvende arithmetiek van de EL X8</a></li>
+<li class='ewd nl'><a href='EWD140.html'>Documentatie over de communicatie apparatuur aan de EL X8</a></li>
+<li class='ewd nl'><a href='EWD139.html'>Appreciatie van ponskaarten</a></li>
+<li class='ewd nl'><a href='EWD137.html'>Heel kort verslag bezoek aan het symposium over Multi Access Computers, 2–4 november 1965 in het NPL</a></li>
+<li class='ewd en'><a href='EWD132.html'>An Experiment with the “record class” as suggested by C.A.R.Hoare</a></li>
+<li class='ewd nl'><a href='EWD131.html'>Verslag van bezoek aan de Arbeitstagung fuer Automatentheorie te Hanover.</a></li>
+<li class='ewd en'><a href='EWD130.html'>A sequel to EWD126</a></li>
+<li class='ewd en'><a href='EWD126.html'>The multiprogramming system for the EL X8 THE</a></li>
+<li class='ewd en'><a href='EWD123.html'>Cooperating sequential processes</a></li>
+<li class='ewd nl'><a href='EWD118.html'>Communicatiebuffering voor de EL-X8 - T.H.E.</a></li>
+<li class='ewd en'><a href='EWD117.html'>Programming considered as a human activity</a></li>
+<li class='ewd nl'><a href='EWD116.html'>De bankiersalgorithme en verfijningen daarvan</a></li>
+<li class='ewd en'><a href='EWD113.html'>Segment control</a></li>
+<li class='ewd nl'><a href='EWD112.html'>Ruwe schets vertaalproces</a></li>
+<li class='ewd nl'><a href='EWD111.html'>Error checking</a></li>
+<li class='ewd nl'><a href='EWD108.html'>Een algorithme ter voorkoming van de dodelijke omarming</a></li>
+<li class='ewd en'><a href='EWD105.html'>Description of the object program (a sequel to EWD102)</a></li>
+<li class='ewd en'><a href='EWD102.html'>Description of the object program, II</a></li>
+<li class='ewd en'><a href='EWD101.html'>Description of the object program</a></li>
+<li class='ewd en'><a href='EWD96.html'>Embedding complex arithmetic</a></li>
+<li class='ewd nl'><a href='EWD91.html'>Samenvatting van oordeel over het “Voorstel tot aanschaffing van een digitale informatieverwerkende machine voor de afdeling der elektrotechniek”</a></li>
+<li class='ewd nl'><a href='EWD89.html'>Over formal locations</a></li>
+<li class='ewd nl'><a href='EWD86.html'>Bezettingsadministratie der trommelpagina’s</a></li>
+<li class='ewd nl'><a href='EWD84.html'>Over paginaadministratie</a></li>
+<li class='ewd nl'><a href='EWD82.html'>Een ponsbandorganisatie voor de X8</a></li>
+<li class='ewd nl'><a href='EWD77.html'>Het controlerende communicatieapparaat</a></li>
+<li class='ewd nl'><a href='EWD75.html'>Over standaardroutines</a></li>
+<li class='ewd nl'><a href='EWD74.html'>Over seinpalen</a></li>
+<li class='ewd nl'><a href='EWD72.html'>Over trommelpaginatransporten</a></li>
+<li class='ewd nl'><a href='EWD71.html'>Over pagina-administratie</a></li>
+<li class='ewd nl'><a href='EWD70.html'>Over stapeladministratie. II</a></li>
+<li class='ewd nl'><a href='EWD69.html'>Over stapeladministratie</a></li>
+<li class='ewd en'><a href='EWD68.html'>Some comments on the aims of MIRFAC</a></li>
+<li class='ewd nl'><a href='EWD65.html'>Over Jansen</a></li>
+<li class='ewd nl'><a href='EWD62.html'>Notitie over de aansluiting en de programmering van de teleprinter</a></li>
+<li class='ewd nl'><a href='EWD57.html'>Multiprogrammering en de X8 (Vervolg van EWD54)</a></li>
+<li class='ewd nl'><a href='EWD54.html'>Multiprogrammering en de X8 (Vervolg van EWD51)</a></li>
+<li class='ewd nl'><a href='EWD51.html'>Multiprogrammering en de X8</a></li>
+<li class='ewd nl'><a href='EWD41.html'>Het vectorgeheugen</a></li>
+<li class='ewd en'><a href='EWD37.html'>A review of the IBM 1620 Data Processing System</a></li>
+<li class='ewd nl'><a href='EWD35.html'>Over de sequentialiteit van procesbeschrijvingen  (English)</a></li>
+<li class='ewd en'><a href='EWD32.html'>Some meditations on Advanced Programming</a></li>
+<li class='ewd en'><a href='EWD28.html'>Substitution processes</a></li>
 </ul>
+</div>
 </body>
