@@ -25,7 +25,9 @@ foreach my $file (@files) {
         'title' => trim($$row[1]),
         'file' => trim($$row[2])
       );
-      push(@ewds, \%ewd);
+      if ($ewd{'file'} !~ /^\s*$/) {
+        push(@ewds, \%ewd);
+      }
     }
   }
 }
