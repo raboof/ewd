@@ -12,7 +12,7 @@ my @files = <sources/www.cs.utexas.edu/~EWD/index??xx.html>;
 
 my @ewds = ();
 
-foreach my $file (@files) { 
+foreach my $file (@files) {
   open FILE, $file or die "Couldn't open file $file: $!";
   binmode(FILE, ":utf8");
   my $content = <FILE>;
@@ -36,6 +36,7 @@ open INDEX, ">target/index.html" or die "Could not open index";
 binmode(INDEX, ":utf8");
 
 print INDEX <<EOF;
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">

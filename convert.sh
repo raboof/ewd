@@ -14,7 +14,7 @@ for i in EWD*; do
   for f in *.html; do
     TARGET="../../../../../target/$f"
     mkdir -p `dirname $TARGET`
-    ../../../../../convertArticle.pl < $f > $TARGET
+    cat $f | iconv -c --from UTF-8 --to UTF-8 | ../../../../../convertArticle.pl > $TARGET
   done
   cd ..
 done

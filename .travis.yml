@@ -4,6 +4,7 @@ addons:
   apt:
     packages:
     - libhtml-tableextract-perl
+    - libhtml-tidy-perl
     - expect
 
 script: bash ./deploy.sh

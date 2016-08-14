@@ -1,5 +1,22 @@
 #!/usr/bin/perl
 
+use strict;
+
+use Encode qw(decode encode);
+use HTML::Tidy;
+use HTML::Entities;
+
+my $tidy = HTML::Tidy->new();
+
+sub tidySnippet {
+  my $snippet = shift;
+  my $document = $tidy->clean($snippet);
+  if ($document =~ /<body>(.*)<\/body>/mis) {
+    return $1;
+  }
+  return $document;
+}
+
 sub getbody {
   my ($article, $title) = @_;
 
@@ -10,7 +27,7 @@ sub getbody {
     $article = $3;
   }
 
-  return $article;
+  return tidySnippet($article);
 }
 
 sub parse {
@@ -30,11 +47,14 @@ sub parse {
 }
 
 $/ = undef;
+binmode(STDIN, ":utf8");
 my $article = <STDIN>;
 
 my $parsed = parse($article);
 
-print <<EOF;
+binmode(STDOUT, ":utf8");
+print STDOUT <<EOF;
+<!DOCTYPE html>
 <html>
 <head>
   <title>$parsed->{'title'}</title>
