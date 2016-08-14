@@ -2,8 +2,6 @@
 
 use HTML::TableExtract;
 
-$/ = undef;
-
 sub trim {
    return $_[0] =~ s/^[\p{FORMAT}\s]+|[\p{FORMAT}\s]+$//rg;
 }
@@ -11,6 +9,14 @@ sub trim {
 my @files = <sources/www.cs.utexas.edu/~EWD/index??xx.html>;
 
 my @ewds = ();
+
+my %language = {};
+open LANG, "meta/languages.tsv" or die;
+while (<LANG> =~ /(.*)\t(.*)/g) {
+  $language{$1} = $2;
+}
+
+$/ = undef;
 
 foreach my $file (@files) {
   open FILE, $file or die "Couldn't open file $file: $!";
@@ -20,10 +26,14 @@ foreach my $file (@files) {
   $te->parse($content);
   foreach $ts ($te->tables) {
     foreach $row ($ts->rows) {
+      my $file = trim($$row[2]);
+      my $title = trim($$row[1]);
+      $title =~ s/ \(English\)//;
       my %ewd = (
         'nr' => trim($$row[0]),
-        'title' => trim($$row[1]),
-        'file' => trim($$row[2])
+        'title' => $title,
+        'file' => $file,
+        'language' => $language{$file}
       );
       if ($ewd{'file'} !~ /^\s*$/) {
         push(@ewds, \%ewd);
@@ -41,18 +51,28 @@ print INDEX <<EOF;
 <head>
   <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+  <link href="assets/common.css" rel="stylesheet">
   <link href="assets/index.css" rel="stylesheet">
+  <script src="assets/index.js"></script>
 </head>
 <body>
+<div class="metabar">
+  <a id="nl" class="lang" href="#" onclick="disableLang('nl')">NL</a>
+  <a id="nonl" class="inactive" href="#" onclick="enableLang('nl')">NL</a>
+  <a id="en" class="lang" href="#" onclick="disableLang('en')">EN</a>
+  <a id="noen" class="inactive" href="#" onclick="enableLang('en')">EN</a>
+</div>
 <h1>Edsger W. Dijkstra</h1>
+<div class="body">
 <ul>
 EOF
 
 foreach my $ewd (reverse @ewds) {
-  print INDEX "<li class='ewd'><a href='$$ewd{'file'}'>$$ewd{'title'}</a></li>\n";
+  print INDEX "<li class='ewd $$ewd{'language'}'><a href='$$ewd{'file'}'>$$ewd{'title'}</a></li>\n";
 }
 
 print INDEX <<EOF;
 </ul>
+</div>
 </body>
 EOF

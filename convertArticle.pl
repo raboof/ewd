@@ -60,6 +60,7 @@ print STDOUT <<EOF;
 <head>
   <title>$parsed->{'title'}</title>
   <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+  <link href="assets/common.css" rel="stylesheet">
   <link href="assets/transcriptions.css" rel="stylesheet">
   <meta name="generator" content="convertArticle.pl">
 </head>
