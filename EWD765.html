@@ -1,0 +1,98 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>A Hungarian problem</title>
+    <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
+    <link href="assets/common.css" rel="stylesheet">
+    <link href="assets/transcriptions.css" rel="stylesheet">
+    <meta name="generator" content="convertArticle.pl">
+  </head>
+  <body>
+  <div class="metabar">
+    <div class="metabar-inner">
+      <a href="index.html">HOME</a>
+    </div>
+  </div>
+  <h1>A Hungarian problem</h1>
+  <div class='body'>         
+             <p class="noindent"><b>A Hungarian problem.</b> 
+             <p> 
+Martin Rem returned from his trip to Hungary with the following problem. Let two positive integers <var>p</var> and <var>q</var> be given. 
+We start with a bag containing a finite number of integers. When the bag contains some number, <var>x</var> say, at least twice, 
+a move is possible; the move consists of replacing in the bag two occurrences of <var>x</var> by <var>x</var>+<var>p</var> and <var>x</var>&minus;<var>q</var> respectively. 
+Show that this game terminates. 
+<p>When we characterize the contents of the bag by its characteristic function <var>f</var> &mdash;i.e. for all <var>x</var>, <var>f</var>&thinsp;(<var>x</var>) = the number of 
+occurrences of the value of <var>x</var> in the bag&mdash; and use the initializing guard &mdash;which is true when the equation can be 
+solved and sets the unknown to a solution&mdash; the game can be written as follows 
+<table cellpadding="0" cellspacing="0"> <tr> <td colspan=2>
+<b>do</b> <var>x</var>&thinsp;: <var>f</var>&thinsp;(<var>x</var>)&thinsp;&ge;&thinsp;2 &rarr;                        </td> </tr> <tr> <td width="25">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> <td width="454" colspan=1>
+     <var>f&thinsp;</var>(<var>x</var>&minus;<var>q</var>), <var>f&thinsp;</var>(<var>x</var>), <var>f&thinsp;</var>(<var>x</var>+<var>p</var>) := <var>f&thinsp;</var>(<var>x</var>&minus;<var>q</var>)+1, <var>f</var>&thinsp;(<var>x</var>)&minus;2, <var>f&thinsp;</var>(<var>x</var>+<var>p</var>)+1</td> </tr> <tr> <td colspan=2>
+<b>od</b>                                              </td> </tr> </table>
+<p>To start with, we generalize the game: for each move a new pair (<var>p</var>,&thinsp;<var>q</var>) of positive numbers may be chosen. 
+Furthermore we extend our program with auxiliary array <var>n</var>, initially satisfying for all <var>x</var> <var>&nbsp;&nbsp;f</var>&thinsp;(<var>x</var>) = <var>n</var>(<var>x</var>), 
+and modified by extending the guarded command with the statement 
+<table> <tr> <td>&nbsp;&nbsp;&nbsp;&nbsp;</td> <td colspan=1>
+    <var>n</var>(<var>x</var>&minus;<var>q</var>), <var>n</var>(<var>x</var>+<var>p</var>) := <var>n</var>(<var>x</var>&minus;q)&thinsp;+&thinsp;1, <var>n</var>(<var>x</var>+<var>p</var>)&thinsp;+&thinsp;1</td> </tr> </table>
+<p class="noindent">In other words, after initialization <var>n</var>(<var>x</var>) counts how many times <var>f</var>&thinsp;(<var>x</var>) is increased. 
+<p>With <var>c</var> defined as <var>c</var> = (<b>N</b>&thinsp;<var>x</var>&thinsp;:: <var>n</var>(<var>x</var>)&thinsp;&gt;&thinsp;0) we have 
+<p class="noindent"><b>Lemma 0</b>. 
+<p>Each <var>n</var>(<var>x</var>) is bounded <b>or</b> <var>c</var> is unbounded. 
+<p class="noindent"><b>Proof</b>. Since each <var>f</var>&thinsp;(<var>x</var>) is bounded by the constant number of integers in the bag, an <var>f</var>&thinsp;(<var>x</var>) that is increased an 
+unbounded number of times is also decreased an unbounded number of times, causing increases 
+of <var>n</var>(<var>y</var>) for some <var>y</var>&thinsp;&gt;&thinsp;<var>x</var> (and some <var>y</var>&thinsp;&lt;&thinsp;<var>x</var>). Hence we have for all <var>x</var>: <br>
+&nbsp; &nbsp;<var>n</var>(<var>x</var>) is bounded <b>or</b> (<b>S</b>&thinsp;<var>y</var>&thinsp;: <var>y&thinsp;</var>&gt;<var>x</var>&thinsp;: <var>n</var>(<var>y</var>)) is unbounded. <br />
+Hence, for bounded <var>c</var> there is no largest <var>x</var> for which 
+<var>n</var>(<var>x</var>) is unbounded, hence there is no such <var>x</var> at all. (End of proof of Lemma 0). 
+<p>Since &ldquo;<var>c</var> is bounded <b>and</b> each <var>n</var>(<var>x</var>) is bounded&rdquo; is equivalent with &ldquo;the game terminates&rdquo;, and since P &or; Q equals 
+(&not;Q &and; P) &or; Q, we derive from Lemma 0: 
+<p class="noindent"><b>Lemma 1 </b>
+<p>The game terminates <b>or</b> <var>c</var> is unbounded.
+<p>The smallest value in the bag is the smallest value <var>x</var> such that <var>n</var>(<var>x</var>)&thinsp;&gt;&thinsp;0 ; the largest value in 
+the bag is the largest value <var>x</var> such that <var>n</var>(<var>x</var>)&thinsp;&gt;&thinsp;0 . Hence, from Lemma 1 we conclude 
+<p class="noindent"><b>Lemma 2. </b>
+<p>The game terminates <b>or</b> the difference between largest and smallest value in the bag is 
+unbounded. 
+<p>With the derivation of Lemma 2, the auxiliary array <var>n</var> has done its work. Defining &ldquo;a gap of length <var>h</var>&rdquo; as a solution 
+of the equation 
+<p class="noindent"><var>f</var>&thinsp;(<var>x</var>)&thinsp;&gt;&thinsp;0 <b>and</b> <var>f</var>&thinsp;(<var>x</var>+<var>h</var>)&thinsp;&gt;&thinsp;0 <b>and</b> (<b>A</b>&thinsp;<var>j</var>&thinsp;: <var>x&thinsp;</var>&lt;&thinsp;<var>j</var>&thinsp;&lt;&thinsp;<var>x</var>+<var>h</var>&thinsp;: <var>f</var>&thinsp;(<var>j</var>)=0) 
+<p class="noindent">we conclude from Lemma 2, because the number of integers in the bag is constant, 
+<p class="noindent"><b>Lemma 3.</b>
+<p>The game terminates <b>or</b> the length of the largest gap is unbounded. 
+<p>Finally we undo some of our generalization: let the choice of the pair of positive numbers for each move be 
+restricted to pairs (<var>p</var>,&thinsp;<var>q</var>) such that <var>p</var>+<var>q</var>&thinsp;&le;&thinsp;<var>K</var> for some <var>K</var>. We then have 
+<p class="noindent"><b>Lemma 4. </b>
+<p>No gap exceeds the maximum of <var>K</var> and the length of the largest initial gap. 
+<p>Combination of the last two lemmata solves the Hungarian problem. 
+<p class="noindent"><b>Acknowledgement and concluding remark.   </b>
+<p>Thanks are due to the members of the Tuesday Afternoon Club with whom I discussed my first proof of Lemma 2. 
+That proof used mathematical induction on the number of integers in the bag. I am particularly grateful to 
+R.W. Bulterman for the persistence of his dislike of the three-case analysis in the induction step required;  
+He also objected to some handwaving with which I draw a correct but sweeping conclusion from &ldquo;A possible move 
+remains possible until done&rdquo;. 
+<p>I must admit that I would have liked a simpler termination proof than the one I found this evening. Perhaps 
+it doesn&rsquo;t exist: Hungary is a traditional source of non-trivial problems. 
+<p>Considering first the generalized problem was an improvement; relaxing constraints could be a general 
+technique for doing away with reductiones ad absurdum. 
+ 
+<p class="noindent"><table width=100%><tr><td valign=top width=50%>
+Plantaanstraat 5</td><td>2 December 1980
+</td></tr><tr><td valign=top>
+5671 AL NUENEN</td><td>prof. dr. Edsger W. Dijkstra
+</td></tr><tr><td valign=top>
+The Netherlands</td><td>Burroughs Research Fellow
+</td>  </tr>  </table>
+          
+<hr /> 
+   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />   
+    Last revision  
+    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">   
+      <!&mdash; #BeginDate format:IS1 &mdash;>
+      <!-- #BeginDate format:En2 -->10-Nov-2015<!-- #EndDate -->
+      <!&mdash; #EndDate &mdash;>  
+    </csobj> 
+  .</font></p>    
+  <p>&nbsp;</p>   
+</div></div></div></div>
+</body></html> </div>
+  </body>
+  </html>
