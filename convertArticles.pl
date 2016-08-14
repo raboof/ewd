@@ -24,7 +24,7 @@ sub getbody {
   if ($article =~ /<div id="content">(.*)/mis) {
     $article = $1;
   }
-  if ($article =~ /.*(<p class="noindent">)?<u>\Q$title\E\s*<\/u>\.?(<\/p>)?(.*)/mis) {
+  if ($article =~ /.*(<p class="noindent">)?<u>\Q$title\E\s*\.?<\/u>\.?(<\/p>)?(.*)/mis) {
     $article = $3;
   }
 
