@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>A prime is in at most 1 way the sum of 2 squares</title>
@@ -16,11 +17,11 @@
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">(0)</td>
-						<td>(<var>a</var> + <var>b</var>)² + (<var>c</var> &ndash; <var>d</var>)² = <var>n</var></td>
+						<td>(<var>a</var> + <var>b</var>) + (<var>c</var> &ndash; <var>d</var>) = <var>n</var></td>
 					</tr>
 					<tr>
 						<td class="spac"></td>
-						<td>(<var>a</var> &ndash; <var>b</var>)² + (<var>c</var> + <var>d</var>)² = <var>n</var></td>
+						<td>(<var>a</var> &ndash; <var>b</var>) + (<var>c</var> + <var>d</var>) = <var>n</var></td>
 					</tr>
 				</table>
 
@@ -62,40 +63,40 @@
 				<p>Now we observe<br />
 					&nbsp; &nbsp; &nbsp; &nbsp; <var>n</var><br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; {(0)}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; (<var>a</var> + <var>b</var>)² + (<var>c</var> &ndash; <var>d</var>)²<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; (<var>a</var> + <var>b</var>) + (<var>c</var> &ndash; <var>d</var>)<br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; {(1)}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; <var>a</var>² + <var>b</var>² + <var>c</var>² + <var>d</var>²<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; <var>a</var> + <var>b</var> + <var>c</var> + <var>d</var><br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; {(2)}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; <var>s</var>²<var>v</var>² + <var>r</var>²<var>t</var>² + <var>s</var>²<var>t</var>² + <var>r</var>²<var>v</var>²<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; <var>s</var><var>v</var> + <var>r</var><var>t</var> + <var>s</var><var>t</var> + <var>r</var><var>v</var><br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; {algebra}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; (<var>s</var>² + <var>r</var>²) &#x2219; (<var>t</var>² + <var>v</var>²)<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; (<var>s</var> + <var>r</var>) &#x2219; (<var>t</var> + <var>v</var>)<br />
 				</p>
 				<p class="noindent">and because the 4 variables are positive, the two factors are each at least 2, and hence <var>n</var> is not a prime number.</p>
 				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
 				<p>The above was written down in Abilene State Park. In contrast to the proof discussed in EWD1154, I designed this proof myself, but the title of this note does not mention &ldquo;derivation&rdquo; of the proof, since I did not &ldquo;derive&rdquo; it in any technical sense.</p>
-				<p>I have considered investigation of the situation <var>x</var>²+<var>y</var>²&nbsp;=&nbsp;<var>n</var> <span class="unicode">&#x2227;</span> <var>u</var>²+<var>v</var>²&nbsp;=&nbsp;<var>n</var> <span class="unicode">&#x2227;</span> prime.<var>n</var> with the aim of showing (<var>x</var>,<var>y</var>)&nbsp;=&nbsp;(<var>u</var>,<var>v</var>) <span class="unicode">&#x2228;</span> (<var>x</var>,<var>y</var>)&nbsp;=&nbsp;(<var>v</var>,<var>u</var>), but rejected that approach for the disjunction, and for the fact that I saw no way of using <var>n</var>&rsquo;s primality. So I did some shunting and set myself to show that <var>n</var> was composite by writing it as a product of 2 plurals. I knew my complex numbers, in particular, that the modulus of a product is the product of the moduli, and then discovered that there was no point in looking at (<var>x</var>+<var>yi</var>)·(<var>u</var>+<var>vi</var>). Hence</p>
+				<p>I have considered investigation of the situation <var>x</var>+<var>y</var>&nbsp;=&nbsp;<var>n</var> <span class="unicode">&#x2227;</span> <var>u</var>+<var>v</var>&nbsp;=&nbsp;<var>n</var> <span class="unicode">&#x2227;</span> prime.<var>n</var> with the aim of showing (<var>x</var>,<var>y</var>)&nbsp;=&nbsp;(<var>u</var>,<var>v</var>) <span class="unicode">&#x2228;</span> (<var>x</var>,<var>y</var>)&nbsp;=&nbsp;(<var>v</var>,<var>u</var>), but rejected that approach for the disjunction, and for the fact that I saw no way of using <var>n</var>&rsquo;s primality. So I did some shunting and set myself to show that <var>n</var> was composite by writing it as a product of 2 plurals. I knew my complex numbers, in particular, that the modulus of a product is the product of the moduli, and then discovered that there was no point in looking at (<var>x</var>+<var>yi</var>)(<var>u</var>+<var>vi</var>). Hence</p>
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">(3)</td>
-						<td>(<var>sv</var> &ndash; <var>rt</var>)² +
-								(<var>st</var> + <var>rv</var>)² =
-								(<var>s</var>² + <var>r</var>²) ·
-								(<var>t</var>² + <var>v</var>²)</td>
+						<td>(<var>sv</var> &ndash; <var>rt</var>) +
+								(<var>st</var> + <var>rv</var>) =
+								(<var>s</var> + <var>r</var>) 
+								(<var>t</var> + <var>v</var>)</td>
 					</tr>
 				</table>
 
-				<p class="noindent">&#x2014;the 2 expressions for the modulus of (<var>s</var> + <var>ri</var>) · (<var>t</var> + <var>vi</var>), which do equate a sum of squares to a product&#x2014; has to be used differently. The right-hand side being even in <var>r</var>, it also equals <span class="nowrap">(<var>sv</var> + <var>rt</var>)²</span> + <span class="nowrap">(<var>st</var> &ndash; <var>rv</var>)²,</span> and now we see the <var>a</var>, <var>b</var>, <var>c</var>, <var>d</var> entering the picture. The introduction of <var>a</var> ± <var>b</var> and <var>c</var> ±<var> d</var> circumvented the disjunctive complication of comparing unordered pairs.</p>
-				<p>I think I knew (3) outside the context of complex numbers as well; it is very common to separate in (<var>a </var>± <var>b</var>)² the squares from the cross product, as in</p>
+				<p class="noindent">&#x2014;the 2 expressions for the modulus of (<var>s</var> + <var>ri</var>)  (<var>t</var> + <var>vi</var>), which do equate a sum of squares to a product&#x2014; has to be used differently. The right-hand side being even in <var>r</var>, it also equals <span class="nowrap">(<var>sv</var> + <var>rt</var>)</span> + <span class="nowrap">(<var>st</var> &ndash; <var>rv</var>),</span> and now we see the <var>a</var>, <var>b</var>, <var>c</var>, <var>d</var> entering the picture. The introduction of <var>a</var>  <var>b</var> and <var>c</var> <var> d</var> circumvented the disjunctive complication of comparing unordered pairs.</p>
+				<p>I think I knew (3) outside the context of complex numbers as well; it is very common to separate in (<var>a </var> <var>b</var>) the squares from the cross product, as in</p>
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">&nbsp;</td>
-						<td>(<var>a</var> + <var>b</var>)² =
-								(<var>a</var> &ndash; <var>b</var>)² + 4<var>ab</var></td>
+						<td>(<var>a</var> + <var>b</var>) =
+								(<var>a</var> &ndash; <var>b</var>) + 4<var>ab</var></td>
 					</tr>
 					<tr>
 						<td class="spac">&nbsp;</td>
-						<td>(<var>a</var> + <var>b</var>)² +
-								(<var>a</var> &ndash; <var>b</var>)² = 2(<var>a</var>² + <var>b</var>²) &nbsp; &nbsp; &nbsp; .</td>
+						<td>(<var>a</var> + <var>b</var>) +
+								(<var>a</var> &ndash; <var>b</var>) = 2(<var>a</var> + <var>b</var>) &nbsp; &nbsp; &nbsp; .</td>
 					</tr>
 				</table>
 

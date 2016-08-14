@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Finding the maximum strong components in a directed graph</title>
@@ -59,7 +60,7 @@ which no nodes can be added.
 for a set of nodes. Our final answer is a partitioning, that is a set of
 sets of nodes with empty intersections: for that latter object we shall
 use the acronym &ldquo;ssn&rdquo;. Similarly, when the need arises, we shall use the
-acronym &ldquo;ssa&rdquo;’for a set of sets of arcs with empty intersection. (Note
+acronym &ldquo;ssa&rdquo;for a set of sets of arcs with empty intersection. (Note
 added while typing out the manuscript: this need has not arisen.)
 <p>Let &ldquo;sn&rdquo; be the given set of nodes, let &ldquo;sa&rdquo; be the given set of
 arcs. Let the final value of &ldquo;ssn&rdquo; be the desired answer. We then write
@@ -194,7 +195,7 @@ of csn.
       If such an arc f points to one of the nodes in ssn, it can be ignored
 (on account of Theorem 1).
       If such an arc f points to a node in the terminal element of csn,
-it can be ignored as well —we knew already that the nodes in this terminal
+it can be ignored as well we knew already that the nodes in this terminal
 element formed a strong component.
       If such an arc points to (a node in) a preceding element of csn,
 the end elements of csn are combined.
@@ -210,7 +211,7 @@ reduced graph that we get by removing all arcs leading back to a node of
 ssn after it has been established that ssn already contains maximal strong
 components for the total graph.)
 <p>The structure of the repeatable statement -only starting when the
-chain csn = empty and ssn1 &ne; empty— can be the following: 
+chain csn = empty and ssn1 &ne; empty can be the following: 
 <table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 7>
       transfer an arbitrary element of ssn1 and append it to an                            </td> </tr> <tr> <td></td> <td colspan = 7>
       initially empty chain csn;                                                           </td> </tr> <tr> <td></td> <td colspan = 7>
@@ -298,7 +299,7 @@ t[k], with k ranging
 such that all arcs originating in node i and belonging to sa1 will have
 an ordinal number k satisfying
 <table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-      b[i—1] < k &le; c[i] </td> </tr>
+      b[i1] < k &le; c[i] </td> </tr>
 </table>
 and those in sa2 a k satisfying
 <table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
@@ -390,7 +391,7 @@ in this exercise does not pretend to be an infallible cure against fallibility
 We have tried two things: we have tried to develop a program in a way that
 leads to a higher confidence level than the one that can he reached when
 the designer &ldquo;rushes into coding&rdquo; and we have tried to make the reader
-share our conviction —strengthened by the above experience!— that the
+share our conviction strengthened by the above experience! that the
 simultaneous development of the correctness proof gives indeed a strong
 heuristic guidance in the process of shaping the program.
 <p>As the reader will have noticed we have not spent a single word of

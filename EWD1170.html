@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Equilateral triangles and rectangular grids</title>
@@ -17,35 +18,35 @@
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 1ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">(0)</td>
-						<td><var>a</var>² + <var>b</var>² = <var>k</var></td>
+						<td><var>a</var> + <var>b</var> = <var>k</var></td>
 					</tr>
 					<tr>
 						<td class="spac">(1)</td>
-						<td><var>c</var>² + <var>d</var>² = <var>k</var></td>
+						<td><var>c</var> + <var>d</var> = <var>k</var></td>
 					</tr>
 					<tr>
 						<td class="spac">(2)</td>
-						<td>(<var>a</var>² &#x2212; <var>c</var>)² + (<var>b</var>² &#x2212; <var>d</var>)² = <var>k</var> &nbsp; &nbsp; &nbsp; .</td>
+						<td>(<var>a</var> &#x2212; <var>c</var>) + (<var>b</var> &#x2212; <var>d</var>) = <var>k</var> &nbsp; &nbsp; &nbsp; .</td>
 					</tr>
 				</table>
 
 				<p>Using (0) and (1), (2) can be simplified to</p>
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 1ex; margin-bottom: 1em;">
 					<tr>
-						<td class="spac">(2´)</td>
-						<td>2·(<var>a</var>·<var>c</var> + <var>b</var>·<var>d</var>) = <var>k</var> &nbsp; &nbsp; &nbsp; .</td>
+						<td class="spac">(2)</td>
+						<td>2(<var>a</var><var>c</var> + <var>b</var><var>d</var>) = <var>k</var> &nbsp; &nbsp; &nbsp; .</td>
 					</tr>
 				</table>
 
-				<p>Seeing that <var>k</var> is even, we turn our attention in view of (0) and (1) to squares and factors of 2. And here we have to make a little jump. It does not suffice to observe (the correct) even.<var>x</var>² &#x2261; even.<var>x</var>, which for a sum of 2 squares only implies even.(<var>x</var>²+<var>y</var>²) &#x2261; even.<var>x</var> &#x2261; even.<var>y</var>. We have to reduce squares modulo 4 and use</p>
+				<p>Seeing that <var>k</var> is even, we turn our attention in view of (0) and (1) to squares and factors of 2. And here we have to make a little jump. It does not suffice to observe (the correct) even.<var>x</var> &#x2261; even.<var>x</var>, which for a sum of 2 squares only implies even.(<var>x</var>+<var>y</var>) &#x2261; even.<var>x</var> &#x2261; even.<var>y</var>. We have to reduce squares modulo 4 and use</p>
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 1ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">(3a)</td>
-						<td><var>x</var>² <b>mod</b> 4 = 0 &nbsp; &#x2261; &nbsp; even.<var>x</var></td>
+						<td><var>x</var> <b>mod</b> 4 = 0 &nbsp; &#x2261; &nbsp; even.<var>x</var></td>
 					</tr>
 					<tr>
 						<td class="spac">(3b)</td>
-						<td><var>x</var>² <b>mod</b> 4 = 1 &nbsp; &#x2261; &nbsp; odd.<var>x</var></td>
+						<td><var>x</var> <b>mod</b> 4 = 1 &nbsp; &#x2261; &nbsp; odd.<var>x</var></td>
 					</tr>
 				</table>
 
@@ -53,31 +54,31 @@
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 1ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">(4a)</td>
-						<td>(<var>x</var>² + <var>y</var>²) <b>mod</b> 4 = 0 &nbsp; &#x2261; &nbsp; even.<var>x</var> <span class="unicode">&#x2227;</span> even.<var>y</var></td>
+						<td>(<var>x</var> + <var>y</var>) <b>mod</b> 4 = 0 &nbsp; &#x2261; &nbsp; even.<var>x</var> <span class="unicode">&#x2227;</span> even.<var>y</var></td>
 					</tr>
 					<tr>
 						<td class="spac">(4b)</td>
-						<td>(<var>x</var>² + <var>y</var>²) <b>mod</b> 4 = 1 &nbsp; &#x2261; &nbsp; even.<var>x</var> <span class="unicode">&#x2262;</span> even.<var>y</var></td>
+						<td>(<var>x</var> + <var>y</var>) <b>mod</b> 4 = 1 &nbsp; &#x2261; &nbsp; even.<var>x</var> <span class="unicode">&#x2262;</span> even.<var>y</var></td>
 					</tr>
 					<tr>
 						<td class="spac">(4c)</td>
-						<td>(<var>x</var>² + <var>y</var>²) <b>mod</b> 4 = 2 &nbsp; &#x2261; &nbsp; odd.<var>x</var> <span class="unicode">&#x2227;</span> odd.<var>y</var> &nbsp; &nbsp; &nbsp; .</td>
+						<td>(<var>x</var> + <var>y</var>) <b>mod</b> 4 = 2 &nbsp; &#x2261; &nbsp; odd.<var>x</var> <span class="unicode">&#x2227;</span> odd.<var>y</var> &nbsp; &nbsp; &nbsp; .</td>
 					</tr>
 				</table>
 
-				<p>And now we observe of an integer solution (<var>a</var>,<var>b</var>,<var>c</var>,<var>d</var>,<var>k</var>) of (0) <span class="unicode">&#x2227;</span> (1) <span class="unicode">&#x2227;</span> (2´):<br />
+				<p>And now we observe of an integer solution (<var>a</var>,<var>b</var>,<var>c</var>,<var>d</var>,<var>k</var>) of (0) <span class="unicode">&#x2227;</span> (1) <span class="unicode">&#x2227;</span> (2):<br />
 					<br />
 					&nbsp; &nbsp; &nbsp; &nbsp; <var>k</var> <b>mod</b> 4 &#x2260; 0<br />
-					= &nbsp; &nbsp; &nbsp; &nbsp; {(2´), in particular even.<var>k</var>}<br />
+					= &nbsp; &nbsp; &nbsp; &nbsp; {(2), in particular even.<var>k</var>}<br />
 					&nbsp; &nbsp; &nbsp; &nbsp; <var>k</var> <b>mod</b> 4 = 2<br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; {(0) and (1)}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; (<var>a</var>²+<var>b</var>²) <b>mod</b> 4 = 2 <span class="unicode">&#x2227;</span> 
-							(<var>c</var>²+<var>d</var>²) <b>mod</b> 4 = 2<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; (<var>a</var>+<var>b</var>) <b>mod</b> 4 = 2 <span class="unicode">&#x2227;</span> 
+							(<var>c</var>+<var>d</var>) <b>mod</b> 4 = 2<br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; {(4c) twice}<br />
 					&nbsp; &nbsp; &nbsp; &nbsp; odd.<var>a</var> <span class="unicode">&#x2227;</span> odd.<var>b</var> <span class="unicode">&#x2227;</span> odd.<var>c</var> <span class="unicode">&#x2227;</span> odd.<var>d</var><br />
 					<span class="unicode">&#x21D2;</span> &nbsp; &nbsp; &nbsp; &nbsp; {arithmetic}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; even.(<var>a</var>·<var>c</var> + <var>b</var>·<var>d</var>)<br />
-					= &nbsp; &nbsp; &nbsp; &nbsp; {(2´)}<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; even.(<var>a</var><var>c</var> + <var>b</var><var>d</var>)<br />
+					= &nbsp; &nbsp; &nbsp; &nbsp; {(2)}<br />
 					&nbsp; &nbsp; &nbsp; &nbsp; <var>k</var> <b>mod</b> 4 = 0 &nbsp; &nbsp; &nbsp; .
 				</p>
 

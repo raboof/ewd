@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>The arithmetic and geometric means once more</title>
@@ -14,47 +15,47 @@
 				<p>In the following,&nbsp; <var>x, y, c</var> &nbsp;are positive.</p>
 				<p>In <a href="../EWD11xx/EWD1140.html">EWD1140</a>, I used<br />
 					<br />
-					(0) &nbsp; &nbsp; &nbsp; &nbsp; (<var>x+y</var>)² = (<var>x&#x2212;y</var>)² + 4&thinsp;·&thinsp;<var>x</var>&thinsp;·&thinsp;<var>y</var><br />
+					(0) &nbsp; &nbsp; &nbsp; &nbsp; (<var>x+y</var>) = (<var>x&#x2212;y</var>) + 4&thinsp;&thinsp;<var>x</var>&thinsp;&thinsp;<var>y</var><br />
 					<br />
 					to argue that<br />
 					<br />
 					(1) &nbsp; &nbsp; &nbsp; &nbsp; <var>x,y</var> = <var>c, x+y&#x2212;c</var> &nbsp; &nbsp; &nbsp; ,<br />
 					<br />
-					which does not change <var>x+y</var>, increases <var>x&thinsp;</var>·<var>&thinsp;y</var> provided <var>c</var> lies between the initial values of <var>x</var> and <var>y</var>.
+					which does not change <var>x+y</var>, increases <var>x&thinsp;</var><var>&thinsp;y</var> provided <var>c</var> lies between the initial values of <var>x</var> and <var>y</var>.
 				</p>
 				<p>In <a href="../EWD11xx/EWD1171.html">EWD1171</a>, I used (0) to argue that<br />
 					<br />
-					(2) &nbsp; &nbsp; &nbsp; &nbsp; <var>x,y</var> := <var>c, x</var>&thinsp;·<var>&thinsp;y/c</var> &nbsp; &nbsp; &nbsp; ,<br />
+					(2) &nbsp; &nbsp; &nbsp; &nbsp; <var>x,y</var> := <var>c, x</var>&thinsp;<var>&thinsp;y/c</var> &nbsp; &nbsp; &nbsp; ,<br />
 					<br />
-					which does not change <var>x&thinsp;</var>·&thinsp;<var>y</var>, decreases <var>x+y</var> provided <var>c</var> lies between the initial values of <var>x</var> and <var>y</var>.
+					which does not change <var>x&thinsp;</var>&thinsp;<var>y</var>, decreases <var>x+y</var> provided <var>c</var> lies between the initial values of <var>x</var> and <var>y</var>.
 				</p>
-				<p>In both cases the use of (0) came a little bit as a rabbit and the link between the condition on <var>c</var> and the decrease of the distance between <var>x</var> and <var>y</var> remained informal. Last Thursday, when I asked for an expression that contained both <var>x+y</var> and <var>x&thinsp;</var>·&thinsp;<var>y</var>, my [student] An Thai Nguyen suggested that we look at (<var>c&#x2212;x</var>)·(<var>c&#x2212;y</var>), and this expression indeed plays a central role in the derivations from which all rabbits have been removed.</p>
+				<p>In both cases the use of (0) came a little bit as a rabbit and the link between the condition on <var>c</var> and the decrease of the distance between <var>x</var> and <var>y</var> remained informal. Last Thursday, when I asked for an expression that contained both <var>x+y</var> and <var>x&thinsp;</var>&thinsp;<var>y</var>, my [student] An Thai Nguyen suggested that we look at (<var>c&#x2212;x</var>)(<var>c&#x2212;y</var>), and this expression indeed plays a central role in the derivations from which all rabbits have been removed.</p>
 				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
 				<p>We want to change <var>x,y</var> such that (i) their sum is not changed, and (ii) their product is increased. Any assignment satisfying (i) can be written like (1); in order to satisfy (ii) we now observe for any <var>c</var></p>
 				<p class="noindent" style="margin-top: 0.5em;">
-					&nbsp; &nbsp; &nbsp; &nbsp; &ldquo;(1) increases <var>x</var>&thinsp;·<var>&thinsp;y</var>&rdquo;<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; &ldquo;(1) increases <var>x</var>&thinsp;<var>&thinsp;y</var>&rdquo;<br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; {program semantics, (1)}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; <var>x&thinsp;</var>·&thinsp;<var>y</var> &lt; <var>c</var>&thinsp;·(<var>x+y&#x2212;c</var>)<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; <var>x&thinsp;</var>&thinsp;<var>y</var> &lt; <var>c</var>&thinsp;(<var>x+y&#x2212;c</var>)<br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; {algebra}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; (<var>c&#x2212;x</var>)·(<var>c&#x2212;y</var>) &lt; 0 &nbsp; &nbsp; &nbsp;.
+					&nbsp; &nbsp; &nbsp; &nbsp; (<var>c&#x2212;x</var>)(<var>c&#x2212;y</var>) &lt; 0 &nbsp; &nbsp; &nbsp;.
 				</p>
 				<p>We now consider the change of <var>x,y</var> such that (iii) their product is not changed, and (iv) their sum is decreased. Any assignment satisfying (iii) can be written like (2); in order to satisfy (iv) as well, we observe for any positive <var>c</var></p>
 				<p class="noindent" style="margin-top: 0.5em;">
 					&nbsp; &nbsp; &nbsp; &nbsp; &ldquo;(2) increases <var>x+y</var>&rdquo;<br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; {program semantics, (2)}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; <var>c + x&thinsp;</var>·&thinsp;<var>y/c</var> &lt; <var>x+y</var><br />
+					&nbsp; &nbsp; &nbsp; &nbsp; <var>c + x&thinsp;</var>&thinsp;<var>y/c</var> &lt; <var>x+y</var><br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; { <var>c</var> &gt; 0 }<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; <var>c² + x</var>&thinsp;·&thinsp;<var>y</var> &lt; <var>c&thinsp;</var>·(<var>x+y</var>)<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; <var>c + x</var>&thinsp;&thinsp;<var>y</var> &lt; <var>c&thinsp;</var>(<var>x+y</var>)<br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; { algebra }<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; (<var>c&#x2212;x</var>)·(<var>c&#x2212;y</var>) &lt; 0 &nbsp; &nbsp; &nbsp;.
+					&nbsp; &nbsp; &nbsp; &nbsp; (<var>c&#x2212;x</var>)(<var>c&#x2212;y</var>) &lt; 0 &nbsp; &nbsp; &nbsp;.
 				</p>
 				<p>So, in both cases, the completely forced calculations lead in exactly the same form to the conclusion that <var>c</var> should lie between the initial values of <var>x</var> and <var>y</var>. The secret is that Nguyen&rsquo;s expression can be rewritten as<br />
 					<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; <var>x&thinsp;</var>·<var>&thinsp;y &#x2212; c</var>&thinsp;·(<var>x+y&#x2212;c</var>)<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; <var>x&thinsp;</var><var>&thinsp;y &#x2212; c</var>&thinsp;(<var>x+y&#x2212;c</var>)<br />
 					<br />
 					and as<br />
 					<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; (<var>c² + x&thinsp;</var>·&thinsp;<var>y</var>) &#x2212; (<var>c&thinsp;</var>·<var>&thinsp;x + c&thinsp;</var>·<var>&thinsp;y</var>) &nbsp; &nbsp; &nbsp; ,<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; (<var>c + x&thinsp;</var>&thinsp;<var>y</var>) &#x2212; (<var>c&thinsp;</var><var>&thinsp;x + c&thinsp;</var><var>&thinsp;y</var>) &nbsp; &nbsp; &nbsp; ,<br />
 					<br />
 					i.e. the difference of two products with equal sums of their factors, and the difference of two sums with equal products of their addenda. I was surprised.
 				</p>

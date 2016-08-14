@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>E.W. Dijkjstra Archive: A Constructive Approach to the Problem of Program Correctness (EWD209a)</title>
@@ -140,7 +141,7 @@ the synchronization between the two processes explicitly. (The synchronizing
 primitives I intend to use for this solution will be described in due time.)
 </p>
 <p>
-<u>Note</u>. For brevity I omit the proof —although for this simple example not
+<u>Note</u>. For brevity I omit the proof although for this simple example not
 too difficult&mdash; that the above problem is well-posed in the sense that a
 synchronization satisfying the above requirement does not contain the danger of
 the so-called "deadly embrace", i.e. one or more processes getting irrevocably
@@ -316,7 +317,7 @@ producer: <u>begin</u> local initiation of the producer;
           <u>end</u>;
 consumer: <u>begin</u> local initiation of the consumer;
             C0: hungry:= <u>true</u>;
-            C1: transmit portion from buffer including "n:= n — 1" and
+            C1: transmit portion from buffer including "n:= n  1" and
                                  "hungry:= <u>false</u>";
             C2: consume new portion locally;
                 <u>goto</u> C0
@@ -563,7 +564,7 @@ convinced me of the practicability of the constructive approach when faced
 with a large problem.                  
 </p>
 <p>
-Acknowledgements are also due &mdash;although they may be unaware of the fact— to   
+Acknowledgements are also due &mdash;although they may be unaware of the fact to   
 Peter Naur and my colleague Gerhard W.Veltkamp. To the former because he convinced
 that something should and could be done regarding program correctness, to the
 latter for his inspiring faith in my efforts, his patience when listening to me

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>A tutorial on the split binary semaphore</title>
@@ -142,12 +143,12 @@ to the reader.
 ar = 0, aw = 0, mutex = 1</td><td align=right>(3)
 </td>  </tr>  </table>
 <table> <tr> <td colspan = 3>
-reader: <b>do</b> true &rarr; ncs;                                                       </td> </tr> <tr> <td>§</td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+reader: <b>do</b> true &rarr; ncs;                                                       </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
                   P(mutex); <b>if</b> aw = 0 &rarr; ar:= ar + 1 <b>fi</b>; V(mutex);     </td> </tr> <tr> <td></td> <td></td> <td>
                   READ;                                                           </td> </tr> <tr> <td></td> <td></td> <td>
                   P(mutex); ar:= ar - 1; V(mutex)                                 </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
         <b>od</b>                                                                        </td> </tr> <tr> <td colspan = 3>
-writer: <b>do</b> true &rarr; ncs;                                                       </td> </tr> <tr> <td>§§</td> <td></td> <td>
+writer: <b>do</b> true &rarr; ncs;                                                       </td> </tr> <tr> <td></td> <td></td> <td>
                   P(mutex); <b>if</b> aw = 0 and ar = 0 &rarr; aw:= aw + 1 <b>fi</b>; V(mutex); </td> </tr> <tr> <td></td> <td></td> <td>
                   WRITE;                                                          </td> </tr> <tr> <td></td> <td></td> <td>
                   P(mutex); aw:= aw - 1; V(mutex)                                 </td> </tr> <tr> <td></td> <td colspan = 2>
@@ -155,9 +156,9 @@ writer: <b>do</b> true &rarr; ncs;                                              
 </table>
 Multiprogram (3) has been designed so as to leave P0 <b>and</b> P1 
 invariant, and that is fine. It has, however, a major drawback: both alternative
-constructs, in the lines marked § and §§ respectively, may lead to 
+constructs, in the lines marked  and  respectively, may lead to 
 abortion! The so-called split binary semaphore provides us with a technique for
-preventing the selection of the critical sections marked § and §§ 
+preventing the selection of the critical sections marked  and  
 respectively under those circumstances in which they would lead to abortion.
 <p>We replace the single binary semaphore mutex by three, also binary,
 semaphores &mdash; m , r , and w say&mdash; , related to the original mutex by
@@ -167,8 +168,8 @@ and replace in multiprogram (3) each P(mutex) by P(m), P(r), or P(w)
 &mdash;the three ways of decreasing mutex by 1&mdash; and each V(mutex) by V(m),
 V(r), or V(w) &mdash;the three ways of increasing mutex by 1&mdash; . (Because
 m, r, and w are semaphores, we thus guarantee 0 &le; mutex &le; 1 .) More 
-precisely: we replace the P(mutex) marked by § by P(r) , replace the
-P(mutex) marked by §§ by P(w) , and the P(mutex) that opens a critical
+precisely: we replace the P(mutex) marked by  by P(r) , replace the
+P(mutex) marked by  by P(w) , and the P(mutex) that opens a critical
 section that cannot lead to abortion by P(m) .
 <p>We can now avoid selection of an aborting critical section by guarding
 V(r) by aw = 0 and by guarding V(w) by aw = 0 <b>and</b> ar = 0 , because

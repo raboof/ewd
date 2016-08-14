@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>On making solutions more and more fine-grained</title>
@@ -23,9 +24,9 @@ The following manuscript                                                        
      EWD 622: On making solutions more and more fine-grained (In gratitude dedicated  </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
            to C.A.R.Hoare, D.E.Knuth, and J.F.Traub.)                                 </td> </tr> <tr> <td colspan = 3>
 is held in copyright by Springer-Verlag New York.                                     </td> </tr> <tr> <td colspan = 3>
-The manuscript was published as pages 292–307 of                                      </td> </tr> <tr> <td></td> <td colspan = 2>
+The manuscript was published as pages 292307 of                                      </td> </tr> <tr> <td></td> <td colspan = 2>
      Edsger W. Dijkstra, Selected Writings on Computing: A Personal Perspective,      </td> </tr> <tr> <td></td> <td colspan = 2>
-     Springer-Verlag, 1982. ISBN 0–387–90652–5.                                       </td> </tr> <tr> <td colspan = 3>
+     Springer-Verlag, 1982. ISBN 0387906525.                                       </td> </tr> <tr> <td colspan = 3>
 <b>Reproduced with permission from Springer-Verlag New York.    </b>                  </td> </tr> <tr> <td colspan = 3>
 <b>Any further reproduction is strictly prohibited.        </b>                       </td> </tr>
 </table>
@@ -225,7 +226,7 @@ PR3 in a straightforward manner:
             <b>if</b> vi[i] = qi &rarr; &lt; e[i]:= d[i] &gt; </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 3>
              &#x25af; vi[i] &ne; qi &rarr; &lt; y[i]:= qi;    </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
                               (<u>A</u> j: d[j]:= false);     </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-                  ·           (<u>A</u> j: e[j]:= false) &gt; </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 4>
+                             (<u>A</u> j: e[j]:= false) &gt; </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 4>
             <b>fi</b>                                         </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td colspan = 5>
       <b>od</b>                                               </td> </tr>
 </table>
@@ -352,7 +353,7 @@ constantly false .
                   L0: &lt; vi:= y &gt; {vi[i] = y[i]};                               </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 5>
                       qi:= fi(vi) {qi = fi(vi)};                                     </td> </tr> <tr> <td></td> <td></td> <td colspan = 6>
                   Ll: <b>if</b> vi[i] = qi &rarr; &lt; g[i]:= (y = vi) &gt;          </td> </tr> <tr> <td></td> <td></td> <td colspan = 6>
-                  L2: &nbsp; &#x25af; vi[i] &ne; qi &rarr; &lt; y[i]:= qi;       ·   </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
+                  L2: &nbsp; &#x25af; vi[i] &ne; qi &rarr; &lt; y[i]:= qi;          </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
                                           <b>if</b> k &lt; N &rarr; skip             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
                                            &#x25af; k = N &rarr; k:= i               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
                                           <b>fi</b>  &gt;  ;                         </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>

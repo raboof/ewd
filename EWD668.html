@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>On the correctness of a design by Alain J.Martin</title>
@@ -109,7 +110,7 @@ at most once:
        bl, b2, pri := false, false, (m is the exceptional one);                 </td> </tr> <tr> <td></td> <td></td> <td colspan = 5>
        <b>do</b> &lt; M.p? &rarr; bl:= true &gt; ;                              </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
                    <b>if</b> pri &rarr; &lt; bl, b2 := false, true &gt;         </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 2>
-                    &#x25af; <b>non</b> pri &rarr;·&lt; R.p!; b1:= false &gt; ; </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                    &#x25af; <b>non</b> pri &rarr;&lt; R.p!; b1:= false &gt; ; </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
                                &lt; R.c?; b2:= true; pri:= true &gt;            </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
                    <b>fi;</b>                                                   </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
                    &lt; M.c!; b2:= false &gt; ; M.v?                            </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 4>

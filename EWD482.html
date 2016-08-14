@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Exercises in making programs robust</title>
@@ -243,7 +244,7 @@ following one:
             c <b>vir</b> int := 2 *(h.high <b>mod</b> 16);                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
             <b>do</b> p(c) &rarr;                                                                        </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
                  <b>do</b> odd(c) &rarr; c, h:hipop; p:(c)= false <b>od</b>;                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
-                  c:·= c + 1                                                                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
+                  c:= c + 1                                                                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
             <b>od</b>;                                                                                   </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
             h:hiext(c); p:(c)= true                                                                      </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 6>
          <b>end</b>                                                                                      </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 7>

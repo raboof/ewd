@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>The arithmetic mean and the geometric mean</title>
@@ -12,7 +13,7 @@
 <h1>The arithmetic mean and the geometric mean</h1>
 <div class='body'>
 				<p>From the well-known algebraic identity</p>
-				<p class="noindent" align="center">(<var>x</var>+<var>y</var>)² &#x2261; (<var>x</var>&ndash;<var>y</var>)² + 4·<var>x</var>·<var>y</var></p>
+				<p class="noindent" align="center">(<var>x</var>+<var>y</var>) &#x2261; (<var>x</var>&ndash;<var>y</var>) + 4<var>x</var><var>y</var></p>
 				<p class="noindent">we conclude that, when we bring two numbers closer together without changing their sum, we increase their product. Let us call such a transformation &ldquo;a contraction&rdquo; of the two numbers. We furthermore observe:<br>
 					(<i>i</i>) &nbsp; when we start with two positive numbers, they remain positive when we contract them.<br>
 					(<i>ii</i>) &nbsp;let <var>c</var> lie between the two numbers we start with; then it is possible to contract this pair of numbers so that <var>c</var> occurs in &#x2014;or, equivalently, &ldquo;is an element of&rdquo;&#x2014; the resulting pair.
@@ -39,20 +40,20 @@
 					&#x2022; &nbsp; because of the increase of the product of a contracted pair, and because all other numbers in the bag are positive, the step increases the product of the <var>n</var> numbers in the bag.<br>
 					&#x2022; &nbsp; the step decreases in the bag the number of numbers that differ from <var>c</var>  by at least 1, hence the above algorithm, terminates.
 				</p>
-				<p>So, for any initial bag <var>B</var> containing <var>n</var> positive numbers, we can construct a final bag <var>B</var>´ of <var>n</var> positive numbers such that<br>
-					&#x2022; &nbsp; sum.<var>B</var> = sum.<var>B</var>´<br>
-					&#x2022; &nbsp; product.<var>B</var> &#x2264; product.<var>B</var>´<br>
-					&#x2022; &nbsp; all elements in <var>B</var>´ are equal to each other
+				<p>So, for any initial bag <var>B</var> containing <var>n</var> positive numbers, we can construct a final bag <var>B</var> of <var>n</var> positive numbers such that<br>
+					&#x2022; &nbsp; sum.<var>B</var> = sum.<var>B</var><br>
+					&#x2022; &nbsp; product.<var>B</var> &#x2264; product.<var>B</var><br>
+					&#x2022; &nbsp; all elements in <var>B</var> are equal to each other
 				</p>
-				<p>The last implies that the &ldquo;arithmetic mean&rdquo; of <var>B</var>´ &#x2014;i.e. (sum.<var>B</var>´)/<var>n</var>&#x2014; equals the &ldquo;geometric mean&rdquo; of <var>B</var>´ &#x2014;i.e. <span class="nowrap"><table class="supsub" style="bottom: -0.1em;"><tr><td><var>n</var><br>&#x221A;</table><span style="border-top: 1px solid;">&nbsp;product.<var>B</var>´&nbsp;</span>&nbsp;&#x2014;.</span></p>
-				<p>And now we observe &#x2014;<var>B</var> and <var>B</var>´ containing the same number of elements&#x2014;<br>
+				<p>The last implies that the &ldquo;arithmetic mean&rdquo; of <var>B</var> &#x2014;i.e. (sum.<var>B</var>)/<var>n</var>&#x2014; equals the &ldquo;geometric mean&rdquo; of <var>B</var> &#x2014;i.e. <span class="nowrap"><table class="supsub" style="bottom: -0.1em;"><tr><td><var>n</var><br>&#x221A;</table><span style="border-top: 1px solid;">&nbsp;product.<var>B</var>&nbsp;</span>&nbsp;&#x2014;.</span></p>
+				<p>And now we observe &#x2014;<var>B</var> and <var>B</var> containing the same number of elements&#x2014;<br>
 					<br>
 					&nbsp; &nbsp; &nbsp; &nbsp; the geometric mean of <var>B</var><br>
-					&#x2264; &nbsp; &nbsp; &nbsp; &nbsp; {product.<var>B</var> &#x2264; product.<var>B</var>´}<br>
-					&nbsp; &nbsp; &nbsp; &nbsp; the geometric mean of <var>B</var>´<br>
-					=  &nbsp; &nbsp; &nbsp; &nbsp; {all elements in <var>B</var>´ are equal to each other}<br>
-					&nbsp; &nbsp; &nbsp; &nbsp; the arithmetic mean of <var>B</var>´<br>
-					=  &nbsp; &nbsp; &nbsp; &nbsp; {sum.<var>B</var> = sum.<var>B</var>´}<br>
+					&#x2264; &nbsp; &nbsp; &nbsp; &nbsp; {product.<var>B</var> &#x2264; product.<var>B</var>}<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; the geometric mean of <var>B</var><br>
+					=  &nbsp; &nbsp; &nbsp; &nbsp; {all elements in <var>B</var> are equal to each other}<br>
+					&nbsp; &nbsp; &nbsp; &nbsp; the arithmetic mean of <var>B</var><br>
+					=  &nbsp; &nbsp; &nbsp; &nbsp; {sum.<var>B</var> = sum.<var>B</var>}<br>
 					&nbsp; &nbsp; &nbsp; &nbsp; the arithmetic mean of <var>B</var> &nbsp; .
 				</p>
 				<p>The above proof was designed during the last session of the ETAC, and it is recorded because we thought it much nicer than Cauchy&rsquo;s proof that J.Misra subsequentially showed us.</p>

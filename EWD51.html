@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Multiprogrammering en de X8 (*EWD 51, EWD 54, EWD 57)</title>
@@ -173,7 +174,7 @@ a neologism coming from</i></tt></td>
                 <p><tt><font size="+1"><b><a name="Par0"></a>0. Inleiding.</b></font></tt></p>
                 <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp;
 Om te beginnen beschouwen wij een aantal &quot;zwak gekoppelde&quot;, onderling
-asynchrone, in zich zelf sequentiële processen. Zonder schade te doen
+asynchrone, in zich zelf sequentile processen. Zonder schade te doen
 aan de algemeenheid kunnen we ons tot cyclische processen
 beperken.&nbsp;</font></tt></p>
                 <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -190,14 +191,14 @@ opzichte van elkaar uit de pas geraken.&nbsp;</font></tt></p>
 In het eerste gedeelte wordt in de opzet volledig in het midden
 gelaten, door welke apparatuur deze onderscheiden processen
 gerealiseerd worden. De uiteindelijke bedoeling is, om in aansluiting
-met de gegeven - en ik moet er aan toevoegen: concipiëerbare -
+met de gegeven - en ik moet er aan toevoegen: concipierbare -
 werkelijkheid sommige van deze cyclische processen door een specifiek
 stuk hardware te laten uitvoeren, terwijl de overige processen door de
 centrale computer verzorgd zullen worden. In het eerste gedeelte is dit
 onderscheid niet van belang; wel belangrijk is, dat een &quot;cyclisch
 proces&quot; een geprogrammeerde conceptie kan zijn en dat het aantal
 cyclische processen, dat op elk gegeven moment in het spel betrokken
-is, in de tijd kan variëren.&nbsp;</font></tt></p>
+is, in de tijd kan variren.&nbsp;</font></tt></p>
                 <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp; In <a href="#Par1">1.</a> zal ik in de plaats van &quot;cyclisch proces&quot; spreken van &quot;machine&quot;, ter onderstreping van het feit, dat we ons deze processen als grotendeels (of volslagen) autonoom moeten voorstellen. In het licht van het vorige moeten we er ons dus niet over verbazen, als er een paar machines bijgeschapen worden of er een paar machines geannihileerd worden. Later, als we dichter bij de realisatie met behulp van beperkte hardware komen, dan zullen we onderscheid maken tussen &quot;concrete machines&quot; - dwz. cyclische processen, waaraan een specifiek stuk hardware beantwoordt zoals bv. een communicatieapparaat - en &quot;abstracte machines&quot;, die tezamen door de centrale computer gesimuleerd worden. Voor deze simulator-generaal zal ik het woord computer reserveren. Deze simulatie roept, met het oog op efficienter gebruik van de totale installatie, strategieproblemen op, waarvan ik me op dit ogenblik met nadruk distanci&euml;er. Voordat ik nl. het strategieprobleem &uuml;berhaupt wil bekijken, dwz. voordat ik er ook maar over denken wil, hoe de computer zijn vrijheid zou kunnen uitbuiten, wil ik eerst zijn &quot;onvrijheid&quot; geformaliseerd zien, wil ik een passend formalisme hebben, waarin de logisch noodzakelijke &quot;interlocks&quot; tussen de diverse machines geformuleerd kunnen worden.&nbsp;</font></tt></p>
                 <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp; In <a href="#Par2">2.</a> zullen we een begin maken met de analyse van de simulatie door &eacute;&eacute;n computer van de verzamelde abstracte machines. Hier zien wij overigens heel duidelijk, dat over de onderlinge snelheidsverhoudingen der verschillende machines geen veronderstellingen gemaakt mogen worden: als een van de abstracte machines werkt, staan de andere stil (werken de andere oneindig langzaam).&nbsp;</font></tt></p>
                 <p>&nbsp;</p>
@@ -215,7 +216,7 @@ De operatie V kan betrekking hebben op een willekeurig aantal
 verschillende seinpalen, dus bv. &quot;V (S1, S2, S3)&quot;. Als deze operatie in
 een van de machines voorkomt - in ons voorbeeld moeten dan S1, S2, S3
 voor deze machine toegankelijke seinpalen zijn - dan is het effect dat
-alle opgegeven seinpalen in <u>één ondeelbare handeling</u> met 1 verhoogd worden.&nbsp; </font></tt></p>
+alle opgegeven seinpalen in <u>n ondeelbare handeling</u> met 1 verhoogd worden.&nbsp; </font></tt></p>
                 <p><tt>&nbsp; </tt></p>
                 <p><tt><font size="+1"><span style="font-weight: bold;"><a name="Par12"></a>1.2. De operatie P (&quot;Prolaag&quot;).&nbsp;</span> </font></tt></p>
                 <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -226,7 +227,7 @@ machine toegankelijk zijn - dan begint een operatie die slechts
 beeindigd kan worden op een moment, dat alle opgegeven seinpalen
 positief zijn. Beeindiging van een P-operatie impliceert, dat alle
 opgegeven seinpalen met 1 verlaagd worden en deze beeindiging geldt als
-<u>één ondeelbare handeling</u>. Ook voor de operatie P beperken we ons tot het geval, dat de erbij opgegeven seinpalen verschillend zijn.&nbsp;</font> </tt></p>
+<u>n ondeelbare handeling</u>. Ook voor de operatie P beperken we ons tot het geval, dat de erbij opgegeven seinpalen verschillend zijn.&nbsp;</font> </tt></p>
                 <p><tt>&nbsp; </tt></p>
                 <p><tt><font size="+1"><b><a name="Par13"></a>1.3. Enige voorbeelden van het gebruik van seinpalen.&nbsp;</b> </font></tt></p>
                 <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -296,13 +297,13 @@ informatieeenheden uit deze buffer willen verwerken.&nbsp;</font> </tt></p>
 Omdat vullen van de buffer administratieve maatregelen met de
 &quot;vulwijzer&quot; impliceert - en voor legen mutatis mutandis hetzelfde geldt
 - eisen we bovendien, dat vullen slechts door 1 machine Xi
-tegelijkertijd kan geschieden en evenzo, dat legen slechts door één
+tegelijkertijd kan geschieden en evenzo, dat legen slechts door n
 machine Yj tegelijkertijd kan geschieden.&nbsp;</font> </tt></p>
                 <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp; We voeren hiervoor in vier seinpalen:&nbsp;</font> </tt></p>
                 <p><tt><font size="+1">SX1 = aantal vrije plaatsen in de buffer (aanvankelijk = N)&nbsp;</font> </tt></p>
-                <p><tt><font size="+1">SX2 = 0 als één van de machines Xi vult, anders 1&nbsp;</font> </tt></p>
+                <p><tt><font size="+1">SX2 = 0 als n van de machines Xi vult, anders 1&nbsp;</font> </tt></p>
                 <p><tt><font size="+1">SY1 = aantal gevulde plaatsen in de buffer (aanvankelijk = 0)&nbsp;</font> </tt></p>
-                <p><tt><font size="+1">SY2 = 0 als één van de machines Yj leegt, anders 1.&nbsp;</font> </tt></p>
+                <p><tt><font size="+1">SY2 = 0 als n van de machines Yj leegt, anders 1.&nbsp;</font> </tt></p>
                 <p><tt><font size="+1">Er zal gelden N - 1 &lt;= SX1 + SY1 &lt;= N. De machines zijn nu:&nbsp;</font> </tt></p>
                 <p><tt><font size="+1">&quot;LXi: P (SX1, SX2); vul volgende plaats van de buffer; V (SY1, SX2); proces Xi; <u>goto</u> LXi&quot;&nbsp;</font> </tt></p>
                 <p><tt><font size="+1">&quot;LYj: P (SY1, SY2); leeg volgende plaats van de buffer; V (SX1, SY2); proces Yj; <u>goto</u> Yj&quot;&nbsp;</font> </tt></p>
@@ -316,7 +317,7 @@ worden.&nbsp;</font> </tt></p>
                 <p><tt>&nbsp; </tt></p>
                 <p><tt><font size="+1"><b><a name="Par2"></a>2. Onderscheid tussen abstracte en concrete machines.</b>&nbsp; </font></tt></p>
                 <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp;
-Een abstracte machine is een of ander geprogrammeerd sequentiëel
+Een abstracte machine is een of ander geprogrammeerd sequentiel
 proces, een concrete machine is een transputapparaat. (Transput is
 input of output.)&nbsp;</font> </tt></p>
                 <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -396,7 +397,7 @@ passend ogenblik in zijn cyclus zal uitvoeren:&nbsp; </font></tt></p>
 P-operatie door de transputmachine impliceert bij voltooiing het
 accepteren van een startopdracht. (Over het wachten als T = 0 laat ik
 me hier niet uit, bv. of het apparaat werkelijk stilstaat of een dode
-slag maakt, want dat is in dit verband onbelangrijk. Essentiëel is, dat
+slag maakt, want dat is in dit verband onbelangrijk. Essentiel is, dat
 de transputmachine bij T = 0 de seinpaal t en de flip-flop T ongemoeid
 zal laten.)&nbsp;</font> </tt></p>
                 <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -414,7 +415,7 @@ aantal opdrachten te verbieden - en dit schept zijn problemen. Dit
 laatste vloeit voort uit het feit, dat de transputmachine bij autonoom
 geheugencontact absolute prioriteit boven de machine heeft (in
 overeenstemming met het feit, dat je op dit microscopische niveau
-essentiële haastsituaties moet kunnen toestaan).&nbsp;</font> </tt></p>
+essentile haastsituaties moet kunnen toestaan).&nbsp;</font> </tt></p>
                 <p><tt><font size="+1">(b)
 dat bij beinvloeding van t en T door de computer het pertinent verboden
 is als, hoe kort maar ook, ten onrechte T = 1 zou gelden. Op dat moment
@@ -496,7 +497,7 @@ kan zich, bij gratie van doofheid, echter permitteren, om tijdelijk T =
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; T := 0;<br>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>if</u> 0 &lt; t <u>then</u><br>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; T := 1&quot;&nbsp;</font> </tt></p>
-                <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp; Essentiëel is hierbij aangenomen&nbsp;</font> </tt></p>
+                <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp; Essentiel is hierbij aangenomen&nbsp;</font> </tt></p>
                 <p><tt><font size="+1">(a) dat het geen kwaad kan, als T ten onrechte een tijdje = 0 is;&nbsp;</font> </tt></p>
                 <p><tt><font size="+1">(b)
 dat als transputmachine en computer &quot;tegelijkertijd&quot; proberen om de

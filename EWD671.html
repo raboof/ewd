@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Program inversion</title>
@@ -22,9 +23,9 @@ accessibility to text-reading software. It will be replaced by a fully marked-up
 The following manuscript                                                        </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
     EWD 671: Program inversion                                                  </td> </tr> <tr> <td colspan = 2>
 is held in copyright by Springer-Verlag New York.                               </td> </tr> <tr> <td colspan = 2>
-The manuscript was published as pages 351–354 of                                </td> </tr> <tr> <td></td> <td>
+The manuscript was published as pages 351354 of                                </td> </tr> <tr> <td></td> <td>
     Edsger W. Dijkstra, Selected Writings on Computing: A Personal Perspective, </td> </tr> <tr> <td></td> <td>
-    Springer-Verlag, 1982. ISBN 0–387–90652–5.                                  </td> </tr> <tr> <td colspan = 2>
+    Springer-Verlag, 1982. ISBN 0387906525.                                  </td> </tr> <tr> <td colspan = 2>
 <b>Reproduced with permission from Springer-Verlag New York. </b>                      </td> </tr> <tr> <td colspan = 2>
 <b>Any further reproduction is strictly prohibited.       </b>                         </td> </tr>
 </table>
@@ -102,9 +103,9 @@ k can be eliminated.
 Inverting it we construct
 Program B1:
 <table> <tr> <td>&nbsp; &nbsp; </td> <td colspan = 3>
-  p:=(0); <b>do</b> p.dom &ne; M &rarr; p:hiext(p.dom) <b>od</b>;· {<u>A</u> i: 0 &le; i &lt; M: p(i) = i } </td> </tr> <tr> <td></td> <td colspan = 3>
+  p:=(0); <b>do</b> p.dom &ne; M &rarr; p:hiext(p.dom) <b>od</b>; {<u>A</u> i: 0 &le; i &lt; M: p(i) = i } </td> </tr> <tr> <td></td> <td colspan = 3>
   <b>do</b> y.dom &ne; 0 &rarr; j,y:hipop {this is an initialization of  j };                               </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-                <b>do</b> j &ne; y.dom &rArr;·j:= j + l; p:swap(j-l,j) <b>od</b>                            </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
+                <b>do</b> j &ne; y.dom &rArr;j:= j + l; p:swap(j-l,j) <b>od</b>                            </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
                      {j's value is no longer relevant}                                                      </td> </tr> <tr> <td></td> <td colspan = 3>
   <b>od</b>                                                                                                 </td> </tr>
 </table>

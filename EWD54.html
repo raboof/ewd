@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Multiprogrammering en de X8 (EWD 51, *EWD54, EWD57)</title>
@@ -229,7 +230,7 @@ startopdrachten en terugmeldingen.<br>
       </b></font></tt>&nbsp;<tt><font size="+1"><br>
 &nbsp;&nbsp;&nbsp;&nbsp; Als de seinpalen, die de synchronisatie met de
 externe apparatuur beheersen, maximaal tweewaardig zouden zijn, zouden
-we de haastsituatie onvoldoende uitgebannen hebben. De essentiële
+we de haastsituatie onvoldoende uitgebannen hebben. De essentile
 haastsituatie mag dan wel uitgebannen zijn, de &quot;morele&quot; haastsituatie
 blijft nog over. Een voorbeeld moge dit toelichten.&nbsp; </font></tt></p>
                 <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp; Stel, dat we een
@@ -369,7 +370,7 @@ de eerstgegevene zijn. Vanaf dat moment draait, rampen
 voorbehouden, de
 leegwijzer netjes achter de vulwijzer aan.&nbsp; </font></tt></p>
                 <p><tt><font size="+1"><span style="font-weight: bold;"><a
- name="Par2411"></a>2.4.1.1.&nbsp; </span>Eén van de
+ name="Par2411"></a>2.4.1.1.&nbsp; </span>En van de
 oplossingen is om
 als onderdeel van het proces, dat de
 machine aanzet, deze leegwijzer te clearen; het <a href="http://" title="Metafoor: tandenpoetsen = begin van de dag; initialiseringsprogramma.">&quot;tandepoetsprogramma&quot;</a>
@@ -412,7 +413,7 @@ geheugenplaats voor de leegwijzer hebben ingevoerd, maar tevens bij de
 trommelorganisatie een paar flip-flops - in ons geval twee - toevoegen,
 waarin bij elke startopdrachtacceptering (dwz. de P-operatie door de
 autonome apparatuur) de opgehoogde leegwijzer uit de vaste
-geheugenplaats copiëren. Dit onder het motto, dat tijdens een heel
+geheugenplaats copiren. Dit onder het motto, dat tijdens een heel
 bloktransport de waarde van de leegwijzer constant is.&nbsp; </font></tt></p>
                 <p><tt><font size="+1">&nbsp;&nbsp;&nbsp;&nbsp; Opmerking: Het totaal van 2 geheugencontacten per woordtransport was gebaseerd op de veronderstelling, dat beginadres op de kernen en lengte samen in een woord ondergebracht zouden zijn. Wij komen hier later aan het <a href="#Par24end">einde van 2.4</a> nog weer even op terug.&nbsp; </font></tt></p>
                 <p><tt><font size="+1"><span style="font-weight: bold;"><br>
@@ -629,7 +630,7 @@ verdieping leeg is, ik deze desnoods weer kan afbreken.<br>
       <br>
 &nbsp;&nbsp;&nbsp;&nbsp; De consecutief genummerde hotelkamers worden
 in het geheugen op consecutieve plaatsen (of vaste formaties daarvan)
-afgebeeld: afbraak van de bovenste étage betekent dus, dat
+afgebeeld: afbraak van de bovenste tage betekent dus, dat
 geheugen
 vrijgemaakt wordt voor andere doeleinden. Het zou dus zin kunnen hebben.<br>
       <br>
@@ -652,7 +653,7 @@ per woord&quot; trekt deze oplossing me minder.)<br>
 laagste vrije kamer&quot; het tijdsgemiddelde van de effectieve hotelomvang
 niet minimaliseert: als op een ogenblik, dat het hotel heel vol is,
 zich een blijvertje aanmeldt, dan kan het gatental nog zo drastisch
-zakken, voordat het blijvertje op de bovenste étage zijn biezen
+zakken, voordat het blijvertje op de bovenste tage zijn biezen
 gepakt
 heeft, kan ik niet gaan afbreken. Ik dacht desalniettemin, dat deze
 taktiek ten koste van weinig me al een heleboel zou helpen, zeker
@@ -714,8 +715,8 @@ ligt.<br>
       <br>
 &nbsp;&nbsp;&nbsp;&nbsp; We beschouwen alle abstracte machines, die op
 een gegeven moment meedoen, dwz. alle abstracte machines, die op een
-gegeven moment óf hun activiteit explicietelijk gestaakt hebben
-- door een P-operatie - óf door interruptie ergens in hun
+gegeven moment f hun activiteit explicietelijk gestaakt hebben
+- door een P-operatie - f door interruptie ergens in hun
 activiteit
 onderbroken zijn. Deze abstracte machines vormen samen de bevolking van
 HAM, dwz. &quot;Hotel voor Abstracte Machines&quot;, en worden gedurende hun
@@ -745,7 +746,7 @@ beschouwen
 als abstracte machines, die dan wel tot de stamgasten van HAM zullen
 behoren.<br>
       <br>
-&nbsp;&nbsp;&nbsp;&nbsp; Eén van de stamgasten van HAM zal zijn
+&nbsp;&nbsp;&nbsp;&nbsp; En van de stamgasten van HAM zal zijn
 de
 &quot;Dummy Abstracte Machine&quot; c.n. DAM. De tekst luidt:<br>
       <br>
@@ -798,10 +799,10 @@ bagage in volgkamers of een centraal depot moet achterlaten. Wij
 signaleren het probleem nu slechts.)<br>
       <br>
 &nbsp;&nbsp;&nbsp;&nbsp; De gasten in HAM vallen uiteen in twee
-gescheiden categorieën: geblokkeerde machines en onderbroken
+gescheiden categorien: geblokkeerde machines en onderbroken
 machines.
-Tijdens non-activiteit van de coordinator is er één
-machine, die in geen van beide categorieën valt, nl. de abstracte
+Tijdens non-activiteit van de coordinator is er n
+machine, die in geen van beide categorien valt, nl. de abstracte
 machine, die op dat ogenblik in actie is.<br>
       <br>
 &nbsp;&nbsp;&nbsp;&nbsp; Indien de besturing ten gevolge van een
@@ -812,7 +813,7 @@ die in actie was, in de groep der onderbroken machines.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Indien de besturing ten gevolge van een
 P-operatie naar de coordinator verwezen wordt, dan geschiedt dit
 onder
-opgave van één of meer seinpalen. Als één
+opgave van n of meer seinpalen. Als n
 van deze
 seinpalen non-positief is, dan gaat de machine, die in actie was, over
 naar de groep van de geblokkeerde, als alle opgegeven seinpalen
@@ -841,7 +842,7 @@ voltooiing de V-operatie weer gewoon door te laten werken.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Om de onderverdeling in klassen aan te geven,
 gaan we kettingen rijgen: elke kamer van HAM bevat ruimte voor een
 ander kamernummer. De abstracte machines, die onderbroken zijn, zijn in
-één of andere volgorde gerangschikt. <br>
+n of andere volgorde gerangschikt. <br>
 Extern noteren we het nummer van
 de eerste onderbroken abstracte machine; in elke kamer noteren we het
 kamernummer van de volgende onderbroken machine en in de kamer van de
@@ -883,9 +884,9 @@ zoet brengt met het laten mislukken van P-operaties, ten tweede <span
 permanente verwaarlozing dan waterdicht zijn, omdat anders de computer
 al zijn tijd zou kunnen besteden aan mislukkende P-operaties, terwijl
 een zinvol proces geen doorgang zou vinden. Het invoeren van de klasse
-der geblokkeerde machines kunnen we dus zien als middel én om de
+der geblokkeerde machines kunnen we dus zien als middel n om de
 efficiency op te voeren door dingen, die kennelijk tot mislukken
-gedoemd zijn, niet eens te proberen, én als middel om straks
+gedoemd zijn, niet eens te proberen, n als middel om straks
 bij de strategie de handen vrij te hebben.<br>
       <br>
 &nbsp;&nbsp;&nbsp;&nbsp; Laten wij nu de geblokkeerde abstracte
@@ -897,7 +898,7 @@ slechts 1 seinpaal als argument meekrijgt.<br>
 tegenkomt, wordt de besturing naar de coordinator verwezen; als de
 seinpaal positief is, wordt de P-operatie voltooid en wordt de machine
 opgenomen in de klasse der onderbroken machines, anders is hij mogelijk
-één van de vele machines, die wachten moet, totdat de
+n van de vele machines, die wachten moet, totdat de
 seinpaal in
 kwestie positief wordt.<br>
       <br>
@@ -922,7 +923,7 @@ V-operatie uitgevoerd, dan zijn de consequenties, die daaraan verbonden
 moeten worden, duidelijk. Als de seinpaal al positief was, dan hoeven
 we er enkel 1 bij te tellen; was hij aanvankelijk = 0, dan dan moeten
 we kijken, of er inmiddels abstracte machines op stonden te wachten, zo
-ja, da kan één van deze machines uit deze ketting
+ja, da kan n van deze machines uit deze ketting
 losgemaakt worden en in de ketting der onderbroken machines opgenomen
 worden. De strategische kwestie komt hier om de hoek kijken in het
 geval er meer dan 1 abstracte machine op de seinpaal in kwestie stond
@@ -1045,7 +1046,7 @@ wel eens naar worden.<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Een alternatieve oplossing is om een abstracte
 machine meer HAM-kamers ter beschikking te geven; de eerste keer, dat
 een abstracte machine met een P-operatie met zo'n lange wachtlijst komt
-aanzetten, zal je de extra moeite moeten doen, om één of
+aanzetten, zal je de extra moeite moeten doen, om n of
 meer extra
 HAM-kamers als volgkamers te reserveren. Ik geloof niet, dat het
 verstandig is om na deze veeleisende P-operatie die &quot;volgkamers&quot; weer

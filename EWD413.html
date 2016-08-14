@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>The formal treatment of some small examples</title>
@@ -858,14 +859,14 @@ instance, for n = 3 and the set of values 2, 4 and 7 we have
       index<sub>3</sub>(7, 2, 4) = 4 </td> </tr> <tr> <td></td> <td>
       index<sub>3</sub>(7, 4, 2) = 5 </td> </tr>
 </table>
-<p>Let (p<sub>0</sub>§ p<sub>1</sub>§ ... §p<sub>n</sub>) denote the permutation of the n different
-values in monotonicly increasing order, i.e. index<sub>n</sub>((p<sub>0</sub>§ p<sub>1</sub>§ ... §p<sub>n</sub>)) = 0.
-(For example (4§ 7§ 2) = (2, 4, 7) but also (7§ 2§ 4) = (2, 4, 7) .)
+<p>Let (p<sub>0</sub> p<sub>1</sub> ... p<sub>n</sub>) denote the permutation of the n different
+values in monotonicly increasing order, i.e. index<sub>n</sub>((p<sub>0</sub> p<sub>1</sub> ... p<sub>n</sub>)) = 0.
+(For example (4 7 2) = (2, 4, 7) but also (7 2 4) = (2, 4, 7) .)
 <p>With the above notation we can formulate the following theorem for
 n &gt; 1:
 <table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
            index<sub>n</sub>(p<sub>0</sub>, p<sub>1</sub>, ..., p<sub>n-1</sub>) =                                                                                           </td> </tr> <tr> <td></td> <td>
-           index<sub>n</sub>(p<sub>0</sub>,(p<sub>1</sub>§ p<sub>2</sub>§ ... §p<sub>n-1</sub>)) +  index<sub>n</sub>(p<sub>1</sub>, p<sub>2</sub>, ..., p<sub>n-1</sub>) </td> </tr>
+           index<sub>n</sub>(p<sub>0</sub>,(p<sub>1</sub> p<sub>2</sub> ... p<sub>n-1</sub>)) +  index<sub>n</sub>(p<sub>1</sub>, p<sub>2</sub>, ..., p<sub>n-1</sub>) </td> </tr>
 </table>
 (e.g. index<sub>3</sub>(4, 7, 2) = index<sub>3</sub>(4, 2, 7) + index<sub>2</sub>(7, 2) = 2 + 1 = 3 .)
 In words: the index<sub>n</sub> of a permutation of n different values is the

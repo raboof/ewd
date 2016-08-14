@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>A prime is in at most 1 way the sum of 2 squares (EWD 1155a)</title>
@@ -27,16 +28,16 @@
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">(0)</td>
-						<td>(<var>a</var> + <var>b</var>)² + (<var>a</var> &ndash; <var>b</var>)² = 2·(<var>a</var>² + <var>b</var>²) &nbsp; &nbsp; &nbsp; .</td>
+						<td>(<var>a</var> + <var>b</var>) + (<var>a</var> &ndash; <var>b</var>) = 2(<var>a</var> + <var>b</var>) &nbsp; &nbsp; &nbsp; .</td>
 					</tr>
 				</table>
 
 				<p class="noindent"><u>Remark</u> &nbsp; This formula is of independent interest in the context of square decompositions: regardless of primality it establishes for any <var>n</var> a one-to-one correspondence between the square decompositions of <var>n</var> and those of 2<var>n</var>. (End of Remark.)</p>
-				<p>We cannot use (0) &ldquo;as is&rdquo;, for we have to write odd numbers as the sum of 2 squares. So we generalize the left-hand side to (<var>a</var> + <var>b</var>)² + (<var>c </var>&ndash; <var>d</var>)², but restrict ourselves to the situation with</p>
+				<p>We cannot use (0) &ldquo;as is&rdquo;, for we have to write odd numbers as the sum of 2 squares. So we generalize the left-hand side to (<var>a</var> + <var>b</var>) + (<var>c </var>&ndash; <var>d</var>), but restrict ourselves to the situation with</p>
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">(1)</td>
-						<td><var>a</var>·<var>b</var> = <var>c</var>·<var>d</var> &nbsp; &nbsp; &nbsp; ,</td>
+						<td><var>a</var><var>b</var> = <var>c</var><var>d</var> &nbsp; &nbsp; &nbsp; ,</td>
 					</tr>
 				</table>
 
@@ -44,38 +45,38 @@
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">(2)</td>
-						<td><var>a</var>·<var>b</var> = <var>c</var>·<var>d</var> &nbsp; <span class="unicode">&#x21D2;</span> &nbsp; (<var>a</var> + <var>b</var>)² + (<var>c</var> &ndash; <var>d</var>)² = <var>a</var>² + <var>b</var>² + <var>c</var>² + <var>d</var>² &nbsp; &nbsp; &nbsp; .</td>
+						<td><var>a</var><var>b</var> = <var>c</var><var>d</var> &nbsp; <span class="unicode">&#x21D2;</span> &nbsp; (<var>a</var> + <var>b</var>) + (<var>c</var> &ndash; <var>d</var>) = <var>a</var> + <var>b</var> + <var>c</var> + <var>d</var> &nbsp; &nbsp; &nbsp; .</td>
 					</tr>
 				</table>
 
 				<p class="noindent">Note that the right-hand side of the consequent is an even function of the variables. So much for the algebraic aspect.</p>
-				<p>We now turn to the question of how to express that an odd <var>n</var> admits 2 different square decompositions. Here the problem is that <var>x</var>²+<var>y</var>² and <var>y</var>²+<var>x</var>² count as the same square decompositions. We can, however, exploit that <var>n</var> is odd; hence, when <var>n</var> is written as sum of 2 squares, the one square is odd and the other square is even. Consequently, if odd <var>n</var> admits 2 different square decompositions, we can choose <em>positive</em> <var>a</var>, <var>b</var>, <var>c</var>, <var>d</var> such that</p>
+				<p>We now turn to the question of how to express that an odd <var>n</var> admits 2 different square decompositions. Here the problem is that <var>x</var>+<var>y</var> and <var>y</var>+<var>x</var> count as the same square decompositions. We can, however, exploit that <var>n</var> is odd; hence, when <var>n</var> is written as sum of 2 squares, the one square is odd and the other square is even. Consequently, if odd <var>n</var> admits 2 different square decompositions, we can choose <em>positive</em> <var>a</var>, <var>b</var>, <var>c</var>, <var>d</var> such that</p>
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">(3)</td>
-						<td>(<var>a</var> + <var>b</var>)² + (<var>c</var> &ndash; <var>d</var>)² = <var>n</var> &nbsp; <span class="unicode">&#x2227;</span></td>
+						<td>(<var>a</var> + <var>b</var>) + (<var>c</var> &ndash; <var>d</var>) = <var>n</var> &nbsp; <span class="unicode">&#x2227;</span></td>
 					</tr>
 					<tr>
 						<td class="spac"></td>
-						<td>(<var>a</var> &#x2212; <var>b</var>)² + (<var>c</var> + <var>d</var>)² = <var>n</var> &nbsp; &nbsp; &nbsp; &nbsp; .</td>
+						<td>(<var>a</var> &#x2212; <var>b</var>) + (<var>c</var> + <var>d</var>) = <var>n</var> &nbsp; &nbsp; &nbsp; &nbsp; .</td>
 					</tr>
 				</table>
 
 				<p class="noindent">Here <var>a</var> is the average of the numbers of the one parity, and <var>c</var> the average of those of the other parity; because we are considering different square decompositions of <var>n</var>, also <var>b</var> and <var>d</var> can be chosen positive.</p>
-				<p>Eliminating after this choice <var>n</var> from (3) by equating the left-hand sides, we deduce after simplification <var>a</var>·<var>b</var> = <var>c</var>·<var>d</var>, i.e. (1), and then, combining (1), (2), and (3)</p>
+				<p>Eliminating after this choice <var>n</var> from (3) by equating the left-hand sides, we deduce after simplification <var>a</var><var>b</var> = <var>c</var><var>d</var>, i.e. (1), and then, combining (1), (2), and (3)</p>
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">(4)</td>
-						<td><var>n</var> = <var>a</var>² + <var>b</var>² + <var>c</var>² + <var>d</var>² &nbsp; &nbsp; &nbsp; ,</td>
+						<td><var>n</var> = <var>a</var> + <var>b</var> + <var>c</var> + <var>d</var> &nbsp; &nbsp; &nbsp; ,</td>
 					</tr>
 				</table>
 
 				<p class="noindent">thus reducing our proof obligation to showing that, thanks to (1), the right-hand side of (4) can be factorized as the product of two plurals.</p>
-				<p>We meet this last proof obligation in a totally classic manner: we exploit (1), i.e. <var>a</var>·<var>b</var> = <var>c</var>·<var>d</var>, by solving the equation</p>
+				<p>We meet this last proof obligation in a totally classic manner: we exploit (1), i.e. <var>a</var><var>b</var> = <var>c</var><var>d</var>, by solving the equation</p>
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">(5)</td>
-						<td><var>a</var>,<var>b</var>,<var>c</var>,<var>d</var> &nbsp; : &nbsp; <var>a</var>·<var>b</var> = <var>c</var>·<var>d</var>&nbsp; &nbsp; &nbsp; ,</td>
+						<td><var>a</var>,<var>b</var>,<var>c</var>,<var>d</var> &nbsp; : &nbsp; <var>a</var><var>b</var> = <var>c</var><var>d</var>&nbsp; &nbsp; &nbsp; ,</td>
 					</tr>
 				</table>
 
@@ -84,7 +85,7 @@
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">&nbsp;</td>
-						<td>(<var>q</var>·<var>r</var>) · (<var>s</var>·<var>t</var>) =  (<var>q</var>·<var>s</var>) · (<var>r</var>·<var>t</var>)</td>
+						<td>(<var>q</var><var>r</var>)  (<var>s</var><var>t</var>) =  (<var>q</var><var>s</var>)  (<var>r</var><var>t</var>)</td>
 					</tr>
 				</table>
 
@@ -92,19 +93,19 @@
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">(6)</td>
-						<td><var>a</var> = <var>q</var>·<var>r</var></td><td class="spac">&nbsp;</td><td>(<i>i</i>)</td>
+						<td><var>a</var> = <var>q</var><var>r</var></td><td class="spac">&nbsp;</td><td>(<i>i</i>)</td>
 					</tr>
 					<tr>
 						<td></td>
-						<td><var>b</var> = <var>s</var>·<var>t</var></td><td>&nbsp;</td><td>(<i>ii</i>)</td>
+						<td><var>b</var> = <var>s</var><var>t</var></td><td>&nbsp;</td><td>(<i>ii</i>)</td>
 					</tr>
 					<tr>
 						<td></td>
-						<td><var>c</var> = <var>q</var>·<var>s</var></td><td>&nbsp;</td><td>(<i>iii</i>)</td>
+						<td><var>c</var> = <var>q</var><var>s</var></td><td>&nbsp;</td><td>(<i>iii</i>)</td>
 					</tr>
 					<tr>
 						<td></td>
-						<td><var>d</var> = <var>r</var>·<var>t</var></td><td>&nbsp;</td><td>(<i>iv</i>) &nbsp; ,</td>
+						<td><var>d</var> = <var>r</var><var>t</var></td><td>&nbsp;</td><td>(<i>iv</i>) &nbsp; ,</td>
 					</tr>
 				</table>
 
@@ -140,18 +141,18 @@
 				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
 					<tr>
 						<td class="spac">&nbsp;</td>
-						<td><var>r</var>·<var>b</var> = <var>s</var>·<var>d</var></td>
+						<td><var>r</var><var>b</var> = <var>s</var><var>d</var></td>
 					</tr>
 				</table>
 
 				<p class="noindent">from which we conclude, in view of (7), that <var>r</var> divides <var>d</var> and that <var>s</var> divides <var>b</var>, and in general &#x2014;<var>r</var>&#x2260;0 and <var>s</var>&#x2260;0&#x2014; <var>b/s</var>=<var>d/r</var>. So either assignment to <var>t</var> does the job.</p>
 				<p>And now we are essentially done, for<br />
 					<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; <var>a</var>² + <var>b</var>² + <var>c</var>² + <var>d</var>²<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; <var>a</var> + <var>b</var> + <var>c</var> + <var>d</var><br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; {(6)}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; (<var>q</var>·<var>r</var>)² + (<var>s</var>·<var>t</var>)² + (<var>q</var>·<var>s</var>)² + (<var>r</var>·<var>t</var>)²<br />
+					&nbsp; &nbsp; &nbsp; &nbsp; (<var>q</var><var>r</var>) + (<var>s</var><var>t</var>) + (<var>q</var><var>s</var>) + (<var>r</var><var>t</var>)<br />
 					= &nbsp; &nbsp; &nbsp; &nbsp; {algebra}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; (<var>q</var>² + <var>t</var>²) · (<var>r</var>² + <var>s</var>²)
+					&nbsp; &nbsp; &nbsp; &nbsp; (<var>q</var> + <var>t</var>)  (<var>r</var> + <var>s</var>)
 				</p>
 
 				<p class="noindent">and the parameters <var>q</var>, <var>r</var>, <var>s</var>, <var>t</var> differing from 0, the factors are plurals.</p>

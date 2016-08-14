@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Sequentiele interpretatie van ponsband</title>
@@ -41,7 +42,7 @@ als volslagen verschillend.
 Als een routine van het type CHAR een band van het betrokken apparaat te verwerken
 krijgt, zal deze bij herhaald aanroepen een waardenreeks afleveren, die uniek verslag 
 aflegt over het bij deze band behorende paginabeeld en wel regel voor regel,
-elke regel van links naar rechts. Het zijn de routines van het type CHAR‚ waarin
+elke regel van links naar rechts. Het zijn de routines van het type CHAR waarin
 de eigenschappen van de diverse hardware ponser/bladschrijvers hun neerslag vinden.
 Over deze eigenschappen worden twee veronderstellingen gemaakt
 </p><p class="noindent">
@@ -49,7 +50,7 @@ a) &nbsp; &nbsp; &nbsp; &nbsp; We veronderstellen dat het hardware apparaat besc
 waarvan de beginwaarde (het begin van) het paginabeeld mede kunnen bepalen,
 dat aan een band ontleend wordt. Wij noemen heersende case, wagenpositie etc. Hieraan
 beantwoordt, dat elke routine van het type CHAR, voordat hij over een paginabeeld
-een verslag kan gaan afleggen geactualiseerd (geïnitialiseerd) moet worden, waarbij
+een verslag kan gaan afleggen geactualiseerd (genitialiseerd) moet worden, waarbij
 deze mechanische geheugenelementen een bij de actualisering opgegeven beginwaarde
 toegedacht krijgen. Na actualisering verslaat CHAR het paginabeeld, dat ontstaat
 wanneer
@@ -98,7 +99,7 @@ De routine SYM kan op drie manieren aan een band een rij basic symbols ontlenen
   <tr>
     <td>&nbsp;</td>
     <td valign="top">3) </td>
-    <td>een rij basic symbols‚ zonder tussenkomst van een paginabeeld direct op het
+    <td>een rij basic symbols zonder tussenkomst van een paginabeeld direct op het
   bandbeeld gedefinieerd; SYM zal dan via HEP de band aftasten, dit interpretatieproces 
   noemen we &ldquo;symhep&rdquo;.</td>
   </tr>
@@ -121,7 +122,7 @@ Evenzo laten wij voor NUM vier verschillende manieren open, waarin hij aan
 een band numerieke waarden ontleent
 <br>1) &nbsp; &nbsp; &nbsp; numerieke waarden, gedefinieerd op een rij basic symbols. NUM zal dan via
 SYM de band aftasten, wij noemen dit interpretatieproces &ldquo;numsym&rdquo;. (Bij activiteit
-van numsym doet het niet ter zake of SYM via symcharf‚ symchart of symhep werkt.)
+van numsym doet het niet ter zake of SYM via symcharf symchart of symhep werkt.)
 <br>2) &nbsp; &nbsp; &nbsp; numerieke waarden gedefinieerd op een flexowriterpaginabeeld; NUM zal dan via
 CHARF de band aftasten, wij noemen dit interpretatieproces &ldquo;numcharf&rdquo;. (NB. Hierbij
 kunnen paginabeelden verwerkt worden, die <u>niet</u> als representatie van basic
@@ -131,7 +132,7 @@ of zo.)
 3) &nbsp; &nbsp; &nbsp; numerieke waarden gedefinieerd op een teleprinterpagina; NUM zal dan via
 CHART de band aftasten, wij noemen dit interpretatieproces &ldquo;numchart&rdquo;.
 <br>
-4) &nbsp; &nbsp; &nbsp; numerieke waarden, zonder tussenkomst van basic symbols of paginabeeld‚
+4) &nbsp; &nbsp; &nbsp; numerieke waarden, zonder tussenkomst van basic symbols of paginabeeld
 direct gedefinieerd op een bandbeeld; NUM zal dan via HEP de band aftasten, dit
 interpretatieproces noemen we &ldquo;numhep&rdquo;. (Op deze wijze zouden binaire voorstellingen
 direct van een band gehaald kunnen worden.)
@@ -180,12 +181,12 @@ bijzonder:
   gang kunnen zijn; welke van de drie vigeert leggen we vast in de waarde van een
   aan de informatiestroom toegevoegde integer statusvariabele &ldquo;basint&rdquo;. </p><table>
 <tr>
-  <td width="90" valign="top">basint = 1</td><td width="522">de informatie is gedefinieerd op een bandbeeld‚ dat niet uitgelegd wordt
-als carrier van een paginabeeld (symhep‚ numhep en algemeen HEP 
+  <td width="90" valign="top">basint = 1</td><td width="522">de informatie is gedefinieerd op een bandbeeld dat niet uitgelegd wordt
+als carrier van een paginabeeld (symhep numhep en algemeen HEP 
 toegestaan, CHARF en CHART niet van toepassing) </td></tr>
 <tr>
   <td valign="top">basint = 2 </td><td>CHARF actueel, dwz. het bandbeeld fungeert alleen als carrier van
-een flexowriterpagina‚ alleen CHARF van toepassing (en HEP alleen
+een flexowriterpagina alleen CHARF van toepassing (en HEP alleen
 vanuit CHARF).    </td></tr>
 <tr>
   <td valign="top">basint = 3</td><td>CHART actueel. dwz. het bandbeeld fungeert alleen als carrier van
@@ -210,7 +211,7 @@ procedure HEP per aanroep de volgende n-ade van de band. Op &ldquo;EINDE BAND&rd
 door totaan de volgende initialisering de waarde &ldquo;&ndash;1&rdquo; af te leveren. De routine HEP
 berekent bij herhaald aanroepen een functie gedefinieerd op het mathematisch model,
 dat ik voor een eindige ponsband heb gekozen: een (in de toekomst) oneindige
-halfrij &ldquo;heptaden”‚ die voor een zeker moment niet en na dat moment louter de
+halfrij &ldquo;heptaden die voor een zeker moment niet en na dat moment louter de
 karakteristieke waarde &ldquo;&ndash;1&rdquo; bevat en aflevert. Voor dit model pleite
 <br>
 1) &nbsp; &nbsp; &nbsp; dat de oneindigheid de mathematische hanteerbaarheid van HEP alleen maar
@@ -222,7 +223,7 @@ hierin zijn representatie vindt.
 (Ik ben me bewust, dat andere mogelijk relevante aspecten van de werkelijkheid
 onder tafel zijn geraakt. De breedte van het papier zou men kunnen willen gebruiken
 ter bepaling van de keuze tussen alternatieve codes; de kleur van het papier of
-het fabrieksnummer van de flexowriter‚ waarop een band geponst is, zou men bij het
+het fabrieksnummer van de flexowriter waarop een band geponst is, zou men bij het
 optreden van lees&mdash; of ponsfouten voor diagnostische doeleinden misschien willen
 weten!)
 </p><P  >
@@ -233,17 +234,17 @@ komen.
 </p><P  >
 <u>De routines van het type CHAR.</u>
 </p><P  >
-Deze sectie behandelt alleen CHARF‚ omdat ik met de teleprinter onvoldoende
+Deze sectie behandelt alleen CHARF omdat ik met de teleprinter onvoldoende
 op de hoogte ben en ik mij, vanwege onbekendheid met standaardpraktijken in het
-telexverkeer‚ nauwelijks bevoegd acht om hier aanbevelingen te doen.
+telexverkeer nauwelijks bevoegd acht om hier aanbevelingen te doen.
 </p><P  >
 De routine CHARF die ik op het oog heb heeft betrekking op een MC-flexowriter
-zonder variabele spatiering‚ zonder backspace‚ met vaste instelling van de regel-
+zonder variabele spatiering zonder backspace met vaste instelling van de regel-
 opvoer en vaste spatiering van de tabulatorstoppen.
 </p>
 <P  >
 Initialisering van CHARF geschiedt onder opgave van twee parameters, de boolean
-&ldquo;lower case&rdquo; en de integer &ldquo;carriage position&rdquo;‚ die bij het begin van de regel op
+&ldquo;lower case&rdquo; en de integer &ldquo;carriage position&rdquo; die bij het begin van de regel op
 0 gesteld wordt. Daarna levert CHARF per aanroep het verslag van het paginabeeld en
 wel per positie op de pagina. (Elke &ldquo;escaping&rdquo; aanslag wordt verslagen in viervoud
 als hij caseonafhankelijk is (dwz. de spatie) en in achtvoud als hij caseafhankelijk
@@ -253,7 +254,7 @@ worden vertaald in een aequivalent aantal spaties, spaties en TAB&rsquo;s aan he
 van de regel worden vanwege hun onzichtbaarheid <u>niet</u> doorgegeven.
 </p>
 <P  >
-We kunnen (zie boven) bv&mdash; basic symbols hetzij op een Flexowriterpagina‚
+We kunnen (zie boven) bv&mdash; basic symbols hetzij op een Flexowriterpagina
 hetzij op een teleprinterpagina definieren en we hebben geeist van bv. een routine
 als SYM, dat hij achter de schermen van de ene code op de andere kan overgaan.
 </p><p>
@@ -271,7 +272,7 @@ Voor de routine CHARF doemt de volgende rol op.
 </p>
 <P  >
 De toestand &ldquo;CHARF actueel&rdquo; &mdash;dwz. basint = 2&mdash; kan slechts bewerkstelligd worden
-door de aanroep van een initialiseringsnrocedure‚ waarbij de statusvariabelen van
+door de aanroep van een initialiseringsnrocedure waarbij de statusvariabelen van
 CHARF (te weten &ldquo;heersende case&rdquo; en &ldquo;Waqenpositie&rdquo;) worden opgegeven. Door de initialiserinqsprocedure 
 wordt de voorgift ingesteld op &ldquo;leeg&rdquo;.
 </p><P  >
@@ -290,8 +291,8 @@ Het geven van een voorgift zou op twee manieren kunnen
   </tr>
 </table>
 <P  >
-  Omdat de tweede methode wat flexibeler is —en de eerste bovendien slecht 
-  gedefinieerd is onmiddellijk na initialisatie— prefereer ik de tweede versie.
+  Omdat de tweede methode wat flexibeler is en de eerste bovendien slecht 
+  gedefinieerd is onmiddellijk na initialisatie prefereer ik de tweede versie.
 </p><P  >
 Indien aan CHARF een voorgift gegeven wordt op een moment, dat CHARF niet
 actueel is, heeft deze handeling geen effect.
@@ -300,17 +301,17 @@ Indien aan CHARF een voorgift gegeven wordt, terwijl een nog niet teruggegeven
 voorgift hing, dan overschrijft de laatste voorgift de eerste.
 </p>
 <P  >
-Een neveneffect van CHARF zal moeten zijn‚ om naar aanleiding van het ontmoeten
+Een neveneffect van CHARF zal moeten zijn om naar aanleiding van het ontmoeten
 van de stopcode de toestand &ldquo;basint = 2&rdquo; (dwz. CHARF&rsquo;s actualiteit) te beeindigen,
 Precieser: evenzo als CHARF onzichtbare spaties aan het einde van de regel niet
-doorgeeft, zal CHARF ook onzichtbare NLCL&rsquo;s niet doormelden‚ wanneer uiteindelijk
+doorgeeft, zal CHARF ook onzichtbare NLCL&rsquo;s niet doormelden wanneer uiteindelijk
 een stopcode op de band gevonden wordt. Het optreden van de stopcode wordt aan het
 aanroepend programma doorgegeven, doordat CHARF met de waarde &ldquo;&ndash;1&rdquo; terugkeert,
 nu in de betekenis &ldquo;EINDE CODE&rdquo;. Indien CHARF wordt aangeroepen tijdens
 &ldquo;basint =: 2&rdquo; en hij keert terug met de waarde &ldquo;&ndash;1&rdquo;, dan heeft dit &ldquo;basint:=0&rdquo;
 als neveneffect. (Dit geldt ook, als deze &ndash;1 uit de voorgift komt; hiermee is dus
-een manier gegeven om CHARF, als hij actueel mocht zijn‚ zijn actualiteit
-te laten beeindigen.) Als CHARF wordt aangeroepen tijdens &ldquo;basint &ne; 2 ‚ dan keert
+een manier gegeven om CHARF, als hij actueel mocht zijn zijn actualiteit
+te laten beeindigen.) Als CHARF wordt aangeroepen tijdens &ldquo;basint &ne; 2  dan keert
 de besturing eveneens terug met CHARF = &ndash;1, doch ditmaal zonder neveneffect.
 </p>
 <P  >
@@ -319,9 +320,9 @@ effect, het aanroepen van CHARF evenmin.
 </p><P  >
 Met deze definitie van het afvallen van de actualiteit heb ik het volgende
 bereikt: als SYM van de flexowriterpagina een niet afsluitend symbool leest, gevolgd
-door een basic symbol‚ dat 1 positie beslaat, gevolgd door een stopcode‚ dan heeft
+door een basic symbol dat 1 positie beslaat, gevolgd door een stopcode dan heeft
 SYM bij het afleveren van het eerste symhool de volgende positie al gezien. CHARF
-heeft misschien de stopcode al gezien, maar nog niet doorgegeven‚ zodat hij zijn
+heeft misschien de stopcode al gezien, maar nog niet doorgegeven zodat hij zijn
 actualiteit nog niet heeft beeindigd. Dus kan de laatste positiebeschrijving nog
 in CHARF worden teruggeduwd.
 </p><P  >
@@ -335,7 +336,7 @@ weet, wat voor dol apparaat we morgen in het systeem moeten opnemen!)
 </p><p class="noindent"><u>Beinvloeding van basint.</u>
 </p><P  >
 Rechtstreeks HEPpen is niet verenigbaar met de actualiteit van CHARF
-of CHART‚ De vraag is, hoe het systeem reageert wanneer men deze (en dergelijke)
+of CHART De vraag is, hoe het systeem reageert wanneer men deze (en dergelijke)
 regels probeert te schenden. In het bijzonder:
 <br>
 1)&nbsp; actualisering van CHARF terwijl basint &ne; 0 is
@@ -356,13 +357,13 @@ Rechtstreeks HEPpen terwijl basint = 2 of = 3 is, is vreemder, omdat we immers
 ons op het standpunt hebben gesteld, dat bij actualiteit van een CHAR de synchronisatie
 met HEP in het algemeen ongedefinieerd is. Om dit als letale programmafout
 te brandmerken, is me echter te gortig. Daarvoor is het primitivum HFP me te fundamenteel. 
-Wel betekent rechtstreeks HEPpen‚ dat een eventuele CHAR—interpretatie
+Wel betekent rechtstreeks HEPpen dat een eventuele CHARinterpretatie
 niet meer valide is. Ik stel daarom voor, om HEP als neveneffect te laten hebben
 </p>
 <P class="nospace"  >&ldquo;<u>if</u> basint &ne; 1 <u>then</u> basint := 0&rdquo;  .
 </p>
 <P class="continue"  >(wordt HEP met basint = 2 vanuit CHARF aangeroepen, dan kan CHARF zelf, voor verlating
-  met “basint := 2&rdquo; dit neveneffect weer ongedaan maken.)
+  met basint := 2&rdquo; dit neveneffect weer ongedaan maken.)
 </p>
 <P  >
 De initialisering van CHARF en CHART zijn de enige manier om basint = 2 of
@@ -434,14 +435,14 @@ te melden en diezelfde betekenis te geven.
 </p><P  >
 In alle gevallen kunnen we bereiken, dat een band <u>niet</u> via numsym gelezen gaat
 worden, door in de aanhef dit aan te geven. Het resultaat is, dat NUM banden leest
-via numsym‚ tenzij andere vermeld. Dit lijkt in overeenstemming met wat we wensen.
+via numsym tenzij andere vermeld. Dit lijkt in overeenstemming met wat we wensen.
 </p><P  >
 <u>De verwerking van &ldquo;EINDE BAND&rdquo;.</u>
 </p><P  >
 Tot nog toe hebben we alleen erover gesproken, hoe HEP op einde band reageert.
 Daar hebben we afgesproken, dat het optreden van EINDE BAND mogelijk wel tot de 
 semantische informatie behoort en HEP is niet uitgerust met automatische aanvrage
-van volgband. Nu moeten we dit voor de volgende niveaus (CHAR‚ SYM en NUM) 
+van volgband. Nu moeten we dit voor de volgende niveaus (CHAR SYM en NUM) 
 beslissen.
 </p>
 <P  >
@@ -457,7 +458,7 @@ De consequentie hiervan is de eis, dat als we met SYM in diverse codes willen
 kunnen lezen, dan in elk geval op het begin van elke physische band de 
 code-identificerende aanhef staat. Is aan deze voorwaarde voldaan, dan kunnen we een
 lange band uit een aantal deelstukken assembleren door plakken; wanneer alle
-deelstukken eindigen met de stopcode‚ dan kan dit plakproces zelfs zonder er aandacht
+deelstukken eindigen met de stopcode dan kan dit plakproces zelfs zonder er aandacht
 aan te besteden of bij die plakjes codewisselingen optreden.
 </p><P  >
 Een en ander voel ik als streke aanwijzing om SYM wel met automatische aanvraag
@@ -495,7 +496,7 @@ het paginabeeld aftast te beginnen achter het teveel gelezen basic symbol!
 </p><P  >
 Wie de band &ldquo;zonder overslaan&rdquo; sequentieel wil aftasten zal na NUM eerst een
 keer SYM moeten doen en dan pas CHARFen. Een open vraag is, of SYM zijn voorgift
-moet behouden bij rechtstreeks CHARFen‚ CHARTnn of HEPpen. Ik hem geneigd deze
+moet behouden bij rechtstreeks CHARFen CHARTnn of HEPpen. Ik hem geneigd deze
 vraag ontkennend te moeten beantwoorden; anders heeft nl na CHARF herhaald SYMmen
 niets meer te maken met in successie aftasten en dat kon wel eens &ldquo;a trouble
 shooter&rsquo;s nightmare&rdquo; worden.
@@ -509,7 +510,7 @@ kan zijn.
 </p><P  >
 Ik zou me kunnen voorstellen, dat we naast NUM een boolean procedure NUMMARK
 introduceren en dit tweetal samen definieren op een willekeurige rij van numerieke
-waarden en zg‚ &ldquo;marks&rdquo; (waarbij een mark als getalscheider fungeert).
+waarden en zg &ldquo;marks&rdquo; (waarbij een mark als getalscheider fungeert).
 </p><P  >
 De boolean procedure NUMMARK geeft antwoord op de vraag of er bij doorlezing
 eerst een &ldquo;mark&rdquo; komt, zo ja, dan is daarmee deze mark gepasseerd. In de diverse
