@@ -5,4 +5,4 @@ convert:
 	./convert.sh
 
 watch:
-	while true ; do inotifywait assets/* *.pl; ./convert.sh; done
+	./convert.sh ; while true ; do inotifywait assets/* *.pl; ./convert.sh; done
