@@ -49,9 +49,9 @@ sub parse {
 
 sub convertArticle {
   my ($filename_in, $filename_out) = @_;
-  open ARTICLE, $filename_in;
+  open ARTICLE, "iconv -c --from UTF-8 --to UTF-8 \"$filename_in\"|";;
   binmode(ARTICLE, ":utf8");
-  my $article = `iconv -c --from UTF-8 --to UTF-8 "$filename_in"`;
+  my $article = <ARTICLE>;
 
   my $parsed = parse($article);
 
