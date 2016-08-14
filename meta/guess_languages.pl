@@ -8,7 +8,7 @@ use Lingua::Identify qw(:language_identification);
 
 $/ = undef;
 
-my @files = <../sources/www.cs.utexas.edu/~EWD/transcriptions/*/*.html>;
+my @files = <../sources/www.cs.utexas.edu/~EWD/transcriptions/*/*.htm*>;
 push(@files, '../sources/www.cs.utexas.edu/~EWD/transcriptions/EWD12xx/EWD 1202/EWD1202.html');
 
 foreach my $file (@files) {
