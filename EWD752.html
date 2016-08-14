@@ -23,27 +23,27 @@
 </td>  </tr>  </table>
 <p class="noindent"><b>0. Problem Description.</b>
 <p>Generalizing the synchronisation paradigm of the Dining Philosophers [1, 2], we consider a finite undirected graph,  
-whose vertices are called âphilosophersâ and whose edges are called âforksâ.  
-A philosopher is a process consisting of a continued alternation of two states called âthinkingâ and âeatingâ respectively. 
+whose vertices are called “philosophers” and whose edges are called “forks”.  
+A philosopher is a process consisting of a continued alternation of two states called “thinking” and “eating” respectively. 
 A fork is a resource shared between the two philosophers it joins;  it is either free or owned by one of those two philosophers.
-The statement âa philosopher is eatingâ is equivalent to the statement that the philosopher owns all the forks it shares with others. 
-Note that for a complete graph the above corresponds to total mutual exclusion, with evidently âeatingâ corresponding to the critical section; the case of the graph being a pentagon corresponds to the paradigm mentioned above. 
+The statement “a philosopher is eating” is equivalent to the statement that the philosopher owns all the forks it shares with others. 
+Note that for a complete graph the above corresponds to total mutual exclusion, with evidently “eating” corresponding to the critical section; the case of the graph being a pentagon corresponds to the paradigm mentioned above. 
 <p>Even in the case of complete 2-graph there is a problem, viz. the resolution of the contention for the single fork when the two philosophers happen to become simultaneously ready to stop thinking. 
   We postulate this problem of binary arbitration solved.  
-  The contention invites us to introduce after thinking and before eating an intermediate state called âready to grabâ the fork. 
+  The contention invites us to introduce after thinking and before eating an intermediate state called “ready to grab” the fork. 
   We can now formulate more precisely our postulate: 
 <table width=100%><tr><td valign=top width=10%>
 P0</td><td>a fork is owned <b>or</b> no philosopher is ready to grab it. </td>  </tr>  </table>
 With thinking periods of <em>positive</em> duration and eating periods of <em>finite</em> duration &mdash;and we shall assume this to be the case for the rest of our paper&mdash; we immediately derive from P0 following corollary 
 <table width=100%><tr><td valign=top width=10%>
 C0</td>
-<td>a  philosopher ready to grab a fork owned by an eating philosopher will own that fork upon completion of the otherâs meal. (It is understood that a thinking philosopher owns no forks.)
+<td>a  philosopher ready to grab a fork owned by an eating philosopher will own that fork upon completion of the other’s meal. (It is understood that a thinking philosopher owns no forks.)
 </td>  </tr>  </table>
 It follows that the postulated solution for the complete 2-graph is free from the the dangers of deadlock and of individual starvation. 
 <p>We propose to solve the synchronization problem corresponding to a general graph in terms of binary arbitration as described above. 
-In order to give the adjective âdistributedâ the strongest possible meaning, we accept the constraint that in any state a philosopher may 
+In order to give the adjective “distributed” the strongest possible meaning, we accept the constraint that in any state a philosopher may 
 be ready to grab <em>at most one specified</em> fork; 
-as before, the state âready to grab a specified forkâ is terminated only by grabbing it. 
+as before, the state “ready to grab a specified fork” is terminated only by grabbing it. 
 Consequently, a philosopher is from now on a process consisting of a repetition of 
 <table width=100%><tr><td valign=top width=10%>
 </td>
@@ -57,12 +57,12 @@ Consequently, a philosopher is from now on a process consisting of a repetition 
 <p>For the sake of realism we admit after the atomic act of grabbing a fork a finite delay before the new owner enters its next state, in particular before it becomes ready to grab the next fork. 
 For our later analysis it is then irrelevant whether, at the end of an eating period, the forks are released simultaneously or not. 
 <p class="noindent"><b>1. Avoiding the danger of deadlock. </b>
-<p>As long as a philosopher is ready to grab a fork (which &mdash;see P0&mdash; is owned by another) it is said to be âblockedâ by that fork; the fork in question is called the âblocking forkâ of that philosopher. 
+<p>As long as a philosopher is ready to grab a fork (which &mdash;see P0&mdash; is owned by another) it is said to be “blocked” by that fork; the fork in question is called the “blocking fork” of that philosopher. 
 <p>Deadlock &mdash;sometimes called &ldquo;partial deadlock&rdquo;&mdash; occurs when there exists a philosopher such that there is no possible future state in which it is eating. 
-Without constraints on the orders in which philosophers grab their forks, the danger of deadlock is present when the graph contains a cycle: let each philosopher on that cycle grab its âleft forkâ first. 
+Without constraints on the orders in which philosophers grab their forks, the danger of deadlock is present when the graph contains a cycle: let each philosopher on that cycle grab its “left fork” first. 
 In the sequel we shall formulate the precise constraint on the grabbing orders that exorcizes the danger of deadlock. 
-<p>For each philosopher in a connected subset of (two or more) philosophers we define &ldquo;its first fork in that subsetâ to be the first fork in its grabbing order that it shares with any other philosopher in that subset. 
-In each connected subset âdirected paths of first forksâ are recursively defined by
+<p>For each philosopher in a connected subset of (two or more) philosophers we define &ldquo;its first fork in that subset” to be the first fork in its grabbing order that it shares with any other philosopher in that subset. 
+In each connected subset “directed paths of first forks” are recursively defined by
 <table width=100%><tr><td valign=top width=10%>1)
 </td><td> a single philosopher is a directed path  of first forks </td></tr><tr><td valign=top>2)
 </td>
@@ -70,16 +70,16 @@ In each connected subset âdirected paths of first forksâ are recursive
 philosopher is a directed path of first forks. </td>  </tr>  </table>
 <p>Since each philosopher in a connected subset has a first fork in that (finite) subset, 
 cyclic directed paths of first forks exist. 
-<p class="noindent"><b>Theorem 0.</b> âthe danger of deadlock is presentâ = âthere exists a connected subset containing a cyclic directed path of more than two first forksâ. End of Theorem 0. 
+<p class="noindent"><b>Theorem 0.</b> “the danger of deadlock is present” = “there exists a connected subset containing a cyclic directed path of more than two first forks”. End of Theorem 0. 
 <p class="noindent"><b>Remark.</b> Note that in the terminology used, a 
-âcyclic directed path of two first forksâ corresponds to a single fork that is first fork at both ends. (End of Remark.) 
+”cyclic directed path of two first forks” corresponds to a single fork that is first fork at both ends. (End of Remark.) 
 <p class="noindent"><b>Proof of Theorem 0. </b>
 <p>Assume the existence of a subset containing a cyclic directed path of three or more first forks. 
 The state in which each philosopher on the cyclic path owns its first fork can be reached when all the philosophers outside the subset are thinking. 
 Since none of the philosophers on the cycle can be the first to eat, deadlock occurs. 
 Hence the truth of the right-hand side implies the truth of the left-hand side. 
 <p>Assume deadlock. This implies eventually the existence of a directed cycle of more than two blocking forks, hence of a directed cycle of forks each owned by, say, its target. 
-If there exists an owned âdiagonalâ fork of the cycle, there exists a smaller directed cycle of at least three owned forks (built from the âdiagonalâ and one part of the original cycle). 
+If there exists an owned “diagonal” fork of the cycle, there exists a smaller directed cycle of at least three owned forks (built from the “diagonal” and one part of the original cycle). 
 By induction we conclude the existence of a directed cycle of at least three owned forks, no diagonal of which is owned. 
 In the subset formed by the philosophers on such a cycle, the forks of the cycle are the first forks of their owners. 
 Hence the truth of the left-hand side implies the truth of the right-hand side. (End of proof of Theorem 0.) 
@@ -107,7 +107,7 @@ from <var>X</var> to <var>Y</var> but are extended by different blocking forks o
 <p>The above ordering of the blocking paths that start at <var>X</var> is meaningful for the following reason. 
 Associate with each blocking path the following state: philosophers not on the path are thinking and the last philosopher on the path is eating. 
 Upon completion of the current meal, a possible successor state of the system 
-is the one associated with the next blocking path, where ânextâ 
+is the one associated with the next blocking path, where “next” 
 is to be understood in terms of the above ordering 
 of the blocking paths starting at <var>X</var>. (See the last paragraph of Section 0.) 
 <p>Whenever <var>X</var> is not thinking, there is a 
@@ -115,7 +115,7 @@ unique blocking path starting at <var>X</var> and with
 its last philosopher eating. it now follows that 
 the maximum number of meals that can take 
 place between two successive thinking periods 
-of <var>X</var> &mdash;called âthe maximum delay for <var>X</var>â&mdash; 
+of <var>X</var> &mdash;called “the maximum delay for <var>X</var>”&mdash; 
 equals the number of blocking paths starting at <var>X</var>. 
 <p class="noindent">From the previous paragraph it follows that a delay 
 equal to the number of blocking paths starting at  
@@ -139,7 +139,7 @@ The blocking paths of the system can now be partitioned as follows:
     <var>BY</var></td><td>Blocking paths containing  <var>Y</var> but not <var>X</var> and blocking paths starting at <var>X</var> with <var>Y</var> in second position </td>  </tr>  </table>
 <p class="noindent"><b>Note.</b> Because <var>f</var> is the first fork of both <var>X</var> and <var>Y</var>, a blocking path containing both starts at one of them with the other in second position. (End of note.) 
 <p>Let us call <var>SX</var> the reduced system that remains when philosopher <var>Y</var> is removed (forks shared by <var>y</var> being removed from the grabbing orders of the others); 
-For this reduced system, <var>X</var> will be denoted as âthe pivotal philosopherâ. 
+For this reduced system, <var>X</var> will be denoted as “the pivotal philosopher”. 
 The system <var>SY</var> is similarly defined by interchanging <var>X</var> and <var>Y</var>. 
 <p>A blocking path from category <var>A</var> occurs in both reduced systems, independently of the place a pivotal philosopher occupies in the 
 grabbing orders of the non-pivotal ones and vice versa. 
@@ -211,13 +211,13 @@ obtained by choosing |<var>m</var>&ndash;<var>n</var>| &le; 1. (See Appendix.)
 <p>From the previous section it follows that the 
 minimal number of blocking paths can always be 
 realized by assigning to each fork a natural number, 
-called its ârankâ, such that 
+called its “rank”, such that 
 <table width=100%><tr><td valign=top width=10%>
 1)</td><td>forks meeting at a philosopher have distinct ranks, and
 </td></tr><tr><td valign=top>
 2)</td><td>each philosopher grabs its forks in the order of increasing rank.
 </td>  </tr>  </table>
-We call such systems âranked systemsâ. (Ranked 
+We call such systems “ranked systems”. (Ranked 
 systems are obviously deadlock-free.) 
 <p class="noindent"><b>Example.</b> By way of illustration we give a system 
 that is deadlock-free, is symmetric in the philosophers, 
@@ -225,10 +225,10 @@ and realizes the minimum number of blocking paths,
 but cannot be ranked. With four philosophers numbered 
 0, 1, 2, 3 and addition being modulo 4, philosopher 
   <var>i</var> grabs the forks it shares with <var>i</var>+2, 
-  <var>i</var>+1, and <var>i</var>+3 in that order. We donât need to consider 
+  <var>i</var>+1, and <var>i</var>+3 in that order. We don’t need to consider 
 that system; there is, indeed, a ranked 
 system enjoying the same properties: it suffices  
-to re-interpret âadditionâ as the bit-wise sum modulo  
+to re-interpret “addition” as the bit-wise sum modulo  
 2. (End of example.) 
 <p>In general, for a ranked system of <var>N</var> philosophers, 
 the number of distinct ranks exceeds the 
@@ -259,7 +259,7 @@ ranked system is, therefore, a power of 2.
 exists for each <var>N</var>=2<sup><var>k</var></sup>. Number the philosophers 
 (in binary) from 0 through <var>N</var>&ndash;1, and assign to 
 the fork shared by philosophers <var>i</var> and <var>j</var> the 
-rank <var>i</var>+<var>j</var>, where âadditionâ is again the bit-wise 
+rank <var>i</var>+<var>j</var>, where “addition” is again the bit-wise 
 sum modulo 2. If <var>X</var> is the number of a philosopher, 
 we can renumber the philosophers without affecting the ranks by 
 performing for each philosopher number <var>i</var>: <var>i</var>:=<var>i</var>+<var>X</var> (addition again bit-wise 
@@ -290,10 +290,10 @@ We can only recommend it when it can be shown on other grounds &mdash;such as ti
 <p>The case of the complete graph, corresponding to total mutual exclusion, was studied in order to determine how bad worst-case delays could be. 
 We now return to the general graph, for which we shall propose a different solution. 
 At the level of detail in which it will be described, it uses less austere communication facilities than binary arbitration only, but it achieves the smallest possible worst-case delay. 
-<p>For this purpose, the life of a philosopher is viewed as a cyclic succession of three states, called âthinkingâ, âhungryâ, and âeatingâ respectively; for brevityâs sake the union of the last two states will be denoted by âtabledâ. 
+<p>For this purpose, the life of a philosopher is viewed as a cyclic succession of three states, called “thinking”, “hungry”, and “eating” respectively; for brevity’s sake the union of the last two states will be denoted by “tabled”. 
 <p>Furthermore, also each fork has three states: either it is undirected or it is directed, i.e.  it carries an arrow in one of the two possible directions. 
 <p>The life of a philosopher is now programmed as follows, angle brackets being used to 
-delimit âpoint actionsâ, philosophers sharing a fork are called each otherâs neighbours. 
+delimit “point actions”, philosophers sharing a fork are called each other’s neighbours. 
 <p class="noindent">
 <table width=100% cellpadding="0" cellspacing="0"><tr><td valign=top width=10%>
 <b>do</b></td><td>true &rarr;
@@ -316,13 +316,13 @@ T2:</td><td>&lt;makes all its forks undirected and switches to thinking&gt;
 </td>  </tr>  </table>
 <p>The system, which is started with all philosophers thinking and all forks undirected, maintains the following invariants: 
 <table width=100%><tr><td valign=top width=10%>
-Q0:</td><td>for each pair of neighbours <var>X</var> and <var>Y</var> âboth <var>X</var> and <var>Y</var> are tabledâ = âthe fork shared by <var>X</var> and <var>Y</var> is directedâ
+Q0:</td><td>for each pair of neighbours <var>X</var> and <var>Y</var> “both <var>X</var> and <var>Y</var> are tabled” = “the fork shared by <var>X</var> and <var>Y</var> is directed”
 </td></tr><tr><td valign=top>
-Q1:</td><td>for each philosopher <var>X</var> â<var>X</var> is hungryâ <b>or</b> â<var>X</var> is without outgoing arrowsâ.
+Q1:</td><td>for each philosopher <var>X</var> “<var>X</var> is hungry” <b>or</b> “<var>X</var> is without outgoing arrows”.
 </td>  </tr>  </table>
 <p>As a consequence of Q0, a thinking philosopher has all its forks undirected; as a consequence of Q1, T2 removes only incoming arrows. 
 The universal truth of Q0 and Q1 precludes simultaneously eating neighbours. 
-<p>In order to prove that transitions T1 &mdash;which are implemented by making a philosopher âwaitâ until all its outgoing arrows have disappeared&mdash; cannot lead to deadlock, we observe the obvious invariance of 
+<p>In order to prove that transitions T1 &mdash;which are implemented by making a philosopher “wait” until all its outgoing arrows have disappeared&mdash; cannot lead to deadlock, we observe the obvious invariance of 
 <table width=100%><tr><td valign=top width=10%>
 Q2:</td><td>directed forks do not form directed cycles.
 </td>  </tr>  </table>
@@ -330,49 +330,49 @@ Q2:</td><td>directed forks do not form directed cycles.
 All philosophers of this directed subgraph are tabled, hence that subgraph cannot grow. 
 It is furthermore cycle-free (on account of Q2): its longest path ends at a philosopher that can eat and, hence, that maximum path length gives an upper bound for the delay of <var>X</var>. 
 With <var>N</var> philosophers, the delay is therefore at most <var>N</var>. 
-<p>Nice as this solution is, it begs the question, since the only safe way of implementing the Tâs &mdash;in particular T0 and T2&mdash; as sequential processes that we know of is to make the Tâs of neighbours mutually exclusive in time, and that mutual exclusion was the original problem. 
+<p>Nice as this solution is, it begs the question, since the only safe way of implementing the T’s &mdash;in particular T0 and T2&mdash; as sequential processes that we know of is to make the T’s of neighbours mutually exclusive in time, and that mutual exclusion was the original problem. 
 <p>Under the assumption that both thinking and eating of a philosopher always require more than <var>N</var> &ldquo;transition times T&rdquo;, an 
-implementation of the mutual exclusion of neighbouring Tâs by means of binary arbitration yields, on the microscopic level, a delay of at most <var>&ldquo;</var> transition times. 
+implementation of the mutual exclusion of neighbouring T’s by means of binary arbitration yields, on the microscopic level, a delay of at most <var>&ldquo;</var> transition times. 
 <p>The moral of the story is that an algorithm with very poor worst-case behaviour can be safely used when embedded in an environment that prevents the realization of the poor performance. 
 <p class="noindent"><b>References  </b>
 <table width=100%><tr><td valign=top width=10%>
 [1]</td>
-<td>Hoare, C.A.R., &ldquo;Towards a Theory of Parallel Programming&rdquo;. <i>Operating Systems Techniques</i>, Ed. C.A.R. Hoare and R.H. Perrott, Academic Press, London and New York, 1972, pp 61â71. </td></tr><tr><td valign=top>
+<td>Hoare, C.A.R., &ldquo;Towards a Theory of Parallel Programming&rdquo;. <i>Operating Systems Techniques</i>, Ed. C.A.R. Hoare and R.H. Perrott, Academic Press, London and New York, 1972, pp 61–71. </td></tr><tr><td valign=top>
 [2]</td>
 <td>Dijkstra, Edsger W., &ldquo;Hierarchical Ordering of Sequential Processes&rdquo;, ibid.
-pp 72â93. 
+pp 72–93. 
 </td>  </tr>  </table>
 <p class="noindent"><b>Appendix </b>
 <p class="noindent">The claim that the system 
 <table width=100% cellpadding="0" cellspacing="0"><tr><td valign=top width=18%>
 for <var>x</var>=1:</td><td width="82%">f(<var>x</var>) = 1 </td></tr><tr><td valign=top>
 for <var>x</var>>1:</td>
-<td>f(<var>x</var>) = (<var>n</var>+1)âf(<var>m</var>) + (<var>m</var>+1)âf(<var>n</var>) </td></tr><tr><td valign=top>
+<td>f(<var>x</var>) = (<var>n</var>+1)∙f(<var>m</var>) + (<var>m</var>+1)∙f(<var>n</var>) </td></tr><tr><td valign=top>
 </td>
 <td>where <var>m</var>&ge;1, <var>n</var>&ge;1, <var>m</var>+<var>n </var>= <var>x</var></td>  </tr>  </table>
-yields its minimal solution for |<var>m</var>â<var>n</var>| &le; 1 is equivalent to
+yields its minimal solution for |<var>m</var>–<var>n</var>| &le; 1 is equivalent to
 the statement that the function f defined by 
 <table width=100% cellpadding="0" cellspacing="0"><tr><td valign=top width=10%>
 </td><td>f(1) = 1                               </td>
-<td> â«
+<td> ⎫
 </td></tr><tr><td valign=top>
 </td>
-<td>f(2â<var>k</var>) = (<var>k</var>+1)âf(<var>k</var>) + (<var>k</var>+1)âf(<var>k</var>) </td>
-<td>â¬ for <var>k</var> &ge; 1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<td>f(2∙<var>k</var>) = (<var>k</var>+1)∙f(<var>k</var>) + (<var>k</var>+1)∙f(<var>k</var>) </td>
+<td>⎬ for <var>k</var> &ge; 1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 </td></tr><tr><td valign=top>
 </td>
-<td>f(2â<var>k</var>+1) = (<var>k</var>+1)âf(<var>k</var>+1) + (<var>k</var>+2)âf(<var>k</var>) </td>
-<td> â­
+<td>f(2∙<var>k</var>+1) = (<var>k</var>+1)∙f(<var>k</var>+1) + (<var>k</var>+2)∙f(<var>k</var>) </td>
+<td> ⎭
 </td>  </tr>  </table>
 satisfies for <var>m</var>&ge;1, <var>n</var>&ge;1, P(<var>m</var>,<var>n</var>) &ge; 0 with P defined by 
 <table width=100%><tr><td valign=top width=10%>
 </td>
-<td>P(<var>m</var>,<var>n</var>) = (<var>m</var>+1)âf(<var>n</var>) &ndash; f(<var>m</var>+<var>n</var>) + (<var>n</var>+1)âf(<var>m</var>) </td><td align=right>(0)
+<td>P(<var>m</var>,<var>n</var>) = (<var>m</var>+1)∙f(<var>n</var>) &ndash; f(<var>m</var>+<var>n</var>) + (<var>n</var>+1)∙f(<var>m</var>) </td><td align=right>(0)
 </td>  </tr>  </table>
 <p>With Q defined by 
 <table width=100%><tr><td width=8% height="20" valign=top>
 </td>
-<td width="86%">Q(<var>m</var>,<var>n</var>) = <var>m</var>âf(<var>n</var>) &ndash; <var>n</var>âf(<var>m</var>)  </td>
+<td width="86%">Q(<var>m</var>,<var>n</var>) = <var>m</var>∙f(<var>n</var>) &ndash; <var>n</var>∙f(<var>m</var>)  </td>
 <td width="6%"><div align="right">(1)</div></td>
 </tr>  
   </table>
@@ -390,7 +390,7 @@ On account of (1), (2) follows from
 which follows from 
 <table width=100%><tr><td valign=top width=10%>
 </td>
-<td><var>n</var>âf(<var>n</var>+1) &ndash; (<var>n</var>+1)âf(<var>n</var>) &gt; 0 for <var>n</var>&ge;1
+<td><var>n</var>∙f(<var>n</var>+1) &ndash; (<var>n</var>+1)∙f(<var>n</var>) &gt; 0 for <var>n</var>&ge;1
 </td><td align=right>(4)
 </td>  </tr>  </table>
 <p>We shall demonstrate (4) by 
@@ -400,25 +400,25 @@ b)</td><td>demonstrating that the first difference of the
 left-hand side of (4) is positive. This first difference is 
 </td></tr><tr><td valign=top>
 </td>
-<td>(<var>n</var>+1)âf(<var>n</var>+2) &ndash; 2â(<var>n</var>+1)âf(<var>n</var>+1) + (<var>n</var>+1)âf(<var>n</var>) = </td></tr><tr><td valign=top>
+<td>(<var>n</var>+1)∙f(<var>n</var>+2) &ndash; 2∙(<var>n</var>+1)∙f(<var>n</var>+1) + (<var>n</var>+1)∙f(<var>n</var>) = </td></tr><tr><td valign=top>
 </td>
-<td>(<var>n</var>+1)â(f(<var>n</var>+2) &ndash; 2âf(<var>n</var>+1) + f(<var>n</var>)) for <var>n</var>&ge;1
+<td>(<var>n</var>+1)∙(f(<var>n</var>+2) &ndash; 2∙f(<var>n</var>+1) + f(<var>n</var>)) for <var>n</var>&ge;1
 </td>  </tr>  </table>
 We are left with the proof that f has a positive second difference. With ddf defined by 
 <table width=100%><tr><td valign=top width=10%>
 </td>
-<td>ddf(<var>n</var>) = f(<var>n</var>+2) â 2âf(<var>n</var>+1) + f(<var>n</var>) </td>  </tr>  </table>
+<td>ddf(<var>n</var>) = f(<var>n</var>+2) – 2∙f(<var>n</var>+1) + f(<var>n</var>) </td>  </tr>  </table>
 we deduce from the definition of f 
 <table width=100%><tr><td valign=top width=5%>
 </td>
-<td>ddf(2â<var>k</var>) = 2â(f(<var>k</var>+1) â f(<var>k</var>)) </td></tr><tr><td valign=top>
-</td><td>ddf(2â<var>k</var>+1) = (<var>k</var>+2)âddf(<var>k</var>) </td>  </tr>  </table>
+<td>ddf(2∙<var>k</var>) = 2∙(f(<var>k</var>+1) – f(<var>k</var>)) </td></tr><tr><td valign=top>
+</td><td>ddf(2∙<var>k</var>+1) = (<var>k</var>+2)∙ddf(<var>k</var>) </td>  </tr>  </table>
 <p class="noindent">Since f(1) = 1, f(2) = 4, f(3) = 11 we find for
   <var>k</var>=1: f(<var>k</var>+1) &ndash; f(<var>k</var>) = 3 and ddf(<var>k</var>) = 4. From 
 that base it follows by induction that all first 
 and second differences of f are positive. 
 Hence, (2) has been established. (End of Proof of (2)). 
-<p>Next we define &mdash; with (2â<var>k</var>) <b>div</b> 2 = (2â<var>k</var>+1) <b>div</b> 2 = <var>k</var>&mdash; 
+<p>Next we define &mdash; with (2∙<var>k</var>) <b>div</b> 2 = (2∙<var>k</var>+1) <b>div</b> 2 = <var>k</var>&mdash; 
 <table width=100% cellpadding="0" cellspacing="0"><tr><td valign=top width=33%>
 <var>x</var><sub>0</sub> = <var>m</var> <b>div</b> 2</td><td><var>x</var><sub>2</sub> = <var>n</var> <b>div</b> 2
 </td></tr><tr><td valign=top>
@@ -429,42 +429,42 @@ Hence, (2) has been established. (End of Proof of (2)).
 <table width=100% cellpadding="0" cellspacing="0"><tr><td valign=top width=30%>
 <var> x</var><sub>0</sub> + <var>x</var><sub>1</sub> = <var>m</var></td><td><var>x</var><sub>2</sub> + <var>x</var><sub>3</sub> = <var>n</var></td>  </tr>  </table>
 {<var>x</var><sub>0</sub> + <var>x</var><sub>3</sub>, <var>x</var><sub>1</sub> + <var>x</var><sub>2</sub>} = {(<var>m</var>+<var>n</var>) <b>div</b> 2, (<var>m</var>+<var>n</var>+1) <b>div</b> 2}
-<p>Using in the subscripts âââ to denote the bit-wise
+<p>Using in the subscripts “∔” to denote the bit-wise
 sum modulo 2, we now consider the expression 
 <table width=100%><tr><td width=10% height="33" valign=top>
-</td><td>(<b>S</b> <var>i</var>: 0&le; <var>i</var> &le; 2: (<var>x</var><sub><var>i</var>â1</sub> + <var>x<sub>i</sub></var><sub>â2</sub>+1) â 
-P(<var>x<sub>i</sub></var>, <var>x<sub>i</sub></var><sub>â3</sub>) + (<var>x<sub>i</sub></var><sub>â3</sub> - <var>x<sub>i</sub></var><sub>â1</sub>) â 
-Q(<var>x<sub>i</sub></var>, <var>x<sub>i</sub></var><sub>â2</sub>))
+</td><td>(<b>S</b> <var>i</var>: 0&le; <var>i</var> &le; 2: (<var>x</var><sub><var>i</var>∔1</sub> + <var>x<sub>i</sub></var><sub>∔2</sub>+1) ∙ 
+P(<var>x<sub>i</sub></var>, <var>x<sub>i</sub></var><sub>∔3</sub>) + (<var>x<sub>i</sub></var><sub>∔3</sub> - <var>x<sub>i</sub></var><sub>∔1</sub>) ∙ 
+Q(<var>x<sub>i</sub></var>, <var>x<sub>i</sub></var><sub>∔2</sub>))
 </td><td align=right>(5)
 </td></tr>  </table>
 <p>In (5) we have two types of terms </p>
 <p class="noindent">a) terms derived from the middle term of P; they add up to </p>
 <table width=100% cellpadding="0" cellspacing="0"><tr><td width=10% height="32" valign=top>
 </td>
-<td>â (<var>x</var><sub>1</sub> + <var>x</var><sub>2</sub> + 1) â f(<var>x</var><sub>0</sub> + <var>x</var><sub>3</sub>) â (<var>x</var><sub>0</sub> + <var>x</var><sub>3</sub> + 1) â f(<var>x</var><sub>1</sub> + <var>x</var><sub>2</sub>) =
+<td>– (<var>x</var><sub>1</sub> + <var>x</var><sub>2</sub> + 1) ∙ f(<var>x</var><sub>0</sub> + <var>x</var><sub>3</sub>) – (<var>x</var><sub>0</sub> + <var>x</var><sub>3</sub> + 1) ∙ f(<var>x</var><sub>1</sub> + <var>x</var><sub>2</sub>) =
 </td></tr><tr><td height="35" valign=top>
 </td>
-<td>â f(<var>x</var><sub>0</sub> + <var>x</var><sub>1</sub> + <var>x</var><sub>2</sub> + <var>x</var><sub>3</sub>) =
+<td>– f(<var>x</var><sub>0</sub> + <var>x</var><sub>1</sub> + <var>x</var><sub>2</sub> + <var>x</var><sub>3</sub>) =
 </td></tr><tr><td height="30" valign=top>
 </td>
-<td>â f(<var>m</var> + <var>n</var>) . </td>  </tr>  </table>
+<td>– f(<var>m</var> + <var>n</var>) . </td>  </tr>  </table>
 b) terms with f(<var>x<sub>i</sub></var>) for 0 &le; <var>i</var> &lt; 4. The coefficient of f(<var>x<sub>i</sub></var>) is
 <table width=100% cellpadding="0" cellspacing="0"><tr><td width=10% height="43" valign=top>
-</td><td>(<var>x<sub>i</sub></var><sub><var>â</var>1</sub> + <var>x<sub>i</sub></var><sub>â2</sub> + 1 ) â (<var>x<sub>i</sub></var><sub>â3</sub> + 1 ) +
-(<var>x<sub>i</sub></var><sub>â1</sub> - <var>x<sub>i</sub></var><sub>â3</sub>) â (<var>x<sub>i</sub></var><sub>â2</sub> =
+</td><td>(<var>x<sub>i</sub></var><sub><var>∔</var>1</sub> + <var>x<sub>i</sub></var><sub>∔2</sub> + 1 ) ∙ (<var>x<sub>i</sub></var><sub>∔3</sub> + 1 ) +
+(<var>x<sub>i</sub></var><sub>∔1</sub> - <var>x<sub>i</sub></var><sub>∔3</sub>) ∙ (<var>x<sub>i</sub></var><sub>∔2</sub> =
 </td></tr><tr><td height="40" valign=top>
-</td><td>(<var>x<sub>i</sub></var><sub>â2</sub> + <var>x<sub>i</sub></var><sub>â3</sub> + 1 ) â (<var>x<sub>i</sub></var><sub>â1</sub> + 1) .
+</td><td>(<var>x<sub>i</sub></var><sub>∔2</sub> + <var>x<sub>i</sub></var><sub>∔3</sub> + 1 ) ∙ (<var>x<sub>i</sub></var><sub>∔1</sub> + 1) .
 </td>  </tr>  </table>
 Combination of the terms with <var>i</var>=0 and <var>i</var>=1 gives
 <table width=100%><tr><td width=10% height="35" valign=top>
 </td>
-<td>(<var>x</var><sub>2</sub> + <var>x</var><sub>3</sub> + 1 ) â f(<var>x</var><sub>0</sub> + <var>x</var><sub>1</sub>) = (<var>n</var>+1) â f(<var>m</var>) , </td>  </tr>  </table>
+<td>(<var>x</var><sub>2</sub> + <var>x</var><sub>3</sub> + 1 ) ∙ f(<var>x</var><sub>0</sub> + <var>x</var><sub>1</sub>) = (<var>n</var>+1) ∙ f(<var>m</var>) , </td>  </tr>  </table>
 Combination of the terms with <var>i</var>=2 and <var>i</var>=3 gives
 <table width=100%><tr><td width=10% height="32" valign=top>
-</td><td>(<var>x</var><sub>0</sub> + <var>x</var><sub>1</sub> + 1 ) â f(<var>x</var><sub>2</sub> + <var>x</var><sub>3</sub>) = (<var>m</var>+1) â f(<var>n</var>) . </td>  </tr>  </table>
+</td><td>(<var>x</var><sub>0</sub> + <var>x</var><sub>1</sub> + 1 ) ∙ f(<var>x</var><sub>2</sub> + <var>x</var><sub>3</sub>) = (<var>m</var>+1) ∙ f(<var>n</var>) . </td>  </tr>  </table>
 Consequently, expression (5) equals P(<var>m</var>, <var>n</var>) .
-<p>Because (<var>x<sub>i</sub></var><sub><var>â</var>3</sub> &gt; <var>x<sub>i</sub></var><sub>â1</sub> &rArr; <var>x</var><sub><var>i</var>â2</sub> &ge; <var>x<sub>i</sub></var> &mdash;and
-similarly (<var>x<sub>i</sub></var><sub>â3</sub> &lt; <var>x<sub>i</sub></var><sub>â1</sub> &rArr; <var>x</var><sub><var>i</var>â2</sub> &le; <var>x</var><sub><var>i</var></sub>&mdash;
+<p>Because (<var>x<sub>i</sub></var><sub><var>∔</var>3</sub> &gt; <var>x<sub>i</sub></var><sub>∔1</sub> &rArr; <var>x</var><sub><var>i</var>∔2</sub> &ge; <var>x<sub>i</sub></var> &mdash;and
+similarly (<var>x<sub>i</sub></var><sub>∔3</sub> &lt; <var>x<sub>i</sub></var><sub>∔1</sub> &rArr; <var>x</var><sub><var>i</var>∔2</sub> &le; <var>x</var><sub><var>i</var></sub>&mdash;
 we conclude
 om account of (2) that the second terms in (5) are &ge; 0. Therefore, P(<var>m</var>,<var>n</var>) &ge; 0 can
 be concluded from
