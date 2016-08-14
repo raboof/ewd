@@ -13,7 +13,7 @@ my @ewds = ();
 my %language = {};
 open LANG, "meta/languages.tsv" or die;
 while (<LANG> =~ /(.*)\t(.*)/g) {
-  $language{$1} = $2;
+  $language{"$1.html"} = $2;
 }
 
 $/ = undef;

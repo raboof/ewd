@@ -15,7 +15,7 @@ foreach my $file (@files) {
   open FILE, $file or die "Couldn't open file $file: $!";
   my $content = <FILE>;
   my $lang = langof($content);
-  if ($lang && $file =~ /.*\/(.*)/) {
+  if ($lang && $file =~ /.*\/(.*).htm*/) {
     print $1 . "\t" . $lang . "\n";
   }
 }
