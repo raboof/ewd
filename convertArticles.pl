@@ -24,7 +24,7 @@ sub getbody {
   if ($article =~ /<div id="content">(.*)/mis) {
     $article = $1;
   }
-  if ($article =~ /.*(<p class="noindent">)?<u>\Q$title\E<\/u>\.?(<\/p>)?(.*)/mis) {
+  if ($article =~ /.*(<p class="noindent">)?<u>\Q$title\E\s*<\/u>\.?(<\/p>)?(.*)/mis) {
     $article = $3;
   }
 
@@ -37,7 +37,7 @@ sub parse {
 
   $article =~ s/href="..\/..\//href="https:\/\/www.cs.utexas.edu\/~EWD\/$1/gi;
 
-  if ($article =~ /<title>(E.W.\s*Dijkstra Archive: )?(&ldquo;)?(.*?)\.?(&rdquo;)?( \(EWD\s*\d+\))?<\/title>/mi) {
+  if ($article =~ /<title>(E.W.\s*Dijkstra Archive: )?(&ldquo;)?(.*?)\.?(&rdquo;)?(\s*\(EWD\s*\d+\))?\s*<\/title>/mi) {
     $result{'title'} = $3;
     $article =~ s/<h1>\Q$result{'title'}\E<\/h1>//mi;
   }
