@@ -1,15 +1,15 @@
   <!DOCTYPE html>
   <html>
   <head>
-    <title>The Distributed Snapshot of K. M. Chandy and L. Lamport (EWD 864a)</title>
+    <title>The Distributed Snapshot of K. M. Chandy and L. Lamport</title>
     <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
     <link href="assets/common.css" rel="stylesheet">
     <link href="assets/transcriptions.css" rel="stylesheet">
     <meta name="generator" content="convertArticle.pl">
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@raboofje" />
-    <meta name="twitter:description" content="From the Edsger Dijkstra EWD archive: The Distributed Snapshot of K. M. Chandy and L. Lamport (EWD 864a)" />
-    <meta name="twitter:title" content="The Distributed Snapshot of K. M. Chandy and L. Lamport (EWD 864a)" />
+    <meta name="twitter:description" content="From the Edsger Dijkstra EWD archive: The Distributed Snapshot of K. M. Chandy and L. Lamport" />
+    <meta name="twitter:title" content="The Distributed Snapshot of K. M. Chandy and L. Lamport" />
     <meta name="twitter:image" content="http://raboof.github.io/ewd/assets/dijkstra.jpeg" />
   </head>
   <body>
@@ -18,26 +18,8 @@
       <a href="index.html">HOME</a>
     </div>
   </div>
-  <h1>The Distributed Snapshot of K. M. Chandy and L. Lamport (EWD 864a)</h1>
-  <div class='body'><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
-<html>
-
-	<head>
-		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
-		<meta name="generator" content="Adobe GoLive 6">
-		<title>E.W.Dijkstra Archive: The Distributed Snapshot of K. M. Chandy and L. Lamport (EWD 864a)</title>
-		<style type="text/css">
-         p { text-indent: 2.0em; }
-        </style>
-	</head>
-
-	<body bgcolor="#ffffff">
-		<div align="right">
-			&nbsp;&nbsp;<a title="PDF scan of EWD 864a" href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD864a.PDF" target="_blank">EWD 864a</a></div>
-		<div align="left">
-			<div>
-				<u>The Distributed Snapshot of K. M. Chandy and L. Lamport</u>
+  <h1>The Distributed Snapshot of K. M. Chandy and L. Lamport</h1>
+  <div class='body'>
 				<p>We consider a distributed system of the form of a strongly connected, finite, directed graph, of which each vertex is a machine and each edge a uni-directional first-in-first-out buffer of sufficient capacity.  (Strongly connected means that there is a directed path from any vertex to any vertex.)</p>
 				<p>A distributed computation consists of a succession of so-called &#x201C;atomic actions&#x201D;; each atomic action is performed by one of the machines: it changes the state of that machine, accepts at most one message per input buffer of that machine, and sends at most one message per output buffer of that machine.  The buffers have no clairvoyance, i.e. a message can only be accepted after it has been sent.</p>
 				<p>For a message-accepting action to take place, the messages in question must have arrived; arrival of messages, however, only enables an atomic action to take place and never forces it to take place.  Each message in a buffer will eventually be accepted by the machine to which this buffer leads.  (The friendly daemon that resolves each machine's nondeterminacy so as to ensure the implied fairness is not considered part of the system.)</p>

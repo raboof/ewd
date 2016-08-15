@@ -1,15 +1,15 @@
   <!DOCTYPE html>
   <html>
   <head>
-    <title>Making a fair roulette from a possibly biased coin (EWD 1071a)</title>
+    <title>Making a fair roulette from a possibly biased coin</title>
     <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
     <link href="assets/common.css" rel="stylesheet">
     <link href="assets/transcriptions.css" rel="stylesheet">
     <meta name="generator" content="convertArticle.pl">
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@raboofje" />
-    <meta name="twitter:description" content="From the Edsger Dijkstra EWD archive: Making a fair roulette from a possibly biased coin (EWD 1071a)" />
-    <meta name="twitter:title" content="Making a fair roulette from a possibly biased coin (EWD 1071a)" />
+    <meta name="twitter:description" content="From the Edsger Dijkstra EWD archive: Making a fair roulette from a possibly biased coin" />
+    <meta name="twitter:title" content="Making a fair roulette from a possibly biased coin" />
     <meta name="twitter:image" content="http://raboof.github.io/ewd/assets/dijkstra.jpeg" />
   </head>
   <body>
@@ -18,9 +18,8 @@
       <a href="index.html">HOME</a>
     </div>
   </div>
-  <h1>Making a fair roulette from a possibly biased coin (EWD 1071a)</h1>
+  <h1>Making a fair roulette from a possibly biased coin</h1>
   <div class='body'>
-				<p class="noindent"><u>Making a fair roulette from a possibly biased coin.</u></p>
 				<p>We are given a possibly biased coin, i.e., a coin that, when flipped, shows head or tail with the probabilities <var>p</var> and <var>q</var> respectively, with <var>p</var>+<var>q</var> = 1, but not necessarily <var>p</var>=<var>q</var>. We don't know the values of <var>p</var> and <var>q</var>, we only know that the coin remains &ldquo;the same&rdquo;, i.e., that <var>p</var> and <var>q</var> are constant in time. The problem is to design an experiment with 37 different outcomes of equal probability.</p>
 				<p>In a variable <var>B</var> of type &ldquo;sequence of 37 faces&rdquo;, we record 37 successive flippings of the coin; if all the faces in <var>B</var> are the same, we start afresh, otherwise we accept the value of <var>B</var>. This first stage of the design has been inspired by (i) the consideration that the experiment has to fail (to terminate) if the coin is so extremely biased that one of the faces <em>never</em> shows up, and (ii) the fact that <span class="inlineformula">2<sup>37</sup>-2</span> is a multiple of 37. (One of Fermat's theorems states that for prime <var>p</var>, <span class="inlineformula"><var>n</var><sup><var>p</var></sup>-<var>n</var></span> is divisible by <var>p</var>.)</p>
 				<p>With <var>B</var> thus determined, we consider the 37 sequences obtained by rotating (to the left, say) for &nbsp; 0&nbsp;&#x2264;&nbsp;<var>k</var>&nbsp;&lt;&nbsp;37 &nbsp; the sequence <var>B</var> over <var>k</var> positions. Because <var>B</var> is not periodic with period 1 and 37 is prime, these 37 sequences are all different. Moreover, since they all contain the same number of heads (and the same number of tails), they are 37 equally likely <var>B</var>-values. To complete our design, we have to introduce a convention that establishes a 1&ndash;1 correspondence between those 37 sequences and the numbers from 0 to 36. We can, for instance, associate with <var>B</var> the number of positions <var>B</var> has to be rotated over so as to yield the lexical minimum of those 37 sequences. (With 37 replaced by 2, the above yields a well-known method for making a fair coin from a possibly biased one.)</p>
