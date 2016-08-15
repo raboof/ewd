@@ -5,6 +5,9 @@
     <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
     <link href="assets/common.css" rel="stylesheet">
     <link href="assets/transcriptions.css" rel="stylesheet">
+    <link href="assets/tweet-selection.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/tweet-selection.js"></script>
     <meta name="generator" content="convertArticle.pl">
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@raboofje" />
@@ -20,5 +23,17 @@
   </div>
   <h1>Mathematical induction's fixpoint</h1>
   <div class='body'>				<p>Let <var>r</var> be a left-founded relation, i.e. let </p>				<p class="noindent">(0) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#x3008; &#x2200;<var>x</var> :: [<var>x</var> &#x21D2; <var>r</var> ; <var>x</var>]  &#x21D2 [ <var>x</var> &#x21D2; false ] &nbsp;&#x3009; &nbsp;&nbsp;&nbsp;&nbsp;;</p>				<p class="noindent">an appeal to what is called &quot;mathematical induction&quot; means that a proof obligation of the form</p>				<p class="noindent">(1) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ <var>x</var> &#x21D2; false ]</p>				<p class="noindent">is replaced by the formally weaker obligation</p>				<p class="noindent">(2) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [<var>x</var> &#x21D2; <var>r</var> ; <var>x</var>] &nbsp;&nbsp;&nbsp;&nbsp; or &nbsp;&nbsp;&nbsp;&nbsp; [ <var>x</var> &#x2227; &#x00AC; ( <var>r</var> ; <var>x</var> ) &#x21D2; false ] .</p>				<p class="noindent">Proving (2) by mathematical induction leads to the (subsequently simplified) obligation</p>				<p class="noindent">(3) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [ <var>x</var> &#x2227; &#x00AC; ( <var>r</var> ; <var>x</var> ) &#x21D2; <var>r</var>; ( <var>x</var> &#x2227; &#x00AC; ( <var>r</var> ; <var>x</var> ))] <br />					&#x2261;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {shunting}<br />					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [<var>x</var> &#x21D2; <var>r</var> ; <var>x</var> &#x2228; <var>r</var> ; ( <var>x</var> &#x2227; &#x00AC; ( <var>r</var> ; <var>x</var> ))]<br />					&#x2261;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { ; monotonic in 2nd argument}<br />					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [<var>x</var> &#x21D2; <var>r</var> ; <var>x</var>]</p>				<p class="noindent">i.e. (2)! The decision to prove by mathematical induction is idempotent. With thanks to the ETAC.</p>			</div>			<!-- date and signature -->			<div>				<p class="rightalign">Nuenen, 17 December 1996</p>				<p class="noindent"><abbr title="Professor">prof.</abbr><abbr title="Doctor">dr.</abbr> Edsger W.Dijkstra<br />					Department of Computer Sciences<br />					The University of Texas at Austin<br />					Austin, <abbr title="Texas">TX</abbr> 78712-1188, <abbr title="United States of America">USA</abbr></p>			</div>			<!-- end date and signature -->			<hr />			<!-- name and date -->			<div id="footer">				<font size="-1">					transcribed by Jose Alejandro Ruiz Delgado<br />					revised<csobj format="MedDate" h="13" region="15" t="DateTime" w="96">Sun, 31 Aug 2008</csobj></font></div>		</div>	</body></html></div>
+  <script>
+$('body').tweetSelection({
+  height: 300,
+  width: 600,
+  minimumTextSelected: 3,
+  shareClass: '.tweet-selection',
+  ellipsis: '...',
+  quoteLeft: '"',
+  quoteRight: '"',
+  via: 'raboofje'
+});
+  </script>
   </body>
   </html>

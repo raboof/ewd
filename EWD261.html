@@ -5,6 +5,9 @@
     <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
     <link href="assets/common.css" rel="stylesheet">
     <link href="assets/transcriptions.css" rel="stylesheet">
+    <link href="assets/tweet-selection.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/tweet-selection.js"></script>
     <meta name="generator" content="convertArticle.pl">
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@raboofje" />
@@ -20,5 +23,17 @@
   </div>
   <h1>Hoe wiskundig programmeren is</h1>
   <div class='body'>			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Een (goed opgezet) programma vertoont een grote structurele analogie met elke (goed opgezette) mathematische theorie. Het werk van de programmeur onderscheidt zich daardoor voor mijn gevoel niet wezenlijk van dat van de creatieve mathematicus.</p>			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Er zijn echter (meer of minder) duidelijke accentsverschillen:<br>1)&nbsp;&nbsp;&nbsp;de basisconcepten der programmering zijn gering in aantal en vrij simpel (misleidend simpel, zo je wilt); het is daardoor een ideaal oefenterrein voor ontwikkeling. (Daarbij komt nog de louterende, correctieve invloed van de eis, dat het programma uiteindelijk echt moet werken!)<br>2)&nbsp;&nbsp;&nbsp;veel wiskundeonderwijs doceert bestaande theorieen, dwz. maakt de student vertrouwd met een specifiek (uitgebreid) begrippenarsenaal; de programmeur zal evenwel iedere keer het passende begrippenarsenaal zelf moeten ontwikkelen. Dit beroep op zijn actief abstractievermogen maakt programmeren tot een naar aard creatiever werk dan die wiskundebeoefening, die zich beperkt tot het toepassen van bestaande theorieen.<br>3)&nbsp;&nbsp;&nbsp;doordat vele programma's zo groot zijn en nochtans werken moeten, leert de programmeur een bewustere ontwikkelingsmethodologie. En dat is, wat je moet proberen te doceren! Voor extensieve kennisoverdracht zie ik veel minder rechtvaardiging.<br>			</p>		</div>		<hr>		<font size="-1">transcribed by Andreas Jonsson<br>			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="96">Wed, 20 Apr 2011</csobj></font>	</body></html></div>
+  <script>
+$('body').tweetSelection({
+  height: 300,
+  width: 600,
+  minimumTextSelected: 3,
+  shareClass: '.tweet-selection',
+  ellipsis: '...',
+  quoteLeft: '"',
+  quoteRight: '"',
+  via: 'raboofje'
+});
+  </script>
   </body>
   </html>
