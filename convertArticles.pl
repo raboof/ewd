@@ -24,8 +24,8 @@ sub getbody {
   if ($article =~ /<div id="content">(.*)/mis) {
     $article = $1;
   }
-  if ($article =~ /.*(<p class="noindent">)?<u>\Q$title\E\s*\.?<\/u>\.?(<\/p>)?(.*)/mis) {
-    $article = $3;
+  if ($article =~ /.*(<p class="noindent">)?(<u>|<h1>)\Q$title\E\s*\.?(<\/u>|<\/h1>)\.?(<\/p>)?(.*)/mis) {
+    $article = $5;
   }
 
   return tidySnippet($article);
