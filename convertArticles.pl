@@ -37,7 +37,7 @@ sub parse {
 
   $article =~ s/href="..\/..\//href="https:\/\/www.cs.utexas.edu\/~EWD\/$1/gi;
 
-  if ($article =~ /<title>(E.W.\s*Dijkstra Archive: )?(&ldquo;)?(.*?)\.?(&rdquo;)?(\s*\(EWD\s*\d+\w*\))?\s*<\/title>/mi) {
+  if ($article =~ /<title>(E.W.\s*Dijkstra Archive:\s*)?(&ldquo;)?(.*?)\.?(&rdquo;)?(\s*\(EWD\s*\d+\w*\))?\s*<\/title>/mi) {
     $result{'title'} = $3;
     $article =~ s/<h1>\Q$result{'title'}\E<\/h1>//mi;
   }
