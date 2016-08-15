@@ -14,5 +14,9 @@ h1 {
 }
 
 p.noindent {
-  text-indent: 0pt
+  text-indent: 0pt;
+}
+
+a.tweet-selection:hover {
+  text-decoration: none;
 }

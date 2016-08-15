@@ -65,6 +65,9 @@ sub convertArticle {
     <link href="https://fonts.googleapis.com/css?family=Lobster|Raleway" rel="stylesheet">
     <link href="assets/common.css" rel="stylesheet">
     <link href="assets/transcriptions.css" rel="stylesheet">
+    <link href="assets/tweet-selection.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/tweet-selection.js"></script>
     <meta name="generator" content="convertArticle.pl">
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="\@raboofje" />
@@ -80,6 +83,14 @@ sub convertArticle {
   </div>
   <h1>$parsed->{'title'}</h1>
   <div class='body'>$parsed->{'body'}</div>
+  <script>
+\$('.body').tweetSelection({
+  ellipsis: '...',
+  quoteLeft: '\\'',
+  quoteRight: '\\'',
+  via: 'raboofje'
+});
+  </script>
   </body>
   </html>
 EOF
