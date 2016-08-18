@@ -23,97 +23,95 @@
   </div>
   <h1>Edsger W. Dijkstra Archive: Communicatiebuffering voor de EL-X8 - T.H.E</h1>
   <div class='body'><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
 <html>
-
-	<head>
-		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
-		<meta name="generator" content="Adobe GoLive 6">
-		<title>Edsger W. Dijkstra Archive: Communicatiebuffering voor de EL-X8 - T.H.E. (EWD 118)</title>
-	</head>
-
-	<body bgcolor="#ffffff">
-		<div align="right">
-			<p> <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF" target="_blank">EWD118</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF#page=1" target="_blank">0</a></p>
-		</div>
-		<div align="left">
-			<p>3 Februari 1965</p>
-			<p><u>Communicatiebuffering voor de EL-X8 - T.H.E.</u></p>
-			<p><u>Algemeen</u></p>
-			<p>De mogelijkheid communicatie-informatie te bufferen is een faciliteit van de installatie als geheel: de bufferruimte wordt dan ook niet bij speciale programma's ondergebracht, maar &quot;universaliter&quot;, zoals de tabel van de SV's van de bibliotheek.</p>
-			<p>Dit doet ons leed, want het impliceert een permanente kerngeheugenbezetting voor de SV-lijst van de buffersegmenten. Toch moet het maar; wij denken aan, zeg 256 SV's (d.w.z. maximaal &Mac185; trommel vol gebufferde transput informatie).</p>
-			<p>Naast de 256 SV's zullen wij extra ruimte ter beschikking stellen om hierin kettingen van segmenten te rijgen.</p>
-			<p>Analyse van de Segment Controller heeft aangetoond, dat het niet ondoenlijk is om SV's te verhuizen; dit maakt het mogelijk, dat een producent een segment als priv&eacute; segment vult, en als het vol is de informatie naar de bufferruimte overhevelt, zonder de informatie &quot;vleselijk&quot; te transporteren. Er hoeft slechts een SV verhuisd te worden</p>
-			<p><u>Invoer via bandlezers</u></p>
-			<p>De invoer via bandlezers behandelen we apart, omdat we deze tamelijk afwijkend bedienen.</p>
-			<p>De PM's nemen <u>niet</u> rechtstreeks contact met de bandlezers op, maar doen dit via een informatiestroom, waarvan de opbouw ver op de consumptie v&oacute;&oacute;r mag zijn. Men kan denken dat de bandlezer zo snel is, dat dit nauwelijks de moeite waard is; wij moeten dit echter wel doen, omdat de buffering de enige manier is om de bandlezer zo gauw mogelijk vrij te maken.</p>
-			<p>Elke PM krijgt slechts de beschikking over een enkele papierband-informatiestroom; het feit dat er (wellicht) meer bandlezers aan de installatie zitten komt niet de individuele programma's, maar het samenspel ten goede.</p>
-			<p>Om deze impliciete invoerstroom hoeft een programma niet te vragen: hij was er kennelijk al, toen het programma ingevoerd ging worden.</p>
-			<p>Wij zagen twee wegen: &ograve;f de bandlezers in de bankiersalgorithme betrekken en van de programmeur verlangen, dat hij de interesse &quot;afmeldt&quot; wanneer hij zijn laatste gegeven heeft ingelezen &ograve;f het er maar op wagen, d.w.z. niet de programmeur laten verklaren dat hij niet meer lezen wil, en, omgekeerd, de bandlezers buiten het bankiersalgorithme te houden. Wij hebben - tegen alle regels in! - tot het laatste besloten. Om het ruimtebeslag in de buffer te mitigeren hebben we wel besloten, om in de informatiestroom van de lezers het bandbeeld gepakt te bergen. (Een pakking van 2000 karakters per segment geeft bij volle band van 300 meter &agrave; 400 kar. per meter 60 segmenten. Dat is natuurlijk niet mals, maar het zij zo.)</p>
-			<p>Wij hebben dit onder anderen gekozen, omdat wij niet veel vertrouwen hebben in de zo moeilijk afdwingbare plicht tot afmelden. (Wij doen ons best onze programmeurs niet te hoog aan te slaan!)</p>
-		</div>
-		<div align="right">
-			<p><a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF" target="_blank">EWD118</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF#page=2" target="_blank">1</a></p>
-		</div>
-		<div align="left">
-			<p>Reservering van een bandlezer voor de opbouw van een bepaalde informatiestroom valt onherroepelijk af bij de detectie van &quot;einde band&quot;.</p>
-			<p>Deze informatiestromen zijn objecten, die elk behoren bij een bepaalde PM. We kunnen ons het &quot;handvat&quot; onderin de stapel van de PM voorstellen. (Geheugenprotectie schept wel problemen, want de producent moet bij het handvat kunnen, maar de producent is tenslotte een stamgast, die moet weten wat hij doet.)</p>
-			<p>Over de gedetailleerde layout van het handvat doen we nu geen voorstel. Wij merken op, dat er onderscheid gemaakt moet worden tussen &quot;informatiestroom nuchter&quot; - d.w.z. niet eens in opbouw - en &quot;informatiestroom leeg&quot;, d.w.z. het komt wel, maar er zit geen enkel segment in de bufferruimte. Het handvat bevat de seinpaal, via welke de producent toevoeging van &eacute;&eacute;n nieuw segment aan de consument doormeldt. Het handvat bevat tevens een identificatie van de producent - om vrij te kunnen maken in geval van desaster, b.v.</p>
-			<p><u>Plotter, printer &amp; ponser</u></p>
-			<p>Wij nemen aan, dat een plotter, die aan een bepaald plaatje begonnen is, dit plaatje moet kunnen afmaken, voordat hij aan een ander plaatje begint. Voorts stellen wij, dat een plotterprent potentieel zo uitgebreid kan zijn, dat wachten met output, het programma &quot;einde plaatje&quot; heeft gemeld, prohibitief zou kunnen zijn. Hieruit volgt, dat met 1 physische plotter, geen PM via twee &quot;abstracte&quot; kanalen, twee - willekeurig uitgebreide - plaatjes kan gaan tekenen. Wij voorkomen dit door geen PM het uitdrukkingsvermogen te geven om aan meer dan een plaatje bezig te zijn. Bij voorkeur zal de plotter (zie onder) slechts aan plaatjes beginnen, waarvan de specificatie volledig voltooid is.</p>
-			<p>Ook voor bandponsers geldt, dat we bij voorkeur slechts een ponser aan het ponsen van een bandje zullen laten beginnen, als het bandbeeld geheel is opgebouwd. Als dit nl. zo is, kan de machine controleren, of er nog genoeg papier op de rol is. Moet een ponser aan een onaf bandbeeld beginnen, dan zal hij vragen om een nieuwe band in de ponser.</p>
-			<p>Tenslotte: de highspeed printer verwerkt van de programma's de informatie &quot;formuliersgewijs&quot;. Als echter twee programma's met dezelfde snelheid formulieren aanbieden is het voor de receptie hoogst onaangenaam, als de formulieren om de ander komen. Ook hier hebben we dus zoiets, dat de formulier printer - zo mogelijk - affe teksten produceren.</p>
-			<p>Ondanks de verschillen zullen wij proberen, deze drie apparaten zo gelijk mogelijk te bespreken.</p>
-			<p>Het volgende beeld werd in eerste instantie voor de plotter(s) ontwikkeld. Wij zullen straks bekijken, in hoeverre het ook voor de andere gereedschap van toepassing is. Wij praten dus eerst even over de plotter(s).</p>
-			<p>Kwantitatief spelen twee aantallen een grote rol: het aantal physische apparaten en het aantal &quot;documenten in opbouw&quot;. (Een &quot;document&quot; is voor een plotter een plaatje, voor een bandponser een noodzakelijkerwijze onverknipte band.)</p>
-		</div>
-		<div align="right">
-			<p><a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF" target="_blank">EWD118</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF#page=3" target="_blank">2</a></p>
-		</div>
-		<div align="left">
-			<p>Wij stellen ons voor, dat een physisch apparaat niet aan het volgende document begint, voordat het vorige is voltooid. (Bij de plotter is dat niet strikt noodzakelijk!) Wij gaan er verder van uit, dat een document zo omvangrijk kan zijn, dat het onredelijk is om a priori te eisen, dat het in zijn totaliteit gebufferd moet kunnen worden, voordat aan de feitelijke uitvoer begonnen wordt. (Dit is voor de ponser weer wat restrictief, omdat de lengte van een physische band wel aan een bovengrens gebonden is.)</p>
-			<p>Voor een bepaald soort physisch apparaat voeren wij in &quot;de uitvoerders&quot; - in evenveelvoud als er physische apparaten zijn - en &quot;de prae-uitvoerders&quot;. Elke prae-uitvoerder is de mogelijkheid om een eventueel &quot;onbegrensd&quot; document te gaan opbouwen. Prae-uitvoerders zijn geprogrammeerde instituten, hun aantal kan in overigens identieke installaties verschillen.</p>
-			<p>De programmeur kent het verschil tussen de prae-uitvoerder en de uitvoerder niet. Als hij als zijn behoefte opgeeft b.v. &quot;1 plotter&quot;, dan wordt deze behoefte ten bate van de bankier vertaald in &quot;1 praeplotter + 1 plotter&quot;. Als hij aangeeft, dat hij een document wil gaan opbouwen, dan wordt dit vertaald in de poging een prae-uitvoerder te lenen. Nu krijgt de PM een prae-uitvoerder toegewezen: hij kan nu het document opbouwen - mogelijk hierin geremd door een P-operatie op vrijkomende bufferruimte en tenslotte wordt van hem verwacht, dat hij het document &quot;voltooid&quot; meldt. Op dit moment komt de prae-uitvoerder vrij en kan een andere - of dezelfde - PM aan documentopbouw beginnen.</p>
-			<p>Als er n prae-uitvoerders en m echte uitvoerders zijn, spelen achter de schermen n + m overigens equivalente informatiestromen een rol: hiervan zijn op elk moment een ten hoogste n-tal &quot;de prae-uitvoerders&quot;. (Deze som komt voort uit het volgende: elke physische uitvoerder kan bezig zijn met de consumptie van een inmiddels af document; daarnaast zijn n documenten in opbouw.)</p>
-			<p>Als een PM een document voltooid meldt, dan moeten wij twee getallen onderscheiden: of een feitelijke uitvoerder was reeds aan de consumptie van deze stroom begonnen of niet. Zo nee, dan wordt het voltooide, onbegonnen beeld aan de z.g. &quot;documentenketting&quot; gehangen. Naast genoemde informatiestromen die hoogstens &eacute;&eacute;n document in opbouw, in afbraak of beide bevatten, is er nl. nog een ketting van voltooide documenten. In deze ketting worden klare documenten opgenomen in volgorde van voltooi&iuml;ng; in deze zelfde volgorde zal later aan hun feitelijke uitvoer begonnen worden. (N.b.: bij meer uitvoerders betekent dit <u>niet</u>, dat ze de een na de ander in volgorde uitgevoerd hoeven te worden!) Verder wordt een prae-uitvoerder vrijgegeven.</p>
-			<p>Als bij voltooi&iuml;ng van het documentbeeld wel reeds een physische uitvoerder aan de feitelijke consumptie begonnen was, wordt de documentenketting met rust gelaten, maar wordt aan de bankier be&euml;indiging van lening gemeld van niet alleen een prae-uitvoerder, amar ook van een uitvoerder. (Zie onder.)</p>
-			<p>Een vrij ledige uitvoerder handelt als volgt:<br>
-				Als de documentenketting niet leeg is, zoekt hij uit de m + n informatiestromen een ongebruikte (die is er!) en initieert deze stroom met het kopdocument uit de ketting. Vervolgens gaat hij uit deze stroom consumeren.</p>
-		</div>
-		<div align="right">
-			<p><a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF" target="_blank">EWD118</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF#page=4" target="_blank">3</a></p>
-		</div>
-		<div align="left">
-			<p>Als de documentenketting leeg is, kan hij, wanneer er wel documenten in opbouw zijn, proberen, of hij al vast aan de uitvoer van een onaf document beginnen kan. Het beginnen aan een onaf document betekent echter dat het opbouwende programma vanaf dat moment geacht wordt behalve een prae-uitvoerder ook een uitvoerder geleend te hebben. De uitvoerder mag zich dus slechts onder controle van de bankier aan een onaf document beginnen.</p>
-			<p>Als een uitvoerder zichzelf uit de documentenketting initieert, is dit een aflopende taak: de uitvoerder kan zich op daggeldbasis ter beschikking stellen en omarmingsrestricties worden hierdoor aanmerkelijk milder.</p>
-			<p>Het idee van de prae-uitvoerders is dus om zo mogelijk op daggeldbasis van de physische uitvoerders gebruik te maken; dit is des te interessanter naarmate de beschikbare bufferruimte groot is ten opzichte van voorkomende document omvangen.</p>
-			<p>Een en ander werpt wel strategische problemen op, speciaal: hoeveel prae-uitvoerders kiezen we en wanneer beslissen we, dat een uitvoerder begint aan de uitvoer van een onaf document. (De mogelijkehid zulks te doen wordt door de bankier afgeperkt: als het mogelijk is, hoeft de uitvoerder het echt nog niet te doen.)</p>
-			<p>Een enkel voorbeeld moge de strategische problemen nader illustreren. Stel, dat we in een installatie van een bepaald type 1 uitvoerder hebben, maar meer prae-uitvoerders en stel, dat de installatie geladen is met een programma, dat een niet ontiegelijk omvangrijk document heel traag vult (een z.g. &quot;druppelaar&quot;). Zolang de omvang van de gebufferde informatiestroom nog geen onbehoorlijke proporties heeft aangenomen, is het zaak, de uitvoerder nog niet aan de uitvoer te laten beginnen: dit kan de physische uitvoerder nl. nodeloos lang bezig houden. En inderdaad: terwijl de druppelaar moeizaam zijn document opbouwt, komt een extra programma, een &quot;vluggertje&quot;, die eventjes een snel produceerbaar document wil uitvoeren; van de kant van de machine is dit een ideale &quot;mix'. Het tweede programma gaat document produceren: als nu dit tweede document - b.v. omvangrijk - niet eerst in zijn geheel gebufferd kan worden, moet het physisch apparaat wegens gebrek aan bufferruimte op een gegeven moment aan een van beide documenten beginnen. Hoe besturen we, dat hij dan aan het document van het vluggertje begint?</p>
-			<p>Er zijn twee oplossingen: als een uitvoerder aan een onaf physisch document moet beginnen - wegens uitputting van de bufferruimte - laat hem dan in geval van keuze de langste informatiestroom kiezen: dit helpt het meeste. In boven beschreven situatie moet je dus hopen dat op het moment dat tot uitvoer besloten wordt, de producenten van het vluggertje de productie van de druppelaar inmiddels heeft ingehaald. (Je moet dus met het vluggertje wel &quot;op tijd&quot; komen: dat moet toch, want als de druppelaar definitief aan de uitvoerder gekoppeld is, dan heb je het gehad en komt het vluggertje toch al niet meer aan bod. Deze inhaaloverweging stelt de grens van &quot;op tijd zijn&quot; alleen wat scherper.)</p>
-			<p>Er is een andere techniek, nl. die der vrijheidsklassen. Hierin kent men aan elk programma een vrijheidsnummer toe: de bankier hanteert nu als nevenvoorwaarde, dat een programma met hoger vrijheidsnummer voor zijn voortzetting niet op de voortzetting van - d.w.z. vrijgave door - een programma uit een lagere vrijheidsklasse afhankelijk mag zijn. Door</p>
-		</div>
-		<div align="right">
-			<p><a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF" target="_blank">EWD118</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF#page=5" target="_blank">4</a></p>
-		</div>
-		<div align="left">
-			<p>de druppelaar dan een lager vrijheidsnummer te geven dan het vluggertje forceert men dat<br>
-				a) het vluggertje alleen geaccepteerd wrodt als de uitvoerder nog niet aan het document van de druppelaar begonnen is,<br>
-				b) daarna de feitelijke uitvoer van het document van het vluggertje de voorrang krijgt.</p>
-			<p>Of de invoering van het vrijheidsgetal geen nadere complicaties met zich meebrengt - afgezien ervan, dat men het moet defini&euml;ren - moet een nadere analyse nu uitmaken.</p>
-			<p>Zonder invoering van het vrijheidsgetal kan men altijd (logisch) straffeloos een vrije uitvoerder aan minstens een van de onaffe documenten laten beginnen. Immers: dit geldt als een lening van de uitvoerder. Voordat deze koppeling tot stand gekomen is, was de toestand veilig, d.w.z. de bankier zag al zijn programma's op den duur eindigen, d.w.z. kon dit programma in een zekere volgorde verifi&euml;ren: het eerste prae-ponsende programma, waarvan hij de doorgang garanderen kan, mag dus ook de feitelijke uitvoerder op dit moment willen lenen. Houdt ook na introducite van het vrijheidsgetal deze redenering stand?</p>
-			<p>In dat geval onderzoekt de bankier eerst of de programma's uit de hoogste vrijheidsklasse door kunnen gaan. Hieronder kunnen er zijn, die wel prae-uitvoerder en uitvoerder geclaimd, maar nog niet geleend hebben. Vervolgens worden de programma's uit de daaronder liggende klasse onderzocht: hier kan het eerste prae-uitvoerende programma ontmoet worden, dat evenwel de uitvoerder zelf niet lenen mag, omdat dan een programma uit hogere vrijheidsklasse in de knoei zou kunnen komen.</p>
-			<p>Moraal is: zonder vrijheidsklasse kan altijd de uitvoerder aan minstens 1 niet leeg onaf document beginnen. Met vrijheidsklasse - en vrije prae-uitvoerders - is het mogelijk de uitvoerder voor een nog lege prae-uitvorder te reserveren!</p>
-			<p>Het voorgaande dekt vrij aardig de bandponser en de plotter: de highspeed printer is een ander chapiter.</p>
-			<p>Om te beginnen: het lijkt irre&euml;el om voor de printer het aantal prae-uitvoerders lager te kiezen dan het aantal PM's (&quot;een programma, dat niet print is nauwelijks een programma&quot;).<br>
-				Als wij ons op het standpunt stellen, dat de printer snel is, dat de programmeur snel zijn gegevens naar buiten wil hebben, dan zou men zeggen: beschouw een formulier van de printer als &quot;document&quot;, zodra dit klaar is, neem het dan in de ketting op. Anderzijds is dit onacceptabel: het scheur- en sorteerwerk, dat hierdoor voor de expeditie zou ontstaan is gewoon te erg. En dan ga je dus zeggen: beschouw aan elke prae-uitvoerder &quot;N&quot; formulieren als document. Maar hoe groot kies je &quot;N&quot;?</p>
-			<p>Het is duidelijk, dat be&euml;indiging van het programma de prae-uitvoerder vrijgeeft en het staartje formulieren als document naar de ketting kan overhevelen. Dan is er ten duidelijkste werk voor de printer. Als de documentenketting leeg is, begint de printer (beginnen de printers) pas actief te worden als de totale omvang van de gebufferde informatie daartoe aanleiding geeft. Het ligt voor de hand, om dan uit een informatiestroom, die begint met het oudste document of de informatiestroom, die het grootste aantal formulieren bevat? Mijn neiging is om de tijdsfactor te verwaarlozen - er komen geen programmeurs in de machinekamer - en de langste informatiestroom te pakken.</p>
-		</div>
-		<hr>
-		<p><font size="-1">Transcribed by Frank Steggink<br>
-				Revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="82">Tue, 6 Jan 2004</csobj>.</font></p>
-	</body>
-
-</html></div>
+<head>
+<meta name="generator" content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="Adobe GoLive 6">
+<title>Edsger W. Dijkstra Archive: Communicatiebuffering voor de EL-X8 - T.H.E. (EWD 118)</title>
+</head>
+<body bgcolor="#FFFFFF">
+<div align="right">
+<p><a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF" target="_blank">EWD118</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF#page=1" target="_blank">0</a></p>
+</div>
+<div align="left">
+<p>3 Februari 1965</p>
+<p><u>Communicatiebuffering voor de EL-X8 - T.H.E.</u></p>
+<p><u>Algemeen</u></p>
+<p>De mogelijkheid communicatie-informatie te bufferen is een faciliteit van de installatie als geheel: de bufferruimte wordt dan ook niet bij speciale programma's ondergebracht, maar "universaliter", zoals de tabel van de SV's van de bibliotheek.</p>
+<p>Dit doet ons leed, want het impliceert een permanente kerngeheugenbezetting voor de SV-lijst van de buffersegmenten. Toch moet het maar; wij denken aan, zeg 256 SV's (d.w.z. maximaal &amp;Mac185; trommel vol gebufferde transput informatie).</p>
+<p>Naast de 256 SV's zullen wij extra ruimte ter beschikking stellen om hierin kettingen van segmenten te rijgen.</p>
+<p>Analyse van de Segment Controller heeft aangetoond, dat het niet ondoenlijk is om SV's te verhuizen; dit maakt het mogelijk, dat een producent een segment als privé segment vult, en als het vol is de informatie naar de bufferruimte overhevelt, zonder de informatie "vleselijk" te transporteren. Er hoeft slechts een SV verhuisd te worden</p>
+<p><u>Invoer via bandlezers</u></p>
+<p>De invoer via bandlezers behandelen we apart, omdat we deze tamelijk afwijkend bedienen.</p>
+<p>De PM's nemen <u>niet</u> rechtstreeks contact met de bandlezers op, maar doen dit via een informatiestroom, waarvan de opbouw ver op de consumptie vóór mag zijn. Men kan denken dat de bandlezer zo snel is, dat dit nauwelijks de moeite waard is; wij moeten dit echter wel doen, omdat de buffering de enige manier is om de bandlezer zo gauw mogelijk vrij te maken.</p>
+<p>Elke PM krijgt slechts de beschikking over een enkele papierband-informatiestroom; het feit dat er (wellicht) meer bandlezers aan de installatie zitten komt niet de individuele programma's, maar het samenspel ten goede.</p>
+<p>Om deze impliciete invoerstroom hoeft een programma niet te vragen: hij was er kennelijk al, toen het programma ingevoerd ging worden.</p>
+<p>Wij zagen twee wegen: òf de bandlezers in de bankiersalgorithme betrekken en van de programmeur verlangen, dat hij de interesse "afmeldt" wanneer hij zijn laatste gegeven heeft ingelezen òf het er maar op wagen, d.w.z. niet de programmeur laten verklaren dat hij niet meer lezen wil, en, omgekeerd, de bandlezers buiten het bankiersalgorithme te houden. Wij hebben - tegen alle regels in! - tot het laatste besloten. Om het ruimtebeslag in de buffer te mitigeren hebben we wel besloten, om in de informatiestroom van de lezers het bandbeeld gepakt te bergen. (Een pakking van 2000 karakters per segment geeft bij volle band van 300 meter à 400 kar. per meter 60 segmenten. Dat is natuurlijk niet mals, maar het zij zo.)</p>
+<p>Wij hebben dit onder anderen gekozen, omdat wij niet veel vertrouwen hebben in de zo moeilijk afdwingbare plicht tot afmelden. (Wij doen ons best onze programmeurs niet te hoog aan te slaan!)</p>
+</div>
+<div align="right">
+<p><a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF" target="_blank">EWD118</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF#page=2" target="_blank">1</a></p>
+</div>
+<div align="left">
+<p>Reservering van een bandlezer voor de opbouw van een bepaalde informatiestroom valt onherroepelijk af bij de detectie van "einde band".</p>
+<p>Deze informatiestromen zijn objecten, die elk behoren bij een bepaalde PM. We kunnen ons het "handvat" onderin de stapel van de PM voorstellen. (Geheugenprotectie schept wel problemen, want de producent moet bij het handvat kunnen, maar de producent is tenslotte een stamgast, die moet weten wat hij doet.)</p>
+<p>Over de gedetailleerde layout van het handvat doen we nu geen voorstel. Wij merken op, dat er onderscheid gemaakt moet worden tussen "informatiestroom nuchter" - d.w.z. niet eens in opbouw - en "informatiestroom leeg", d.w.z. het komt wel, maar er zit geen enkel segment in de bufferruimte. Het handvat bevat de seinpaal, via welke de producent toevoeging van één nieuw segment aan de consument doormeldt. Het handvat bevat tevens een identificatie van de producent - om vrij te kunnen maken in geval van desaster, b.v.</p>
+<p><u>Plotter, printer &amp; ponser</u></p>
+<p>Wij nemen aan, dat een plotter, die aan een bepaald plaatje begonnen is, dit plaatje moet kunnen afmaken, voordat hij aan een ander plaatje begint. Voorts stellen wij, dat een plotterprent potentieel zo uitgebreid kan zijn, dat wachten met output, het programma "einde plaatje" heeft gemeld, prohibitief zou kunnen zijn. Hieruit volgt, dat met 1 physische plotter, geen PM via twee "abstracte" kanalen, twee - willekeurig uitgebreide - plaatjes kan gaan tekenen. Wij voorkomen dit door geen PM het uitdrukkingsvermogen te geven om aan meer dan een plaatje bezig te zijn. Bij voorkeur zal de plotter (zie onder) slechts aan plaatjes beginnen, waarvan de specificatie volledig voltooid is.</p>
+<p>Ook voor bandponsers geldt, dat we bij voorkeur slechts een ponser aan het ponsen van een bandje zullen laten beginnen, als het bandbeeld geheel is opgebouwd. Als dit nl. zo is, kan de machine controleren, of er nog genoeg papier op de rol is. Moet een ponser aan een onaf bandbeeld beginnen, dan zal hij vragen om een nieuwe band in de ponser.</p>
+<p>Tenslotte: de highspeed printer verwerkt van de programma's de informatie "formuliersgewijs". Als echter twee programma's met dezelfde snelheid formulieren aanbieden is het voor de receptie hoogst onaangenaam, als de formulieren om de ander komen. Ook hier hebben we dus zoiets, dat de formulier printer - zo mogelijk - affe teksten produceren.</p>
+<p>Ondanks de verschillen zullen wij proberen, deze drie apparaten zo gelijk mogelijk te bespreken.</p>
+<p>Het volgende beeld werd in eerste instantie voor de plotter(s) ontwikkeld. Wij zullen straks bekijken, in hoeverre het ook voor de andere gereedschap van toepassing is. Wij praten dus eerst even over de plotter(s).</p>
+<p>Kwantitatief spelen twee aantallen een grote rol: het aantal physische apparaten en het aantal "documenten in opbouw". (Een "document" is voor een plotter een plaatje, voor een bandponser een noodzakelijkerwijze onverknipte band.)</p>
+</div>
+<div align="right">
+<p><a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF" target="_blank">EWD118</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF#page=3" target="_blank">2</a></p>
+</div>
+<div align="left">
+<p>Wij stellen ons voor, dat een physisch apparaat niet aan het volgende document begint, voordat het vorige is voltooid. (Bij de plotter is dat niet strikt noodzakelijk!) Wij gaan er verder van uit, dat een document zo omvangrijk kan zijn, dat het onredelijk is om a priori te eisen, dat het in zijn totaliteit gebufferd moet kunnen worden, voordat aan de feitelijke uitvoer begonnen wordt. (Dit is voor de ponser weer wat restrictief, omdat de lengte van een physische band wel aan een bovengrens gebonden is.)</p>
+<p>Voor een bepaald soort physisch apparaat voeren wij in "de uitvoerders" - in evenveelvoud als er physische apparaten zijn - en "de prae-uitvoerders". Elke prae-uitvoerder is de mogelijkheid om een eventueel "onbegrensd" document te gaan opbouwen. Prae-uitvoerders zijn geprogrammeerde instituten, hun aantal kan in overigens identieke installaties verschillen.</p>
+<p>De programmeur kent het verschil tussen de prae-uitvoerder en de uitvoerder niet. Als hij als zijn behoefte opgeeft b.v. "1 plotter", dan wordt deze behoefte ten bate van de bankier vertaald in "1 praeplotter + 1 plotter". Als hij aangeeft, dat hij een document wil gaan opbouwen, dan wordt dit vertaald in de poging een prae-uitvoerder te lenen. Nu krijgt de PM een prae-uitvoerder toegewezen: hij kan nu het document opbouwen - mogelijk hierin geremd door een P-operatie op vrijkomende bufferruimte en tenslotte wordt van hem verwacht, dat hij het document "voltooid" meldt. Op dit moment komt de prae-uitvoerder vrij en kan een andere - of dezelfde - PM aan documentopbouw beginnen.</p>
+<p>Als er n prae-uitvoerders en m echte uitvoerders zijn, spelen achter de schermen n + m overigens equivalente informatiestromen een rol: hiervan zijn op elk moment een ten hoogste n-tal "de prae-uitvoerders". (Deze som komt voort uit het volgende: elke physische uitvoerder kan bezig zijn met de consumptie van een inmiddels af document; daarnaast zijn n documenten in opbouw.)</p>
+<p>Als een PM een document voltooid meldt, dan moeten wij twee getallen onderscheiden: of een feitelijke uitvoerder was reeds aan de consumptie van deze stroom begonnen of niet. Zo nee, dan wordt het voltooide, onbegonnen beeld aan de z.g. "documentenketting" gehangen. Naast genoemde informatiestromen die hoogstens één document in opbouw, in afbraak of beide bevatten, is er nl. nog een ketting van voltooide documenten. In deze ketting worden klare documenten opgenomen in volgorde van voltooiïng; in deze zelfde volgorde zal later aan hun feitelijke uitvoer begonnen worden. (N.b.: bij meer uitvoerders betekent dit <u>niet</u>, dat ze de een na de ander in volgorde uitgevoerd hoeven te worden!) Verder wordt een prae-uitvoerder vrijgegeven.</p>
+<p>Als bij voltooiïng van het documentbeeld wel reeds een physische uitvoerder aan de feitelijke consumptie begonnen was, wordt de documentenketting met rust gelaten, maar wordt aan de bankier beëindiging van lening gemeld van niet alleen een prae-uitvoerder, amar ook van een uitvoerder. (Zie onder.)</p>
+<p>Een vrij ledige uitvoerder handelt als volgt:<br>
+Als de documentenketting niet leeg is, zoekt hij uit de m + n informatiestromen een ongebruikte (die is er!) en initieert deze stroom met het kopdocument uit de ketting. Vervolgens gaat hij uit deze stroom consumeren.</p>
+</div>
+<div align="right">
+<p><a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF" target="_blank">EWD118</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF#page=4" target="_blank">3</a></p>
+</div>
+<div align="left">
+<p>Als de documentenketting leeg is, kan hij, wanneer er wel documenten in opbouw zijn, proberen, of hij al vast aan de uitvoer van een onaf document beginnen kan. Het beginnen aan een onaf document betekent echter dat het opbouwende programma vanaf dat moment geacht wordt behalve een prae-uitvoerder ook een uitvoerder geleend te hebben. De uitvoerder mag zich dus slechts onder controle van de bankier aan een onaf document beginnen.</p>
+<p>Als een uitvoerder zichzelf uit de documentenketting initieert, is dit een aflopende taak: de uitvoerder kan zich op daggeldbasis ter beschikking stellen en omarmingsrestricties worden hierdoor aanmerkelijk milder.</p>
+<p>Het idee van de prae-uitvoerders is dus om zo mogelijk op daggeldbasis van de physische uitvoerders gebruik te maken; dit is des te interessanter naarmate de beschikbare bufferruimte groot is ten opzichte van voorkomende document omvangen.</p>
+<p>Een en ander werpt wel strategische problemen op, speciaal: hoeveel prae-uitvoerders kiezen we en wanneer beslissen we, dat een uitvoerder begint aan de uitvoer van een onaf document. (De mogelijkehid zulks te doen wordt door de bankier afgeperkt: als het mogelijk is, hoeft de uitvoerder het echt nog niet te doen.)</p>
+<p>Een enkel voorbeeld moge de strategische problemen nader illustreren. Stel, dat we in een installatie van een bepaald type 1 uitvoerder hebben, maar meer prae-uitvoerders en stel, dat de installatie geladen is met een programma, dat een niet ontiegelijk omvangrijk document heel traag vult (een z.g. "druppelaar"). Zolang de omvang van de gebufferde informatiestroom nog geen onbehoorlijke proporties heeft aangenomen, is het zaak, de uitvoerder nog niet aan de uitvoer te laten beginnen: dit kan de physische uitvoerder nl. nodeloos lang bezig houden. En inderdaad: terwijl de druppelaar moeizaam zijn document opbouwt, komt een extra programma, een "vluggertje", die eventjes een snel produceerbaar document wil uitvoeren; van de kant van de machine is dit een ideale "mix'. Het tweede programma gaat document produceren: als nu dit tweede document - b.v. omvangrijk - niet eerst in zijn geheel gebufferd kan worden, moet het physisch apparaat wegens gebrek aan bufferruimte op een gegeven moment aan een van beide documenten beginnen. Hoe besturen we, dat hij dan aan het document van het vluggertje begint?</p>
+<p>Er zijn twee oplossingen: als een uitvoerder aan een onaf physisch document moet beginnen - wegens uitputting van de bufferruimte - laat hem dan in geval van keuze de langste informatiestroom kiezen: dit helpt het meeste. In boven beschreven situatie moet je dus hopen dat op het moment dat tot uitvoer besloten wordt, de producenten van het vluggertje de productie van de druppelaar inmiddels heeft ingehaald. (Je moet dus met het vluggertje wel "op tijd" komen: dat moet toch, want als de druppelaar definitief aan de uitvoerder gekoppeld is, dan heb je het gehad en komt het vluggertje toch al niet meer aan bod. Deze inhaaloverweging stelt de grens van "op tijd zijn" alleen wat scherper.)</p>
+<p>Er is een andere techniek, nl. die der vrijheidsklassen. Hierin kent men aan elk programma een vrijheidsnummer toe: de bankier hanteert nu als nevenvoorwaarde, dat een programma met hoger vrijheidsnummer voor zijn voortzetting niet op de voortzetting van - d.w.z. vrijgave door - een programma uit een lagere vrijheidsklasse afhankelijk mag zijn. Door</p>
+</div>
+<div align="right">
+<p><a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF" target="_blank">EWD118</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD118.PDF#page=5" target="_blank">4</a></p>
+</div>
+<div align="left">
+<p>de druppelaar dan een lager vrijheidsnummer te geven dan het vluggertje forceert men dat<br>
+a) het vluggertje alleen geaccepteerd wrodt als de uitvoerder nog niet aan het document van de druppelaar begonnen is,<br>
+b) daarna de feitelijke uitvoer van het document van het vluggertje de voorrang krijgt.</p>
+<p>Of de invoering van het vrijheidsgetal geen nadere complicaties met zich meebrengt - afgezien ervan, dat men het moet definiëren - moet een nadere analyse nu uitmaken.</p>
+<p>Zonder invoering van het vrijheidsgetal kan men altijd (logisch) straffeloos een vrije uitvoerder aan minstens een van de onaffe documenten laten beginnen. Immers: dit geldt als een lening van de uitvoerder. Voordat deze koppeling tot stand gekomen is, was de toestand veilig, d.w.z. de bankier zag al zijn programma's op den duur eindigen, d.w.z. kon dit programma in een zekere volgorde verifiëren: het eerste prae-ponsende programma, waarvan hij de doorgang garanderen kan, mag dus ook de feitelijke uitvoerder op dit moment willen lenen. Houdt ook na introducite van het vrijheidsgetal deze redenering stand?</p>
+<p>In dat geval onderzoekt de bankier eerst of de programma's uit de hoogste vrijheidsklasse door kunnen gaan. Hieronder kunnen er zijn, die wel prae-uitvoerder en uitvoerder geclaimd, maar nog niet geleend hebben. Vervolgens worden de programma's uit de daaronder liggende klasse onderzocht: hier kan het eerste prae-uitvoerende programma ontmoet worden, dat evenwel de uitvoerder zelf niet lenen mag, omdat dan een programma uit hogere vrijheidsklasse in de knoei zou kunnen komen.</p>
+<p>Moraal is: zonder vrijheidsklasse kan altijd de uitvoerder aan minstens 1 niet leeg onaf document beginnen. Met vrijheidsklasse - en vrije prae-uitvoerders - is het mogelijk de uitvoerder voor een nog lege prae-uitvorder te reserveren!</p>
+<p>Het voorgaande dekt vrij aardig de bandponser en de plotter: de highspeed printer is een ander chapiter.</p>
+<p>Om te beginnen: het lijkt irreëel om voor de printer het aantal prae-uitvoerders lager te kiezen dan het aantal PM's ("een programma, dat niet print is nauwelijks een programma").<br>
+Als wij ons op het standpunt stellen, dat de printer snel is, dat de programmeur snel zijn gegevens naar buiten wil hebben, dan zou men zeggen: beschouw een formulier van de printer als "document", zodra dit klaar is, neem het dan in de ketting op. Anderzijds is dit onacceptabel: het scheur- en sorteerwerk, dat hierdoor voor de expeditie zou ontstaan is gewoon te erg. En dan ga je dus zeggen: beschouw aan elke prae-uitvoerder "N" formulieren als document. Maar hoe groot kies je "N"?</p>
+<p>Het is duidelijk, dat beëindiging van het programma de prae-uitvoerder vrijgeeft en het staartje formulieren als document naar de ketting kan overhevelen. Dan is er ten duidelijkste werk voor de printer. Als de documentenketting leeg is, begint de printer (beginnen de printers) pas actief te worden als de totale omvang van de gebufferde informatie daartoe aanleiding geeft. Het ligt voor de hand, om dan uit een informatiestroom, die begint met het oudste document of de informatiestroom, die het grootste aantal formulieren bevat? Mijn neiging is om de tijdsfactor te verwaarlozen - er komen geen programmeurs in de machinekamer - en de langste informatiestroom te pakken.</p>
+</div>
+<hr>
+<p><font size="-1">Transcribed by Frank Steggink<br>
+Revised Tue, 6 Jan 2004.</font></p>
+</body>
+</html>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

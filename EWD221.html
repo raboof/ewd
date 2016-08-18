@@ -22,46 +22,36 @@
     </div>
   </div>
   <h1>Raw Code for computing De Bruijn-sequences</h1>
-  <div class='body'><html>
-<head>
-		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
-		<title>E.W. Dijkstra Archive: Raw Code for computing De Bruijn-sequences (EWD 221)</title>
-</head>
-<body>
-<div align="right">
-			 <a href="https://www.cs.utexas.edu/~EWD/ewd02xx/EWD221.PDF">EWD221</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd02xx/EWD221.PDF#page=1">0</a></div>
-<p>
+  <div class='body'>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd02xx/EWD221.PDF">EWD221</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd02xx/EWD221.PDF#page=1">0</a></div>
 <pre>
-<font size=3>
+<font size="3">
 
 <u>array</u> d[0:36];
 d[0] := 0; d[1] := 0; d[2] := 0; d[3] := 0; d[4] := 0; d[5] := 0;
 k := 5;
-4 < k <u>and</u> k < 36 <u>herhaal</u>
+4 &lt; k <u>and</u> k &lt; 36 <u>herhaal</u>
 
-<u>begin</u>		j := k-1; geluk := <u>true</u>;
-		j &#x2265; 4 <u>and</u> geluk herhaal
-		<u>begin</u> gelijk := <u>true</u>; h := 0;
-			h &#x2264; 4 <u>and</u> gelijk <u>herhaal</u>
-			<u>begin</u> gelijk := (d[k-h] = d[j-h]); h := h+1 <u>end</u>;
-			gelijk <u>zoja</u> geluk := false; j := j-1
-		<u>end</u>;
-		geluk dan
-		<u>begin</u> k := k+1; k &#x2264; 31 <u>dan</u> d[k] := 0 <u>anders</u> d[k] := d[k-32] <u>and</u>
-		      <u>anders</u>
-		<u>begin</u> k &gt; 31 <u>zoja</u> k := 31;
-			d[k] = 1 <u>zoja</u> k := k-1;
-			d[k] := 1
-		<u>end</u>
+<u>begin</u>            j := k-1; geluk := <u>true</u>;
+                j ≥ 4 <u>and</u> geluk herhaal
+                <u>begin</u> gelijk := <u>true</u>; h := 0;
+                        h ≤ 4 <u>and</u> gelijk <u>herhaal</u>
+                        <u>begin</u> gelijk := (d[k-h] = d[j-h]); h := h+1 <u>end</u>;
+                        gelijk <u>zoja</u> geluk := false; j := j-1
+                <u>end</u>;
+                geluk dan
+                <u>begin</u> k := k+1; k ≤ 31 <u>dan</u> d[k] := 0 <u>anders</u> d[k] := d[k-32] <u>and</u>
+                      <u>anders</u>
+                <u>begin</u> k &gt; 31 <u>zoja</u> k := 31;
+                        d[k] = 1 <u>zoja</u> k := k-1;
+                        d[k] := 1
+                <u>end</u>
 <u>end</u>
-</pre>
 </font>
+</pre>
 <hr>
 Transcribed by Mikhail Esteves<br>
-<p>Last revised on <csobj format="MedDate" h="16" region="15" t="DateTime" w="101">Sat, 19 Jul 2003</csobj>.
-</body></html>
-
+<p>Last revised on Sat, 19 Jul 2003.</p>
 </div>
   <script>
 $('.body').tweetSelection({

@@ -23,78 +23,51 @@
   </div>
   <h1>Self-stabilization with three-state machines</h1>
   <div class='body'>
-			<p>
-				I consider <var>N</var>+1 machines numbered from 0 through <var>N</var> (<var>N</var> > 1). In order to avoid avoidable subscripts in my text, I introduce for each machine nr.<var>i</var> a local terminology <br />
-				<var>L</var> = state of machine nr.(<var>i</var>&ndash;1)<u>mod</u>(<var>N</var>+1), its &ldquo;lefthand neighbour&rdquo;
-				<br />
-				<var>S</var> = state of machine nr.<i>i</i> (<var>S</var> from &ldquo;self&rdquo;)
-				<br />
-				<var>R</var> = state of machine nr.(<var>i</var>+1)<u>mod</u>(<var>N</var>+1), its &ldquo;righthand neighbour&rdquo;.
-			</p>
-			<p>For each machine one or more privileges are defined, i.e. boolean functions of <var>L</var>, <var>S</var> and <var>R</var>. A &ldquo;move&rdquo; consists of selecting one of the privileges currently present and bringing the machine enjoying it in a new state, i.e. <var>S</var>:= <var>f</var>&thinsp;(<var>L</var>,<var>S</var>,<var>R</var>), where the function <var>f</var> may depend on the privilege selected in the case of a machine for which more than one privilege has been defined.</p>
-			<p>
-				We call a state of the total system &ldquo;legitimate&rdquo; if and only if
-				<br />1)&nbsp;&nbsp;&nbsp;&nbsp; exactly one privilege is present and, therefore, exactly one move is possible, and
-				<br />2)&nbsp;&nbsp;&nbsp;&nbsp; the execution of the only possible move will again bring the total system in a legitimate state, and
-				<br />3)&nbsp;&nbsp;&nbsp;&nbsp; successive moves will cause each privilege to be present with equal frequency.
-			</p>
-			<p>We are interested in designing a set of finite state machines, privileges and moves, such that, in addition, the system enjoys the property of &ldquo;self-stabilization&rdquo;, i.e. regardless of the initial state and regardless of the privilege selected for the next move, it must always be possible to do a next move and after a finite number of moves the total system must arrive at a legitimate state.</p>
-			<p>Each machine is a three-state machine, its state being denoted by 0, 1 and 2; in the following &ldquo;+&rdquo; and &ldquo;&ndash;&rdquo;, when referring to machine states, are to be understood as operations, reduced <u>mod</u>&nbsp;3&nbsp;.</p>
-			<p>
-				The machines nr.<var>i</var> with 0 < <var>i</var> < <var>N</var> are called &ldquo;the normal machines&rdquo;; they have two privileges:
-				<br />
-				the privilege &nbsp; &ldquo;<var>S</var> + 1 = <var>L</var>&rdquo; allows the move &nbsp;&ldquo;<var>S</var>:= <var>S</var> + 1&rdquo;&nbsp; and
-				<br />the privilege &nbsp; &ldquo;<var>S</var> + 1 = <var>R</var>&thinsp;&rdquo; allows the move &nbsp;&ldquo;<var>S</var>:= <var>S</var> + 1&rdquo;.
-		  </p>
-			<p>
-				Machine nr.0 &mdash;the so-called bottom machine&mdash; has one privilege:
-				<br />
-				the privilege &nbsp;&ldquo;<var>S</var> + 1 = <var>R</var>&thinsp;&rdquo;&nbsp;&nbsp; allows the move &nbsp;&ldquo;<var>S</var>:= <var>S</var> &ndash; 1&rdquo;.
-			</p>
-			<p>
-				Machine nr.<var>N</var> &mdash;the so-called top machine&mdash; has also only one privilege: <br />the privilege &nbsp;&ldquo;<var>L</var> = <var>R</var> <u>and</u> <var>S</var> &#x2260; <var>L</var> + 1&rdquo;&nbsp; allows the move &nbsp;&ldquo;<var>S</var>:= <var>L</var> + 1&rdquo;.
-			</p>
-			<p>
-				We observe
-				<br />0)&nbsp;&nbsp;&nbsp;&nbsp; each move destroys the privilege allowing it
-				<br />1)&nbsp;&nbsp;&nbsp;&nbsp; at least one privilege must be present (no privilege among the bottom machine and the normal machines implies that they are all in the same state; if the top machine is not to have its privilege, it must be on account of &nbsp;<var>S</var> = <var>L</var> + 1, which contradicts the assumption that its normal neighbour had no privilege) <br />2)&nbsp;&nbsp;&nbsp;&nbsp; between two successive moves of the top machine, the bottom machine must have moved at least once.
-			</p>
-			<p>
-				We now consider the <var>N</var> differences between nr.<var>i</var> and nr.<var>i</var>+1 (0 &#x2264; <var>i</var> < <var>N</var>) and write a &ldquo;+&rdquo; between the two of each pair if the lefthand state is one higher than the righthand state, a &ldquo;&ndash;&rdquo; if the lefthand state is one less than the righthand state and nothing if they are equal. If the normal machine <var>B</var> does a move, we have five possibilities <br />a)&nbsp;&nbsp;&nbsp;&nbsp; &ldquo;<var>A</var> + <var>B</var> &nbsp; <var>C</var>&thinsp;&rdquo; becomes &ldquo;<var>A</var> &nbsp; <var>B</var> + <var>C</var>&thinsp;&rdquo; (a &ldquo;+&rdquo; travelling to the right),
-				<br />
-				b)&nbsp;&nbsp;&nbsp;&nbsp; &ldquo;<var>A</var> &nbsp; <var>B</var> &ndash; <var>C</var>&thinsp;&rdquo; becomes &ldquo;<var>A</var> &ndash; <var>B</var> &nbsp; <var>C</var>&thinsp;&rdquo; (a &ldquo;&ndash;&rdquo; travelling to the left),
-				<br />
-				c)&nbsp;&nbsp;&nbsp;&nbsp; &ldquo;<var>A</var> + <var>B</var> + <var>C</var>&thinsp;&rdquo; becomes &ldquo;<var>A</var> &nbsp; <var>B</var> &ndash; <var>C</var>&thinsp;&rdquo; (internal reflection of &ldquo;+&nbsp;+&rdquo;)
-				<br />
-				d)&nbsp;&nbsp;&nbsp;&nbsp; &ldquo;<var>A</var> &ndash; <var>B</var> &ndash; <var>C</var>&thinsp;&rdquo; becomes &ldquo;<var>A</var> + <var>B</var> &nbsp; <var>C</var>&thinsp;&rdquo; (internal reflection of &ldquo;&ndash;&thinsp;&ndash;&rdquo;)
-				<br />
-				e)&nbsp;&nbsp;&nbsp;&nbsp; &ldquo;<var>A</var> + <var>B</var> &ndash; <var>C</var>&thinsp;&rdquo; becomes &ldquo;<var>A</var> &nbsp; <var>B</var> &nbsp; <var>C</var>&thinsp;&rdquo; (mutual annihilation of &ldquo;+&thinsp;&ndash;&rdquo;).
-				<br />
-				Transitions c), d) and e) reduce the total number of &ldquo;+&rdquo; and &ldquo;&ndash;&rdquo; signs.
-		  </p>
-			<p>A move of the bottom machine requires a &ldquo;&ndash;&rdquo; to the right of it and changes it in a &ldquo;+&rdquo;: it is a true reflection, leaving the number of &ldquo;+&rdquo; and &ldquo;&ndash;&rdquo; signs unchanged. A move of the top machine creates a &ldquo;&ndash;&rdquo; at the left of it &mdash;in doing so it may absorb a &ldquo;+&rdquo; in that position&mdash;, but on account of observation 2) it cannot do so in a higher frequency than the bottom machine absorbs &ldquo;&ndash;&rdquo; signs.</p>
-			<p>In the legitimate states there is only one &ldquo;+&rdquo; or &ldquo;&ndash;&rdquo; sign, travelling in the appropriate direction and being changed &mdash;and then reflected&mdash; at the ends.</p>
-			<p>Self-stabilization is now obvious. A move of the bottom machine absorbs a &ldquo;&ndash;&rdquo; gone to the left and produces in its place a &ldquo;+&rdquo; ready to go to the right. How is the bottom machine going to receive its next &ldquo;&ndash;&rdquo; in the non-legitimate state? Either because the right going &ldquo;+&rdquo; meets a pair &ldquo;&ndash;&thinsp;&ndash;&rdquo; (&ldquo;+&thinsp;&ndash;&thinsp;&ndash;&rdquo; can reduce to &ldquo;&ndash;&rdquo;) or because it meets another &ldquo;+&rdquo; (&ldquo;+&thinsp;+&rdquo; can reduce to &ldquo;&ndash;&rdquo;) that could have been created by &ldquo;&ndash;&thinsp;&ndash;&rdquo;. In order to stay away permanently from the legitimate state, the top machine would have to create two &ldquo;&ndash;&rdquo; signs for every single &ldquo;&ndash;&rdquo; arriving at the bottom machine. But this possibility is denied by our observation that between two successive moves of the top machine, the bottom machine must have moved at least once.</p>
-			<p class="noindent"><u>Note</u>. In view of the fact that a three-state machine requires two bits, with which we can have four-state machines, for whom the problem of self-stabilization has already been solved, the result achieved here could very well be totally insignificant. This aspect of minimization of the number of machine states has reached the stage of a problem in pure mathematics and I shall not pursue it any further.</p>
-		</div>
-		<div>
-			<br /><br /><br />
-			1st November 1973 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; prof.dr.Edsger W.Dijkstra<br />
-			BURROUGHS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Research Fellow<br />
-			Plataanstraat 5<br />
-			NUENEN - 4565<br />
-			The Netherlands<br />
-		</div>
-		<hr />
-		<div id="footer">
-			<font size="-1">
-				transcribed by Chrys Alexander Panayiotou<br />
-				revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="96"><!-- #BeginDate format:En2 -->08-Sep-2013<!-- #EndDate --></csobj>
-			</font>
-		</div>
-	</div>
-</body>
-</html></div>
+<p>I consider <var>N</var>+1 machines numbered from 0 through <var>N</var> (<var>N</var> &gt; 1). In order to avoid avoidable subscripts in my text, I introduce for each machine nr.<var>i</var> a local terminology<br>
+<var>L</var> = state of machine nr.(<var>i</var>–1)<u>mod</u>(<var>N</var>+1), its “lefthand neighbour”<br>
+<var>S</var> = state of machine nr.<i>i</i> (<var>S</var> from “self”)<br>
+<var>R</var> = state of machine nr.(<var>i</var>+1)<u>mod</u>(<var>N</var>+1), its “righthand neighbour”.</p>
+<p>For each machine one or more privileges are defined, i.e. boolean functions of <var>L</var>, <var>S</var> and <var>R</var>. A “move” consists of selecting one of the privileges currently present and bringing the machine enjoying it in a new state, i.e. <var>S</var>:= <var>f</var> (<var>L</var>,<var>S</var>,<var>R</var>), where the function <var>f</var> may depend on the privilege selected in the case of a machine for which more than one privilege has been defined.</p>
+<p>We call a state of the total system “legitimate” if and only if<br>
+1)&nbsp;&nbsp;&nbsp;&nbsp; exactly one privilege is present and, therefore, exactly one move is possible, and<br>
+2)&nbsp;&nbsp;&nbsp;&nbsp; the execution of the only possible move will again bring the total system in a legitimate state, and<br>
+3)&nbsp;&nbsp;&nbsp;&nbsp; successive moves will cause each privilege to be present with equal frequency.</p>
+<p>We are interested in designing a set of finite state machines, privileges and moves, such that, in addition, the system enjoys the property of “self-stabilization”, i.e. regardless of the initial state and regardless of the privilege selected for the next move, it must always be possible to do a next move and after a finite number of moves the total system must arrive at a legitimate state.</p>
+<p>Each machine is a three-state machine, its state being denoted by 0, 1 and 2; in the following “+” and “–”, when referring to machine states, are to be understood as operations, reduced <u>mod</u>&nbsp;3&nbsp;.</p>
+<p>The machines nr.<var>i</var> with 0 &lt; <var>i</var> &lt; <var>N</var> are called “the normal machines”; they have two privileges:<br>
+the privilege &nbsp; “<var>S</var> + 1 = <var>L</var>” allows the move &nbsp;“<var>S</var>:= <var>S</var> + 1”&nbsp; and<br>
+the privilege &nbsp; “<var>S</var> + 1 = <var>R</var> ” allows the move &nbsp;“<var>S</var>:= <var>S</var> + 1”.</p>
+<p>Machine nr.0 —the so-called bottom machine— has one privilege:<br>
+the privilege &nbsp;“<var>S</var> + 1 = <var>R</var> ”&nbsp;&nbsp; allows the move &nbsp;“<var>S</var>:= <var>S</var> – 1”.</p>
+<p>Machine nr.<var>N</var> —the so-called top machine— has also only one privilege:<br>
+the privilege &nbsp;“<var>L</var> = <var>R</var> <u>and</u> <var>S</var> ≠ <var>L</var> + 1”&nbsp; allows the move &nbsp;“<var>S</var>:= <var>L</var> + 1”.</p>
+<p>We observe<br>
+0)&nbsp;&nbsp;&nbsp;&nbsp; each move destroys the privilege allowing it<br>
+1)&nbsp;&nbsp;&nbsp;&nbsp; at least one privilege must be present (no privilege among the bottom machine and the normal machines implies that they are all in the same state; if the top machine is not to have its privilege, it must be on account of &nbsp;<var>S</var> = <var>L</var> + 1, which contradicts the assumption that its normal neighbour had no privilege)<br>
+2)&nbsp;&nbsp;&nbsp;&nbsp; between two successive moves of the top machine, the bottom machine must have moved at least once.</p>
+<p>We now consider the <var>N</var> differences between nr.<var>i</var> and nr.<var>i</var>+1 (0 ≤ <var>i</var> &lt; <var>N</var>) and write a “+” between the two of each pair if the lefthand state is one higher than the righthand state, a “–” if the lefthand state is one less than the righthand state and nothing if they are equal. If the normal machine <var>B</var> does a move, we have five possibilities<br>
+a)&nbsp;&nbsp;&nbsp;&nbsp; “<var>A</var> + <var>B</var> &nbsp; <var>C</var> ” becomes “<var>A</var> &nbsp; <var>B</var> + <var>C</var> ” (a “+” travelling to the right),<br>
+b)&nbsp;&nbsp;&nbsp;&nbsp; “<var>A</var> &nbsp; <var>B</var> – <var>C</var> ” becomes “<var>A</var> – <var>B</var> &nbsp; <var>C</var> ” (a “–” travelling to the left),<br>
+c)&nbsp;&nbsp;&nbsp;&nbsp; “<var>A</var> + <var>B</var> + <var>C</var> ” becomes “<var>A</var> &nbsp; <var>B</var> – <var>C</var> ” (internal reflection of “+&nbsp;+”)<br>
+d)&nbsp;&nbsp;&nbsp;&nbsp; “<var>A</var> – <var>B</var> – <var>C</var> ” becomes “<var>A</var> + <var>B</var> &nbsp; <var>C</var> ” (internal reflection of “– –”)<br>
+e)&nbsp;&nbsp;&nbsp;&nbsp; “<var>A</var> + <var>B</var> – <var>C</var> ” becomes “<var>A</var> &nbsp; <var>B</var> &nbsp; <var>C</var> ” (mutual annihilation of “+ –”).<br>
+Transitions c), d) and e) reduce the total number of “+” and “–” signs.</p>
+<p>A move of the bottom machine requires a “–” to the right of it and changes it in a “+”: it is a true reflection, leaving the number of “+” and “–” signs unchanged. A move of the top machine creates a “–” at the left of it —in doing so it may absorb a “+” in that position—, but on account of observation 2) it cannot do so in a higher frequency than the bottom machine absorbs “–” signs.</p>
+<p>In the legitimate states there is only one “+” or “–” sign, travelling in the appropriate direction and being changed —and then reflected— at the ends.</p>
+<p>Self-stabilization is now obvious. A move of the bottom machine absorbs a “–” gone to the left and produces in its place a “+” ready to go to the right. How is the bottom machine going to receive its next “–” in the non-legitimate state? Either because the right going “+” meets a pair “– –” (“+ – –” can reduce to “–”) or because it meets another “+” (“+ +” can reduce to “–”) that could have been created by “– –”. In order to stay away permanently from the legitimate state, the top machine would have to create two “–” signs for every single “–” arriving at the bottom machine. But this possibility is denied by our observation that between two successive moves of the top machine, the bottom machine must have moved at least once.</p>
+<p class="noindent"><u>Note</u>. In view of the fact that a three-state machine requires two bits, with which we can have four-state machines, for whom the problem of self-stabilization has already been solved, the result achieved here could very well be totally insignificant. This aspect of minimization of the number of machine states has reached the stage of a problem in pure mathematics and I shall not pursue it any further.</p>
+<div><br>
+<br>
+<br>
+1st November 1973 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; prof.dr.Edsger W.Dijkstra<br>
+BURROUGHS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Research Fellow<br>
+Plataanstraat 5<br>
+NUENEN - 4565<br>
+The Netherlands<br></div>
+<hr>
+<div id="footer"><font size="-1">transcribed by Chrys Alexander Panayiotou<br>
+revised <!-- #BeginDate format:En2 -->08-Sep-2013<!-- #EndDate --></font></div>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

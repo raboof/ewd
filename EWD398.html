@@ -23,732 +23,863 @@
   </div>
   <h1>Sequencing primitives revisited</h1>
   <div class='body'>
-         <hr />
-<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR
-<hr />
-<p class="noindent">
-<p class="noindent"><b>Sequencing primitives revisited.</b>
-  <p>Let &ldquo;db&rdquo; equal the number of boys in the common dressing room of a
-swimming pool; the initial value of db obviously equals zero. Using the
-operators &ldquo;inc&rdquo; and &ldquo;dec&rdquo; respectively for increase and decrease by one of
-their integer argument(s), we can describe the life of a little boy &mdash;omitting
-all further irrelevant details&mdash; as the cyclic process
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-             <b>do</b> inc(db); dec(db) <b>od</b> </td> </tr>
+<hr>
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. —HR</p>
+<hr>
+<p class="noindent"></p>
+<p class="noindent"><b>Sequencing primitives revisited.</b></p>
+<p>Let “db” equal the number of boys in the common dressing room of a swimming pool; the initial value of db obviously equals zero. Using the operators “inc” and “dec” respectively for increase and decrease by one of their integer argument(s), we can describe the life of a little boy —omitting all further irrelevant details— as the cyclic process</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>do</b> inc(db); dec(db) <b>od</b></td>
+</tr>
 </table>
-where the repeatable statement describes a single usage of the dressing
-room. And if we have a community of a hundred of such little boys, we have
-a hundred of such sequential processes.
-<p>There is, however, another way of looking at the usage of the dressing
-room. From the point of view of the dressing room &mdash;which can be assumed
-not to be awfully interested in the identity of the boys using it, there
-are just two sequential processes
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-        <b>do</b> inc(db) <b>od</b> and <b>do</b> dec(db) <b>od</b> , </td> </tr>
+where the repeatable statement describes a single usage of the dressing room. And if we have a community of a hundred of such little boys, we have a hundred of such sequential processes.
+<p>There is, however, another way of looking at the usage of the dressing room. From the point of view of the dressing room —which can be assumed not to be awfully interested in the identity of the boys using it, there are just two sequential processes</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>do</b> inc(db) <b>od</b> and <b>do</b> dec(db) <b>od</b> ,</td>
+</tr>
 </table>
-describing what happens at its entry and at its exit respectively. These
-two processes, however, have to be synchronized so as to maintain the
-invariance of 
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-              db &ge; 0 </td> </tr>
+describing what happens at its entry and at its exit respectively. These two processes, however, have to be synchronized so as to maintain the invariance of
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>db ≥ 0</td>
+</tr>
 </table>
-(From the point of view of the dressing room we can even regard the physical
-boys as a means for implementing this synchronization restriction: they are
-very similar to the coins in one&rsquo;s purse!)
-<p>As a second example, consider the well-known version of Euclid&rsquo;s
-algorithm for the computation of the greatest common divisor GCD(A, B) of two
-positive numbers, using addition and subtraction only:
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-      a := A; b := B;                                                           </td> </tr> <tr> <td></td> <td colspan = 2>
-      <b>while</b> a &ne; b <b>do</b> <b>if</b> a &gt; b <b>then</b> a := a - b </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                                 <b>else</b> b := b - a <b>fi</b> <b>od</b>     </td> </tr> <tr> <td></td> <td colspan = 2>
-      print(a)                                                                  </td> </tr>
+(From the point of view of the dressing room we can even regard the physical boys as a means for implementing this synchronization restriction: they are very similar to the coins in one’s purse!)
+<p>As a second example, consider the well-known version of Euclid’s algorithm for the computation of the greatest common divisor GCD(A, B) of two positive numbers, using addition and subtraction only:</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2">a := A; b := B;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>while</b> a ≠ b <b>do</b> <b>if</b> a &gt; b <b>then</b> a := a - b</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>else</b> b := b - a <b>fi</b> <b>od</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2">print(a)</td>
+</tr>
 </table>
-<p>The first line establishes the relation &ldquo;GCD(A, B) = GCD(a, b)&rdquo; and
-both operations &ldquo;a:= a - b&rdquo; and &ldquo;b:= b - a&rdquo; leave that relation &mdash;For such
-are the properties of the GCD-function&mdash; invariant. Furthermore, the first
-line establishes 
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                 a &gt; 0 <b>and</b> b &gt; 0 </td> </tr>
+<p>The first line establishes the relation “GCD(A, B) = GCD(a, b)” and both operations “a:= a - b” and “b:= b - a” leave that relation —For such are the properties of the GCD-function— invariant. Furthermore, the first line establishes</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>a &gt; 0 <b>and</b> b &gt; 0</td>
+</tr>
 </table>
-and also this relation is kept invariant; the loop terminates when a = b
-and then, because GCD(a, a) = a , we know the answer.
-<p>Also this program, however, admits another interpretation, viz. the
-two cyclic processes
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-        <b>do</b> a:= a - b <b>od</b> and <b>do</b> b:=b-a <b>od</b> </td> </tr>
+and also this relation is kept invariant; the loop terminates when a = b and then, because GCD(a, a) = a , we know the answer.
+<p>Also this program, however, admits another interpretation, viz. the two cyclic processes</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>do</b> a:= a - b <b>od</b> and <b>do</b> b:=b-a <b>od</b></td>
+</tr>
 </table>
 have to be synchronized in such a fashion that the relation
-<table><tr><td valign=top width=10%>
-P:</td><td>a &gt; 0 <b>and</b> b &gt; 0
-</td>  </tr>  </table>
+<table>
+<tr>
+<td valign="top" width="10%">P:</td>
+<td>a &gt; 0 <b>and</b> b &gt; 0</td>
+</tr>
+</table>
 is kept invariant.
-<p>Let us compute the synchronizing conditions that follow from this
-requirement. Using the notation
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-        wp(S, P)  </td> </tr>
+<p>Let us compute the synchronizing conditions that follow from this requirement. Using the notation</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>wp(S, P)</td>
+</tr>
 </table>
-for &ldquo;the weakest precondition such that its truth prior to the execution
-of S will guarantee that the execution of S will establish the truth of the
-postcondition P&rdquo;,then from the axiom of assignment follows
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-    wp(&ldquo;a:=a - b&rdquo;, a&gt;0 <b>and</b> b&gt;0) = (a - b&gt;0 <b>and</b> b&gt;0) </td> </tr> <tr> <td></td> <td>
-    wp(&ldquo;b:=b - a&rdquo;, a&gt;O <b>and</b> b&gt;0) (a&gt;O <b>and</b> b - a&gt;0).  </td> </tr>
+for “the weakest precondition such that its truth prior to the execution of S will guarantee that the execution of S will establish the truth of the postcondition P”,then from the axiom of assignment follows
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>wp(“a:=a - b”, a&gt;0 <b>and</b> b&gt;0) = (a - b&gt;0 <b>and</b> b&gt;0)</td>
+</tr>
+<tr>
+<td></td>
+<td>wp(“b:=b - a”, a&gt;O <b>and</b> b&gt;0) (a&gt;O <b>and</b> b - a&gt;0).</td>
+</tr>
 </table>
-For each of the two statements we have here the necessary and 
-sufficient precondition to establish the truth of the postcondition F. We are,
-however, only interested in maintaining P, that is, for each of the
-statements S, we are interested in the additional condition C, such that
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-     (P <b>and</b> C) &rArr; wp(S, P) . </td> </tr>
+For each of the two statements we have here the necessary and sufficient precondition to establish the truth of the postcondition F. We are, however, only interested in maintaining P, that is, for each of the statements S, we are interested in the additional condition C, such that
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>(P <b>and</b> C) ⇒ wp(S, P) .</td>
+</tr>
 </table>
-<p>The computation of C is simple. but I shall explain it slowly, as I
-can only have heart-felt sympathy with any reader who, through unfamiliarity,
-gets confused. (Students and staff from Aarhus, Denmark, may remember how,
-early 1973, I got completely entangled during one of my lectures, when lack
-of preparation could not be compensated by experience!)
-One uses the following theorems of propositional calculus
-<table><tr><td valign=top width=10%>
-1)</td><td>From P &rArr; C2 follows (P <b>and</b> (C1 <b>and</b> C2)) = (P <b>and</b> C1)
-</td></tr>
-<tr><td valign=top>
-2)</td><td>From P &rArr; <b>non</b> C2 follows (P <b>and</b> (C1 <b>or</b> C2)) = (P <b>and</b> C1) .
-</td>  </tr>  </table>
-<p>As first form of C, satisfying
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-        (P <b>and</b> c) &rArr; wp(S, P) </td> </tr>
+<p>The computation of C is simple. but I shall explain it slowly, as I can only have heart-felt sympathy with any reader who, through unfamiliarity, gets confused. (Students and staff from Aarhus, Denmark, may remember how, early 1973, I got completely entangled during one of my lectures, when lack of preparation could not be compensated by experience!) One uses the following theorems of propositional calculus</p>
+<table>
+<tr>
+<td valign="top" width="10%">1)</td>
+<td>From P ⇒ C2 follows (P <b>and</b> (C1 <b>and</b> C2)) = (P <b>and</b> C1)</td>
+</tr>
+<tr>
+<td valign="top">2)</td>
+<td>From P ⇒ <b>non</b> C2 follows (P <b>and</b> (C1 <b>or</b> C2)) = (P <b>and</b> C1) .</td>
+</tr>
 </table>
-one chooses C equal to wp(S, P) itself and if C is a conjunction, theorem 1
-allows us to drop any term that is implied by P and if C is a disjunction,
-theorem 2 allows us to drop any term whose negation is implied by P. In
-this example we only need theorem 1 and we arrive at
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-      (P <b>and</b> a &gt; b) &rArr; wp(&ldquo;a:= a - b&rdquo;, P) and </td> </tr> <tr> <td></td> <td>
-      (P <b>and</b> b &gt; a) &rArr; wp(&ldquo;b:= b - a&rdquo;, P) .   </td> </tr>
+<p>As first form of C, satisfying</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>(P <b>and</b> c) ⇒ wp(S, P)</td>
+</tr>
 </table>
-<p>And it is now very tempting &mdash;so tempting in fact, that I shall do it&mdash;
-to write our program for the greatest common divisor as follows:
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-      a:= A; b:= B;                     </td> </tr> <tr> <td></td> <td colspan = 2>
-      <b>do</b> a &gt; b: a:= a - b,    </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-         b &gt; a: b:= b - a <b>od</b>; </td> </tr> <tr> <td></td> <td colspan = 2>
-      print(a)                          </td> </tr>
+one chooses C equal to wp(S, P) itself and if C is a conjunction, theorem 1 allows us to drop any term that is implied by P and if C is a disjunction, theorem 2 allows us to drop any term whose negation is implied by P. In this example we only need theorem 1 and we arrive at
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>(P <b>and</b> a &gt; b) ⇒ wp(“a:= a - b”, P) and</td>
+</tr>
+<tr>
+<td></td>
+<td>(P <b>and</b> b &gt; a) ⇒ wp(“b:= b - a”, P) .</td>
+</tr>
 </table>
-We call a construct like &ldquo;a &gt; b: a2:= a - b&rdquo; a &ldquo;guarded command&rdquo; and for
-the time being we suggest the following syntax
-<p class="p0">< <var>guarding head</var> > ::= < <var>boolean expression</var> > : < <var>statement</var> > </p>
-<p class="p0">< <var>guarded command</var> > ::= < <var>guarding head</var> > { ; < <var>statement</var> > }</p>
-where the braces {...} should be read as &ldquo;followed zero or more times
-by the enclosed&rdquo; &mdash;in our example above, this is zero times&mdash;
-<p class="p0">< <var>guarded command list</var> > ::= < <var>guarded command</var> > { , < <var>guarded command</var> > }</p>
-<p>The guarded command list is a semantically unordered list of guarded
-commands, separated by commas. (We have sticked to the usual convention to
-use the comma as separator in a list in which the relative order of the
-elements separated is semantically irrelevant, the above program could
-equally well have been written with
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-   <b>do</b> b &gt; a: b:=b - a,       </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-      a.&gt; b: a:= a - b <b>od</b> .) </td> </tr>
+<p>And it is now very tempting —so tempting in fact, that I shall do it— to write our program for the greatest common divisor as follows:</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2">a:= A; b:= B;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>do</b> a &gt; b: a:= a - b,</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>b &gt; a: b:= b - a <b>od</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2">print(a)</td>
+</tr>
 </table>
-<p>A guarded command is &ldquo;executable&rdquo; when its associated guard &mdash;here
-the boolean expression with which the guarding head starts&mdash; considered as
-a function of the initial state is true.
-<p>Basically we propose two constructs with guarded command lists. The
-first is a possible form of a statement:
-<p class="p0">< <var>statement</var> > ::= <b>if</b> < <var>guarded command list</var> > <b>fi</b> </p>
-If one or more of the guarded commands is executable, the execution of the
-whole construct consists of the execution of one of the executable guarded
-commands. If none of the guarded commands in the enclosed list is executable,
-the program is wrong &mdash;and in attempted execution we assume program abortion.
-Note that there is <b>no</b> point in introducing the default convention that, if
-none of the n alternatives mentioned in the list is executable, the whole
-construct reduces to the empty statement. If we wish to provide that 
-alternative, we should add it as the n+1st alternative and write instead of
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-     <b>if</b> B1: S1, ... Bn: Sn <b>fi</b> </td> </tr>
+We call a construct like “a &gt; b: a2:= a - b” a “guarded command” and for the time being we suggest the following syntax
+<p class="p0">&lt; <var>guarding head</var> &gt; ::= &lt; <var>boolean expression</var> &gt; : &lt; <var>statement</var> &gt;</p>
+<p class="p0">&lt; <var>guarded command</var> &gt; ::= &lt; <var>guarding head</var> &gt; { ; &lt; <var>statement</var> &gt; }</p>
+where the braces {...} should be read as “followed zero or more times by the enclosed” —in our example above, this is zero times—
+<p class="p0">&lt; <var>guarded command list</var> &gt; ::= &lt; <var>guarded command</var> &gt; { , &lt; <var>guarded command</var> &gt; }</p>
+<p>The guarded command list is a semantically unordered list of guarded commands, separated by commas. (We have sticked to the usual convention to use the comma as separator in a list in which the relative order of the elements separated is semantically irrelevant, the above program could equally well have been written with</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>do</b> b &gt; a: b:=b - a,</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>a.&gt; b: a:= a - b <b>od</b> .)</td>
+</tr>
+</table>
+<p>A guarded command is “executable” when its associated guard —here the boolean expression with which the guarding head starts— considered as a function of the initial state is true.</p>
+<p>Basically we propose two constructs with guarded command lists. The first is a possible form of a statement:</p>
+<p class="p0">&lt; <var>statement</var> &gt; ::= <b>if</b> &lt; <var>guarded command list</var> &gt; <b>fi</b></p>
+If one or more of the guarded commands is executable, the execution of the whole construct consists of the execution of one of the executable guarded commands. If none of the guarded commands in the enclosed list is executable, the program is wrong —and in attempted execution we assume program abortion. Note that there is <b>no</b> point in introducing the default convention that, if none of the n alternatives mentioned in the list is executable, the whole construct reduces to the empty statement. If we wish to provide that alternative, we should add it as the n+1st alternative and write instead of
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>if</b> B1: S1, ... Bn: Sn <b>fi</b></td>
+</tr>
 </table>
 rather
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-     <b>if</b> B1: S1, ... , Bn: Sn, <b>non</b>(B1 <b>or</b> ... <b>or</b> Bn): Slast <b>fi</b> </td> </tr>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>if</b> B1: S1, ... , Bn: Sn, <b>non</b>(B1 <b>or</b> ... <b>or</b> Bn): Slast <b>fi</b></td>
+</tr>
 </table>
-where Slast can be the empty statement. For the above we propose &mdash;but
-this can be regarded as syntactic sugar&mdash; the abreviation
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-     <b>if</b> B1: S1, ... , Bn: Sn <b>else</b> Slast <b>fi</b> , </td> </tr>
+where Slast can be the empty statement. For the above we propose —but this can be regarded as syntactic sugar— the abreviation
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>if</b> B1: S1, ... , Bn: Sn <b>else</b> Slast <b>fi</b> ,</td>
+</tr>
 </table>
 i.e. we also allow the format
-<p class="p0">< <var>statement</var> > ::= <b>if</b> < <var>guarded command list</var> > <b>else</b> < <var>guarded command list</var> > <b>fi</b> </p>
-If one or more guarded commands from the list are executable, one of them will
-will be executed, otherwise the statement following &ldquo;else&rdquo; .
-<p>What used to be written as <b>if</b> B <b>then</b> S1 <b>else</b> S2 <b>fi</b> can now be
-written    
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                <b>if</b> B: S1, <b>non</b> B: S2 <b>fi</b> </td> </tr>
+<p class="p0">&lt; <var>statement</var> &gt; ::= <b>if</b> &lt; <var>guarded command list</var> &gt; <b>else</b> &lt; <var>guarded command list</var> &gt; <b>fi</b></p>
+If one or more guarded commands from the list are executable, one of them will will be executed, otherwise the statement following “else” .
+<p>What used to be written as <b>if</b> B <b>then</b> S1 <b>else</b> S2 <b>fi</b> can now be written</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>if</b> B: S1, <b>non</b> B: S2 <b>fi</b></td>
+</tr>
 </table>
 or, with our last notational extension as
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-      <b>if</b> B: S1 <b>else</b> S2 <b>fi</b> . </td> </tr>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>if</b> B: S1 <b>else</b> S2 <b>fi</b> .</td>
+</tr>
 </table>
-<p>(In doing so, we can imagine ourselves to serve a dual purpose. On the
-one hand the use of <b>else</b> can be regarded as a hint to the implementation:
-after the evaluation of B the value of <b>non</b> B is known as well. On the
-other hand it is an explicit expression (for us!) of the fact that at least
-one of the alternatives is executable, stronger, that if none of the preceeding
-ones is executable, the last one is and that, if the last one is executable,
-it is the only one. In the following it will become apparent that the use
-of else is often to be avoided.)
-<p>Note that what we used to write as
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-      <b>if</b> B <b>then</b> S <b>fi</b> </td> </tr>
+<p>(In doing so, we can imagine ourselves to serve a dual purpose. On the one hand the use of <b>else</b> can be regarded as a hint to the implementation: after the evaluation of B the value of <b>non</b> B is known as well. On the other hand it is an explicit expression (for us!) of the fact that at least one of the alternatives is executable, stronger, that if none of the preceeding ones is executable, the last one is and that, if the last one is executable, it is the only one. In the following it will become apparent that the use of else is often to be avoided.)</p>
+<p>Note that what we used to write as</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>if</b> B <b>then</b> S <b>fi</b></td>
+</tr>
 </table>
 should be written now as
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-   <b>if</b> B: S <b>else</b> <b>fi</b> </td> </tr>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td><b>if</b> B: S <b>else</b> <b>fi</b></td>
+</tr>
 </table>
 and not as
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-    <b>if</b> B: S <b>fi</b> </td> </tr>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>if</b> B: S <b>fi</b></td>
+</tr>
 </table>
 because in the old notation the latter would correspond to
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-    <b>if</b> B <b>then</b> S <b>else</b> ABORT <b>fi</b> . </td> </tr>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>if</b> B <b>then</b> S <b>else</b> ABORT <b>fi</b> .</td>
+</tr>
 </table>
-<p>Secondly we note that in the case that more than one of the guarded
-commands in the list is executable, we have left undefined which of the ones
-will be chosen for execution. This is done intentionally; in this respect
-we are proposing what could be regarded as a non-deterministic machine. On
-the one hand we have the duty to see to it that this non-determinacy is
-only introduced &ldquo;when it does not matter&rdquo;, on the other hand &mdash;and that is
-at this stage more important&mdash; whenever &ldquo;it does not matter&rdquo; our notation
-does not force an arbitrary or premature decision upon us.
-<p>The second construct with guarded command lists that we propose is
-<p class="p0">< <var>statement</var> > ::= <b>do</b> < <var>guarded command list</var> > <b>od</b> </p>
-Here we do allow that the alternatives are exhausted. i.e. it is not a
-fatal error if none of the guarded commands is executable: in the case of
-exhaustion, the execution of the whole <b>do</b> ... <b>od</b> construct is regarded as
-completed. The complementary rule, however, is that this is the <b>only</b> way
-in which the <b>do</b> ... <b>od</b> construct can terminate and that, as long as at
-least one of the guarded commands is executable, one of the executable ones
-will be selected for execution. In the case of more than one executable
-command, it is again undefined which one will be selected, we postulate,
-however, that then they will be selected in &ldquo;fair random order&rdquo;, i.e. we
-disallow the non-determinacy permanent neglect of a permanently executable
-guarded command from the list.
-We have to postulate this, because in the construct
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-      <b>do</b> B1: S1, B2: S2 <b>od</b> </td> </tr>
+<p>Secondly we note that in the case that more than one of the guarded commands in the list is executable, we have left undefined which of the ones will be chosen for execution. This is done intentionally; in this respect we are proposing what could be regarded as a non-deterministic machine. On the one hand we have the duty to see to it that this non-determinacy is only introduced “when it does not matter”, on the other hand —and that is at this stage more important— whenever “it does not matter” our notation does not force an arbitrary or premature decision upon us.</p>
+<p>The second construct with guarded command lists that we propose is</p>
+<p class="p0">&lt; <var>statement</var> &gt; ::= <b>do</b> &lt; <var>guarded command list</var> &gt; <b>od</b></p>
+Here we do allow that the alternatives are exhausted. i.e. it is not a fatal error if none of the guarded commands is executable: in the case of exhaustion, the execution of the whole <b>do</b> ... <b>od</b> construct is regarded as completed. The complementary rule, however, is that this is the <b>only</b> way in which the <b>do</b> ... <b>od</b> construct can terminate and that, as long as at least one of the guarded commands is executable, one of the executable ones will be selected for execution. In the case of more than one executable command, it is again undefined which one will be selected, we postulate, however, that then they will be selected in “fair random order”, i.e. we disallow the non-determinacy permanent neglect of a permanently executable guarded command from the list. We have to postulate this, because in the construct
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>do</b> B1: S1, B2: S2 <b>od</b></td>
+</tr>
 </table>
-we would not like to exclude &mdash;nor to advocate for that matter!&mdash; that both
-B1 and B2 might be true, while S1 has reduced itself to the empty statement
-and the &ldquo;possible&rdquo; execution of S2 will eventually cause both guards to
-become false. In that case we cannot allow the non-determinacy to be so bad
-as to choose the executable first alternative S1 all the time.
-<p>Again, if more than one of the guarded commands is executable we have
-what we can regard as a non-deterministic machine. We have to see to it that
-whenever we introduce this non-determinacy, &ldquo;it does not matter&rdquo;, on the
-other hand &ldquo;whenever it does not matter&rdquo; our notation relieves us from the
-duty to make an arbitrary choice.
-<p>But even in the case of mutually exclusive B&rsquo;s &mdash;i.e. no non-determinacy&mdash;
-the text
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-     <b>do</b> B1:S1, B2:S2 <b>od</b> </td> </tr>
+we would not like to exclude —nor to advocate for that matter!— that both B1 and B2 might be true, while S1 has reduced itself to the empty statement and the “possible” execution of S2 will eventually cause both guards to become false. In that case we cannot allow the non-determinacy to be so bad as to choose the executable first alternative S1 all the time.
+<p>Again, if more than one of the guarded commands is executable we have what we can regard as a non-deterministic machine. We have to see to it that whenever we introduce this non-determinacy, “it does not matter”, on the other hand “whenever it does not matter” our notation relieves us from the duty to make an arbitrary choice.</p>
+<p>But even in the case of mutually exclusive B’s —i.e. no non-determinacy— the text</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>do</b> B1:S1, B2:S2 <b>od</b></td>
+</tr>
 </table>
-seems to have advantages. In the older notation we would be forced to
-choose between one of the following versions
-<table> <tr> <td colspan = 3>
-1) <b>while</b>(B1 <b>or</b> B2)<b>do</b>                 </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-     <b>if</b> B1 <b>then</b> S1 <b>else</b> S2 <b>fi</b> </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; </td> <td>
-       <b>od</b>                                          </td> </tr>
+seems to have advantages. In the older notation we would be forced to choose between one of the following versions
+<table>
+<tr>
+<td colspan="3">1) <b>while</b>(B1 <b>or</b> B2)<b>do</b></td>
+</tr>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>if</b> B1 <b>then</b> S1 <b>else</b> S2 <b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp;</td>
+<td><b>od</b></td>
+</tr>
 </table>
-more or less obscuring the fact that S2 will only be executed provided
-B2 holds initially
-<table> <tr> <td colspan = 3>
-2) <b>while</b>(B1 <b>or</b> B2)<b>do</b>    </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-     <b>while</b> B1 <b>do</b> D1 <b>od</b>; </td> </tr> <tr> <td></td> <td colspan = 2>
-     <b>while</b> B2 <b>do</b> S2 <b>od</b>  </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-          <b>od</b>                          </td> </tr>
+more or less obscuring the fact that S2 will only be executed provided B2 holds initially
+<table>
+<tr>
+<td colspan="3">2) <b>while</b>(B1 <b>or</b> B2)<b>do</b></td>
+</tr>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>while</b> B1 <b>do</b> D1 <b>od</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>while</b> B2 <b>do</b> S2 <b>od</b></td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>od</b></td>
+</tr>
 </table>
-which is not too bad, but not too nice either &mdash;with the possible execption
-of the first outer repetition. for instance. the first inner loop will
-always be executed at least once.
-<table> <tr> <td colspan = 3>
-3) <b>repeat</b> ready:= <b>true</b>;                               </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-      <b>while</b> B1 <b>do</b> S1; ready:= <b>false</b> <b>od</b>; </td> </tr> <tr> <td></td> <td></td> <td>
-      <b>while</b> B2 <b>do</b> S2; ready:= <b>false</b> <b>od</b>  </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-   <b>until</b> ready                                               </td> </tr>
+which is not too bad, but not too nice either —with the possible execption of the first outer repetition. for instance. the first inner loop will always be executed at least once.
+<table>
+<tr>
+<td colspan="3">3) <b>repeat</b> ready:= <b>true</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td><b>while</b> B1 <b>do</b> S1; ready:= <b>false</b> <b>od</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><b>while</b> B2 <b>do</b> S2; ready:= <b>false</b> <b>od</b></td>
+</tr>
+<tr>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>until</b> ready</td>
+</tr>
 </table>
-Clearly our alternatives are getting nastier and nastier. Besides that,
-without any further information there is no reason to assume that our new
-version with the guarded commands would lead to a greater number of 
-evaluations of the boolean expression B1 and B2.
-<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p>             
-<p>As we have pointed out, in the case of a non-deterministic choice
-between two or more guarded commands, we must ensure that &ldquo;the choice
-does not matter&rdquo; and before proceeding with more examples, we had better
-be sufficiently clear about
-<table><tr><td valign=top width=10%>
-1)</td><td>what we mean by &ldquo;does not matter&rdquo; and
-</td></tr>
-<tr><td valign=top>
-2)</td><td>how we ensure that fact.
-</td>  </tr>  </table>
-<p>There is a snag about non-determinacy. We recall that we denote by
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                wp(S, R) </td> </tr>
+Clearly our alternatives are getting nastier and nastier. Besides that, without any further information there is no reason to assume that our new version with the guarded commands would lead to a greater number of evaluations of the boolean expression B1 and B2.
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</p>
+<p>As we have pointed out, in the case of a non-deterministic choice between two or more guarded commands, we must ensure that “the choice does not matter” and before proceeding with more examples, we had better be sufficiently clear about</p>
+<table>
+<tr>
+<td valign="top" width="10%">1)</td>
+<td>what we mean by “does not matter” and</td>
+</tr>
+<tr>
+<td valign="top">2)</td>
+<td>how we ensure that fact.</td>
+</tr>
 </table>
-the weakest precondition such that its truth prior to the execution of S
-will guarantee that the execution of S will establish the truth of the
-postcondition P; in particular it guarantees that the execution of S will
-terminate successfully, which in general could be prevented by either
-endless looping &mdash;e.g. <b>do</b> <b>true</b>: S <b>od</b>&mdash; or by abortion &mdash;e.g. <b>if</b> <b>false</b>: S <b>fi</b>&mdash;.
-Proper termination is guaranteed if the initial state satisfies wp(S, T),
-where &ldquo;T&rdquo; is used to denote the condition that is satisfied by all states.
-The most important properties are
-<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For any S. wp(S, F) = F , where &ldquo;F&rdquo; is used to denote the condition
-that no state satisfies. (This is called the &ldquo;Law of the Excluded Miracle&rdquo;.)
-<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For any S and any Q and R such that 0 &rArr; R , we have
-wp(S, Q) &rArr; wp(S, R) . (As a result wp(S, Q) &rArr; wp(S, T) for any Q.)
-<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For any S, Q and R we have (wp(S, Q) <b>and</b> wp(S, R)) = wp(S, Q <b>and</b> R)
-<br>4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For any S, Q and R we have
-if S is deterministic: (wp(S, Q) <b>or</b> wp(S, R)) = wp(S, Q <b>or</b> R)
-otherwise only:        (wp(S, Q) <b>or</b> wp(S, R)) &rArr; wp(S, Q <b>or</b> R) .
-<p>In the fourth relation. the non-determinacy replaces the equality
-by an implication. If initially wp(S, R) is not true, the truth of R after
-execution of S is not excluded.
-<p class=noindent><b>Note</b>. For a given S, wp(S, R) is <b>uniquely</b> defined for any postcondition R,
-even if S is non-deterministic!
-<p>Finally I introduce &mdash;inspired by, but possibly deviating from, C.A.R.
-Hoare&mdash; one further notation, viz.
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-         {P} S {R} </td> </tr>
+<p>There is a snag about non-determinacy. We recall that we denote by</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>wp(S, R)</td>
+</tr>
 </table>
-to be read as &ldquo;P is with respect to S a safe precondition for the 
-postcondition R&rdquo; and asserting that the truth of P prior to the execution of S is
-sufficient to guarantee that S cannot terminate without establishing the
-truth of R. Note that in this assertion we do not guarantee that S will
-terminate properly, we don&rsquo;t assert that S will produce the desired result,
-we only assert that S won&rsquo;t produce the wrong result. We can relate this
-assertion to our previous formalism:
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-         {P} S {R}                                 </td> </tr> <tr> <td></td> <td>
-         (wp(S, T) <b>and</b> P) &rArr; wp(S, R) . </td> </tr>
+the weakest precondition such that its truth prior to the execution of S will guarantee that the execution of S will establish the truth of the postcondition P; in particular it guarantees that the execution of S will terminate successfully, which in general could be prevented by either endless looping —e.g. <b>do</b> <b>true</b>: S <b>od</b>— or by abortion —e.g. <b>if</b> <b>false</b>: S <b>fi</b>—. Proper termination is guaranteed if the initial state satisfies wp(S, T), where “T” is used to denote the condition that is satisfied by all states. The most important properties are<br>
+1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For any S. wp(S, F) = F , where “F” is used to denote the condition that no state satisfies. (This is called the “Law of the Excluded Miracle”.)<br>
+2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For any S and any Q and R such that 0 ⇒ R , we have wp(S, Q) ⇒ wp(S, R) . (As a result wp(S, Q) ⇒ wp(S, T) for any Q.)<br>
+3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For any S, Q and R we have (wp(S, Q) <b>and</b> wp(S, R)) = wp(S, Q <b>and</b> R)<br>
+4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For any S, Q and R we have if S is deterministic: (wp(S, Q) <b>or</b> wp(S, R)) = wp(S, Q <b>or</b> R) otherwise only: (wp(S, Q) <b>or</b> wp(S, R)) ⇒ wp(S, Q <b>or</b> R) .
+<p>In the fourth relation. the non-determinacy replaces the equality by an implication. If initially wp(S, R) is not true, the truth of R after execution of S is not excluded.</p>
+<p class="noindent"><b>Note</b>. For a given S, wp(S, R) is <b>uniquely</b> defined for any postcondition R, even if S is non-deterministic!</p>
+<p>Finally I introduce —inspired by, but possibly deviating from, C.A.R. Hoare— one further notation, viz.</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>{P} S {R}</td>
+</tr>
 </table>
-<p>There are two typical applications of the concept of &ldquo;a safe precondition&rdquo;.
-Firstly, if we can establish a safe precondition and can establish <b>separately</b>
-that the execution of S will terminate properly, then we have derived a
-sufficient precondition &mdash;not necessarily the weakest one, but often we
-don&rsquo;t need that, so why bother? The advantage is that the reasoning
-establishing the safeness of the precondition now need not be encumbered
-by arguments establishing proper termination (the latter arguments often
-being of quite a different nature). Secondly, we may be quite content with
-the assertion itself as we are often content with programs that either do
-the job or &ldquo;give up&rdquo; &mdash;e.g. a compiler refusing a source program, the
-compilation of which violates some capacity limits&mdash;, provided that we can
-be certain that &ldquo;giving up&rdquo; will be exceptional and not disastrous.
-<p>For our constructs with guarded commands we can now formulate the
-following properties.
-<p>Let S be &ldquo;<b>if</b> B1:S1, ... , Bn:Sn <b>fi</b>&rdquo; and let for 1 &le; S &le; n hold:
-{P <b>and</b> Bi} Si {R}, then we can assert about S: {P} S QR} . Note that
-S may fail to terminate properly because none of the guards is true, or
-because the guarded command selected fails to terminate properly.
-<p>Let S be &ldquo;<b>do</b> B1:S1. ... , Bn:Sn <b>od</b>&rdquo; and let for 1 &le; S &le; n hold:
-{P <b>and</b> Bi} Si {P}; then we can assert: {P} S {P <b>and</b> <b>non</b>(B1 <b>or</b> ... <b>or</b> Bn)}.
-Note that also this S may fail to terminate properly, but here either
-because the state with no guard true fails to occur, or because a guarded
-command selected fails to terminate properly.
-<p>Let S be &ldquo;<b>if</b> B1:S1, ... , Bn,Sn <b>fi</b>&rdquo; and let for 1 &le; S &le; n hold
-(P <b>and</b> Bi) &rArr; wp(Si, R). then (P <b>and</b> (B1 <b>or</b> ... <b>or</b> Bn))&rArr;wp(S, R) .
-Here we assert termination.
-<p>To give an example. Let S be
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-   <b>do</b> y &ne; 1: x:= x + 1, </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-      y &ne; 1: x:= x - 1,        </td> </tr> <tr> <td></td> <td></td> <td>
-      y &ne; 1: y:=1 <b>od</b>    </td> </tr>
+to be read as “P is with respect to S a safe precondition for the postcondition R” and asserting that the truth of P prior to the execution of S is sufficient to guarantee that S cannot terminate without establishing the truth of R. Note that in this assertion we do not guarantee that S will terminate properly, we don’t assert that S will produce the desired result, we only assert that S won’t produce the wrong result. We can relate this assertion to our previous formalism:
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>{P} S {R}</td>
+</tr>
+<tr>
+<td></td>
+<td>(wp(S, T) <b>and</b> P) ⇒ wp(S, R) .</td>
+</tr>
 </table>
-Above we have made explicitly the rule, that a loop of this type terminates.
-What, however, in the mean time has been done with x is in general undefined.
-I venture the following assertions about S:
-<table> <tr> <td>
-wp(S, x = x0) = (y = 1 <b>and</b> x = x0) </td> </tr> <tr> <td>
-wp(S. y &ne; 1) = F                       </td> </tr> <tr> <td>
-wp(S, y = 1) = T                          </td> </tr>
+<p>There are two typical applications of the concept of “a safe precondition”. Firstly, if we can establish a safe precondition and can establish <b>separately</b> that the execution of S will terminate properly, then we have derived a sufficient precondition —not necessarily the weakest one, but often we don’t need that, so why bother? The advantage is that the reasoning establishing the safeness of the precondition now need not be encumbered by arguments establishing proper termination (the latter arguments often being of quite a different nature). Secondly, we may be quite content with the assertion itself as we are often content with programs that either do the job or “give up” —e.g. a compiler refusing a source program, the compilation of which violates some capacity limits—, provided that we can be certain that “giving up” will be exceptional and not disastrous.</p>
+<p>For our constructs with guarded commands we can now formulate the following properties.</p>
+<p>Let S be “<b>if</b> B1:S1, ... , Bn:Sn <b>fi</b>” and let for 1 ≤ S ≤ n hold: {P <b>and</b> Bi} Si {R}, then we can assert about S: {P} S QR} . Note that S may fail to terminate properly because none of the guards is true, or because the guarded command selected fails to terminate properly.</p>
+<p>Let S be “<b>do</b> B1:S1. ... , Bn:Sn <b>od</b>” and let for 1 ≤ S ≤ n hold: {P <b>and</b> Bi} Si {P}; then we can assert: {P} S {P <b>and</b> <b>non</b>(B1 <b>or</b> ... <b>or</b> Bn)}. Note that also this S may fail to terminate properly, but here either because the state with no guard true fails to occur, or because a guarded command selected fails to terminate properly.</p>
+<p>Let S be “<b>if</b> B1:S1, ... , Bn,Sn <b>fi</b>” and let for 1 ≤ S ≤ n hold (P <b>and</b> Bi) ⇒ wp(Si, R). then (P <b>and</b> (B1 <b>or</b> ... <b>or</b> Bn))⇒wp(S, R) . Here we assert termination.</p>
+<p>To give an example. Let S be</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>do</b> y ≠ 1: x:= x + 1,</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>y ≠ 1: x:= x - 1,</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>y ≠ 1: y:=1 <b>od</b></td>
+</tr>
 </table>
-and this is all there is to be said about S, we have captured its semantics
-completely.
-<p>Before turning to next examples, I once more return to Euclid&rsquo;s
-algorithm
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
-          <b>if</b> A &gt; 0 <b>and</b> B &gt; 0: </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 2>
-            a:= A; b:= B;                         </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
-            <b>do</b> a &gt; b: a:= a - b,        </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-               b &gt; a: b:= b - a                </td> </tr> <tr> <td></td> <td colspan = 3>
-          <b>od</b>                               </td> </tr> <tr> <td></td> <td colspan = 3>
-          print(a) <b>fi</b>                      </td> </tr>
+Above we have made explicitly the rule, that a loop of this type terminates. What, however, in the mean time has been done with x is in general undefined. I venture the following assertions about S:
+<table>
+<tr>
+<td>wp(S, x = x0) = (y = 1 <b>and</b> x = x0)</td>
+</tr>
+<tr>
+<td>wp(S. y ≠ 1) = F</td>
+</tr>
+<tr>
+<td>wp(S, y = 1) = T</td>
+</tr>
 </table>
-(By supplying &ldquo;A &gt; 0 and B &gt; 0&rdquo; as a guard for our previous algorithm we
-have made the condition imposed on the arguments explicit: if they don&rsquo;t
-satisfy it, the program as a whole will be aborted.) When we did derive
-the program we have already used the invariance of
-<table><tr><td valign=top width=10%>
-P:</td><td>GCD(A, B) = GCD(a, b)<b>and</b> a &gt;0 <b>and</b> b &gt;0 .
-</td>  </tr>  </table>
+and this is all there is to be said about S, we have captured its semantics completely.
+<p>Before turning to next examples, I once more return to Euclid’s algorithm</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="3"><b>if</b> A &gt; 0 <b>and</b> B &gt; 0:</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp;</td>
+<td colspan="2">a:= A; b:= B;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="2"><b>do</b> a &gt; b: a:= a - b,</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>b &gt; a: b:= b - a</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="3"><b>od</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="3">print(a) <b>fi</b></td>
+</tr>
+</table>
+(By supplying “A &gt; 0 and B &gt; 0” as a guard for our previous algorithm we have made the condition imposed on the arguments explicit: if they don’t satisfy it, the program as a whole will be aborted.) When we did derive the program we have already used the invariance of
+<table>
+<tr>
+<td valign="top" width="10%">P:</td>
+<td>GCD(A, B) = GCD(a, b)<b>and</b> a &gt;0 <b>and</b> b &gt;0 .</td>
+</tr>
+</table>
 The loop theorem just mentioned tells us that upon termination we know also
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-          <b>non</b> (a &gt; b <b>or</b> b &gt; a) </td> </tr>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>non</b> (a &gt; b <b>or</b> b &gt; a)</td>
+</tr>
 </table>
-from which we conclude a = b, with the consequence that &ldquo;print(a)&rdquo; indeed
-produces the desired answer.
-<p>Does the loop terminate? Yes, for each execution of a guarded command
-from the list decreases a + b by at least 1 and therefore, in view of the
-invariance of P, this can happen only a finite number of times. We see
-here that &ldquo;termination&rdquo; &mdash;i.e. all the guards false&mdash; is here our goal;
-when synchronizing cyclic processes such as in an operating system, the
-situation &ldquo;all the guards false&rdquo; is called &ldquo;a deadly embrace&rdquo; and there
-one aims at avoiding this situation, because the show must go on! I hope
-to have shown the close connection between termination of sequential
-processes and deadlock in parallel programming.
-<p>Let us now try another problem. For N &ge; 0, we are requested to
-assign to an integer variable &ldquo;a&rdquo; such a value that the relation
-<table><tr><td valign=top width=30%>
-<p>R: </td><td>a<sup>2</sup> &le; N <b>and</b> (a+1)<sup>2</sup>&gt;N                            
-</td>  </tr>  </table>
-is established. with &ldquo;a<sup>2</sup> &le; N&rdquo; as our P to be kept invariant during the
-loop, the program a:= 0; <b>do</b> (a+1)<sup>2</sup> &le; N: a:= a + 1 <b>od</b>
-follows directly. We arrive at a more interesting program when we introduce
-a local variable (as a means for weakening R) and choose as our relation
-<table><tr><td valign=top width=30%>
-<p>P:</td><td>a<sup>2</sup> &le; N <b>and</b> b<sup>2</sup>&gt;N 
-</td>  </tr>  </table>
-Clearly, (P <b>and</b> a+1 = b) &rArr; R, and therefore our first sketch of the
-program can be (the first line is only one of the many ways in which
-P can be established easily)
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-      a:= 0; b:= N + 1;                                            </td> </tr> <tr> <td></td> <td colspan = 2>
-      <b>do</b> a+1 &ne; b: &ldquo;bring a and b closer together   </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                          under invariance of P&rdquo; <b>od</b> . </td> </tr>
+from which we conclude a = b, with the consequence that “print(a)” indeed produces the desired answer.
+<p>Does the loop terminate? Yes, for each execution of a guarded command from the list decreases a + b by at least 1 and therefore, in view of the invariance of P, this can happen only a finite number of times. We see here that “termination” —i.e. all the guards false— is here our goal; when synchronizing cyclic processes such as in an operating system, the situation “all the guards false” is called “a deadly embrace” and there one aims at avoiding this situation, because the show must go on! I hope to have shown the close connection between termination of sequential processes and deadlock in parallel programming.</p>
+<p>Let us now try another problem. For N ≥ 0, we are requested to assign to an integer variable “a” such a value that the relation</p>
+<table>
+<tr>
+<td valign="top" width="30%">
+<p>R:</p>
+</td>
+<td>a<sup>2</sup> ≤ N <b>and</b> (a+1)<sup>2</sup>&gt;N</td>
+</tr>
 </table>
-<p>Let &ldquo;d&rdquo; be the amount, by which the difference b - a is going to
-be decreased. Without loss of generality, we can assume that in the operation
-&ldquo;bring a and b closer together under invariance of P&rdquo; only one of the two
-variables will be changed each time, because the other one can be adjusted
-in the (or a) next execution of the repeatable statement.
-<p>Under these life-simplifying restrictions the repeatable statement
-will be somthing of the structure
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-       d:= ......;                    </td> </tr> <tr> <td></td> <td colspan = 2>
-       <b>if</b> ......: a:= a + d,   </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-          ......: b:= b - d <b>fi</b> </td> </tr>
+is established. with “a<sup>2</sup> ≤ N” as our P to be kept invariant during the loop, the program a:= 0; <b>do</b> (a+1)<sup>2</sup> ≤ N: a:= a + 1 <b>od</b> follows directly. We arrive at a more interesting program when we introduce a local variable (as a means for weakening R) and choose as our relation
+<table>
+<tr>
+<td valign="top" width="30%">
+<p>P:</p>
+</td>
+<td>a<sup>2</sup> ≤ N <b>and</b> b<sup>2</sup>&gt;N</td>
+</tr>
 </table>
-Let us first find out the guards. The repeatable statement as a whole has
-to maintain the invariance of P. Let us derive in the usual manner the
-corresponding weakest preconditions:
-<br>wp(&ldquo;a:= a + d&rdquo;, P) = ((a + d)<sup>2</sup> &le; N and b<sup>2</sup>&gt;N)
-<br>wp(&ldquo;a:= b - d&rdquo;, P) = (a<sup>2</sup> &le; N and (b - d)<sup>2</sup>&gt;N)
-<p>Now our theorems about the <b>if</b>...<b>fi</b> construct tell us, that we can
-drop the terms implied by P and our repeatable statement becomes
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-       d:= .......;                                      </td> </tr> <tr> <td></td> <td colspan = 2>
-       <b>if</b> (a + d)<sup>2</sup> &le; N: a:= a + d,  </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-          (b - d)<sup>2</sup> &gt; N: b:=b - d <b>fi</b> </td> </tr>
+Clearly, (P <b>and</b> a+1 = b) ⇒ R, and therefore our first sketch of the program can be (the first line is only one of the many ways in which P can be established easily)
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2">a:= 0; b:= N + 1;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>do</b> a+1 ≠ b: “bring a and b closer together</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>under invariance of P” <b>od</b> .</td>
+</tr>
 </table>
-This, however, would lead to abortion, if both guards were false. That must
-be excluded, so the negation of the one has to imply the truth of the other:
-e.g. (a + d)<sup>2</sup> &gt; N (the negation of the first guard) must imply (b - d)<sup>2</sup> &gt; N.
-This implication is ensured if (a + d) &le; (b - d) , i.e. 2d &lt; b-a .
-In order to assure termination, d should be positive, but any value
-of d satisfying 0 &lt;d &lt; (b - a) <b>div</b> 2 will do. The larger the value of
-d, the faster our program, and my final suggestion for this program is
-therefore   
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
-            a:= 0; b:= N + 1;                                    </td> </tr> <tr> <td></td> <td colspan = 3>
-            <b>do</b> a+1 &ne; b: d:=(b-a) <b>div</b> 2;         </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-                <b>if</b> (a + d)<sup>2</sup> &le; N: a:= a + d, </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-                   (b-d)<sup>2</sup>&gt;N: b:=b-d <b>fi</b>      </td> </tr> <tr> <td></td> <td colspan = 3>
-            <b>od</b>                                            </td> </tr>
+<p>Let “d” be the amount, by which the difference b - a is going to be decreased. Without loss of generality, we can assume that in the operation “bring a and b closer together under invariance of P” only one of the two variables will be changed each time, because the other one can be adjusted in the (or a) next execution of the repeatable statement.</p>
+<p>Under these life-simplifying restrictions the repeatable statement will be somthing of the structure</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2">d:= ......;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>if</b> ......: a:= a + d,</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>......: b:= b - d <b>fi</b></td>
+</tr>
 </table>
-(Remark. If 2d &lt; b - a , then both guards may be true and it does not matter
-which of the two guarded commands is executed. In this example they could
-even be executed both, but that is not typical.) I think this example a
-beauty. The assignment to &ldquo;d&rdquo; is to ensure that the partial operator
-<b>if</b> ... <b>fi</b> is not invoked outside its domain, but, working backwards, we
-can derive what obligation this implies. (In Canterbury, last September,
-I have shown in essence the derivation of the same algorithm, but that was
-a clumsy affair, compared with the above!) 
-<p class=noindent>(26th November 1973). Since I wrote the previous pages of this report last
-week, I saw that Don Knuth pointed out in a letter to Tony Hoare, that this
-use of the comma violates all rules of interpunction: one should not use
-the comma as major separator between pieces of text that internally may
-contain the semicolon as minor separator. I agree and in the following text
-&mdash;this whole report <b>is</b> an experiment in notation!&mdash; I shall use &mdash;inspired
-by the vertical bar &ldquo;|&rdquo; of Peter Naur&rsquo;s representation of BNF&mdash; a fat
-vertical bar &ldquo;&#x25af;&rdquo; instead, i.e.
-<p class="p0">< <var>guarded command list</var> > ::= < <var>guarded command </var> > { &#x25af; < <var>guarded command</var> > }</p>
-<p>The next example I am going to code is known as &ldquo;The Problem of the
-Dutch National Flag&rdquo;. In frontof a row of buckets, numbered from 1 through N,
-there is a minicomputer. Each bucket contains one pebble and each pebble is
-either red, or white of blue. The minicomputer can permute the pebbles
-because it has two controllable mechanical hands. controlled by the
-instruction &ldquo;swap(i, j)&rdquo; (1 &le; i, j &le; N): if i = j, this is the empty command,
-if i &ne; j, the pebbles in buckets nr.i and nr.j respectively are interchanged.
-Also the machine has a movable eye used to compute the function &ldquo;look(i)&rdquo;
-(1 &le; i &le; N) of type colour: its value is the colour of the pebble in bucket
-nr.i (currently in bucket nr.i. I mean). The minicomputer must be programmed
-in such a way that it will rearrange the pebbles in the order of the Dutch
-National Flag, i.e. red, white, blue. There are, however, three constraints.
-<br>1) We know nothing about the numbers of red, white or blue pebbles, the
-program must even work in the case of missing colours
-<br>2) It is a minicomputer with such a small store that the program may not
-make use of internal arrays  
-<br>3) It is assumed that the evaluation of the function &ldquo;look&rdquo; is so 
-timeconsuming that we require that each pebble is &ldquo;looked at&rdquo; at most once.
-<p>The argument is the following. On account of the last requirement
-we have somewhere half way the computational process four kinds of pebbles:
-established red, established white, established blue and uninspected. We
-have to keep track of which is what, we cannot use an internal array for
-that purpose, we therefore use also the row of buckets and there contents
-as a memory element. We can represent then the information with three
-internal pointers, r, w and b according to the following convention:
-<table width=100%><tr><td valign=top width=16%>
-for 1 &le; k &lt; r:</td><td>the pebble in bucket nr.k is established red,
-</td></tr>
-<tr><td valign=top>
-for r &le; k &le; w:</td><td>the pebble in bucket nr.k is uninspected
-</td></tr>
-<tr><td valign=top>
-for w &lt; k &le; b:</td><td>the pebble in bucket nr.k is established white
-</td></tr>
-<tr><td valign=top>
-for b &lt; k &le; N:</td><td>the pebble in bucket nr.k is established blue.
-</td>  </tr>  </table>
-<p>Once we have chosen this general intermediate state, our problem is
-nearly solved, because both initial state (all pebbles uninspected) and
-final state (no pebbles uninspected and the remaining ones sorted out)
-are particular cases of the above described general state. So that one
-is established and under its invariance the number of uninspected
-pebbles is decreased one at a time. Inspection of the pebble in bucket
-nr. w gives on the average less swaps to perform than inspection of the
-pebble in bucket nr.r and we arrive ultimately at the following program
-<table> <tr> <td colspan = 4>
-<b>begin</b> <b>int</b> var r, w, b; colour <b>var</b> v; </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
-   r:=1; w:= N; b:= N;                                    </td> </tr> <tr> <td></td> <td colspan = 3>
-   <b>do</b> r &le; w: v:= look(w);                       </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-      <b>if</b> v = red: swap(r, w); inc(r) &#x25af;      </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-         v = white: dec(w) &#x25af;                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
-         v = blue: swap(b, w); dec(b, w)                  </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
-      <b>fi</b>                                           </td> </tr> <tr> <td></td> <td colspan = 3>
-   <b>od</b>                                              </td> </tr> <tr> <td colspan = 4>
-<b>end</b>                                                </td> </tr>
+Let us first find out the guards. The repeatable statement as a whole has to maintain the invariance of P. Let us derive in the usual manner the corresponding weakest preconditions:<br>
+wp(“a:= a + d”, P) = ((a + d)<sup>2</sup> ≤ N and b<sup>2</sup>&gt;N)<br>
+wp(“a:= b - d”, P) = (a<sup>2</sup> ≤ N and (b - d)<sup>2</sup>&gt;N)
+<p>Now our theorems about the <b>if</b>...<b>fi</b> construct tell us, that we can drop the terms implied by P and our repeatable statement becomes</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2">d:= .......;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>if</b> (a + d)<sup>2</sup> ≤ N: a:= a + d,</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>(b - d)<sup>2</sup> &gt; N: b:=b - d <b>fi</b></td>
+</tr>
+</table>
+This, however, would lead to abortion, if both guards were false. That must be excluded, so the negation of the one has to imply the truth of the other: e.g. (a + d)<sup>2</sup> &gt; N (the negation of the first guard) must imply (b - d)<sup>2</sup> &gt; N. This implication is ensured if (a + d) ≤ (b - d) , i.e. 2d &lt; b-a . In order to assure termination, d should be positive, but any value of d satisfying 0 &lt;d &lt; (b - a) <b>div</b> 2 will do. The larger the value of d, the faster our program, and my final suggestion for this program is therefore
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="3">a:= 0; b:= N + 1;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="3"><b>do</b> a+1 ≠ b: d:=(b-a) <b>div</b> 2;</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>if</b> (a + d)<sup>2</sup> ≤ N: a:= a + d,</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>(b-d)<sup>2</sup>&gt;N: b:=b-d <b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="3"><b>od</b></td>
+</tr>
+</table>
+(Remark. If 2d &lt; b - a , then both guards may be true and it does not matter which of the two guarded commands is executed. In this example they could even be executed both, but that is not typical.) I think this example a beauty. The assignment to “d” is to ensure that the partial operator <b>if</b> ... <b>fi</b> is not invoked outside its domain, but, working backwards, we can derive what obligation this implies. (In Canterbury, last September, I have shown in essence the derivation of the same algorithm, but that was a clumsy affair, compared with the above!)
+<p class="noindent">(26th November 1973). Since I wrote the previous pages of this report last week, I saw that Don Knuth pointed out in a letter to Tony Hoare, that this use of the comma violates all rules of interpunction: one should not use the comma as major separator between pieces of text that internally may contain the semicolon as minor separator. I agree and in the following text —this whole report <b>is</b> an experiment in notation!— I shall use —inspired by the vertical bar “|” of Peter Naur’s representation of BNF— a fat vertical bar “▯” instead, i.e.</p>
+<p class="p0">&lt; <var>guarded command list</var> &gt; ::= &lt; <var>guarded command</var> &gt; { ▯ &lt; <var>guarded command</var> &gt; }</p>
+<p>The next example I am going to code is known as “The Problem of the Dutch National Flag”. In frontof a row of buckets, numbered from 1 through N, there is a minicomputer. Each bucket contains one pebble and each pebble is either red, or white of blue. The minicomputer can permute the pebbles because it has two controllable mechanical hands. controlled by the instruction “swap(i, j)” (1 ≤ i, j ≤ N): if i = j, this is the empty command, if i ≠ j, the pebbles in buckets nr.i and nr.j respectively are interchanged. Also the machine has a movable eye used to compute the function “look(i)” (1 ≤ i ≤ N) of type colour: its value is the colour of the pebble in bucket nr.i (currently in bucket nr.i. I mean). The minicomputer must be programmed in such a way that it will rearrange the pebbles in the order of the Dutch National Flag, i.e. red, white, blue. There are, however, three constraints.<br>
+1) We know nothing about the numbers of red, white or blue pebbles, the program must even work in the case of missing colours<br>
+2) It is a minicomputer with such a small store that the program may not make use of internal arrays<br>
+3) It is assumed that the evaluation of the function “look” is so timeconsuming that we require that each pebble is “looked at” at most once.</p>
+<p>The argument is the following. On account of the last requirement we have somewhere half way the computational process four kinds of pebbles: established red, established white, established blue and uninspected. We have to keep track of which is what, we cannot use an internal array for that purpose, we therefore use also the row of buckets and there contents as a memory element. We can represent then the information with three internal pointers, r, w and b according to the following convention:</p>
+<table width="100%">
+<tr>
+<td valign="top" width="16%">for 1 ≤ k &lt; r:</td>
+<td>the pebble in bucket nr.k is established red,</td>
+</tr>
+<tr>
+<td valign="top">for r ≤ k ≤ w:</td>
+<td>the pebble in bucket nr.k is uninspected</td>
+</tr>
+<tr>
+<td valign="top">for w &lt; k ≤ b:</td>
+<td>the pebble in bucket nr.k is established white</td>
+</tr>
+<tr>
+<td valign="top">for b &lt; k ≤ N:</td>
+<td>the pebble in bucket nr.k is established blue.</td>
+</tr>
+</table>
+<p>Once we have chosen this general intermediate state, our problem is nearly solved, because both initial state (all pebbles uninspected) and final state (no pebbles uninspected and the remaining ones sorted out) are particular cases of the above described general state. So that one is established and under its invariance the number of uninspected pebbles is decreased one at a time. Inspection of the pebble in bucket nr. w gives on the average less swaps to perform than inspection of the pebble in bucket nr.r and we arrive ultimately at the following program</p>
+<table>
+<tr>
+<td colspan="4"><b>begin</b> <b>int</b> var r, w, b; colour <b>var</b> v;</td>
+</tr>
+<tr>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td colspan="3">r:=1; w:= N; b:= N;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="3"><b>do</b> r ≤ w: v:= look(w);</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>if</b> v = red: swap(r, w); inc(r) ▯</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>v = white: dec(w) ▯</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>v = blue: swap(b, w); dec(b, w)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="2"><b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="3"><b>od</b></td>
+</tr>
+<tr>
+<td colspan="4"><b>end</b></td>
+</tr>
 </table>
 and I prefer the last part over what I used to write down
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
-     <b>if</b> v = red <b>then</b> swap(r, w); inc(r)                            </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-        <b>else</b> <b>if</b> v = blue <b>then</b> swap(b, w); dec(b) <b>fi</b>; </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-             dec(w)                                                              </td> </tr> <tr> <td></td> <td colspan = 3>
-     <b>fi</b>                                                                   </td> </tr>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="3"><b>if</b> v = red <b>then</b> swap(r, w); inc(r)</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>else</b> <b>if</b> v = blue <b>then</b> swap(b, w); dec(b) <b>fi</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>dec(w)</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="3"><b>fi</b></td>
+</tr>
 </table>
-<p>I know that I am now talking about minute details &mdash;some of my readers
-might already wonder why I bother!&mdash; but let us analyse the difference as
-completely as possible, so that we might learn from it. We have seen that
-decrementing &ldquo;w&rdquo; is part of the reaction in cases white and blue, so we 
-decide to group them together in our first binary cut,where we ask for
-&ldquo;v = red&rdquo;. (I have shown this example in its old version for many audiences
-and I remember my &ldquo;justification&rdquo; more or less going as follows &ldquo;What the
-repeatable statement has to do is to decrease the difference w - r, either
-by increasing r or by decreasing w , etc&rdquo;. What a waste of words!) In
-passing we note, that this way of partitioning becomes definitely unattractive,
-if for some reasons, we may expect a minority of red pebbles, and that is
-suddenly a quite different sort of consideration! If the pebble is not
-red, we discover that waht has to be done in the case of a white pebble
-is really a subset of what has to be done with the blue pebble and as
-no programmer would think of writing
-<table> <tr> <td>
-<p><b>if</b> v = white <b>then</b> <b>else</b> swap(B, w); dec(b) <b>fi</b>; dec(w) </td> </tr>
+<p>I know that I am now talking about minute details —some of my readers might already wonder why I bother!— but let us analyse the difference as completely as possible, so that we might learn from it. We have seen that decrementing “w” is part of the reaction in cases white and blue, so we decide to group them together in our first binary cut,where we ask for “v = red”. (I have shown this example in its old version for many audiences and I remember my “justification” more or less going as follows “What the repeatable statement has to do is to decrease the difference w - r, either by increasing r or by decreasing w , etc”. What a waste of words!) In passing we note, that this way of partitioning becomes definitely unattractive, if for some reasons, we may expect a minority of red pebbles, and that is suddenly a quite different sort of consideration! If the pebble is not red, we discover that waht has to be done in the case of a white pebble is really a subset of what has to be done with the blue pebble and as no programmer would think of writing</p>
+<table>
+<tr>
+<td>
+<p><b>if</b> v = white <b>then</b> <b>else</b> swap(B, w); dec(b) <b>fi</b>; dec(w)</p>
+</td>
+</tr>
 </table>
-(you may omit the <b>else</b> but not the <b>then</b>!) we &ldquo;discover&rdquo; that we must ask
-explicitly for a blue pebble. If there happens, quite erroneously, to be
-a grey pebble as well, it is unconsciously treated as a white one. Then
-we learn by sad experience, that this is not too good from the point of
-robustness, so we introduce, as element of the well-trained programmer&rsquo;s
-competence, the notion of &ldquo;defensive programming&rdquo;.... It just means, that
-educating him with the existence of &ldquo;<b>else</b>&rdquo; as the default case, he is
-always invited to choose, in a curious mixture of static and dynamic
-efficiency considerations, which of the cases he is going to treat as the
-default.... If we assume the availability of a mill with some capacity
-for concurrency and if the tests can be done concurrently, the whole
-argument disappears completely. As long as that is not the case, let us
-at least create a mental platform where we can ignore such details!
-<p>If a number of guarded commands from a list have a common tail,
-we might wish to save writing; we can do so by introducing an abbreviation,
-which syntactically can be presented as an alternative for the guarding
-head <br>
-<span class="p0">< <var>guarding head</var> > ::= [ < <var>guarded command list</var> > ]: < <var>statement</var> > </span>
-<br>allowing us to write
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-      <b>if</b> v = red: swap(r, w); inc(r) &#x25af; </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; </td> <td>
-        [v = white: &#x25af;                         </td> </tr> <tr> <td></td> <td></td> <td>
-        v = blue: swap(b, w); dec(b)]: dec(w)        </td> </tr> <tr> <td></td> <td colspan = 2>
-      <b>fi</b>                                      </td> </tr>
+(you may omit the <b>else</b> but not the <b>then</b>!) we “discover” that we must ask explicitly for a blue pebble. If there happens, quite erroneously, to be a grey pebble as well, it is unconsciously treated as a white one. Then we learn by sad experience, that this is not too good from the point of robustness, so we introduce, as element of the well-trained programmer’s competence, the notion of “defensive programming”.... It just means, that educating him with the existence of “<b>else</b>” as the default case, he is always invited to choose, in a curious mixture of static and dynamic efficiency considerations, which of the cases he is going to treat as the default.... If we assume the availability of a mill with some capacity for concurrency and if the tests can be done concurrently, the whole argument disappears completely. As long as that is not the case, let us at least create a mental platform where we can ignore such details!
+<p>If a number of guarded commands from a list have a common tail, we might wish to save writing; we can do so by introducing an abbreviation, which syntactically can be presented as an alternative for the guarding head<br>
+<span class="p0">&lt; <var>guarding head</var> &gt; ::= [ &lt; <var>guarded command list</var> &gt; ]: &lt; <var>statement</var> &gt;</span><br>
+allowing us to write</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>if</b> v = red: swap(r, w); inc(r) ▯</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp;</td>
+<td>[v = white: ▯</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>v = blue: swap(b, w); dec(b)]: dec(w)</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>fi</b></td>
+</tr>
 </table>
-but this is now presented not so much as something that has to do with
-&ldquo;sequencing control&rdquo; -decisions and the like- it is just a short-hand
-notation, an abreviation. (As the different elements of the guarded command
-list are semantically unordered, we are absolutely free to order them
-in the case of common tails as we see fit: it is a merging tree.)
-<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p>      
-<p>The original reason to undertake these experiments was the following
-observation. Many a program shows the following phenomenon
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-      <b>while</b> <b>non</b> null(x1) <b>do</b> </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-         <b>begin</b> temp:= tail(x1);.....      </td> </tr>
+but this is now presented not so much as something that has to do with “sequencing control” -decisions and the like- it is just a short-hand notation, an abreviation. (As the different elements of the guarded command list are semantically unordered, we are absolutely free to order them in the case of common tails as we see fit: it is a merging tree.)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</p>
+<p>The original reason to undertake these experiments was the following observation. Many a program shows the following phenomenon</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>while</b> <b>non</b> null(x1) <b>do</b></td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td><b>begin</b> temp:= tail(x1);.....</td>
+</tr>
 </table>
-(this is taken from an example from R.M.Burstall), where the function
-&ldquo;the tail of a list&rdquo;,i.e. what remains after removal of its first element,
-is undefined if its argument happens to be an empty list. It is a clear
-example of a partial function. In a program using such partial functions
-or operators, it turns out that much of the sequencing control in the
-upper level, using such functions or operators, is no more than ensuring
-that the partial operators or functions will not be invoked outside there
-domain. Now this is kind of silly: it implies that the upper level program
-has the duty to reflect in its explicitly stated sequencing commands
-what measures are to be taken in order to prevent invocation outside the
-domain, while anybody with any experience at all will know that for
-robustness sake the implementation of a thing like &ldquo;tail&rdquo; will start....
-by checking that the upper level program satisfies that rule, that the
-upper level programmer has indeed met his obligations! Since I saw this,
-it has been hurting me, not so much for reasons of computational (in)efficiency,
-but perhaps still more for logical reasons: to present from below a partial
-function or operator does not seem to be a nice interface. I have been
-looking for a long time, what we should have instead, and the idea of
-the guarded command seems to come closer to it than anything I have seen
-before. More precisely, from below we offer so-called &ldquo;guarded primitives&rdquo;
-and syntactically they can be used as guarding heads, i.e. we have the
-alternative form (I give the old one from page 2 as well)
-<p class="p0">< <var>guarding head</var> > ::= < <var>boolean expression </var> > : < <var>statement</var> > |
-                                              < <var>guarded primitive</var> >  .
-</p>
-<p>Let me show, how these can be used; I use an example that I owe to
-W.H.J.Feijen. Let V be a set and let e be a variable of the type of the
-elements of V.
-We consider two guarded primitives
-<table width=100%><tr><td valign=top width=12%>
-sel(V, e):</td><td>the guard of this primitive is the initial value of <b>non</b> empty(V);
-           the corresponding action is to select any element from V, to
-           remove it from V and to assign it to the variable a.
-</td></tr>
-<tr><td valign=top>
-sub(V, e):</td><td>the guard of this primitive is the initial value of &ldquo;e <b>in</b> V&rdquo;;
-           the corresponding action is to remove this element from V.
-</td>  </tr>  </table>
-<p>It is now requested to make a program establishing whether the set B0
-is contained in the set A0. We introduce two variable sets, A and B and
-maintain the invariance of the following relation
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-         (A0 contains B0) = (A contains B) </td> </tr>
+(this is taken from an example from R.M.Burstall), where the function “the tail of a list”,i.e. what remains after removal of its first element, is undefined if its argument happens to be an empty list. It is a clear example of a partial function. In a program using such partial functions or operators, it turns out that much of the sequencing control in the upper level, using such functions or operators, is no more than ensuring that the partial operators or functions will not be invoked outside there domain. Now this is kind of silly: it implies that the upper level program has the duty to reflect in its explicitly stated sequencing commands what measures are to be taken in order to prevent invocation outside the domain, while anybody with any experience at all will know that for robustness sake the implementation of a thing like “tail” will start.... by checking that the upper level program satisfies that rule, that the upper level programmer has indeed met his obligations! Since I saw this, it has been hurting me, not so much for reasons of computational (in)efficiency, but perhaps still more for logical reasons: to present from below a partial function or operator does not seem to be a nice interface. I have been looking for a long time, what we should have instead, and the idea of the guarded command seems to come closer to it than anything I have seen before. More precisely, from below we offer so-called “guarded primitives” and syntactically they can be used as guarding heads, i.e. we have the alternative form (I give the old one from page 2 as well)
+<p class="p0">&lt; <var>guarding head</var> &gt; ::= &lt; <var>boolean expression</var> &gt; : &lt; <var>statement</var> &gt; | &lt; <var>guarded primitive</var> &gt; .</p>
+<p>Let me show, how these can be used; I use an example that I owe to W.H.J.Feijen. Let V be a set and let e be a variable of the type of the elements of V. We consider two guarded primitives</p>
+<table width="100%">
+<tr>
+<td valign="top" width="12%">sel(V, e):</td>
+<td>the guard of this primitive is the initial value of <b>non</b> empty(V); the corresponding action is to select any element from V, to remove it from V and to assign it to the variable a.</td>
+</tr>
+<tr>
+<td valign="top">sub(V, e):</td>
+<td>the guard of this primitive is the initial value of “e <b>in</b> V”; the corresponding action is to remove this element from V.</td>
+</tr>
 </table>
-(i.e. both sides are either true or false). Now we start massaging the
-sets A and B, but under invariance of the above relation. when A is empty,
-the question (A contains B) is easily answered: it is true if and only if
-B is empty as well. So after initialization we try to&ldquo;empty&rdquo; A, which we
-can do with the guarded primitive &ldquo;sel&rdquo;. In order to maintain the invariance
-any element removed from A has to be removed from B as well, if B contains
-it. And we are led to the following program
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-   A:= A0; B:= B0;                                             </td> </tr> <tr> <td></td> <td>
-   <b>do</b> se1(A, e);<b>do</b> sub(B, e) <b>od</b> <b>od</b> </td> </tr> <tr> <td></td> <td>
-   answer:= empty(B)                                           </td> </tr>
+<p>It is now requested to make a program establishing whether the set B0 is contained in the set A0. We introduce two variable sets, A and B and maintain the invariance of the following relation</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>(A0 contains B0) = (A contains B)</td>
+</tr>
 </table>
-(Remark: We have not exploited the fact that A and B are sets which, by
-definition, do not contain different elements. The &ldquo;<b>do</b> sub(B, e) <b>od</b>&rdquo; would
-old-fashionedly have been coded as <b>if</b> e <b>in</b> B <b>then</b> sub(B, e) <b>fi</b>: this
-construct now appears as a special case of a loop, viz. where the repeatable
-statement never needs to be executed more than once. In our version the
-program will also work for &ldquo;collections of values&rdquo;: it will establish
-whether any value occurring at least once in B, also occurs at least once in
-A.)
-<p>We are not finished with this example yet: the only possible change
-of B is that it loses an element: we are not interested in the final value
-of B. we only want to know of the final value of B is empty or not: as a
-result, if B becomes empty halfway, then we can stop the repetition, we 
-can &ldquo;extrapolate&rdquo; the final value of B. And this suggests the following
-program
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-    A:= A0; B:= B0;                                                                              </td> </tr> <tr> <td></td> <td>
-    <b>do</b> <b>non</b> empty(B) <b>and</b> sel(A, e); <b>do</b> sub(B, e) <b>od</b> <b>od</b>; </td> </tr> <tr> <td></td> <td>
-    answer:= empty(B)                                                                            </td> </tr>
+(i.e. both sides are either true or false). Now we start massaging the sets A and B, but under invariance of the above relation. when A is empty, the question (A contains B) is easily answered: it is true if and only if B is empty as well. So after initialization we try to“empty” A, which we can do with the guarded primitive “sel”. In order to maintain the invariance any element removed from A has to be removed from B as well, if B contains it. And we are led to the following program
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>A:= A0; B:= B0;</td>
+</tr>
+<tr>
+<td></td>
+<td><b>do</b> se1(A, e);<b>do</b> sub(B, e) <b>od</b> <b>od</b></td>
+</tr>
+<tr>
+<td></td>
+<td>answer:= empty(B)</td>
+</tr>
+</table>
+(Remark: We have not exploited the fact that A and B are sets which, by definition, do not contain different elements. The “<b>do</b> sub(B, e) <b>od</b>” would old-fashionedly have been coded as <b>if</b> e <b>in</b> B <b>then</b> sub(B, e) <b>fi</b>: this construct now appears as a special case of a loop, viz. where the repeatable statement never needs to be executed more than once. In our version the program will also work for “collections of values”: it will establish whether any value occurring at least once in B, also occurs at least once in A.)
+<p>We are not finished with this example yet: the only possible change of B is that it loses an element: we are not interested in the final value of B. we only want to know of the final value of B is empty or not: as a result, if B becomes empty halfway, then we can stop the repetition, we can “extrapolate” the final value of B. And this suggests the following program</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>A:= A0; B:= B0;</td>
+</tr>
+<tr>
+<td></td>
+<td><b>do</b> <b>non</b> empty(B) <b>and</b> sel(A, e); <b>do</b> sub(B, e) <b>od</b> <b>od</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td>answer:= empty(B)</td>
+</tr>
 </table>
 where we have used yet another form of guarding head, viz.
-<p class="p0">< <var>guarding head</var> > ::= < <var>boolean expression </var> > <b>and</b> < <var>guarded primitive</var> > ,
-</p>
-<p>This might seem to be at first sight a little piece of ad-hoccery, it
-is not. In order that something be evoked, in general we have two conditions:
-it most be possible to do it &mdash;and the guarded primitive presents that
-as a condition from below&mdash; but you must also be interested in doing it,
-and that is clearly somthing that must be specified by the upper level
-programmer! Once you have seen this separation of reasons why to do
-something, classical programs, in which these different conditions are
-often lumped together in a single boolean expression, can strike you as
-unnecessarily obscure.
-<p>I shall give a final program, doing a merge sort, merging three
-sets A, B, and C into a fourth one; initially D is empty, finally
-A, B and C are empty} I assume a guarded command &ldquo;selmin&rdquo;, that I have
-written in the form of a parallel assignment when used. Its guard is
-non-emptiness of the sets mentioned at the right hand side; its action is
-to select from each of the sets the minimum value and to assign this 
-vector of values to the vector of variables at the left hand side. The
-sets are not changed. The operator &ldquo;move(e, V, W)&rdquo; transfers -if 
-possible an element with value e from V to W; if there is no such element, it is
-the empty statement.  
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 5>
-     <b>do</b> (a, b, c):= selmin(A, B, C); d:= min(a, b, c);                                     </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
-        <b>if</b> a = d: move(a, A, D) &#x25af;                                                   </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 3>
-          b = d: move(b, B, D) &#x25af;                                                           </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 3>
-          c = d: move(c, C, D) <b>fi</b>                                                          </td> </tr> <tr> <td></td> <td colspan = 5>
-     <b>od</b> {comment: now at least one of the three input streams is empty};                   </td> </tr> <tr> <td></td> <td colspan = 5>
-     <b>if</b> empty(A): <b>do</b> (b, c):= selmin(B, C); d:= min(b, C);                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-                     <b>if</b> b = d: move(b, B, D) &#x25af; c: = d: move(c, c, D) <b>fi</b>      </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-                  <b>od</b> &#x25af;                                                              </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
-        empty(B): <b>do</b> (a, c):= selmin(A, C); d:= min(a, c);                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>
-                     <b>if</b> a = d: move(a, A, D) &#x25af; c = d: move(c, C, D) <b>fi</b>              </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
-                  <b>od</b> &#x25af;                                                                       </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
-        empty(C): <b>do</b> (a, b):= selmin(A, B); d:= min(a, b);                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>
-                     <b>if</b> a = d: move(a, A, D) &#x25af; b = d: move(b, B, D) <b>fi</b>              </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 2>
-                  <b>od</b>                                                                       </td> </tr> <tr> <td></td> <td colspan = 5>
-     <b>fi</b> {now at least two of the three input streams are empty};                           </td> </tr> <tr> <td></td> <td colspan = 5>
-     <b>if</b> empty(A) and empty(B): <b>do</b> (c):= selmin(C); move(c, C, D) <b>od</b> &#x25af; </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
-        empty(B) <b>and</b> empty(C): <b>do</b> (a):= selmin(A); move(a, A, D) <b>od</b> &#x25af; </td> </tr> <tr> <td></td> <td></td> <td colspan = 4>
-        empty(C) <b>and</b> empty(A): <b>do</b> (b):= selmin(B): move(b, B, D) <b>od</b>          </td> </tr> <tr> <td></td> <td colspan = 5>
-     <b>fi</b> {now all the three input streams are empty}                                        </td> </tr>
-</table>
-<p>It is in this example quite clearly that the guarded primitive
-controls repetition, while &mdash;some sort of&mdash; negation of the guard is
-used for selection: they express our interest.
-<p class="noindent"><b>Concluding remarks</b>.
-<p>I regard what I have sketched as an aspect of a programming language,
-but it could be &ldquo;an abstract programming language&rdquo;. i.e. a programming
-language for which we don&rsquo;t have a processor that, without further human
-intervention, will process our programs with acceptable efficiency. I do
-not care about that too much, it is a very one-sided view to regard
-programs as &ldquo;things to execute automatically&rdquo;: they are also things to
-design, to enjoy, to embellish, to talk about and to use as a means of
-communication, either with yourself or with someone else. About algorithms.
-It is primarily with the latter aspects in mind; that the above has been
-written. Very tentatively written, even.
-<p class="noindent">26th November 1973
+<p class="p0">&lt; <var>guarding head</var> &gt; ::= &lt; <var>boolean expression</var> &gt; <b>and</b> &lt; <var>guarded primitive</var> &gt; ,</p>
+<p>This might seem to be at first sight a little piece of ad-hoccery, it is not. In order that something be evoked, in general we have two conditions: it most be possible to do it —and the guarded primitive presents that as a condition from below— but you must also be interested in doing it, and that is clearly somthing that must be specified by the upper level programmer! Once you have seen this separation of reasons why to do something, classical programs, in which these different conditions are often lumped together in a single boolean expression, can strike you as unnecessarily obscure.</p>
+<p>I shall give a final program, doing a merge sort, merging three sets A, B, and C into a fourth one; initially D is empty, finally A, B and C are empty} I assume a guarded command “selmin”, that I have written in the form of a parallel assignment when used. Its guard is non-emptiness of the sets mentioned at the right hand side; its action is to select from each of the sets the minimum value and to assign this vector of values to the vector of variables at the left hand side. The sets are not changed. The operator “move(e, V, W)” transfers -if possible an element with value e from V to W; if there is no such element, it is the empty statement.</p>
 <table>
-<tr><td>BURROUGHS</td><td width=15%></td><td>prof.dr.Edsger W.Dijkstra</td></tr>
-<tr><td>Plataanstraat 5</td><td></td><td>Research Fellow </td></tr>
-<tr><td>NUENEN 4565     </td></tr>
-<tr><td>The Netherlands  </td></tr>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="5"><b>do</b> (a, b, c):= selmin(A, B, C); d:= min(a, b, c);</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td colspan="4"><b>if</b> a = d: move(a, A, D) ▯</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp;</td>
+<td colspan="3">b = d: move(b, B, D) ▯</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="3">c = d: move(c, C, D) <b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="5"><b>od</b> {comment: now at least one of the three input streams is empty};</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="5"><b>if</b> empty(A): <b>do</b> (b, c):= selmin(B, C); d:= min(b, C);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td><b>if</b> b = d: move(b, B, D) ▯ c: = d: move(c, c, D) <b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>od</b> ▯</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="4">empty(B): <b>do</b> (a, c):= selmin(A, C); d:= min(a, c);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><b>if</b> a = d: move(a, A, D) ▯ c = d: move(c, C, D) <b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="2"><b>od</b> ▯</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="4">empty(C): <b>do</b> (a, b):= selmin(A, B); d:= min(a, b);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><b>if</b> a = d: move(a, A, D) ▯ b = d: move(b, B, D) <b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="2"><b>od</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="5"><b>fi</b> {now at least two of the three input streams are empty};</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="5"><b>if</b> empty(A) and empty(B): <b>do</b> (c):= selmin(C); move(c, C, D) <b>od</b> ▯</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="4">empty(B) <b>and</b> empty(C): <b>do</b> (a):= selmin(A); move(a, A, D) <b>od</b> ▯</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="4">empty(C) <b>and</b> empty(A): <b>do</b> (b):= selmin(B): move(b, B, D) <b>od</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="5"><b>fi</b> {now all the three input streams are empty}</td>
+</tr>
 </table>
-<hr />
-   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
-    Last revision
-    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
-      <!-- #BeginDate format:IS1 -->2014-11-15<!-- #EndDate -->
-    </csobj>
-  .</font></p>
-
-</body></html></div>
+<p>It is in this example quite clearly that the guarded primitive controls repetition, while —some sort of— negation of the guard is used for selection: they express our interest.</p>
+<p class="noindent"><b>Concluding remarks</b>.</p>
+<p>I regard what I have sketched as an aspect of a programming language, but it could be “an abstract programming language”. i.e. a programming language for which we don’t have a processor that, without further human intervention, will process our programs with acceptable efficiency. I do not care about that too much, it is a very one-sided view to regard programs as “things to execute automatically”: they are also things to design, to enjoy, to embellish, to talk about and to use as a means of communication, either with yourself or with someone else. About algorithms. It is primarily with the latter aspects in mind; that the above has been written. Very tentatively written, even.</p>
+<p class="noindent">26th November 1973</p>
+<table>
+<tr>
+<td>BURROUGHS</td>
+<td width="15%"></td>
+<td>prof.dr.Edsger W.Dijkstra</td>
+</tr>
+<tr>
+<td>Plataanstraat 5</td>
+<td></td>
+<td>Research Fellow</td>
+</tr>
+<tr>
+<td>NUENEN 4565</td>
+</tr>
+<tr>
+<td>The Netherlands</td>
+</tr>
+</table>
+<hr>
+<p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br>
+Last revision <!-- #BeginDate format:IS1 -->2014-11-15<!-- #EndDate -->
+ .</font></p>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

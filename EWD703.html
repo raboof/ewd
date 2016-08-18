@@ -23,403 +23,625 @@
   </div>
   <h1>A tutorial on the split binary semaphore</h1>
   <div class='body'>
-        <hr />
-<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
-transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
-accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
-<hr />
-           <p class="noindent">
-              
-<p class=noindent><b>A tutorial on the split binary semaphore</b>.
-<p>The purpose of this note is threefold. It has been written to 
-introduce the student to
-<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the technique of the so-called &ldquo;split binary semaphore&rdquo; &mdash;originally
-discovered, but at the same time not recommended, by C.A.R.Hoare&mdash;
-<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the use of formal techniques in the development of multiprograms
-<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the now canonical example of &ldquo;The readers and the writers&rdquo;, which the
-student must know anyhow; it will be used as a carrier for the other two
-purposes. The problem of the readers and the writers was designed by D.L.
-Parnas.
-<p>We consider two classes of cyclic processes, called &ldquo;readers&rdquo; and
-&ldquo;writers&rdquo; respectively. with &ldquo;ncs&rdquo; standing for &ldquo;non-critical section&rdquo;,
-they can be described by the programs
-<table width=100%>
-<tr><td valign=top width=10%> reader: </td><td valign=top>
-<b>do</b> true &rarr; ncs; READ <b>od</b></td><td align=right>(1)
-</td></tr>
-<tr><td valign=top> writer: </td><td valign=top>
-<b>do</b> true &rarr; ncs; WRITE <b>od</b></td><td align=right>
-</td>  </tr>  </table>
-respectively. Here &ldquo;READ&rdquo; and &ldquo;WRITE&rdquo; denote their respective critical
-sections, critical in the sense that when a writer is engaged in its critical
-section, it must be <b>the only process</b> engaged in its critical section. This
-problem can be solved in many different ways &mdash;the problem is canonical in
-the sense that everybody proposing new synchronization primitives has solved
-it in his way&mdash; , we shall now solve it using a split binary semaphore.
-Our first step is the introduction of variables, in terms of which we
-express our synchronization requirement formally; we call them &ldquo;ar&rdquo; and
-&ldquo;aw&rdquo; &mdash;short for &ldquo;number of active readers&rdquo; and &ldquo;number of active writers&rdquo;
-respectively&mdash; and consider the following multiprogram:
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-        ar = 0, aw = 0, mutex = 1           </td> </tr> <tr> <td colspan = 3>
-reader: <b>do</b> true &rarr; ncs;          </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td>
-           P(mutex); ar: ar + 1; V(mutex);  </td> </tr> <tr> <td></td> <td></td> <td>
-           READ;                            </td> </tr> <tr> <td></td> <td></td> <td>
-           P(mutex); ar: ar - 1; V(mutex)   </td> </tr> <tr> <td></td> <td colspan = 2>
-        <b>od</b>                           </td> </tr> <tr> <td colspan = 3>
-writer: <b>do</b> true &rarr; ncs;          </td> </tr> <tr> <td></td> <td></td> <td>
-           P(mutex); aw:= aw + 1; V(mutex); </td> </tr> <tr> <td></td> <td></td> <td>
-           WRITE;                           </td> </tr> <tr> <td></td> <td></td> <td>
-           P(mutex); aw:= aw - 1; V(mutex)  </td> </tr> <tr> <td></td> <td colspan = 2>
-        <b>od</b>                           </td> </tr>
+<hr>
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. —HR</p>
+<hr>
+<p class="noindent"></p>
+<p class="noindent"><b>A tutorial on the split binary semaphore</b>.</p>
+<p>The purpose of this note is threefold. It has been written to introduce the student to<br>
+1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the technique of the so-called “split binary semaphore” —originally discovered, but at the same time not recommended, by C.A.R.Hoare—<br>
+2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the use of formal techniques in the development of multiprograms<br>
+3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the now canonical example of “The readers and the writers”, which the student must know anyhow; it will be used as a carrier for the other two purposes. The problem of the readers and the writers was designed by D.L. Parnas.</p>
+<p>We consider two classes of cyclic processes, called “readers” and “writers” respectively. with “ncs” standing for “non-critical section”, they can be described by the programs</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%">reader:</td>
+<td valign="top"><b>do</b> true → ncs; READ <b>od</b></td>
+<td align="right">(1)</td>
+</tr>
+<tr>
+<td valign="top">writer:</td>
+<td valign="top"><b>do</b> true → ncs; WRITE <b>od</b></td>
+<td align="right"></td>
+</tr>
 </table>
-<p>For multiprogram (2) the invariance of
-<table width=100%><tr><td valign=top width=10%>
-P0:</td><td>ar &ge; 0 <b>and</b> aw &ge; 0
-</td>  </tr>  </table>
-follows immediately in the usual way &ldquo;from the topology of the program&rdquo;.
-(Associate with reader<sub>i</sub> an additional variable c<sub>i</sub> , initially : 0, and
-satisfying 0 &le; c<sub>i</sub> &le; 1 ; replace ar:= ar + 1 by c<sub>i</sub>, ar := 1, ar + 1 and
-ar:= ar - 1 by c<sub>i</sub>, ar := 0, ar - 1 and observe the invariance of ar =
-&Sigma;ci , etc.)
-<p class=noindent><b>Note</b>. Looking at program (2) and interpreting it operationally, one might be
-tempted to say: clearly ar &ge; the number of readers engaged in READ , and
-as &rdquo;a number of readers&ldquo; is never negative, ar &ge; 0 follows immediately, and
-similarly for aw &ge; 0 . I prefer not to do so, to prove the invariance of
-P0 from the uninterpreted text (2), and to conclude from P0 that it does
-not prohibit the interpretation of ar and aw as natural numbers. (End of
-Note.)
-<p>In terms of ar and aw I propose the required invariance of
-P1: aw = 0 <b>or</b> (aw = 1 <b>and</b> ar = 0)
-as a suitable formal expression of our operational requirement &rdquo;when a writer
-is engaged in its critical section, it must be <b>the only process</b> engaged in
-its critical section&ldquo;. The term aw = 0 is intended to cover the situation
-when no writer is engaged in its critical section, the term aw = 1 <b>and</b> ar = 0
-                
-should cover the case when a writer is engaged in its critical section.
-<p class=noindent><b>Note</b>. The attentive reader will already have decided that he should not 
-expect more eloquence from me on the &ldquo;suitability&rdquo; of the proposal captured by
-P1 . (End of Note.)
-<p>In order to prevent ar:= ar + 1 from violating P1 we can make
-it into a guarded command of the form
-<table width=100%><tr><td valign=top width=10%>
-</td><td>wp(&ldquo;ar:= ar + 1&rdquo;, P1) &rarr; ar:= ar + 1 .
-</td>  </tr>  </table>
+respectively. Here “READ” and “WRITE” denote their respective critical sections, critical in the sense that when a writer is engaged in its critical section, it must be <b>the only process</b> engaged in its critical section. This problem can be solved in many different ways —the problem is canonical in the sense that everybody proposing new synchronization primitives has solved it in his way— , we shall now solve it using a split binary semaphore. Our first step is the introduction of variables, in terms of which we express our synchronization requirement formally; we call them “ar” and “aw” —short for “number of active readers” and “number of active writers” respectively— and consider the following multiprogram:
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2">ar = 0, aw = 0, mutex = 1</td>
+</tr>
+<tr>
+<td colspan="3">reader: <b>do</b> true → ncs;</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>P(mutex); ar: ar + 1; V(mutex);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>READ;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(mutex); ar: ar - 1; V(mutex)</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>od</b></td>
+</tr>
+<tr>
+<td colspan="3">writer: <b>do</b> true → ncs;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(mutex); aw:= aw + 1; V(mutex);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>WRITE;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(mutex); aw:= aw - 1; V(mutex)</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>od</b></td>
+</tr>
+</table>
+<p>For multiprogram (2) the invariance of</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%">P0:</td>
+<td>ar ≥ 0 <b>and</b> aw ≥ 0</td>
+</tr>
+</table>
+follows immediately in the usual way “from the topology of the program”. (Associate with reader<sub>i</sub> an additional variable c<sub>i</sub> , initially : 0, and satisfying 0 ≤ c<sub>i</sub> ≤ 1 ; replace ar:= ar + 1 by c<sub>i</sub>, ar := 1, ar + 1 and ar:= ar - 1 by c<sub>i</sub>, ar := 0, ar - 1 and observe the invariance of ar = Σci , etc.)
+<p class="noindent"><b>Note</b>. Looking at program (2) and interpreting it operationally, one might be tempted to say: clearly ar ≥ the number of readers engaged in READ , and as ”a number of readers“ is never negative, ar ≥ 0 follows immediately, and similarly for aw ≥ 0 . I prefer not to do so, to prove the invariance of P0 from the uninterpreted text (2), and to conclude from P0 that it does not prohibit the interpretation of ar and aw as natural numbers. (End of Note.)</p>
+<p>In terms of ar and aw I propose the required invariance of P1: aw = 0 <b>or</b> (aw = 1 <b>and</b> ar = 0) as a suitable formal expression of our operational requirement ”when a writer is engaged in its critical section, it must be <b>the only process</b> engaged in its critical section“. The term aw = 0 is intended to cover the situation when no writer is engaged in its critical section, the term aw = 1 <b>and</b> ar = 0 should cover the case when a writer is engaged in its critical section.</p>
+<p class="noindent"><b>Note</b>. The attentive reader will already have decided that he should not expect more eloquence from me on the “suitability” of the proposal captured by P1 . (End of Note.)</p>
+<p>In order to prevent ar:= ar + 1 from violating P1 we can make it into a guarded command of the form</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>wp(“ar:= ar + 1”, P1) → ar:= ar + 1 .</td>
+</tr>
+</table>
 The axiom of assignment gives for this guard
-<table width=100%><tr><td valign=top width=10%>
-</td><td>aw = 0 <b>or</b> (aw = 1 <b>and</b> ar + 1 = 0)
-</td>  </tr>  </table>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>aw = 0 <b>or</b> (aw = 1 <b>and</b> ar + 1 = 0)</td>
+</tr>
+</table>
 but on account of P0 the second term is false, and we simplify
-<table width=100%><tr><td valign=top width=10%>
-</td><td>aw = 0 &rarr; ar:= ar + 1 .
-</td>  </tr>  </table>
-<p>In order to prevent aw:= aw + 1 from violating P1 we consider
-<table width=100%><tr><td valign=top width=10%>
-</td><td>wp(&ldquo;aw:= aw + 1&rdquo;, P1) &rarr; aw:: aw + 1 .
-</td>  </tr>  </table>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>aw = 0 → ar:= ar + 1 .</td>
+</tr>
+</table>
+<p>In order to prevent aw:= aw + 1 from violating P1 we consider</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>wp(“aw:= aw + 1”, P1) → aw:: aw + 1 .</td>
+</tr>
+</table>
 The axiom of assignment gives for this guard
-<table width=100%><tr><td valign=top width=10%>
-</td><td>aw + 1 = 0 <b>or</b> (aw + 1 = 1 <b>and</b> ar = 0)
-</td>  </tr>  </table>
-but, again, P0 admits simplification of this guard &mdash;its first term is false&mdash;
-and we find
-<table width=100%><tr><td valign=top width=10%>
-</td><td>aw = 0 and ar = 0 &rarr; aw:= aw + 1 .
-</td>  </tr>  </table>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>aw + 1 = 0 <b>or</b> (aw + 1 = 1 <b>and</b> ar = 0)</td>
+</tr>
+</table>
+but, again, P0 admits simplification of this guard —its first term is false— and we find
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>aw = 0 and ar = 0 → aw:= aw + 1 .</td>
+</tr>
+</table>
 The decrease ar:= ar - 1 is similarly guarded
-<table width=100%><tr><td valign=top width=10%>
-</td><td>wp(&ldquo;ar:= ar - 1&rdquo;, P1) &rarr; ar:= ar - 1 ,
-</td>  </tr>  </table>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>wp(“ar:= ar - 1”, P1) → ar:= ar - 1 ,</td>
+</tr>
+</table>
 and we get for the guard with the axiom of assignment
-<table width=100%><tr><td valign=top width=10%>
-</td><td>aw = 0 <b>or</b> (aw = 1 <b>and</b> ar - 1 = 0) ,
-</td>  </tr>  </table>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>aw = 0 <b>or</b> (aw = 1 <b>and</b> ar - 1 = 0) ,</td>
+</tr>
+</table>
 which, thanks to P1 can be simplified as
-<table width=100%><tr><td valign=top width=10%>
-</td><td>aw = 0 &rarr; ar:= ar - 1 .
-</td>  </tr>  </table>
-The known invariance of P0 tells us that the precondition of ar:= ar - 1
-                
-implies wp(&ldquo;ar:= ar - 1&rdquo;, P0) , i.e. implies ar - 1 &ge; 0 ; on account of
-P1 this implies aw = 0 , and, therefore, we can simplify to
-<table width=100%><tr><td valign=top width=10%>
-</td><td>true &rarr; ar:= ar - 1
-</td>  </tr>  </table>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>aw = 0 → ar:= ar - 1 .</td>
+</tr>
+</table>
+The known invariance of P0 tells us that the precondition of ar:= ar - 1 implies wp(“ar:= ar - 1”, P0) , i.e. implies ar - 1 ≥ 0 ; on account of P1 this implies aw = 0 , and, therefore, we can simplify to
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>true → ar:= ar - 1</td>
+</tr>
+</table>
 i.e. the decrease ar:= ar - 1 need not be guarded at all.
-<p>The verification that also aw:= aw - 1 need not be guarded is left
-to the reader.
-<p>Inserting the guards as derived we get
-<table width=100%>
-<tr><td valign=top width=20%> initial state: </td><td valign=top>
-ar = 0, aw = 0, mutex = 1</td><td align=right>(3)
-</td>  </tr>  </table>
-<table> <tr> <td colspan = 3>
-reader: <b>do</b> true &rarr; ncs;                                                       </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                  P(mutex); <b>if</b> aw = 0 &rarr; ar:= ar + 1 <b>fi</b>; V(mutex);     </td> </tr> <tr> <td></td> <td></td> <td>
-                  READ;                                                           </td> </tr> <tr> <td></td> <td></td> <td>
-                  P(mutex); ar:= ar - 1; V(mutex)                                 </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-        <b>od</b>                                                                        </td> </tr> <tr> <td colspan = 3>
-writer: <b>do</b> true &rarr; ncs;                                                       </td> </tr> <tr> <td></td> <td></td> <td>
-                  P(mutex); <b>if</b> aw = 0 and ar = 0 &rarr; aw:= aw + 1 <b>fi</b>; V(mutex); </td> </tr> <tr> <td></td> <td></td> <td>
-                  WRITE;                                                          </td> </tr> <tr> <td></td> <td></td> <td>
-                  P(mutex); aw:= aw - 1; V(mutex)                                 </td> </tr> <tr> <td></td> <td colspan = 2>
-        <b>od</b>                                                                        </td> </tr>
+<p>The verification that also aw:= aw - 1 need not be guarded is left to the reader.</p>
+<p>Inserting the guards as derived we get</p>
+<table width="100%">
+<tr>
+<td valign="top" width="20%">initial state:</td>
+<td valign="top">ar = 0, aw = 0, mutex = 1</td>
+<td align="right">(3)</td>
+</tr>
 </table>
-Multiprogram (3) has been designed so as to leave P0 <b>and</b> P1 
-invariant, and that is fine. It has, however, a major drawback: both alternative
-constructs, in the lines marked  and  respectively, may lead to 
-abortion! The so-called split binary semaphore provides us with a technique for
-preventing the selection of the critical sections marked  and  
-respectively under those circumstances in which they would lead to abortion.
-<p>We replace the single binary semaphore mutex by three, also binary,
-semaphores &mdash; m , r , and w say&mdash; , related to the original mutex by
-mutex = m + r + w ,
-and replace in multiprogram (3) each P(mutex) by P(m), P(r), or P(w)
-                     
-&mdash;the three ways of decreasing mutex by 1&mdash; and each V(mutex) by V(m),
-V(r), or V(w) &mdash;the three ways of increasing mutex by 1&mdash; . (Because
-m, r, and w are semaphores, we thus guarantee 0 &le; mutex &le; 1 .) More 
-precisely: we replace the P(mutex) marked by  by P(r) , replace the
-P(mutex) marked by  by P(w) , and the P(mutex) that opens a critical
-section that cannot lead to abortion by P(m) .
-<p>We can now avoid selection of an aborting critical section by guarding
-V(r) by aw = 0 and by guarding V(w) by aw = 0 <b>and</b> ar = 0 , because
-the precondition of a V-operation on a component of a split binary semaphore
-can be taken as the postcondition of the corresponding P-operation. Our
-analysis so far would suggest that it suffices to replace V(mutex) everytime
+<table>
+<tr>
+<td colspan="3">reader: <b>do</b> true → ncs;</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>P(mutex); <b>if</b> aw = 0 → ar:= ar + 1 <b>fi</b>; V(mutex);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>READ;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(mutex); ar:= ar - 1; V(mutex)</td>
+</tr>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>od</b></td>
+</tr>
+<tr>
+<td colspan="3">writer: <b>do</b> true → ncs;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(mutex); <b>if</b> aw = 0 and ar = 0 → aw:= aw + 1 <b>fi</b>; V(mutex);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>WRITE;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(mutex); aw:= aw - 1; V(mutex)</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>od</b></td>
+</tr>
+</table>
+Multiprogram (3) has been designed so as to leave P0 <b>and</b> P1 invariant, and that is fine. It has, however, a major drawback: both alternative constructs, in the lines marked and respectively, may lead to abortion! The so-called split binary semaphore provides us with a technique for preventing the selection of the critical sections marked and respectively under those circumstances in which they would lead to abortion.
+<p>We replace the single binary semaphore mutex by three, also binary, semaphores — m , r , and w say— , related to the original mutex by mutex = m + r + w , and replace in multiprogram (3) each P(mutex) by P(m), P(r), or P(w) —the three ways of decreasing mutex by 1— and each V(mutex) by V(m), V(r), or V(w) —the three ways of increasing mutex by 1— . (Because m, r, and w are semaphores, we thus guarantee 0 ≤ mutex ≤ 1 .) More precisely: we replace the P(mutex) marked by by P(r) , replace the P(mutex) marked by by P(w) , and the P(mutex) that opens a critical section that cannot lead to abortion by P(m) .</p>
+<p>We can now avoid selection of an aborting critical section by guarding V(r) by aw = 0 and by guarding V(w) by aw = 0 <b>and</b> ar = 0 , because the precondition of a V-operation on a component of a split binary semaphore can be taken as the postcondition of the corresponding P-operation. Our analysis so far would suggest that it suffices to replace V(mutex) everytime by</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%">Q:</td>
+<td valign="top"><b>if</b> true → V(m) ▯ aw = 0 → V(r) ▯ aw = 0 <b>and</b> ar = 0 → V(w) <b>fi</b></td>
+<td align="right">(4)</td>
+</tr>
+</table>
+<p>This, however, is too naive. To start with: how do we translate the initialization mutex = 1 ? The initialization m = 0, r = 1, w = 0 is too restrictive: if all readers remain in their ncs , no writer could perform WRITE. The initialization m = 0 , r = 0, w = 1 has to be rejected on similar grounds. In order to make the only remaining possible initialization m = 1, r = 0, w = 0 acceptable, readers and writers should encounter as first P-operation one that cannot lead to abortion. We can satisfy this requirement by inserting in both readers and writers of (3) after ncs</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>P(mutex); V(mutex);</td>
+</tr>
+</table>
+before performing the substitution described above. This would lead to the following multiprogram
+<table width="100%">
+<tr>
+<td valign="top" width="20%">initial state:</td>
+<td valign="top">ar = 0, aw = 0, m = 1, r = 0, w = 0</td>
+<td align="right">(5)</td>
+</tr>
+</table>
+<table>
+<tr>
+<td colspan="3">reader: <b>do</b> true → ncs; P(m); Q;</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>P(r) {aw = 0}; ar:= ar + 1; Q;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>READ;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(m); ar:= ar - 1; Q</td>
+</tr>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>od</b></td>
+</tr>
+<tr>
+<td colspan="3">writer: <b>do</b> true → ncs; P(m); Q;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(w) {aw = 0 an</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>ar = 0}; aw:= aw + 1; Q;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>WRITE;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(m); aw:= aw - 1; Q</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>od</b></td>
+</tr>
+</table>
+Multiprogram (5) is, however, still too naive: the non-determinacy, that has been introduced by Q as given in (4), has lead to a system with the danger of deadlock. The recipe for its prevention is, however, universal.<br>
+1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At initialization and at each V-operation, the “type of the next operation” —i.e. the component of the split binary semaphore on which this program will perform its next P-operation— must be uniquely defined. Our program (5) satisfies this condition, as do all programs without initial non-determinacy nor non-determinacy between a V-operation and the dynamically next P-operation. If a program does not satisfy this condition we can always make it satisfying it by introducing one or more extra components of the split binary semaphore, and by replacing essentially
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>if</b> true → P(component 1);...</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp;</td>
+<td>▯ true → P(component 2);...</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>fi</b></td>
+</tr>
+</table>
 by
-<table width=100%>
-<tr><td valign=top width=10%> Q: </td><td valign=top>
-<b>if</b> true &rarr; V(m) &#x25af; aw = 0 &rarr; V(r) &#x25af; aw = 0 <b>and</b> ar = 0 &rarr; V(w) <b>fi</b></td><td align=right>(4)
-</td>  </tr>  </table>
-<p>This, however, is too naive. To start with: how do we translate the
-initialization mutex = 1 ? The initialization m = 0, r = 1, w = 0 is too
-restrictive: if all readers remain in their ncs , no writer could perform
-WRITE. The initialization m = 0 , r = 0, w = 1 has to be rejected on 
-similar grounds. In order to make the only remaining possible initialization
-m = 1, r = 0, w = 0 acceptable, readers and writers should encounter as
-first P-operation one that cannot lead to abortion. We can satisfy this
-requirement by inserting in both readers and writers of (3) after ncs
-<table width=100%><tr><td valign=top width=10%>
-</td><td>P(mutex); V(mutex);
-</td>  </tr>  </table>
-before performing the substitution described above. This would lead to the
-following multiprogram
-<table width=100%>
-<tr><td valign=top width=20%> initial state: </td><td valign=top>
-ar = 0, aw = 0, m = 1, r = 0, w = 0</td><td align=right>(5)
-</td>  </tr>  </table>
-<table> <tr> <td colspan = 3>
-reader: <b>do</b> true &rarr; ncs; P(m); Q;      </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                  P(r) {aw = 0}; ar:= ar + 1; Q; </td> </tr> <tr> <td></td> <td></td> <td>
-                  READ;                          </td> </tr> <tr> <td></td> <td></td> <td>
-                  P(m); ar:= ar - 1; Q           </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-        <b>od</b>                                </td> </tr> <tr> <td colspan = 3>
-writer: <b>do</b> true &rarr; ncs; P(m); Q;      </td> </tr> <tr> <td></td> <td></td> <td>
-                  P(w) {aw = 0 an                </td> </tr> <tr> <td></td> <td></td> <td>
-                  ar = 0}; aw:= aw + 1; Q;       </td> </tr> <tr> <td></td> <td></td> <td>
-                  WRITE;                         </td> </tr> <tr> <td></td> <td></td> <td>
-                  P(m); aw:= aw - 1; Q           </td> </tr> <tr> <td></td> <td colspan = 2>
-        <b>od</b>                                </td> </tr>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>if</b> true → P(extra component); Q; P(component 1);...</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp;</td>
+<td>▯ true → P(extra component); Q; P(cpmponent 2);...</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>fi</b></td>
+</tr>
 </table>
-Multiprogram (5) is, however, still too naive: the non-determinacy, that has
-been introduced by Q as given in (4), has lead to a system with the danger
-of deadlock. The recipe for its prevention is, however, universal.
-<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At initialization and at each V-operation, the &ldquo;type of the next 
-operation&rdquo; &mdash;i.e. the component of the split binary semaphore on which this
-program will perform its next P-operation&mdash; must be uniquely defined.
-Our program (5) satisfies this condition, as do all programs without initial
-non-determinacy nor non-determinacy between a V-operation and the dynamically
-next P-operation. If a program does not satisfy this condition we can always
-make it satisfying it by introducing one or more extra components of the split
-binary semaphore, and by replacing essentially
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-       <b>if</b> true &rarr; P(component 1);... </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
-        &#x25af; true &rarr; P(component 2);... </td> </tr> <tr> <td></td> <td colspan = 2>
-       <b>fi</b>                                </td> </tr>
+<p class="noindent"><b>Task</b>. Prove that for this substitution process only a finite number of different extra components is needed. (End of Task.)<br>
+2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with each component of the binary semaphore we associate a counter, initialized to the number of processes for which the first P-operation is of the corresponding type.<br>
+3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After each P-operation we insert a decrease by 1 of the counter associated with its type.<br>
+4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before each Q we insert an increase by 1 of the counter associated with the type of the dynamically next P-operation. (Thanks to step 1 this is a we11-defined counter.)</p>
+<p class="noindent"><b>Note</b>. For the operationally minded each counter can be interpreted as the number of processes “ready” or “headed” for a P-operation on the corresponding component. (End of Note.)<br>
+5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strengthen in Q the guarding of each V(component) by the requirement that the corresponding counter is positive.</p>
+<p>Associating with the semaphore components m , r , and w the counters bm , br , and bw respectively, carrying out the above transformations on program (5) leads to</p>
+<table width="100%">
+<tr>
+<td valign="top" width="20%">initial state:</td>
+<td valign="top">ar = 0, aw = 0, bm = number of processes, hr = 0, bw = 0 m = 1, r = 0, w = 0</td>
+<td align="right">(6)</td>
+</tr>
 </table>
-by
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-       <b>if</b> true &rarr; P(extra component); Q; P(component 1);... </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
-        &#x25af; true &rarr; P(extra component); Q; P(cpmponent 2);... </td> </tr> <tr> <td></td> <td colspan = 2>
-       <b>fi</b>                                                       </td> </tr>
-</table>
-<p class=noindent><b>Task</b>. Prove that for this substitution process only a finite number of 
-different extra components is needed. (End of Task.)
-<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with each component of the binary semaphore we associate a counter,
-initialized to the number of processes for which the first P-operation is of
-the corresponding type.
-<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After each P-operation we insert a decrease by 1 of the counter 
-associated with its type.
-                 
-<br>4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before each Q we insert an increase by 1 of the counter associated
-with the type of the dynamically next P-operation. (Thanks to step 1
-this is a we11-defined counter.)
-<p class=noindent><b>Note</b>. For the operationally minded each counter can be interpreted as the
-number of processes &ldquo;ready&rdquo; or &ldquo;headed&rdquo; for a P-operation on the 
-corresponding component. (End of Note.)
-<br>5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strengthen in Q the guarding of each V(component) by the requirement
-that the corresponding counter is positive.
-<p>Associating with the semaphore components m , r , and w the counters
-bm , br , and bw respectively, carrying out the above transformations on
-program (5) leads to
-<table width=100%>
-<tr><td valign=top width=20%> initial state: </td><td valign=top>
-ar = 0, aw = 0, bm = number of processes, hr = 0, bw = 0
-m = 1, r = 0, w = 0
-</td><td align=right>(6)
-</td>  </tr>  </table>
-<table> <tr> <td colspan = 3>
-reader: <b>do</b> true &rarr; ncs;                                </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                  P(m); bm:= bm - 1; br:= br + 1; Q;              </td> </tr> <tr> <td></td> <td></td> <td>
-                  P(r); br:= hr - 1; ar:= ar + 1; bm:= bm + 1; Q; </td> </tr> <tr> <td></td> <td></td> <td>
-                  READ;                                           </td> </tr> <tr> <td></td> <td></td> <td>
-                  P(m); bm:= bm - 1; ar:= ar - 1; bm:= hm + 1; Q  </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-        <b>od</b>                                                 </td> </tr> <tr> <td colspan = 3>
-writer: <b>do</b> true &rarr; ncs;                                </td> </tr> <tr> <td></td> <td></td> <td>
-                  P(m); bm:= bm - 1; bw:= bw + 1; Q;              </td> </tr> <tr> <td></td> <td></td> <td>
-                  P(w); bw:= bw - 1; aw:= aw + 1; bm:= bm + 1; Q; </td> </tr> <tr> <td></td> <td></td> <td>
-                  WRITE;                                          </td> </tr> <tr> <td></td> <td></td> <td>
-                  P(m); bm:= bm - 1 aw:= aw - 1; bm:= bm + 1; Q   </td> </tr> <tr> <td></td> <td colspan = 2>
-        <b>od</b>                                                 </td> </tr>
+<table>
+<tr>
+<td colspan="3">reader: <b>do</b> true → ncs;</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>P(m); bm:= bm - 1; br:= br + 1; Q;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(r); br:= hr - 1; ar:= ar + 1; bm:= bm + 1; Q;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>READ;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(m); bm:= bm - 1; ar:= ar - 1; bm:= hm + 1; Q</td>
+</tr>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>od</b></td>
+</tr>
+<tr>
+<td colspan="3">writer: <b>do</b> true → ncs;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(m); bm:= bm - 1; bw:= bw + 1; Q;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(w); bw:= bw - 1; aw:= aw + 1; bm:= bm + 1; Q;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>WRITE;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>P(m); bm:= bm - 1 aw:= aw - 1; bm:= bm + 1; Q</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>od</b></td>
+</tr>
 </table>
 with Q short for
-<table width=100%>
-<tr><td valign=top width=10%> Q: </td><td valign=top>
-<b>if</b> bm &gt; 0 &rarr; V(m)</td><td align=right>(6&rsquo;)
-</td>  </tr>  </table>
-<table> <tr> <td></td> <td>&nbsp; </td> <td>
-          &#x25af; aw = 0 <b>and</b> br &gt; 0 i V(:)                        </td> </tr> <tr> <td></td> <td></td> <td>
-          &#x25af; aw = 0 <b>and</b> ar = 0 <b>and</b> bw &gt; 0 &rarr; V(w) </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-         <b>fi</b>                                                           </td> </tr>
+<table width="100%">
+<tr>
+<td valign="top" width="10%">Q:</td>
+<td valign="top"><b>if</b> bm &gt; 0 → V(m)</td>
+<td align="right">(6’)</td>
+</tr>
 </table>
- 
-<b>Note</b>. The transformation of the introduction of the counters and of the
-strengthening of the guards in Q by the requirement that the corresponding
-counters be positive, excludes the danger of deadlock. If the original 
-requirement &mdash;in our case: the invariance of P1&mdash; entailed intrinsically the
-danger of deadlock, this danger is now made manifest by the danger of abortion
-in Q . The systematic procedure for dealing with that situation falls 
-outside the scope of this tutorial. (End of Note.)
-<p>Our original system was free from deadlock, hence we must &mdash;see above
-note&mdash; be able to prove the absence of the danger of abortion in Q . The
-precondition of Q implies everywhere in (6)
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-      bm + br + bw = number of readers + number of writers </td> </tr> <tr> <td></td> <td>
-      ar + br &le; number of readers                       </td> </tr> <tr> <td></td> <td>
-      aw + bw &le; number of writers                       </td> </tr>
+<table>
+<tr>
+<td></td>
+<td>&nbsp;</td>
+<td>▯ aw = 0 <b>and</b> br &gt; 0 i V(:)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>▯ aw = 0 <b>and</b> ar = 0 <b>and</b> bw &gt; 0 → V(w)</td>
+</tr>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>fi</b></td>
+</tr>
+</table>
+<b>Note</b>. The transformation of the introduction of the counters and of the strengthening of the guards in Q by the requirement that the corresponding counters be positive, excludes the danger of deadlock. If the original requirement —in our case: the invariance of P1— entailed intrinsically the danger of deadlock, this danger is now made manifest by the danger of abortion in Q . The systematic procedure for dealing with that situation falls outside the scope of this tutorial. (End of Note.)
+<p>Our original system was free from deadlock, hence we must —see above note— be able to prove the absence of the danger of abortion in Q . The precondition of Q implies everywhere in (6)</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>bm + br + bw = number of readers + number of writers</td>
+</tr>
+<tr>
+<td></td>
+<td>ar + br ≤ number of readers</td>
+</tr>
+<tr>
+<td></td>
+<td>aw + bw ≤ number of writers</td>
+</tr>
 </table>
 <b>Task</b>. Verify the above three assertions. (End of Task.)
-<p class=noindent>From the above we conclude
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-      ar + aw &le; bm , and hence                      </td> </tr> <tr> <td></td> <td>
-      bm &gt; 0 <b>or</b> (ar = 0 <b>and</b> aw = 0) . </td> </tr>
+<p class="noindent">From the above we conclude</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>ar + aw ≤ bm , and hence</td>
+</tr>
+<tr>
+<td></td>
+<td>bm &gt; 0 <b>or</b> (ar = 0 <b>and</b> aw = 0) .</td>
+</tr>
 </table>
-Assuming the number of processes to be larger than zero &mdash;otherwise the danger
-of abortion is absent anyhow!;&mdash; , we also have
-<table width=100%><tr><td valign=top width=10%>
-</td><td>bm &gt 0 <b>or</b> br &gt; 0 <b>or</b> bw &gt; 0
-</td>  </tr>  </table>
-and from the last two relations it follows that at least one of the guards of
-Q as given in (6&rsquo;) is true.
-The above form of Q as given in (6&rsquo;) is still very non-deterministic:
-we have the strategic freedom of strengthening the guards as long as we avoid
-the danger of abortion. As it stands, our solution does not exclude that
-readers or a writer are denied access to their critical section READ or
-WRITE without reason. Within Q we can give &ldquo;priority&rdquo; to V(r) or V(w)
-by strengthening the guard of V(m) to the conjunction of the complements of
-the other two guards:
-                
-<table width=100%><tr><td valign=top width=10%>
-Am:</td><td>(aw &gt; 0 <b>or</b> br = 0) <b>and</b> (aw &gt; 0 <b>or</b> ar &gt; 0 <b>or</b> bw = 0)
-</td>  </tr>  </table>
+Assuming the number of processes to be larger than zero —otherwise the danger of abortion is absent anyhow!;— , we also have
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>bm &gt; 0 <b>or</b> br &gt; 0 <b>or</b> bw &gt; 0</td>
+</tr>
+</table>
+and from the last two relations it follows that at least one of the guards of Q as given in (6’) is true. The above form of Q as given in (6’) is still very non-deterministic: we have the strategic freedom of strengthening the guards as long as we avoid the danger of abortion. As it stands, our solution does not exclude that readers or a writer are denied access to their critical section READ or WRITE without reason. Within Q we can give “priority” to V(r) or V(w) by strengthening the guard of V(m) to the conjunction of the complements of the other two guards:
+<table width="100%">
+<tr>
+<td valign="top" width="10%">Am:</td>
+<td>(aw &gt; 0 <b>or</b> br = 0) <b>and</b> (aw &gt; 0 <b>or</b> ar &gt; 0 <b>or</b> bw = 0)</td>
+</tr>
+</table>
 Denoting by Ar and Aw respectively:
-<table width=100%><tr><td valign=top width=10%>
-Ar:</td><td> aw = 0 <b>and</b> br &gt; 0
-</td></tr>
-<tr><td valign=top>
-Aw:</td><td>aw = 0 <b>and</b> ar = 0 <b>and</b> bw &gt; 0
-</td>  </tr>  </table>
-we can new substitute for Q in (6)
-<table width=100%>
-<tr><td valign=top width=10%> Q: </td><td valign=top>
-if Am &rarr; V(m) &#x25af; Ar &rarr; V(r) &#x25af; Aw &rarr; V(w) <b>fi</b> .</td><td align=right>(7')
-</td>  </tr>  </table>
-All (new superfluous) operations on bm can be omitted; using the 
-postconditions of the P-operations, the substitution instances of Q as given
-by (7&rsquo;) can be simplified. Thus we derive from (6) the multiprogram 
-<table width=100%>
-<tr><td valign=top width=20%> initial state: </td><td valign=top>
-ar = 0, aw = 0, br = 0, bw = 0, m = 1, r = 0, w = 0</td><td align=right>(7)
-</td>  </tr>  </table>
-<table> <tr> <td colspan = 7>
-reader:                                                                                                    </td> </tr> <tr> <td colspan = 7>
-<b>do</b> true &rarr; ncs;                                                                                 </td> </tr> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 6>
-    P(m); br:= br + l; <b>if</b> aw &gt; 0 &rarr; V(m) &#x25af; aw = 0 &rarr; V(r) <b>fi</b>;              </td> </tr> <tr> <td></td> <td colspan = 6>
-    P(r); br, ar := br - l, ar + l; <b>if</b> br = 0 &rarr; V(m) &#x25af; br &gt; 0 &rarr; V(r) <b>fi</b>; </td> </tr> <tr> <td></td> <td colspan = 6>
-    READ;                                                                                                  </td> </tr> <tr> <td></td> <td colspan = 6>
-    P(m); ar:= ar - 1; <b>if</b> ar &gt; 0 <b>or</b> bw = 0 &rarr; V(m)                                    </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 3>
-                         &#x25af; ar = 0 <b>and</b> bw &gt; 0 &rarr; V(w)                                  </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 5>
-                       <b>fi</b>                                                                           </td> </tr> <tr> <td colspan = 7>
-<b>od</b>                                                                                                  </td> </tr> <tr> <td colspan = 7>
-writer:                                                                                                    </td> </tr> <tr> <td colspan = 7>
-<b>do</b> true &rarr; ncs;                                                                                 </td> </tr> <tr> <td></td> <td colspan = 6>
-    P(m); bw:= bw + l; <b>if</b> aw &gt; 0 <b>or</b> ar &gt; 0 &rarr; V(m)                                 </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 4>
-                        &#x25af; aw = 0 <b>and</b> ar = 0 &rarr; V(w)                                      </td> </tr> <tr> <td></td> <td></td> <td colspan = 5>
-                       <b>fi</b>                                                                           </td> </tr> <tr> <td></td> <td colspan = 6>
-    P(w); bw, aw := bw - l, aw + 1; V(m);                                                                  </td> </tr> <tr> <td></td> <td colspan = 6>
-    WRITE;                                                                                                 </td> </tr> <tr> <td></td> <td colspan = 6>
-    P(m) ;  aw:= aw - l ;  <b>if</b> br = 0 <b>and</b> bw = 0 &rarr; V(m)                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
-                            &#x25af; br &gt; 0 &rarr; V(r)                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>
-                            &#x25af; bw &gt; 0 &rarr; V(w)                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 2>
-                           <b>fi</b>                                                                       </td> </tr> <tr> <td colspan = 7>
-<b>od</b>                                                                                                  </td> </tr>
+<table width="100%">
+<tr>
+<td valign="top" width="10%">Ar:</td>
+<td>aw = 0 <b>and</b> br &gt; 0</td>
+</tr>
+<tr>
+<td valign="top">Aw:</td>
+<td>aw = 0 <b>and</b> ar = 0 <b>and</b> bw &gt; 0</td>
+</tr>
 </table>
-
-<b>Remark</b>. An inspection of the alternative constructs in (7) shows that only
-the very last one is non-deterministic: here we have, therefore, still a
-strategic freedom. Investigate the consequences of replacing the last
-guarded command bw &gt; 0 &rarr; V(w)&nbsp;&nbsp;&nbsp; by&nbsp;&nbsp;&nbsp; bw &gt; 0 <b>and</b> br = 0 &rarr; V(w) . (End of
-Remark.)        
-<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
-<p>In the above we have derived our final program as the end of a sequence
-of successive versions. We have done so for educational reasons, with the
-intent of introducing the different aspects of programs synchronized with
-a split binary semaphore one after the other. This is not meant as a 
-suggestion that in the case of actual program design one should write down all those
-successive versions! The experienced programmer knows that &ldquo;outside the
-critical sections&rdquo; as delineated by the P - V pairs, we have an invariant of
-the form
-<table width=100%><tr><td valign=top width=10%>
-</td><td>(m = 0 <b>or</b> Am) <b>and</b> (r = 0 <b>or</b> Ar) <b>and</b> (w = 0 <b>or</b> Aw)
-</td>  </tr>  </table>
-and focusses his attention on the A&rsquo;s; having chosen them he derives the final
-code. I make this remark because so-called &ldquo;program transformations&rdquo; are
-sometimes suggested as a practical way of program derivation &mdash;not by me,
-for as a rule it leads to an undue amount of writing&mdash; .
-<p class=noindent><table width=100%><tr><td valign=top width=50%>
-5th March 1979</td><td>
-</td></tr>
-<tr><td valign=top>
-Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
-</td></tr>
-<tr><td valign=top>
-5671 AL NUENEN</td><td>Burroughs Research Fellow
-</td></tr>
-<tr><td valign=top>
-The Netherlands</td><td>
-</td>  </tr>  </table>
-
-
-<hr />
-   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
-    Last revision
-    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
-      <!-- #BeginDate format:IS1 -->2015-02-09<!-- #EndDate -->
-    </csobj>
-  .</font></p>
-  <p>&nbsp;</p>
-</body></html></div>
+we can new substitute for Q in (6)
+<table width="100%">
+<tr>
+<td valign="top" width="10%">Q:</td>
+<td valign="top">if Am → V(m) ▯ Ar → V(r) ▯ Aw → V(w) <b>fi</b> .</td>
+<td align="right">(7')</td>
+</tr>
+</table>
+All (new superfluous) operations on bm can be omitted; using the postconditions of the P-operations, the substitution instances of Q as given by (7’) can be simplified. Thus we derive from (6) the multiprogram
+<table width="100%">
+<tr>
+<td valign="top" width="20%">initial state:</td>
+<td valign="top">ar = 0, aw = 0, br = 0, bw = 0, m = 1, r = 0, w = 0</td>
+<td align="right">(7)</td>
+</tr>
+</table>
+<table>
+<tr>
+<td colspan="7">reader:</td>
+</tr>
+<tr>
+<td colspan="7"><b>do</b> true → ncs;</td>
+</tr>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="6">P(m); br:= br + l; <b>if</b> aw &gt; 0 → V(m) ▯ aw = 0 → V(r) <b>fi</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="6">P(r); br, ar := br - l, ar + l; <b>if</b> br = 0 → V(m) ▯ br &gt; 0 → V(r) <b>fi</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="6">READ;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="6">P(m); ar:= ar - 1; <b>if</b> ar &gt; 0 <b>or</b> bw = 0 → V(m)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp;</td>
+<td colspan="3">▯ ar = 0 <b>and</b> bw &gt; 0 → V(w)</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="5"><b>fi</b></td>
+</tr>
+<tr>
+<td colspan="7"><b>od</b></td>
+</tr>
+<tr>
+<td colspan="7">writer:</td>
+</tr>
+<tr>
+<td colspan="7"><b>do</b> true → ncs;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="6">P(m); bw:= bw + l; <b>if</b> aw &gt; 0 <b>or</b> ar &gt; 0 → V(m)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>&nbsp;</td>
+<td colspan="4">▯ aw = 0 <b>and</b> ar = 0 → V(w)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="5"><b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="6">P(w); bw, aw := bw - l, aw + 1; V(m);</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="6">WRITE;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="6">P(m) ; aw:= aw - l ; <b>if</b> br = 0 <b>and</b> bw = 0 → V(m)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp;</td>
+<td>▯ br &gt; 0 → V(r)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>▯ bw &gt; 0 → V(w)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp;</td>
+<td colspan="2"><b>fi</b></td>
+</tr>
+<tr>
+<td colspan="7"><b>od</b></td>
+</tr>
+</table>
+<b>Remark</b>. An inspection of the alternative constructs in (7) shows that only the very last one is non-deterministic: here we have, therefore, still a strategic freedom. Investigate the consequences of replacing the last guarded command bw &gt; 0 → V(w)&nbsp;&nbsp;&nbsp; by&nbsp;&nbsp;&nbsp; bw &gt; 0 <b>and</b> br = 0 → V(w) . (End of Remark.)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</p>
+<p>In the above we have derived our final program as the end of a sequence of successive versions. We have done so for educational reasons, with the intent of introducing the different aspects of programs synchronized with a split binary semaphore one after the other. This is not meant as a suggestion that in the case of actual program design one should write down all those successive versions! The experienced programmer knows that “outside the critical sections” as delineated by the P - V pairs, we have an invariant of the form</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>(m = 0 <b>or</b> Am) <b>and</b> (r = 0 <b>or</b> Ar) <b>and</b> (w = 0 <b>or</b> Aw)</td>
+</tr>
+</table>
+and focusses his attention on the A’s; having chosen them he derives the final code. I make this remark because so-called “program transformations” are sometimes suggested as a practical way of program derivation —not by me, for as a rule it leads to an undue amount of writing— .
+<p class="noindent"></p>
+<table width="100%">
+<tr>
+<td valign="top" width="50%">5th March 1979</td>
+<td></td>
+</tr>
+<tr>
+<td valign="top">Plataanstraat 5</td>
+<td>prof.dr.Edsger W.Dijkstra</td>
+</tr>
+<tr>
+<td valign="top">5671 AL NUENEN</td>
+<td>Burroughs Research Fellow</td>
+</tr>
+<tr>
+<td valign="top">The Netherlands</td>
+<td></td>
+</tr>
+</table>
+<hr>
+<p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br>
+Last revision <!-- #BeginDate format:IS1 -->2015-02-09<!-- #EndDate -->
+ .</font></p>
+<p>&nbsp;</p>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

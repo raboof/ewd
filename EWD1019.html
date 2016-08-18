@@ -23,52 +23,52 @@
   </div>
   <h1>Another Filler of the YoP Institute</h1>
   <div class='body'>
-				<p class="noindent"><span style="border-bottom: 1px dashed;">Why numbering should start at zero</span></p>
-				<p>When we have to characterize a set of adjacent natural numbers, say {2, 3, 4, 5, 6, 7, 8, 9, 10}, we have four options, depending on whether the bounds are included or not:</p>
-				<table cellpadding="0" cellspacing="0" border="0" style="margin-top: 1em;">
-					<tr><td>(a)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td><td>1 &lt; <var>x</var> &lt; 11</td></tr>
-					<tr><td>(b)</td><td>1 &lt; <var>x</var> &#x2264; 10</td></tr>
-					<tr><td>(c)</td><td>2 &#x2264; <var>x</var> &lt; 11</td></tr>
-					<tr><td>(d)</td><td>2 &#x2264; <var>x</var> &#x2264; 10</td></tr>
-				</table>
-				<p>Natural numbers have the property that there is a smallest natural number. Different civilizations have made different choices for that minimum value; for the classical Greeks, for instance, it was 2, because, for them, 1 was not a number. (Consequently, Euclid had to introduce a case analysis in the justification of his algorithm for the greatest common divisor of two numbers, viz. the case that the two numbers had a common divisor versus the case that they had not, i.e. were relatively prime.)</p>
-				<p>This observation makes the convention of excluding the lower bound, as illustrated in (a) and (b) unattractive: if the range includes the smallest natural number &#x2014;as the example would for Greeks&#x2014; the convention of excluding the lower bound requires the introduction of an unnatural lower bound &#x2014;as the examples (a) and (b) would do for the <span class="nowrap">Greeks&#x2014;&nbsp;.</span> This is certainly inelegant and hence we adopt the principle of <em>inclusion of the lower bound</em>.</p>
-				<p>So we are left with the choice between (c) and (d). If we include the upper bound and consider the generalization <span class="nowrap">2 &#x2264; <var>x</var> &#x2264; <var>n</var>,</span> we see that for <var>n</var>=2 the range still contains the value 2. If we wish to represent the empty range by shrinking <var>n</var> still further, it would require <var>n</var>=1, which would be very unnatural for the Greeks. In general, the convention of including the upper bound requires the introduction of an unnatural upper bound; since this is certainly inelegant, we adopt the principle of <em>exclusion of the upper bound</em>.</p>
-				<p>In short, (c) is the winner: ranges of natural numbers will be indicated by</p>
-				<p style="margin-left: 5em;"><var>m</var> &#x2264; <var>x</var> &lt; <var>n</var></p>
-				<p class="noindent">with natural bounds <var>m</var> and <var>n</var>, with <span class="nowrap"><var>m</var> &#x2264; <var>n</var>.</span> Further advantages are</p>
-				<ul style="margin-top: 0; margin-bottom: 0;">
-					<li>the number of values in the range equals the difference of the bounds</li>
-					<li>if the upper bound of one range equals the lower bound of another range, the ranges are contiguous.</li>
-				</ul>
-				<p>After these preliminary investigations we ask ourselves how we characterize the first <var>n</var> natural numbers. For the classical Greeks this would be</p>
-				<p style="margin-left: 5em;">2 &#x2264; <var>x</var> &lt; <var>n</var>+2 &nbsp; &nbsp; &nbsp; ;</p>
-				<p class="noindent">were we to adopt the convention that the natural numbers start at 1, we would get the equally ugly</p>
-				<p style="margin-left: 5em;">1 &#x2264; <var>x</var> &lt; <var>n</var>+1 &nbsp; &nbsp; &nbsp; .</p>
-				<p class="noindent">Obviously,</p>
-				<p style="margin-left: 5em;">0 &#x2264; <var>x</var> &lt; <var>n</var></p>
-				<p class="noindent">is the most elegant formula; it corresponds to accepting zero as the smallest natural number. (This choice has further advantages.)</p>
-				<p>And now you know why my manuscripts start with page 0. It is really quite easy. When writing a manuscript, I have the completed pages behind me, spread out on the floor. The number on each new page equals the number of completed pages on the floor.</p>
-				<p align="right" style="margin-right: 8em;">Austin, 1988 Jan. 25</p>
-				<p class="noindent">
-					prof.dr. Edsger W.Dijkstra<br />
-					Department of Computer Science<br />
-					The University of Texas at Austin, Austin, TX 78712&ndash;1188, USA<br />
-				</p>
-			</div>
-			<div>
-        <br/>
-      </div>
-		</div>
-		<hr />
-		<div id="footer">
-         transcribed by Corrado Cantelmi<br />
-          revised 
-          <!-- #BeginDate format:En2 -->27-Nov-2011<!-- #EndDate -->
-		</div>
-	</body>
-
-</html>
+<p class="noindent"><span style="border-bottom: 1px dashed;">Why numbering should start at zero</span></p>
+<p>When we have to characterize a set of adjacent natural numbers, say {2, 3, 4, 5, 6, 7, 8, 9, 10}, we have four options, depending on whether the bounds are included or not:</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-top: 1em;">
+<tr>
+<td>(a)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>1 &lt; <var>x</var> &lt; 11</td>
+</tr>
+<tr>
+<td>(b)</td>
+<td>1 &lt; <var>x</var> ≤ 10</td>
+</tr>
+<tr>
+<td>(c)</td>
+<td>2 ≤ <var>x</var> &lt; 11</td>
+</tr>
+<tr>
+<td>(d)</td>
+<td>2 ≤ <var>x</var> ≤ 10</td>
+</tr>
+</table>
+<p>Natural numbers have the property that there is a smallest natural number. Different civilizations have made different choices for that minimum value; for the classical Greeks, for instance, it was 2, because, for them, 1 was not a number. (Consequently, Euclid had to introduce a case analysis in the justification of his algorithm for the greatest common divisor of two numbers, viz. the case that the two numbers had a common divisor versus the case that they had not, i.e. were relatively prime.)</p>
+<p>This observation makes the convention of excluding the lower bound, as illustrated in (a) and (b) unattractive: if the range includes the smallest natural number —as the example would for Greeks— the convention of excluding the lower bound requires the introduction of an unnatural lower bound —as the examples (a) and (b) would do for the <span class="nowrap">Greeks—&nbsp;.</span> This is certainly inelegant and hence we adopt the principle of <em>inclusion of the lower bound</em>.</p>
+<p>So we are left with the choice between (c) and (d). If we include the upper bound and consider the generalization <span class="nowrap">2 ≤ <var>x</var> ≤ <var>n</var>,</span> we see that for <var>n</var>=2 the range still contains the value 2. If we wish to represent the empty range by shrinking <var>n</var> still further, it would require <var>n</var>=1, which would be very unnatural for the Greeks. In general, the convention of including the upper bound requires the introduction of an unnatural upper bound; since this is certainly inelegant, we adopt the principle of <em>exclusion of the upper bound</em>.</p>
+<p>In short, (c) is the winner: ranges of natural numbers will be indicated by</p>
+<p style="margin-left: 5em;"><var>m</var> ≤ <var>x</var> &lt; <var>n</var></p>
+<p class="noindent">with natural bounds <var>m</var> and <var>n</var>, with <span class="nowrap"><var>m</var> ≤ <var>n</var>.</span> Further advantages are</p>
+<ul style="margin-top: 0; margin-bottom: 0;">
+<li>the number of values in the range equals the difference of the bounds</li>
+<li>if the upper bound of one range equals the lower bound of another range, the ranges are contiguous.</li>
+</ul>
+<p>After these preliminary investigations we ask ourselves how we characterize the first <var>n</var> natural numbers. For the classical Greeks this would be</p>
+<p style="margin-left: 5em;">2 ≤ <var>x</var> &lt; <var>n</var>+2 &nbsp; &nbsp; &nbsp; ;</p>
+<p class="noindent">were we to adopt the convention that the natural numbers start at 1, we would get the equally ugly</p>
+<p style="margin-left: 5em;">1 ≤ <var>x</var> &lt; <var>n</var>+1 &nbsp; &nbsp; &nbsp; .</p>
+<p class="noindent">Obviously,</p>
+<p style="margin-left: 5em;">0 ≤ <var>x</var> &lt; <var>n</var></p>
+<p class="noindent">is the most elegant formula; it corresponds to accepting zero as the smallest natural number. (This choice has further advantages.)</p>
+<p>And now you know why my manuscripts start with page 0. It is really quite easy. When writing a manuscript, I have the completed pages behind me, spread out on the floor. The number on each new page equals the number of completed pages on the floor.</p>
+<p align="right" style="margin-right: 8em;">Austin, 1988 Jan. 25</p>
+<p class="noindent">prof.dr. Edsger W.Dijkstra<br>
+Department of Computer Science<br>
+The University of Texas at Austin, Austin, TX 78712–1188, USA<br></p>
+<div><br></div>
+<hr>
+<div id="footer">transcribed by Corrado Cantelmi<br>
+revised <!-- #BeginDate format:En2 -->27-Nov-2011<!-- #EndDate --></div>
 </div>
   <script>
 $('.body').tweetSelection({

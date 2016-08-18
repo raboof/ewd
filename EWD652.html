@@ -23,172 +23,329 @@
   </div>
   <h1>A correction on EWD651</h1>
   <div class='body'>
-        <hr />
-<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
-transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
-accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
-<hr />
-           <p class="noindent">
- 
-<p class=noindent><b>A correction on EWD651</b>.
-<p>The day after I had mailed the copies of EWD651 to its various recipients
-I discovered that it was miserably wrong: the transfer from the L-group to
-the R-group did not work properly. In the new version the boolean L is
-replaced by the four-valued integer k . &rsquo;
-<p>A notational difference is the introduction of the integers pL and
-pH , counting the numbers of blocked processes in the L-group and in the
-R-group respectively. The former variables wL and wR have disappeared,
-their values being pL - nL and
-pR - nR respectively.
-<p>The integer k controls whether a process with a false guard will
-arrive in the L-group or in the R-group. In contrast to EWD651, in which
-the value of L was left undefined when both groups were empty, we have now
-decided that the first process to be blocked will come in the R-group, thus
-being faithful to the intention of maintaining m = 0 <b>or</b> pL = 0 <b>or</b> pR &gt; 0 .
-Initially we have k = 1 . We shall now describe the meaning of the variable k.
-<p class=noindent><b>k = 0 </b>.
-<p>The process finding its guard false either just entered the critical
-activity via P(m) or is retesting its guard; in the latter case it came from
-the L-group. In either case it is directed towards the L-group. During the
-test of a guard with k = 0, we have pR = nR &gt; 0 , and all the processes in
-the R-group have a false guard.
-<p class=noindent><b>k = 1 </b>.
-<p>If the process finding its guard false just entered the critical activity
-via P(m), we had pL = pR = 0 , and the process is entered into the R-group.
-If the process finding its guard false is retesting its guard, it came from
-the R-group and returns to it, and the values of the guards of the processes
-in the L-group &mdash;if any&mdash; are unknown.
-<p class=noindent><b>k = 2 </b>.
-<p>This state, which is one of the transfer states, cannot occur with m = 1,
-                       
-hence a process finding its guard false has not just entered the critical
-activity. The process that is retesting its guard came from the L-group and
-will be directed into the R-group. The state k &ge; 2 remains until the L-group
-is empty, so as to ensure that <b>all</b> L-processes escape or become an R-process
-before a new process is admitted via P(m) . This is done in order to 
-exclude infinite overtaking of a process in the L-group. During k = 2 we
-have pR = nR , and all processes in the R-group &mdash;if any&mdash; have a false
-guard.
-<p class=noindent><b>k = 3 </b>.
-<p>This second transfer state can also not occur with m = 1 . It is only
-entered when in the &ldquo;middle&rdquo; of the transfer of processes from the L-group
-to the R-group &mdash;i.e. when k = 2 &mdash; one of the processes escapes via S .
-As soon as that has happened, we are no longer sure that all processes in the
-R-group have a false guard. Therefore all the processes in the R-group have
-to retest their guard before the transfer from the L-group to the R-group
-can be resumed. When with k = 3 a process finds its guard false, it came
-from the R-group and will be returned to the R-group, just as in state k = 1
-The values of the guards of the processes in the L-group &mdash;if any&mdash; are 
-unknown, when it has been established that the R-group only contains processes
-with a false guard and the L-group is not empty, the transfer will be resumed
-with k = 2.
-<p>When, with pR &gt; 0 , it has been established that all processes in the
-R-group have a false guard &mdash; pR = nR &mdash; the primary case distinction is
-whether the L-group is empty or not. In the first case, the critical activity
-is terminated via V(m) with k = 0 , because a new process that blocks itself,
-should do so in the L-group. In the second case &mdash;because when processes
-from the R-group are tested, the guards of those in the L-group are never
-known&mdash; those in the L-group have to retest their guard. The last process
-(re)entering the R-group did so with k: 1, 2, or 3 ; the L-testing has to
-be resumed with k = 0, 2, 2 respectively, hence the
-<table width=100%><tr><td valign=top width=10%>
-</td><td><b>do</b> odd(k) &rarr; k:=k-1 <b>od</b>.
-</td>  </tr>  </table>
-<p>Upon completion of an S , when there are no blocked processes, the
-critical activity is terminated via V(m) with k = 1 , because the first new
-<table> <tr> <td>&nbsp; </td> <td colspan = 10>
- P(m);                                                                                                                       </td> </tr> <tr> <td></td> <td colspan = 10>
- <b>do</b> <b>non</b> Bi &rarr;                                                                                                   </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 8>
-      <b>if</b>  k = 0 &rarr;                                                                                                </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 5>
-             pL, nL := pL + l, nL + 1;                                                                                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
-             <b>if</b> pL &gt; nL &rarr; V(tL) &#x25af; pL = nL &rarr; V(m) <b>fi</b>;                                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
-             P(sL); nL:= nL - 1;                                                                                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
-             <b>if</b> nL &gt; 0 &rarr; V(sL) &#x25af; nL = 0 - V(tL) <b>fi</b>;                                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
-             P(tL); pL:= pL - l                                                                                              </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 8>
-      &#x25af; k &gt; 0 &rarr;                                                                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
-             pR, nR := pR + 1, nR + 1;                                                                                       </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
-             <b>if</b> pR &gt; nR &rarr; V(tR)                                                                               </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 4>
-              &#x25af; pR = nR &rarr;                                                                                        </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
-                    <b>if</b> pL = 0 &rarr; k:= 0; V(m)                                                                      </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 2>
-                     &#x25af; pL &gt; 0 &rarr; <b>do</b> odd(k) &rarr; k:= k - 1 <b>od</b>                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                                 <b>if</b> nL &gt; 0 &rarr; V(sL) &#x25af; nL = 0 &rarr; V(tL) <b>fi</b>;                    </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 3>
-                    <b>fi</b>                                                                                                </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
-             <b>fi</b>;                           .                                                                          </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
-             P(sR); nR:= nR - 1;                                                                                             </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
-             <b>if</b> nR &gt; 0 &rarr; V(sR) &#x25af; nR = 0 &rarr; V(tR) <b>fi</b>;                                        </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td colspan = 5>
-             P(tR); pR:= pR - l                                                                                              </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 8>
-      <b>fi</b>                                                                                                              </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td colspan = 9>
-  <b>od</b> ;                                                                                                                </td> </tr> <tr> <td></td> <td colspan = 10>
- Si;                                                                                                                         </td> </tr> <tr> <td></td> <td colspan = 10>
- <b>if</b> pR = 0 &rarr;                                                                                                     </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 7>
-       <b>if</b> pL = 0 &rarr; k:= l; V(m)                                                                                   </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td colspan = 6>
-        &#x25af; pL &gt; 0 &rarr; k:= 2; <b>if</b> nL &gt; 0 &rarr; V(sL) &#x25af; nL = 0 &rarr; V(tL) <b>fi</b>;            </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 7>
-       <b>fi</b>                                                                                                             </td> </tr> <tr> <td></td> <td></td> <td colspan = 9>
-  &#x25af; pR &gt; 0 &rarr;                                                                                                  </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td colspan = 7>
-       <b>do</b> even(k) &rarr; k:= k + 1 <b>od</b>; <b>if</b> nR &gt; 0 &rarr; V(sR) &#x25af; nR = 0 &rarr; V(tR) <b>fi</b> </td> </tr> <tr> <td colspan = 11>
-<b>fi</b>                                                                                                                    </td> </tr>
+<hr>
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. —HR</p>
+<hr>
+<p class="noindent"></p>
+<p class="noindent"><b>A correction on EWD651</b>.</p>
+<p>The day after I had mailed the copies of EWD651 to its various recipients I discovered that it was miserably wrong: the transfer from the L-group to the R-group did not work properly. In the new version the boolean L is replaced by the four-valued integer k . ’</p>
+<p>A notational difference is the introduction of the integers pL and pH , counting the numbers of blocked processes in the L-group and in the R-group respectively. The former variables wL and wR have disappeared, their values being pL - nL and pR - nR respectively.</p>
+<p>The integer k controls whether a process with a false guard will arrive in the L-group or in the R-group. In contrast to EWD651, in which the value of L was left undefined when both groups were empty, we have now decided that the first process to be blocked will come in the R-group, thus being faithful to the intention of maintaining m = 0 <b>or</b> pL = 0 <b>or</b> pR &gt; 0 . Initially we have k = 1 . We shall now describe the meaning of the variable k.</p>
+<p class="noindent"><b>k = 0</b> .</p>
+<p>The process finding its guard false either just entered the critical activity via P(m) or is retesting its guard; in the latter case it came from the L-group. In either case it is directed towards the L-group. During the test of a guard with k = 0, we have pR = nR &gt; 0 , and all the processes in the R-group have a false guard.</p>
+<p class="noindent"><b>k = 1</b> .</p>
+<p>If the process finding its guard false just entered the critical activity via P(m), we had pL = pR = 0 , and the process is entered into the R-group. If the process finding its guard false is retesting its guard, it came from the R-group and returns to it, and the values of the guards of the processes in the L-group —if any— are unknown.</p>
+<p class="noindent"><b>k = 2</b> .</p>
+<p>This state, which is one of the transfer states, cannot occur with m = 1, hence a process finding its guard false has not just entered the critical activity. The process that is retesting its guard came from the L-group and will be directed into the R-group. The state k ≥ 2 remains until the L-group is empty, so as to ensure that <b>all</b> L-processes escape or become an R-process before a new process is admitted via P(m) . This is done in order to exclude infinite overtaking of a process in the L-group. During k = 2 we have pR = nR , and all processes in the R-group —if any— have a false guard.</p>
+<p class="noindent"><b>k = 3</b> .</p>
+<p>This second transfer state can also not occur with m = 1 . It is only entered when in the “middle” of the transfer of processes from the L-group to the R-group —i.e. when k = 2 — one of the processes escapes via S . As soon as that has happened, we are no longer sure that all processes in the R-group have a false guard. Therefore all the processes in the R-group have to retest their guard before the transfer from the L-group to the R-group can be resumed. When with k = 3 a process finds its guard false, it came from the R-group and will be returned to the R-group, just as in state k = 1 The values of the guards of the processes in the L-group —if any— are unknown, when it has been established that the R-group only contains processes with a false guard and the L-group is not empty, the transfer will be resumed with k = 2.</p>
+<p>When, with pR &gt; 0 , it has been established that all processes in the R-group have a false guard — pR = nR — the primary case distinction is whether the L-group is empty or not. In the first case, the critical activity is terminated via V(m) with k = 0 , because a new process that blocks itself, should do so in the L-group. In the second case —because when processes from the R-group are tested, the guards of those in the L-group are never known— those in the L-group have to retest their guard. The last process (re)entering the R-group did so with k: 1, 2, or 3 ; the L-testing has to be resumed with k = 0, 2, 2 respectively, hence the</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td><b>do</b> odd(k) → k:=k-1 <b>od</b>.</td>
+</tr>
 </table>
-             
-blocked process should be entered into the R-group. Otherwise testing is
-resumed with priority to the R-group. If the R-group is empty &mdash;possible
-values of k are 1, 2, and 3 &mdash; the transfer from the L-group to the R-group
-is started or continued with k = 2 , because the R-group (being empty) contains
-                
-no processes with a possibly true guard. If the R-group is not empty, the
-testing of the R-group is started or continued. The S has been executed
-with k = 0, 1, 2, or 3 ; testing will be resumed with k = 1, 1, 3, 3 , hence
-the 
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-           <b>do</b> even(k) &rarr; k:= k + 1 <b>od</b> </td> </tr>
+<p>Upon completion of an S , when there are no blocked processes, the critical activity is terminated via V(m) with k = 1 , because the first new</p>
+<table>
+<tr>
+<td>&nbsp;</td>
+<td colspan="10">P(m);</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="10"><b>do</b> <b>non</b> Bi →</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="8"><b>if</b> k = 0 →</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="5">pL, nL := pL + l, nL + 1;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="5"><b>if</b> pL &gt; nL → V(tL) ▯ pL = nL → V(m) <b>fi</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="5">P(sL); nL:= nL - 1;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="5"><b>if</b> nL &gt; 0 → V(sL) ▯ nL = 0 - V(tL) <b>fi</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="5">P(tL); pL:= pL - l</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="8">▯ k &gt; 0 →</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="5">pR, nR := pR + 1, nR + 1;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="5"><b>if</b> pR &gt; nR → V(tR)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp;</td>
+<td colspan="4">▯ pR = nR →</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="3"><b>if</b> pL = 0 → k:= 0; V(m)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp;</td>
+<td colspan="2">▯ pL &gt; 0 → <b>do</b> odd(k) → k:= k - 1 <b>od</b></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>if</b> nL &gt; 0 → V(sL) ▯ nL = 0 → V(tL) <b>fi</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="3"><b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="5"><b>fi</b>; .</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="5">P(sR); nR:= nR - 1;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="5"><b>if</b> nR &gt; 0 → V(sR) ▯ nR = 0 → V(tR) <b>fi</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="5">P(tR); pR:= pR - l</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="8"><b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp;</td>
+<td colspan="9"><b>od</b> ;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="10">Si;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="10"><b>if</b> pR = 0 →</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp;</td>
+<td colspan="7"><b>if</b> pL = 0 → k:= l; V(m)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp;</td>
+<td colspan="6">▯ pL &gt; 0 → k:= 2; <b>if</b> nL &gt; 0 → V(sL) ▯ nL = 0 → V(tL) <b>fi</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="7"><b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="9">▯ pR &gt; 0 →</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="7"><b>do</b> even(k) → k:= k + 1 <b>od</b>; <b>if</b> nR &gt; 0 → V(sR) ▯ nR = 0 → V(tR) <b>fi</b></td>
+</tr>
+<tr>
+<td colspan="11"><b>fi</b></td>
+</tr>
+</table>
+blocked process should be entered into the R-group. Otherwise testing is resumed with priority to the R-group. If the R-group is empty —possible values of k are 1, 2, and 3 — the transfer from the L-group to the R-group is started or continued with k = 2 , because the R-group (being empty) contains no processes with a possibly true guard. If the R-group is not empty, the testing of the R-group is started or continued. The S has been executed with k = 0, 1, 2, or 3 ; testing will be resumed with k = 1, 1, 3, 3 , hence the
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td><b>do</b> even(k) → k:= k + 1 <b>od</b></td>
+</tr>
 </table>
 independent of the question whether the L-group is empty or not.
-<p class=noindent><b>Note</b>. The integer k was introduced when I had discovered the need for the
-state k = 2 , but not yet the need for the state k = 3 . Had I foreseen
-that fourth state, I would have used a second boolean , tf say (&ldquo;transfer&rdquo;),
-and would have coded
-<table width=100%><tr><td valign=top width=7%>
-k = 0</td><td>as L <b>and</b> <b>non</b> tf
-</td></tr>
-<tr><td valign=top>
-k = 1</td><td>as <b>non</b> L <b>and</b> <b>non</b> tf
-</td></tr>
-<tr><td valign=top>
-k = 2</td><td>as L <b>and</b> tf
-</td></tr>
-<tr><td valign=top>
-k = 3</td><td>as <b>non</b> L <b>and</b> tf ,
-</td>  </tr>  </table>
+<p class="noindent"><b>Note</b>. The integer k was introduced when I had discovered the need for the state k = 2 , but not yet the need for the state k = 3 . Had I foreseen that fourth state, I would have used a second boolean , tf say (“transfer”), and would have coded</p>
+<table width="100%">
+<tr>
+<td valign="top" width="7%">k = 0</td>
+<td>as L <b>and</b> <b>non</b> tf</td>
+</tr>
+<tr>
+<td valign="top">k = 1</td>
+<td>as <b>non</b> L <b>and</b> <b>non</b> tf</td>
+</tr>
+<tr>
+<td valign="top">k = 2</td>
+<td>as L <b>and</b> tf</td>
+</tr>
+<tr>
+<td valign="top">k = 3</td>
+<td>as <b>non</b> L <b>and</b> tf ,</td>
+</tr>
+</table>
 <table>
-<tr><td>and the statements:</td><td> <b>do</b> odd(k) &rarr; k:= k - 1 <b>od</b></td><td> and</td><td> <b>do</b> even(k) &rarr; k:= k +1 <b>od</b>  </td></tr>
-<tr><td>simply as:</td><td>          L:= true</td><td>                                    and</td><td> L:= false</td></tr>
+<tr>
+<td>and the statements:</td>
+<td><b>do</b> odd(k) → k:= k - 1 <b>od</b></td>
+<td>and</td>
+<td><b>do</b> even(k) → k:= k +1 <b>od</b></td>
+</tr>
+<tr>
+<td>simply as:</td>
+<td>L:= true</td>
+<td>and</td>
+<td>L:= false</td>
+</tr>
 </table>
 respectively. (End of note.)
-<p>I can only describe the blunder of EWD651 as &ldquo;most instructive&rdquo;, because
-I know exactly how it occurred: we did not stick to our own rules, fell back
-into our old bad habits and rushed into coding! Besides that the whole 
-experience provides a (totally unintended but welcome) confirmation of my often
-stated conjecture that pictures give a false sense of security. Although
-somewhat humiliated I am actually glad that I blundered so clearly!
-<p>I wish everybody a happy 1978!
-<p class=noindent><table width=100%><tr><td valign=top width=50%>
-Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
-</td></tr>
-<tr><td valign=top>
-5671 AL Nuenen</td><td>Burroughs Research Fellow
-</td></tr>
-<tr><td valign=top>
-The Netherlands</td><td>
-</td>  </tr>  </table>
-
-<hr />
-   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
-    Last revision
-    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
-      <!-- #BeginDate format:IS1 -->2015-01-26<!-- #EndDate -->
-    </csobj>
-  .</font></p>
-  <p>&nbsp;</p>
-</body></html></div>
+<p>I can only describe the blunder of EWD651 as “most instructive”, because I know exactly how it occurred: we did not stick to our own rules, fell back into our old bad habits and rushed into coding! Besides that the whole experience provides a (totally unintended but welcome) confirmation of my often stated conjecture that pictures give a false sense of security. Although somewhat humiliated I am actually glad that I blundered so clearly!</p>
+<p>I wish everybody a happy 1978!</p>
+<p class="noindent"></p>
+<table width="100%">
+<tr>
+<td valign="top" width="50%">Plataanstraat 5</td>
+<td>prof.dr.Edsger W.Dijkstra</td>
+</tr>
+<tr>
+<td valign="top">5671 AL Nuenen</td>
+<td>Burroughs Research Fellow</td>
+</tr>
+<tr>
+<td valign="top">The Netherlands</td>
+<td></td>
+</tr>
+</table>
+<hr>
+<p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br>
+Last revision <!-- #BeginDate format:IS1 -->2015-01-26<!-- #EndDate -->
+ .</font></p>
+<p>&nbsp;</p>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

@@ -23,99 +23,74 @@
   </div>
   <h1>What we seem to have learned</h1>
   <div class='body'>
-</p>
-<p>The purpose of this note is to record our main experiences during the first three months we addressed ourselves to the question &ldquo;how to tame the complexity of artefacts such as proofs and programs&rdquo;. At present we can only give an unsorted list: it is too early to assess their significance.</p>
-
+<p>The purpose of this note is to record our main experiences during the first three months we addressed ourselves to the question “how to tame the complexity of artefacts such as proofs and programs”. At present we can only give an unsorted list: it is too early to assess their significance.</p>
 <p>We have done most of our experiments with mathematical arguments; initially the presentation of the arguments was our main concern, but quickly we started to care about the arguments proper as well.</p>
-
-<p>We started with the prejudice that brevity is a hallmark of mathematical elegance; our recent experiences have only strengthened it. In the beginning we committed in the name of brevity what we then identified as a sin, viz. brevity by omission. (It is an easy trap to fall into. Once alerted, we spotted many &ldquo;sinful omissions&rdquo; in the texts of others and even in our own first drafts.)</p>
-
-<p>It took us some time to discover that giving the heuristics or buffering the shock of invention and giving the &ldquo;clearest&rdquo; presentation are not necessarily the same thing: the type of &ldquo;clarity&rdquo; we seem to be homing in on does not exclude surprises for the reader. (For the first author the ruthless separation of these two concerns came as something of a shock.)</p>
-<p>It might be illuminating to point out that the type of &ldquo;clarity&rdquo; we are looking for is unthinkable (or unbelievable) for someone that identifies convenient with conventional. Our whole search for &ldquo;clarity&rdquo; is based on the conviction that some patterns of reasoning are objectively &ldquo;simpler&rdquo; than others in the same sense as in which doing arithmetic in Arabic numerals is objectively &ldquo;simpler&rdquo; than in Roman numerals.</p>
-
-<p>To give a specific example, we know full well that the natural numbers are much, much older than the negative integers. We are inclined to regret that that aspect of history has been faithfully copied in the education of all of us. (If we are very puristic, we should even object to the name &ldquo;natural numbers&rdquo; since it suggests that the negative numbers are in some sense &ldquo;unnatural&rdquo;.) It obscures the fact that the unrestricted integers have been invented to <em>simplify</em> matters. It seems that in order to become mathematically adult we have to learn to dissociate ourselves from our pasts: we have to rid ourselves of all sorts of common but confusing thinking habits. But we have to identify them first!</p>
-
-<p>We knew &mdash; see <a href="../EWD04xx/ewd447.html">EWD447</a> &ldquo;On the r&ocirc;le of scientific thought&rdquo;, August 1974 &mdash; that &ldquo;separation of concerns&rdquo; is essential. It now seems that such separation can and should be applied to a much greater extent than we anticipated three months ago.</p>
+<p>We started with the prejudice that brevity is a hallmark of mathematical elegance; our recent experiences have only strengthened it. In the beginning we committed in the name of brevity what we then identified as a sin, viz. brevity by omission. (It is an easy trap to fall into. Once alerted, we spotted many “sinful omissions” in the texts of others and even in our own first drafts.)</p>
+<p>It took us some time to discover that giving the heuristics or buffering the shock of invention and giving the “clearest” presentation are not necessarily the same thing: the type of “clarity” we seem to be homing in on does not exclude surprises for the reader. (For the first author the ruthless separation of these two concerns came as something of a shock.)</p>
+<p>It might be illuminating to point out that the type of “clarity” we are looking for is unthinkable (or unbelievable) for someone that identifies convenient with conventional. Our whole search for “clarity” is based on the conviction that some patterns of reasoning are objectively “simpler” than others in the same sense as in which doing arithmetic in Arabic numerals is objectively “simpler” than in Roman numerals.</p>
+<p>To give a specific example, we know full well that the natural numbers are much, much older than the negative integers. We are inclined to regret that that aspect of history has been faithfully copied in the education of all of us. (If we are very puristic, we should even object to the name “natural numbers” since it suggests that the negative numbers are in some sense “unnatural”.) It obscures the fact that the unrestricted integers have been invented to <em>simplify</em> matters. It seems that in order to become mathematically adult we have to learn to dissociate ourselves from our pasts: we have to rid ourselves of all sorts of common but confusing thinking habits. But we have to identify them first!</p>
+<p>We knew — see <a href="../EWD04xx/ewd447.html">EWD447</a> “On the rôle of scientific thought”, August 1974 — that “separation of concerns” is essential. It now seems that such separation can and should be applied to a much greater extent than we anticipated three months ago.</p>
 <p class="noindent"><span style="border-bottom: 1px dashed #000">Zero and One.</span></p>
-
 <p>We knew that the mathematical community still hesitates whether zero is a natural number. The second author discovered this when he observed how the majority of mathematicians he had asked proved</p>
-
-<p><var>s</var>(<var>n</var>+1) = <var>s</var>(<var>n</var>) + 1 &ndash; (<var>p</var>&ndash;1) &middot; <var>m</var>(<var>n</var>+1)</p>
+<p><var>s</var>(<var>n</var>+1) = <var>s</var>(<var>n</var>) + 1 – (<var>p</var>–1) · <var>m</var>(<var>n</var>+1)</p>
 <table>
-  <tr>
-    <td width="107" align=right>where <var>s</var>(<var>n</var>) = </td><td width="493">the sum of the digits of the <var>p</var>-ary representation of <var>n</var>, and</td></tr>
-  <tr><td align=right valign="top"><var>m</var>(<var>n</var>) =</td><td>the multiplicity of the factor <var>p</var> of <var>n</var>, i.e. the maximum value <var>m</var> such that <var>p<sup>m</sup></var> divides <var>n</var>&nbsp;.</td></tr>
+<tr>
+<td width="107" align="right">where <var>s</var>(<var>n</var>) =</td>
+<td width="493">the sum of the digits of the <var>p</var>-ary representation of <var>n</var>, and</td>
+</tr>
+<tr>
+<td align="right" valign="top"><var>m</var>(<var>n</var>) =</td>
+<td>the multiplicity of the factor <var>p</var> of <var>n</var>, i.e. the maximum value <var>m</var> such that <var>p<sup>m</sup></var> divides <var>n</var>&nbsp;.</td>
+</tr>
 </table>
-
-<p>The theorem follows from subtracting 1 from <var>n</var>+1, carrying out this simple computation in base <var>p</var>. The second author&rsquo;s observation was that most mathematicians introduced a case analysis depending on whether <var>n</var>+1 was divisible by <var>p</var> or not, unaware of the fact that the argument about the length of the train of trailing zeros of the <var>p</var>-ary representation of <var>n</var>+1 is also applicable when that train is empty.</p>
-
-<p>We encountered several new instances. After having defined <var>P</var>(<var>n</var>) as the number of unordered partitions of <var>n</var>, one author separate defined <var>P</var>(0) = 1. In another paper he derived the sequence <var>c</var><sub>1</sub>,&thinsp;<var>c</var><sub>2</sub>,<var>&thinsp;c</var><sub>3</sub>,... from the sequence <var>b</var><sub>1</sub>,<var>&thinsp;b</var><sub>2</sub>,<var>&thinsp;b</var><sub>3</sub>,... according to the formula</p>
-<p><var>c<sub>j</sub></var> = <var>b<sub>j</sub></var> &ndash; (<var>j</var>&ndash;1)&thinsp;&middot;<var>m</var> &nbsp; &nbsp; &nbsp; .</p>
-<p>Had he denoted the sequences by <var>b</var><sub>0</sub>,<var>&thinsp;b</var><sub>1</sub>,<var>&thinsp;b</var><sub>2</sub>,... and <var>c</var><sub>0</sub>,&thinsp;<var>c</var><sub>1</sub>,<var>&thinsp;c</var><sub>2</sub>,..., the formula would have been</p>
-<p><var>c<sub>j</sub></var> = <var>b<sub>j</sub></var> &ndash; <var>j</var>&thinsp;&middot;<var>m</var> &nbsp; &nbsp; &nbsp; .</p>
-
-<p>Another mathematician &mdash; who knew perfectly well that the empty product should equal 1 &mdash; had severe problems in accepting that (<u>A</u><i>i</i>: 0 &le; <i>i</i> &lt; <var>n</var>: <var>B</var>(<var>i</var>)) should equal <u>true</u> for <var>n</var>=0. Also the interpretation of the command &ldquo;direct arrows towards your tabled neighbours&rdquo; caused problems in the absence of tabled neighbours.</p>
-
+<p>The theorem follows from subtracting 1 from <var>n</var>+1, carrying out this simple computation in base <var>p</var>. The second author’s observation was that most mathematicians introduced a case analysis depending on whether <var>n</var>+1 was divisible by <var>p</var> or not, unaware of the fact that the argument about the length of the train of trailing zeros of the <var>p</var>-ary representation of <var>n</var>+1 is also applicable when that train is empty.</p>
+<p>We encountered several new instances. After having defined <var>P</var>(<var>n</var>) as the number of unordered partitions of <var>n</var>, one author separate defined <var>P</var>(0) = 1. In another paper he derived the sequence <var>c</var><sub>1</sub>, <var>c</var><sub>2</sub>,<var> c</var><sub>3</sub>,... from the sequence <var>b</var><sub>1</sub>,<var> b</var><sub>2</sub>,<var> b</var><sub>3</sub>,... according to the formula</p>
+<p><var>c<sub>j</sub></var> = <var>b<sub>j</sub></var> – (<var>j</var>–1) ·<var>m</var> &nbsp; &nbsp; &nbsp; .</p>
+<p>Had he denoted the sequences by <var>b</var><sub>0</sub>,<var> b</var><sub>1</sub>,<var> b</var><sub>2</sub>,... and <var>c</var><sub>0</sub>, <var>c</var><sub>1</sub>,<var> c</var><sub>2</sub>,..., the formula would have been</p>
+<p><var>c<sub>j</sub></var> = <var>b<sub>j</sub></var> – <var>j</var> ·<var>m</var> &nbsp; &nbsp; &nbsp; .</p>
+<p>Another mathematician — who knew perfectly well that the empty product should equal 1 — had severe problems in accepting that (<u>A</u><i>i</i>: 0 ≤ <i>i</i> &lt; <var>n</var>: <var>B</var>(<var>i</var>)) should equal <u>true</u> for <var>n</var>=0. Also the interpretation of the command “direct arrows towards your tabled neighbours” caused problems in the absence of tabled neighbours.</p>
 <p>In classical Greece, one was not considered a number. As a result poor Euclid had to give two separate proofs for his algorithm for the greatest common divisor of two numbers, one for the case they had a common divisor and one for the case they had not. By now people should know better, but the other week we saw a (bright!) mathematician confused because he thought the largest odd divisor of 15 was 5. Evidently, one is still a second-class citizen.</p>
-
 <p>It can be argued that our Western languages with their singular and plural forms keep these distinctions alive. The circumstance offers a further advantage of formal over verbal arguments.</p>
 <p class="noindent"><span style="border-bottom: 1px dashed #000">Postponing definitions and proofs.</span></p>
-
 <p>This section is mainly about the arrangement of the material to be presented. The message is that most of our experiences with the presentation of programs seem to carry over to the presentation of mathematical arguments in general.</p>
-
-<p>Programs are now usually presented in the so-called &ldquo;top-to-bottom&rdquo; or &ldquo;top-down&rdquo; fashion. There are good reasons for this. Programs have to bridge the gap between the problems and the tools; whereas the programming languages that provide their building blocks have been very stable &mdash; some would even argue: depressingly so &mdash; the general-purpose nature of the tool is faithfully reflected in the diversity of the problems to be solved. Top-down presentation presents first what is specific and unfamiliar, thereby providing the framework in which the later details fit. (This also explains why hardware designers, who over the last decades had the diversity at the side of their building blocks, tend to prefer the so-called &ldquo;bottom-up&rdquo; presentation.)</p>
-
-<p>Since Euclid&rsquo;s Elements were written, mathematicians tend to present mathematical theories in a bottom-up fashion: axioms first! But presenting a solution based on known foundations is more akin to presenting a program, and accordingly, we found top-down presentations more appropriate. (This could be an example of how &ldquo;convenient&rdquo; and &ldquo;conventional&rdquo; can diverge.) For instance, when demonstrating that two sets have the same cardinality it seems worth a sentence at the beginning, announcing whether a counting argument or a one-to-one correspondence will be developed.</p>
-<p>A minor consequence of this principle is that we don&rsquo;t lump all defintions together at the beginning of the exposition, but postpone each definition until it is needed.</p>
-
+<p>Programs are now usually presented in the so-called “top-to-bottom” or “top-down” fashion. There are good reasons for this. Programs have to bridge the gap between the problems and the tools; whereas the programming languages that provide their building blocks have been very stable — some would even argue: depressingly so — the general-purpose nature of the tool is faithfully reflected in the diversity of the problems to be solved. Top-down presentation presents first what is specific and unfamiliar, thereby providing the framework in which the later details fit. (This also explains why hardware designers, who over the last decades had the diversity at the side of their building blocks, tend to prefer the so-called “bottom-up” presentation.)</p>
+<p>Since Euclid’s Elements were written, mathematicians tend to present mathematical theories in a bottom-up fashion: axioms first! But presenting a solution based on known foundations is more akin to presenting a program, and accordingly, we found top-down presentations more appropriate. (This could be an example of how “convenient” and “conventional” can diverge.) For instance, when demonstrating that two sets have the same cardinality it seems worth a sentence at the beginning, announcing whether a counting argument or a one-to-one correspondence will be developed.</p>
+<p>A minor consequence of this principle is that we don’t lump all defintions together at the beginning of the exposition, but postpone each definition until it is needed.</p>
 <p>A major consequence is our tendency to use lemmata before we have given their proofs. Though unusual, this seems entirely correct. The statement of a lemma is a logical firewall between its usage and its proof; the use of a lemma is independent of how the lemma can be proved and, during the study of its use, knowledge of its proof is therefore an unnecessary burden.</p>
-
 <p class="noindent"><span style="border-bottom: 1px dashed #000">How naming can hurt.</span></p>
 <p>One of the problems of presenting, annotating, or specifying a sizeable program is avoiding such naming conventions that the number of names needed explodes: not introducing avoidable names becomes vital. As an exercise we therefore tried to present a number of mathematical arguments with great precision and detail but using as few names as possible. We learned two things.</p>
-<p>Firstly we discovered a few notational habits that create the need for new names. The &ldquo;... convention&rdquo; is one of them, e.g. Courant and Robbins assume  </p>
-<p>&ldquo;<var>m</var> = <var>p</var><sub>1&thinsp;</sub><var>p</var><sub>2</sub>...<var>&thinsp;p<sub>r</sub></var> = <var>q</var><sub>1</sub><var>&thinsp;q</var><sub>2</sub>...<var>&thinsp;q<sub>s</sub></var>,  </p>
-<p class="noindent">where the <var>p</var>&rsquo;s and the <var>q</var>&rsquo;s are primes.&rdquo; In the continuation of their text &ldquo;<var>p<sub>r</sub></var>&rdquo; and &ldquo;<var>q<sub>s</sub></var>&rdquo; both occur half a dozen times, though the actual values of <var>r</var> and <var>s</var> are totally irrelevant in the argument. The introduction of pictures in geometry &mdash; see <a href="https://www.cs.utexas.edu/users/EWD/ewd07xx/EWD780.PDF">AvG1/EWD780</a> &mdash; forces the introduction of nomenclature, viz. in order to refer in the text to components of the picture.</p>
-
-<p>Secondly we learned that the introduction of names can complicate the argument &mdash; see <a href="EWD763.html">EWD763</a>/<a href="EWD764.html">764</a> and <a href="EWD771.html">EWD771</a>/<a href="EWD772.html">772</a>, AvG0b &mdash; viz. when the need for case analyses is introduced because the naming has destroyed the symmetry. Both examples are very impressive but a caveat is in order: a 2-coloured grid of points and a 2-coloured complete graph are rather similar objects and the experience might not be transferable outside combinatorics.</p>
-
+<p>Firstly we discovered a few notational habits that create the need for new names. The “... convention” is one of them, e.g. Courant and Robbins assume</p>
+<p>“<var>m</var> = <var>p</var><sub>1 </sub><var>p</var><sub>2</sub>...<var> p<sub>r</sub></var> = <var>q</var><sub>1</sub><var> q</var><sub>2</sub>...<var> q<sub>s</sub></var>,</p>
+<p class="noindent">where the <var>p</var>’s and the <var>q</var>’s are primes.” In the continuation of their text “<var>p<sub>r</sub></var>” and “<var>q<sub>s</sub></var>” both occur half a dozen times, though the actual values of <var>r</var> and <var>s</var> are totally irrelevant in the argument. The introduction of pictures in geometry — see <a href="https://www.cs.utexas.edu/users/EWD/ewd07xx/EWD780.PDF">AvG1/EWD780</a> — forces the introduction of nomenclature, viz. in order to refer in the text to components of the picture.</p>
+<p>Secondly we learned that the introduction of names can complicate the argument — see <a href="EWD763.html">EWD763</a>/<a href="EWD764.html">764</a> and <a href="EWD771.html">EWD771</a>/<a href="EWD772.html">772</a>, AvG0b — viz. when the need for case analyses is introduced because the naming has destroyed the symmetry. Both examples are very impressive but a caveat is in order: a 2-coloured grid of points and a 2-coloured complete graph are rather similar objects and the experience might not be transferable outside combinatorics.</p>
 <p class="noindent"><span style="border-bottom: 1px dashed #000">On overspecification.</span></p>
-
 <p>With the introduction of</p>
-<p>&ldquo;<var>m</var> = <var>p</var><sub>1</sub><var>&thinsp;p</var><sub>2</sub>...&thinsp;<var>p<sub>r</sub></var> = <var>q</var><sub>1</sub><var>&thinsp;q</var><sub>2</sub>...<var>&thinsp;q</var><sub>s</sub>&rdquo;&nbsp;&nbsp;&nbsp;,</p>
-<p class="noindent">Courant and Robbins have done more harm than just introducing two superfluous subscripts: they have represented a bag of primes by a sequence of primes, though everyone knows that multiplication of integers is   &ldquo;commutative&rdquo;. (Multiplication is &ldquo;commutative&rdquo; means that you can &ldquo;interchange&rdquo; the factors without affecting the product: <var>a</var>&thinsp;&middot;<var>b</var> = <var>b&thinsp;</var>&middot;<var>a</var>&nbsp;. But &ldquo;interchange&rdquo; is only meaningful with respect to a notation that has destroyed the symmetry. The symmetry is the fundamental property; commutativity is a notational artefact.) The clumsiness culminates in Courant and Robbin&rsquo;s formulation of the conclusion:</p>
+<p>“<var>m</var> = <var>p</var><sub>1</sub><var> p</var><sub>2</sub>... <var>p<sub>r</sub></var> = <var>q</var><sub>1</sub><var> q</var><sub>2</sub>...<var> q</var><sub>s</sub>”&nbsp;&nbsp;&nbsp;,</p>
+<p class="noindent">Courant and Robbins have done more harm than just introducing two superfluous subscripts: they have represented a bag of primes by a sequence of primes, though everyone knows that multiplication of integers is “commutative”. (Multiplication is “commutative” means that you can “interchange” the factors without affecting the product: <var>a</var> ·<var>b</var> = <var>b </var>·<var>a</var>&nbsp;. But “interchange” is only meaningful with respect to a notation that has destroyed the symmetry. The symmetry is the fundamental property; commutativity is a notational artefact.) The clumsiness culminates in Courant and Robbin’s formulation of the conclusion:</p>
 <blockquote>
-  <p class="noindent">
-    &ldquo;Hence the prime decomposition of <var>m</var>&prime; must be [read: &ldquo;is&rdquo;, AvG/EWD] unique, aside from the order of the factors.&rdquo;
-  </p>
+<p class="noindent">“Hence the prime decomposition of <var>m</var>′ must be [read: “is”, AvG/EWD] unique, aside from the order of the factors.”</p>
 </blockquote>
-<p>We had similar experiences in AvG4/EWD785 and in <a href="EWD787.html">EWD787</a>, which both dealt with so-called &ldquo;unordered partitions&rdquo;, i.e. bags of positive integers with given sum. They were nicely formulated in terms of bags in contrast to the proofs of Post and Sylvester respectively; the partitions being &ldquo;unordered&rdquo;, Post and Sylvester immediately took the liberty of ordering the parts &mdash; say in descending order &mdash; and carrying out the argument in terms of that order.</p>
-
-<p>For Post, this had the consequence that he also had to introduce the &ldquo;reverse&rdquo; of a partition, i.e. the same partition written in ascending order. For Sylvester it had the more dramatic consequence that he missed the generalization from 2 to <var>k</var>:</p>
-<p class="noindent" style="margin-left: 2em">&ldquo;Consider for any natural number <var>N</var> the bags of positive integers whose sum is <var>N</var>. The number of those bags not containing a multiple of <var>k</var> (<var>k</var> &ge; 1) equals the number of those bags containing no integer <var>k</var> or more times.&rdquo;</p>
-
-<p>Using the term &ldquo;unordered partitions&rdquo; has two drawbacks. Firstly, starting from sequences in which the order does matter &mdash; &lt;&thinsp;3,&thinsp;2&thinsp;&gt; &ne; &lt;&thinsp;2,&thinsp;3&thinsp;&gt; &mdash; the concept is weakened, though adjectives and prefixes should strengthen a concept (instead of calling bags &ldquo;multisets&rdquo;, we should call sets &ldquo;unibags&rdquo;). Secondly, the term &ldquo;partition&rdquo; hides the general concept of a bag: it groups the bags of positive integers quite arbitrarily by their sum.</p>
-
+<p>We had similar experiences in AvG4/EWD785 and in <a href="EWD787.html">EWD787</a>, which both dealt with so-called “unordered partitions”, i.e. bags of positive integers with given sum. They were nicely formulated in terms of bags in contrast to the proofs of Post and Sylvester respectively; the partitions being “unordered”, Post and Sylvester immediately took the liberty of ordering the parts — say in descending order — and carrying out the argument in terms of that order.</p>
+<p>For Post, this had the consequence that he also had to introduce the “reverse” of a partition, i.e. the same partition written in ascending order. For Sylvester it had the more dramatic consequence that he missed the generalization from 2 to <var>k</var>:</p>
+<p class="noindent" style="margin-left: 2em">“Consider for any natural number <var>N</var> the bags of positive integers whose sum is <var>N</var>. The number of those bags not containing a multiple of <var>k</var> (<var>k</var> ≥ 1) equals the number of those bags containing no integer <var>k</var> or more times.”</p>
+<p>Using the term “unordered partitions” has two drawbacks. Firstly, starting from sequences in which the order does matter — &lt; 3, 2 &gt; ≠ &lt; 2, 3 &gt; — the concept is weakened, though adjectives and prefixes should strengthen a concept (instead of calling bags “multisets”, we should call sets “unibags”). Secondly, the term “partition” hides the general concept of a bag: it groups the bags of positive integers quite arbitrarily by their sum.</p>
 <p align="center">21 May 1981</p>
-
 <table>
- <tr>
- <td width="266" style="padding-right: 3em">drs. A.J.M. van Gasteren
-<br />BP Venture Research Fellow
-<br />Dept. of Mathematics
-<br />University of Technology
-<br />5600 MB EINDHOVEN
-<br />The Netherlands
- </td><td width="334" style="vertical-align: top">
-prof. dr. Edsger W. Dijkstra
-<br />Burroughs Research Fellow
-<br />Plataanstraat 5
-<br />5671 AL NUENEN
-<br />The Netherlands
- </td>
- </tr>
+<tr>
+<td width="266" style="padding-right: 3em">drs. A.J.M. van Gasteren<br>
+BP Venture Research Fellow<br>
+Dept. of Mathematics<br>
+University of Technology<br>
+5600 MB EINDHOVEN<br>
+The Netherlands</td>
+<td width="334" style="vertical-align: top">prof. dr. Edsger W. Dijkstra<br>
+Burroughs Research Fellow<br>
+Plataanstraat 5<br>
+5671 AL NUENEN<br>
+The Netherlands</td>
+</tr>
 </table>
-</body>
-</html></div>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

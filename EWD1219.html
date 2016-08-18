@@ -23,108 +23,62 @@
   </div>
   <h1>&quot;I have a proof that....&quot;</h1>
   <div class='body'>
-				<p>This is about an observation of a type that I don't particularly like to make, but once the observation has been made, it had better be recorded. In the following, <var>A</var> and <var>B</var> stand for propositions for which I may have a proof.</p>
-				<p>Consider statements <var>a</var>0 and <var>a</var>1:</p>
-				<p class="noindent">(<var>a</var>0) I have a proof that <u>true</u> (holds)<br>
-					(<var>a</var>1) <u>true</u> (holds)&nbsp;&nbsp;&nbsp;.</p>
-				<p class="noindent">Then, <var>a</var>0 and <var>a</var>1 are equivalent. (Since &#x2014;by definition&#x2014; the proof that <u>true</u> (holds) is empty, it is impossible not to have it.)</p>
-				<p>Consider statements <var>b</var>0 and <var>b</var>1:</p>
-				<p class="noindent">(<var>b</var>0) I have a proof that <u>false</u> (holds)<br>
-					(<var>b</var>1) <u>false</u> (holds)&nbsp;&nbsp;&nbsp;.</p>
-				<p class="noindent">Then <var>b</var>0 and <var>b</var>1 are equivalent. (Since &#x2014;by definition&#x2014; the proof that <u>false</u> (holds) does not exist, it is impossible to have it.)</p>
-				<p>From the above we conclude by case analysis the equivalence of <var>c</var>0 and <var>c</var>1:</p>
-				<p class="noindent">(<var>c</var>0) I have a proof that I have a proof that <var>A</var> (holds)<br>
-					(<var>c</var>1) I have a proof that <var>A</var> (holds)&nbsp;&nbsp;&nbsp;.</p>
-				<p>Consider statements <var>d</var>0 and <var>d</var>1:</p>
-				<p class="noindent">(<var>d</var>0) I have a proof that <var>A</var>&#x2227;<var>B</var> (holds)<br>
-					(<var>d</var>1) I have a proof that <var>A</var> (holds) and I have a proof that <var>B</var> (holds)&nbsp;&nbsp;&nbsp;.</p>
-				<p class="noindent">Then <var>d</var>0 and <var>d</var>1 are equivalent. (Well, that is what &quot;&#x2227;&quot; (=&quot;and&quot;) means.)</p>
-				<p>This last law can be generalized to universal quantification. Consider statements <var>e</var>0 and <var>e</var>1 (in which the range for <var>n</var> is implicitly understood):</p>
-				<p class="noindent">(<var>e</var>0) I have a proof that, for all <var>n</var>, <var>A</var>.<var>n</var> (holds)<br>
-					(<var>e</var>1) For all <var>n</var>, I have a proof that <var>A</var>.<var>n</var> (holds)&nbsp;&nbsp;&nbsp;.</p>
-				<p class="noindent">Then e0 and e1 are equivalent.</p>
-				<p class="noindent"><u>Remark</u>: As a result it is semantically irrelevant that the sentence &quot;I have a proof of <var>A</var>.<var>n</var> for all <var>n</var>&quot; is syntactically ambiguous. (End of remark.)</p>
-				<p>Consider the statements <var>f</var>0 and <var>f</var>1:</p>
-				<p class="noindent">(<var>f</var>0) If I have a proof that <var>A</var> (holds) then I have a proof that <var>B</var> (holds)<br>
-					(<var>f</var>1) I have a proof that, if I have a proof that <var>A</var> holds, then <var>B</var> (holds)</p>
-				<p class="noindent">Then <var>f</var>0 and <var>f</var>1 are equivalent. (If I don't have a proof that <var>A</var> (holds), <var>f</var>0 and <var>f</var>1 are both &quot;vacuously&quot; <u>true</u>; if I do have a proof that <var>A</var> (holds), both <var>f</var>0 and <var>f</var>1 reduce to &quot;I have a proof that <var>B</var> (holds)&quot;.)</p>
-				<p class="noindent"><u>Remark</u>: As a result it is semantically irrelevant that the sentence &quot;I have a proof that <var>B</var> holds if I have a proof of <var>A</var>.&quot; is syntactically ambiguous. (End of remark.)</p>
-				<p>But consider now statements <var>g</var>0 and <var>g</var>1:</p>
-				<p class="noindent">(<var>g</var>0) I have a proof that <var>A</var> &#x2228; <var>B</var> (holds)<br>
-					(<var>g</var>1) I have a proof that <var>A</var> (holds) or I have a proof that <var>B</var> (holds) or I have both proofs.</p>
-				<p class="noindent">In this case, the two statements are not equivalent: <var>g</var>1 implies <var>g</var>0, but it is in general not the other way round.</p>
-				<div align="center">
-					<p class="noindent"><tt>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
-							&nbsp;*</tt></p>
-				</div>
-				<p>Let us now do away with all the above verbosity and abbreviate &quot;I have a proof that <var>A</var> (holds)&quot; to &quot;[<var>A</var>]&quot;. Our laws about having proofs can then be summa rized as follows:</p>
-				<p class="noindent">(a) [<u>true</u>] &#x2261; <u>true</u></p>
-				<p class="p1">(b) [<u>false</u>] &#x2261; <u>false</u></p>
-				<p class="p1">(c) [[<var>A</var>]] &#x2261; [<var>A</var>]</p>
-				<p class="p1">(d) [<var>A</var> &#x2227; <var>B</var>] &#x2261; [<var>A</var>] &#x2227; [<var>B</var>]</p>
-				<p class="p1">(e) [&#x3008;&#x2200;n :: <var>A</var>.<var>n</var>&#x3009;] &#x2261; &#x3008;&#x2200;<var>n</var> :: [<var>A</var>.<var>n</var>]&#x3009;</p>
-				<p class="p1">(f) [<var>A</var>] &#x21D2; [<var>B</var>] &#x2261; [[<var>A</var>] &#x21D2; <var>B</var>]</p>
-				<p class="p1">(g) [<var>A</var> &#x2228; <var>B</var>] &#x21D0; [<var>A</var>] &#x2228; [<var>B</var>]</p>
-				<p>The moral of the story is that &quot;I have a proof that...&quot; has all the algebraic properties of the &quot;everywhere&quot; operator, i.e. of universal quantification over a non-empty domain (see [DS90]).</p>
-				<p class="noindent">[DS90] Dijkstra, Edsger W. and Scholten, Carel S., <i>Predicate Calculus and Program Semantics</i>, Springer-Verlag, New York, 1990.</p>
-			<div id="content" align="center">
-				<p>Austin, 15 October 1995</p>
-			</div>
-			<div id="content">
-				<p></p>
-				<p class="noindent">Prof. Dr. Edsger W. Dijkstra<br>
-					Department of Computer Sciences<br>
-					The University of Texas at Austin,<br>
-					Austin, TX 78712-1188<br>
-					USA</p>
-				<hr>
-				<font size="-1">Transcription by Mikhail Esteves.<br>
-					Last revised on <csobj format="MedDate" h="13" region="15" t="DateTime" w="95">Thu, 27 Dec 2007</csobj>.</font></div>
-		
-		
-			
-				
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		
-			
-		
-			
-				
-			</body></html>
-
+<p>This is about an observation of a type that I don't particularly like to make, but once the observation has been made, it had better be recorded. In the following, <var>A</var> and <var>B</var> stand for propositions for which I may have a proof.</p>
+<p>Consider statements <var>a</var>0 and <var>a</var>1:</p>
+<p class="noindent">(<var>a</var>0) I have a proof that <u>true</u> (holds)<br>
+(<var>a</var>1) <u>true</u> (holds)&nbsp;&nbsp;&nbsp;.</p>
+<p class="noindent">Then, <var>a</var>0 and <var>a</var>1 are equivalent. (Since —by definition— the proof that <u>true</u> (holds) is empty, it is impossible not to have it.)</p>
+<p>Consider statements <var>b</var>0 and <var>b</var>1:</p>
+<p class="noindent">(<var>b</var>0) I have a proof that <u>false</u> (holds)<br>
+(<var>b</var>1) <u>false</u> (holds)&nbsp;&nbsp;&nbsp;.</p>
+<p class="noindent">Then <var>b</var>0 and <var>b</var>1 are equivalent. (Since —by definition— the proof that <u>false</u> (holds) does not exist, it is impossible to have it.)</p>
+<p>From the above we conclude by case analysis the equivalence of <var>c</var>0 and <var>c</var>1:</p>
+<p class="noindent">(<var>c</var>0) I have a proof that I have a proof that <var>A</var> (holds)<br>
+(<var>c</var>1) I have a proof that <var>A</var> (holds)&nbsp;&nbsp;&nbsp;.</p>
+<p>Consider statements <var>d</var>0 and <var>d</var>1:</p>
+<p class="noindent">(<var>d</var>0) I have a proof that <var>A</var>∧<var>B</var> (holds)<br>
+(<var>d</var>1) I have a proof that <var>A</var> (holds) and I have a proof that <var>B</var> (holds)&nbsp;&nbsp;&nbsp;.</p>
+<p class="noindent">Then <var>d</var>0 and <var>d</var>1 are equivalent. (Well, that is what "∧" (="and") means.)</p>
+<p>This last law can be generalized to universal quantification. Consider statements <var>e</var>0 and <var>e</var>1 (in which the range for <var>n</var> is implicitly understood):</p>
+<p class="noindent">(<var>e</var>0) I have a proof that, for all <var>n</var>, <var>A</var>.<var>n</var> (holds)<br>
+(<var>e</var>1) For all <var>n</var>, I have a proof that <var>A</var>.<var>n</var> (holds)&nbsp;&nbsp;&nbsp;.</p>
+<p class="noindent">Then e0 and e1 are equivalent.</p>
+<p class="noindent"><u>Remark</u>: As a result it is semantically irrelevant that the sentence "I have a proof of <var>A</var>.<var>n</var> for all <var>n</var>" is syntactically ambiguous. (End of remark.)</p>
+<p>Consider the statements <var>f</var>0 and <var>f</var>1:</p>
+<p class="noindent">(<var>f</var>0) If I have a proof that <var>A</var> (holds) then I have a proof that <var>B</var> (holds)<br>
+(<var>f</var>1) I have a proof that, if I have a proof that <var>A</var> holds, then <var>B</var> (holds)</p>
+<p class="noindent">Then <var>f</var>0 and <var>f</var>1 are equivalent. (If I don't have a proof that <var>A</var> (holds), <var>f</var>0 and <var>f</var>1 are both "vacuously" <u>true</u>; if I do have a proof that <var>A</var> (holds), both <var>f</var>0 and <var>f</var>1 reduce to "I have a proof that <var>B</var> (holds)".)</p>
+<p class="noindent"><u>Remark</u>: As a result it is semantically irrelevant that the sentence "I have a proof that <var>B</var> holds if I have a proof of <var>A</var>." is syntactically ambiguous. (End of remark.)</p>
+<p>But consider now statements <var>g</var>0 and <var>g</var>1:</p>
+<p class="noindent">(<var>g</var>0) I have a proof that <var>A</var> ∨ <var>B</var> (holds)<br>
+(<var>g</var>1) I have a proof that <var>A</var> (holds) or I have a proof that <var>B</var> (holds) or I have both proofs.</p>
+<p class="noindent">In this case, the two statements are not equivalent: <var>g</var>1 implies <var>g</var>0, but it is in general not the other way round.</p>
+<div align="center">
+<p class="noindent"><tt>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+&nbsp;*</tt></p>
+</div>
+<p>Let us now do away with all the above verbosity and abbreviate "I have a proof that <var>A</var> (holds)" to "[<var>A</var>]". Our laws about having proofs can then be summa rized as follows:</p>
+<p class="noindent">(a) [<u>true</u>] ≡ <u>true</u></p>
+<p class="p1">(b) [<u>false</u>] ≡ <u>false</u></p>
+<p class="p1">(c) [[<var>A</var>]] ≡ [<var>A</var>]</p>
+<p class="p1">(d) [<var>A</var> ∧ <var>B</var>] ≡ [<var>A</var>] ∧ [<var>B</var>]</p>
+<p class="p1">(e) [〈∀n :: <var>A</var>.<var>n</var>〉] ≡ 〈∀<var>n</var> :: [<var>A</var>.<var>n</var>]〉</p>
+<p class="p1">(f) [<var>A</var>] ⇒ [<var>B</var>] ≡ [[<var>A</var>] ⇒ <var>B</var>]</p>
+<p class="p1">(g) [<var>A</var> ∨ <var>B</var>] ⇐ [<var>A</var>] ∨ [<var>B</var>]</p>
+<p>The moral of the story is that "I have a proof that..." has all the algebraic properties of the "everywhere" operator, i.e. of universal quantification over a non-empty domain (see [DS90]).</p>
+<p class="noindent">[DS90] Dijkstra, Edsger W. and Scholten, Carel S., <i>Predicate Calculus and Program Semantics</i>, Springer-Verlag, New York, 1990.</p>
+<div id="content" align="center">
+<p>Austin, 15 October 1995</p>
+</div>
+<div id="content">
+<p class="noindent">Prof. Dr. Edsger W. Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin,<br>
+Austin, TX 78712-1188<br>
+USA</p>
+<hr>
+<font size="-1">Transcription by Mikhail Esteves.<br>
+Last revised on Thu, 27 Dec 2007.</font></div>
 </div>
   <script>
 $('.body').tweetSelection({

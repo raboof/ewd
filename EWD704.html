@@ -23,93 +23,53 @@
   </div>
   <h1>A machine for image construction in tomography</h1>
   <div class='body'>
-        <hr />
-<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
-transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
-accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
-<hr />
-           <p class="noindent">
- 
-<p class=noindent><b>A machine for image construction in tomography</b>.
-<p>Each measurement corresponds to a ray that is characterized by its
-direction and its distance from the centre. It gives in each point of the
-image an additive contribution to the absorption density that is
-<table width=100%><tr><td valign=top width=10%>
-1)</td><td>constant along a line parallel to the ray
-</td></tr>
-<tr><td valign=top>
-2)</td><td>proportional to the value measured.
-</td>  </tr>  </table>
-<p>For the contributions of measurements corresponding to the rays in one
-direction we cover the picture by a set of stripes &mdash;not necessarily of the
-same width&mdash; and in that same direction. The contribution of each ray is
-approximated by a function that is constant in each stripe.
-<p>For each stripe that function value can be computed as the product of
-the measured value and a constant that is uniquely determined by the stripe
-number and the distance from the ray to the centre. Because that distance is
-a function of the detector, we need &mdash;with a coverage by M stripes&mdash; to
-store M constants per detector; obviously, the M multiplications of a
-measured value can be performed simultaneously.
-<p>The area in which the image is to be constructed is divided into fields
-of a size small enough for the required resolution. In each field the density
-is treated as constant: the subdivision of the area into fields represents the
-spatial discretization of the image. Each stripe contributes additively to
-a field its function value, multiplied by the fraction of the field covered
-by the stripe. If fields are so small that they are covered by at most two
-stripes, this takes at most one multiplication per field. For each 
-measurement all these multiplications can be performed simultaneously. For each field
-the identity of the covering stripe(s) and the value of the fraction follows
-uniquely from the position of the field.
-<p>For the next part of the design
-<br>1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it is a benefit that the rays in another direction have the same set
-of distances from the centre, so that the same M constants per detector can
-
-be used in all directions
-<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it is essential that the angle between two directions is a multiple
-of 2&pi;/ N for some large integer N .
-<p>Our discretization of the image consists of concentric rings &mdash;not
-necessarily all of the same width&mdash; each of which is equally divided into
-N/k equal fields, with k a positive integer. Because k = 1 would lead
-to a very expensive machine, it is desirable that N is not prime; it is
-even desirable that N has a suitable number of small factors. (N = 2400
-looks realistic, still nicer would be N = 2520 , the smallest number 
-divisible by the numbers up to 10 .)
-<p>At any moment each field is taken care of by one cell. The N/k
-cells taking care of the N/k fields of a ring are placed in the corresponding
-cyclic order. Each cell takes care of its field in k &ldquo;successive&rdquo; positions,
-where &ldquo;successive&rdquo; is meant in the sense that the transition from one position
-to the next amounts to an image rotation of 2&pi; / N . Each cell has a counter
-c , satisfying 0 &le; c &lt; k , at each moment the c-values of the cells of a
-ring have the same value. A (clockwise) rotation over 2&pi; / N amounts in
-each ring to c:= (c+1)<b>mod</b> k , and in those rings in which c has thereby
-returned to zero, to a transmission by each cell to its clockwise neighbour
-of its field value, accumulated thus far.
-<p>If field sizes &mdash;i.e. k-values&mdash; are chosen such that the area covered
-by the k successive positions taken care of by a cell, is covered by at most
-two stripes, each cell needs at most two function values per measurement. 
-Between 0 and 1 the &ldquo;fraction&rdquo; can, to all intents and purposes, be taken as
-a linear function of c .
-<p>Each measurement can be processed by first rotating the image in the
-appropriate direction.
-<p class=noindent><table width=100%><tr><td valign=top width=50%>
-24th February 1979</td><td>prof.dr.Edsger W.Dijkstra
-</td></tr>
-<tr><td valign=top>
-Plataanstraat 5</td><td>Burroughs Research Fellow
-</td></tr>
-<tr><td valign=top>
-The Netherlands</td><td>
-</td>  </tr>  </table>
-
-<hr />
-   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
-    Last revision
-    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
-      <!-- #BeginDate format:IS1 -->2015-02-12<!-- #EndDate -->
-    </csobj>
-  .</font></p>
-  <p>&nbsp;</p>
-</body></html></div>
+<hr>
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. —HR</p>
+<hr>
+<p class="noindent"></p>
+<p class="noindent"><b>A machine for image construction in tomography</b>.</p>
+<p>Each measurement corresponds to a ray that is characterized by its direction and its distance from the centre. It gives in each point of the image an additive contribution to the absorption density that is</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%">1)</td>
+<td>constant along a line parallel to the ray</td>
+</tr>
+<tr>
+<td valign="top">2)</td>
+<td>proportional to the value measured.</td>
+</tr>
+</table>
+<p>For the contributions of measurements corresponding to the rays in one direction we cover the picture by a set of stripes —not necessarily of the same width— and in that same direction. The contribution of each ray is approximated by a function that is constant in each stripe.</p>
+<p>For each stripe that function value can be computed as the product of the measured value and a constant that is uniquely determined by the stripe number and the distance from the ray to the centre. Because that distance is a function of the detector, we need —with a coverage by M stripes— to store M constants per detector; obviously, the M multiplications of a measured value can be performed simultaneously.</p>
+<p>The area in which the image is to be constructed is divided into fields of a size small enough for the required resolution. In each field the density is treated as constant: the subdivision of the area into fields represents the spatial discretization of the image. Each stripe contributes additively to a field its function value, multiplied by the fraction of the field covered by the stripe. If fields are so small that they are covered by at most two stripes, this takes at most one multiplication per field. For each measurement all these multiplications can be performed simultaneously. For each field the identity of the covering stripe(s) and the value of the fraction follows uniquely from the position of the field.</p>
+<p>For the next part of the design<br>
+1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it is a benefit that the rays in another direction have the same set of distances from the centre, so that the same M constants per detector can be used in all directions<br>
+2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;it is essential that the angle between two directions is a multiple of 2π/ N for some large integer N .</p>
+<p>Our discretization of the image consists of concentric rings —not necessarily all of the same width— each of which is equally divided into N/k equal fields, with k a positive integer. Because k = 1 would lead to a very expensive machine, it is desirable that N is not prime; it is even desirable that N has a suitable number of small factors. (N = 2400 looks realistic, still nicer would be N = 2520 , the smallest number divisible by the numbers up to 10 .)</p>
+<p>At any moment each field is taken care of by one cell. The N/k cells taking care of the N/k fields of a ring are placed in the corresponding cyclic order. Each cell takes care of its field in k “successive” positions, where “successive” is meant in the sense that the transition from one position to the next amounts to an image rotation of 2π / N . Each cell has a counter c , satisfying 0 ≤ c &lt; k , at each moment the c-values of the cells of a ring have the same value. A (clockwise) rotation over 2π / N amounts in each ring to c:= (c+1)<b>mod</b> k , and in those rings in which c has thereby returned to zero, to a transmission by each cell to its clockwise neighbour of its field value, accumulated thus far.</p>
+<p>If field sizes —i.e. k-values— are chosen such that the area covered by the k successive positions taken care of by a cell, is covered by at most two stripes, each cell needs at most two function values per measurement. Between 0 and 1 the “fraction” can, to all intents and purposes, be taken as a linear function of c .</p>
+<p>Each measurement can be processed by first rotating the image in the appropriate direction.</p>
+<p class="noindent"></p>
+<table width="100%">
+<tr>
+<td valign="top" width="50%">24th February 1979</td>
+<td>prof.dr.Edsger W.Dijkstra</td>
+</tr>
+<tr>
+<td valign="top">Plataanstraat 5</td>
+<td>Burroughs Research Fellow</td>
+</tr>
+<tr>
+<td valign="top">The Netherlands</td>
+<td></td>
+</tr>
+</table>
+<hr>
+<p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br>
+Last revision <!-- #BeginDate format:IS1 -->2015-02-12<!-- #EndDate -->
+ .</font></p>
+<p>&nbsp;</p>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

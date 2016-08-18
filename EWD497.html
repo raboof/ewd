@@ -23,44 +23,37 @@
   </div>
   <h1>A challenge to memory designers?</h1>
   <div class='body'>
-						<p>In the good old sequential days memory accesses took place one after the other, and a memory technique (such as ferrite core technology) that could accommodate one access at a time was adequate. When independent I/O-channels were introduced, the memory access mechanism became a resource shared between the central processor and the channel(s), and a switch was introduced which --usually on a priority basis-- granted mutually exclusive accesses to the various competitors. (&quot;Cycle stealing&quot; was the term then introduced to describe that arrangement.) It seems worthwhile to point out that originally the need for mutual exclusion was a purely <u>technical</u> one, dictated by ferrite core technology: as program areas, working space and buffers were at any moment in time disjoint, there was <u>no logical</u> reason.</p>
-						<p>Or: hardly so, to say the honest truth. This disjointness of these areas of concurrent activity could only be guaranteed thanks to a macroscopic synchronization of computing and I/O-activities, and for the implementation of such synchronization constraints, it was sometimes exploited that the mutually exclusive storage cycle consisted of a &quot;read&quot;, followed by a &quot;write&quot;. Examples are the test-and-set instruction, the swap (between a memory location and a register) or the indivisible &quot;add-to-memory&quot;. The mutual exclusion, i.e. the indivisibility of these operations on memory words was suddenly <u>a logical necessity</u>: nothing prevented different processors to attempt to access the same location simultaneously.</p>
-						<p>The difference is pointed out in connection with the solution described in EWD496 &quot;on-the-fly garbage collection: an exercise in cooperation.&quot;, in which two processors are supposed to operate in the same memory: as long as they access different words in memory, there is no logical objection at all to have these different accesses overlap in time. The possibility of simultaneous attempts to access the same storage location --all the time and all through memory-- is the rule, the actual coincidence of such attempts will be the exception.</p>
-						<p>For that reason one dreams of a memory arrangement in which simultaneous accesses can take place unencumbered as long as different locations are involved, and mutual interference (i.e. delays) will only occur at those exceptional moments when it is logically necessary, i.e. when the same word is involved in more than one attempted access. Compared with that dream, the current solution with the switch that always imposes mutual exclusion independent of such coincidence, is a safe but crude solution. This crudeness is pointed out because it might be acceptable with the number of processors N = 2, but it won't remain so if N grows: for sufficiently large N, the possibility of many simultaneous accesses seems to become some sort of must.</p>
-						<p>I have no idea how such a memory would look like --an electronically rotating memory with many sensing stations?--, hence the word &quot;challenge&quot; in my title. Let me finally explain the presence of the question mark: with EWD496 we now have one such algorithm with N = 2, say. The question of whether we shall be able to design more of those, with the values of N that are considerably higher, is still an open question.</p>
-						<table width="400" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td valign="top">9th June 1975<br>
-									NUENEN - 4565<br>
-									The Netherlands</td>
-								<td valign="top">prof.dr.Edsger W.Dijkstra<br>
-									Burroughs Research Fellow</td>
-							</tr>
-						</table>
-						<br>
-					</div>
-					<div align="left">
-						<p><u></u></p>
-					</div>
-					<font size="-1">
-						<hr>
-						transcribed by Tristram Brelstaff<br>
-						revised <csobj format="MedDate" h="16" region="15" t="DateTime" w="84">Sat, 12 Jun 2004</csobj></font>
-					<p></p>
-				</td>
-				<td width="26" height="1111"></td>
-				<td width="1" height="1111"><spacer type="block" width="1" height="1111"></td>
-			</tr>
-			<tr height="1" cntrlrow>
-				<td width="472" height="1"><spacer type="block" width="472" height="1"></td>
-				<td width="26" height="1"><spacer type="block" width="26" height="1"></td>
-				<td width="1" height="1"></td>
-			</tr>
-		</table>
-		<p></p>
-	</body>
-
-</html></div>
+<p>In the good old sequential days memory accesses took place one after the other, and a memory technique (such as ferrite core technology) that could accommodate one access at a time was adequate. When independent I/O-channels were introduced, the memory access mechanism became a resource shared between the central processor and the channel(s), and a switch was introduced which --usually on a priority basis-- granted mutually exclusive accesses to the various competitors. ("Cycle stealing" was the term then introduced to describe that arrangement.) It seems worthwhile to point out that originally the need for mutual exclusion was a purely <u>technical</u> one, dictated by ferrite core technology: as program areas, working space and buffers were at any moment in time disjoint, there was <u>no logical</u> reason.</p>
+<p>Or: hardly so, to say the honest truth. This disjointness of these areas of concurrent activity could only be guaranteed thanks to a macroscopic synchronization of computing and I/O-activities, and for the implementation of such synchronization constraints, it was sometimes exploited that the mutually exclusive storage cycle consisted of a "read", followed by a "write". Examples are the test-and-set instruction, the swap (between a memory location and a register) or the indivisible "add-to-memory". The mutual exclusion, i.e. the indivisibility of these operations on memory words was suddenly <u>a logical necessity</u>: nothing prevented different processors to attempt to access the same location simultaneously.</p>
+<p>The difference is pointed out in connection with the solution described in EWD496 "on-the-fly garbage collection: an exercise in cooperation.", in which two processors are supposed to operate in the same memory: as long as they access different words in memory, there is no logical objection at all to have these different accesses overlap in time. The possibility of simultaneous attempts to access the same storage location --all the time and all through memory-- is the rule, the actual coincidence of such attempts will be the exception.</p>
+<p>For that reason one dreams of a memory arrangement in which simultaneous accesses can take place unencumbered as long as different locations are involved, and mutual interference (i.e. delays) will only occur at those exceptional moments when it is logically necessary, i.e. when the same word is involved in more than one attempted access. Compared with that dream, the current solution with the switch that always imposes mutual exclusion independent of such coincidence, is a safe but crude solution. This crudeness is pointed out because it might be acceptable with the number of processors N = 2, but it won't remain so if N grows: for sufficiently large N, the possibility of many simultaneous accesses seems to become some sort of must.</p>
+<p>I have no idea how such a memory would look like --an electronically rotating memory with many sensing stations?--, hence the word "challenge" in my title. Let me finally explain the presence of the question mark: with EWD496 we now have one such algorithm with N = 2, say. The question of whether we shall be able to design more of those, with the values of N that are considerably higher, is still an open question.</p>
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top">9th June 1975<br>
+NUENEN - 4565<br>
+The Netherlands</td>
+<td valign="top">prof.dr.Edsger W.Dijkstra<br>
+Burroughs Research Fellow</td>
+</tr>
+</table>
+<br>
+<div align="left"></div>
+<hr>
+<font size="-1">transcribed by Tristram Brelstaff<br>
+revised Sat, 12 Jun 2004</font>
+<table>
+<tr>
+<td width="26" height="1111"></td>
+<td width="1" height="1111"><spacer type="block" width="1" height="1111"></td>
+</tr>
+<tr height="1" cntrlrow="">
+<td width="472" height="1"><spacer type="block" width="472" height="1"></td>
+<td width="26" height="1"><spacer type="block" width="26" height="1"></td>
+<td width="1" height="1"></td>
+</tr>
+</table>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

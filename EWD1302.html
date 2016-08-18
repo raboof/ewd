@@ -23,128 +23,76 @@
   </div>
   <h1>Once more bichrome triangles in complete graphs</h1>
   <div class='body'>
-				<p>We consider the bichrome triangles in a complete <var>n</var>-graph of which each of its edges is either red or blue. Each bichrome triangle has 2 &quot;mixed Vs,&quot; where a mixed V is a pair of edges with different colours and a shared end point, while a monochrome triangle has no mixed Vs. Thus we can find an upper bound for <var>nbt</var>, i.e. the number of bichrome triangles, by halving an upper bound for the number of mixed Vs. We distinguish even and odd <var>n</var>.</p>
-				<p class="noindent"><u><var>n</var> = 2<var>k</var></u><var>&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;</var>The <var>n</var>&#x2212;1 edges that share an end point form at most <var>k</var>&#x2219;(<var>k</var>&#x2212;1) mixed Vs. Hence there are at most <var>n</var>&#x2219;<var>k</var>&#x2219;(<var>k</var>&#x2212;1) mixed Vs, and<br>
-					<br>
-				</p>
-				<table width="50%">
-	<tr>
-	<td align ="left" width="20%">(0)</td>
-	<td align ="left"><var>nbt</var> &#x2264; <var>k</var><sup>2</sup>&#x2219;(<var>k</var>&#x2212;1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</td>
-	</tr>
-</table>
-				<p class="noindent"><u><var>n</var> = 2<var>k</var> + 1</u>&nbsp;&nbsp;. &nbsp;The <var>n</var>&#x2212;1 edges that share an end point form at most <var>k</var><sup>2</sup> mixed Vs. Hence there are at most <var>k</var><sup>2</sup>&#x2219;<var>n</var> mixed Vs and<br>
-					<br>
-				</p>
-				<table width="50%">
-	<tr>
-	<td align ="left" width="20%">(1)</td>
-	<td align ="left"><var>nbt</var> &#x2264; <var>k</var><sup>2</sup>&#x2219;(2<var>k</var>+1)/2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</td>
-	</tr>
-</table>
-				<p class="noindent">
-(Note that the right-hand side need not be integer.)</p>
-				<p />
-				The rest of this note is devoted to the question whether these upper bounds are as low as possible. The answer will turn out to be affirmative. This will be demonstrated by constructing for arbitrary <var>n</var> a graph such that for each node red and blue degree are as equal as possible, i.e. the situation from which the upper bounds (0) and (1) are derived [the red/blue degree of a node is the number of red/blue edges sharing that node as an endpoint.] We deal with even and odd <var>n</var> separately. 
-				<p class="noindent"><u><var>n</var> = 2<var>k</var></u> &nbsp;&nbsp;Partition the <var>n</var> nodes into <var>k</var> A-nodes and <var>k</var> B-nodes, colour the AA- and the BB-edges red and the AB-edges blue. Then each node has a red degree equal to <var>k</var>&#x2212;1 and a blue degree equal to <var>k</var>, which, <var>n</var>&#x2212;1 being odd, is as equal as you can get them.</p>
-				<p class="noindent"><u><var>n</var> = 2<var>k</var> + 1</u> &nbsp;This case is slightly more complicated because the situation that in each node the degrees are both equal to <var>k</var> can only be obtained for even <var>k</var>; for uneven <var>k</var> we must admit 1 node with degrees (<var>k</var>&#x2212;1, <var>k</var>+1); this corresponds to the situations in which the right-hand side of (1) is not an integer.</p>
-		<div id="frame" align="left">
-			<div id="content" align="left">
-				<p>As before we partition the <var>n</var> nodes, but this time into <var>n</var>+1 A-nodes and <var>n</var> B-nodes. Were we to colour them as before, each A-node would have degrees (<var>k</var>,<var>k</var>) as desired, but each B-node would have degrees (<var>k</var>&#x2212;1,<var>k</var>+1). To remedy the situation, consider the following transformation:</p>
-			</div>
-		</div>
-		<div id="frame">
-			<div id="content">
-				<p />
-				<center>
-					<table width="30%">
-						<tr>
-							<td />
-							A
-
-							<td />
-							<font color="#FF0000">&#x2014</font>
-
-							<td />
-							A
-
-							<td width="50%" />
-							<td />
-							A
-
-							<td />
-							<font color="#0000FF">&#x2014</font>
-
-							<td />
-							A
+<p>We consider the bichrome triangles in a complete <var>n</var>-graph of which each of its edges is either red or blue. Each bichrome triangle has 2 "mixed Vs," where a mixed V is a pair of edges with different colours and a shared end point, while a monochrome triangle has no mixed Vs. Thus we can find an upper bound for <var>nbt</var>, i.e. the number of bichrome triangles, by halving an upper bound for the number of mixed Vs. We distinguish even and odd <var>n</var>.</p>
+<p class="noindent"><u><var>n</var> = 2<var>k</var></u><var>&nbsp;&nbsp;.&nbsp;&nbsp;&nbsp;</var>The <var>n</var>−1 edges that share an end point form at most <var>k</var>∙(<var>k</var>−1) mixed Vs. Hence there are at most <var>n</var>∙<var>k</var>∙(<var>k</var>−1) mixed Vs, and<br>
+<br></p>
+<table width="50%">
+<tr>
+<td align="left" width="20%">(0)</td>
+<td align="left"><var>nbt</var> ≤ <var>k</var><sup>2</sup>∙(<var>k</var>−1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</td>
 </tr>
-						<tr>
-							<td />
-							<font color="#0000FF">|</font>
-
-							<td />
-							<td />
-							<font color="#0000FF">|</font>
-
-							<td align="center" width="50%" />
-							&#x2192; <!-- right arrow -->
-							<td />
-							<font color="#FF0000">|</font>
-
-							<td />
-							<td />
-							<font color="#FF0000">|</font></tr>
-						<tr>
-							<td />
-							B
-
-							<td />
-							<td />
-							B
-
-							<td width="50%" />
-							<td />
-							B
-
-							<td />
-							<td />
-							B
+</table>
+<p class="noindent"><u><var>n</var> = 2<var>k</var> + 1</u>&nbsp;&nbsp;. &nbsp;The <var>n</var>−1 edges that share an end point form at most <var>k</var><sup>2</sup> mixed Vs. Hence there are at most <var>k</var><sup>2</sup>∙<var>n</var> mixed Vs and<br>
+<br></p>
+<table width="50%">
+<tr>
+<td align="left" width="20%">(1)</td>
+<td align="left"><var>nbt</var> ≤ <var>k</var><sup>2</sup>∙(2<var>k</var>+1)/2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</td>
 </tr>
-					</table>
-				</center>
-				<p class="noindent">While it leaves the degrees of all A-nodes unchanged, it can be used to change at 2 B-nodes degrees (<var>k</var>&#x2212;1, <var>k</var>+1) into (<var>k</var>,<var>k</var>), as desired. With <var>k </var>= 2&#x2219;<var>h</var> or k = 2&#x2219;<var>h</var>+1, we can apply this transformation on <var>h</var> disjoint pairs of B-nodes (and <var>h</var> distinct, and hence initially red, AA-edges).</p>
-				<p class="noindent"><u>Note</u> For odd <var>k</var>, a node with degrees differing from (<var>k</var>,<var>k</var>) is unavoidable because the sum of the red/blue degrees is even.<br />
-					(End of Note.)<br />
-				</p>
-				<center>
-					Austin, 29 October 2000</center>
-				<p />
-				<p class="noindent">
-
-
-Prof. Dr. Edsger W. Dijkstra<br />
-					
-					
-Department of Computer Sciences<br />
-					
-					
-The University of Texas at Austin<br />
-					
-					
-Austin, TX 78712-1188<br />
-					
-					
-USA
-</p>
-				<hr>
-				<p class="noindent"><font size="-1">Transcribed by Jordan Olsommer.<br>
-						
-						Last revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="91">Sat, 24 Nov 2007</csobj>.</font></p>
-			</div>
-		</div>
-	</body>
-</html>
-
+</table>
+<p class="noindent">(Note that the right-hand side need not be integer.)</p>
+The rest of this note is devoted to the question whether these upper bounds are as low as possible. The answer will turn out to be affirmative. This will be demonstrated by constructing for arbitrary <var>n</var> a graph such that for each node red and blue degree are as equal as possible, i.e. the situation from which the upper bounds (0) and (1) are derived [the red/blue degree of a node is the number of red/blue edges sharing that node as an endpoint.] We deal with even and odd <var>n</var> separately.
+<p class="noindent"><u><var>n</var> = 2<var>k</var></u> &nbsp;&nbsp;Partition the <var>n</var> nodes into <var>k</var> A-nodes and <var>k</var> B-nodes, colour the AA- and the BB-edges red and the AB-edges blue. Then each node has a red degree equal to <var>k</var>−1 and a blue degree equal to <var>k</var>, which, <var>n</var>−1 being odd, is as equal as you can get them.</p>
+<p class="noindent"><u><var>n</var> = 2<var>k</var> + 1</u> &nbsp;This case is slightly more complicated because the situation that in each node the degrees are both equal to <var>k</var> can only be obtained for even <var>k</var>; for uneven <var>k</var> we must admit 1 node with degrees (<var>k</var>−1, <var>k</var>+1); this corresponds to the situations in which the right-hand side of (1) is not an integer.</p>
+<div id="frame" align="left">
+<div id="content" align="left">
+<p>As before we partition the <var>n</var> nodes, but this time into <var>n</var>+1 A-nodes and <var>n</var> B-nodes. Were we to colour them as before, each A-node would have degrees (<var>k</var>,<var>k</var>) as desired, but each B-node would have degrees (<var>k</var>−1,<var>k</var>+1). To remedy the situation, consider the following transformation:</p>
+</div>
+</div>
+<div id="frame">
+<div id="content">
+<center>A <font color="#FF0000">&amp;#x2014</font>A A <font color="#0000FF">&amp;#x2014</font>A <font color="#0000FF">|</font><font color="#0000FF">|</font>→ <font color="#FF0000">|</font><font color="#FF0000">|</font>B B B B
+<table width="30%">
+<tr>
+<td>
+<td>
+<td>
+<td width="50%">
+<td>
+<td>
+<td></tr>
+<tr>
+<td>
+<td>
+<td>
+<td align="center" width="50%"><!-- right arrow -->
+<td>
+<td>
+<td></tr>
+<tr>
+<td>
+<td>
+<td>
+<td width="50%">
+<td>
+<td>
+<td></tr>
+</table>
+</center>
+<p class="noindent">While it leaves the degrees of all A-nodes unchanged, it can be used to change at 2 B-nodes degrees (<var>k</var>−1, <var>k</var>+1) into (<var>k</var>,<var>k</var>), as desired. With <var>k</var> = 2∙<var>h</var> or k = 2∙<var>h</var>+1, we can apply this transformation on <var>h</var> disjoint pairs of B-nodes (and <var>h</var> distinct, and hence initially red, AA-edges).</p>
+<p class="noindent"><u>Note</u> For odd <var>k</var>, a node with degrees differing from (<var>k</var>,<var>k</var>) is unavoidable because the sum of the red/blue degrees is even.<br>
+(End of Note.)<br></p>
+<center>Austin, 29 October 2000</center>
+<p class="noindent">Prof. Dr. Edsger W. Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin<br>
+Austin, TX 78712-1188<br>
+USA</p>
+<hr>
+<p class="noindent"><font size="-1">Transcribed by Jordan Olsommer.<br>
+Last revised Sat, 24 Nov 2007.</font></p>
+</div>
+</div>
 </div>
   <script>
 $('.body').tweetSelection({

@@ -22,7 +22,34 @@
     </div>
   </div>
   <h1>Factorizing the factorial</h1>
-  <div class='body'></h4>				<p class="noindent">Let <var>n</var> be a natural number; let <var>p</var> be a prime;</p>				<p class="continue"><var>m</var> = the exponent of <var>p</var> in the prime factorization of <var>n</var>! ;</p>				<p class="continue"><var>s</var> = the sum of the (<var>p</var>-ary) digits of <var>n</var>&#x2019;s representation in base <var>p</var>.</p>				<p class="noindent"><u>Theorem</u> &nbsp;&nbsp;&nbsp;&nbsp; <var>m</var> = ( <var>n</var> - <var>s</var> ) / ( <var>p</var> - 1 )</p>				<p>Because of the usual recursive definition of <var>n</var>!, an inductive proof over <var>n</var> seems indicated. Since for <var>n</var> = 0, <var>m</var> = 0 &#x2227; <var>s</var> = 0, the theorem holds for <var>n</var> = 0.</p>				<p>Consider now the transition from <var>n</var> to <var>n</var> + 1; let <var>k</var> be the exponent of <var>p</var> in the prime factorization of <var>n</var> + 1.</p>				<p>Because ( <var>n</var> + 1 )! = ( <var>n</var> + 1 ) &#x2219; <var>n</var>! and <var>p</var> is prime</p>				<p class="noindent">(0) &nbsp;&nbsp;&nbsp;&nbsp; &#x0394; <var>m</var> = <var>k</var> .</p>				<p>Because ( <var>n</var> + 1 ) - <var>n</var> = 1</p>				<p class="noindent">(1) &nbsp;&nbsp;&nbsp;&nbsp; &#x0394; <var>n</var> = 1 .</p>				<p>Because the <var>p</var>-ary representation of ( <var>n</var> + 1 ) ends on exactly <var>k</var> zeros</p>				<p class="noindent">(2) &nbsp;&nbsp;&nbsp;&nbsp; &#x0394; <var>s</var> = 1 - <var>k</var>&#x2219;( <var>p</var> - 1 )</p>				<p>Combining (1) and (2) yields</p>				<p class="noindent">(3) &nbsp;&nbsp;&nbsp;&nbsp; &#x0394; (( <var>n</var> - <var>s</var> ) / ( <var>p</var> - 1 )) = <var>k</var> .</p>				<p>Combining (0) and (3) yields the induction step, and thus the proof is completed.</p>			</div>		</div>		<div id="frame" align="right">			<p class="rightalign">Edsger W.Dijkstra&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>		</div>		<div id="frame">			<div>				<br />			</div>			<!-- end date and signature --><!-- name and date -->			<div id="footer">				<hr />						transcribed by Jose Alejandro Ruiz Delgado<br />				 		revised <csobj format="MedDate" h="15" region="15" t="DateTime" w="106">Sun, 31 Aug 2008</csobj></div>		</div>	</body></html></div>
+  <div class='body'>
+<p class="noindent">Let <var>n</var> be a natural number; let <var>p</var> be a prime;</p>
+<p class="continue"><var>m</var> = the exponent of <var>p</var> in the prime factorization of <var>n</var>! ;</p>
+<p class="continue"><var>s</var> = the sum of the (<var>p</var>-ary) digits of <var>n</var>’s representation in base <var>p</var>.</p>
+<p class="noindent"><u>Theorem</u> &nbsp;&nbsp;&nbsp;&nbsp; <var>m</var> = ( <var>n</var> - <var>s</var> ) / ( <var>p</var> - 1 )</p>
+<p>Because of the usual recursive definition of <var>n</var>!, an inductive proof over <var>n</var> seems indicated. Since for <var>n</var> = 0, <var>m</var> = 0 ∧ <var>s</var> = 0, the theorem holds for <var>n</var> = 0.</p>
+<p>Consider now the transition from <var>n</var> to <var>n</var> + 1; let <var>k</var> be the exponent of <var>p</var> in the prime factorization of <var>n</var> + 1.</p>
+<p>Because ( <var>n</var> + 1 )! = ( <var>n</var> + 1 ) ∙ <var>n</var>! and <var>p</var> is prime</p>
+<p class="noindent">(0) &nbsp;&nbsp;&nbsp;&nbsp; Δ <var>m</var> = <var>k</var> .</p>
+<p>Because ( <var>n</var> + 1 ) - <var>n</var> = 1</p>
+<p class="noindent">(1) &nbsp;&nbsp;&nbsp;&nbsp; Δ <var>n</var> = 1 .</p>
+<p>Because the <var>p</var>-ary representation of ( <var>n</var> + 1 ) ends on exactly <var>k</var> zeros</p>
+<p class="noindent">(2) &nbsp;&nbsp;&nbsp;&nbsp; Δ <var>s</var> = 1 - <var>k</var>∙( <var>p</var> - 1 )</p>
+<p>Combining (1) and (2) yields</p>
+<p class="noindent">(3) &nbsp;&nbsp;&nbsp;&nbsp; Δ (( <var>n</var> - <var>s</var> ) / ( <var>p</var> - 1 )) = <var>k</var> .</p>
+<p>Combining (0) and (3) yields the induction step, and thus the proof is completed.</p>
+<div id="frame" align="right">
+<p class="rightalign">Edsger W.Dijkstra&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</div>
+<div id="frame">
+<div><br></div>
+<!-- end date and signature --><!-- name and date -->
+<div id="footer">
+<hr>
+transcribed by Jose Alejandro Ruiz Delgado<br>
+revised Sun, 31 Aug 2008</div>
+</div>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

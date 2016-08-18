@@ -23,67 +23,55 @@
   </div>
   <h1>Courtesy Dr.Birgit Schieder</h1>
   <div class='body'>
-				<p>This note deals with the proof of the following</p>
-				<p class="noindent"><b>Theorem</b> Given are <var>N</var> blue and <var>N</var> red points in the Euclidean plane such that no 3 of them are collinear; then blue and red points can be connected one-to-one by straight line segments such that no segments intersect.</p>
-				<p>The proof is by showing the termination of the following repetition, operating on an arbitrarily initialized variable of type &ldquo;one-to-one correspondence between the given <var>N</var> blue and <var>N</var> red points&rdquo;:				<br />
-				  <br />
-                </p>
-				<table width="90%" border="0" align="right" cellpadding="0" cellspacing="0">
-				  <tr>
-				    <td align="right" valign="bottom"><b>do&nbsp;</b></td>
-				    <td align="left" valign="bottom">there are intersecting segments &#x2192;</td>
-			      </tr>
-				  <tr>
-				    <td width="30" align="right" valign="bottom">&nbsp; </td>
-				    <td width="548" align="left" valign="bottom">			        flip two intersecting segments <b>od</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,</td>
-			      </tr>
-			  </table>
-				<p class="noindent">&nbsp;</p>
-				<p class="noindent">where the operation &ldquo;flip&rdquo; replaces as illustrated below two intersecting segments (the solid ones) by two non-intersecting segments (the dotted ones):<br />
-			  </p>
-				<p><img src="EWD1215fig.1.png" alt="figure 1" width="185" height="140" align="middle" class="center" /></p>
-				<p>We can not conduct the proof of termination by stating that the flip reduces the number of segment/segment intersections, for it need not do so: the &ldquo;dotted&rdquo; segments may introduce new intersections with other segments.</p>
-				<p>The famous termination argument observes (i) that the number of possible states is finite (viz. <var>N</var>!), so that a real variant function will do, and (ii) that the flip decreases the sum of the lengths of the <var>N</var> connecting segments (and it is here that the noncollinearity is used to rule out all sorts of &ldquo;pathological&rdquo; cases). This argument is famous because it is also a little bit scandalous because of its illicit affaire with the notion of Euclidean distance. (It is most definitely not a metric theorem we are dealing with.) So, when I showed th above argument in 1994 at the Marktoberdorf Summer School, I challenged the audience to design a &ldquo;decent&rdquo; proof (i.e. using only concepts of affine geometry.) The challenge was most elegantly met by Dr.Birgit Schieder (of the &ldquo;Institut f&uuml;r Informatik der Technischen Universit&auml;t M&uuml;nchen&rdquo;), who constructed a counting argument. The challenge is, firstly, to choose what to count and, secondly, to design a crisp argument for the decrease.</p>
-				<p>The changing state of the computation is characterized by the one-to-one correspondence, i.e. by the set of <var>N</var> connecting segments. Below, we shall use the term &ldquo;segment&rdquo; to denote the so-called &ldquo;open&rdquo; segment, i.e. its two coloured endpoints are <em>not</em> included. We shall use the term &ldquo;line&rdquo; to denote any of the <var>N</var>&thinsp;<span class="superscript">2</span> infinite lines through 1 blue and 1 red point; this set of <var>N</var><span class="superscript">&thinsp;2</span> lines is as fixed as the 2<var>N</var> coloured points. Finally, a line and a segment are said to be &ldquo;intersect&rdquo;, or to give rise to an &ldquo;intersection&rdquo;, when they have exactly 1 point in common.</p>
-			  <p class="noindent"><b>Lemma 0</b> For no line the number of segments it intersects is increased by a flip.</p>
-				<p class="noindent"><b>Proof</b></p>
-				<p><img src="EWD1215fig.2.png" alt="figure 2" width="279" height="150" class="nospace" /></p>
-				<p>For a line whose number of intersections is possibly increased by the flip, we can confine our attention to lines that intersect at least 1 of the segments created by the flip. Representative instances are line <var>p</var> (intersects 1 dotted segment) and line <var>q</var> (intersects 2 dotted segments). But &mdash;not thanks to Euclid, but thanks to Hilbert&mdash; they intersect as many solid segments, so the flip does not increase their number of intersections. (End of Proof.)</p>
-				<p class="noindent"><b>Lemma 1</b> For two lines, the number of segments intersected is decreased by 1.</p>
-				<p class="noindent"><b>Proof</b> Line (<var>B</var><span class="smallFont">0</span>,<var>&thinsp;R</var><span class="smallFont">0</span>) loses its intersection with segment (<var>B</var><span class="smallFont">1</span>,<var>&thinsp;</var><var>R</var><span class="smallFont">1</span>), which disappears, and intersects neither of the new segments. Similarly for line (<var>B</var><span class="smallFont">1</span>,<var>&thinsp;R</var><span class="smallFont">1</span>) (End of Proof.)</p>
-				<p>From the lemmata we conclude that each flip decreases the number of line/segment intersections, and this concludes Birgit Schieder&rsquo;s counting argument.</p>
-				<p class="center">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* <br />
-			    *</p>
-				<p>I posed the problem to the Tuesday Afternoon Clubs in Eindhoven and Austin; both solved the problem. At the ETAC, we then investigated how the case analysis could be reduced, and how the argument that it is exhaustive could be simplified. (The argument as given above, however, was designed later.) At the ATAC, we afterwards looked for heuristics that would have led to the idea of counting segment/line intersections. In retrospect we could make all sorts of explanatory and justifying remarks, but none of them could in honesty be dressed up as heuristic principle.</p>
-			  <p>The counting argument annoys me because my &ldquo;proof&rdquo; of Lemma 0 relies so heavily on that part of geometry with whose axiomatization I am so unfamiliar: I know Euclid&rsquo;s axioms, but for a proof of Lemma 0 they don&rsquo;t suffice.</p>
-			  <blockquote>
-			    <blockquote>
-			      <p align="right"> Austin, 17 September 1995</p>
-		        </blockquote>
-		      </blockquote>
+<p>This note deals with the proof of the following</p>
+<p class="noindent"><b>Theorem</b> Given are <var>N</var> blue and <var>N</var> red points in the Euclidean plane such that no 3 of them are collinear; then blue and red points can be connected one-to-one by straight line segments such that no segments intersect.</p>
+<p>The proof is by showing the termination of the following repetition, operating on an arbitrarily initialized variable of type “one-to-one correspondence between the given <var>N</var> blue and <var>N</var> red points”:<br>
+<br></p>
+<table width="90%" border="0" align="right" cellpadding="0" cellspacing="0">
+<tr>
+<td align="right" valign="bottom"><b>do&nbsp;</b></td>
+<td align="left" valign="bottom">there are intersecting segments →</td>
+</tr>
+<tr>
+<td width="30" align="right" valign="bottom">&nbsp;</td>
+<td width="548" align="left" valign="bottom">flip two intersecting segments <b>od</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,</td>
+</tr>
+</table>
+<p class="noindent">&nbsp;</p>
+<p class="noindent">where the operation “flip” replaces as illustrated below two intersecting segments (the solid ones) by two non-intersecting segments (the dotted ones):<br></p>
+<p><img src="EWD1215fig.1.png" alt="figure 1" width="185" height="140" align="middle" class="center"></p>
+<p>We can not conduct the proof of termination by stating that the flip reduces the number of segment/segment intersections, for it need not do so: the “dotted” segments may introduce new intersections with other segments.</p>
+<p>The famous termination argument observes (i) that the number of possible states is finite (viz. <var>N</var>!), so that a real variant function will do, and (ii) that the flip decreases the sum of the lengths of the <var>N</var> connecting segments (and it is here that the noncollinearity is used to rule out all sorts of “pathological” cases). This argument is famous because it is also a little bit scandalous because of its illicit affaire with the notion of Euclidean distance. (It is most definitely not a metric theorem we are dealing with.) So, when I showed th above argument in 1994 at the Marktoberdorf Summer School, I challenged the audience to design a “decent” proof (i.e. using only concepts of affine geometry.) The challenge was most elegantly met by Dr.Birgit Schieder (of the “Institut für Informatik der Technischen Universität München”), who constructed a counting argument. The challenge is, firstly, to choose what to count and, secondly, to design a crisp argument for the decrease.</p>
+<p>The changing state of the computation is characterized by the one-to-one correspondence, i.e. by the set of <var>N</var> connecting segments. Below, we shall use the term “segment” to denote the so-called “open” segment, i.e. its two coloured endpoints are <em>not</em> included. We shall use the term “line” to denote any of the <var>N</var> <span class="superscript">2</span> infinite lines through 1 blue and 1 red point; this set of <var>N</var><span class="superscript"> 2</span> lines is as fixed as the 2<var>N</var> coloured points. Finally, a line and a segment are said to be “intersect”, or to give rise to an “intersection”, when they have exactly 1 point in common.</p>
+<p class="noindent"><b>Lemma 0</b> For no line the number of segments it intersects is increased by a flip.</p>
+<p class="noindent"><b>Proof</b></p>
+<p><img src="EWD1215fig.2.png" alt="figure 2" width="279" height="150" class="nospace"></p>
+<p>For a line whose number of intersections is possibly increased by the flip, we can confine our attention to lines that intersect at least 1 of the segments created by the flip. Representative instances are line <var>p</var> (intersects 1 dotted segment) and line <var>q</var> (intersects 2 dotted segments). But —not thanks to Euclid, but thanks to Hilbert— they intersect as many solid segments, so the flip does not increase their number of intersections. (End of Proof.)</p>
+<p class="noindent"><b>Lemma 1</b> For two lines, the number of segments intersected is decreased by 1.</p>
+<p class="noindent"><b>Proof</b> Line (<var>B</var><span class="smallFont">0</span>,<var> R</var><span class="smallFont">0</span>) loses its intersection with segment (<var>B</var><span class="smallFont">1</span>,<var> </var><var>R</var><span class="smallFont">1</span>), which disappears, and intersects neither of the new segments. Similarly for line (<var>B</var><span class="smallFont">1</span>,<var> R</var><span class="smallFont">1</span>) (End of Proof.)</p>
+<p>From the lemmata we conclude that each flip decreases the number of line/segment intersections, and this concludes Birgit Schieder’s counting argument.</p>
+<p class="center">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</p>
+<p>I posed the problem to the Tuesday Afternoon Clubs in Eindhoven and Austin; both solved the problem. At the ETAC, we then investigated how the case analysis could be reduced, and how the argument that it is exhaustive could be simplified. (The argument as given above, however, was designed later.) At the ATAC, we afterwards looked for heuristics that would have led to the idea of counting segment/line intersections. In retrospect we could make all sorts of explanatory and justifying remarks, but none of them could in honesty be dressed up as heuristic principle.</p>
+<p>The counting argument annoys me because my “proof” of Lemma 0 relies so heavily on that part of geometry with whose axiomatization I am so unfamiliar: I know Euclid’s axioms, but for a proof of Lemma 0 they don’t suffice.</p>
+<blockquote>
+<blockquote>
+<p align="right">Austin, 17 September 1995</p>
+</blockquote>
+</blockquote>
 <p>&nbsp;</p>
-			  <p class="noindent">prof.dr. Edsger W.Dijkstra<br />
-				  Department of Computer Sciences<br />
-				  The University of Texas at Austin<br />
-				  Austin, TX 78712-1188<br />
-				  USA</p>
-			  <p>&nbsp;</p>
-			</div>
-			<!-- end signatures -->
-			<hr />
-			<!-- name and date -->
-			<div id="footer">
-				<font size="-1">
-         transcribed by Bart Vreugdenhil<br />
-					 revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="96">
-					   <!-- #BeginDate format:En2 -->30-Dec-2011<!-- #EndDate -->
-					 </csobj>
-				</font></div>
-		</div>
-	</body>
-</html>
-
-
+<p class="noindent">prof.dr. Edsger W.Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin<br>
+Austin, TX 78712-1188<br>
+USA</p>
+<p>&nbsp;</p>
+<!-- end signatures -->
+<hr>
+<!-- name and date -->
+<div id="footer"><font size="-1">transcribed by Bart Vreugdenhil<br>
+revised <!-- #BeginDate format:En2 -->30-Dec-2011<!-- #EndDate -->
+ </font></div>
 </div>
   <script>
 $('.body').tweetSelection({

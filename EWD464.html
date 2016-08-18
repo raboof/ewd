@@ -23,221 +23,274 @@
   </div>
   <h1>A new elephant built from mosquitos humming in harmony</h1>
   <div class='body'>
-         <hr />
-         <p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR
-         </p>
-         <hr />
-<p class="noindent">
-<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial Black, sans-serif">Copyright
-		Notice</FONT></P>
-		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>The
-		following manuscript </FONT></FONT>
-		</P>
-		<P STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>EWD
-		464: A new elephant built from mosquitos humming in harmony</FONT></FONT>
-		</P>
-		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>is
-		held in copyright by Springer&mdash;Verlag New York. </FONT></FONT>
-		</P>
-		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>The
-		manuscript was published as pages 79-83 of </FONT></FONT>
-		</P>
-		<P STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>Edsger
-		W. Dijkstra, Selected Writings on Computing: A Personal
-		Perspective, </FONT></FONT>
-		</P>
-		<P STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2>Springer-Verlag,
-		1982. ISBN O&mdash;387&mdash;90652&mdash;5. </FONT></FONT>
-		</P>
-		<P CLASS="noindent" STYLE="margin-bottom: 0.5cm"><FONT FACE="Arial, sans-serif"><FONT SIZE=2><B>Reproduced
-		with permission from Springer-Verlag New York. <BR>Any further
-		reproduction is strictly prohibited.</B></FONT></FONT><FONT SIZE=2>
-		.</FONT></P>
-<p class="noindent"><p class="noindent">
-<p><b>A new elephant built from mosquitos humming in harmony</b>.
-<p>In an earlier document &mdash;EWD456&mdash; I mentioned a problem, suggesting
-that it boiled down to forming a transitive closure. M.Rem pointed out to
-me that suggestion was wrong; this report deals with the problem in question.
-<p>We consider a non-deterministic finite state automaton with N states,
-each state being either a terminal or a non-terminal state. We can associate
-each state with a different node of a directed graph &mdash;and vice versa&mdash; in
-which each node has at least one outgoing arc. Terminal nodes &mdash;i.e. nodes
-corresponding to a terminal state&mdash; are the nodes whose <b>only</b> outgoing arc
-leads back into themselves: the only outgoing arc of a terminal node is also
-one of its incoming arcs. For each node the outgoing arcs point to the set
-of permissible &ldquo;successor nodes&rdquo;, a node with only one outgoing arc is a
-deterministic node and all directed paths along the graph correspond to a
-possible computation of the machine.
-<p>Let R be a set of terminal nodes. We can then ask for the set V of
-nodes v , such that any directed path, starting at a node v will arrive
-after a finite number of arcs in a node from R. (This is asking for the
-weakest pre-condition for the finite state automaton.) After reducing the
-given graph by removing from each node from R its only outgoing arc,
-with respect to that reduced graph we can also define the set V as all
-the points v , such that each directed path starting at v is finite.
-<p>The following sequential program would do the job. Assuming the nodes
-to be consecutively numbered, we introduce an array nia &mdash;i.e. &ldquo;number of
-ill-directed arcs&mdash; that (after the removal of the outgoing arcs from nodes
-r in R) count for each node the number of its outgoing arcs that lead to
-a node outside V.
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
-      &ldquo;initialize nia such that nia(r) = 0 for r in R and nia(n)=                  </td> </tr> <tr> <td></td> <td colspan = 4>
-      number of node n&rsquo;s outgoing arcs for any node n not in R;                    </td> </tr> <tr> <td></td> <td colspan = 4>
-      C:= R; V:= empty;                                                                  </td> </tr> <tr> <td></td> <td colspan = 4>
-      <b>do</b> E &ne; empty &rarr; transfer an arbitrary node c from C to V;            </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
-                     PC:= predecessor set of c;                                          </td> </tr> <tr> <td></td> <td></td> <td colspan = 3>
-                     <b>do</b> PC &ne; empty &rarr; remove an arbitrary node pc from PC; </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-                        <b>if</b> nia(pc) &gt; 1 &rarr; nia:(pc)= nia(pc) - 1            </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; </td> <td>
-                         &#x25af; nia(pc) = 1 &rarr; nia:(pc)= 0; C:= C + pc             </td> </tr> <tr> <td></td> <td></td> <td></td> <td colspan = 2>
-                        <b>fi</b>                                                        </td> </tr> <tr> <td></td> <td></td> <td colspan = 3>
-                     <b>od</b>                                                           </td> </tr> <tr> <td></td> <td colspan = 4>
-      <b>od</b> .  &rdquo;                                                               </td> </tr>
+<hr>
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. —HR</p>
+<hr>
+<p class="noindent"></p>
+<p class="noindent" style="margin-bottom: 0.5cm"><font face="Arial Black, sans-serif">Copyright Notice</font></p>
+<p class="noindent" style="margin-bottom: 0.5cm"><font face="Arial, sans-serif"><font size="2">The following manuscript</font></font></p>
+<p style="margin-bottom: 0.5cm"><font face="Arial, sans-serif"><font size="2">EWD 464: A new elephant built from mosquitos humming in harmony</font></font></p>
+<p class="noindent" style="margin-bottom: 0.5cm"><font face="Arial, sans-serif"><font size="2">is held in copyright by Springer—Verlag New York.</font></font></p>
+<p class="noindent" style="margin-bottom: 0.5cm"><font face="Arial, sans-serif"><font size="2">The manuscript was published as pages 79-83 of</font></font></p>
+<p style="margin-bottom: 0.5cm"><font face="Arial, sans-serif"><font size="2">Edsger W. Dijkstra, Selected Writings on Computing: A Personal Perspective,</font></font></p>
+<p style="margin-bottom: 0.5cm"><font face="Arial, sans-serif"><font size="2">Springer-Verlag, 1982. ISBN O—387—90652—5.</font></font></p>
+<p class="noindent" style="margin-bottom: 0.5cm"><font face="Arial, sans-serif"><font size="2"><b>Reproduced with permission from Springer-Verlag New York.<br>
+Any further reproduction is strictly prohibited.</b></font></font> <font size="2">.</font></p>
+<p class="noindent"></p>
+<p class="noindent"></p>
+<p><b>A new elephant built from mosquitos humming in harmony</b>.</p>
+<p>In an earlier document —EWD456— I mentioned a problem, suggesting that it boiled down to forming a transitive closure. M.Rem pointed out to me that suggestion was wrong; this report deals with the problem in question.</p>
+<p>We consider a non-deterministic finite state automaton with N states, each state being either a terminal or a non-terminal state. We can associate each state with a different node of a directed graph —and vice versa— in which each node has at least one outgoing arc. Terminal nodes —i.e. nodes corresponding to a terminal state— are the nodes whose <b>only</b> outgoing arc leads back into themselves: the only outgoing arc of a terminal node is also one of its incoming arcs. For each node the outgoing arcs point to the set of permissible “successor nodes”, a node with only one outgoing arc is a deterministic node and all directed paths along the graph correspond to a possible computation of the machine.</p>
+<p>Let R be a set of terminal nodes. We can then ask for the set V of nodes v , such that any directed path, starting at a node v will arrive after a finite number of arcs in a node from R. (This is asking for the weakest pre-condition for the finite state automaton.) After reducing the given graph by removing from each node from R its only outgoing arc, with respect to that reduced graph we can also define the set V as all the points v , such that each directed path starting at v is finite.</p>
+<p>The following sequential program would do the job. Assuming the nodes to be consecutively numbered, we introduce an array nia —i.e. “number of ill-directed arcs— that (after the removal of the outgoing arcs from nodes r in R) count for each node the number of its outgoing arcs that lead to a node outside V.</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="4">“initialize nia such that nia(r) = 0 for r in R and nia(n)=</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="4">number of node n’s outgoing arcs for any node n not in R;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="4">C:= R; V:= empty;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="4"><b>do</b> E ≠ empty → transfer an arbitrary node c from C to V;</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="3">PC:= predecessor set of c;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="3"><b>do</b> PC ≠ empty → remove an arbitrary node pc from PC;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>if</b> nia(pc) &gt; 1 → nia:(pc)= nia(pc) - 1</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp;</td>
+<td>▯ nia(pc) = 1 → nia:(pc)= 0; C:= C + pc</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td colspan="2"><b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="3"><b>od</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="4"><b>od</b> . ”</td>
+</tr>
 </table>
-<p>And this sequential program demonstrates the ugliness of the problem
-quite nicely: for the initialization of nia we need for each node outside
-R (the size of its) successor set; thereafter we need for each node c its
-predecessor set.
-<p>The following &ldquo;program&rdquo; is a little bit less sequential: it manipulates
-the connection matrix. Let con(i, j) = 1 if the is an arc from i to j ,
-otherwise con(i, j) = 0. (To each terminal node corresponds a 1 on the
-diagonal which is the only 1 in its row.) The array con will be broken
-down as the computation proceeds:
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
-      &ldquo;C:= R; V:= empty;                                         </td> </tr> <tr> <td></td> <td colspan = 3>
-      <b>do</b> C &ne; empty &rarr; V:= V + C:                         </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-                     make all columns corresponding to the elements of </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                                  C equal to all zeros;                </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
-                     C:= all elements outside V to which correspond    </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
-                                  all-zero rows                        </td> </tr> <tr> <td></td> <td colspan = 3>
-      <b>od</b> . &rdquo;                                              </td> </tr>
+<p>And this sequential program demonstrates the ugliness of the problem quite nicely: for the initialization of nia we need for each node outside R (the size of its) successor set; thereafter we need for each node c its predecessor set.</p>
+<p>The following “program” is a little bit less sequential: it manipulates the connection matrix. Let con(i, j) = 1 if the is an arc from i to j , otherwise con(i, j) = 0. (To each terminal node corresponds a 1 on the diagonal which is the only 1 in its row.) The array con will be broken down as the computation proceeds:</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="3">“C:= R; V:= empty;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="3"><b>do</b> C ≠ empty → V:= V + C:</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2">make all columns corresponding to the elements of</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>C equal to all zeros;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="2">C:= all elements outside V to which correspond</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>all-zero rows</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="3"><b>od</b> . ”</td>
+</tr>
 </table>
-Here the &ldquo;ugliness&rdquo; observed above is reflected by the repeatable statement
-itself, in which the connectivity matrix is accessed either by rows or by
-columns. In its second form the algorithm reflects, however, the potential
-parallellism, because each time all columns or all rows respectively can
-be treated concurrently.
-<p>One and a half year ago I designed a number of so-called &ldquo;elephants
-built from mosquitos&rdquo;. The idea was that we should have a large set of 
-microcomputers &mdash;mosquitos&mdash;with only very few input legs and output legs (and
-possibly some antennae for synchronization). According to a <b>fixed</b> pattern,
-input and output legs would be paired, each pair thus providing a directed
-communication link between two mosquitos. The question was whether we could
-design powerful special-purpose elephants built from such mosquitos, 
-harmoniously humming together. (The hyper-fast Fourier elephant was the most
-spectacular output of that effort, but it turned out to be known.) The 
-remainder of this report deals with the design of an elephant solving the 
-problem posed above. It is reasonable to wish to design an elephant for this
-task: the modifications to which the matrix con is subjected is strictly
-monotonic and that should simplify the problems, otherwise present in elephant
-design, considerably. We are <b>not</b> interested in a one-mosquite elephant, not
-in an N<sup>2</sup>-mosquito elephant either, and we are heading for an N-mosquito
-elephant, and we shall try to come away with the simplest strongly connected
-arrangement I can think of: a cyclic arrangement with traffic in one direction
-only, with a mosquito associated with each node.
-<p>We consider the nodes and the associated mosquitos numbered from 0
-through N-1 . In order to do away with superfluous subscripts, each machine
-j refers to machine (j+1)<b>mod</b> N as &ldquo;its right-hand neighbour&rdquo;. If all
-machine have a variable called &ldquo;x&rdquo; , transmission of information to one&rsquo;s
-right-hand neighbour will be coded as &ldquo;xR:= ....&rdquo; (We are heading for fully
-synchronized mosquitos.)
-<p>We shall now describe mosquito nr j . It is primarily the manager of
-the j-th column of the matrix con . We shall represent it as a boolean
-vector (with &ldquo;true&rdquo; for &ldquo;1&rdquo;, i.e. the presence of an incoming arc for node j )
-<br>arc(i) means: from node i leads (still) an arc to node j.
-<p class="noindent">Furthermore, we observe that in an arrangement like this, it does not seem
-to do any harm if a mosquito, once in set V , continues to set its vector
-&ldquo;arc&rdquo; to all elements false (for the time not bothering about termination).
-We introduce for each mosquito j a boolean
-out means: node i is (still) outside set V.
-<p>We initialize V:= R , i.e. out = false for all target nodes and
-still true for all the others.
-<p>Consider what will happen if all machines j are now, after this
-initialization, simultaneously started on a synchronous execution of the
-following program:
-<br>mosquito j:
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-            arc:(j)= arc(j) <b>and</b> out; xR:= arc(j);              </td> </tr> <tr> <td></td> <td colspan = 2>
-            i:= (j - 1) <b>mod</b> N;                                  </td> </tr> <tr> <td></td> <td colspan = 2>
-            <b>do</b> i &ne; j &rarr; arc:(i)= arc(i) <b>and</b> out; </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                       xR:= x <b>or</b> arc(i);                       </td> </tr> <tr> <td></td> <td></td> <td>
-                       i:= (i - 1) <b>mod</b> N                       </td> </tr> <tr> <td></td> <td colspan = 2>
-            <b>od</b>                                                 </td> </tr> <tr> <td></td> <td colspan = 2>
-            out:= out <b>and</b> x                                    </td> </tr>
+Here the “ugliness” observed above is reflected by the repeatable statement itself, in which the connectivity matrix is accessed either by rows or by columns. In its second form the algorithm reflects, however, the potential parallellism, because each time all columns or all rows respectively can be treated concurrently.
+<p>One and a half year ago I designed a number of so-called “elephants built from mosquitos”. The idea was that we should have a large set of microcomputers —mosquitos—with only very few input legs and output legs (and possibly some antennae for synchronization). According to a <b>fixed</b> pattern, input and output legs would be paired, each pair thus providing a directed communication link between two mosquitos. The question was whether we could design powerful special-purpose elephants built from such mosquitos, harmoniously humming together. (The hyper-fast Fourier elephant was the most spectacular output of that effort, but it turned out to be known.) The remainder of this report deals with the design of an elephant solving the problem posed above. It is reasonable to wish to design an elephant for this task: the modifications to which the matrix con is subjected is strictly monotonic and that should simplify the problems, otherwise present in elephant design, considerably. We are <b>not</b> interested in a one-mosquite elephant, not in an N<sup>2</sup>-mosquito elephant either, and we are heading for an N-mosquito elephant, and we shall try to come away with the simplest strongly connected arrangement I can think of: a cyclic arrangement with traffic in one direction only, with a mosquito associated with each node.</p>
+<p>We consider the nodes and the associated mosquitos numbered from 0 through N-1 . In order to do away with superfluous subscripts, each machine j refers to machine (j+1)<b>mod</b> N as “its right-hand neighbour”. If all machine have a variable called “x” , transmission of information to one’s right-hand neighbour will be coded as “xR:= ....” (We are heading for fully synchronized mosquitos.)</p>
+<p>We shall now describe mosquito nr j . It is primarily the manager of the j-th column of the matrix con . We shall represent it as a boolean vector (with “true” for “1”, i.e. the presence of an incoming arc for node j )<br>
+arc(i) means: from node i leads (still) an arc to node j.</p>
+<p class="noindent">Furthermore, we observe that in an arrangement like this, it does not seem to do any harm if a mosquito, once in set V , continues to set its vector “arc” to all elements false (for the time not bothering about termination). We introduce for each mosquito j a boolean out means: node i is (still) outside set V.</p>
+<p>We initialize V:= R , i.e. out = false for all target nodes and still true for all the others.</p>
+<p>Consider what will happen if all machines j are now, after this initialization, simultaneously started on a synchronous execution of the following program:<br>
+mosquito j:</p>
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2">arc:(j)= arc(j) <b>and</b> out; xR:= arc(j);</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2">i:= (j - 1) <b>mod</b> N;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>do</b> i ≠ j → arc:(i)= arc(i) <b>and</b> out;</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>xR:= x <b>or</b> arc(i);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>i:= (i - 1) <b>mod</b> N</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>od</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2">out:= out <b>and</b> x</td>
+</tr>
 </table>
-Each row is inspected starting at the diagonal and then towards the right.
-Each mosquito starts updating its column at the diagonal and then upwards.
-Each time a mosquito has updated element arc(i), x means &ldquo;in row i a 1
-(or true) occurs to the left of column j up to and including the diagonal
-element of row i&rdquo;, and updating and confrontation take place in complete
-synchronism. The above program should be repeated as many times as necessary.
-The following program will see to that with the same initialization
-<br>mosquito j:  
-<table> <tr> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
-            new:= <b>non</b> out; act:= true;                  </td> </tr> <tr> <td></td> <td colspan = 3>
-            <b>do</b> act &rarr;                               </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-                  goonR:= new;                                 </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
-                  arc:(j)= arc(j) <b>and</b> out; xR:= arc(j); </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
-                  i:= (j - 1) <b>mod</b> N;                    </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
-                  <b>do</b> i &ne; j &rarr;                    </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                          goonR:= goon <b>or</b> new;          </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
-                          arc:(i)= arc(i) <b>and</b> out;      </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
-                          xR:= x <b>or</b> arc(i);             </td> </tr> <tr> <td></td> <td></td> <td></td> <td>
-                          i:= (i - 1) <b>mod</b> N             </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
-                  <b>od</b>;                                   </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
-                  new:= out <b>and</b> <b>nonn</b> x;          </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
-                  out := out <b>and</b> x;                     </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
-                  act:= goon                                   </td> </tr> <tr> <td></td> <td colspan = 3>
-            <b>od</b> .                                        </td> </tr>
+Each row is inspected starting at the diagonal and then towards the right. Each mosquito starts updating its column at the diagonal and then upwards. Each time a mosquito has updated element arc(i), x means “in row i a 1 (or true) occurs to the left of column j up to and including the diagonal element of row i”, and updating and confrontation take place in complete synchronism. The above program should be repeated as many times as necessary. The following program will see to that with the same initialization<br>
+mosquito j:
+<table>
+<tr>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="3">new:= <b>non</b> out; act:= true;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="3"><b>do</b> act →</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2">goonR:= new;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="2">arc:(j)= arc(j) <b>and</b> out; xR:= arc(j);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="2">i:= (j - 1) <b>mod</b> N;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="2"><b>do</b> i ≠ j →</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>goonR:= goon <b>or</b> new;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>arc:(i)= arc(i) <b>and</b> out;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>xR:= x <b>or</b> arc(i);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>i:= (i - 1) <b>mod</b> N</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="2"><b>od</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="2">new:= out <b>and</b> <b>nonn</b> x;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="2">out := out <b>and</b> x;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="2">act:= goon</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="3"><b>od</b> .</td>
+</tr>
 </table>
-All mosquitos will terminate simultaneously. (The local boolean &ldquo;act&rdquo; is
-not strictly necessary: we could have done it with &ldquo;goon&rdquo; itself.)
-  <p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
-<p>Time-wise, the above elephant is not very spectacular. Perhaps this is
-not too surprising: it has been remarked before &mdash;for instance by Hopcroft
-and Tarjan in print&mdash; that algorithms manipulating graphs in terms of the
-connection matrix tend to be relatively poor. This elephant has been recorded
-for a few other reasons.
-<p>Firstly &mdash;with the exception of the hyper-fast Fourier elephant&mdash; very
-little has been documented about our earlier efforts at elephant design.
-<p>Secondly, this is the first time that I have been able to solve a problem
-from graph theory with an elephant whose internal connection pattern between
-the mosquitos does not depend on the structure of the graph. (If it does, the
-elephant is such a very special-purpose one to be hardly interesting.) In
-view of the remark by Hopcroft and Tarjan it remains questionable whether
-much may be expected from such elephants, but that is still an open question.
-<p>Thirdly, it has been recorded as &ldquo;a reminder&rdquo;, viz. a reminder of the
-fact that we do not have any systematic methodology for elephant design as
-we now seem to have for the design of sequential programs. The latter we can
-now usually present as the &ldquo;natural&rdquo; outcome of a number of stepwise 
-refinements. The reader who has seen a number of such program developments will
-have noticed the completely different presentation of the above elephant.
-I can only say: &ldquo;Well, here it is.&rdquo; and the reader, at the moment of 
-understanding it, is expected to react with: &ldquo;Ain&rsquo;t that cute!&rdquo;; But this is, of
-course, very unsatisfactory, for it just means that we have not understood
-yet the problems involved in elephant design. (The interlocking of updating
-the columns and scanning the rows is, of course, &ldquo;cute&rdquo; and there is no point
-in denying that I show it with some pride!)
-<p>Fourthly, the way in which simultaneous termination of mosquito activity
-is controlled &mdash;although not &ldquo;deep&rdquo; in any sense&mdash; seems to have the virtue
-of generality, and therefore, deserves recording.
-<p>Fifthly, the solution seems remarkable for its very low demands on the
-facilities for inter-mosquito communication.
-<p class="noindent">
-<table> <tr> <td>
-28th November 1974 &nbsp; &nbsp;  </td><td> &nbsp; &nbsp;     prof.dr. Edsger W.Dijkstra </td> </tr> <tr> <td>
-Plataanstraat 5  &nbsp; &nbsp;  </td><td>   &nbsp; &nbsp;       Burroughs Research Fellow  </td> </tr> <tr> <td>
-NUENEN - 4565    </td><td>                                   </td> </tr> <tr> <td>
-The Netherlands  </td><td>                                   </td> </tr>
+All mosquitos will terminate simultaneously. (The local boolean “act” is not strictly necessary: we could have done it with “goon” itself.)
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</p>
+<p>Time-wise, the above elephant is not very spectacular. Perhaps this is not too surprising: it has been remarked before —for instance by Hopcroft and Tarjan in print— that algorithms manipulating graphs in terms of the connection matrix tend to be relatively poor. This elephant has been recorded for a few other reasons.</p>
+<p>Firstly —with the exception of the hyper-fast Fourier elephant— very little has been documented about our earlier efforts at elephant design.</p>
+<p>Secondly, this is the first time that I have been able to solve a problem from graph theory with an elephant whose internal connection pattern between the mosquitos does not depend on the structure of the graph. (If it does, the elephant is such a very special-purpose one to be hardly interesting.) In view of the remark by Hopcroft and Tarjan it remains questionable whether much may be expected from such elephants, but that is still an open question.</p>
+<p>Thirdly, it has been recorded as “a reminder”, viz. a reminder of the fact that we do not have any systematic methodology for elephant design as we now seem to have for the design of sequential programs. The latter we can now usually present as the “natural” outcome of a number of stepwise refinements. The reader who has seen a number of such program developments will have noticed the completely different presentation of the above elephant. I can only say: “Well, here it is.” and the reader, at the moment of understanding it, is expected to react with: “Ain’t that cute!”; But this is, of course, very unsatisfactory, for it just means that we have not understood yet the problems involved in elephant design. (The interlocking of updating the columns and scanning the rows is, of course, “cute” and there is no point in denying that I show it with some pride!)</p>
+<p>Fourthly, the way in which simultaneous termination of mosquito activity is controlled —although not “deep” in any sense— seems to have the virtue of generality, and therefore, deserves recording.</p>
+<p>Fifthly, the solution seems remarkable for its very low demands on the facilities for inter-mosquito communication.</p>
+<p class="noindent"></p>
+<table>
+<tr>
+<td>28th November 1974 &nbsp; &nbsp;</td>
+<td>&nbsp; &nbsp; prof.dr. Edsger W.Dijkstra</td>
+</tr>
+<tr>
+<td>Plataanstraat 5 &nbsp; &nbsp;</td>
+<td>&nbsp; &nbsp; Burroughs Research Fellow</td>
+</tr>
+<tr>
+<td>NUENEN - 4565</td>
+<td></td>
+</tr>
+<tr>
+<td>The Netherlands</td>
+<td></td>
+</tr>
 </table>
-<hr />
-   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
-    Last revision
-    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
-      <!&mdash; #BeginDate format:IS1 &mdash;>2014-11-13<!&mdash; #EndDate &mdash;>
-    </csobj>
-  .</font></p>
-  <p>&nbsp;</p>
-</body></html></div>
+<hr>
+<p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br>
+Last revision 2014-11-13 .</font></p>
+<p>&nbsp;</p>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

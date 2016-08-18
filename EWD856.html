@@ -22,86 +22,58 @@
     </div>
   </div>
   <h1>On maximising a product</h1>
-  <div class='body'><html>
-
+  <div class='body'><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <head>
+<meta name="generator" content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org">
 <title>E.W. Dijkstra Archive: On maximising a product (EWD 856)</title>
-<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta content="Microsoft FrontPage 4.0" name="GENERATOR">
 <meta name="ProgId" content="FrontPage.Editor.Document">
 </head>
-
-<body bgcolor="#ffffff">
-
+<body bgcolor="#FFFFFF">
 <table align="center" border="0">
-  <tbody>
-    <tr>
-      <td>
-        <div align="right">
-          <p><font face="Verdana,Arial,Helvetica,sans-serif"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD856.PDF">EWD856</a>-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD856.PDF#page=1">0</a></font></p>
-        </div>
-        <p><u><font face="Verdana,Arial,Helvetica,sans-serif">On maximising a
-        product</font></u></p>
-        <p><font face="Verdana,Arial,Helvetica,sans-serif">The problem is to
-        construct a set of positive integers with given sum such that their
-        product is as large as possible.</font></p>
-        <p><font face="Verdana,Arial,Helvetica,sans-serif">The first observation
-        is that we need not include integers <font face="AppleGothic, arial unicode ms, arial">&#8805;</font></font><font face="Verdana,Arial,Helvetica,sans-serif">
-        4. The reason is that such an integer <i>k</i> can be replaced, without
-        changing the sum, by the two integers 2 and <i>k</i>-2, thereby
-        replacing in the product a factor <i>k</i> by a factor 2</font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif"><i>k</i> - 4 and that we don't lose if 2</font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif"><i>k</i> - 4 </font><font face="Verdana,Arial,Helvetica,sans-serif"><font face="AppleGothic, arial unicode ms, arial">&#8805;</font></font><font face="Verdana,Arial,Helvetica,sans-serif">
-        <i>k</i>, i.e. if <i>k</i> </font><font face="Verdana,Arial,Helvetica,sans-serif"><font face="AppleGothic, arial unicode ms, arial">&#8805;</font></font><font face="Verdana,Arial,Helvetica,sans-serif">
-        4.</font></p>
-        <p><font face="Verdana,Arial,Helvetica,sans-serif">The second
-        observation is that 1 only needs to be included if it is the only
-        integer in the set, i.e. if the given sum equals 1. In all other cases
-        we can increase the product without changing the sum by removing the 1
-        (which does not contribute to the product) and increasing one of the
-        other integers by 1.</font></p>
-        <p><font face="Verdana,Arial,Helvetica,sans-serif">In the general case this leaves us with a set of 2's and 3's. The final observation is that we don't need to include 3 or more 2's: 2+2+2 = 3+3 but 2</font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif">2</font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif">2 &lt; 3</font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif">3.</font></p>
-        <p align="center">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
-        *</p>
-        <p><font face="Verdana,Arial,Helvetica,sans-serif">We solved this
-        problem a number of years ago (and were not the first to do so), but in
-        my memory the argument was less clean than above. It was more or less
-        polluted by</font></p>
-        <div align="right">
-							<font face="Verdana,Arial,Helvetica,sans-serif"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD856.PDF">EWD856</a>-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD856.PDF#page=2">1</a></font></div>
-        <p><font face="Verdana,Arial,Helvetica,sans-serif">the circumstance that the answer is not unique if the given sum is of the form 3</font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif"><i>n</i> +
-        4: two 2's may be replaced by one 4.</font></p>
-        <p><font face="Verdana,Arial,Helvetica,sans-serif">Another way of
-        complicating the first observation is to treat even and odd values
-        separately, e.g. comparing for <i>k</i> = 2</font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif"><i>x</i> the value 2</font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif"><i>x</i>
-        with <i>x</i><sup>2</sup>, and for <i>k</i> = 2</font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif"><i>x</i> + 1 the value 2</font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif"><i>x</i> + 1 with <i>x</i></font>&#x2219;<font face="Verdana,Arial,Helvetica,sans-serif">(<i>x</i> + 1).</font></p>
-        <p><font face="Verdana,Arial,Helvetica,sans-serif"><br>
-        </font></p>
-        <table border="0">
-          <tr>
-            <td><font face="Verdana,Arial,Helvetica,sans-serif">California
-              Institute of Technology<br>
-              <u>PASADENA</u>, CA 91125<br>
-              United States of America</font></td>
-            <td width="80"></td>
-            <td><font face="Verdana,Arial,Helvetica,sans-serif">14 June 1983<br>
-              prof.dr. Edsger W. Dijkstra<br>
-              Burroughs Research Fellow</font></td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <hr>
-        <font face="Verdana,Arial,Helvetica,sans-serif">Transcriber: Kevin Hely.<br>Last revised on <csobj format="MedDate" h="15" region="15" t="DateTime" w="109">Sat, 20 Sep 2003</csobj>.</font></td>
-    </tr>
-  </tbody>
+<tbody>
+<tr>
+<td>
+<div align="right">
+<p><font face="Verdana,Arial,Helvetica,sans-serif"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD856.PDF">EWD856</a>-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD856.PDF#page=1">0</a></font></p>
+</div>
+<p><u><font face="Verdana,Arial,Helvetica,sans-serif">On maximising a product</font></u></p>
+<p><font face="Verdana,Arial,Helvetica,sans-serif">The problem is to construct a set of positive integers with given sum such that their product is as large as possible.</font></p>
+<p><font face="Verdana,Arial,Helvetica,sans-serif">The first observation is that we need not include integers <font face="AppleGothic, arial unicode ms, arial">≥</font></font> <font face="Verdana,Arial,Helvetica,sans-serif">4. The reason is that such an integer <i>k</i> can be replaced, without changing the sum, by the two integers 2 and <i>k</i>-2, thereby replacing in the product a factor <i>k</i> by a factor 2</font>∙<font face="Verdana,Arial,Helvetica,sans-serif"><i>k</i> - 4 and that we don't lose if 2</font>∙<font face="Verdana,Arial,Helvetica,sans-serif"><i>k</i> - 4</font> <font face="Verdana,Arial,Helvetica,sans-serif"><font face="AppleGothic, arial unicode ms, arial">≥</font></font> <font face="Verdana,Arial,Helvetica,sans-serif"><i>k</i>, i.e. if <i>k</i></font> <font face="Verdana,Arial,Helvetica,sans-serif"><font face="AppleGothic, arial unicode ms, arial">≥</font></font> <font face="Verdana,Arial,Helvetica,sans-serif">4.</font></p>
+<p><font face="Verdana,Arial,Helvetica,sans-serif">The second observation is that 1 only needs to be included if it is the only integer in the set, i.e. if the given sum equals 1. In all other cases we can increase the product without changing the sum by removing the 1 (which does not contribute to the product) and increasing one of the other integers by 1.</font></p>
+<p><font face="Verdana,Arial,Helvetica,sans-serif">In the general case this leaves us with a set of 2's and 3's. The final observation is that we don't need to include 3 or more 2's: 2+2+2 = 3+3 but 2</font>∙<font face="Verdana,Arial,Helvetica,sans-serif">2</font>∙<font face="Verdana,Arial,Helvetica,sans-serif">2 &lt; 3</font>∙<font face="Verdana,Arial,Helvetica,sans-serif">3.</font></p>
+<p align="center">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</p>
+<p><font face="Verdana,Arial,Helvetica,sans-serif">We solved this problem a number of years ago (and were not the first to do so), but in my memory the argument was less clean than above. It was more or less polluted by</font></p>
+<div align="right"><font face="Verdana,Arial,Helvetica,sans-serif"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD856.PDF">EWD856</a>-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD856.PDF#page=2">1</a></font></div>
+<p><font face="Verdana,Arial,Helvetica,sans-serif">the circumstance that the answer is not unique if the given sum is of the form 3</font>∙<font face="Verdana,Arial,Helvetica,sans-serif"><i>n</i> + 4: two 2's may be replaced by one 4.</font></p>
+<p><font face="Verdana,Arial,Helvetica,sans-serif">Another way of complicating the first observation is to treat even and odd values separately, e.g. comparing for <i>k</i> = 2</font>∙<font face="Verdana,Arial,Helvetica,sans-serif"><i>x</i> the value 2</font>∙<font face="Verdana,Arial,Helvetica,sans-serif"><i>x</i> with <i>x</i><sup>2</sup>, and for <i>k</i> = 2</font>∙<font face="Verdana,Arial,Helvetica,sans-serif"><i>x</i> + 1 the value 2</font>∙<font face="Verdana,Arial,Helvetica,sans-serif"><i>x</i> + 1 with <i>x</i></font>∙<font face="Verdana,Arial,Helvetica,sans-serif">(<i>x</i> + 1).</font></p>
+<p><font face="Verdana,Arial,Helvetica,sans-serif"><br></font></p>
+<table border="0">
+<tr>
+<td><font face="Verdana,Arial,Helvetica,sans-serif">California Institute of Technology<br>
+<u>PASADENA</u>, CA 91125<br>
+United States of America</font></td>
+<td width="80"></td>
+<td><font face="Verdana,Arial,Helvetica,sans-serif">14 June 1983<br>
+prof.dr. Edsger W. Dijkstra<br>
+Burroughs Research Fellow</font></td>
+</tr>
 </table>
-
+</td>
+</tr>
+<tr>
+<td>
+<hr>
+<font face="Verdana,Arial,Helvetica,sans-serif">Transcriber: Kevin Hely.<br>
+Last revised on Sat, 20 Sep 2003.</font></td>
+</tr>
+</tbody>
+</table>
 </body>
-
 </html>
-
-
 </div>
   <script>
 $('.body').tweetSelection({

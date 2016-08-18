@@ -22,104 +22,159 @@
     </div>
   </div>
   <h1>A somewhat open letter to F. Krger</h1>
-  <div class='body'>         
-           <p class="noindent"><b>A somewhat open letter to F. Krger.</b> 
-           <p class="noindent">Dear Dr. Krger:
-<p>In a recent article [1], you prove &mdash;in my notation, see [2] &mdash;  
-<p>
-<table cellpadding="0" cellspacing="0"> <tr> <td colspan=2>
-{<var>a</var>&thinsp;&le;&thinsp;100 &and; <var>b&thinsp;</var>=&thinsp;1} </td> </tr> <tr> <td colspan=2>
-<b>do</b> 100&thinsp;&lt;&thinsp;<var>a</var> &and; <var>b&thinsp;</var>&ne;&thinsp;1 &rarr; <var>a</var>,&thinsp;<var>b</var> := <var>a</var>&minus;10, <var>b</var>&minus;1</td> </tr> <tr>  <td colspan=1>
- &nbsp;&#11007; <var>a</var>&thinsp;&le;&thinsp;100 &rarr; <var>a</var>,&thinsp;<var>b</var> := <var>a</var>+11, <var>b</var>+1 </td> </tr> <tr> <td colspan=2>
-<b>od</b> {<var>a</var> = 101} </td> </tr> </table>
-<p class="noindent">Allow me to show you the argument I, as a programmer, came up with. </p>
-<p>I rewrote the proof obligation as follows 
-<p>
-<table cellpadding="0" cellspacing="0"> <tr> <td colspan=2>
-{<var>a</var>&thinsp;&le;&thinsp;100 &and; <var>b</var>&thinsp;=&thinsp;1} </td> </tr> <tr> <td colspan=2>
-<b>do</b> <var>a&thinsp;</var>&le;&thinsp;100 &rarr; <var>a</var>,&thinsp;<var>b</var> := <var>a</var>+11, <var>b</var>+1 <b>od</b>;                  </td> </tr> <tr> <td colspan=2>
-{P0, hence P0 &or; P1 &or; P2}                                            </td> </tr> <tr> <td colspan=2>
-<b>do</b> 110&thinsp;&lt;&thinsp;<var>a</var> &and; <var>b&thinsp;</var>&ne;&thinsp;1 &rarr; <var>a</var>,&thinsp;<var>b</var> := <var>a</var>&minus;10, <var>b</var>&minus;1 {P0 &or; P2} </td> </tr> <tr>  <td width="403" colspan=1>
- &nbsp;&#11007; 100&thinsp;&lt;&thinsp;<var>a</var>&thinsp;&le;&thinsp;110 &and; <var>b</var>&thinsp;&ne;&thinsp;1 &rarr; <var>a</var>,&thinsp;<var>b</var> := <var>a</var>&minus;10, <var>b</var>&minus;1 {P1}</td> </tr> <tr>  <td colspan=1>
- &nbsp;&#11007;&nbsp;<var>a</var>&thinsp;&le;&thinsp;100 &rarr; <var>a</var>,&thinsp;<var>b</var> := <var>a</var>+11, <var>b</var>+1 {P0} </td> </tr> <tr> <td colspan=2>
-<b>od</b> {(P0 &or; P1 &or; P2) &and; 100&thinsp;<&thinsp;<var>a</var> &and; <var>b</var>&thinsp;=1, hence <var>a</var>&thinsp;=&thinsp;101} </td> </tr> </table>
-<br />
-<table width=100% cellpadding="0" cellspacing="0">
-  <tr><td valign=top width=10%>
-with</td><td>P0 = 100&thinsp;&lt;&thinsp;<var>a</var>&thinsp;&le;&thinsp;111 &and; <var>b</var>&thinsp;&ge;&thinsp;2
-</td></tr><tr><td valign=top>
-</td><td>P1 = 90&thinsp;<&thinsp;<var>a</var>&thinsp;&le;&thinsp;100 &and; <var>b</var>&thinsp;&ge;&thinsp;1
-</td></tr><tr><td valign=top>
-</td><td>P2 = (<var>a</var>&thinsp;=&thinsp;101) &and; (<var>b</var>&thinsp;=&thinsp;1) . </td>  </tr>  </table>
-<p>The two program transformations have no effect. You may <em>always</em> insert before a repetitive construct an excerpt from it; you may
-  <em>always</em> split a guarded command. The first repetitive construct terminates obviously. The verification that P0 &or; P1 &or; P2 
-is an invariant of the second one is simple and straightforward. 
-<p>In order to prove the termination of the second repetitive construct, we observe
-<table width=100%><tr><td valign=top width=4%>
-1)</td>
-<td width="96%">the initial truth of P0. (excluding truth of the last guard)
-</td></tr><tr><td valign=top>
-2)</td><td>that the truth of P1 implies the falsity of the first two guards and the truth of the last one.
-</td>  </tr>  </table>
-<p class="noindent">As a result 
-  the last two guarded commands may be merged and the invariant relation may be strengthened. We rewrite the second repetitive construct as follows</p><br />
-<table cellpadding="0" cellspacing="0"> 
-  <tr> <td colspan=2>
-{P0, hence P0 &or; P2}                                                   </td> </tr> <tr> <td colspan=2>
-<b>do</b> 110&thinsp;&lt;&thinsp;<var>a</var> &and; <var>b</var>&thinsp;&ne;&thinsp;1 &rarr; <var>a</var>,&thinsp;<var>b</var> := <var>a</var>&minus;10, <var>b</var>&minus;1 {P0 &or; P2}</td> </tr> <tr>  <td colspan=1>
- &nbsp;&#11007; 100&thinsp;&lt;&thinsp;<var>a</var>&thinsp;&le;&thinsp;110 &and; <var>b</var>&thinsp;&ne;&thinsp;1 &rarr; <var>a</var>&thinsp;:= <var>a</var>+1 {P0} </td> </tr> <tr> <td colspan=2>
-<b>od</b> {(P0 &or; P2) &and; <var>b</var>&thinsp;=&thinsp;1, hence <var>a</var>&thinsp;=&thinsp;101} </td> </tr> </table>
-<p>In view of  P0 &or; P2, the first guarded command sets <var>a</var>&thinsp;=&thinsp;101; the second guard remains true until <var>a</var>&thinsp;=&thinsp;111. The guards
-being mutually exclusive, we may rewrite &mdash;note that a loop with only the second guarded command obviously terminates&mdash; 
-<p>
-<table cellpadding="0" cellspacing="0"> <tr> <td colspan=2>
-{ P0 &or; P2 }                                                          </td> </tr> <tr> <td colspan=2>
-<b>do</b> 110&thinsp;&lt;&thinsp;<var>a</var> &and; <var>b</var>&thinsp;&ne;&thinsp;1 &rarr; <var>a</var>,&thinsp;<var>b</var> := 101, <var>b</var>&minus;1 {P0 &or; P2}</td> </tr> <tr>  <td colspan=1>&nbsp;&#11007; 100&thinsp;&lt;&thinsp;<var>a</var>&thinsp;&le;&thinsp;110 &and; <var>b</var>&thinsp;&ne;&thinsp;1 &rarr; <var>a</var> := 111 { P0 } </td> </tr> <tr> <td colspan=2>
-<b>od</b>                                                               </td> </tr> <tr> <td></td> <td colspan=1></td></tr></table>
-<p>Because P0 &and; <var>a</var>&thinsp;=&thinsp;111 implies the truth of the first guard, by almost the same device as used before, 
-the two guarded commands can be merged, giving
-<p>
-<table cellpadding="0" cellspacing="0"> <tr> <td colspan=1>
-{ P0 &or; P2 }                                                                  </td> </tr> <tr> <td colspan=1>
-<b>do</b> 100&thinsp;&lt;&thinsp;<var>a</var> &and; <var>b</var>&thinsp;&ne;&thinsp;1 &rarr; <var>a</var>,&thinsp;<var>b</var> := 101, <var>b</var>&minus;1 {P0 &or; P2} <b>od</b></td> </tr> </table>
-<p class="noindent">which trivially terminates. This includes a proof with a minimum amount of formal labor. </p>
-<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
-<p>When I saw the length of your proof, it put me off; I stopped reading and developed the above argument. I had never really 
-analyzed with McCarthy&rsquo;s 91 function: it has always struck me as a rather contorted puzzle. After the above proof, I proved the 
-termination in the style of R.W. Floyd, using a well-founded set; from that I derived a closed formula for the exact number of 
-repetitions. It is neither long, nor difficult; but it is too boring to record here; the steps of the derivation are completely standard.
-<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
-<p>In my opinion &mdash;but the opinion is a well-considered one&mdash; computing science needs the kind of vigorous mathematics that results 
-from a subtle balance between the application of formal techniques and of common sense. (And there are reasons to believe that 
-in computing science that balance is more critical than in many other areas of mathematics.) 
-I trust you can now understand why I find it hard to consider your &ldquo;Generalized invariants&rdquo; of great significance in the context 
-of computing science. Perhaps your paper had better been published in the <i>Journal of Logic</i> than in <i>Acta Informatica</i>, where 
-it gives fuel to the accusation that the latter publishes too much &ldquo;pompous irrelevance&rdquo;. 
-<br><br>
-<table width=100%><tr><td valign=top width=5%>
-[1]</td><td width="95%">Krger, F. : Infinite proof rules for loops. <i>Acta InInformatica 14</i>, 371-389 (1980) </td></tr><tr><td valign=top>
-[2]</td>
-<td>Dijkstra, Edsger W.: <i>A Discipline of Programming</i>. Prentice-Hall, Inc, Englewood Cliffs, N.J., USA </td>  </tr>  </table>
- 
-<p class="noindent"><table width=100%><tr><td valign=top width=50%>
-Plantaanstraat 5</td><td>11 November 1980
-</td></tr><tr><td valign=top>
-5671 AL NUENEN</td><td>prof. dr. Edsger W. Dijkstra
-</td></tr><tr><td valign=top>
-The Netherlands</td><td>Burroughs Research Fellow
-</td>  </tr>  </table>
-          
-<hr /> 
-   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />   
-    Last revision  
-    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">   
-      <!&mdash; #BeginDate format:IS1 &mdash;>
-      <!-- #BeginDate format:En2 -->10-Nov-2015<!-- #EndDate -->
-    </csobj> 
-  .</font></p>    
-  <p>&nbsp;</p>   
-</div></div></div></div>
-</body></html> </div>
+  <div class='body'>
+<p class="noindent"><b>A somewhat open letter to F. Krger.</b></p>
+<p class="noindent">Dear Dr. Krger:</p>
+<p>In a recent article [1], you prove —in my notation, see [2] —</p>
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td colspan="2">{<var>a</var> ≤ 100 ∧ <var>b </var>= 1}</td>
+</tr>
+<tr>
+<td colspan="2"><b>do</b> 100 &lt; <var>a</var> ∧ <var>b </var>≠ 1 → <var>a</var>, <var>b</var> := <var>a</var>−10, <var>b</var>−1</td>
+</tr>
+<tr>
+<td colspan="1">&nbsp;⫿ <var>a</var> ≤ 100 → <var>a</var>, <var>b</var> := <var>a</var>+11, <var>b</var>+1</td>
+</tr>
+<tr>
+<td colspan="2"><b>od</b> {<var>a</var> = 101}</td>
+</tr>
+</table>
+<p class="noindent">Allow me to show you the argument I, as a programmer, came up with.</p>
+<p>I rewrote the proof obligation as follows</p>
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td colspan="2">{<var>a</var> ≤ 100 ∧ <var>b</var> = 1}</td>
+</tr>
+<tr>
+<td colspan="2"><b>do</b> <var>a </var>≤ 100 → <var>a</var>, <var>b</var> := <var>a</var>+11, <var>b</var>+1 <b>od</b>;</td>
+</tr>
+<tr>
+<td colspan="2">{P0, hence P0 ∨ P1 ∨ P2}</td>
+</tr>
+<tr>
+<td colspan="2"><b>do</b> 110 &lt; <var>a</var> ∧ <var>b </var>≠ 1 → <var>a</var>, <var>b</var> := <var>a</var>−10, <var>b</var>−1 {P0 ∨ P2}</td>
+</tr>
+<tr>
+<td width="403" colspan="1">&nbsp;⫿ 100 &lt; <var>a</var> ≤ 110 ∧ <var>b</var> ≠ 1 → <var>a</var>, <var>b</var> := <var>a</var>−10, <var>b</var>−1 {P1}</td>
+</tr>
+<tr>
+<td colspan="1">&nbsp;⫿&nbsp;<var>a</var> ≤ 100 → <var>a</var>, <var>b</var> := <var>a</var>+11, <var>b</var>+1 {P0}</td>
+</tr>
+<tr>
+<td colspan="2"><b>od</b> {(P0 ∨ P1 ∨ P2) ∧ 100 &lt; <var>a</var> ∧ <var>b</var> =1, hence <var>a</var> = 101}</td>
+</tr>
+</table>
+<br>
+<table width="100%" cellpadding="0" cellspacing="0">
+<tr>
+<td valign="top" width="10%">with</td>
+<td>P0 = 100 &lt; <var>a</var> ≤ 111 ∧ <var>b</var> ≥ 2</td>
+</tr>
+<tr>
+<td valign="top"></td>
+<td>P1 = 90 &lt; <var>a</var> ≤ 100 ∧ <var>b</var> ≥ 1</td>
+</tr>
+<tr>
+<td valign="top"></td>
+<td>P2 = (<var>a</var> = 101) ∧ (<var>b</var> = 1) .</td>
+</tr>
+</table>
+<p>The two program transformations have no effect. You may <em>always</em> insert before a repetitive construct an excerpt from it; you may <em>always</em> split a guarded command. The first repetitive construct terminates obviously. The verification that P0 ∨ P1 ∨ P2 is an invariant of the second one is simple and straightforward.</p>
+<p>In order to prove the termination of the second repetitive construct, we observe</p>
+<table width="100%">
+<tr>
+<td valign="top" width="4%">1)</td>
+<td width="96%">the initial truth of P0. (excluding truth of the last guard)</td>
+</tr>
+<tr>
+<td valign="top">2)</td>
+<td>that the truth of P1 implies the falsity of the first two guards and the truth of the last one.</td>
+</tr>
+</table>
+<p class="noindent">As a result the last two guarded commands may be merged and the invariant relation may be strengthened. We rewrite the second repetitive construct as follows</p>
+<br>
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td colspan="2">{P0, hence P0 ∨ P2}</td>
+</tr>
+<tr>
+<td colspan="2"><b>do</b> 110 &lt; <var>a</var> ∧ <var>b</var> ≠ 1 → <var>a</var>, <var>b</var> := <var>a</var>−10, <var>b</var>−1 {P0 ∨ P2}</td>
+</tr>
+<tr>
+<td colspan="1">&nbsp;⫿ 100 &lt; <var>a</var> ≤ 110 ∧ <var>b</var> ≠ 1 → <var>a</var> := <var>a</var>+1 {P0}</td>
+</tr>
+<tr>
+<td colspan="2"><b>od</b> {(P0 ∨ P2) ∧ <var>b</var> = 1, hence <var>a</var> = 101}</td>
+</tr>
+</table>
+<p>In view of P0 ∨ P2, the first guarded command sets <var>a</var> = 101; the second guard remains true until <var>a</var> = 111. The guards being mutually exclusive, we may rewrite —note that a loop with only the second guarded command obviously terminates—</p>
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td colspan="2">{ P0 ∨ P2 }</td>
+</tr>
+<tr>
+<td colspan="2"><b>do</b> 110 &lt; <var>a</var> ∧ <var>b</var> ≠ 1 → <var>a</var>, <var>b</var> := 101, <var>b</var>−1 {P0 ∨ P2}</td>
+</tr>
+<tr>
+<td colspan="1">&nbsp;⫿ 100 &lt; <var>a</var> ≤ 110 ∧ <var>b</var> ≠ 1 → <var>a</var> := 111 { P0 }</td>
+</tr>
+<tr>
+<td colspan="2"><b>od</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="1"></td>
+</tr>
+</table>
+<p>Because P0 ∧ <var>a</var> = 111 implies the truth of the first guard, by almost the same device as used before, the two guarded commands can be merged, giving</p>
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td colspan="1">{ P0 ∨ P2 }</td>
+</tr>
+<tr>
+<td colspan="1"><b>do</b> 100 &lt; <var>a</var> ∧ <var>b</var> ≠ 1 → <var>a</var>, <var>b</var> := 101, <var>b</var>−1 {P0 ∨ P2} <b>od</b></td>
+</tr>
+</table>
+<p class="noindent">which trivially terminates. This includes a proof with a minimum amount of formal labor.</p>
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</p>
+<p>When I saw the length of your proof, it put me off; I stopped reading and developed the above argument. I had never really analyzed with McCarthy’s 91 function: it has always struck me as a rather contorted puzzle. After the above proof, I proved the termination in the style of R.W. Floyd, using a well-founded set; from that I derived a closed formula for the exact number of repetitions. It is neither long, nor difficult; but it is too boring to record here; the steps of the derivation are completely standard.</p>
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</p>
+<p>In my opinion —but the opinion is a well-considered one— computing science needs the kind of vigorous mathematics that results from a subtle balance between the application of formal techniques and of common sense. (And there are reasons to believe that in computing science that balance is more critical than in many other areas of mathematics.) I trust you can now understand why I find it hard to consider your “Generalized invariants” of great significance in the context of computing science. Perhaps your paper had better been published in the <i>Journal of Logic</i> than in <i>Acta Informatica</i>, where it gives fuel to the accusation that the latter publishes too much “pompous irrelevance”.<br>
+<br></p>
+<table width="100%">
+<tr>
+<td valign="top" width="5%">[1]</td>
+<td width="95%">Krger, F. : Infinite proof rules for loops. <i>Acta InInformatica 14</i>, 371-389 (1980)</td>
+</tr>
+<tr>
+<td valign="top">[2]</td>
+<td>Dijkstra, Edsger W.: <i>A Discipline of Programming</i>. Prentice-Hall, Inc, Englewood Cliffs, N.J., USA</td>
+</tr>
+</table>
+<p class="noindent"></p>
+<table width="100%">
+<tr>
+<td valign="top" width="50%">Plantaanstraat 5</td>
+<td>11 November 1980</td>
+</tr>
+<tr>
+<td valign="top">5671 AL NUENEN</td>
+<td>prof. dr. Edsger W. Dijkstra</td>
+</tr>
+<tr>
+<td valign="top">The Netherlands</td>
+<td>Burroughs Research Fellow</td>
+</tr>
+</table>
+<hr>
+<p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br>
+Last revision <!-- #BeginDate format:En2 -->10-Nov-2015<!-- #EndDate -->
+ .</font></p>
+<p>&nbsp;</p>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

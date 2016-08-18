@@ -23,107 +23,94 @@
   </div>
   <h1>Paying logical conscience-money to the fair demon</h1>
   <div class='body'>
-			<p>
-				The traditional formulation of the difference between total and partial correctness is: in the case of total correctness we prove that a correct result will be produced, in the case of partial correctness we prove that no incorrect result will be produced, or, more explicitly, in the case of partial correctness we prove that a correct result will be produced or that the mechanism will fail to terminate. As a result, a proof of partial correctness supplemented with a proof of termination yields a proof of total correctness.</p>
-			<p>In the sixties R.W.Floyd did just that, basing himself on a flowchart language. A year later, C.A.R.Hoare gave semantic axioms and proof rules for partial correctness for a language with more syntactic structure. Floyd's approach was still very operational, and he seemed to consider the semantics of his program  &#x2014;as a &quot;working mechanism&quot;&#x2014; also defined in the case of non-termination. Hoare, who only concerned himself with partial correctness, did not need to talk about termination and his approach is in that sense less operational, less &quot;mechanical&quot;.</p>
-				<p>I liked Hoare's approach &#x2014;it was at the time I was coining the term structured programming&#x2014; much better than Floyd's, but was also dissatisfied by it, because it was clearly incomplete: his axioms and proof rules permitted one to translate &quot;<code><u>while</u></code> <var>B</var> <code><u>do</u></code> <var>S</var> <code><u>od</u></code>&quot; into &quot;<code><u>while</u></code> <var>B</var> <code><u>do</u></code> <code><u>skip</u></code> <code><u>od</u></code>&quot;.</p>
-				<p>
-				In the seventies I developed the predicate transformers as a means for defining program semantics.  My approach differed from the previous ones in two main aspects: I restricted myself to total correctness and allowed non-determinacy.</p>
-				<p>The operational interpretation of my formal system is that for those initial states in which termination is not guaranteed, I have left the semantics undefined. The inverse interpretation is that my formal semantics for a program <var>S</var> are only concerned with those initial states satisfying <code>wp</code>(<var>S</var>, <var>T</var><code>)</code> &#x2014;that &quot;the answer&quot; is only defined as a partial &quot;function&quot;&#x2014; and that for all initial states <u>not</u> satisfying <code>wp</code>(<var>S</var>, <var>T</var><code>)</code> any implementation is totally free to choose its reaction; the mechanism may embark upon an infinite computation, it may even evaporate.</p>
-				<p>
-				That the formalism is restricted to what can be accomplished by terminating computations has the very great advantage that I really don't need to talk about non-terminating ones.  This is a great advantage, because the question of termination or non-termination is always couched in operational terminology, from which I could now depart: if so desired I can ignore the circumstance that my text also permits the interpretation of executable code.</p>
-				<p>
-				I had to pay a price for that luxury.  For the program</p>
-			<table width="278" border="0" cellspacing="2" cellpadding="0">
-				<tr>
-					<td valign="top" width="40"><var>S</var>:</td>
-					<td valign="top"><code><u>do</u> <var>x</var>&gt;0 </code>&#x2192;<code> <var>x</var>:= <var>x</var>+1<br>
-							&nbsp;</code>&#x2337;<code> <var>x</var>&gt;0 </code>&#x2192;<code> <var>x</var>:= 0<br>
-							<u>
-				      od</u></code></td>
-				</tr>
-			</table>
-			<p>I have only defined that for <var>x</var> &#x2264; 0, <var>S</var> is equivalent to a skip, for <var>x</var>&gt;0 we have not only defined nothing &#x2014;that is not too bad, because: termination is not guaranteed, isn't it?&#x2014; but have not even the tools for defining that, if it terminates, it will terminate with <var>x</var> = 0. The purpose of this note is to show how I can attach a meaning to such a program <var>S</var> by regarding it as an abbreviation of a program <var>S'</var>.</p>
-			<p>
-				Consider the general repetitive construct</p>
-			<table width="381" border="0" cellspacing="2" cellpadding="0">
-				<tr>
-					<td width="50">DO:</td>
-					<td><code><u>do</u></code> <var>B</var>1 &#x2192; <var>S</var>1 &#x2337; &#x22EF; &#x2337; <var>Bn</var> &#x2192; <var>Sn</var> <code><u>od</u></code></td>
-				</tr>
-				<tr>
-					<td width="50">IF:</td>
-					<td><code><u>if</u></code> <var>B</var>1 &#x2192; <var>S</var>1 &#x2337; &#x22EF; &#x2337; <var>Bn</var> &#x2192; <var>Sn</var> <code><u>fi</u></code></td>
-				</tr>
-				<tr>
-					<td width="50">BB:</td>
-					<td><var>B</var>1 <code><u>or</u></code> &#x22EF; <code><u>or</u></code> <var>Bn</var></td>
-				</tr>
-			</table>
-			<p>and suppose that we have proved for a certain <var>P</var>:</p>
-			<blockquote>
-				<table width="100%" border="0" cellspacing="2" cellpadding="0">
-					<tr>
-						<td>(<var>P</var> <code><u>and</u></code> <var>BB</var>)&nbsp;&nbsp;&nbsp;&#x21d2;&nbsp;&nbsp;&nbsp;<code>wp</code>(IF, <var>P</var>)</td>
-						<td align="right">(1)</td>
-					</tr>
-				</table>
-			</blockquote>
-			<p>With a ghost variable <var>t</var> we derive the primed system:</p>
-			<blockquote>
-				<p><var>Bj'</var> = <var>Bj</var> <code><u>and</u></code> <var>t</var>&gt;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(hence <var>BB'</var> = <var>BB</var> <code><u>and</u></code> <var>t</var>&gt;0)</p>
-				<p><var>Sj'</var> = <var>Sj</var>; <var>t</var>:= <var>t</var>&#x2212;1</p>
-				<p><var>P'</var> = <var>P</var> <code><u>and</u></code> <var>t</var>&#x2265;0 .</p>
-			</blockquote>
-			<p>Then (1) implies (<var>P'</var> <code><u>and</u></code> <var>BB'</var>) &#x21d2; <code>wp</code>(IF' <var>P'</var>)</p>
-			<p>furthermore (<var>P'</var> <code><u>and</u></code> <var>BB'</var>) &#x21d2; <code>wdec</code>(IF' <var>t</var>) <code><u>and</u></code> <var>t</var>&gt;0 .</p>
-			<p>
-				Hence our well-known theorem about the repetitive construct allows us to conclude</p>
-			<blockquote>
-				<p><var>P'</var> &#x21d2;  wp(DO', <var>p'</var> <code><u>and</u></code> <code><u>non</u></code> <var>BB'</var>) .</p>
-			</blockquote>
-			<p>Expressed in the old <var>P</var> and <var>BB</var>, this post-condition reduces to</p>
-			<blockquote>
-				<p><var>P</var> and <var>t</var>&#x2265;0 <code><u>and</u></code> (<code><u>non</u></code> <var>BB</var> <code><u>or</u></code> <var>t</var>&#x2264;0)</p>
-			</blockquote>
-			<table width="95%" border="0" cellspacing="2" cellpadding="0">
-				<tr>
-					<td>
-				which implies </td>
-					<td><var>t</var>&gt;0 &#x21d2; (<var>P</var> <code><u>and</u></code> <code><u>non</u></code> <var>BB</var>)</td>
-					<td align="right"> (2)</td>
-				</tr>
-			</table>
-			<p>Operationally, (2) can be interpreted as &quot;when <var>S</var> stops, we could have chosen for <var>t</var> such a large initial value that its final value is still positive, hence <var>P</var> <code><u>and</u> <u>non</u></code> <var>BB</var> has been established&quot;. By introducing the ghost variable <var>t</var> which &#x2014;in the operational sense&#x2014; does not only count the repetitions but also forces termination, we have related <var>S</var> to a program <var>S'</var> for which I can prove total correctness in my usual manner.</p>
-		</div>
-		<div align="center">
-			<p>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
-				*</p>
-		</div>
-		<div align="left">
-			<p>The above formal manipulations are not in any sense deep. But I am very pleased. Instead of building my theory upon mechanisms which may terminate or not, I built my theory on texts to which &#x2014;but I don't need to remember that&#x2014; terminating mechanisms can be made to correspond. By abbreviating some texts (from <var>S'</var> to <var>S</var>) I indicate a reduction of this mechanism, and the reduced mechanism may fail to terminate....</p>
-			<p>
-				As said, I am very pleased, for I hope that this &quot;trick&quot; will enable us to cope in multiprogramming without mathematical problems with the kind of &quot;bounded by unspecified&quot; nondeterminacy that we have captured in the up till now intractable metaphor of &quot;a fair demon&quot;.</p>
-			<p>
-				10th of January 1977</p>
-		</div>
-		<div align="left">
-			<table width="459" border="0" cellspacing="2" cellpadding="0">
-				<tr>
-					<td valign="top" width="203">
-						Plataanstraat 5<br>NL&#x2013;4565 NUENEN<br>
-						The Netherlands</td>
-					<td valign="top" width="250">prof.dr.Edsger W.Dijkstra<br>
-						Burroughs Research Fellow</td>
-				</tr>
-			</table>
-		</div>
-		<hr>
-		<font size="-1">transcribed by Tristram Brelstaff<br>
-			revised <csobj format="MedDate" h="16" region="15" t="DateTime" w="85">Thu, 20 Jul 2006</csobj></font>
-	</body>
-
-</html></div>
+<p>The traditional formulation of the difference between total and partial correctness is: in the case of total correctness we prove that a correct result will be produced, in the case of partial correctness we prove that no incorrect result will be produced, or, more explicitly, in the case of partial correctness we prove that a correct result will be produced or that the mechanism will fail to terminate. As a result, a proof of partial correctness supplemented with a proof of termination yields a proof of total correctness.</p>
+<p>In the sixties R.W.Floyd did just that, basing himself on a flowchart language. A year later, C.A.R.Hoare gave semantic axioms and proof rules for partial correctness for a language with more syntactic structure. Floyd's approach was still very operational, and he seemed to consider the semantics of his program —as a "working mechanism"— also defined in the case of non-termination. Hoare, who only concerned himself with partial correctness, did not need to talk about termination and his approach is in that sense less operational, less "mechanical".</p>
+<p>I liked Hoare's approach —it was at the time I was coining the term structured programming— much better than Floyd's, but was also dissatisfied by it, because it was clearly incomplete: his axioms and proof rules permitted one to translate "<code><u>while</u></code> <var>B</var> <code><u>do</u></code> <var>S</var> <code><u>od</u></code>" into "<code><u>while</u></code> <var>B</var> <code><u>do</u></code> <code><u>skip</u></code> <code><u>od</u></code>".</p>
+<p>In the seventies I developed the predicate transformers as a means for defining program semantics. My approach differed from the previous ones in two main aspects: I restricted myself to total correctness and allowed non-determinacy.</p>
+<p>The operational interpretation of my formal system is that for those initial states in which termination is not guaranteed, I have left the semantics undefined. The inverse interpretation is that my formal semantics for a program <var>S</var> are only concerned with those initial states satisfying <code>wp</code>(<var>S</var>, <var>T</var><code>)</code> —that "the answer" is only defined as a partial "function"— and that for all initial states <u>not</u> satisfying <code>wp</code>(<var>S</var>, <var>T</var><code>)</code> any implementation is totally free to choose its reaction; the mechanism may embark upon an infinite computation, it may even evaporate.</p>
+<p>That the formalism is restricted to what can be accomplished by terminating computations has the very great advantage that I really don't need to talk about non-terminating ones. This is a great advantage, because the question of termination or non-termination is always couched in operational terminology, from which I could now depart: if so desired I can ignore the circumstance that my text also permits the interpretation of executable code.</p>
+<p>I had to pay a price for that luxury. For the program</p>
+<table width="278" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top" width="40"><var>S</var>:</td>
+<td valign="top"><code><u>do</u> <var>x</var>&gt;0</code> → <code><var>x</var>:= <var>x</var>+1<br>
+&nbsp;</code>⌷ <code><var>x</var>&gt;0</code> → <code><var>x</var>:= 0<br>
+<u>od</u></code></td>
+</tr>
+</table>
+<p>I have only defined that for <var>x</var> ≤ 0, <var>S</var> is equivalent to a skip, for <var>x</var>&gt;0 we have not only defined nothing —that is not too bad, because: termination is not guaranteed, isn't it?— but have not even the tools for defining that, if it terminates, it will terminate with <var>x</var> = 0. The purpose of this note is to show how I can attach a meaning to such a program <var>S</var> by regarding it as an abbreviation of a program <var>S'</var>.</p>
+<p>Consider the general repetitive construct</p>
+<table width="381" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td width="50">DO:</td>
+<td><code><u>do</u></code> <var>B</var>1 → <var>S</var>1 ⌷ ⋯ ⌷ <var>Bn</var> → <var>Sn</var> <code><u>od</u></code></td>
+</tr>
+<tr>
+<td width="50">IF:</td>
+<td><code><u>if</u></code> <var>B</var>1 → <var>S</var>1 ⌷ ⋯ ⌷ <var>Bn</var> → <var>Sn</var> <code><u>fi</u></code></td>
+</tr>
+<tr>
+<td width="50">BB:</td>
+<td><var>B</var>1 <code><u>or</u></code> ⋯ <code><u>or</u></code> <var>Bn</var></td>
+</tr>
+</table>
+<p>and suppose that we have proved for a certain <var>P</var>:</p>
+<blockquote>
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td>(<var>P</var> <code><u>and</u></code> <var>BB</var>)&nbsp;&nbsp;&nbsp;⇒&nbsp;&nbsp;&nbsp;<code>wp</code>(IF, <var>P</var>)</td>
+<td align="right">(1)</td>
+</tr>
+</table>
+</blockquote>
+<p>With a ghost variable <var>t</var> we derive the primed system:</p>
+<blockquote>
+<p><var>Bj'</var> = <var>Bj</var> <code><u>and</u></code> <var>t</var>&gt;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(hence <var>BB'</var> = <var>BB</var> <code><u>and</u></code> <var>t</var>&gt;0)</p>
+<p><var>Sj'</var> = <var>Sj</var>; <var>t</var>:= <var>t</var>−1</p>
+<p><var>P'</var> = <var>P</var> <code><u>and</u></code> <var>t</var>≥0 .</p>
+</blockquote>
+<p>Then (1) implies (<var>P'</var> <code><u>and</u></code> <var>BB'</var>) ⇒ <code>wp</code>(IF' <var>P'</var>)</p>
+<p>furthermore (<var>P'</var> <code><u>and</u></code> <var>BB'</var>) ⇒ <code>wdec</code>(IF' <var>t</var>) <code><u>and</u></code> <var>t</var>&gt;0 .</p>
+<p>Hence our well-known theorem about the repetitive construct allows us to conclude</p>
+<blockquote>
+<p><var>P'</var> ⇒ wp(DO', <var>p'</var> <code><u>and</u></code> <code><u>non</u></code> <var>BB'</var>) .</p>
+</blockquote>
+<p>Expressed in the old <var>P</var> and <var>BB</var>, this post-condition reduces to</p>
+<blockquote>
+<p><var>P</var> and <var>t</var>≥0 <code><u>and</u></code> (<code><u>non</u></code> <var>BB</var> <code><u>or</u></code> <var>t</var>≤0)</p>
+</blockquote>
+<table width="95%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td>which implies</td>
+<td><var>t</var>&gt;0 ⇒ (<var>P</var> <code><u>and</u></code> <code><u>non</u></code> <var>BB</var>)</td>
+<td align="right">(2)</td>
+</tr>
+</table>
+<p>Operationally, (2) can be interpreted as "when <var>S</var> stops, we could have chosen for <var>t</var> such a large initial value that its final value is still positive, hence <var>P</var> <code><u>and</u> <u>non</u></code> <var>BB</var> has been established". By introducing the ghost variable <var>t</var> which —in the operational sense— does not only count the repetitions but also forces termination, we have related <var>S</var> to a program <var>S'</var> for which I can prove total correctness in my usual manner.</p>
+<div align="center">
+<p>*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</p>
+</div>
+<div align="left">
+<p>The above formal manipulations are not in any sense deep. But I am very pleased. Instead of building my theory upon mechanisms which may terminate or not, I built my theory on texts to which —but I don't need to remember that— terminating mechanisms can be made to correspond. By abbreviating some texts (from <var>S'</var> to <var>S</var>) I indicate a reduction of this mechanism, and the reduced mechanism may fail to terminate....</p>
+<p>As said, I am very pleased, for I hope that this "trick" will enable us to cope in multiprogramming without mathematical problems with the kind of "bounded by unspecified" nondeterminacy that we have captured in the up till now intractable metaphor of "a fair demon".</p>
+<p>10th of January 1977</p>
+</div>
+<div align="left">
+<table width="459" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top" width="203">Plataanstraat 5<br>
+NL–4565 NUENEN<br>
+The Netherlands</td>
+<td valign="top" width="250">prof.dr.Edsger W.Dijkstra<br>
+Burroughs Research Fellow</td>
+</tr>
+</table>
+</div>
+<hr>
+<font size="-1">transcribed by Tristram Brelstaff<br>
+revised Thu, 20 Jul 2006</font>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

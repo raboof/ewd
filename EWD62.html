@@ -23,277 +23,270 @@
   </div>
   <h1>Notitie over de aansluiting en de programmering van de teleprinter</h1>
   <div class='body'>
-						<p><u>1. Hardware</u></p>
-						<p><u>1.1. Hardware voor de teleprinter (dwz. outputorgaan).</u></p>
-						<p>De hardware bestaat uit:<br>
-							een 2-waardige startseinpaal, genaamd &quot;Acflop teleprinter&quot;,<br>
-							een 2-waardige ingreepseinpaal, genaamd &quot;Inflop teleprinter&quot;,<br>
-							een vaste geheugenplaats, die fungeert als buffer met capaciteit van 1 karakter;<br>
-							het vullen van deze vaste geheugenplaats zal ik in de tekst representeren door</p>
-					</div>
-					<div align="center">
-						<p>&quot;teleprinter :=.....&quot; .</p>
-					</div>
-					<div align="left">
-						<p>Voor de bediening van het printwerk bestaat dus slechts het minimum: we kunnen geen startopdrachten accumuleren en per startopdracht kunnen we slechts 1 karakter aanbieden. De opmerking is, dat een teleprinter een zo langzaam medium is, dat alles, wat er meer ingebouwd wordt, moeilijk te verdedigen is.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het aanbieden van een karakter aan de teleprinter geschiedt door de sequens:</p>
-						<blockquote>
-							<p>&quot;P(Inflop teleprinter);<br>
-								teleprinter:= karakter;<br>
-								V(Acflop teleprinter)&quot; .</p>
-						</blockquote>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De P-operatie is wel een aanroep van de Coordinator, de V-operatie kan zonder meer in het programma staan (Nl. Acflop teleprinter:= 1&quot;).</p>
-						<p><u>1.2. Hardware voor het toetsenbord (dwz. inputorgaan).</u></p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hiervoor zijn twee voorstellen ter sprake geweest; het doel van deze notitie is onder andere om er achter te komen of het ene voorstel preferabel is boven het andere.</p>
-						<p><u>1.2.1. Toetsenbord met expliciete &quot;Acflop&quot;.</u></p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De hardware bestaat uit:<br>
-							een 2-waardige startseinpaal, genaamd &quot;Acflop toetsenbord&quot;,<br>
-							een 2-waardige ingreepseinpaal, genaamd &quot;Inflop toetsenbord&quot;,<br>
-							een vaste geheugenplaats, die fungeert als buffer met capaciteit van 1 karakter;<br>
-							het uitlezen van deze geheugenplaats zal ik in het volgende representeren door:</p>
-					</div>
-					<div align="center">
-						<p>&quot;.......:= toetsenbord&quot;.</p>
-					</div>
-					<div align="left">
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hier wordt het toetsenbord dus beschouwd als een invoermedium zonder de mogelijkheid van accumulatie van startopdrachten en per startopdracht slechts 1 karakter.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drukt men op de toets van het toetsenbord, dan stuurt de toetsapparatuur een startpuls, vijf informatiepulsen en een stoppuls naar de &quot;statisizer&quot;. De bedoeling van boven gegeven arrangement is, om de statisizer slechts via het toetsenbord te vullen, als op het moment van de startpuls &quot;Acflop toetsenbord = 1&quot; is, terwijl deze vulling zorgt, dat &quot;Acflop toetsenbord := 0&quot; uitgevoerd is, voordat de volgende startpuls zou kunnen komen. Het autonoom transport probeert de inhoud van de statisizer naar de vaste geheugenplaats te transporteren, zodra dit gelukt is, wordt dit door &quot;Inflop toetsenbord := 1&quot; naar de computer gesignaleerd.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het ruwe schema, dat een karakter van het toetsenbord accepteert bestaat uit</p>
-						<blockquote>
-							<p>&quot;P(Inflop toetsenbord);<br>
-								karakter := toetsenbord;<br>
-								V(Acflop toetsenbord)&quot; .</p>
-						</blockquote>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In het kader van het tandenpoetsen moet de machine dus een keer &quot;V(Acflop toetsenbord)&quot; uitgevoerd hebben om voor deze invoer ontvankelijk te kunnen zijn.</p>
-						<p><u>1.2.2. Toetsenbord zonder expliciete &quot;Acflop&quot;.</u></p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bij het vullen van de statisizer kan men &quot;Acflop toetsenbord:= 0&quot; uitvoeren bij de afsluitende stoppuls; omdat het autonoom transport practisch instantaan zal plaatsvinden, wordt practisch tegelijkertijd &quot;Inflop toetsenbord:= 1&quot; uitgevoerd.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Omgekeerd: de luistervergunning van de &quot;Inflop toetsenbord&quot; zal slechts = 1 zijn, als er een toetsenbordprogramma daadwerkelijk in zijn operatie</p>
-					</div>
-					<div align="center">
-						<p>&quot;P(Inflop toetsenbord)&quot;</p>
-					</div>
-					<div align="left">
-						<p>is blijven hangen.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Als de ingreep effect heeft en dit programma weer in de coordinator in de categorie van de (gedeblokkeerde) onderbroken programma's wordt opgenomen -dwz. als de coordinator beslist, dat dit programma zijn P-operatie voltooid heeft- dan wordt &quot;Inflop toetsenbord:= 0&quot; uitgevoerd (en tevens &quot;luisterbit toetsenbord:= 0&quot;, wanneer de wachtketen aan de Inflop toetsenbord hiermee leeg is geworden).</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aannemend, dat dit nu gedeblokkeerde toetsenbordprgramma rap aan de beurt komt -en daar is alles voor te zeggen om er in de coordinator via een prioriteitsregel voor te zorgen, dat dit inderdaad het geval zal zijn- dan zal het tweetal:</p>
-						<blockquote>
-							<p>&quot;karakter:= toetsenbord;<br>
-								V(Acflop toetsenbord)&quot;</p>
-						</blockquote>
-						<p>snel daarna uitgevoerd worden.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De opmerking nu is, dat hieruit volgt, dat deze Acflop en Inflop &quot;bijna altijd&quot; elkaars inverse zullen zijn en dat men zich daarom kan afvragen, of de Acflop toetsenbord -en daarmee de operatie &quot;V(Acflop toetsenbord)&quot;- niet helemaal vervallen kan. We moeten dan wel opnieuw afspreken wat er gebeurt als men in een te hoog tempo op de toetsen drukt.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In het voorstel 1.2.1. had het te snel drukken van de volgende toets geen effect. Nu is het voorstel, om het te snel indrukken van de volgende toets het vorige karakter te laten invalideren. Bv. als volgt.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het indrukken van een toets heeft altijd ten gevolge, dat een karakter naar de statisizer gezonden wordt. Als dit echter gebeurt op een ogenblik, dat het vorige autonoom transport nog niet heeft plaatsgevonden (kans nihil) of als het autonoom transport plaatsvindt, terwijl &quot;Inflop toetsenbord = 1&quot; is, dan wordt op de geheugenplaats c.n. &quot;toetsenbord&quot; een non-valide karakter aangeboden (bv. numeriek groter dan 31). Hier kan het toetsenbordprogramma dan op testen.</p>
-						<p><u>2. Overwegingen bij de vergelijking.</u></p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bij de vergelijking van deze twee oplossingen laat ik de financiele consequentie van een en ander buiten beschouwing: ik ben niet competent om deze te beoordelen en bovendien kon het wel eens niet zo verschrikkelijk veel uitmaken.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Voorts dienen we te bedenken:</p>
-						<table width="517" border="0" cellspacing="2" cellpadding="2">
-							<tr>
-								<td valign="top" width="4%">a)</td>
-								<td valign="top">dat de kans op &quot;te snel de volgende toets indrukken&quot; naar wij van ganserharte hopen, klein zal zijn;</td>
-							</tr>
-							<tr>
-								<td valign="top" width="4%">b)</td>
-								<td valign="top">dat het geen ramp is, als de boodschap in eerste aanleg verkeerd is doorgekomen, daar de operateur toch eerst zal afwachten of de &quot;body&quot; van de boodschap correct is uitgetypt, voordat hij de OK-melding geeft.</td>
-							</tr>
-						</table>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anderzijds dienen we te bedenken:</p>
-						<table width="501" border="0" cellspacing="2" cellpadding="2">
-							<tr>
-								<td align="left" valign="top" width="4%">c)</td>
-								<td align="left" valign="top">dat de kans op non-validiteit, omdat het autonoom transport nog niet heeft plaatsgevonden (1.2.2.) heel klein is, maar dat het haastig is op te eisen, dat de reactie op de ingreep onder alle omstandigheden &quot;rap&quot; zal zijn. (We hebben nog nergens essentiele haastsituaties en ik zou me graag de vrijheid voorbehouden, om op gezette tijden -zeg eens in de vijf minuten- de machine een seconde doof te maken voor pak weg herindeling van de informatie op de trommel.) Als dan de bedienende operateur met een kans van 1 op 300 &quot;in de war&quot; zou raken, zou dat toch wel hinderlijk zijn.</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top" width="4%">d)</td>
-								<td align="left" valign="top">dat het gewenst is, dat in de coordinator de behandeling van het toetsenbordprogramma zich in zo weinig mogelijk van die van de andere programma's onderscheidt.</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top" width="4%">e)</td>
-								<td align="left" valign="top">dat het gewenst is, dat de operateur, in twijfel of hij een toets heeft ingedrukt, zo gauw en zo zeker mogelijk weet, waar hij aan toe is.</td>
-							</tr>
-						</table>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ik ga er van uit, dat opnamen van via het toetsenbord ingevoerde karakters en het uitprinten van deze karakters twee karaktersgewijze synchrone processen zullen zijn.</p>
-						<p><u>3. Een conventie voor teleprinterreservering.</u></p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Als de wachtketting van een hardware seinpaal leeg is -als er geen enkel programma op deze seinpaal wacht- dan zet de coordinator de bijbehorende luisterbit = 0. Deze wordt slechts = 1, als wel een programma op het positief worden van de seinpaal staat te wachten. Dit impliceert, dat ik me ingrepen kan besparen, door zo mogelijk er naar te streven, dat P-operaties op hardware seinpalen zo laat mogelijk gepasseerd worden; is de ingreep op dat ogenblik al binnen, dan kunnen we dat meteen verifieren.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hieruit volgt als algemene strategie, dat we de passering van een hardware seinpaal in de programma's zo ver mogelijk naar achteren schuiven. Wat aan conventies impliceert, zullen we zo dadelijk zien. (N.B. Ik weet, dat teleprinter-ingrepen zo weinig frequent voorkomen, dat het uitsparen van ingrepen op efficiency-overwegingen hier een zwak argument is; ik wil echter de hele behandeling van de in-en uitvoer-troep zo uniform mogelijk houden, anders verdrinken we in de chaos.)</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het is duidelijk, dat verschillende programma's van de teleprinter gebruik kunnen willen maken; het is kennelijk niet de bedoeling, dat karakters van verschillende bronnen kriskras door elkaar getypt worden: voor het uitprinten van een samenhangende tekst moet een programma de teleprinter dus voor zich reserveren. We voeren hiertoen in de geprogrammeerde seinpaal &quot;teleprinter vrij&quot;; dit is een 2-waardige seinpaal.</p>
-						<p>Het synchroon met de teleprinter aanbieden van een stuk samenhangende tekst kan nu door twee soorten programma gebeuren -met weglating van alle hier niet irrelevante tellingen-:</p>
-						<table width="344" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td align="left" valign="top">type A:</td>
-								<td align="left" valign="top">&quot;<br>
-									L:</td>
-								<td align="left" valign="top">P(teleprinter vrij);<br>
-									P(Inflop teleprinter);<br>
-									teleprinter:= volgend karakter;<br>
-									V(Acflop teleprinter);<br>
-									<u>if</u> B <u>then</u> <u>goto</u> L;<br>
-									V(teleprinter vrij)&quot; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top">type B:</td>
-								<td align="left" valign="top">&quot;<br>
-									L:</td>
-								<td align="left" valign="top">P(teleprinter vrij);<br>
-									teleprinter:= volgend karakter;<br>
-									V(Acflop teleprinter);<br>
-									P(Inflop teleprinter);<br>
-									<u>if</u> B <u>then</u> <u>goto</u> L;<br>
-									V(teleprinter vrij)&quot; .</td>
-							</tr>
-						</table>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In het eerste geval wordt de teleprinter vrijgegeven na de laatste tikopdracht, in het tweede geval pas na de terugmelding, dat het volgende karakter alweer getikt kan worden. Het is duidelijk, dat wij slechts een organisatie kunnen opbouwen, mits we hier een duidelijke keuze doen; mijn voorkeur gaat op grond van de eerder gegeven overwegingen uit naar type A. (Deze voorkeur is niet uiterst dwingend; dit is een reden te meer om deze conventie in alle klaarheid en met alle nadruk te formuleren!)</p>
-						<p><u>4. Uittikken synchroon met het toetsenbord.</u></p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In het volgende veronderstel ik de operatie &quot;P(teleprinter vrij)&quot; uitgevoerd -waarover later meer- zodat niet, terwijl ik aan het &quot;intikken&quot; ben, een machineprogramma me de teleprinter onder de vingers weg kan kapen.</p>
-						<p><u>4.1. Met expliciete Acflop voor het toetsenbord.</u></p>
-						<p>4.1.1. De meest rigoureuze sluis, die ik me voor kan stellen bestaat uit de volgende cyclus:</p>
-						<table width="332" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td valign="top">&quot;L: </td>
-								<td valign="top">P(Inflop teleprinter);<br>
-									V(Acflop toetsenbord);<br>
-									P(Inflop toetsenbord);<br>
-									karakter:= toetsenbord;<br>
-									teleprinter:= karakter;<br>
-									V(Acflop teleprinter);<br>
-									<u>if</u> B <u>then</u> <u>goto</u> L&quot;.</td>
-							</tr>
-						</table>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hier vraagt de machine pas om een volgend karakter van het toetsenbord, als de terugmelding van het typen van het vorige karakter binnen is. Hier weet de operateur drommels goed, waar hij aan toe is, als hij midden in het tikken van een boodschap -doordat iemand binnenkomt of door doofheid van de machine- gestoord wordt. Als de getikte letters van de boodschap alle nog correct zijn, maar hij weet niet precies meer wat hij heeft aangeslagen, dan zijn er drie mogelijkheden. (Ik neem, evenals bij de volgende toetsenbordprogrammaatjes aan, dat zij in doofheid uitgevoerd zullen worden!)</p>
-						<table width="497" border="0" cellspacing="2" cellpadding="2">
-							<tr>
-								<td align="left" valign="top">a) </td>
-								<td align="left" valign="top">het programma is (in de coordinator) in de eerste P-operatie blijven hangen, hoewel de bijbehorende ingreep al binnen is (de printer staat immers stil);</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top">b) </td>
-								<td align="left" valign="top">het programma is in de tweede P-operatie blijven hangen, omdat de ingreep er nog niet is -de operateur moet de volgende toets aanslaan;</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top">c) </td>
-								<td align="left" valign="top">het programma is in de tweede P-operatie (in de coordinator) blijven hangen: het voglende karakter is via de statisizer al tot de machine doorgedrongen.</td>
-							</tr>
-						</table>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In alle drie de gevallen kan de operateur het volgende karakter aanslaan; in geval a) heeft het geen effect, in geval b) heeft het het gewenste effect en in geval c) heeft het geen effect (niet het ongewenste). Alleen in het geval c) zit er een klein, klein lekje, nl. als de operatie &quot;P(Inflop teleprinter)&quot; voltooid kan worden voordat het karakter goed en wel op het papier staat. Het karakter kan dan twee keer getikt worden.</p>
-						<p>4.1.2. Een iets minder rigoureuze sluis is:</p>
-						<table width="380" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td align="left" valign="top">&quot;L: </td>
-								<td align="left" valign="top">P(Inflop toetsenbord, Inflop teleprinter);<br>
-									karakter:= toetsenbord; teleprinter:= karakter;<br>
-									V(Acflop teleprinter, Acflop toetsenbord);<br>
-									<u>if</u> B <u>then</u> <u>goto</u> L&quot;.</td>
-							</tr>
-						</table>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hier kan de machine alleen in de P-operatie blijven hangen; als de teleprinter stil staat, is dus &quot;Inflop teleprinter&quot; geen belemmering. Of (a) Inflop toetsenbord is de belemmering of (b) er is geen belemmering, maar de coordinator gunt de machine niet. Als nu weer de tekst voorzover uitgetikt correct is, dan kan de operateur maar een ding doen: het volgende karakter aanslaan en wachten.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In geval (a) is dit normaal het volgende karakter, in geval (b) was dit karakter al binnen en wordt zijn tweede aanslag genegeerd. Voordeel van dit arrangement is, dat 1 keer volgend karakter aanslaan beslist voldoende is. Ook dit sluisje heeft (in geval b) een lekje: vlak voordat hij de toets hernieuwd aanslaat, beeindigt de machine de P-operatie en maakt zij via de V-operatie de statisizer opnieuw ontvankelijk en de letter verschijnt dus twee maal op papier. Het lekje is iets groter, omdat het niet te verkleinen is door de ingreep van het toetsenbord te vertragen. De kans, dat doorgaan van het toetsenbordprogramma en indrukken van de volgende toets niet voldoende coincideren, lijkt me zo klein, dat we dit lekje wel kunnen accepteren. Een voordeel van dit arrangement is, dat in geval van twijfel nog 1 keer de volgende toets indrukken in elk geval op den duur soulaas moet brengen.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nadeel van dit arrangement is, dat &quot;te snel inslaan&quot; hoegenaamd niet tot de machine doordringt en dat snel inslaan van &quot;a b c&quot; dus &quot;a c&quot; op het papier zou kunnen verschijnen. Ik weeg dit bezwaar niet zo heel erg en wel op grond van de volgende overweging: als &quot;a c&quot; op het papier verschenen is, dan is dat naar voor de operateur, want hij moet het correctieritueel uitvoeren. Als hem dit een paar keer is overkomen, zal hij er verder wel voor oppassen, dat dit hem niet te vaak overkomt: en de gedragslijn, die hij daartoe moet volgen, is duidelijk!</p>
-						<p><u>4.2. Zonder expliciete Acflop voor het toetsenbord.</u></p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We beschouwen nu de analoge versie van het programma uit 4.1.2.:</p>
-						<table width="469" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td align="left" valign="top">&nbsp;&quot;L1:</td>
-								<td align="left" valign="top">P(Inflop toetsenbord, Inflop teleprinter);</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top">&nbsp;&nbsp;L2:</td>
-								<td align="left" valign="top">karakter:= toetsenbord;<br>
-									<u>if</u> 31 &lt; karakter <u>then</u><br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> P(Inflop toetsenbord); <u>goto</u> L2 <u>end</u>;<br>
-									teleprinter:= karakter;<br>
-									V(Acflop teleprinter);<br>
-									<u>if</u> B <u>then</u> <u>goto</u> L1&quot;.</td>
-							</tr>
-						</table>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wat betreft het te snel aanslaan van de operateur is dit beter. Nemen we weer het te snel aanslaan van &quot;a b c&quot; in die zin, dat b aangeslagen wordt, voordat a correct is verwerkt. In 4.1.2. was de fout van de operateur, dat hij &quot;c&quot; aansloeg, voordat &quot;b&quot; getikt was; in dit geval moet hij, om het nu spaak te laten lopen &quot;c&quot; al aanslaan, voordat de &quot;a&quot; getikt is: de &quot;a&quot; wordt nl. door de te snel gekomen &quot;b&quot; bedorven tot een karakter dat groter dan 31 is.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Laten we nu onderzoeken, hoe precies de operateur weet, waar hij aan toe is, als hij aarzelt wat hij heeft aangeslagen of wat door de machine geweigerd is. Het interessante geval is natuurlijk weer, dat de operateur zich even bedenkt en ziet, dat datgene, wat op papier staat, nog correct is. Het enige, wat hij kan doen is na enige bedenktijd vol goede moed het volgende karakter aanslaan, dat op papier verschijnen moet.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stond het programma op &quot;Inflop toetsenbord&quot; te wachten, dan was deze actie goed. Nu het geval, dat de volgende karakter al aanwezig was.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Was &quot;Inflop toetsenbord = 1&quot;, maar was de machine te lui met haar reactie hierop, dan vernietigt de nieuwe aanslag het al aanwezige volgkarakter en moet dus mettertijd nogmaals op de toets gedrukt worden.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Was inmiddels &quot;Inflop toetsenbord:= 0&quot; voltooid, maar had de coordinator het toetsenbordprogramma nog niet verder laten lopen, dan zal de operateur merken, dat het volgende karakter twee keer getikt wordt.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De kans hierop is te verkleinen, door de coordinator zo te construeren, dat, wanneer de coordinateur de operatie P(Inflop toetsenbord) voltooit, dwz. &quot;Inflop toetsenbord:= 0&quot; uitvoert, het nu toegestane toetsenbordprogramma inderdaad zo snel mogelijk voortgezet wordt. Dit is de prijs, die we betalen voor het dubbele gebruik van &quot;Inflop toetsenbord' en ik vind het niet mooi.</p>
-						<p><u>5. Een mengvorm.</u></p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salvo errore et omissione combineert het volgende voorstel de deugden van beide systemen.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elke keer, dat een toets wordt ingedrukt, wordt een karakter naar de staticiser gezonden; als op het moment van de startpuls de staticiser nog vol mocht zijn, dan neemt de staticiser een non-valide karakter op. (Kans nihil, dit is het zelfde loffelijke perfectionisme als in 1.2.2.)</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De inhoud van de staticiser wordt nu in principe naar het geheugen doorgezonden per autonoom woordtransport, afhankelijk echter van de waarde van Acflop toetsenbord en Inflop toetsenbord op dat ogenblik. (De actie van Acflop toetsenbord is dus van het vullen van de staticiser verschoven naar het autonoom transport.)</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We onderscheiden nu drie gevallen (het vierde kan zich niet voordoen).</p>
-						<table width="510" border="0" cellspacing="2" cellpadding="2">
-							<tr>
-								<td align="left" valign="top" width="4%">a) </td>
-								<td align="left" valign="top">Acflop toetsenbord = 1 en Inflop toetsenbord = 0.<br>
-									Het karakter wordt zoals het zich in de staticiser bevindt, naar het geheugen doorgezonden; Acflop toetsenbord:= 0; Inflop toetsenbord:= 1);<br>
-									(Dit als ondeelbare handeling. Dit is het normale geval van karaktertransport.)</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top" width="4%">b) </td>
-								<td align="left" valign="top">Acflop toetsenbord = 0 en Inflop toetsenbord = 1.<br>
-									Het karakter wordt in &quot;non-valide vorm&quot; in het geheugen neergezet.<br>
-									(Dit is het geval, dat de tweede toets ingedrukt wordt, terwijl de machine nog niet gereageerd heeft op de ingreep van de vorige. We kunnen dan het vorige karakter nog met &quot;non-valide&quot; overschrijven.)</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top" width="4%">c) </td>
-								<td align="left" valign="top">Acflop toetsenbord = 0 en Inflop toetsenbord = 0.<br>
-									Het autonoom transport wordt onderdrukt en het karakter raakt &quot;onder tafel&quot;.<br>
-									(Op de ingreep is gereageerd en het is dus te laat, om het vorige karakter nog te herroepen; anderzijds is het tweede karakter wel te vroeg, omdat de machine er nog niet om gevraagd heeft.)</td>
-							</tr>
-						</table>
-						<p>De vierde mogelijkheid komt niet voor, omdat de machine slechts Acflop = 1 zal zetten, als de Inflop = 0 is.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De structuur van het programma is nu als volgt:</p>
-						<table border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td align="right" valign="top">
-									<div align="right">
-										&quot;L1:&nbsp;<br>
-										 &nbsp;L2:&nbsp;</div>
-								</td>
-								<td align="left" valign="top">P(Inflop toetsenbord, Inflop teleprinter);<br>
-									karakter:= toetsenbord;<br>
-									<u>if</u> 31 &lt; karakter <u>then</u> <u>begin</u> V(Acflop toetsenbord); P(Inflop toetsenbord);<br>
-									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> L2 <u>end</u>;<br>
-									teleprinter:= karakter;<br>
-									V(Acflop teleprinter, Acflop toetsenbord);<br>
-									<u>if</u> B <u>then</u> <u>goto</u> L1&quot;.</td>
-							</tr>
-						</table>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wie nu te snel achter elkaar &quot;a b&quot; aanslaat, zal merken, dat er of niets (heel snel) of &quot;a&quot; (iets minder te snel) getypt wordt. In beide gevallen moet hij het eerste ontbrekende karakter aanslaan.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Als nu de operateur aarzelt over wat er gebeurd is, maar de boodschap is, voorzover hij op het papier verschenen is, nog correct, dan kan de operateur na enige bedenktijd alleen maar vol goede moed het ontbrekende karakter (nogmaals?) aanslaan.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De teleprinter staat stil en &quot;Inflop teleprinter&quot; kan dus geen belemmering zijn. We moeten nu drie gevallen onderscheiden.</p>
-						<table width="504" border="0" cellspacing="2" cellpadding="2">
-							<tr>
-								<td align="left" valign="top" width="4%">a) </td>
-								<td align="left" valign="top">Als Inflop toetsenbord de belemmering in de P-operatie is, dan wacht het programma op het volgende karakter en het aanslaan ervan is dus correct.</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top" width="4%">b) </td>
-								<td align="left" valign="top">Als Inflop toetsenbord = 1 is, maar de machine is wegens doofheid wat lui met de reactie op deze ingreep, dan maakt de extra aanslag het aanwezige karakter non-valide en is er dus ook niets kapot. (Na verloop van tijd raakt het programma dus in toestand a), dat het karakter nogmaals aangeslagen moet worden.)</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top" width="4%">c) </td>
-								<td align="left" valign="top">Als &quot;Inflop toetsenbord:= 0&quot; door de coordinator voltooid is, maar het toetsenbordprogramma is nog niet aan bod gekomen, dan is het volgende karakter inmiddels onherroepbaar tot het geheugen doorgedrongen. De extra aanslag -de herhaling- deert nu niet, want deze aanslag raakt onder tafel.</td>
-							</tr>
-						</table>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het enige lekje, dat er nu nog in zit is hetzelfde als in het programma 4.1.2. Als de oeprateur een inmiddels ingevoerd (en geaccepteerd) maar nog niet uitgetikt karakter uit ongeduld nog eens aanslaat, precies op het ogenblik, dat de machine de V-operatie uitgevoerd heeft, dan wordt het karakter twee keer ingevoerd. Dit is echter het risico, dat ik geneigd ben om te accepteren.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aan de problemen van teleprinter-reservering en conventies voor herroepen van ingetikte boodschappen, dan wel OK-melding wilde ik een andere notitie wijden.</p>
-						<p>PS. Voor de misspelling van &quot;staticiser&quot; in het begin van deze notitie des schrijvers verontschuldigingen.</p>
-					</div>
-					<div align="left">
-						<p><u></u></p>
-					</div>
-					<hr>
-					<font size="-1">transcribed by Frank Steggink<br>
-						revised <csobj format="MedDate" h="16" region="15" t="DateTime" w="84">Sat, 19 Jun 2004</csobj></font>
-					<p></p>
-				</td>
-				<td width="1" height="7135"><spacer type="block" width="1" height="7135"></td>
-			</tr>
-			<tr height="1" cntrlrow>
-				<td width="520" height="1"><spacer type="block" width="520" height="1"></td>
-				<td width="1" height="1"></td>
-			</tr>
-		</table>
-		<p></p>
-	</body>
-
-</html></div>
+<p><u>1. Hardware</u></p>
+<p><u>1.1. Hardware voor de teleprinter (dwz. outputorgaan).</u></p>
+<p>De hardware bestaat uit:<br>
+een 2-waardige startseinpaal, genaamd "Acflop teleprinter",<br>
+een 2-waardige ingreepseinpaal, genaamd "Inflop teleprinter",<br>
+een vaste geheugenplaats, die fungeert als buffer met capaciteit van 1 karakter;<br>
+het vullen van deze vaste geheugenplaats zal ik in de tekst representeren door</p>
+<div align="center">
+<p>"teleprinter :=....." .</p>
+</div>
+<div align="left">
+<p>Voor de bediening van het printwerk bestaat dus slechts het minimum: we kunnen geen startopdrachten accumuleren en per startopdracht kunnen we slechts 1 karakter aanbieden. De opmerking is, dat een teleprinter een zo langzaam medium is, dat alles, wat er meer ingebouwd wordt, moeilijk te verdedigen is.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het aanbieden van een karakter aan de teleprinter geschiedt door de sequens:</p>
+<blockquote>
+<p>"P(Inflop teleprinter);<br>
+teleprinter:= karakter;<br>
+V(Acflop teleprinter)" .</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De P-operatie is wel een aanroep van de Coordinator, de V-operatie kan zonder meer in het programma staan (Nl. Acflop teleprinter:= 1").</p>
+<p><u>1.2. Hardware voor het toetsenbord (dwz. inputorgaan).</u></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hiervoor zijn twee voorstellen ter sprake geweest; het doel van deze notitie is onder andere om er achter te komen of het ene voorstel preferabel is boven het andere.</p>
+<p><u>1.2.1. Toetsenbord met expliciete "Acflop".</u></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De hardware bestaat uit:<br>
+een 2-waardige startseinpaal, genaamd "Acflop toetsenbord",<br>
+een 2-waardige ingreepseinpaal, genaamd "Inflop toetsenbord",<br>
+een vaste geheugenplaats, die fungeert als buffer met capaciteit van 1 karakter;<br>
+het uitlezen van deze geheugenplaats zal ik in het volgende representeren door:</p>
+</div>
+<div align="center">
+<p>".......:= toetsenbord".</p>
+</div>
+<div align="left">
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hier wordt het toetsenbord dus beschouwd als een invoermedium zonder de mogelijkheid van accumulatie van startopdrachten en per startopdracht slechts 1 karakter.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Drukt men op de toets van het toetsenbord, dan stuurt de toetsapparatuur een startpuls, vijf informatiepulsen en een stoppuls naar de "statisizer". De bedoeling van boven gegeven arrangement is, om de statisizer slechts via het toetsenbord te vullen, als op het moment van de startpuls "Acflop toetsenbord = 1" is, terwijl deze vulling zorgt, dat "Acflop toetsenbord := 0" uitgevoerd is, voordat de volgende startpuls zou kunnen komen. Het autonoom transport probeert de inhoud van de statisizer naar de vaste geheugenplaats te transporteren, zodra dit gelukt is, wordt dit door "Inflop toetsenbord := 1" naar de computer gesignaleerd.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het ruwe schema, dat een karakter van het toetsenbord accepteert bestaat uit</p>
+<blockquote>
+<p>"P(Inflop toetsenbord);<br>
+karakter := toetsenbord;<br>
+V(Acflop toetsenbord)" .</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In het kader van het tandenpoetsen moet de machine dus een keer "V(Acflop toetsenbord)" uitgevoerd hebben om voor deze invoer ontvankelijk te kunnen zijn.</p>
+<p><u>1.2.2. Toetsenbord zonder expliciete "Acflop".</u></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bij het vullen van de statisizer kan men "Acflop toetsenbord:= 0" uitvoeren bij de afsluitende stoppuls; omdat het autonoom transport practisch instantaan zal plaatsvinden, wordt practisch tegelijkertijd "Inflop toetsenbord:= 1" uitgevoerd.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Omgekeerd: de luistervergunning van de "Inflop toetsenbord" zal slechts = 1 zijn, als er een toetsenbordprogramma daadwerkelijk in zijn operatie</p>
+</div>
+<div align="center">
+<p>"P(Inflop toetsenbord)"</p>
+</div>
+<div align="left">
+<p>is blijven hangen.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Als de ingreep effect heeft en dit programma weer in de coordinator in de categorie van de (gedeblokkeerde) onderbroken programma's wordt opgenomen -dwz. als de coordinator beslist, dat dit programma zijn P-operatie voltooid heeft- dan wordt "Inflop toetsenbord:= 0" uitgevoerd (en tevens "luisterbit toetsenbord:= 0", wanneer de wachtketen aan de Inflop toetsenbord hiermee leeg is geworden).</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aannemend, dat dit nu gedeblokkeerde toetsenbordprgramma rap aan de beurt komt -en daar is alles voor te zeggen om er in de coordinator via een prioriteitsregel voor te zorgen, dat dit inderdaad het geval zal zijn- dan zal het tweetal:</p>
+<blockquote>
+<p>"karakter:= toetsenbord;<br>
+V(Acflop toetsenbord)"</p>
+</blockquote>
+<p>snel daarna uitgevoerd worden.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De opmerking nu is, dat hieruit volgt, dat deze Acflop en Inflop "bijna altijd" elkaars inverse zullen zijn en dat men zich daarom kan afvragen, of de Acflop toetsenbord -en daarmee de operatie "V(Acflop toetsenbord)"- niet helemaal vervallen kan. We moeten dan wel opnieuw afspreken wat er gebeurt als men in een te hoog tempo op de toetsen drukt.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In het voorstel 1.2.1. had het te snel drukken van de volgende toets geen effect. Nu is het voorstel, om het te snel indrukken van de volgende toets het vorige karakter te laten invalideren. Bv. als volgt.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het indrukken van een toets heeft altijd ten gevolge, dat een karakter naar de statisizer gezonden wordt. Als dit echter gebeurt op een ogenblik, dat het vorige autonoom transport nog niet heeft plaatsgevonden (kans nihil) of als het autonoom transport plaatsvindt, terwijl "Inflop toetsenbord = 1" is, dan wordt op de geheugenplaats c.n. "toetsenbord" een non-valide karakter aangeboden (bv. numeriek groter dan 31). Hier kan het toetsenbordprogramma dan op testen.</p>
+<p><u>2. Overwegingen bij de vergelijking.</u></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bij de vergelijking van deze twee oplossingen laat ik de financiele consequentie van een en ander buiten beschouwing: ik ben niet competent om deze te beoordelen en bovendien kon het wel eens niet zo verschrikkelijk veel uitmaken.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Voorts dienen we te bedenken:</p>
+<table width="517" border="0" cellspacing="2" cellpadding="2">
+<tr>
+<td valign="top" width="4%">a)</td>
+<td valign="top">dat de kans op "te snel de volgende toets indrukken" naar wij van ganserharte hopen, klein zal zijn;</td>
+</tr>
+<tr>
+<td valign="top" width="4%">b)</td>
+<td valign="top">dat het geen ramp is, als de boodschap in eerste aanleg verkeerd is doorgekomen, daar de operateur toch eerst zal afwachten of de "body" van de boodschap correct is uitgetypt, voordat hij de OK-melding geeft.</td>
+</tr>
+</table>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Anderzijds dienen we te bedenken:</p>
+<table width="501" border="0" cellspacing="2" cellpadding="2">
+<tr>
+<td align="left" valign="top" width="4%">c)</td>
+<td align="left" valign="top">dat de kans op non-validiteit, omdat het autonoom transport nog niet heeft plaatsgevonden (1.2.2.) heel klein is, maar dat het haastig is op te eisen, dat de reactie op de ingreep onder alle omstandigheden "rap" zal zijn. (We hebben nog nergens essentiele haastsituaties en ik zou me graag de vrijheid voorbehouden, om op gezette tijden -zeg eens in de vijf minuten- de machine een seconde doof te maken voor pak weg herindeling van de informatie op de trommel.) Als dan de bedienende operateur met een kans van 1 op 300 "in de war" zou raken, zou dat toch wel hinderlijk zijn.</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="4%">d)</td>
+<td align="left" valign="top">dat het gewenst is, dat in de coordinator de behandeling van het toetsenbordprogramma zich in zo weinig mogelijk van die van de andere programma's onderscheidt.</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="4%">e)</td>
+<td align="left" valign="top">dat het gewenst is, dat de operateur, in twijfel of hij een toets heeft ingedrukt, zo gauw en zo zeker mogelijk weet, waar hij aan toe is.</td>
+</tr>
+</table>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ik ga er van uit, dat opnamen van via het toetsenbord ingevoerde karakters en het uitprinten van deze karakters twee karaktersgewijze synchrone processen zullen zijn.</p>
+<p><u>3. Een conventie voor teleprinterreservering.</u></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Als de wachtketting van een hardware seinpaal leeg is -als er geen enkel programma op deze seinpaal wacht- dan zet de coordinator de bijbehorende luisterbit = 0. Deze wordt slechts = 1, als wel een programma op het positief worden van de seinpaal staat te wachten. Dit impliceert, dat ik me ingrepen kan besparen, door zo mogelijk er naar te streven, dat P-operaties op hardware seinpalen zo laat mogelijk gepasseerd worden; is de ingreep op dat ogenblik al binnen, dan kunnen we dat meteen verifieren.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hieruit volgt als algemene strategie, dat we de passering van een hardware seinpaal in de programma's zo ver mogelijk naar achteren schuiven. Wat aan conventies impliceert, zullen we zo dadelijk zien. (N.B. Ik weet, dat teleprinter-ingrepen zo weinig frequent voorkomen, dat het uitsparen van ingrepen op efficiency-overwegingen hier een zwak argument is; ik wil echter de hele behandeling van de in-en uitvoer-troep zo uniform mogelijk houden, anders verdrinken we in de chaos.)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het is duidelijk, dat verschillende programma's van de teleprinter gebruik kunnen willen maken; het is kennelijk niet de bedoeling, dat karakters van verschillende bronnen kriskras door elkaar getypt worden: voor het uitprinten van een samenhangende tekst moet een programma de teleprinter dus voor zich reserveren. We voeren hiertoen in de geprogrammeerde seinpaal "teleprinter vrij"; dit is een 2-waardige seinpaal.</p>
+<p>Het synchroon met de teleprinter aanbieden van een stuk samenhangende tekst kan nu door twee soorten programma gebeuren -met weglating van alle hier niet irrelevante tellingen-:</p>
+<table width="344" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="left" valign="top">type A:</td>
+<td align="left" valign="top">"<br>
+L:</td>
+<td align="left" valign="top">P(teleprinter vrij);<br>
+P(Inflop teleprinter);<br>
+teleprinter:= volgend karakter;<br>
+V(Acflop teleprinter);<br>
+<u>if</u> B <u>then</u> <u>goto</u> L;<br>
+V(teleprinter vrij)" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;of</td>
+</tr>
+<tr>
+<td align="left" valign="top">type B:</td>
+<td align="left" valign="top">"<br>
+L:</td>
+<td align="left" valign="top">P(teleprinter vrij);<br>
+teleprinter:= volgend karakter;<br>
+V(Acflop teleprinter);<br>
+P(Inflop teleprinter);<br>
+<u>if</u> B <u>then</u> <u>goto</u> L;<br>
+V(teleprinter vrij)" .</td>
+</tr>
+</table>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In het eerste geval wordt de teleprinter vrijgegeven na de laatste tikopdracht, in het tweede geval pas na de terugmelding, dat het volgende karakter alweer getikt kan worden. Het is duidelijk, dat wij slechts een organisatie kunnen opbouwen, mits we hier een duidelijke keuze doen; mijn voorkeur gaat op grond van de eerder gegeven overwegingen uit naar type A. (Deze voorkeur is niet uiterst dwingend; dit is een reden te meer om deze conventie in alle klaarheid en met alle nadruk te formuleren!)</p>
+<p><u>4. Uittikken synchroon met het toetsenbord.</u></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In het volgende veronderstel ik de operatie "P(teleprinter vrij)" uitgevoerd -waarover later meer- zodat niet, terwijl ik aan het "intikken" ben, een machineprogramma me de teleprinter onder de vingers weg kan kapen.</p>
+<p><u>4.1. Met expliciete Acflop voor het toetsenbord.</u></p>
+<p>4.1.1. De meest rigoureuze sluis, die ik me voor kan stellen bestaat uit de volgende cyclus:</p>
+<table width="332" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top">"L:</td>
+<td valign="top">P(Inflop teleprinter);<br>
+V(Acflop toetsenbord);<br>
+P(Inflop toetsenbord);<br>
+karakter:= toetsenbord;<br>
+teleprinter:= karakter;<br>
+V(Acflop teleprinter);<br>
+<u>if</u> B <u>then</u> <u>goto</u> L".</td>
+</tr>
+</table>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hier vraagt de machine pas om een volgend karakter van het toetsenbord, als de terugmelding van het typen van het vorige karakter binnen is. Hier weet de operateur drommels goed, waar hij aan toe is, als hij midden in het tikken van een boodschap -doordat iemand binnenkomt of door doofheid van de machine- gestoord wordt. Als de getikte letters van de boodschap alle nog correct zijn, maar hij weet niet precies meer wat hij heeft aangeslagen, dan zijn er drie mogelijkheden. (Ik neem, evenals bij de volgende toetsenbordprogrammaatjes aan, dat zij in doofheid uitgevoerd zullen worden!)</p>
+<table width="497" border="0" cellspacing="2" cellpadding="2">
+<tr>
+<td align="left" valign="top">a)</td>
+<td align="left" valign="top">het programma is (in de coordinator) in de eerste P-operatie blijven hangen, hoewel de bijbehorende ingreep al binnen is (de printer staat immers stil);</td>
+</tr>
+<tr>
+<td align="left" valign="top">b)</td>
+<td align="left" valign="top">het programma is in de tweede P-operatie blijven hangen, omdat de ingreep er nog niet is -de operateur moet de volgende toets aanslaan;</td>
+</tr>
+<tr>
+<td align="left" valign="top">c)</td>
+<td align="left" valign="top">het programma is in de tweede P-operatie (in de coordinator) blijven hangen: het voglende karakter is via de statisizer al tot de machine doorgedrongen.</td>
+</tr>
+</table>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In alle drie de gevallen kan de operateur het volgende karakter aanslaan; in geval a) heeft het geen effect, in geval b) heeft het het gewenste effect en in geval c) heeft het geen effect (niet het ongewenste). Alleen in het geval c) zit er een klein, klein lekje, nl. als de operatie "P(Inflop teleprinter)" voltooid kan worden voordat het karakter goed en wel op het papier staat. Het karakter kan dan twee keer getikt worden.</p>
+<p>4.1.2. Een iets minder rigoureuze sluis is:</p>
+<table width="380" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="left" valign="top">"L:</td>
+<td align="left" valign="top">P(Inflop toetsenbord, Inflop teleprinter);<br>
+karakter:= toetsenbord; teleprinter:= karakter;<br>
+V(Acflop teleprinter, Acflop toetsenbord);<br>
+<u>if</u> B <u>then</u> <u>goto</u> L".</td>
+</tr>
+</table>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hier kan de machine alleen in de P-operatie blijven hangen; als de teleprinter stil staat, is dus "Inflop teleprinter" geen belemmering. Of (a) Inflop toetsenbord is de belemmering of (b) er is geen belemmering, maar de coordinator gunt de machine niet. Als nu weer de tekst voorzover uitgetikt correct is, dan kan de operateur maar een ding doen: het volgende karakter aanslaan en wachten.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In geval (a) is dit normaal het volgende karakter, in geval (b) was dit karakter al binnen en wordt zijn tweede aanslag genegeerd. Voordeel van dit arrangement is, dat 1 keer volgend karakter aanslaan beslist voldoende is. Ook dit sluisje heeft (in geval b) een lekje: vlak voordat hij de toets hernieuwd aanslaat, beeindigt de machine de P-operatie en maakt zij via de V-operatie de statisizer opnieuw ontvankelijk en de letter verschijnt dus twee maal op papier. Het lekje is iets groter, omdat het niet te verkleinen is door de ingreep van het toetsenbord te vertragen. De kans, dat doorgaan van het toetsenbordprogramma en indrukken van de volgende toets niet voldoende coincideren, lijkt me zo klein, dat we dit lekje wel kunnen accepteren. Een voordeel van dit arrangement is, dat in geval van twijfel nog 1 keer de volgende toets indrukken in elk geval op den duur soulaas moet brengen.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nadeel van dit arrangement is, dat "te snel inslaan" hoegenaamd niet tot de machine doordringt en dat snel inslaan van "a b c" dus "a c" op het papier zou kunnen verschijnen. Ik weeg dit bezwaar niet zo heel erg en wel op grond van de volgende overweging: als "a c" op het papier verschenen is, dan is dat naar voor de operateur, want hij moet het correctieritueel uitvoeren. Als hem dit een paar keer is overkomen, zal hij er verder wel voor oppassen, dat dit hem niet te vaak overkomt: en de gedragslijn, die hij daartoe moet volgen, is duidelijk!</p>
+<p><u>4.2. Zonder expliciete Acflop voor het toetsenbord.</u></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We beschouwen nu de analoge versie van het programma uit 4.1.2.:</p>
+<table width="469" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="left" valign="top">&nbsp;"L1:</td>
+<td align="left" valign="top">P(Inflop toetsenbord, Inflop teleprinter);</td>
+</tr>
+<tr>
+<td align="left" valign="top">&nbsp;&nbsp;L2:</td>
+<td align="left" valign="top">karakter:= toetsenbord;<br>
+<u>if</u> 31 &lt; karakter <u>then</u><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> P(Inflop toetsenbord); <u>goto</u> L2 <u>end</u>;<br>
+teleprinter:= karakter;<br>
+V(Acflop teleprinter);<br>
+<u>if</u> B <u>then</u> <u>goto</u> L1".</td>
+</tr>
+</table>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wat betreft het te snel aanslaan van de operateur is dit beter. Nemen we weer het te snel aanslaan van "a b c" in die zin, dat b aangeslagen wordt, voordat a correct is verwerkt. In 4.1.2. was de fout van de operateur, dat hij "c" aansloeg, voordat "b" getikt was; in dit geval moet hij, om het nu spaak te laten lopen "c" al aanslaan, voordat de "a" getikt is: de "a" wordt nl. door de te snel gekomen "b" bedorven tot een karakter dat groter dan 31 is.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Laten we nu onderzoeken, hoe precies de operateur weet, waar hij aan toe is, als hij aarzelt wat hij heeft aangeslagen of wat door de machine geweigerd is. Het interessante geval is natuurlijk weer, dat de operateur zich even bedenkt en ziet, dat datgene, wat op papier staat, nog correct is. Het enige, wat hij kan doen is na enige bedenktijd vol goede moed het volgende karakter aanslaan, dat op papier verschijnen moet.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Stond het programma op "Inflop toetsenbord" te wachten, dan was deze actie goed. Nu het geval, dat de volgende karakter al aanwezig was.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Was "Inflop toetsenbord = 1", maar was de machine te lui met haar reactie hierop, dan vernietigt de nieuwe aanslag het al aanwezige volgkarakter en moet dus mettertijd nogmaals op de toets gedrukt worden.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Was inmiddels "Inflop toetsenbord:= 0" voltooid, maar had de coordinator het toetsenbordprogramma nog niet verder laten lopen, dan zal de operateur merken, dat het volgende karakter twee keer getikt wordt.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De kans hierop is te verkleinen, door de coordinator zo te construeren, dat, wanneer de coordinateur de operatie P(Inflop toetsenbord) voltooit, dwz. "Inflop toetsenbord:= 0" uitvoert, het nu toegestane toetsenbordprogramma inderdaad zo snel mogelijk voortgezet wordt. Dit is de prijs, die we betalen voor het dubbele gebruik van "Inflop toetsenbord' en ik vind het niet mooi.</p>
+<p><u>5. Een mengvorm.</u></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Salvo errore et omissione combineert het volgende voorstel de deugden van beide systemen.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Elke keer, dat een toets wordt ingedrukt, wordt een karakter naar de staticiser gezonden; als op het moment van de startpuls de staticiser nog vol mocht zijn, dan neemt de staticiser een non-valide karakter op. (Kans nihil, dit is het zelfde loffelijke perfectionisme als in 1.2.2.)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De inhoud van de staticiser wordt nu in principe naar het geheugen doorgezonden per autonoom woordtransport, afhankelijk echter van de waarde van Acflop toetsenbord en Inflop toetsenbord op dat ogenblik. (De actie van Acflop toetsenbord is dus van het vullen van de staticiser verschoven naar het autonoom transport.)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We onderscheiden nu drie gevallen (het vierde kan zich niet voordoen).</p>
+<table width="510" border="0" cellspacing="2" cellpadding="2">
+<tr>
+<td align="left" valign="top" width="4%">a)</td>
+<td align="left" valign="top">Acflop toetsenbord = 1 en Inflop toetsenbord = 0.<br>
+Het karakter wordt zoals het zich in de staticiser bevindt, naar het geheugen doorgezonden; Acflop toetsenbord:= 0; Inflop toetsenbord:= 1);<br>
+(Dit als ondeelbare handeling. Dit is het normale geval van karaktertransport.)</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="4%">b)</td>
+<td align="left" valign="top">Acflop toetsenbord = 0 en Inflop toetsenbord = 1.<br>
+Het karakter wordt in "non-valide vorm" in het geheugen neergezet.<br>
+(Dit is het geval, dat de tweede toets ingedrukt wordt, terwijl de machine nog niet gereageerd heeft op de ingreep van de vorige. We kunnen dan het vorige karakter nog met "non-valide" overschrijven.)</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="4%">c)</td>
+<td align="left" valign="top">Acflop toetsenbord = 0 en Inflop toetsenbord = 0.<br>
+Het autonoom transport wordt onderdrukt en het karakter raakt "onder tafel".<br>
+(Op de ingreep is gereageerd en het is dus te laat, om het vorige karakter nog te herroepen; anderzijds is het tweede karakter wel te vroeg, omdat de machine er nog niet om gevraagd heeft.)</td>
+</tr>
+</table>
+<p>De vierde mogelijkheid komt niet voor, omdat de machine slechts Acflop = 1 zal zetten, als de Inflop = 0 is.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De structuur van het programma is nu als volgt:</p>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="right" valign="top">
+<div align="right">"L1:&nbsp;<br>
+&nbsp;L2:&nbsp;</div>
+</td>
+<td align="left" valign="top">P(Inflop toetsenbord, Inflop teleprinter);<br>
+karakter:= toetsenbord;<br>
+<u>if</u> 31 &lt; karakter <u>then</u> <u>begin</u> V(Acflop toetsenbord); P(Inflop toetsenbord);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> L2 <u>end</u>;<br>
+teleprinter:= karakter;<br>
+V(Acflop teleprinter, Acflop toetsenbord);<br>
+<u>if</u> B <u>then</u> <u>goto</u> L1".</td>
+</tr>
+</table>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wie nu te snel achter elkaar "a b" aanslaat, zal merken, dat er of niets (heel snel) of "a" (iets minder te snel) getypt wordt. In beide gevallen moet hij het eerste ontbrekende karakter aanslaan.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Als nu de operateur aarzelt over wat er gebeurd is, maar de boodschap is, voorzover hij op het papier verschenen is, nog correct, dan kan de operateur na enige bedenktijd alleen maar vol goede moed het ontbrekende karakter (nogmaals?) aanslaan.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De teleprinter staat stil en "Inflop teleprinter" kan dus geen belemmering zijn. We moeten nu drie gevallen onderscheiden.</p>
+<table width="504" border="0" cellspacing="2" cellpadding="2">
+<tr>
+<td align="left" valign="top" width="4%">a)</td>
+<td align="left" valign="top">Als Inflop toetsenbord de belemmering in de P-operatie is, dan wacht het programma op het volgende karakter en het aanslaan ervan is dus correct.</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="4%">b)</td>
+<td align="left" valign="top">Als Inflop toetsenbord = 1 is, maar de machine is wegens doofheid wat lui met de reactie op deze ingreep, dan maakt de extra aanslag het aanwezige karakter non-valide en is er dus ook niets kapot. (Na verloop van tijd raakt het programma dus in toestand a), dat het karakter nogmaals aangeslagen moet worden.)</td>
+</tr>
+<tr>
+<td align="left" valign="top" width="4%">c)</td>
+<td align="left" valign="top">Als "Inflop toetsenbord:= 0" door de coordinator voltooid is, maar het toetsenbordprogramma is nog niet aan bod gekomen, dan is het volgende karakter inmiddels onherroepbaar tot het geheugen doorgedrongen. De extra aanslag -de herhaling- deert nu niet, want deze aanslag raakt onder tafel.</td>
+</tr>
+</table>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het enige lekje, dat er nu nog in zit is hetzelfde als in het programma 4.1.2. Als de oeprateur een inmiddels ingevoerd (en geaccepteerd) maar nog niet uitgetikt karakter uit ongeduld nog eens aanslaat, precies op het ogenblik, dat de machine de V-operatie uitgevoerd heeft, dan wordt het karakter twee keer ingevoerd. Dit is echter het risico, dat ik geneigd ben om te accepteren.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aan de problemen van teleprinter-reservering en conventies voor herroepen van ingetikte boodschappen, dan wel OK-melding wilde ik een andere notitie wijden.</p>
+<p>PS. Voor de misspelling van "staticiser" in het begin van deze notitie des schrijvers verontschuldigingen.</p>
+</div>
+<div align="left"></div>
+<hr>
+<font size="-1">transcribed by Frank Steggink<br>
+revised Sat, 19 Jun 2004</font>
+<table>
+<tr>
+<td width="1" height="7135"><spacer type="block" width="1" height="7135"></td>
+</tr>
+<tr height="1" cntrlrow="">
+<td width="520" height="1"><spacer type="block" width="520" height="1"></td>
+<td width="1" height="1"></td>
+</tr>
+</table>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

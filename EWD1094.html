@@ -23,132 +23,116 @@
   </div>
   <h1>The undeserved status of the pigeon-hole principle</h1>
   <div class='body'>
-				<p>Right at the moment I was introduced to the pigeon-hole principle, I understood that there was something very special about it, for the Englishman from whom I learned it told it to me under its German name &quot;das Schubfach prinzip&quot;. Later I learned that also in other languages it is honoured by a special name. It is, indeed, surrounded by some mystique, for proofs using it are often regarded as something special, something particularly ingenious. This feeling of awe is, for instance, nicely reflected by Ross Honsberger when he concludes one of his examples with the characterization &quot;another triumph of the pigeon-hole principle&quot;. (Earlier he has called it &quot;a fundamental tool of combinatorics&quot;.)</p>
-				<p>It is my feeling, however, that this mystique and the surprise when we see the pigeon-hole principle being applied successfully are closely connected to the clumsiness of the usual formulations of the principle: they contain a lot of misleading noise, are overspecific, and hide the principle's arithmetic nature. Instead of composing an average formulation, I quote a typical one verbatim from the literature:</p>
-				<table width="100%" border="0" cellspacing="4" cellpadding="0">
-					<tr>
-						<td valign="top" width="8%">(0)</td>
-						<td valign="top">&quot;if more than <var>n</var> objects are distributed into a set of <var>n</var> compartments, some compartment must receive more than one of the objects&quot;.</td>
-					</tr>
-				</table>
-				<p class="continue">(Instead of the above &quot;more than <var>n</var>&quot;, one often encounters the more specific &quot;<var>n</var>+1&quot;.) We shall compare (0) with the alternative</p>
-				<table width="100%" border="0" cellspacing="4" cellpadding="0">
-					<tr>
-						<td valign="top" width="8%">(1)</td>
-						<td valign="top">&quot;for a nonempty, finite bag of real numbers, the maximum is at least the average (and the minimum is at most the average).</td>
-					</tr>
-				</table>
-				<p>Comparing (1) and (0), we observe to begin with that the &quot;distributing&quot; and &quot;receiving&quot; have disappeared, and rightly so, for they are just noise: the pigeon-hole principle is equally applicable when no process of distribution and reception is involved, e.g. when we wish to conclude, from the fact that a month is longer than a week, that in a month some weekday occurs more than once.</p>
-				<p>The second thing we observe is that the &quot;objects&quot; and the &quot;compartments&quot; have disappeared. That is a great improvement, for it saves us the needless trouble of making a painful identification in all those circumstances in which (for visual or linguistic reasons) the metaphor of objects and compartments does not fit nicely. In the previous example, for instance, we should not talk about a month containing a number of Tuesdays, but about Tuesday ( = compartment ) containing a number of days-of the-month ( = objects ). The whole metaphor of objects and compartments is just a pain in the neck.</p>
-				<p>Another regrettable consequence of the metaphor is that it invites a misleading visualization. Formulation (0) is in the form of an implication; the contrapositive states equivalently</p>
-				<table width="100%" border="0" cellspacing="4" cellpadding="0">
-					<tr>
-						<td valign="top" width="8%">(2)</td>
-						<td valign="top">&quot;if each of <var>n</var> compartments contains at most one object, they contain together at most <var>n</var> objects&quot;.</td>
-					</tr>
-				</table>
-				<p class="continue">Formulation (0) evokes a picture of cramped, overstuffed compartments &#x2014;2 or more pigeons squeezed into a 1-pigeon hole&#x2014; , whereas formulation (2) rather evokes a picture of underoccupied compartments. The difference between the pictures hides the fact that (0) and (2) are equivalent.</p>
-				<p class="noindent"><u>Remark</u> It is not uncommon to see people distinguish &#x2014;not in meaning, but in r&ocirc;le&#x2014; between <var>x</var>&#x2264;<var>y</var> and <var>y</var>&#x2265;<var>x</var> . The former they read as expressing (in terms of <var>y</var>) an upper bound for <var>x</var> , the latter as giving (in terms of <var>x</var>) a lower bound for <var>y</var> . I advise against trying to make such distinctions: the charm of</p>
-				<p class="noindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <var>average</var> &#x2264; <var>maximum</var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and<br>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>maximum</var> &#x2265; <var>average</var></p>
-				<p class="noindent">is that they state exactly the same and need not evoke different connotations as (0) and (2) seem to do. (End of Remark.)</p>
-				<p>Finally, the traditional pigeon-hole principle is much less general than it should be: expressed in <var>average</var> and <var>maximum</var>, (0) yields</p>
-				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <var>average</var> &gt; 1 &#x21d2; <var>maximum</var> &gt;1</p>
-				<p class="noindent">which is much weaker than (1)'s</p>
-				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <var>average</var> &#x2264; <var>maximum</var> ;</p>
-				<p class="noindent">this is why (1), being really stronger than (0), is referred to as the Generalized Pigeon-hole Principle.</p>
-				<p>As an example in which the Generalized Pigeon-hole Principle comes in handy, we consider now what is known as the Problem of the German Soccer Lotto.</p>
-				<p>Variables of type &quot;outcome&quot; have 1 of 3 possible values; variables of type &quot;column&quot; consist of 13 variables of type &quot;outcome&quot;. In the following, dummies <var>c</var> and <var>d</var> range over type &quot;column&quot; and <var>W</var> is a set of constants of type &quot;column&quot;. We are asked to construct a set <var>W</var>, as small as possible, such that</p>
-				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<u>A</u> <var>d</var> :: (<u>E</u> <var>c </var>: <var>c</var> &#x2208; <var>W</var> : (<u>N</u> <var>i </var>: 0 &#x2264; <var>i </var>&lt; 13 : <var>d</var>.<var>i</var> = <var>c</var>.<var>i</var>) &#x2265; 5))</p>
-				<p class="noindent">In words: <var>W</var> should be such a set of columns that, whatever column we choose for <var>d</var>, <var>W</var> contains a column <var>c</var> that coincides with <var>d</var> in at least 5 positions.</p>
-				<p>Set <var>W</var> contains at least 3 columns, for with at most 2 columns in <var>W</var> it is possible to choose <var>d</var> such that it coincides in no position with a column in <var>W</var>. But 3 columns suffice. Let <var>x</var>, <var>y</var>, <var>z</var> be the three columns in <var>W</var>; we can choose them such that for any <var>i</var> in the range 0 &#x2264; <var>i</var> &lt; 13</p>
-				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>&nbsp;&nbsp;</var>{<var> x</var>.<var>i</var>, <var>y</var>.<var>i</var>, <var>z</var>.<var>i </var>}</p>
-				<p class="noindent">is the triple of possible outcome-values. With such a choice, each value <var>d</var>.<var>i</var> coincides with one of the three { <var>x</var>, <var>y</var>, <var>z </var>}; 13 coincidences in 3 columns yields an average of 4&#x2153; coincidences per column, and hence at least 1 column coincides in at least 5 positions with <var>d</var> . And thus the Problem of the German Soccer Lotto has been solved.</p>
-				<p>The example has been included for two reasons. Firstly it is an example for which the traditional (0) does not suffice and the stronger (1) is really needed. Secondly, it shows the arithmetic reason for the surprise that the use of the pigeon-hole principle often evokes: the three constants 3, 13 and 5 of the problem statement fortunately satisfy the magical relation that 5 is the smallest integer that is at least 13/3. It is this arithmetic accident that makes the Problem of the German Soccer Lotto trivial. Replacing 5 by 6 we get a completely different problem, which is much harder to solve! Another way to phrase the same observation is that if you can get away with an argument as simple as the pigeon-hole principle, you have just been lucky.</p>
-			</div>
-			<div align="center">
-			<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
-				*</p>
-		</div>
-			<div align="left">
-			<p>Another, I think unpleasant, property of the pigeon-hole principle is that it seems to invite the reductio ad absurdum. Take this simple problem:</p>
-		</div>
-		<div align="center">
-			<table width="329" border="0" cellspacing="5" cellpadding="0">
-				<tr>
-					<td align="left">On the ranch, each cowboy is the exclusive owner of at least one horse. Show that on the ranch</td>
-				</tr>
-				<tr>
-					<td align="center"># cowboys &#x2264; # horses&nbsp;&nbsp;&nbsp;.</td>
-				</tr>
-			</table>
-		</div>
-		<div align="left">
-			<p>It is not unusual at all to encounter an argument of the following shape. Assume that the conclusion is false, i.e., assume that # cowboys &gt; # horses; now put each cowboy (= pigeon) into one of the horses (= holes) he owns; then the pigeon-hole principle tells us that there is a horse owned by at least two cowboys, which contradicts the exclusive ownership. Hence the conclusion is true, i.e. # cowboys &#x2264; # horses.</p>
-			<p>[Compare the argument with the following one. Since the minimum number of horses per (i.e. exclusively owned by a) cowboy is at least 1, the average number of horses per cowboy is at least 1, i.e.</p>
-		</div>
-		<div align="center">
-			<table width="221" border="0" cellspacing="2" cellpadding="0">
-				<tr>
-					<td>
-						<table width="87" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td>
-									<div align="center">
-										<u>&nbsp;&nbsp;# horses&nbsp;&nbsp;</u></div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div align="center">
-										# cowboys</div>
-								</td>
-							</tr>
-						</table>
-					</td>
-					<td>&#x2265;&nbsp;&nbsp;1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.]</td>
-				</tr>
-			</table>
-		</div>
-		<div align="left">
-			<p>The former argument is hardly a parody. In a recent textbook on discrete mathematics, I encountered the following problem</p>
-			<p>&quot;There are 42 students who are to share 12 computers. Each student uses exactly one computer and no computer is used by more than six students. Show that at least five computers are used by three or more students.&quot;</p>
-			<p>Let <var>k</var> be the number of computers serving at least three students; since each computer serves at most 6 students, these <var>k</var> machines serve at most 6<var>k</var> students. Since the remaining 12&#150;<var>k</var> serve at most 2 students each, the latter machines serve at most 24&#150;2<var>k</var>
- students. Adding these results, we conclude that the number of students served is at most 24 + 4<var>k</var>. Since 42 students are served, we conclude 42 &#x2264; 24 + 4<var>k</var> or 4&#x00BD; &#x2264; <var>k</var> and, since <var>k</var> is integer, 5 &#x2264; <var>k</var> , which completes the proof.</p>
-			<p>The textbook, however, proceeds as follows &#x2014;ignore that, instead of 5&#x2264;<var>k</var>, it only shows <var>k</var> &#x2260; 4&#x2014; :</p>
-			<p>&quot;[Use an argument by contradiction.] Suppose that only four computers were used by three or more students. [ A contradiction must be derived]. At most six students are allowed to share any computer, making a total of at most 24 students using these four computers. Since there are 42 students in all, that would leave at least 18 students to share the remaining eight computers. But the generalized pigeon-hole principle guarantees that if 18 students share 8 computers, then at least three must share one of them. [The pigeons are the 18 students, the pigeon-holes are the eight computers, and 18 &gt; 2&#x2219;8.] This is a contradiction. Thus the supposition is false, and so at least five computers are used by three or more students.&quot;</p>
-			<p class="noindent"><u>Remark</u> Both arguments contain the number 24, but this is an accident: in the former argument, 24 emerges as twice the number of machines, in the latter as four times the maximum number of students served by a single machine. (End of Remark.)</p>
-			<p>In the problem statement, it is inessential that each student uses &quot;exactly&quot; one computer: with each student using &quot;at least&quot; one computer, the conclusion would have been valid as well. Is it far-fetched to assume that the overspecific &quot;exactly&quot; sneaked into the problem statement because a pigeon can occupy only 1 pigeon-hole at a time? We have now spotted (<var>i</var>) a needlessly weak theorem to be proved, (<var>ii</var>) an avoidable reductio ad absurdum, and (<var>iii</var>) an error in the purported proof (for k&#x2265;5 does not follow from k&#x2260;4). I am afraid that the desire to use the pigeon-hole principle can be blamed for all three shortcomings. The argument in terms of <var>k</var> is just an order of magnitude cleaner than the solution of the textbook.</p>
-			<p>The moral of the story is that we are much better off with the neutral, general standard procedure: name the unknown(s) so that you can formalize all conditions given or to be established and simplify by formula manipulation, unencumbered by imagery as tends to be imposed upon you by catchy names like &quot;The Pigeon-hole Principle&quot;.</p>
-		</div>
-		<div align="center">
-			<p class="noindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Austin, 21 March 1991</p>
-		</div>
-		<div align="left">
-			<p class="noindent">prof.dr.Edsger W.Dijkstra<br>
-				
-				
-				Department of Computer Sciences<br>
-				
-				
-				The University of Texas at Austin<br>
-				Austin, TX 78712&#150;1188<br>
-				
-				
-				USA<br>
-				
-				
-				_____________<br>
-				
-				
-				Mathematical Methodology</p>
-		</div>
-		<hr>
-		<font size="-1">transcribed by Mario B&eacute;land<br>
-			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="84">Fri, 18 Jan 2008</csobj></font>
-	</body>
-
-</html></div>
+<p>Right at the moment I was introduced to the pigeon-hole principle, I understood that there was something very special about it, for the Englishman from whom I learned it told it to me under its German name "das Schubfach prinzip". Later I learned that also in other languages it is honoured by a special name. It is, indeed, surrounded by some mystique, for proofs using it are often regarded as something special, something particularly ingenious. This feeling of awe is, for instance, nicely reflected by Ross Honsberger when he concludes one of his examples with the characterization "another triumph of the pigeon-hole principle". (Earlier he has called it "a fundamental tool of combinatorics".)</p>
+<p>It is my feeling, however, that this mystique and the surprise when we see the pigeon-hole principle being applied successfully are closely connected to the clumsiness of the usual formulations of the principle: they contain a lot of misleading noise, are overspecific, and hide the principle's arithmetic nature. Instead of composing an average formulation, I quote a typical one verbatim from the literature:</p>
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+<tr>
+<td valign="top" width="8%">(0)</td>
+<td valign="top">"if more than <var>n</var> objects are distributed into a set of <var>n</var> compartments, some compartment must receive more than one of the objects".</td>
+</tr>
+</table>
+<p class="continue">(Instead of the above "more than <var>n</var>", one often encounters the more specific "<var>n</var>+1".) We shall compare (0) with the alternative</p>
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+<tr>
+<td valign="top" width="8%">(1)</td>
+<td valign="top">"for a nonempty, finite bag of real numbers, the maximum is at least the average (and the minimum is at most the average).</td>
+</tr>
+</table>
+<p>Comparing (1) and (0), we observe to begin with that the "distributing" and "receiving" have disappeared, and rightly so, for they are just noise: the pigeon-hole principle is equally applicable when no process of distribution and reception is involved, e.g. when we wish to conclude, from the fact that a month is longer than a week, that in a month some weekday occurs more than once.</p>
+<p>The second thing we observe is that the "objects" and the "compartments" have disappeared. That is a great improvement, for it saves us the needless trouble of making a painful identification in all those circumstances in which (for visual or linguistic reasons) the metaphor of objects and compartments does not fit nicely. In the previous example, for instance, we should not talk about a month containing a number of Tuesdays, but about Tuesday ( = compartment ) containing a number of days-of the-month ( = objects ). The whole metaphor of objects and compartments is just a pain in the neck.</p>
+<p>Another regrettable consequence of the metaphor is that it invites a misleading visualization. Formulation (0) is in the form of an implication; the contrapositive states equivalently</p>
+<table width="100%" border="0" cellspacing="4" cellpadding="0">
+<tr>
+<td valign="top" width="8%">(2)</td>
+<td valign="top">"if each of <var>n</var> compartments contains at most one object, they contain together at most <var>n</var> objects".</td>
+</tr>
+</table>
+<p class="continue">Formulation (0) evokes a picture of cramped, overstuffed compartments —2 or more pigeons squeezed into a 1-pigeon hole— , whereas formulation (2) rather evokes a picture of underoccupied compartments. The difference between the pictures hides the fact that (0) and (2) are equivalent.</p>
+<p class="noindent"><u>Remark</u> It is not uncommon to see people distinguish —not in meaning, but in rôle— between <var>x</var>≤<var>y</var> and <var>y</var>≥<var>x</var> . The former they read as expressing (in terms of <var>y</var>) an upper bound for <var>x</var> , the latter as giving (in terms of <var>x</var>) a lower bound for <var>y</var> . I advise against trying to make such distinctions: the charm of</p>
+<p class="noindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <var>average</var> ≤ <var>maximum</var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>maximum</var> ≥ <var>average</var></p>
+<p class="noindent">is that they state exactly the same and need not evoke different connotations as (0) and (2) seem to do. (End of Remark.)</p>
+<p>Finally, the traditional pigeon-hole principle is much less general than it should be: expressed in <var>average</var> and <var>maximum</var>, (0) yields</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <var>average</var> &gt; 1 ⇒ <var>maximum</var> &gt;1</p>
+<p class="noindent">which is much weaker than (1)'s</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <var>average</var> ≤ <var>maximum</var> ;</p>
+<p class="noindent">this is why (1), being really stronger than (0), is referred to as the Generalized Pigeon-hole Principle.</p>
+<p>As an example in which the Generalized Pigeon-hole Principle comes in handy, we consider now what is known as the Problem of the German Soccer Lotto.</p>
+<p>Variables of type "outcome" have 1 of 3 possible values; variables of type "column" consist of 13 variables of type "outcome". In the following, dummies <var>c</var> and <var>d</var> range over type "column" and <var>W</var> is a set of constants of type "column". We are asked to construct a set <var>W</var>, as small as possible, such that</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (<u>A</u> <var>d</var> :: (<u>E</u> <var>c</var> : <var>c</var> ∈ <var>W</var> : (<u>N</u> <var>i</var> : 0 ≤ <var>i</var> &lt; 13 : <var>d</var>.<var>i</var> = <var>c</var>.<var>i</var>) ≥ 5))</p>
+<p class="noindent">In words: <var>W</var> should be such a set of columns that, whatever column we choose for <var>d</var>, <var>W</var> contains a column <var>c</var> that coincides with <var>d</var> in at least 5 positions.</p>
+<p>Set <var>W</var> contains at least 3 columns, for with at most 2 columns in <var>W</var> it is possible to choose <var>d</var> such that it coincides in no position with a column in <var>W</var>. But 3 columns suffice. Let <var>x</var>, <var>y</var>, <var>z</var> be the three columns in <var>W</var>; we can choose them such that for any <var>i</var> in the range 0 ≤ <var>i</var> &lt; 13</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>&nbsp;&nbsp;</var>{ <var>x</var>.<var>i</var>, <var>y</var>.<var>i</var>, <var>z</var>.<var>i</var> }</p>
+<p class="noindent">is the triple of possible outcome-values. With such a choice, each value <var>d</var>.<var>i</var> coincides with one of the three { <var>x</var>, <var>y</var>, <var>z</var> }; 13 coincidences in 3 columns yields an average of 4⅓ coincidences per column, and hence at least 1 column coincides in at least 5 positions with <var>d</var> . And thus the Problem of the German Soccer Lotto has been solved.</p>
+<p>The example has been included for two reasons. Firstly it is an example for which the traditional (0) does not suffice and the stronger (1) is really needed. Secondly, it shows the arithmetic reason for the surprise that the use of the pigeon-hole principle often evokes: the three constants 3, 13 and 5 of the problem statement fortunately satisfy the magical relation that 5 is the smallest integer that is at least 13/3. It is this arithmetic accident that makes the Problem of the German Soccer Lotto trivial. Replacing 5 by 6 we get a completely different problem, which is much harder to solve! Another way to phrase the same observation is that if you can get away with an argument as simple as the pigeon-hole principle, you have just been lucky.</p>
+<div align="center">
+<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+*</p>
+</div>
+<div align="left">
+<p>Another, I think unpleasant, property of the pigeon-hole principle is that it seems to invite the reductio ad absurdum. Take this simple problem:</p>
+</div>
+<div align="center">
+<table width="329" border="0" cellspacing="5" cellpadding="0">
+<tr>
+<td align="left">On the ranch, each cowboy is the exclusive owner of at least one horse. Show that on the ranch</td>
+</tr>
+<tr>
+<td align="center"># cowboys ≤ # horses&nbsp;&nbsp;&nbsp;.</td>
+</tr>
+</table>
+</div>
+<div align="left">
+<p>It is not unusual at all to encounter an argument of the following shape. Assume that the conclusion is false, i.e., assume that # cowboys &gt; # horses; now put each cowboy (= pigeon) into one of the horses (= holes) he owns; then the pigeon-hole principle tells us that there is a horse owned by at least two cowboys, which contradicts the exclusive ownership. Hence the conclusion is true, i.e. # cowboys ≤ # horses.</p>
+<p>[Compare the argument with the following one. Since the minimum number of horses per (i.e. exclusively owned by a) cowboy is at least 1, the average number of horses per cowboy is at least 1, i.e.</p>
+</div>
+<div align="center">
+<table width="221" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td>
+<table width="87" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td>
+<div align="center"><u>&nbsp;&nbsp;# horses&nbsp;&nbsp;</u></div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center"># cowboys</div>
+</td>
+</tr>
+</table>
+</td>
+<td>≥&nbsp;&nbsp;1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.]</td>
+</tr>
+</table>
+</div>
+<div align="left">
+<p>The former argument is hardly a parody. In a recent textbook on discrete mathematics, I encountered the following problem</p>
+<p>"There are 42 students who are to share 12 computers. Each student uses exactly one computer and no computer is used by more than six students. Show that at least five computers are used by three or more students."</p>
+<p>Let <var>k</var> be the number of computers serving at least three students; since each computer serves at most 6 students, these <var>k</var> machines serve at most 6<var>k</var> students. Since the remaining 12–<var>k</var> serve at most 2 students each, the latter machines serve at most 24–2<var>k</var> students. Adding these results, we conclude that the number of students served is at most 24 + 4<var>k</var>. Since 42 students are served, we conclude 42 ≤ 24 + 4<var>k</var> or 4½ ≤ <var>k</var> and, since <var>k</var> is integer, 5 ≤ <var>k</var> , which completes the proof.</p>
+<p>The textbook, however, proceeds as follows —ignore that, instead of 5≤<var>k</var>, it only shows <var>k</var> ≠ 4— :</p>
+<p>"[Use an argument by contradiction.] Suppose that only four computers were used by three or more students. [ A contradiction must be derived]. At most six students are allowed to share any computer, making a total of at most 24 students using these four computers. Since there are 42 students in all, that would leave at least 18 students to share the remaining eight computers. But the generalized pigeon-hole principle guarantees that if 18 students share 8 computers, then at least three must share one of them. [The pigeons are the 18 students, the pigeon-holes are the eight computers, and 18 &gt; 2∙8.] This is a contradiction. Thus the supposition is false, and so at least five computers are used by three or more students."</p>
+<p class="noindent"><u>Remark</u> Both arguments contain the number 24, but this is an accident: in the former argument, 24 emerges as twice the number of machines, in the latter as four times the maximum number of students served by a single machine. (End of Remark.)</p>
+<p>In the problem statement, it is inessential that each student uses "exactly" one computer: with each student using "at least" one computer, the conclusion would have been valid as well. Is it far-fetched to assume that the overspecific "exactly" sneaked into the problem statement because a pigeon can occupy only 1 pigeon-hole at a time? We have now spotted (<var>i</var>) a needlessly weak theorem to be proved, (<var>ii</var>) an avoidable reductio ad absurdum, and (<var>iii</var>) an error in the purported proof (for k≥5 does not follow from k≠4). I am afraid that the desire to use the pigeon-hole principle can be blamed for all three shortcomings. The argument in terms of <var>k</var> is just an order of magnitude cleaner than the solution of the textbook.</p>
+<p>The moral of the story is that we are much better off with the neutral, general standard procedure: name the unknown(s) so that you can formalize all conditions given or to be established and simplify by formula manipulation, unencumbered by imagery as tends to be imposed upon you by catchy names like "The Pigeon-hole Principle".</p>
+</div>
+<div align="center">
+<p class="noindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Austin, 21 March 1991</p>
+</div>
+<div align="left">
+<p class="noindent">prof.dr.Edsger W.Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin<br>
+Austin, TX 78712–1188<br>
+USA<br>
+_____________<br>
+Mathematical Methodology</p>
+</div>
+<hr>
+<font size="-1">transcribed by Mario Béland<br>
+revised Fri, 18 Jan 2008</font>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

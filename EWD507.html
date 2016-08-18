@@ -22,7 +22,263 @@
     </div>
   </div>
   <h1>On a gauntlet thrown by David Gries</h1>
-  <div class='body'> <p align="center">by<br>Edsger W. Dijkstra</p><p>It is requested to design a program that will generate the <code>N!</code> permutationsof the values from <code>0</code> through <code>N-1</code> in such an order that the transition fromone permutation to the next is always performed by exactly one swap of twoneighbours.</p><p>In a permutation each pair of values such that the larger value precedesthe smaller one, presents a so-called "inversion". (In particular: the one andonly permutation with zero inversions is the one in which the values are placedin monotonically increasing order.) The notion of inversions can be expectedto be relevant because the swapping of two neighbours changes the total numberof inversions by (plus or minus) 1, and it is, therefore, suggested tocharacterize each permutation by its inversions. This can be done by introducing<code>N</code> inversion counters <code>inv[i]</code> for 0 ≤ <code>i</code> &lt; <code>N</code>, where <code>inv[i]</code> equals the numberof inversions between the value <code>i</code> and the values smaller than <code>i</code>. (From this definition 0 ≤ <code>inv[i]</code> ≤ <code>i</code> follows; the total number of inversions of a permutationis the sum of the corresponding <code>inv[i]</code>-values.) That each permutationdefines the <code>inv[i]</code>-values uniquely is obvious; that the <code>inv[i]</code>-values definethe permutation uniquely is easily seen by considering the algorithm constructingthe permutation from the <code>inv[i]</code>-values —processing these values in the order of increasing <code>i</code> — : this algorithm leaves us no choice.</p><p>There is, therefore, a one-to-one correspondence between the <code>N!</code> possible<code>inv</code>-values and the <code>N!</code> permutations, and the question becomes, which modificationsof the <code>inv</code>-value correspond to a swap of neighbours: each swap of two neighbours changes exactly one <code>inv[i]</code>-value by 1, viz. with <code>i</code> = the larger of the twovalues swapped. The value of <code>inv[i]</code> is to be increased if the swap increasesthe number of inversions; otherwise it is to be decreased.</p><p>A feasible sequence of <code>inv</code>-values to be generated is now reasonably obvious: it is the generalization of the Gray-code. For <code>N = 4</code> it would begin				<blockquote><table>	<tr>		<th><code>inv[0]</code></th>		<th><code>inv[1]</code></th>		<th><code>inv[2]</code></th>		<th><code>inv[3]</code></th>	</tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									1</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									2</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									3</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									1</div>							</td><td>								<div align="center">									3</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									1</div>							</td><td>								<div align="center">									2</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									1</div>							</td><td>								<div align="center">									1</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									1</div>							</td><td>								<div align="center">									0</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									2</div>							</td><td>								<div align="center">									0</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									2</div>							</td><td>								<div align="center">									1</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									2</div>							</td><td>								<div align="center">									2</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									0</div>							</td><td>								<div align="center">									2</div>							</td><td>								<div align="center">									3</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									1</div>							</td><td>								<div align="center">									2</div>							</td><td>								<div align="center">									3</div>							</td></tr>	<tr><td>								<div align="center">									0</div>							</td><td>								<div align="center">									1</div>							</td><td>								<div align="center">									2</div>							</td><td>								<div align="center">									2</div>							</td></tr>	<tr><td colspan="4">etc.</td></tr></table></blockquote>				<p>The rule is as follows: a number is changeable when it may be increasedor decreased by 1. It may be increased if the sum of the numbers to its leftis even and it has not reached its maximum value; it may be decreased if thesum of the numbers to its left is odd and it has not reached its minimum valuezero. At each step, always the right-most changeable number is changed. It is not difficult to see that in the permutation, the value <code>i</code> is, indeed,swapped with a smaller value.</p>				<p>After having established the value <code>i</code>, such that <code>inv[i]</code> has to bechanged, and, also, whether the value <code>i</code> has to be swapped with its predecessorin the permutation (corresponding to an increase of <code>inv[i]</code>) or with itssuccessor in the permutation (corresponding to a decrease of <code>inv[i]</code>), wehave to establish the place <code>c</code> in the permutation, where the value <code>i</code> is located,because for all <code>j</code> > <code>i</code>, <code>inv[j]</code> has an extreme value, <code>c</code> is given by				<blockquote><code>c = i - inv[i] + </code> (the number of values j such that <code>j</code> > <code>i <u>and</u> inv[j] = j</code>)</blockquote>				<p>In the following program we have given <code>inv[0]</code> — which should be constantly 0 — the funny value -2; this is the usual, mean, little coding trick, in orderto let the search for the right-most changeable <code>inv[i]</code>-value terminateartificially when there is no more such an <code>inv[i]</code>-value. The value "<code>totinv</code>"records the total number of inversions in the array <code>a</code>, that is used to recordthe permutation; the variable "<code>linv</code>" records the sum of the (non-funny) <code>inv[j]</code>-valuesto the left of <code>inv[i]</code> (i.e. with <code>j</code> &lt; <code>i</code>).</p>				<pre><code><u>begin</u> <u>integer</u> <u>array</u> a, inv [0:N-1]; <u>boolean</u> ready; <u>integer</u> totinv, i, c, linv;i:= 0; <u>do</u> i &lt; N → a[i]:= i; inv[i]:= 0; i:= i + 1 <u>od</u>; inv[0]:= -2;ready:= <u>false</u>; totinv:= 0;<u>do</u> <u>non</u> ready → printarray(a);      i:= N - 1; c:= 0; linv:= totinv - inv[i];      <u>do</u> inv[i] = i <u>and</u> even(linv) →            c:= c + 1; i:= i - 1; linv:= linv - inv[i]       <font size="+3"><sub>&#x25AF;</sub></font> inv[i] = 0 <u>and</u> odd(linv) →            i:= i - 1; linv:= linv - inv[i]      <u>od</u>      c:= c + i - inv[i];      <u>if</u> even(linv) <u>and</u> i > 0 →              inv[i]:= inv[i] + 1; totinv:= totinv + 1; swap(a, c-1, c)       </code><font size="+3"><sub>&#x25AF;</sub></font><code> odd(linv) <u>and</u> i > 0 →              inv[i]:= inv[i] - 1; totinv:= totinv - 1; swap(a, c, c+1)       </code><font size="+3"><sub>&#x25AF;</sub></font><code> i = 0 → ready:= <u>true</u>      <u>fi</u><u>od</u><u>end</u></code></pre><p style="text-indent: 0em">Post Scriptum.</p><p>The problem solved above has been posed to me by David Gries, who toldme that he had found it a non-trivial task to present a solution to it in aconvincing manner. The argument shown led quickly to the above solution,which is submitted for publication upon his request. (End of Post Scriptum.)</p>      <table width="90%" border="0" cellspacing="2" cellpadding="0"> 	<tr> 		<td width="60%">            Burroughs<br/>			Plataanstraat 5<br/> 			NUENEN - 4565<br/>			The Netherlands		</td> 		<td>			prof.dr.Edsger W.Dijkstra<br/>			Burroughs Research Fellow		</td> 	</tr> </table><hr> <div id=footer> 	<font size="-1">transcribed by Edwin de Jong<br>revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="87">Tue, 7 Dec 2010</csobj></font></div> 	</div> </div> 	</BODY></HTML> </div>
+  <div class='body'>
+<p align="center">by<br>
+Edsger W. Dijkstra</p>
+<p>It is requested to design a program that will generate the <code>N!</code> permutations of the values from <code>0</code> through <code>N-1</code> in such an order that the transition from one permutation to the next is always performed by exactly one swap of two neighbours.</p>
+<p>In a permutation each pair of values such that the larger value precedes the smaller one, presents a so-called "inversion". (In particular: the one and only permutation with zero inversions is the one in which the values are placed in monotonically increasing order.) The notion of inversions can be expected to be relevant because the swapping of two neighbours changes the total number of inversions by (plus or minus) 1, and it is, therefore, suggested to characterize each permutation by its inversions. This can be done by introducing <code>N</code> inversion counters <code>inv[i]</code> for 0&nbsp;≤&nbsp;<code>i</code>&nbsp;&lt;&nbsp;<code>N</code>, where <code>inv[i]</code> equals the number of inversions between the value <code>i</code> and the values smaller than <code>i</code>. (From this definition 0&nbsp;≤&nbsp;<code>inv[i]</code>&nbsp;≤&nbsp;<code>i</code> follows; the total number of inversions of a permutation is the sum of the corresponding <code>inv[i]</code>-values.) That each permutation defines the <code>inv[i]</code>-values uniquely is obvious; that the <code>inv[i]</code>-values define the permutation uniquely is easily seen by considering the algorithm constructing the permutation from the <code>inv[i]</code>-values —processing these values in the order of increasing <code>i</code> — : this algorithm leaves us no choice.</p>
+<p>There is, therefore, a one-to-one correspondence between the <code>N!</code> possible <code>inv</code>-values and the <code>N!</code> permutations, and the question becomes, which modifications of the <code>inv</code>-value correspond to a swap of neighbours: each swap of two neighbours changes exactly one <code>inv[i]</code>-value by 1, viz. with <code>i</code> = the larger of the two values swapped. The value of <code>inv[i]</code> is to be increased if the swap increases the number of inversions; otherwise it is to be decreased.</p>
+<p>A feasible sequence of <code>inv</code>-values to be generated is now reasonably obvious: it is the generalization of the Gray-code. For <code>N = 4</code> it would begin</p>
+<blockquote>
+<table>
+<tr>
+<th><code>inv[0]</code></th>
+<th><code>inv[1]</code></th>
+<th><code>inv[2]</code></th>
+<th><code>inv[3]</code></th>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">1</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">2</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">3</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">1</div>
+</td>
+<td>
+<div align="center">3</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">1</div>
+</td>
+<td>
+<div align="center">2</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">1</div>
+</td>
+<td>
+<div align="center">1</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">1</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">2</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">2</div>
+</td>
+<td>
+<div align="center">1</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">2</div>
+</td>
+<td>
+<div align="center">2</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">2</div>
+</td>
+<td>
+<div align="center">3</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">1</div>
+</td>
+<td>
+<div align="center">2</div>
+</td>
+<td>
+<div align="center">3</div>
+</td>
+</tr>
+<tr>
+<td>
+<div align="center">0</div>
+</td>
+<td>
+<div align="center">1</div>
+</td>
+<td>
+<div align="center">2</div>
+</td>
+<td>
+<div align="center">2</div>
+</td>
+</tr>
+<tr>
+<td colspan="4">etc.</td>
+</tr>
+</table>
+</blockquote>
+<p>The rule is as follows: a number is changeable when it may be increased or decreased by 1. It may be increased if the sum of the numbers to its left is even and it has not reached its maximum value; it may be decreased if the sum of the numbers to its left is odd and it has not reached its minimum value zero. At each step, always the right-most changeable number is changed. It is not difficult to see that in the permutation, the value <code>i</code> is, indeed, swapped with a smaller value.</p>
+<p>After having established the value <code>i</code>, such that <code>inv[i]</code> has to be changed, and, also, whether the value <code>i</code> has to be swapped with its predecessor in the permutation (corresponding to an increase of <code>inv[i]</code>) or with its successor in the permutation (corresponding to a decrease of <code>inv[i]</code>), we have to establish the place <code>c</code> in the permutation, where the value <code>i</code> is located, because for all <code>j</code> &gt; <code>i</code>, <code>inv[j]</code> has an extreme value, <code>c</code> is given by</p>
+<blockquote><code>c = i - inv[i] +</code> (the number of values j such that <code>j</code> &gt; <code>i <u>and</u> inv[j] = j</code>)</blockquote>
+<p>In the following program we have given <code>inv[0]</code> — which should be constantly 0 — the funny value -2; this is the usual, mean, little coding trick, in order to let the search for the right-most changeable <code>inv[i]</code>-value terminate artificially when there is no more such an <code>inv[i]</code>-value. The value "<code>totinv</code>" records the total number of inversions in the array <code>a</code>, that is used to record the permutation; the variable "<code>linv</code>" records the sum of the (non-funny) <code>inv[j]</code>-values to the left of <code>inv[i]</code> (i.e. with <code>j</code> &lt; <code>i</code>).</p>
+<pre>
+<code><u>begin</u> <u>integer</u> <u>array</u> a, inv [0:N-1]; <u>boolean</u> ready; <u>integer</u> totinv, i, c, linv;
+i:= 0; <u>do</u> i &lt; N → a[i]:= i; inv[i]:= 0; i:= i + 1 <u>od</u>; inv[0]:= -2;
+ready:= <u>false</u>; totinv:= 0;
+<u>do</u> <u>non</u> ready → printarray(a);
+      i:= N - 1; c:= 0; linv:= totinv - inv[i];
+      <u>do</u> inv[i] = i <u>and</u> even(linv) →
+            c:= c + 1; i:= i - 1; linv:= linv - inv[i]
+       <font size="+3"><sub>▯</sub></font> inv[i] = 0 <u>and</u> odd(linv) →
+            i:= i - 1; linv:= linv - inv[i]
+      <u>od</u>
+      c:= c + i - inv[i];
+      <u>if</u> even(linv) <u>and</u> i &gt; 0 →
+              inv[i]:= inv[i] + 1; totinv:= totinv + 1; swap(a, c-1, c)
+       </code><font size="+3"><sub>▯</sub></font><code> odd(linv) <u>and</u> i &gt; 0 →
+              inv[i]:= inv[i] - 1; totinv:= totinv - 1; swap(a, c, c+1)
+       </code><font size="+3"><sub>▯</sub></font><code> i = 0 → ready:= <u>true</u>
+      <u>fi</u>
+<u>od</u>
+<u>end</u></code>
+</pre>
+<p style="text-indent: 0em">Post Scriptum.</p>
+<p>The problem solved above has been posed to me by David Gries, who told me that he had found it a non-trivial task to present a solution to it in a convincing manner. The argument shown led quickly to the above solution, which is submitted for publication upon his request. (End of Post Scriptum.)</p>
+<table width="90%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td width="60%">Burroughs<br>
+Plataanstraat 5<br>
+NUENEN - 4565<br>
+The Netherlands</td>
+<td>prof.dr.Edsger W.Dijkstra<br>
+Burroughs Research Fellow</td>
+</tr>
+</table>
+<hr>
+<div id="footer"><font size="-1">transcribed by Edwin de Jong<br>
+revised Tue, 7 Dec 2010</font></div>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

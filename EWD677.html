@@ -23,17 +23,11 @@
   </div>
   <h1>On one of Cayley's theorems</h1>
   <div class='body'>
-<p>
-A (finite) graph consists of a (finite) set of nodes with at most one edge between any two nodes. The so-called "multiplicity" of a node is defined as the number of edges of which that node is an endpoint.
-<p>
-A connected graph without cycles is called a "tree"; a tree with N nodes has N-1 edges. In a tree the nodes with a multiplicity =1 are called its "leaves". A tree with at least 2 nodes has at least 2 leaves.
-<p>
-In the following "a labeled tree" is a tree in which each node is labeled with a distinct integer. From a labeled tree with at least 2 nodes we can remove the leaf with the lowest number, together with the edge connecting it to the rest of the tree; the remaining graph is again a labeled tree. Hence this action can be repeated until the tree has been reduced to a single node; that remaining node is the one with the maximum number.
-
-		<p>
-For instance, the tree
-
-		<pre>
+<p>A (finite) graph consists of a (finite) set of nodes with at most one edge between any two nodes. The so-called "multiplicity" of a node is defined as the number of edges of which that node is an endpoint.</p>
+<p>A connected graph without cycles is called a "tree"; a tree with N nodes has N-1 edges. In a tree the nodes with a multiplicity =1 are called its "leaves". A tree with at least 2 nodes has at least 2 leaves.</p>
+<p>In the following "a labeled tree" is a tree in which each node is labeled with a distinct integer. From a labeled tree with at least 2 nodes we can remove the leaf with the lowest number, together with the edge connecting it to the rest of the tree; the remaining graph is again a labeled tree. Hence this action can be repeated until the tree has been reduced to a single node; that remaining node is the one with the maximum number.</p>
+<p>For instance, the tree</p>
+<pre>
           4
            \
         3   0   5
@@ -42,66 +36,56 @@ For instance, the tree
              / \
             2   6
 </pre>
-		
 would give rise to the following sequence - in the order from left to right - of edge removals; each time we have written the number of the leaf being removed in the upper line:
-
-		<pre>        2 3 4 0 5 6 1
+<pre>
+        2 3 4 0 5 6 1
         1 7 0 7 1 1 7
 </pre>
-		<div align="right">
-<a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD677.PDF">EWD677</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD677.PDF#page=2">1</a></div>
-<p>
-We remark
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD677.PDF">EWD677</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD677.PDF#page=2">1</a></div>
+<p>We remark</p>
 <table width="100%">
-<tr><td align="left" valign="top" width="5%">
-1.)</td><td align="left" valign="top">that the right-most value of the bottom line is always the highest node number
-</td></tr>
-<tr><td align="left" valign="top">
-2.)</td><td align="left" valign="top">that the top line is always a permutation of the remaining node numbers
-</td></tr>
-<tr><td align="left" valign="top">
-3.)</td><td align="left" valign="top">that the number of times that a value occurs in such a scheme equals the multiplicity of the corresponding node.
-</td></tr>
+<tr>
+<td align="left" valign="top" width="5%">1.)</td>
+<td align="left" valign="top">that the right-most value of the bottom line is always the highest node number</td>
+</tr>
+<tr>
+<td align="left" valign="top">2.)</td>
+<td align="left" valign="top">that the top line is always a permutation of the remaining node numbers</td>
+</tr>
+<tr>
+<td align="left" valign="top">3.)</td>
+<td align="left" valign="top">that the number of times that a value occurs in such a scheme equals the multiplicity of the corresponding node.</td>
+</tr>
 </table>
-		<p>When we remove from such a scheme the top line and the right-most column --in our example<pre>
+<p>When we remove from such a scheme the top line and the right-most column --in our example</p>
+<pre>
         1 7 0 7 1 1
 </pre>
-<p>would be the result-- each value has been removed once (on account of 1. and 2.) and (on account of 3 the number of times that a value occurs in such a sequence is one less than the multiplicity of the corresponding nodes. Hence the leaves are the nodes whose number is missing in the sequence.<p>
-Given the bottom line minus the right-most element and knowing the set of integers used to label the nodes, we can therefore reconstruct the left-most element of the top line: it is the minimum value from the set that is missing in the sequence. Because for a tree of N nodes the sequence is N-2 elements long, at least 2 values are missing; therefore that minimum missing value never equals the maximum node number, i.e. the construction is possible for any sequence of N-2 node numbers.
-
-		<p>
-The next value in the top line is found by the same argument after reducing the set of node numbers by removing from it the value just filled in, and reducing 
-		<div align="right">
-<a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD677.PDF">EWD677</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD677.PDF#page=3">2</a></div>
-		<p>
-the sequence by the removal of its left-most element. By repeating the argument, the first N-2 elements of the top line can be reconstructed. Finally, of the right-most column the bottom element is reconstructable on account of observation 1. and its top element by observation 2. .
-<p>
-Hence, for a set of N labeled nodes, there is a one-to-one correspondence between the trees connecting these nodes and the sequences of N-2 node numbers. Because the number of such sequences is obviously equal to
+<p>would be the result-- each value has been removed once (on account of 1. and 2.) and (on account of 3 the number of times that a value occurs in such a sequence is one less than the multiplicity of the corresponding nodes. Hence the leaves are the nodes whose number is missing in the sequence.</p>
+<p>Given the bottom line minus the right-most element and knowing the set of integers used to label the nodes, we can therefore reconstruct the left-most element of the top line: it is the minimum value from the set that is missing in the sequence. Because for a tree of N nodes the sequence is N-2 elements long, at least 2 values are missing; therefore that minimum missing value never equals the maximum node number, i.e. the construction is possible for any sequence of N-2 node numbers.</p>
+<p>The next value in the top line is found by the same argument after reducing the set of node numbers by removing from it the value just filled in, and reducing</p>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD677.PDF">EWD677</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD677.PDF#page=3">2</a></div>
+<p>the sequence by the removal of its left-most element. By repeating the argument, the first N-2 elements of the top line can be reconstructed. Finally, of the right-most column the bottom element is reconstructable on account of observation 1. and its top element by observation 2. .</p>
+<p>Hence, for a set of N labeled nodes, there is a one-to-one correspondence between the trees connecting these nodes and the sequences of N-2 node numbers. Because the number of such sequences is obviously equal to</p>
 <pre>
         N<sup>N-2</sup>        ,
 </pre>
 this value also equals the number of possible trees connecting N labeled nodes. This is ascertained by one of Cayley's famous theorems, of which this note offers a new proof.
-<p>
-<u>Remark.</u> To tell the truth: this proof is not so very new, as I discovered it more than 20 years ago. It surfaced yesterday in a discussion at the Tuesday Afternoon Club, which urged me to devote a small note to it. Hence. (End of remark)
-<p>
-23rd of August, 1978
-<p>
-<table  width="100%" border="0">
+<p><u>Remark.</u> To tell the truth: this proof is not so very new, as I discovered it more than 20 years ago. It surfaced yesterday in a discussion at the Tuesday Afternoon Club, which urged me to devote a small note to it. Hence. (End of remark)</p>
+<p>23rd of August, 1978</p>
+<table width="100%" border="0">
 <tr>
-<td valign="top" width="50%">
-Plataanstraat 5<br>
+<td valign="top" width="50%">Plataanstraat 5<br>
 5671 AL NUENEN<br>
 The Netherlands</td>
-<td valign="top">
-prof.dr. Edsger W. Dijkstra<br>
+<td valign="top">prof.dr. Edsger W. Dijkstra<br>
 BURROUGHS Research Fellow</td>
-</tr></table>
+</tr>
+</table>
 <hr>
 Transcription by John C Gordon
-<p>Last revised on <csobj format="MedDate" h="16" region="15" t="DateTime" w="106">Tue, 24 Jun 2003</csobj>.
-</body></html></div>
+<p>Last revised on Tue, 24 Jun 2003.</p>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

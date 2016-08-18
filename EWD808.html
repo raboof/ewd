@@ -23,65 +23,48 @@
   </div>
   <h1>Canonical String Reduction</h1>
   <div class='body'>
-<p>
-This note addresses the problem of how to characterize an intermediate machine state during the evaluation of a SASL expression. Addressing that problem without any specific implementation in mind and observing that both the initial state and the answer are legitimate SASL expressions, I shall try to characterize the relevant intermediate states as SASL expressions as well. In doing so I hope to design such a strict scheme for using scopes that some light is shed on the problem of garbage detection.
-<p>
-I have to adapt SASL's syntax to my purpose. Instead of writing
-<p>
+<p>This note addresses the problem of how to characterize an intermediate machine state during the evaluation of a SASL expression. Addressing that problem without any specific implementation in mind and observing that both the initial state and the answer are legitimate SASL expressions, I shall try to characterize the relevant intermediate states as SASL expressions as well. In doing so I hope to design such a strict scheme for using scopes that some light is shed on the problem of garbage detection.</p>
+<p>I have to adapt SASL's syntax to my purpose. Instead of writing</p>
 <pre>
   from 0
     <u>where</u> from n = n : from (n+1)
 </pre>
 I shall write
-<p>
 <pre>
   |[ from <u>with</u> from =
        |[ n : from (n+1) <u>with</u> n= ]|
   ]| 0
 </pre>
 The inner block on the middle line delineates the scope of n ; the fact that it ends on "<u>with</u> n=]|" indicates that it represents what some readers may
-<p>
-<div align="right">
-			 <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=2">1</a></div>
-<p>
-know better as the &#x03BB;-expression &#x03BB;n &#x2022; (n:from(n+1)). The outer block delineates the scope of the identifier from . Its first occurrence states that the whole block stands for the object locally known as "from"; "<u>with</u> from = " introduces a definition of the object locally known as "from"; the object being a function, its definition then follows as a &#x03BB;-expression. Note the contrast with the original SASL program: there the whole expression "from 0" was defined with the scope of "from", while in our version the scope of "from" is chosen as small as possible.
-<p>
-We shall do our experiments with a slightly more ambitious program, viz. the program for the tabulation of fusc, inspired by J.L.A. van de Snepscheut, designed by A.J.M. van Gasteren, and using the function "zip" as simplified by F.E.J. Kruseman Aretz.
-<p>
-In regular SASL the text could be
-<p>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=2">1</a></div>
+<p>know better as the λ-expression λn • (n:from(n+1)). The outer block delineates the scope of the identifier from . Its first occurrence states that the whole block stands for the object locally known as "from"; "<u>with</u> from = " introduces a definition of the object locally known as "from"; the object being a function, its definition then follows as a λ-expression. Note the contrast with the original SASL program: there the whole expression "from 0" was defined with the scope of "from", while in our version the scope of "from" is chosen as small as possible.</p>
+<p>We shall do our experiments with a slightly more ambitious program, viz. the program for the tabulation of fusc, inspired by J.L.A. van de Snepscheut, designed by A.J.M. van Gasteren, and using the function "zip" as simplified by F.E.J. Kruseman Aretz.</p>
+<p>In regular SASL the text could be</p>
 <pre>
   x
   <u>where</u> x = 1 : zip x (elf x)
         <u>where</u> zip (p:q)r = p : zip r q
-		      elf(a:b:c) = a+b:elf(b:c)
+                      elf(a:b:c) = a+b:elf(b:c)
 </pre>
 The above definition fails to express very directly - i.e. otherwise than by the recognition of the pattern "b:c" - that the tail of the original argument of elf is the argument of the recursive call.
-<p>
-<div align="right">
-			 <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=3">2</a></div>
-<p>
-In our notation, we would write
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=3">2</a></div>
+<p>In our notation, we would write</p>
 <pre>
-|[ x <u>with</u> x = 1:						(0)
-     |[ zip <u>with</u> zip=						(1)
-	     |[ p:						(2)
-		  |[ zip r q <u>with</u> r= ]| <u>with</u> p:q=		(3)
-	     |]							(4)
-	 |]  x							(5)
-	 ( |[ elf <u>with</u> elf=					(6)
-	     |[ a +						(7)
-		  |[ b <u>with</u> b:?=y]| : elf y <u>with</u> a:y=		(8)
-	     ]|							(9)
-	 ]| x)							(10)
-]|								(11)
+|[ x <u>with</u> x = 1:                                         (0)
+     |[ zip <u>with</u> zip=                                            (1)
+             |[ p:                                              (2)
+                  |[ zip r q <u>with</u> r= ]| <u>with</u> p:q=         (3)
+             |]                                                 (4)
+         |]  x                                                  (5)
+         ( |[ elf <u>with</u> elf=                                      (6)
+             |[ a +                                             (7)
+                  |[ b <u>with</u> b:?=y]| : elf y <u>with</u> a:y=             (8)
+             ]|                                                 (9)
+         ]| x)                                                  (10)
+]|                                                              (11)
 </pre>
 The scope of x extends over 0-11; the scope of zip extends over 1-5; the scope of p:q extends over 2-4; the scope of r is on line 3; the scope of elf extends over 6-10; the scope of a:y extends over 7-9; the scope of b is on line 8.
-<p>
-The definition of zip on 2-4 is arrived at by successive abstraction. From
-<p>
+<p>The definition of zip on 2-4 is arrived at by successive abstraction. From</p>
 <pre>
      zip (p:q) r = p:zip r q
 </pre>
@@ -89,63 +72,42 @@ we derive, by abstracting first from r,
 <pre>
      zip (p:q) = p : |[ zip r q <u>with</u> r= ]|   .
 </pre>
-Here, the proper scope for r has been determined as follows: the placing of "<u>with</u> r = ]|" is prescribed by our rule for &#x03BB;-abstraction, the placing of the
-<p>
-<div align="right">
-			 <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=4">3</a></div>
-<p>
-corresponding "|[" is determined by the rule that the scope coincides with the smallest syntactic unit containing all occurrences of the variable in question. Here its place reflects that functional application is left-associative, i.e. that zip r q is short for ((zip r) q).
-<p>
-On line 8, |[ b <u>with</u> b:?=y ]| is no more than a complicated way of writing "hd y". The convention followed seems consistent - it is, in terms of number of characters needed, clumsy, but that is of no relevance here: we are not proposing a notation to be programmed in.
-<p>
-Things defined within a scope are significant within that scope. Our final result should have global significance. This observation presents the process of evaluation as exporting successive elements of x - which is a continued concatenation of integers - outside the scope of the local terminology. (We had already decided to choose our scopes as small as possible; exporting as much as possible from them is a natural extension. It can be claimed that we already did so, when we replaced
-<p>
+Here, the proper scope for r has been determined as follows: the placing of "<u>with</u> r = ]|" is prescribed by our rule for λ-abstraction, the placing of the
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=4">3</a></div>
+<p>corresponding "|[" is determined by the rule that the scope coincides with the smallest syntactic unit containing all occurrences of the variable in question. Here its place reflects that functional application is left-associative, i.e. that zip r q is short for ((zip r) q).</p>
+<p>On line 8, |[ b <u>with</u> b:?=y ]| is no more than a complicated way of writing "hd y". The convention followed seems consistent - it is, in terms of number of characters needed, clumsy, but that is of no relevance here: we are not proposing a notation to be programmed in.</p>
+<p>Things defined within a scope are significant within that scope. Our final result should have global significance. This observation presents the process of evaluation as exporting successive elements of x - which is a continued concatenation of integers - outside the scope of the local terminology. (We had already decided to choose our scopes as small as possible; exporting as much as possible from them is a natural extension. It can be claimed that we already did so, when we replaced</p>
 <pre>
           |[ p : zip r q <u>with</u> r= ]|
 by        p : |[ zip r q <u>with</u> r= ]|   .    )
 </pre>
 Evaluation of an expression can now be viewed
-<p>
-<div align="right">
-			 <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=5">4</a></div>
-<p>
-as applying such reductions (i.e. semantics preserving transformations) that lead to export from a scope of values global with respect to that scope.
-<p>
-In this case we can do that by substitution. We have an expression of the form
-<p>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=5">4</a></div>
+<p>as applying such reductions (i.e. semantics preserving transformations) that lead to export from a scope of values global with respect to that scope.</p>
+<p>In this case we can do that by substitution. We have an expression of the form</p>
 <pre>
           |[ x <u>with</u> x = 1: E(x) ]|  .
 </pre>
 The substitution x = 1:w - meaningful because "1" has a meaning outside the scope of x - leads to the equivalent, but further evaluated expression
-<p>
 <pre>
           1:|[ w <u>with</u> w = |[ E(x) <u>with</u> x=1:w ]| ]|    .
 </pre>
 The inner bracket pair delineates the scope of x, the outer bracket pair delineates the scope of w.
-<p>
-Applying the substitution x=1:w we get
-<p>
+<p>Applying the substitution x=1:w we get</p>
 <pre>
-1:|[ w <u>with</u> w =							(0)
-     |[ |[ zip <u>with</u> zip =					(1)
-            |[ p: |[ zip r q <u>with</u> r = ]| <u>with</u> p:q= ]|		(2)
-     ]| x							(3)
-    (|[ elf <u>with</u> elf=						(4)
-        |[a + |[ b <u>with</u> b:?=y ]| : elf y <u>with</u> a:y= ]|		(5)
-     ]| x) <u>with</u> x = 1:w						(6)
-    ]|								(7)
-]|								(8)
+1:|[ w <u>with</u> w =                                                  (0)
+     |[ |[ zip <u>with</u> zip =                                        (1)
+            |[ p: |[ zip r q <u>with</u> r = ]| <u>with</u> p:q= ]|             (2)
+     ]| x                                                       (3)
+    (|[ elf <u>with</u> elf=                                            (4)
+        |[a + |[ b <u>with</u> b:?=y ]| : elf y <u>with</u> a:y= ]|             (5)
+     ]| x) <u>with</u> x = 1:w                                          (6)
+    ]|                                                          (7)
+]|                                                              (8)
 </pre>
 This is, to my feeling, <u>not</u> the moment to eliminate x
-<p>
-<div align="right">
-			 <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=6">5</a></div>
-<p>
-- by substituting 1:w for it - since, within its scope, x is referenced twice. The next thing to do is to unfold zip, i.e. replacing its outer occurrence by its definition and inserting its definition at its inner occurrence, i.e. replacing lines (1), (2), and (3) by
-<p>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=6">5</a></div>
+<p>- by substituting 1:w for it - since, within its scope, x is referenced twice. The next thing to do is to unfold zip, i.e. replacing its outer occurrence by its definition and inserting its definition at its inner occurrence, i.e. replacing lines (1), (2), and (3) by</p>
 <pre>
       |[ |[ p: |[ |[ zip <u>with</u> zip =
                       |[ p: |[ zip r q <u>with</u> r = ]| <u>with</u> p:q = ]|
@@ -154,7 +116,6 @@ This is, to my feeling, <u>not</u> the moment to eliminate x
          ]|
 </pre>
 Application of the above unfolded zip to x=1:w leads to the elimination of the outer p:q, i.e. the above can be simplified to
-<p>
 <pre>
       |[ 1: |[ |[ zip <u>with</u> zip =
                    |[ p : |[ zip r q <u>with</u> r = ]| <u>with</u> p:q = ]|
@@ -162,11 +123,7 @@ Application of the above unfolded zip to x=1:w leads to the elimination of the o
             ]|
 </pre>
 We can now eliminate x by replacing its last occurrence by (1:w). The above being applied to the expression of 4-6, we also eliminate in the above the outer r, which is only referenced once. The combined result of these eliminations is
-<p>
-<div align="right">
-			 <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=7">6</a></div>
-<p>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=7">6</a></div>
 <pre>
 1: |[ w <u>with</u> w = 1:
        |[ zip <u>with</u> zip =
@@ -178,7 +135,6 @@ We can now eliminate x by replacing its last occurrence by (1:w). The above bein
    ]|
 </pre>
 The next step is one we have seen before, viz substitution. This time we substitute something for w, say 1:x. The result is
-<p>
 <pre>
 1:1:
  |[ x <u>with</u> x =
@@ -192,30 +148,25 @@ The next step is one we have seen before, viz substitution. This time we substit
  ]|
 </pre>
 Again, I have not felt the liberty of eliminating w, being referenced twice. The next step is to unfold zip again. In order to save writing I have performed the subsequent unfolding of elf as well.
-<p>
-<div align="right">
-			 <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=8">7</a></div>
-<p>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=8">7</a></div>
 <pre>
-1:1:									(0)
-|[ x <u>with</u> x=								(1)
-   |[ |[ p:								(2)
-         |[ |[ zip <u>with</u> zip=						(3)
-               |[ p: |[ zip r q <u>with</u> r= ]| <u>with</u> p:q= ]|			(4)
-            ]| r q <u>with</u> r=						(5)
-         ]| <u>with</u> p:q=							(6)
-      ]|								(7)
-     (|[ a+ |[ b <u>with</u> b:?=y]|:						(8)
-          |[ elf <u>with</u> elf=						(9)
-               |[ a+ |[ b <u>with</u> b:?=y]| : elf y <u>with</u> a:y= ]|		(10)
-          ]| y <u>with</u> a:y=						(11)
-      ]| (1:w)) w <u>with</u> w=1:x						(12)
-   ]|									(13)
-]|									(14)
+1:1:                                                                    (0)
+|[ x <u>with</u> x=                                                             (1)
+   |[ |[ p:                                                             (2)
+         |[ |[ zip <u>with</u> zip=                                             (3)
+               |[ p: |[ zip r q <u>with</u> r= ]| <u>with</u> p:q= ]|                   (4)
+            ]| r q <u>with</u> r=                                               (5)
+         ]| <u>with</u> p:q=                                                    (6)
+      ]|                                                                (7)
+     (|[ a+ |[ b <u>with</u> b:?=y]|:                                           (8)
+          |[ elf <u>with</u> elf=                                               (9)
+               |[ a+ |[ b <u>with</u> b:?=y]| : elf y <u>with</u> a:y= ]|               (10)
+          ]| y <u>with</u> a:y=                                         (11)
+      ]| (1:w)) w <u>with</u> w=1:x                                             (12)
+   ]|                                                                   (13)
+]|                                                                      (14)
 </pre>
 Now we are ready to eliminate the outer a:y scope. Lines 8-12 become then
-<p>
 <pre>
    (1 + |[ b <u>with</u> b:?=w ]|:
       |[ elf <u>with</u> elf=
@@ -223,11 +174,7 @@ Now we are ready to eliminate the outer a:y scope. Lines 8-12 become then
       ]| w ) w <u>with</u> w = 1:x
 </pre>
 Now we can do several things. On account of w=1:x the top line of the above can be replaced by "(1+1:" and then by "(2:". We can also eliminate the outer p:q scope. They commute; then the outer r scope can be eliminated.
-<p>
-<div align="right">
-			 <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=9">8</a></div>
-<p>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=9">8</a></div>
 <pre>
  1:1:
 |[ x <u>with</u> x=2:
@@ -241,12 +188,10 @@ Now we can do several things. On account of w=1:x the top line of the above can 
 ]|
 </pre>
 But now I get into problems. Taking the definitions of zip and elf for granted, the above can be represented as
-<p>
 <pre>
 1:1: |[ x <u>with</u> x = 2: |[ zip w (elf w) <u>with</u> w = 1:x ]| ]|
 </pre>
 and in a really demand-driven mode we would substitute x=2:y and we would get
-<p>
 <pre>
 1:1:2:
  |[ y <u>with</u> y=
@@ -254,29 +199,22 @@ and in a really demand-driven mode we would substitute x=2:y and we would get
  ]|
 </pre>
 One way to proceed would be to eliminate the scope of x:
-<p>
 <pre>
 1:1:2:
  |[ y <u>with</u> y = |[ zip w (elf w) <u>with</u> w = 1:2:y ]| ]|
-</pre> 
-<div align="right">
-			 <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=10">9</a></div>
-<p>
-followed by an application of zip
-<p>
+</pre>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=10">9</a></div>
+<p>followed by an application of zip</p>
 <pre>
 1:1:2:
 |[ y <u>with</u> y = 1 : |[ zip (elf w) (2:y) <u>with</u> w = 1:2:y ]| ]|
 </pre>
 followed by removal of w's single reference:
-<p>
 <pre>
 1:1:2:
 |[ y <u>with</u> y = 1: zip (elf(1:2:y)) (2:y) ]|
 </pre>
 On the other hand, in a truly demand-driven way, we could have applied zip, using w=1:x
-<p>
 <pre>
 1:1:2:
 |[ y <u>with</u> y = 1:
@@ -284,83 +222,62 @@ On the other hand, in a truly demand-driven way, we could have applied zip, usin
 ]|
 </pre>
 followed by a removal of w's single reference
-<p>
 <pre>
 1:1:2:
 |[ y <u>with</u> y=1: |[ zip (elf(1:x)) x <u>with</u> x=2:y ]| ]|
 </pre>
 I like that last form better, and consider the early removal of the scope of x - on account of "single occurrence" - a mistake. Let us, therefore, try only to substitute when forced to do so by a function application. Let us redo the game, but now in shorthand.
-<p>
-<div align="right">
-			 <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=11">10</a></div>
-<p>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=11">10</a></div>
 <pre>
 |[ x <u>with</u> x = 1 : zip x (elf x) ]|
 </pre>
 The introduction x = 1:w leads to
-<p>
 <pre>
 1 : |[ w <u>with</u> w = |[ zip x (elf x) <u>with</u> x = 1:w ]| ]|
 </pre>
 Application of zip forces the first x to be substituted
-<p>
 <pre>
 1 : |[ w <u>with</u> w = 1 : |[ zip (elf x) w <u>with</u> x = 1:w ]| ]|
 </pre>
 The introduction of w = 1:y leads to
-<p>
 <pre>
 1:1:|[ y <u>with</u> y = |[ |[ zip (elf x) w <u>with</u> x = 1:w ]| <u>with</u> 1 = 1:y ]| ]|
 </pre>
 Application of elf is now possible, and the scope for x disappears
-<p>
 <pre>
 1:1: |[ y <u>with</u> y = |[ zip (2:(elf w)) w <u>with</u> w = 1:y ]| ]|
 </pre>
 Now zip can be applied
-<p>
 <pre>
 1:1: |[ y <u>with</u> y = 2: |[ zip w (elf w) <u>with</u> w = 1:y ]| ]|
 </pre>
 Substituting y = 2:x we get
-<p>
 <pre>
 1:1:2:
  |[ x <u>with</u> x = |[ |[ zip w (elf w) <u>with</u> w = 1:y]| <u>with</u> y = 2:x ]| ]|
 </pre>
 Next we apply zip, using w = 1:y once
-<p>
-<div align="right">
-			 <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - 
-<a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=12">11</a></div>
-<p>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF">EWD808</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd08xx/EWD808.PDF#page=12">11</a></div>
 <pre>
  1:1:2:
 |[ x <u>with</u> x = 1 : |[ |[ zip (elf w) y <u>with</u> w=1:y ]| <u>with</u> y= 2:x ]| ]|
 </pre>
-Etc. In this way the dilemma does not emerge. We need, of course, more and more identifiers, but that does not matter. We could use f[k:k&#x227D;0]; f[k] stands then for (+e)<sup>k</sup>f.
-<p>
-It is very well possible that the above example is much too simple. It suggests me, that garbage detection should not be a serious problem, and that should make me suspicious.
-<p>
-<u>Note</u>. I have not <u>proved</u> that with my last regime the dilemma does not arise, for the time being I am willing to believe it. (I am very willing to believe that the dilemma does not arise this way, for it is exactly the place where I got stuck a year ago). (End of Note.)
-<p>
+Etc. In this way the dilemma does not emerge. We need, of course, more and more identifiers, but that does not matter. We could use f[k:k≽0]; f[k] stands then for (+e)<sup>k</sup>f.
+<p>It is very well possible that the above example is much too simple. It suggests me, that garbage detection should not be a serious problem, and that should make me suspicious.</p>
+<p><u>Note</u>. I have not <u>proved</u> that with my last regime the dilemma does not arise, for the time being I am willing to believe it. (I am very willing to believe that the dilemma does not arise this way, for it is exactly the place where I got stuck a year ago). (End of Note.)</p>
 <table width="60%" cellspacing="0" cellpadding="2" border="0">
-<tr><td>
-Plataanstraat 5<br>
+<tr>
+<td>Plataanstraat 5<br>
 5671 AL NEUNEN<br>
 The Netherlands</td>
-<td>
-16 December 1981<br>
+<td>16 December 1981<br>
 prof.dr.Edsger W. Dijkstra<br>
-Burroughs Research Fellow</td></tr>
+Burroughs Research Fellow</td>
+</tr>
 </table>
-
-<p><hr>
+<hr>
 Transcribed by <a href="http://www.thejackol.com/">Mikhail Esteves</a>
-<p>Last revised on <csobj format="MedDate" h="16" region="15" t="DateTime" w="107">Thu, 16 Oct 2003</csobj>.
-</body></html>
-
+<p>Last revised on Thu, 16 Oct 2003.</p>
 </div>
   <script>
 $('.body').tweetSelection({

@@ -23,46 +23,33 @@
   </div>
   <h1>Sylvester&rsquo;s theorem used (see EWD1016)</h1>
   <div class='body'>
-				<p class="noindent"><u>Sylvester&rsquo;s theorem used (see <a href="../EWD10xx/EWD1016.html">EWD1016</a>)</u></p>
-				<p>On Tuesday 2 January 1996, Ronald W. Bulterman told me the following theorem.</p>
-				<p>Consider, for <var>n</var> &#x2265; 2, <var>n</var> distinct points in the plane; let <var>k</var> be the number of all distinct lines such that each of them contains at least 2 of those points. Then &nbsp; <span class="nowrap"><var>k</var> = 1&nbsp;<span class="unicode">&#x2228;</span>&nbsp;<var>k</var> &#x2265; <var>n</var> &nbsp; .</span></p>
-				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
-				<p class="noindent"><u>Proof</u> &nbsp; The proof is by mathematical induction on <var>n</var>. There are two reasons for trying this proof structure, firstly the shape of the disjunct <var>k</var>&nbsp;&#x2265;&nbsp;<var>n</var> in the demonstrandum and secondly the fact that (Euclid&rsquo;s Axiom) &nbsp; <span class="nowrap"><var>n</var> = 2&nbsp;<span class="unicode">&#x21D2;</span>&nbsp;<var>k</var> = 1</span> &nbsp; immediately establishes the base.</p>
-				<p>With &nbsp; <var>n</var>&#x02B9; = <var>n</var>&thinsp;+1, we consider for the induction step <var>n</var>&#x02B9; distinct points, giving rise to <var>k&#x02B9;</var>&nbsp; lines. We have to show &nbsp; <span class="nowrap"><var>k&#x02B9;</var> = 1&nbsp;<span class="unicode">&#x2228;</span>&nbsp;<var>k&#x02B9;</var>&nbsp;&#x2265; <var>n</var>&#x02B9;,</span> where we may use <span class="nowrap"><var>k</var> = 1 <span class="unicode">&#x2228;</span> <var>k</var> &#x2265; <var>n</var></span> &ldquo;ex hypothese&rdquo;. In view of our demonstrandum being a disjunction, we introduce a case analysis, viz. <var>k&#x02B9;</var> =1 versus <var>k&#x02B9;</var> &#x2260;1.</p>
-				<p class="noindent"><span style="border-bottom: 1px dashed black"><var>k&#x02B9;</var> = 1</span></p>
-				<p style="margin-top: 0.25em;">In this case, the demonstrandum &nbsp; <span class="nowrap"><var>k&#x02B9;</var> = 1&nbsp;<span class="unicode">&#x2228;</span>&nbsp;<var>k&#x02B9;</var> &#x2265; <var>n</var>&#x02B9;</span> &nbsp; follows directly (i.e. by predicate calculus alone).</p>
-				<p class="noindent"><span style="border-bottom: 1px dashed black"><var>k&#x02B9;</var> &#x2260; 1</span></p>
-				<p style="margin-top: 0.25em;">In this case, the demonstrandum &nbsp; <span class="nowrap"><var>k&#x02B9;</var> = 1&nbsp;<span class="unicode">&#x2228;</span>&nbsp;<var>k&#x02B9;</var> &#x2265; <var>n</var>&#x02B9;</span> &nbsp; simplifies directly to <span class="nowrap"><var>k&#x02B9;</var> &#x2265; <var>n</var>&#x02B9;.</span> The remainder of the proof is devoted to showing how, for <var>n</var>&#x02B9; noncollinear points, <span class="nowrap"><var>k&#x02B9;</var> &#x2265; <var>n</var></span> follows from the induction hypothesis.</p>
-				<p>In order to be able to appeal to the induction hypothesis, we single out one of the <var>n</var>&#x02B9; points &mdash;let us call that point &ldquo;<var>A</var>&rdquo;&mdash; and consider the remaining <var>n</var> points and the <var>k</var> lines they give rise to all by themselves. Ex hypothese we may use <span class="nowrap"><var>k</var> = 1 <span class="unicode">&#x2228;</span> <var>k</var> &#x2265; <var>n</var>;</span> we exploit the two disjuncts separately.</p>
-				<p>In the case <var>k</var> = 1, the <var>n</var> (distinct) points lie on a single line, and, because the <var>n</var>&#x02B9; points are noncollinear, that line does <em>not</em> contain <var>A</var>. Hence <span class="nowrap"><var>k&#x02B9;</var> = <var>n</var> + 1,</span> and since <span class="nowrap"><var>n</var>&#x02B9; = <var>n</var> + 1,</span> <span class="nowrap"><var>k&#x02B9;</var> &#x2265; <var>n</var>&#x02B9;</span> has been established.</p>
-				<p>In the remaining case <var>k</var> &#x2265; <var>n</var> &mdash;or, since <var>n</var>&#x02B9; = <var>n</var> + 1, equivalently <span class="nowrap"><var>k</var> + 1 &#x2265; <var>n</var>&#x02B9; &mdash; ,</span> our demonstrandum <span class="nowrap"><var>k&#x02B9;</var> &#x2265; <var>n</var>&#x02B9;</span> follows from <span class="nowrap"><var>k&#x02B9;</var> &#x2265; <var>k</var> + 1</span> or, equivalently, <span class="nowrap"><var>k&#x02B9;</var>&nbsp;&thinsp;&gt; <var>k</var>.</span> How do we establish <span class="nowrap"><var>k&#x02B9;</var>&nbsp; &gt; <var>k</var>?</span> Or, in other words, how can we conclude that the removal of <var>A</var> reduces the number of lines? Well, since a line has to go through at least 2 points of the set, such a line disappears if <var>A</var> is one of the only 2 points it goes through. Hence we can assert <span class="nowrap"><var>k&#x02B9;</var> &nbsp;&gt; <var>k</var></span> by a proper choice of <var>A</var> provided:</p>
-				<p>&ldquo;For any number of distinct, noncollinear points in the plane, there exists a line through exactly 2 of them.&rdquo;</p>
-				<p class="noindent">But this was Sylvester&rsquo;s conjecture, which since then became a theorem, so we are done.</p>
-				<p align="right" style="margin-top: 0;">(End of Proof.)</p>
-				<p align="right" style="margin-right: 8em;">Austin, 13 January 1996</p>
-				<p>&nbsp;</p>
-				<p class="noindent">
-					prof.dr. Edsger W.Dijkstra<br />
-					Department of Computer Sciences<br />
-					The University of Texas at Austin<br />
-					Austin, TX 78712&ndash;1188<br />
-					USA
-				</p>
-
-			</div>
-			<div>
-    <br/>
-  </div>
-		</div>
-		<hr />
-		<div id="footer">
-     transcribed by Corrado Cantelmi<br /> 
-     revised 
-     <!-- #BeginDate format:En2 -->18-Mar-2012<!-- #EndDate -->
-		</div>
-	</body>
-
-</html>
+<p class="noindent"><u>Sylvester’s theorem used (see <a href="../EWD10xx/EWD1016.html">EWD1016</a>)</u></p>
+<p>On Tuesday 2 January 1996, Ronald W. Bulterman told me the following theorem.</p>
+<p>Consider, for <var>n</var> ≥ 2, <var>n</var> distinct points in the plane; let <var>k</var> be the number of all distinct lines such that each of them contains at least 2 of those points. Then &nbsp; <span class="nowrap"><var>k</var> = 1&nbsp;<span class="unicode">∨</span>&nbsp;<var>k</var> ≥ <var>n</var> &nbsp; .</span></p>
+<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p class="noindent"><u>Proof</u> &nbsp; The proof is by mathematical induction on <var>n</var>. There are two reasons for trying this proof structure, firstly the shape of the disjunct <var>k</var>&nbsp;≥&nbsp;<var>n</var> in the demonstrandum and secondly the fact that (Euclid’s Axiom) &nbsp; <span class="nowrap"><var>n</var> = 2&nbsp;<span class="unicode">⇒</span>&nbsp;<var>k</var> = 1</span> &nbsp; immediately establishes the base.</p>
+<p>With &nbsp; <var>n</var>ʹ = <var>n</var> +1, we consider for the induction step <var>n</var>ʹ distinct points, giving rise to <var>kʹ</var>&nbsp; lines. We have to show &nbsp; <span class="nowrap"><var>kʹ</var> = 1&nbsp;<span class="unicode">∨</span>&nbsp;<var>kʹ</var>&nbsp;≥ <var>n</var>ʹ,</span> where we may use <span class="nowrap"><var>k</var> = 1 <span class="unicode">∨</span> <var>k</var> ≥ <var>n</var></span> “ex hypothese”. In view of our demonstrandum being a disjunction, we introduce a case analysis, viz. <var>kʹ</var> =1 versus <var>kʹ</var> ≠1.</p>
+<p class="noindent"><span style="border-bottom: 1px dashed black"><var>kʹ</var> = 1</span></p>
+<p style="margin-top: 0.25em;">In this case, the demonstrandum &nbsp; <span class="nowrap"><var>kʹ</var> = 1&nbsp;<span class="unicode">∨</span>&nbsp;<var>kʹ</var> ≥ <var>n</var>ʹ</span> &nbsp; follows directly (i.e. by predicate calculus alone).</p>
+<p class="noindent"><span style="border-bottom: 1px dashed black"><var>kʹ</var> ≠ 1</span></p>
+<p style="margin-top: 0.25em;">In this case, the demonstrandum &nbsp; <span class="nowrap"><var>kʹ</var> = 1&nbsp;<span class="unicode">∨</span>&nbsp;<var>kʹ</var> ≥ <var>n</var>ʹ</span> &nbsp; simplifies directly to <span class="nowrap"><var>kʹ</var> ≥ <var>n</var>ʹ.</span> The remainder of the proof is devoted to showing how, for <var>n</var>ʹ noncollinear points, <span class="nowrap"><var>kʹ</var> ≥ <var>n</var></span> follows from the induction hypothesis.</p>
+<p>In order to be able to appeal to the induction hypothesis, we single out one of the <var>n</var>ʹ points —let us call that point “<var>A</var>”— and consider the remaining <var>n</var> points and the <var>k</var> lines they give rise to all by themselves. Ex hypothese we may use <span class="nowrap"><var>k</var> = 1 <span class="unicode">∨</span> <var>k</var> ≥ <var>n</var>;</span> we exploit the two disjuncts separately.</p>
+<p>In the case <var>k</var> = 1, the <var>n</var> (distinct) points lie on a single line, and, because the <var>n</var>ʹ points are noncollinear, that line does <em>not</em> contain <var>A</var>. Hence <span class="nowrap"><var>kʹ</var> = <var>n</var> + 1,</span> and since <span class="nowrap"><var>n</var>ʹ = <var>n</var> + 1,</span> <span class="nowrap"><var>kʹ</var> ≥ <var>n</var>ʹ</span> has been established.</p>
+<p>In the remaining case <var>k</var> ≥ <var>n</var> —or, since <var>n</var>ʹ = <var>n</var> + 1, equivalently <span class="nowrap"><var>k</var> + 1 ≥ <var>n</var>ʹ — ,</span> our demonstrandum <span class="nowrap"><var>kʹ</var> ≥ <var>n</var>ʹ</span> follows from <span class="nowrap"><var>kʹ</var> ≥ <var>k</var> + 1</span> or, equivalently, <span class="nowrap"><var>kʹ</var>&nbsp; &gt; <var>k</var>.</span> How do we establish <span class="nowrap"><var>kʹ</var>&nbsp; &gt; <var>k</var>?</span> Or, in other words, how can we conclude that the removal of <var>A</var> reduces the number of lines? Well, since a line has to go through at least 2 points of the set, such a line disappears if <var>A</var> is one of the only 2 points it goes through. Hence we can assert <span class="nowrap"><var>kʹ</var> &nbsp;&gt; <var>k</var></span> by a proper choice of <var>A</var> provided:</p>
+<p>“For any number of distinct, noncollinear points in the plane, there exists a line through exactly 2 of them.”</p>
+<p class="noindent">But this was Sylvester’s conjecture, which since then became a theorem, so we are done.</p>
+<p align="right" style="margin-top: 0;">(End of Proof.)</p>
+<p align="right" style="margin-right: 8em;">Austin, 13 January 1996</p>
+<p>&nbsp;</p>
+<p class="noindent">prof.dr. Edsger W.Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin<br>
+Austin, TX 78712–1188<br>
+USA</p>
+<div><br></div>
+<hr>
+<div id="footer">transcribed by Corrado Cantelmi<br>
+revised <!-- #BeginDate format:En2 -->18-Mar-2012<!-- #EndDate --></div>
 </div>
   <script>
 $('.body').tweetSelection({

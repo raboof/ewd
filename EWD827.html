@@ -22,7 +22,90 @@
     </div>
   </div>
   <h1>A very simple exercise in SASL</h1>
-  <div class='body'><br/>			<p>&nbsp;&nbsp;The idea is to prove the equality of two recursively defined infinite sequences by showing that the one satisfies the defining equation of the other. Here we shall try this out on the simplest example I can think of.</p><p>&nbsp;&nbsp;Let us consider the equations</p>			<table border="0" width="100%" cellspacing="3">			<tr>				<td>(0)</td>				<td>from <var>n</var> = <var>n</var> : from (<var>n</var>+1)</td>			</tr>			<tr>				<td>(1a)</td>				<td>inc(<var>a</var>:<var>b</var>) = <var>a</var>+1 : inc <var>b</var></td>			</tr>			<tr>				<td>(1b)</td>				<td>  x = 0 : inc x          .</td>			</tr>			</table> <p class="noindent">We have to prove x = from 0  . We observe</p>			<table border="0" width="100%" cellspacing="3">			<tr>				<td>(2)</td>				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(inc<sup><var>n </var></sup>x = <var>n</var> : inc<sup><var>n</var>+1<i> </i></sup>x )<br/>						</td>			</tr>			<tr>				<td>&nbsp;</td>				<td>&#x21D2; &nbsp;&nbsp;&nbsp;{ inc is a function }</td>			</tr>			<tr>				<td>&nbsp;</td>				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(inc(inc<sup><var>n</var><i> </i></sup>x ) = inc (<var>n </var>: inc<sup><var>n</var>+1<i> </i></sup>x ))</td>			</tr>			<tr>				<td>&nbsp;</td>				<td>= &nbsp;&nbsp;&nbsp;{ 1a }</td>			</tr>			<tr>				<td>&nbsp;</td>				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(inc(inc<sup><var>n</var><i> </i></sup>x) = <var>n</var> +1 : inc(inc<sup><var>n</var>+1<i> </i></sup>x ))</td>			</tr>			<tr>				<td>&nbsp;</td>				<td>= &nbsp;&nbsp;&nbsp;{ def. of iterated functional composition }</td>			</tr>			<tr>				<td>(3)</td>				<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(inc<sup><var>n</var>+1<i> </i></sup>x = <var>n</var>+1 : inc<sup><var>n</var>+2<i> </i></sup>x )</td>			</tr>			</table>			 With (2)&#x21D2;(3) providing the induction step and &#8212;since &nbsp;&nbsp; x = inc<sup>0<i> </i></sup> x &nbsp;&nbsp; by the definition of iterated functional definition&#8212; (1b) providing the base, (2) has been proved for all <var>n</var>. Since (2) is the same equation in &nbsp;&nbsp; inc<sup><var>n</var><i> </i></sup>x &nbsp;&nbsp; as (0) is in from &nbsp;&nbsp;<var>n</var> &nbsp; , &nbsp; inc<sup><var>n</var><i>&nbsp;</i></sup>x&nbsp;=&nbsp;from&nbsp;<var>n</var> &nbsp;&nbsp;has been established for all <var>n</var>, in particular for <var>n</var>=0 &nbsp;, which completes the proof.<br/><div align="center">			<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>				*</p>		</div>									 <p>&nbsp;&nbsp;I tried it the other way round , viz. I tried to show that from 0 was a solution of (1b), but this became a mess.<br/>It is too warm and too humid to write much more now.</p>				<p><br/>					       </p>			</div>				<div>							<table border="0" width="100%" cellspacing="3">			<tr>				<td>Burroughs</td>				<td>6 June 1982</td>			</tr>			<tr>				<td>12201 Technology Blvd.</td>				<td>prof.dr.Edsger W.Dijkstra</td>			</tr>			<tr>				<td>AUSTIN, Texas, 78759</td>				<td>Burroughs Research Fellow</td>			</tr>			<tr>				<td>USA</td>				<td>&nbsp;</td>			</tr>			</table>				          <br />							<!-- end signatures -->			<hr />			<!-- name and date -->			<div id="footer">				<font size="-1">         transcribed by Germ&aacute;n Gonz&aacute;lez-Morris<br />					 revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="94">Sun, 26 Dec 2010</csobj></font></div>		</div>	</body></html></div>
+  <div class='body'>
+<br>
+<p>&nbsp;&nbsp;The idea is to prove the equality of two recursively defined infinite sequences by showing that the one satisfies the defining equation of the other. Here we shall try this out on the simplest example I can think of.</p>
+<p>&nbsp;&nbsp;Let us consider the equations</p>
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>(0)</td>
+<td>from <var>n</var> = <var>n</var> : from (<var>n</var>+1)</td>
+</tr>
+<tr>
+<td>(1a)</td>
+<td>inc(<var>a</var>:<var>b</var>) = <var>a</var>+1 : inc <var>b</var></td>
+</tr>
+<tr>
+<td>(1b)</td>
+<td>x = 0 : inc x .</td>
+</tr>
+</table>
+<p class="noindent">We have to prove x = from 0 . We observe</p>
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>(2)</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(inc<sup><var>n</var></sup> x = <var>n</var> : inc<sup><var>n</var>+1</sup>x )<br></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>⇒ &nbsp;&nbsp;&nbsp;{ inc is a function }</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(inc(inc<sup><var>n</var></sup>x ) = inc (<var>n</var> : inc<sup><var>n</var>+1</sup>x ))</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= &nbsp;&nbsp;&nbsp;{ 1a }</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(inc(inc<sup><var>n</var></sup>x) = <var>n</var> +1 : inc(inc<sup><var>n</var>+1</sup>x ))</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= &nbsp;&nbsp;&nbsp;{ def. of iterated functional composition }</td>
+</tr>
+<tr>
+<td>(3)</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(inc<sup><var>n</var>+1</sup>x = <var>n</var>+1 : inc<sup><var>n</var>+2</sup>x )</td>
+</tr>
+</table>
+With (2)⇒(3) providing the induction step and —since &nbsp;&nbsp; x = inc<sup>0</sup> x &nbsp;&nbsp; by the definition of iterated functional definition— (1b) providing the base, (2) has been proved for all <var>n</var>. Since (2) is the same equation in &nbsp;&nbsp; inc<sup><var>n</var></sup>x &nbsp;&nbsp; as (0) is in from &nbsp;&nbsp;<var>n</var> &nbsp; , &nbsp; inc<sup><var>n</var><i>&nbsp;</i></sup>x&nbsp;=&nbsp;from&nbsp;<var>n</var> &nbsp;&nbsp;has been established for all <var>n</var>, in particular for <var>n</var>=0 &nbsp;, which completes the proof.<br>
+<div align="center">
+<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+*</p>
+</div>
+<p>&nbsp;&nbsp;I tried it the other way round , viz. I tried to show that from 0 was a solution of (1b), but this became a mess.<br>
+It is too warm and too humid to write much more now.</p>
+<p><br></p>
+<div>
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>Burroughs</td>
+<td>6 June 1982</td>
+</tr>
+<tr>
+<td>12201 Technology Blvd.</td>
+<td>prof.dr.Edsger W.Dijkstra</td>
+</tr>
+<tr>
+<td>AUSTIN, Texas, 78759</td>
+<td>Burroughs Research Fellow</td>
+</tr>
+<tr>
+<td>USA</td>
+<td>&nbsp;</td>
+</tr>
+</table>
+<br>
+<!-- end signatures -->
+<hr>
+<!-- name and date -->
+<div id="footer"><font size="-1">transcribed by Germán González-Morris<br>
+revised Sun, 26 Dec 2010</font></div>
+</div>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

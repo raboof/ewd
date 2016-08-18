@@ -23,53 +23,51 @@
   </div>
   <h1>Edsger W. Dijkstra Archive: Een algorithme ter voorkoming van de dodelijke omarming</h1>
   <div class='body'><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
 <html>
-
-	<head>
-		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
-		<meta name="generator" content="Adobe GoLive 6">
-		<title>Edsger W. Dijkstra Archive: Een algorithme ter voorkoming van de dodelijke omarming. (EWD 108)</title>
-	</head>
-
-	<body bgcolor="#ffffff">
-		<div align="right">
-			<p> <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD108.PDF" target="_blank">EWD108</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD108.PDF" target="_blank">1</a></p>
-		</div>
-		<div align="left">
-			<p><u>Een algorithme ter voorkoming van de dodelijke omarming.</u></p>
-			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Een bankier is op de volgende -menslievende- voorwaarden bereid om aan klanten -in hele guldens- geld te lenen.<br>
-				1) De klant moet kunnen garanderen, dat als hij over het gevraagde geld de beschikking krijgt, het project, waarvoor de lening wordt aangegaan, binnen eindige tijd voltooid zal worden, waarna de klant al het geleende geld aan de bankier zal teruggeven.<br>
-				2) De klant moet van te voren een bovengrens opgeven van wat hij ooit tegelijkertijd ten bate van dit project in leen zal moeten kunnen hebben.<br>
-				3) Als de klant -met eerbiediging van 2)- om een aanvullende lening komt vragen, mag hij niet klagen, wanneer hij van de bankier te horen krijgt &quot;Op het moment kan ik U het gevraagde bedrag niet ter beschikking stellen, maar ik garandeer U, dat dit binnen eindige tijd wel het geval zal zijn.&quot;<br>
-				4) Het is toegestaan -zulks wordt zelfs aangemoedigd!- dat de klant, wanneer hij tijdens de transactie ziet, dat de initiele (zie 2.) resp laatst genoemde bovengrens niet meer gehaald zal worden, de bankier van de verlaging van de bovengrens in kennis stelt.</p>
-			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De vragen zijn: (als de bankier met een kapitaal van A gulden werkt)<br>
-				a) onder welke voorwaarden kan hij een zich aanbiedende klant aannemen?<br>
-				b) wat is de algorithme om tot wel, resp. niet uitbetaling te beslissen, zo, dat de bankier enerzijds nimmer een uitbetaling zal uitstellen, die hij veilig had kunnen doen, anderzijds nooit een betaling doet, wanneer hij niet meer onder alle omstandigheden garanderen kan, dat hij zijn toekomstige verplichtingen zal kunnen nakomen.</p>
-			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het antwoord op de eerste vraag is, dat de bankier elke klant kan accepteren, welks (initiele) bovengrens zijn totale kapitaal A niet overschrijdt.</p>
-			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Om te beslissen, of hij bij aanvraag tot betaling kan overgaan, overziet hij de situatie, die zou ontstaan, wanneer hij tot betaling zou overgan. Is deze situatie &quot;veilig&quot;, dan betaalt hij uit, is deze niet veilig, dan weigert hij de betaling. Om de algorithme te beschrijven, die vaststelt of een situatie veilig is, voeren we de volgende termen in.</p>
-			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Voor elke klant houdt de bankier twee bedragen bij:<br>
-				1) lening (aanvankelijk = 0)<br>
-				2) claim (aanvankelijk = initiele bovengrens)</p>
-			<p>Op elk moment geldt voor elke klant &quot;lening + claim = bovengrens&quot;.</p>
-			<p>Het aanvangskapitaal A verminderd met de som der leningen noemen we de &quot;kasvoorraad&quot;.</p>
-			<p>Om een situatie te onderzoeken, rangschikt de bankier zijn klanten in volgorde van niet afnemende claim, dus claim[i] &lt; claim[i + 1]. Vervolgens voert hij uit:</p>
-			<p><tt>&quot;vrij bedrag:= kasvoorraad; i:= 1;</tt></p>
-			<p><tt>L:&nbsp;&nbsp;<u>if</u> claim[i] &lt; vrij bedrag <u>then</u></tt></p>
-			<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> vrij bedrag:= vrij bedrag + lening[i];</tt></p>
-			<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> vrij bedrag &lt; A <u>then</u> <u>begin</u> i:= i + 1; <u>goto</u> L <u>end</u></tt></p>
-			<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u> veilig:= <u>true</u></tt></p>
-			<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u></tt></p>
-			<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u></tt></p>
-			<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;veilig:= <u>false</u>&quot;</tt></p>
-			<p>De bankier controleert dus of hij &quot;door verstandig te wachten al zijn geld weer terugziet.&quot;</p>
-		</div>
-		<hr>
-		<p><font size="-1">Transcribed by Frank Steggink<br>
-				Revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="82">Tue, 6 Jan 2004</csobj>.</font></p>
-	</body>
-
-</html></div>
+<head>
+<meta name="generator" content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="Adobe GoLive 6">
+<title>Edsger W. Dijkstra Archive: Een algorithme ter voorkoming van de dodelijke omarming. (EWD 108)</title>
+</head>
+<body bgcolor="#FFFFFF">
+<div align="right">
+<p><a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD108.PDF" target="_blank">EWD108</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd01xx/EWD108.PDF" target="_blank">1</a></p>
+</div>
+<div align="left">
+<p><u>Een algorithme ter voorkoming van de dodelijke omarming.</u></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Een bankier is op de volgende -menslievende- voorwaarden bereid om aan klanten -in hele guldens- geld te lenen.<br>
+1) De klant moet kunnen garanderen, dat als hij over het gevraagde geld de beschikking krijgt, het project, waarvoor de lening wordt aangegaan, binnen eindige tijd voltooid zal worden, waarna de klant al het geleende geld aan de bankier zal teruggeven.<br>
+2) De klant moet van te voren een bovengrens opgeven van wat hij ooit tegelijkertijd ten bate van dit project in leen zal moeten kunnen hebben.<br>
+3) Als de klant -met eerbiediging van 2)- om een aanvullende lening komt vragen, mag hij niet klagen, wanneer hij van de bankier te horen krijgt "Op het moment kan ik U het gevraagde bedrag niet ter beschikking stellen, maar ik garandeer U, dat dit binnen eindige tijd wel het geval zal zijn."<br>
+4) Het is toegestaan -zulks wordt zelfs aangemoedigd!- dat de klant, wanneer hij tijdens de transactie ziet, dat de initiele (zie 2.) resp laatst genoemde bovengrens niet meer gehaald zal worden, de bankier van de verlaging van de bovengrens in kennis stelt.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De vragen zijn: (als de bankier met een kapitaal van A gulden werkt)<br>
+a) onder welke voorwaarden kan hij een zich aanbiedende klant aannemen?<br>
+b) wat is de algorithme om tot wel, resp. niet uitbetaling te beslissen, zo, dat de bankier enerzijds nimmer een uitbetaling zal uitstellen, die hij veilig had kunnen doen, anderzijds nooit een betaling doet, wanneer hij niet meer onder alle omstandigheden garanderen kan, dat hij zijn toekomstige verplichtingen zal kunnen nakomen.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Het antwoord op de eerste vraag is, dat de bankier elke klant kan accepteren, welks (initiele) bovengrens zijn totale kapitaal A niet overschrijdt.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Om te beslissen, of hij bij aanvraag tot betaling kan overgaan, overziet hij de situatie, die zou ontstaan, wanneer hij tot betaling zou overgan. Is deze situatie "veilig", dan betaalt hij uit, is deze niet veilig, dan weigert hij de betaling. Om de algorithme te beschrijven, die vaststelt of een situatie veilig is, voeren we de volgende termen in.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Voor elke klant houdt de bankier twee bedragen bij:<br>
+1) lening (aanvankelijk = 0)<br>
+2) claim (aanvankelijk = initiele bovengrens)</p>
+<p>Op elk moment geldt voor elke klant "lening + claim = bovengrens".</p>
+<p>Het aanvangskapitaal A verminderd met de som der leningen noemen we de "kasvoorraad".</p>
+<p>Om een situatie te onderzoeken, rangschikt de bankier zijn klanten in volgorde van niet afnemende claim, dus claim[i] &lt; claim[i + 1]. Vervolgens voert hij uit:</p>
+<p><tt>"vrij bedrag:= kasvoorraad; i:= 1;</tt></p>
+<p><tt>L:&nbsp;&nbsp;<u>if</u> claim[i] &lt; vrij bedrag <u>then</u></tt></p>
+<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> vrij bedrag:= vrij bedrag + lening[i];</tt></p>
+<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> vrij bedrag &lt; A <u>then</u> <u>begin</u> i:= i + 1; <u>goto</u> L <u>end</u></tt></p>
+<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u> veilig:= <u>true</u></tt></p>
+<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>end</u></tt></p>
+<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u></tt></p>
+<p><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;veilig:= <u>false</u>"</tt></p>
+<p>De bankier controleert dus of hij "door verstandig te wachten al zijn geld weer terugziet."</p>
+</div>
+<hr>
+<p><font size="-1">Transcribed by Frank Steggink<br>
+Revised Tue, 6 Jan 2004.</font></p>
+</body>
+</html>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

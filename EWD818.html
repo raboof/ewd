@@ -23,132 +23,48 @@
   </div>
   <h1>A nice theorem on monotonic predicate sequences</h1>
   <div class='body'>
-                <span class="underline">A nice theorem on monotonic predicate sequences</span>
-                <p>
-                    A predicate sequence <var>P</var><sub><var>i</var></sub> (<var>i</var> &#x2265;
-                    0) such that &#x2014;denoting universal quantification over all states by
-                    square brackets&#x2014; (<span class="underline">A</span><var>i</var> :
-                    <var>i</var> &#x2265; 0 : [<var>P</var><sub><var>i</var></sub> &#x21D2;
-                    <var>P</var><sub><var>i</var>+1</sub>]) is called <i>weakening</i>; a predicate sequence
-                    <var>P</var><sub><var>i</var></sub> (<var>i</var> &#x2265; 0) such that (<span
-                    class="underline">A</span><var>i</var> : <var>i</var> &#x2265; 0 :
-                    [<var>P</var><sub><var>i</var>+1</sub> &#x21D2;
-                    <var>P</var><sub><var>i</var></sub>]) is called <i>strengthening</i>. A predicate sequence
-                    <var>P</var><sub><var>i</var></sub> (<var>i</var> &#x2265; 0)</em> that is
-                    weakening or strengthening is called <i>monotonic</i>.
-                </p>
-                <p class="noindent"> <b>Theorem</b>&emsp;For any monotonic predicate
-                    sequence <var>P</var><sub><var>i</var></sub> (<var>i</var> &#x2265; 0) we have
-                    <br />
-                    &emsp;&emsp;[(<span class="underline">A</span><var>i</var> : <var>i</var>
-                    &#x2265; 0 : (<span class="underline">E</span><var>j</var> : <var>j</var>
-                    &#x2265; <var>i</var> : <var>P</var><sub><var>j</var></sub>)) = (<span
-                    class="underline">E</span><var>i</var> : <var>i</var> &#x2265; 0 : (<span
-                    class="underline">A</span><var>j</var> : <var>j</var> &#x2265; <var>i</var> :
-                    <var>P</var><sub><var>j</var></sub>))]&emsp;.
-                </p>
-                <p class="noindent"> <b>Proof</b>&emsp;Let
-                    <var>P</var><sub><var>i</var></sub> (<var>i</var> &#x2265; 0) be a weakening
-                    predicate sequence; we then have for all natural <var>i</var><br />
-                    (0)&emsp;&emsp;[<var>P</var><sub><var>i</var></sub> = (<span
-                    class="underline">A</span><var>j</var> : <var>j</var> &#x2265; <var>i</var> :
-                    <var>P</var><sub><var>j</var></sub>)]<br />
-                    (1)&emsp;&emsp;[(<span class="underline">E</span><var>j</var> : <var>j</var>
-                    &#x2265; <var>i</var> : <var>P</var><sub><var>j</var></sub>) = (<span
-                    class="underline">E</span><var>j</var> : <var>j</var> &#x2265; 0 :
-                    <var>P</var><sub><var>j</var></sub>)]&emsp;.<br />
-                    For arbitrary <var>Z</var> we observe
-                    <p class="noindent">
-                        &emsp;&emsp;[<var>Z</var> = (<span class="underline">A</span><var>i</var> :
-                        <var>i</var> &#x2265; 0 : (<span class="underline">E</span><var>j</var> :
-                        <var>j</var> &#x2265; <var>i</var> : <var>P</var><sub><var>j</var></sub>))]
-                        <br />
-                        &emsp; = {(1)}<br />
-                        &emsp;&emsp;[<var>Z</var> = (<span class="underline">A</span><var>i</var> :
-                        <var>i</var> &#x2265; 0 : (<span class="underline">E</span><var>j</var> :
-                        <var>j</var> &#x2265; 0 : <var>P</var><sub><var>j</var></sub>))]<br />
-                        &emsp; = {predicate calculus}<br />
-                        &emsp;&emsp;[<var>Z</var> = (<span class="underline">E</span><var>j</var> :
-                        <var>j</var> &#x2265; 0 : <var>P</var><sub><var>j</var></sub>)]<br />
-                        &emsp; = {renaming the dummy}<br />
-                        &emsp;&emsp;[<var>Z</var> = (<span class="underline">E</span><var>i</var> :
-                        <var>i</var> &#x2265; 0 : <var>P</var><sub><var>i</var></sub>)]<br />
-                        &emsp; = {(0)}<br />
-                        &emsp;&emsp;[<var>Z</var> = (<span class="underline">E</span><var>i</var> :
-                        <var>i</var> &#x2265; 0 : (<span class="underline">A</span><var>j</var> :
-                        <var>j</var> &#x2265; i : <var>P</var><sub><var>j</var></sub>))]
-                    </p>
-                    <br />
-                    which proves the theorem for weakening <var>P</var><sub><var>i</var></sub>
-                    (<var>i</var> &#x2265; 0).
-                    <p>
-                        Let <var>P</var><sub><var>i</var></sub> (<var>i</var> &#x2265; 0) be a
-                        strengthening predicate sequence; then the sequence of predicates
-                        &#x00AC;<var>P</var><sub><var>i</var></sub> is weakening and we conclude
-                        from the above<br />
-                        &emsp;&emsp;[(<span class="underline">A</span><var>i</var> : <var>i</var>
-                        &#x2265; 0 : (<span class="underline">E</span><var>j</var> : <var>j</var>
-                        &#x2265; <var>i</var> : &#x00AC;<var>P</var><sub><var>j</var></sub>)) =
-                        (<span class="underline">E</span><var>i</var> : <var>i</var> &#x2265; 0 :
-                        (<span class="underline">A</span><var>j</var> : <var>j</var> &#x2265;
-                        <var>i</var> : &#x00AC;<var>P</var><sub><var>j</var></sub>))]&emsp;.<br />
-                        Negating both sides and applying de Morgan yields<br />
-                        &emsp;&emsp;[(<span class="underline">E</span><var>i</var> : <var>i</var>
-                        &#x2265; 0 : (<span class="underline">A</span><var>j</var> : <var>j</var>
-                        &#x2265; <var>i</var> : <var>P</var><sub><var>j</var></sub>)) = (<span
-                        class="underline">A</span><var>i</var> : <var>i</var> &#x2265; 0 : (<span
-                        class="underline">E</span><var>j</var> : <var>j</var> &#x2265; <var>i</var>
-                        : <var>P</var><sub><var>j</var></sub>))]&emsp;.<br />
-                        (End of Proof.)
-                    </p>
-                    <p>
-                        As we see from the proof, the two equal expressions mentioned in the
-                        Theorem are for a weakening predicate sequence
-                        <var>P</var><sub><var>i</var></sub> (<var>i</var> &#x2265; 0) most simply
-                        expressed as (<span class="underline">E</span><var>i</var> : <var>i</var>
-                        &#x2265; 0 : <var>P</var><sub><var>i</var></sub>); for a strengthening
-                        predicate sequence <var>P</var><sub><var>i</var></sub> (<var>i</var>
-                        &#x2265; 0) they are most simply expressed as (<span
-                        class="underline">A</span><var>i</var> : <var>i</var> &#x2265; 0 :
-                        <var>P</var><sub><var>i</var></sub>). These are the forms in which these
-                        limits are best known.
-                    </p>
-                    <p class="center">*&emsp;&emsp;&emsp;&emsp;*</p>
-                    <p class="center">*</p>
-                    <p>
-                        C.S. Scholten and I discovered this theorem while working on EWD816. We
-                        were slightly amazed that in its full generality the Theorem was new for
-                        us, the more so because monotonic predicate sequences occur so frequently
-                        and its proof is so simple. (The Theorem, though nice and in a way
-                        striking, is definitely not deep.) Hence this note.
-                    </p>
-            </div>
-            <div>
-                <p class="noindent">
-                    <p class="noindent" style="width: 50%; display: inline-block;">
-                        Plataanstraat 5<br />
-                        5671 AL NUENEN<br />
-                        The Netherlands
-                    </p>
-                    <p class="noindent" style="display: inline-block;">
-                        3 April 1982<br />
-                        prof. dr. Edsger W.Dijkstra<br />
-                        Burroughs Research Fellow
-                    </p>
-                </p>
-            </div>
-            <hr />
-            <div id="footer">
-                <font size="-1">transcribed by Matthew Hill<br />
-                    revised
-                    <csobj format="MedDate" h="13" region="15" t="DateTime" w="96">
-                      <!-- #BeginDate format:En2 -->11-Nov-2014<!-- #EndDate -->
-                    </csobj>
-                </font>
-            </div>
-        </div>
-    </body>
-</html></div>
+<span class="underline">A nice theorem on monotonic predicate sequences</span>
+<p>A predicate sequence <var>P</var><sub><var>i</var></sub> (<var>i</var> ≥ 0) such that —denoting universal quantification over all states by square brackets— (<span class="underline">A</span><var>i</var> : <var>i</var> ≥ 0 : [<var>P</var><sub><var>i</var></sub> ⇒ <var>P</var><sub><var>i</var>+1</sub>]) is called <i>weakening</i>; a predicate sequence <var>P</var><sub><var>i</var></sub> (<var>i</var> ≥ 0) such that (<span class="underline">A</span><var>i</var> : <var>i</var> ≥ 0 : [<var>P</var><sub><var>i</var>+1</sub> ⇒ <var>P</var><sub><var>i</var></sub>]) is called <i>strengthening</i>. A predicate sequence <var>P</var><sub><var>i</var></sub> (<var>i</var> ≥ 0) that is weakening or strengthening is called <i>monotonic</i>.</p>
+<p class="noindent"><b>Theorem</b> For any monotonic predicate sequence <var>P</var><sub><var>i</var></sub> (<var>i</var> ≥ 0) we have<br>
+  [(<span class="underline">A</span><var>i</var> : <var>i</var> ≥ 0 : (<span class="underline">E</span><var>j</var> : <var>j</var> ≥ <var>i</var> : <var>P</var><sub><var>j</var></sub>)) = (<span class="underline">E</span><var>i</var> : <var>i</var> ≥ 0 : (<span class="underline">A</span><var>j</var> : <var>j</var> ≥ <var>i</var> : <var>P</var><sub><var>j</var></sub>))] .</p>
+<p class="noindent"><b>Proof</b> Let <var>P</var><sub><var>i</var></sub> (<var>i</var> ≥ 0) be a weakening predicate sequence; we then have for all natural <var>i</var><br>
+(0)  [<var>P</var><sub><var>i</var></sub> = (<span class="underline">A</span><var>j</var> : <var>j</var> ≥ <var>i</var> : <var>P</var><sub><var>j</var></sub>)]<br>
+(1)  [(<span class="underline">E</span><var>j</var> : <var>j</var> ≥ <var>i</var> : <var>P</var><sub><var>j</var></sub>) = (<span class="underline">E</span><var>j</var> : <var>j</var> ≥ 0 : <var>P</var><sub><var>j</var></sub>)] .<br>
+For arbitrary <var>Z</var> we observe</p>
+<p class="noindent">  [<var>Z</var> = (<span class="underline">A</span><var>i</var> : <var>i</var> ≥ 0 : (<span class="underline">E</span><var>j</var> : <var>j</var> ≥ <var>i</var> : <var>P</var><sub><var>j</var></sub>))]<br>
+  = {(1)}<br>
+  [<var>Z</var> = (<span class="underline">A</span><var>i</var> : <var>i</var> ≥ 0 : (<span class="underline">E</span><var>j</var> : <var>j</var> ≥ 0 : <var>P</var><sub><var>j</var></sub>))]<br>
+  = {predicate calculus}<br>
+  [<var>Z</var> = (<span class="underline">E</span><var>j</var> : <var>j</var> ≥ 0 : <var>P</var><sub><var>j</var></sub>)]<br>
+  = {renaming the dummy}<br>
+  [<var>Z</var> = (<span class="underline">E</span><var>i</var> : <var>i</var> ≥ 0 : <var>P</var><sub><var>i</var></sub>)]<br>
+  = {(0)}<br>
+  [<var>Z</var> = (<span class="underline">E</span><var>i</var> : <var>i</var> ≥ 0 : (<span class="underline">A</span><var>j</var> : <var>j</var> ≥ i : <var>P</var><sub><var>j</var></sub>))]</p>
+<br>
+which proves the theorem for weakening <var>P</var><sub><var>i</var></sub> (<var>i</var> ≥ 0).
+<p>Let <var>P</var><sub><var>i</var></sub> (<var>i</var> ≥ 0) be a strengthening predicate sequence; then the sequence of predicates ¬<var>P</var><sub><var>i</var></sub> is weakening and we conclude from the above<br>
+  [(<span class="underline">A</span><var>i</var> : <var>i</var> ≥ 0 : (<span class="underline">E</span><var>j</var> : <var>j</var> ≥ <var>i</var> : ¬<var>P</var><sub><var>j</var></sub>)) = (<span class="underline">E</span><var>i</var> : <var>i</var> ≥ 0 : (<span class="underline">A</span><var>j</var> : <var>j</var> ≥ <var>i</var> : ¬<var>P</var><sub><var>j</var></sub>))] .<br>
+Negating both sides and applying de Morgan yields<br>
+  [(<span class="underline">E</span><var>i</var> : <var>i</var> ≥ 0 : (<span class="underline">A</span><var>j</var> : <var>j</var> ≥ <var>i</var> : <var>P</var><sub><var>j</var></sub>)) = (<span class="underline">A</span><var>i</var> : <var>i</var> ≥ 0 : (<span class="underline">E</span><var>j</var> : <var>j</var> ≥ <var>i</var> : <var>P</var><sub><var>j</var></sub>))] .<br>
+(End of Proof.)</p>
+<p>As we see from the proof, the two equal expressions mentioned in the Theorem are for a weakening predicate sequence <var>P</var><sub><var>i</var></sub> (<var>i</var> ≥ 0) most simply expressed as (<span class="underline">E</span><var>i</var> : <var>i</var> ≥ 0 : <var>P</var><sub><var>i</var></sub>); for a strengthening predicate sequence <var>P</var><sub><var>i</var></sub> (<var>i</var> ≥ 0) they are most simply expressed as (<span class="underline">A</span><var>i</var> : <var>i</var> ≥ 0 : <var>P</var><sub><var>i</var></sub>). These are the forms in which these limits are best known.</p>
+<p class="center">*    *</p>
+<p class="center">*</p>
+<p>C.S. Scholten and I discovered this theorem while working on EWD816. We were slightly amazed that in its full generality the Theorem was new for us, the more so because monotonic predicate sequences occur so frequently and its proof is so simple. (The Theorem, though nice and in a way striking, is definitely not deep.) Hence this note.</p>
+<div>
+<p class="noindent"></p>
+<p class="noindent" style="width: 50%; display: inline-block;">Plataanstraat 5<br>
+5671 AL NUENEN<br>
+The Netherlands</p>
+<p class="noindent" style="display: inline-block;">3 April 1982<br>
+prof. dr. Edsger W.Dijkstra<br>
+Burroughs Research Fellow</p>
+</div>
+<hr>
+<div id="footer"><font size="-1">transcribed by Matthew Hill<br>
+revised <!-- #BeginDate format:En2 -->11-Nov-2014<!-- #EndDate -->
+ </font></div>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

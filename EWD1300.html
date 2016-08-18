@@ -23,564 +23,566 @@
   </div>
   <h1>The notational conventions I adopted, and why</h1>
   <div class='body'>
-			<p>At a given moment, the concept of polite mathematics emerged, the underlying idea of which is that, even if you have only 60 readers, it pays to spend an hour if by doing so you can save your average reader a minute. By inventing an idealized &ldquo;average reader&rdquo;, we could translate most of the lofty, human goal of politeness into more or less formal criteria we could apply to our texts. This note is devoted to the resulting notational and stylistic conventions that were adopted as the years went by.</p>
-			<p>We don&rsquo;t want to baffle or puzzle our readers, in particular it should be clear what has to be done to check our argument and it should be possible to do so without pencil and paper. This dictates small, explicit steps. On the other hand it is well known that brevity is the leading characteristic of mathematical elegance, and some fear that this ideal excludes the small, explicit steps, but one of the joys of my professional life has been the discovery that this fear is unfounded, for brevity can be achieved without committing the sin of omission.</p>
-			<p>I should point out that my ideal of crisp clarity is not universally shared. Some consider the puzzles that are created by their omissions as spicy challenges, without which their texts would be boring; others shun clarity lest their work is considered trivial.</p>
-		</div>
-		<div align="center">
-			<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
-				*</p>
-		</div>
-		<div align="left">
-			<p>As time went by, we accepted as challenges to avoid pulling rabbits out of the magician&rsquo;s hat. There is a mathematical style in which proofs are presented as strings of unmotivated tricks that miraculously do the job, but we found greater intellectual satisfaction in showing how each next step in the argument, if not actually forced, is at least something sweetly reasonable to try. Another reason for avoiding rabbits as much as possible was that we did not want to teach proofs, we wanted to teach proof design. Eventually, expelling rabbits became another joy of my professional life.</p>
-			<p>I should point out that also my ideal of proofs without rabbits is not universally shared. Some authors believed that, in order to keep the reader awake, one has to tickle him with surprises. Others believe that simulated sparks of divine inspiration are essential for earning the respect of their readership.</p>
-		</div>
-		<div align="center">
-			<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
-				*</p>
-		</div>
-		<div align="left">
-			<p>As a final influence I must mention our desire to let the symbols do the work &#x2014;more precisely: as much of the work as profitability possible&#x2014;. The intuitive mathematician feels that he understands what he is talking about and uses formulae primarily to summarize situations and relations in to him familiar universes. When he seems to derive one formula from another, the transformations he allows are those that seem to be true in the universe he has in mind. The formalist, however, prefers to manipulate his formulae, temporarily ignoring all interpretations they might admit, the rules for the permissible symbol manipulations being formulated in terms of those symbols: the formalist calculates with uninterpreted formulae. While the average intuitive mathematician is perfectly happy with semantically ambiguous formulae &ldquo;because he knows what is meant&rdquo;, the formalist obviously insists on an unambiguous formalism.</p>
-			<p>Saying that the preferences of the formalist are not universally shared, would be the understatement of the year: intuitive mathematicians can hate more formally inclined colleagues with the same visceral hatred as Republicans can hate Democratic presidents with.</p>
-		</div>
-		<div align="center">
-			<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
-				*</p>
-		</div>
-			<div align="left">
-				<p class="noindent"><u>Infix notation and expressions</u></p>
-				<p>Without much hesitation I have decided to stick to the usual infix operators. They have the disadvantage of requiring parentheses to distinguish (<var>p</var>+<var>q</var>)/<var>r</var> from <var>p</var>+(<var>q</var>/<var>r</var>) which prefix notation would have rendered as /+<var>pqr</var> and +<var>p</var>/<var>qr</var> respectively.</p>
-				<p class="noindent"><u>Remark</u> &nbsp;One of the names of prefix or Polish notation is &ldquo;parenthesis-free&rdquo; notation, but that is a little bit misleading, for though no longer needed, the parentheses are still permissible: we could have written /(+<var>pq</var>)<var>r</var> and +<var>p</var>(/<var>qr</var>) respectively. (End of Remark).</p>
-				<p>A little hesitance was induced when my late colleague Wouter Peremans remarked in passing that infix notation was of course &ldquo;a notational relic&rdquo;. It made me realize why I like it so much for associative operators: it allows us to write <var>p</var>+<var>q</var>+<var>r</var>&nbsp; without being forced to choose between (<var>p</var>+<var>q</var>)+<var>r</var> and <var>p</var>+(<var>q</var>+<var>r</var>); in prefix notation, the choice between ++<var>pqr</var> and +<var>p</var>+<var>qr</var> would have been unavoidable.</p>
-				<p>The main reason to stick to the infix notation for the usual operators was, of course, that we are so terribly used to it, but the associativity does play an honest role: I did introduce &#x2014;with great satisfaction!&#x2014; infix operators for what I used to denote by max(<var>x</var>,&#x200A;<var>y</var>) and gcd(<var>x</var>,<var>&#x200A;y</var>) , and find that I don&rsquo;t introduce anymore infix operators that are not associative.</p>
-				<p>Priority rules, i.e., rules of relative binding power, are the standard way of reducing the number of parenthesis pairs that would otherwise be needed, but we should remember that we are not obliged to reduce them to the absolute minimum. We learned to appreciate the following customs.</p>
-				<p class="noindent">&#x2022;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Only use priority rules that are frequently appealed to, and hence are familiar. I would not hesitate to write <var>p</var>+<var>q</var>&#x2219;<var>r</var>, but would avoid <var>p</var>/<var>q</var>&#x2219;<var>r</var> and <var>p</var>&nbsp;&#x21d2;&nbsp;<var>q</var>&nbsp;&#x21d2;&nbsp;<var>r</var> .</p>
-				<p class="noindent">&#x2022;&nbsp;&nbsp;&nbsp;&nbsp; Do not introduce priority rules that destroy symmetry. I remember how much more pleasant the predicate calculus became to work with after we had decided to give con- and disjunction the same binding power and thus to consider <var>p</var>&nbsp;&#x2227;&nbsp;<var>q</var>&nbsp;&#x2228;&nbsp;<var>r</var> an ill-formed formula.</p>
-				<p class="noindent">&#x2022;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When introducing new infix operators, parenthesize so as to postpone decisions about binding powers until experience justifies a preference.</p>
-				<p class="noindent">&#x2022;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When you have the freedom, choose the larger symbol for the operator with the lower binding power.</p>
-				<p class="noindent">&#x2022;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Surround the operators with the lower binding power with more space than those with a higher binding power. E.g.,</p>
-				<blockquote>
-					<p><var>p</var> &#x2227; <var>q&nbsp;&nbsp;&nbsp;</var>&#x21d2;&nbsp;&nbsp;&nbsp;<var>r</var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2261;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>p</var>&nbsp; &#x21d2;&nbsp; (<var>q</var>&nbsp; &#x21d2;&nbsp; <var>r </var>)</p>
-				</blockquote>
-				<p class="noindent">is safely readable without knowing that &#x2227; &#x21d2; &#x2261;&nbsp; is the order of decreasing binding power. This spacing is a vital visual aid to parsing and the fact that nowadays it is violated in many publications means that these publications do a disservice to the propagation of formal techniques. (The visual aid is vital because the mathematician does not do string manipulation but manipulation of parsed formulae: when substituting equals for equals, identifying subexpressions is essential.)</p>
-				<p class="noindent">&#x2022;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For unary operators, give them the highest binding power and stick to prefix operators.</p>
-				<p class="noindent">&#x2022;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For the relation/predicate calculus we settled on the following order of decreasing binding power</p>
-				<blockquote>
-					<table border="0" cellspacing="2" cellpadding="0">
-						<tr>
-							<td>&not;</td>
-							<td>&nbsp;&nbsp;~</td>
-							<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-							<td>(negation, relational converse)</td>
-						</tr>
-						<tr>
-							<td><b>;</b></td>
-							<td></td>
-							<td></td>
-							<td>(relational composition)</td>
-						</tr>
-						<tr>
-							<td>&#x2227;</td>
-							<td>&#x2228;</td>
-							<td></td>
-							<td>(conjunction, disjunction)</td>
-						</tr>
-						<tr>
-							<td>&#x21d2;</td>
-							<td>&#x21D0</td>
-							<td></td>
-							<td>(implication, consequence</td>
-						</tr>
-						<tr>
-							<td>&#x2261;</td>
-							<td></td>
-							<td></td>
-							<td>(equivalence)</td>
-						</tr>
-					</table>
-				</blockquote>
-				<p>As time went on, I learned to appreciate expressions built with operators as a way of avoiding functional notation. We can write the difference&nbsp; <var>a</var>&#x2212;<var>b</var>&nbsp; as&nbsp; dif.(<var>a</var>,&thinsp;<var>b</var>) or exc.(<var>b</var>,&thinsp;<var>a</var>), where min and exc are functions of an ordered pair. (I believe that the notion of &ldquo;function of 2 arguments&rdquo; is now obsolete.) But we can also write the &ldquo;curried&rdquo; versions (min.&#x200A;<var>a</var>).<var>&#x200A;b</var> and (sub.<var>&#x200A;b</var>).<var>&#x200A;a</var> in which, for instance, sub is a higher-order function such that sub.<var>&#x200A;b</var> decreases its argument by <var>b</var> (so that <span class="nowrap">sub.(&#x2212;1)</span> would be the successor function). Functions dif, exc, min and sub are different functions and as soon as the operation of functional composition enters the game, the distinctions are essential. But as long as we don&rsquo;t do functional composition, the choice between the four options is irrelevant and writing the expression <var>a</var>&#x2212;<var>b</var> is a lovely way of avoiding being overspecific. (Not making superfluous distinctions should always be encouraged; it is bad enough that we don&rsquo;t have a canonical representation for the unordered pair.)</p>
-			</div>
-			<div align="center">
-			<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
-				*</p>
-		</div>
-			<div align="left">
-				<p class="noindent"><u>Invisible operators</u></p>
-				<p>A.N. Whitehead made many wise remarks it is a pleasure to agree with, but I cannot share his judgement when he applauds the introduction of the invisible multiplication sign. The multiplication being so common, he praises the mathematical community for the efficiency of its convention, but he ignores the price.</p>
-			</div>
-		<div id="frame" align="left">
-			<p>The one price is confusion: look at the different semantics of juxtapositions in</p>
-		</div>
-		<div id="frame">
-			<div align="left">
-				<blockquote>
-					<p>3&#x00BD;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3<var>y</var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</p>
-				</blockquote>
-				<p class="noindent">Is it a wonder that little children (many of whom have a most systematic mind) get confused by the mathematics they are taught? One would like the little kids to spend their time on learning the techniques of effective thought, but regrettably they spend a lot of it on familiarizing themselves with odd, irregular notational conventions whose wide adoption is their only virtue.</p>
-				<p>The much heavier price is that the invisible multiplication all but rules out the introduction of multiple-letter identifiers, thus creating the need of symbols of other alphabets (which &#x2014;and Whitehead should have known that!&#x2014; significantly contributed to the pain of typing mathematics). And when the multiple-letter identifiers could no longer be avoided, they were admitted at the price of ambiguity, as</p>
-				<blockquote>
-					<p><var>sin&#x200A;</var>(<var>s</var> + <var>i</var> + <var>n</var>)</p>
-				</blockquote>
-				<p class="noindent">illustrates.</p>
-				<p class="noindent"><u>Remark&nbsp;</u> I also think that Whitehead made another error of judgement. Brevity is much more effectively obtained by macroscopic measures such as avoiding duplication, case analysis and superfluous nomenclature, than by such microscopic measures as making the multiplication invisible. (End of Remark.)</p>
-				<p>I now avoid invisible infix operators almost entirely. I do remember a few texts dealing with theorems about strings in which concatenation was denoted by juxtaposition. I could afford that because at the beginning I had declared the types of my one-letter variables: <var>x</var>, <var>y</var>, <var>z</var>&nbsp; were of type character,&nbsp; <var>X</var>, <var>Y</var>, <var>Z</var> were of type&nbsp; (possibly empty) character string: in <var>xX</var>, <var>x</var> would stand for the leading character of the string <var>xX</var>.</p>
-				<p>The most far-reaching consequence is the introduction of a visible infix operator for function application. I have given it the highest binding power and therefore I have chosen the smallest symbol I could think of: the infix dot &ldquo;.&rdquo; . So, instead of the traditional <var>f&nbsp;</var>(<var>x</var>)&nbsp; I now write <var>f.&#x200A;x</var> .&nbsp; I have started doing this very tentatively in 1984; I have stuck to the convention and I see more and more people adopting it. One of its attractions is the way in which it caters for <var>&#x03BB;</var>-abstraction: in 1973 I wrote &ldquo;wp(<var>S</var>,<var>&thinsp;R</var>)&rdquo; for the weakest precondition such that statement <var>S</var> establishes postcondition <var>R</var>, but wp.&#x200A;<var>S.&#x200A;R</var> is much more attractive, wp.&#x200A;<var>S</var> now being the predicate transformer associated with statement <var>S</var>. Note that we have chosen the function application dot to be left associative:&nbsp; wp.&#x200A;<var>S</var>.&#x200A;<var>R</var> is short for (wp.<var>&#x200A;S</var>&#x200A;).<var>&#x200A;R</var> .</p>
-				<p class="noindent"><u>Remark</u> The convention that function application is left-associative has been adopted almost universally. Note that the parentheses then necessary in</p>
-				<blockquote>
-					<p>&nbsp;<var>f</var>.(<var>g</var>.<var>&#x200A;x</var>)</p>
-				</blockquote>
-				<p class="noindent">can be eliminated by writing the above as</p>
-				<blockquote>
-					<p>&nbsp;<var>f</var>&thinsp;&#x25E6;<var>g&#x200A;</var>.&thinsp;<var>x</var></p>
-				</blockquote>
-				<p class="noindent">and postulating that functional composition has a greater binding power than functional application. Please note that</p>
-				<blockquote>
-					<p>&nbsp;<var>f</var>&#x200A;&#x25E6;<var>g</var>&#x200A;&#x25E6;<var>h&#x200A;</var>.&thinsp;<var>x</var></p>
-				</blockquote>
-				<p class="noindent">is semantically unambiguous, functional composition being associative. (End of Remark.)</p>
-			</div>
-			<div align="center">
-				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
-					
-				*</p>
-			</div>
-			<div align="left">
-				<p class="noindent"><u>Quantification</u></p>
-				<p>I had three major desires with respect to quantification, (i) unambiguous identification of the dummy, (ii) clear delineation of the scope, and (iii) range as a uniform ingredient.</p>
-				<p class="noindent"><u>ad(i)</u> &nbsp;The need for unambiguous dummy identification becomes clear when we consider the list of sets, which starts with the set of the first 10 squares:</p>
-				<p><var>&nbsp;</var>{<var> i&nbsp;</var><sup>2</sup> | <var>i </var>&lt;10 },&nbsp;&nbsp;&nbsp;&nbsp; { <var>i </var><sup>3</sup> | <var>i </var>&lt;10 },&nbsp;&nbsp;&nbsp;&nbsp; { <var>i <sup>n</sup></var> | <var>i </var>&lt; 10 },&nbsp;&nbsp;&nbsp; { <var>i <sup>n</sup></var> | <var>i </var>&lt; <var>n </var>}</p>
-				<p class="noindent">where {<var>i </var><sup><var>i</var>+1</sup>, <var>i</var> <sup><var>i</var>+2</sup>, <var>i</var> <sup><var>i</var>+3</sup>, .... } would be a possible interpretation of the last set.</p>
-				<p class="noindent"><u>ad(ii)</u>&nbsp; It is already an ambiguity with the traditional summation; compare</p>
-				<blockquote>
-					<table border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td align="center">3</td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center">3</td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center">3</td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center">3</td>
-							<td align="center"></td>
-						</tr>
-						<tr>
-							<td align="center"><font size="+2">&#x2211;</font></td>
-							<td align="center"><var>n</var><sup>2</sup></td>
-							<td align="center">&nbsp;&nbsp;,</td>
-							<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-							<td align="center">1 +</td>
-							<td align="center"><font size="+2">&#x2211;</font></td>
-							<td align="center"><var>n</var><sup>2</sup></td>
-							<td align="center">&nbsp;&nbsp;,</td>
-							<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-							<td align="center"><font size="+2">&#x2211;</font></td>
-							<td align="center"><var>n</var><sup>2</sup> + 1</td>
-							<td align="center">&nbsp;&nbsp;,</td>
-							<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-							<td align="center"><font size="+2">&#x2211;</font></td>
-							<td align="center">1 +<var>n</var><sup>2</sup></td>
-						</tr>
-						<tr>
-							<td align="center"><var>n</var>=1</td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center"><var>n</var>=1</td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center"><var>n</var>=1</td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center"></td>
-							<td align="center"><var>n</var>=1</td>
-							<td align="center"></td>
-						</tr>
-					</table>
-				</blockquote>
-				<p class="noindent">possible interpretations being, in order,&nbsp;&nbsp; 14,&nbsp;&nbsp; 15,&nbsp;&nbsp; 15 or 17,&nbsp;&nbsp; 17 or 3+<var>n</var><sup>2</sup> .&nbsp; But even logicians write</p>
-				<p>&#x2200;<var>x</var> <var>P</var>(<var>x</var>) &#x2227; <var>Q</var></p>
-				<p class="noindent">without making clear whether they mean</p>
-				<p>(&#x2200;<var>x</var> <var>P</var>(<var>x</var>)) &#x2227; <var>Q</var>&nbsp;&nbsp;&nbsp; or&nbsp;&nbsp;&nbsp; (&#x2200;<var>x</var> <var>P</var>(<var>x</var>) &#x2227; <var>Q</var>)</p>
-				<p class="noindent">which differ if the range for <var>x</var> is empty.</p>
-				<p class="noindent"><u>ad(iii)</u>&nbsp;&nbsp; Although the properties of the underlying (symmetric and associative) operators may differ&nbsp; &#x2014;addition and multiplication are not idempotent and maximum and minimum may lack a neutral element&#x2014; we would like a uniform format. There is, for instance, no reason why summation should have a dummy ranging over consecutive integers.</p>
-				<p>The format is based on our format for set notation. The set that we formerly described as</p>
-				<p>{ <var>i </var><sup>2</sup> | <var>i </var>&lt; 10 }</p>
-				<p class="noindent">is denoted by</p>
-				<p>&#x3008; <var>i</var> <b>:</b> <var>i </var>&lt; 10 <b>:</b> <var>i </var><sup>2 </sup>&#x3009;</p>
-				<p class="noindent">where &ldquo;<var>i</var>&#x200A;&rdquo; is the dummy &#x2014;if there are more dummies, we separate them by commas&#x2014;, &ldquo;<var>i </var>&lt; 10&rdquo; is the range and &ldquo;<var>i </var><sup>2&#x200A;</sup>&rdquo; is the term. The semicolons around the range are only separators, the &ldquo;angle brackets&rdquo; delineate the scope of the dummies. The explicit enumeration of the dummies between &#x3008; and the first <b>:</b> acts like ALGOL 60&rsquo;s declaration of the local variables of an inner block. The convention enables us to distinguish between</p>
-				<p>&#x3008; <var>i</var> <b>: </b><var>i </var>&lt; <var>n</var> <b>:</b> <var>i </var><sup><var>n </var></sup>&#x3009; ,&nbsp;&nbsp;&nbsp; &#x3008; <var>n</var> <b>:</b> <var>i </var>&lt; <var>n</var> <b>:</b> <var>i </var><sup><var>n </var></sup>&#x3009;&nbsp; and&nbsp;&nbsp;&nbsp; &#x3008; <var>i</var>,&thinsp;<var>n</var> <b>:</b> <var>i </var>&lt; <var>n</var> <b>:</b> <var>i </var><sup><var>n </var></sup>&#x3009; ;</p>
-				<p class="noindent">The last one is the set of all powers for which the exponent exceeds the base, the first two are subsets thereof.</p>
-				<p>In ALGOL 60, the declaration of a local variable includes the type of that variable, and I see no logical objection against adopting that convention: we could have written</p>
-				<p>&#x3008; <var>i</var> &#x2208;&#x200A;&#x2115; <b>:</b> <var>i </var>&lt; 10 <b>:</b> <var>i </var><sup>2&thinsp;</sup>&#x3009;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;,</p>
-				<p class="noindent">but we have never done so: I have always found it preferable to supply such information in the surrounding text.</p>
-				<p class="noindent"><u>Remark</u> &nbsp;It took many years before I introduced the angle brackets &#x3008; &#x3009; ; all that time I used the standard parentheses ( ) . The transition to angle brackets for scope delineation was a great improvement. (End of Remark).</p>
-				<p>When a quantified operator is applied to the set</p>
-				<p>&#x3008; <var>i</var> <b>: </b><var>r.&#x200A;i</var> <b>: </b><var>t.&#x200A;i </var>&#x3009;&nbsp;&nbsp; ,</p>
-				<p class="noindent">we write it just after the opening angle bracket:</p>
-			</div>
-			<p class="noindent">&#x3008;&#x2211; <var>i</var> <b>: </b><var>r.&#x200A;i</var> <b>: </b><var>t.&#x200A;i </var>&#x3009;&nbsp; ,&nbsp;&nbsp; &#x3008;&#x220F; <var>i</var> <b>: </b><var>r.&#x200A;i</var> <b>: </b><var>t.&#x200A;i </var>&#x3009;&nbsp; ,&nbsp;&nbsp; &#x3008;&#x2200; <var>i</var> <b>: </b><var>r.&#x200A;i</var> <b>: </b><var>t.&#x200A;i </var>&#x3009;&nbsp; ,&nbsp;&nbsp; &#x3008;&#x2203; <var>i</var> <b>: </b><var>r.&#x200A;i</var> <b>: </b><var>t.&#x200A;i </var>&#x3009; ,</p>
-			<div align="left">
-			  <p class="noindent">&#x3008;&#x2191; <var>i</var> <b>: </b><var>r.&#x200A;i</var> <b>: </b><var>t.&#x200A;i </var>&#x3009;&nbsp;&nbsp; and&nbsp;&nbsp; &#x3008;&#x2193; <var>i</var> <b>: </b><var>r.&#x200A;i</var> <b>: </b><var>t.&#x200A;i </var>&#x3009;&nbsp; .</p>
-				<p class="noindent">For the first two, the type of the term <var>t.&#x200A;i</var> must admit addition and multiplication, for the next two, universal and existential quantification respectively, the type of the term <var>t.&#x200A;i</var> had better be Boolean, while for the supremum and the infimum the surrounding text had better specify the partial order with respect to which these extremes have been defined.</p>
-				<p>From a logical point of view, universal and existential quantification don&rsquo;t need a variable range parameter since it can be absorbed in the term:</p>
-				<p>&#x3008;&#x2200; <var>i</var> <b>: </b><var>r.&#x200A;i</var> <b>: </b><var>t.&#x200A;i </var>&#x3009;&nbsp;&nbsp;&nbsp; &#x2261;&nbsp;&nbsp;&nbsp; &#x3008;&#x2200; <var>i</var> <b>:</b> true <b>:</b>&nbsp; <var>r.&#x200A;i</var>&nbsp; &#x21d2;&nbsp;<var> t.&#x200A;i</var> &#x3009;&nbsp;</p>
-				<p>&#x3008;&#x2203; <var>i</var> <b>: </b><var>r&#x200A;.&#x200A;i</var> <b>: </b><var>t.&#x200A;i </var>&#x3009;&nbsp;&nbsp;&nbsp; &#x2261;&nbsp;&nbsp;&nbsp; &#x3008;&#x2203; <var>i</var> <b>:</b> true <b>:</b>&nbsp; <var>r.&#x200A;i</var>&nbsp; &#x2227;&nbsp;<var> t.&#x200A;i </var>&#x3009;</p>
-				<p class="noindent">But the range parameter allows more elegant formulae, such as the defining property of the supremum</p>
-				<p>&#x3008;&#x2191; <var>i </var><b>:</b>&nbsp;<var>r.&#x200A;i </var><b>:</b> <var>k.&#x200A;i </var>&#x3009;&nbsp;&#x2291; <var>z</var>&nbsp;&nbsp; &#x2261;&nbsp;&nbsp; &#x3008;&#x2200; <var>i</var> <b>: </b><var>r.&#x200A;i</var> <b>:</b> <var>k.&#x200A;i</var>&nbsp; &#x2291; <var>z </var>&#x3009;</p>
-				<p class="noindent">The explicit range parameter is also welcome from a practical point of view. During many manipulations, the range can remain constant, as is for instance illustrated by de Morgan&rsquo;s Law</p>
-				<p>&not;&#x3008;&#x2200; <var>i</var> <b>: </b><var>r.&#x200A;i</var> <b>: </b><var>t.&#x200A;i </var>&#x3009; &nbsp;&nbsp;&nbsp;&nbsp;&#x2261;&nbsp;&nbsp;&nbsp; &#x3008;&#x2203; <var>i</var> <b>: </b><var>r.&#x200A;i</var> <b>: </b>&not;<var>t.&#x200A;i </var>&#x3009;</p>
-				<p class="noindent">and we shall show below the notational exploitation of such range constancy.</p>
-			</div>
-			<div align="center">
-				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
-					
-				*&nbsp;</p>
-			</div>
-			<div align="left">
-				<p class="noindent"><u>The proof format</u></p>
-				<p>When, for transitive&nbsp; &#x2192; , we conclude <var>A</var> &#x2192; <var>C</var> from <var>A</var> &#x2192; <var>B</var> and <var>B</var> &#x2192; <var>C</var>&nbsp; , we wish for brevity&rsquo;s sake to write down the intermediate result <var>B</var> only once. We therefore present the calculation&nbsp; in the following format</p>
-				<p></p>
-				<table border="0" cellspacing="2" cellpadding="0">
-					<tr>
-						<td align="left" valign="bottom" width="15%"></td>
-						<td align="center" valign="bottom" width="15%">A</td>
-						<td align="left" valign="bottom"></td>
-					</tr>
-					<tr>
-						<td align="left" valign="bottom" width="15%">&#x2192;</td>
-						<td align="center" valign="bottom" width="15%"></td>
-						<td align="left" valign="bottom">{hint why A &#x2192; B}</td>
-					</tr>
-					<tr>
-						<td align="left" valign="bottom" width="15%"></td>
-						<td align="center" valign="bottom" width="15%">B</td>
-						<td align="left" valign="bottom"></td>
-					</tr>
-					<tr>
-						<td align="left" valign="bottom" width="15%">&#x2192;</td>
-						<td align="center" valign="bottom" width="15%"></td>
-						<td align="left" valign="bottom">{hint why B &#x2192; C}</td>
-					</tr>
-					<tr>
-						<td align="left" valign="bottom" width="15%"></td>
-						<td align="center" valign="bottom" width="15%">C</td>
-						<td align="left" valign="bottom"></td>
-					</tr>
-				</table>
-				<p class="noindent">We shall return to the role of the hints later; we now only report that it is absolutely essential that at least one line is available for each hint, so as to discourage economizing on them.</p>
-				<p>&nbsp;&nbsp;&nbsp; Another, purely editorial way of reducing duplication is declaring something, once and for all, to hold for all intermediate results of a calculation rather then repeating it each time. We do this for the type specification of variables and the range of dummies. This is a special case of &ldquo;embedding the calculation in a context&rdquo;. To illustrate some of these matters, let me show a few ways of proving the following the following simple</p>
-				<p class="noindent"><u>Theorem 0</u>.&nbsp;&nbsp; For associative&nbsp; &#149;&nbsp; , we have for all&nbsp; <var>x</var>, <var>y</var>, <var>z</var></p>
-				<p><var>x </var>&#149; <var>y</var> = <var>y</var>&nbsp; &#x2227;&nbsp; <var>y </var>&#149; <var>z</var> = z&nbsp;&nbsp; &#x21d2;&nbsp;&nbsp;&nbsp; <var>x </var>&#149; <var>z</var> = <var>z</var></p>
-				<p class="noindent"><u>Proof 0</u>.&nbsp;&nbsp;&nbsp; This proof uses Leibniz&rsquo;s Principle in the form</p>
-				<p><var>p</var> = <var>q</var>&nbsp;&nbsp; &#x2227;&nbsp;&nbsp; <var>f.&#x200A;p</var>&nbsp;&nbsp;&nbsp; &#x21d2;&nbsp;&nbsp;&nbsp; <var>f.&#x200A;q</var></p>
-				<p class="noindent">and has the structure of a weakening chain of boolean expressions.</p>
-				<p>&nbsp;&nbsp;&nbsp; We prove Theorem 0 by observing for any <var>x</var>, <var>y</var>, <var>z</var> and associative&nbsp; &#149;</p>
-				<p></p>
-				<table border="0" cellspacing="2" cellpadding="0">
-					<tr>
-						<td></td>
-						<td><var>x </var>&#149; <var>y</var>&nbsp; =&nbsp; <var>y</var>&nbsp;&nbsp; &#x2227;&nbsp;&nbsp; <var>y </var>&#149; <var>z</var>&nbsp; =&nbsp; <var>z</var></td>
-					</tr>
-					<tr>
-						<td>&#x2261;&nbsp;&nbsp;&nbsp;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ predicate calculus }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>&nbsp;<var>y </var>&#149; <var>z</var>&nbsp; =&nbsp; <var>z</var>&nbsp;&nbsp; &#x2227;&nbsp;&nbsp; <var>x </var>&#149; <var>y</var>&nbsp; =&nbsp; <dfn><var>y</var></dfn>&nbsp;&nbsp; &#x2227;&nbsp;&nbsp; <var>y </var>&#149; <var>z</var>&nbsp;&nbsp; =&nbsp;&nbsp; <var>z</var></td>
-					</tr>
-					<tr>
-						<td>&#x21d2;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ Leibniz }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><var>y </var>&#149; <var>z</var>&nbsp; =&nbsp; <var>z</var>&nbsp;&nbsp; &#x2227;&nbsp;&nbsp; (<var>x </var>&#149; <var>y</var>) &#149; <var>z</var>&nbsp;&nbsp; =&nbsp;&nbsp; <var>z</var></td>
-					</tr>
-					<tr>
-						<td>&#x2261;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &#149; associative }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><var>y </var>&#149; <var>z</var>&nbsp; =&nbsp; <var>z</var>&nbsp;&nbsp; &#x2227;&nbsp;&nbsp; <var>x </var>&#149; (&#x200A;<var>y </var>&#149; <dfn>z</dfn>)&nbsp;&nbsp; =&nbsp;&nbsp; <var>z</var></td>
-					</tr>
-					<tr>
-						<td>&#x21d2;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ Leibniz }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><var>x </var>&#149; <var>z</var>&nbsp; =&nbsp; <var>z</var></td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		<div id="frame" align="center">
-			<p>(End of Proof 0).</p>
-		</div>
-		<div id="frame">
-			<div align="left">
-				<p class="noindent">Here the calculation is embedded in the context of &#149; being associative, a proof shape that is suggested by the formulation of theorem 0.</p>
-				<p class="noindent"><u>Proof 1</u>&nbsp;&nbsp; This proof uses Leibniz&rsquo;s principle in the form</p>
-				<p><var>p</var> = <var>q</var>&nbsp;&nbsp; &#x21d2;&nbsp;&nbsp; <var>f.&#x200A;p</var> = <var>f.&#x200A;q</var></p>
-				<p>We prove Theorem 0&nbsp; by observing for associative &#149; and <var>x</var>, <var>y</var>, <var>z</var> satisfying the antecedent</p>
-				<p></p>
-				<table  border="0" cellspacing="2" cellpadding="0">
-					<tr>
-						<td></td>
-						<td><var>x </var>&#149; <var>z</var></td>
-					</tr>
-					<tr>
-						<td>=&nbsp;&nbsp;&nbsp;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;{ <var>y </var>&#149; <var>z</var>&nbsp; =&nbsp; <var>z</var>&nbsp;&nbsp; from antecedent }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><var>x </var>&#149; (<var>&#x200A;y </var>&#149; <var>z</var>)</td>
-					</tr>
-					<tr>
-						<td>=</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;{ &#149; associative}</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>(<var>x </var>&#149; <var>y</var>) &#149; <var>z</var>)</td>
-					</tr>
-					<tr>
-						<td>=</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;{ <var>x </var>&#149; <var>y</var> = <var>y</var>&nbsp; from antecedent }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><var>y </var>&#149; <var>z</var></td>
-					</tr>
-					<tr>
-						<td>=</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;{ <var>y </var>&#149; <var>z</var> = <var>z</var>&nbsp; from antecedent }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><var>z</var></td>
-					</tr>
-				</table>
-			</div>
-			<div align="center">
-				<p>(End of Proof 1)</p>
-			</div>
-			<div align="left">
-				<p>In proof 1, we have been very &#x2014;one could argue: too !&#x2014; explicit in our hints: we could have started with</p>
-			  <p class="noindent">&nbsp;&nbsp;&nbsp;&nbsp; <var>x </var>&#149; <var>z</var><br>
-					=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { antecedent }<br>
-				  &nbsp;&nbsp;&nbsp;&nbsp; <var>x  </var>&#149; (&#x200A;<var>y </var>&#149; <var>z&#x200A;</var>)</p>
-				<p class="noindent">because the observed equality is obviously justified by&nbsp;&nbsp; <var>y </var>&#149; <var>z</var> = <var>z</var>&nbsp;&nbsp; ,&nbsp;&nbsp;&nbsp; which fortunately is one of the conjuncts of the antecedent. But personally I am in favour of making the hints as clear and helpful as possible. And in the style of&nbsp;&nbsp; Proof 1 we can afford it, for we have embedded our calculation in a more elaborate context &#x2014;viz. that of the antecedent&#x2014; from which the hint selects a conjunct only when it is needed. This is more concise&nbsp; than the style of proof 0, in which conjuncts &#x2014;e.g.&nbsp; <var>y </var>&#149; <var>z</var> = <var>z</var>&#x2014; are dragged along as long as they are needed. In the next example we&rsquo;ll show another way of how &ldquo;context&rdquo; can be used to avoid repetition of the same subexpression.</p>
-				<p>We recall the defining property of the supremum&nbsp; &#x2191;&nbsp; with respect to the complete partial order &#x2291;:</p>
-				<p>&#x3008;&#x2191; <var>i </var><b>:</b>&nbsp;<var>r.&#x200A;i </var><b>:</b>&nbsp;<var>k.&#x200A;i </var>&#x3009;&#x2291; <var>z</var>&nbsp;&nbsp; &#x2261;&nbsp;&nbsp; &#x3008;&#x2200;<var>i </var><b>:</b>&nbsp;<var>r.&#x200A;i </var><b>:</b>&nbsp;<var>k.&#x200A;i</var>&nbsp; &#x2291; <var>z</var> &#x3009;&nbsp;&nbsp;&nbsp; for all <var>z</var></p>
-				<p class="noindent">Part of the Theorem of Knaster-Tarski states that with&nbsp; <var>h</var>&nbsp; defined by</p>
-				<p><var>h</var> = &#x3008;&#x2191; <var>y </var><b>:</b>&nbsp; <var>y</var>&nbsp;&#x2291; <var>f.&#x200A;y </var><b>:</b> <var>y </var>&#x3009;</p>
-				<p class="noindent">we have</p>
-				<p><var>h</var> &#x2291; <var>f.&#x200A;h</var></p>
-				<p class="noindent">if <var>f</var> is monotonic with respect to &#x2291; ,&nbsp; i.e.,</p>
-				<p><var>p</var> &#x2291; <var>q</var>&nbsp;&nbsp;&nbsp;&#x21d2;&nbsp;&nbsp; <var>f.&#x200A;p</var> &#x2291; <var>f.&#x200A;q</var>&nbsp;&nbsp;&nbsp; for all <var>p</var>, <var>q</var> .</p>
-				<p class="noindent">(In another language: &ldquo;<var>f</var>-application is &#x2291;-&#x200A;preserving&rdquo;.)</p>
-				<p class="noindent"><u>Proof&nbsp;&nbsp;</u> In this proof&nbsp;&nbsp; <var>y</var> &#x2291; <var>f.y</var>&nbsp;&nbsp; is understood to be the range of the dummy <var>y</var>.</p>
-				<p>To begin with we conclude from the definitions of &#x2191; and <var>h</var> that <var>h</var>&rsquo;s defining property is that</p>
-				<p class="noindent">(0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>h</var> &#x2291; <var>z&nbsp;&nbsp;&nbsp;&nbsp;</var>&#x2261;&nbsp;&nbsp;&#x3008;&#x2200;<var>y</var> <b>::</b> <var>y</var> &#x2291; <var>z </var>&#x3009;&nbsp;&nbsp; for all <var>z</var> .</p>
-				<p>And now we observe</p>
-				<p></p>
-				<table border="0" cellspacing="2" cellpadding="0">
-					<tr>
-						<td></td>
-						<td><var>&nbsp;h</var> &#x2291; <var>f.&#x200A;h</var></td>
-					</tr>
-					<tr>
-						<td>&#x2261;&nbsp;&nbsp;&nbsp;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ (0) with <var>z </var><b>:=</b> <var>f.&#x200A;h </var>}</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>&#x3008;&#x2200;<var>y</var> <b>::</b> <var>y</var> &#x2291; <var>f.&#x200A;h </var>&#x3009;</td>
-					</tr>
-					<tr>
-						<td>&#x21D0</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &#x2291; transitive ; &#x2200; monotonic }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>&#x3008;&#x2200;<var>y</var> <b>::</b><var> y</var>&nbsp;&#x2291; <var>f.y</var> &nbsp;&#x2227; <var>f.y</var>&nbsp; &#x2291; <var>f.&#x200A;h </var>&#x3009;</td>
-					</tr>
-					<tr>
-						<td>&#x2261;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&#x2200; distributes over &#x2227;}</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>&#x3008;&#x2200;<var>y</var> <b>::</b> <var>y</var> &#x2291;<var> f.&#x200A;y</var> &#x3009;&nbsp;&nbsp; &#x2227;&nbsp;&nbsp; &#x3008;&#x2200;<var>y</var> <b>::</b> <var>f.&#x200A;y</var>&nbsp; &#x2291; <var>f.&#x200A;h </var>&#x3009;</td>
-					</tr>
-					<tr>
-						<td>&#x2261;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ range is <var>y</var> &#x2291; <var>f.y</var>, predicate calculus }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>&#x3008;&#x2200;<var>y</var> <b>::</b> <var>f.&#x200A;y</var> &#x2291; <var>f.&#x200A;h </var>&#x3009;</td>
-					</tr>
-					<tr>
-						<td>&#x21D0</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <var>f</var> monotonic; &#x2200; monotonic }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>&#x3008;&#x2200;<var>y</var> <b>::</b> <var>y</var> &#x2291; <var>h </var>&#x3009;</td>
-					</tr>
-					<tr>
-						<td>&#x2261;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ (0) with <var>z </var><b>:=</b> <var>h</var> }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><var>&nbsp;h</var> &#x2291; <var>h</var></td>
-					</tr>
-					<tr>
-						<td>&#x2261;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ &#x2291; reflexive }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>&nbsp;true</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		<div id="frame" align="center">
-			<p>( End of Proof)</p>
-		</div>
-		<div id="frame">
-			<div align="left">
-				<p class="noindent"><u>Remark</u> As an aside I would like to point out that the second step, which strengthens</p>
-				<p><var>y</var> &#x2291; <var>f.&#x200A;h</var></p>
-				<p class="noindent">to</p>
-				<p><var>y</var>&nbsp; &#x2291; <var>f.&#x200A;y</var>&nbsp; &#x2227;&nbsp; <var>f.&#x200A;y</var>&nbsp; &#x2291; <var>f.&#x200A;h</var></p>
-				<p class="noindent">is absolutely standard. In the original relation the operands differ in two respects: <var>y</var> versus <var>h</var> and the number of <var>f</var>-applications, in the strengthened version each of the differences has been localized in one of the conjuncts, so that they can be dealt with separately. We could have tried the separation the other way round</p>
-				<p><var>y</var>&nbsp; &#x2291; <var>h</var>&nbsp; &#x2227;&nbsp; <var>h</var>&nbsp; &#x2291; <var>f.&#x200A;h</var></p>
-				<p class="noindent">but as that choice reintroduces the original poof obligation it is not helpful.<br>
-					(End of Remark)</p>
-			</div>
-			<div align="center">
-				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
-					*</p>
-			</div>
-			<div align="left">
-				<p class="noindent"><u>The role of the hints</u></p>
-				<p>With suitable formalization, the hints would fully define the manipulations, and we could omit all the intermediate results, as they would follow. Clearly we have not done so; we consider the intermediate results an essential ingredient of the proof since it is the &ldquo;intermediate&rdquo; result that indicates whether we are done or, if not, suggests what to do next.</p>
-				<p>Our hints were intended to be helpful, and as time went by, we made up our mind how we wanted to help the reader. The most important property of the hint became that it restrict and delineate the search space where the justification should be found. So, if the hint is</p>
-				<blockquote>
-					<p class="noindent">{predicate calculus}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ,</p>
-				</blockquote>
-				<p class="noindent">then this means that the rules of the predicate calculus suffice. When anything beyond that is needed, it is something, a rule or a property , from the context in which the calculation is embedded; in that case the hint should identify that context element uniquely. For this purpose we commonly number formulae (like &ldquo;(0)&rdquo; in the last example).</p>
-				<p class="noindent"><u>Remark&nbsp;</u> For the formula number&rsquo;s place the left margin is to be preferred over the right margin, because then it is easier to maintain a small distance between the number and the formula it numbers. (A similar remark applies to page numbers in tables of contents.)<br>
-					(End of Remark.)</p>
-				<p>In the hints, in our last example, that referred to (0), we gave the instantiations &#x2014;<span class="nowrap">&ldquo;<var>z&nbsp;</var><b>:=&nbsp;</b><var>f.&#x200A;h</var>&rdquo;</span> and &ldquo;<var>z&nbsp;</var><b>:=&nbsp;</b><var>h</var>&rdquo; respectively&#x2014; though in a simple example like this it is perhaps a little bit overdone. As soon as the pattern matching might become a problem, however, the instantiation is really helpful and we therefore don&rsquo;t omit it: our texts should not pose puzzles to the reader.</p>
-				<p>To save space we sometimes combine two manipulations within a single step. We do not hesitate to do so in the case of independent commuting operations on disjoint subexpressions of the intermediate result. We never combine nested substitutions, for that would be asking for trouble. For such microscopic space savings, the general advice is &ldquo;In dubio abstine.&rdquo;; the space savings that can be obtained by proper proof structure &#x2014;such as effective disentanglement and avoided case analyses&#x2014; are greater and intellectually more satisfying.</p>
-			</div>
-			<div align="center">
-				<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
-					*</p>
-			</div>
-			<div align="left">
-				<p class="noindent"><u>Overloading and an unsolved dilemma</u></p>
-				<p>Derivation distributes over addition, i.e.,</p>
-
-				<table cellpadding="0" cellspacing="0" border="0" style="margin-left: 2em; margin-top: 1em;">
-					<tr><td class="num"><var>d</var></td><td rowspan="2">&nbsp;(<var>x+y</var>) &nbsp;= &nbsp;</td><td class="num"><var>dx</var></td><td rowspan="2">&nbsp; + &nbsp;</td><td class="num"><var>dy</var></td><td rowspan="2" valign="bottom">&nbsp; &nbsp; &nbsp; &nbsp; .</td></tr>
-					<tr><td class="den"><var>dt</var></td><td class="den"><var>dt</var></td><td class="den"><var>dt</var></td></tr>
-				</table>
-
-				<p class="noindent">Usually we don&rsquo;t consider this an example of overloading, but if <var>x</var>+<var>y</var>&nbsp; stands for a speed and <var>t</var> is time, than the&nbsp; +&nbsp; at the right-hand side adds accelerations.&nbsp;&nbsp; Yet we don&rsquo;t feel obliged to introduce two different + signs and to write something like</p>
-
-				<table cellpadding="0" cellspacing="0" border="0" style="margin-left: 2em; margin-top: 1em;">
-					<tr><td class="num"><var>d</var></td><td rowspan="2">&nbsp;(<var>x +<sub><var>s</var></sub> y</var>) &nbsp;= &nbsp;</td><td class="num"><var>dx</var></td><td rowspan="2">&nbsp; +<sub><var>a</var></sub> &nbsp;</td><td class="num"><var>dy</var></td><td rowspan="2">&nbsp; &nbsp; &nbsp; &nbsp; ,</td></tr>
-					<tr><td class="den"><var>dt</var></td><td class="den"><var>dt</var></td><td class="den"><var>dt</var></td></tr>
-				</table>
-
-				<p class="noindent">primarily because the absence of a notational distinction between the two additions did not introduce any ambiguity.</p>
-				<p>Let now <var>x</var> and <var>y</var> be two functions which, when applied to <var>t</var> yield two addable values. Then it is customary to define the function that is denoted by <var>x</var>+<var>y</var> by</p>
-				<p>(<var>x</var>+<var>y</var>)<var>.&#x200A;t</var> &nbsp;= &nbsp;<var>x.&#x200A;t </var>+ <var>y.&#x200A;t</var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for all <var>t</var>,</p>
-				<p class="noindent">Note that, formally, &ldquo;<var>.&#x200A;t </var>&rdquo; now distributes (to the left) over +&nbsp; .&nbsp; (In our former example the distribution of <var>d</var>/<var>dt</var>&nbsp; was &ldquo;to the right&rdquo;, so we are still on reasonably familiar ground.)</p>
-				<p>But now the question arises what meaning to ascribe to <var>x </var>= <var>y</var>&nbsp; . The traditional interpretation is that <var>x </var>= <var>y</var> is a boolean&nbsp; expression stating that <var>x</var> and <var>y</var> are the same function, i.e.,</p>
-				<p><var>x</var> = <var>y</var>&nbsp;&nbsp; &#x2261;&nbsp;&nbsp; &#x3008; &#x2200;<var>t</var> <b>::</b> <var>x.&#x200A;t</var> = <var>y.&#x200A;t </var>&#x3009;</p>
-				<p class="noindent">(Here we have used &#x2261; for equality between boolean operands.) But in analogy to our previous example <var>x </var>= <var>y</var> could also be interpreted as a boolean function given by</p>
-				<p class="noindent">(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<var>x </var>= <var>y</var>)<var>.&#x200A;t</var>&nbsp;&nbsp; &#x2261;&nbsp;&nbsp;<var> x.&#x200A;t</var>&nbsp; =&nbsp; <var>y.&#x200A;t</var>&nbsp;&nbsp;&nbsp; for all <var>t</var>&nbsp; ,</p>
-				<p class="noindent">i.e.,&nbsp; the boolean function that yields <u>true</u> wherever <var>x</var> and <var>y</var> coincide, and <u>false</u> everywhere else.</p>
-				<p>&nbsp;&nbsp;&nbsp;In many of my writings I have chosen interpretation (1). In addition I have chosen to use a pair of square brackets to denote for a boolean function universal quantification over its domain:</p>
-				<p class="noindent">(2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<var>b</var>]&nbsp;&nbsp;&nbsp; &#x2261;&nbsp;&nbsp;&nbsp; &#x3008; &#x2200;<var>t</var>&nbsp; <b>::</b> <var>b.&#x200A;t </var>&#x3009;</p>
-				<p class="noindent">The great advantage of the square brackets is that one does not need to introduce a dummy argument. And now one proceeds</p>
-				<p class="noindent"></p>
-				<table border="0" cellspacing="2" cellpadding="0">
-					<tr>
-						<td></td>
-						<td>( <var>x</var> and <var>y</var> are the same function )</td>
-					</tr>
-					<tr>
-						<td>&#x2261;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ definition of the functional equality }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>&#x3008; &#x2200;<var>t</var>&nbsp; <b>::</b> <var>x.&#x200A;t</var> = <var>y.&#x200A;t </var>&#x3009;</td>
-					</tr>
-					<tr>
-						<td>&#x2261;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ (1) }</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>&#x3008; &#x2200;<var>t</var>&nbsp; <b>::</b> (<var>x </var>= <var>y</var>)<var>.&#x200A;t </var>&#x3009;</td>
-					</tr>
-					<tr>
-						<td>&#x2261;</td>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ (2)&nbsp; with&nbsp; <var>b</var>&nbsp;<b>:=</b>&nbsp; <var>x </var>= <var>y </var>}</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td>[<var>x </var>= <var>y </var>]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;</td>
-					</tr>
-				</table>
-				<p class="noindent">the annoying moral of the story is that to express what we know and appreciate as plain and honest-to-God equality may require an extra pair of square brackets. All this is not very satisfactory, but I don&rsquo;t know enough of type theory to try to improve the scene.</p>
-			</div>
-			<div align="center">
-				<p>Nuenen,&nbsp; 25 July 2000</p>
-			</div>
-			<div align="left">
-				<p class="noindent">prof. dr. Edsger W. Dijkstra<br>
-					Department of Computer Sciences<br>
-					The University of Texas at Austin<br>
-					Austin, TX 78712&#x2013;1188<br>
-					USA<br>
-				</p>
-			</div>
-			<hr>
-			<font size="-1">transcribed by Mario B&eacute;land and Hamilton Richards<br>
-			edited by Corrado Cantelmi<br>
-revised
-<csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
-  <!-- #BeginDate format:En2 -->30-Jun-2013<!-- #EndDate -->
-</csobj>
-    </font></div>
-	</body>
-
-</html>
-
+<p>At a given moment, the concept of polite mathematics emerged, the underlying idea of which is that, even if you have only 60 readers, it pays to spend an hour if by doing so you can save your average reader a minute. By inventing an idealized “average reader”, we could translate most of the lofty, human goal of politeness into more or less formal criteria we could apply to our texts. This note is devoted to the resulting notational and stylistic conventions that were adopted as the years went by.</p>
+<p>We don’t want to baffle or puzzle our readers, in particular it should be clear what has to be done to check our argument and it should be possible to do so without pencil and paper. This dictates small, explicit steps. On the other hand it is well known that brevity is the leading characteristic of mathematical elegance, and some fear that this ideal excludes the small, explicit steps, but one of the joys of my professional life has been the discovery that this fear is unfounded, for brevity can be achieved without committing the sin of omission.</p>
+<p>I should point out that my ideal of crisp clarity is not universally shared. Some consider the puzzles that are created by their omissions as spicy challenges, without which their texts would be boring; others shun clarity lest their work is considered trivial.</p>
+<div align="center">
+<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+*</p>
+</div>
+<div align="left">
+<p>As time went by, we accepted as challenges to avoid pulling rabbits out of the magician’s hat. There is a mathematical style in which proofs are presented as strings of unmotivated tricks that miraculously do the job, but we found greater intellectual satisfaction in showing how each next step in the argument, if not actually forced, is at least something sweetly reasonable to try. Another reason for avoiding rabbits as much as possible was that we did not want to teach proofs, we wanted to teach proof design. Eventually, expelling rabbits became another joy of my professional life.</p>
+<p>I should point out that also my ideal of proofs without rabbits is not universally shared. Some authors believed that, in order to keep the reader awake, one has to tickle him with surprises. Others believe that simulated sparks of divine inspiration are essential for earning the respect of their readership.</p>
+</div>
+<div align="center">
+<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+*</p>
+</div>
+<div align="left">
+<p>As a final influence I must mention our desire to let the symbols do the work —more precisely: as much of the work as profitability possible—. The intuitive mathematician feels that he understands what he is talking about and uses formulae primarily to summarize situations and relations in to him familiar universes. When he seems to derive one formula from another, the transformations he allows are those that seem to be true in the universe he has in mind. The formalist, however, prefers to manipulate his formulae, temporarily ignoring all interpretations they might admit, the rules for the permissible symbol manipulations being formulated in terms of those symbols: the formalist calculates with uninterpreted formulae. While the average intuitive mathematician is perfectly happy with semantically ambiguous formulae “because he knows what is meant”, the formalist obviously insists on an unambiguous formalism.</p>
+<p>Saying that the preferences of the formalist are not universally shared, would be the understatement of the year: intuitive mathematicians can hate more formally inclined colleagues with the same visceral hatred as Republicans can hate Democratic presidents with.</p>
+</div>
+<div align="center">
+<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+*</p>
+</div>
+<div align="left">
+<p class="noindent"><u>Infix notation and expressions</u></p>
+<p>Without much hesitation I have decided to stick to the usual infix operators. They have the disadvantage of requiring parentheses to distinguish (<var>p</var>+<var>q</var>)/<var>r</var> from <var>p</var>+(<var>q</var>/<var>r</var>) which prefix notation would have rendered as /+<var>pqr</var> and +<var>p</var>/<var>qr</var> respectively.</p>
+<p class="noindent"><u>Remark</u> &nbsp;One of the names of prefix or Polish notation is “parenthesis-free” notation, but that is a little bit misleading, for though no longer needed, the parentheses are still permissible: we could have written /(+<var>pq</var>)<var>r</var> and +<var>p</var>(/<var>qr</var>) respectively. (End of Remark).</p>
+<p>A little hesitance was induced when my late colleague Wouter Peremans remarked in passing that infix notation was of course “a notational relic”. It made me realize why I like it so much for associative operators: it allows us to write <var>p</var>+<var>q</var>+<var>r</var>&nbsp; without being forced to choose between (<var>p</var>+<var>q</var>)+<var>r</var> and <var>p</var>+(<var>q</var>+<var>r</var>); in prefix notation, the choice between ++<var>pqr</var> and +<var>p</var>+<var>qr</var> would have been unavoidable.</p>
+<p>The main reason to stick to the infix notation for the usual operators was, of course, that we are so terribly used to it, but the associativity does play an honest role: I did introduce —with great satisfaction!— infix operators for what I used to denote by max(<var>x</var>, <var>y</var>) and gcd(<var>x</var>,<var> y</var>) , and find that I don’t introduce anymore infix operators that are not associative.</p>
+<p>Priority rules, i.e., rules of relative binding power, are the standard way of reducing the number of parenthesis pairs that would otherwise be needed, but we should remember that we are not obliged to reduce them to the absolute minimum. We learned to appreciate the following customs.</p>
+<p class="noindent">•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Only use priority rules that are frequently appealed to, and hence are familiar. I would not hesitate to write <var>p</var>+<var>q</var>∙<var>r</var>, but would avoid <var>p</var>/<var>q</var>∙<var>r</var> and <var>p</var>&nbsp;⇒&nbsp;<var>q</var>&nbsp;⇒&nbsp;<var>r</var> .</p>
+<p class="noindent">•&nbsp;&nbsp;&nbsp;&nbsp; Do not introduce priority rules that destroy symmetry. I remember how much more pleasant the predicate calculus became to work with after we had decided to give con- and disjunction the same binding power and thus to consider <var>p</var>&nbsp;∧&nbsp;<var>q</var>&nbsp;∨&nbsp;<var>r</var> an ill-formed formula.</p>
+<p class="noindent">•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When introducing new infix operators, parenthesize so as to postpone decisions about binding powers until experience justifies a preference.</p>
+<p class="noindent">•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When you have the freedom, choose the larger symbol for the operator with the lower binding power.</p>
+<p class="noindent">•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Surround the operators with the lower binding power with more space than those with a higher binding power. E.g.,</p>
+<blockquote>
+<p><var>p</var> ∧ <var>q&nbsp;&nbsp;&nbsp;</var>⇒&nbsp;&nbsp;&nbsp;<var>r</var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>p</var>&nbsp; ⇒&nbsp; (<var>q</var>&nbsp; ⇒&nbsp; <var>r</var> )</p>
+</blockquote>
+<p class="noindent">is safely readable without knowing that ∧ ⇒ ≡&nbsp; is the order of decreasing binding power. This spacing is a vital visual aid to parsing and the fact that nowadays it is violated in many publications means that these publications do a disservice to the propagation of formal techniques. (The visual aid is vital because the mathematician does not do string manipulation but manipulation of parsed formulae: when substituting equals for equals, identifying subexpressions is essential.)</p>
+<p class="noindent">•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For unary operators, give them the highest binding power and stick to prefix operators.</p>
+<p class="noindent">•&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For the relation/predicate calculus we settled on the following order of decreasing binding power</p>
+<blockquote>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td>¬</td>
+<td>&nbsp;&nbsp;~</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>(negation, relational converse)</td>
+</tr>
+<tr>
+<td><b>;</b></td>
+<td></td>
+<td></td>
+<td>(relational composition)</td>
+</tr>
+<tr>
+<td>∧</td>
+<td>∨</td>
+<td></td>
+<td>(conjunction, disjunction)</td>
+</tr>
+<tr>
+<td>⇒</td>
+<td>&amp;#x21D0</td>
+<td></td>
+<td>(implication, consequence</td>
+</tr>
+<tr>
+<td>≡</td>
+<td></td>
+<td></td>
+<td>(equivalence)</td>
+</tr>
+</table>
+</blockquote>
+<p>As time went on, I learned to appreciate expressions built with operators as a way of avoiding functional notation. We can write the difference&nbsp; <var>a</var>−<var>b</var>&nbsp; as&nbsp; dif.(<var>a</var>, <var>b</var>) or exc.(<var>b</var>, <var>a</var>), where min and exc are functions of an ordered pair. (I believe that the notion of “function of 2 arguments” is now obsolete.) But we can also write the “curried” versions (min. <var>a</var>).<var> b</var> and (sub.<var> b</var>).<var> a</var> in which, for instance, sub is a higher-order function such that sub.<var> b</var> decreases its argument by <var>b</var> (so that <span class="nowrap">sub.(−1)</span> would be the successor function). Functions dif, exc, min and sub are different functions and as soon as the operation of functional composition enters the game, the distinctions are essential. But as long as we don’t do functional composition, the choice between the four options is irrelevant and writing the expression <var>a</var>−<var>b</var> is a lovely way of avoiding being overspecific. (Not making superfluous distinctions should always be encouraged; it is bad enough that we don’t have a canonical representation for the unordered pair.)</p>
+</div>
+<div align="center">
+<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+*</p>
+</div>
+<div align="left">
+<p class="noindent"><u>Invisible operators</u></p>
+<p>A.N. Whitehead made many wise remarks it is a pleasure to agree with, but I cannot share his judgement when he applauds the introduction of the invisible multiplication sign. The multiplication being so common, he praises the mathematical community for the efficiency of its convention, but he ignores the price.</p>
+</div>
+<div id="frame" align="left">
+<p>The one price is confusion: look at the different semantics of juxtapositions in</p>
+</div>
+<div id="frame">
+<div align="left">
+<blockquote>
+<p>3½&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3<var>y</var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 32&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</p>
+</blockquote>
+<p class="noindent">Is it a wonder that little children (many of whom have a most systematic mind) get confused by the mathematics they are taught? One would like the little kids to spend their time on learning the techniques of effective thought, but regrettably they spend a lot of it on familiarizing themselves with odd, irregular notational conventions whose wide adoption is their only virtue.</p>
+<p>The much heavier price is that the invisible multiplication all but rules out the introduction of multiple-letter identifiers, thus creating the need of symbols of other alphabets (which —and Whitehead should have known that!— significantly contributed to the pain of typing mathematics). And when the multiple-letter identifiers could no longer be avoided, they were admitted at the price of ambiguity, as</p>
+<blockquote>
+<p><var>sin </var>(<var>s</var> + <var>i</var> + <var>n</var>)</p>
+</blockquote>
+<p class="noindent">illustrates.</p>
+<p class="noindent"><u>Remark&nbsp;</u> I also think that Whitehead made another error of judgement. Brevity is much more effectively obtained by macroscopic measures such as avoiding duplication, case analysis and superfluous nomenclature, than by such microscopic measures as making the multiplication invisible. (End of Remark.)</p>
+<p>I now avoid invisible infix operators almost entirely. I do remember a few texts dealing with theorems about strings in which concatenation was denoted by juxtaposition. I could afford that because at the beginning I had declared the types of my one-letter variables: <var>x</var>, <var>y</var>, <var>z</var>&nbsp; were of type character,&nbsp; <var>X</var>, <var>Y</var>, <var>Z</var> were of type&nbsp; (possibly empty) character string: in <var>xX</var>, <var>x</var> would stand for the leading character of the string <var>xX</var>.</p>
+<p>The most far-reaching consequence is the introduction of a visible infix operator for function application. I have given it the highest binding power and therefore I have chosen the smallest symbol I could think of: the infix dot “.” . So, instead of the traditional <var>f&nbsp;</var>(<var>x</var>)&nbsp; I now write <var>f. x</var> .&nbsp; I have started doing this very tentatively in 1984; I have stuck to the convention and I see more and more people adopting it. One of its attractions is the way in which it caters for <var>λ</var>-abstraction: in 1973 I wrote “wp(<var>S</var>,<var> R</var>)” for the weakest precondition such that statement <var>S</var> establishes postcondition <var>R</var>, but wp. <var>S. R</var> is much more attractive, wp. <var>S</var> now being the predicate transformer associated with statement <var>S</var>. Note that we have chosen the function application dot to be left associative:&nbsp; wp. <var>S</var>. <var>R</var> is short for (wp.<var> S</var> ).<var> R</var> .</p>
+<p class="noindent"><u>Remark</u> The convention that function application is left-associative has been adopted almost universally. Note that the parentheses then necessary in</p>
+<blockquote>
+<p>&nbsp;<var>f</var>.(<var>g</var>.<var> x</var>)</p>
+</blockquote>
+<p class="noindent">can be eliminated by writing the above as</p>
+<blockquote>
+<p>&nbsp;<var>f</var> ◦<var>g </var>. <var>x</var></p>
+</blockquote>
+<p class="noindent">and postulating that functional composition has a greater binding power than functional application. Please note that</p>
+<blockquote>
+<p>&nbsp;<var>f</var> ◦<var>g</var> ◦<var>h </var>. <var>x</var></p>
+</blockquote>
+<p class="noindent">is semantically unambiguous, functional composition being associative. (End of Remark.)</p>
+</div>
+<div align="center">
+<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+*</p>
+</div>
+<div align="left">
+<p class="noindent"><u>Quantification</u></p>
+<p>I had three major desires with respect to quantification, (i) unambiguous identification of the dummy, (ii) clear delineation of the scope, and (iii) range as a uniform ingredient.</p>
+<p class="noindent"><u>ad(i)</u> &nbsp;The need for unambiguous dummy identification becomes clear when we consider the list of sets, which starts with the set of the first 10 squares:</p>
+<p><var>&nbsp;</var>{ <var>i&nbsp;</var><sup>2</sup> | <var>i</var> &lt;10 },&nbsp;&nbsp;&nbsp;&nbsp; { <var>i</var> <sup>3</sup> | <var>i</var> &lt;10 },&nbsp;&nbsp;&nbsp;&nbsp; { <var>i <sup>n</sup></var> | <var>i</var> &lt; 10 },&nbsp;&nbsp;&nbsp; { <var>i <sup>n</sup></var> | <var>i</var> &lt; <var>n</var> }</p>
+<p class="noindent">where {<var>i</var> <sup><var>i</var>+1</sup>, <var>i</var> <sup><var>i</var>+2</sup>, <var>i</var> <sup><var>i</var>+3</sup>, .... } would be a possible interpretation of the last set.</p>
+<p class="noindent"><u>ad(ii)</u>&nbsp; It is already an ambiguity with the traditional summation; compare</p>
+<blockquote>
+<table border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td align="center">3</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">3</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">3</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">3</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center"><font size="+2">∑</font></td>
+<td align="center"><var>n</var><sup>2</sup></td>
+<td align="center">&nbsp;&nbsp;,</td>
+<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="center">1 +</td>
+<td align="center"><font size="+2">∑</font></td>
+<td align="center"><var>n</var><sup>2</sup></td>
+<td align="center">&nbsp;&nbsp;,</td>
+<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="center"><font size="+2">∑</font></td>
+<td align="center"><var>n</var><sup>2</sup> + 1</td>
+<td align="center">&nbsp;&nbsp;,</td>
+<td align="center">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td align="center"><font size="+2">∑</font></td>
+<td align="center">1 +<var>n</var><sup>2</sup></td>
+</tr>
+<tr>
+<td align="center"><var>n</var>=1</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><var>n</var>=1</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><var>n</var>=1</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"><var>n</var>=1</td>
+<td align="center"></td>
+</tr>
+</table>
+</blockquote>
+<p class="noindent">possible interpretations being, in order,&nbsp;&nbsp; 14,&nbsp;&nbsp; 15,&nbsp;&nbsp; 15 or 17,&nbsp;&nbsp; 17 or 3+<var>n</var><sup>2</sup> .&nbsp; But even logicians write</p>
+<p>∀<var>x</var> <var>P</var>(<var>x</var>) ∧ <var>Q</var></p>
+<p class="noindent">without making clear whether they mean</p>
+<p>(∀<var>x</var> <var>P</var>(<var>x</var>)) ∧ <var>Q</var>&nbsp;&nbsp;&nbsp; or&nbsp;&nbsp;&nbsp; (∀<var>x</var> <var>P</var>(<var>x</var>) ∧ <var>Q</var>)</p>
+<p class="noindent">which differ if the range for <var>x</var> is empty.</p>
+<p class="noindent"><u>ad(iii)</u>&nbsp;&nbsp; Although the properties of the underlying (symmetric and associative) operators may differ&nbsp; —addition and multiplication are not idempotent and maximum and minimum may lack a neutral element— we would like a uniform format. There is, for instance, no reason why summation should have a dummy ranging over consecutive integers.</p>
+<p>The format is based on our format for set notation. The set that we formerly described as</p>
+<p>{ <var>i</var> <sup>2</sup> | <var>i</var> &lt; 10 }</p>
+<p class="noindent">is denoted by</p>
+<p>〈 <var>i</var> <b>:</b> <var>i</var> &lt; 10 <b>:</b> <var>i</var> <sup>2</sup> 〉</p>
+<p class="noindent">where “<var>i</var> ” is the dummy —if there are more dummies, we separate them by commas—, “<var>i</var> &lt; 10” is the range and “<var>i</var> <sup>2 </sup>” is the term. The semicolons around the range are only separators, the “angle brackets” delineate the scope of the dummies. The explicit enumeration of the dummies between 〈 and the first <b>:</b> acts like ALGOL 60’s declaration of the local variables of an inner block. The convention enables us to distinguish between</p>
+<p>〈 <var>i</var> <b>:</b> <var>i</var> &lt; <var>n</var> <b>:</b> <var>i</var> <sup><var>n</var></sup> 〉 ,&nbsp;&nbsp;&nbsp; 〈 <var>n</var> <b>:</b> <var>i</var> &lt; <var>n</var> <b>:</b> <var>i</var> <sup><var>n</var></sup> 〉&nbsp; and&nbsp;&nbsp;&nbsp; 〈 <var>i</var>, <var>n</var> <b>:</b> <var>i</var> &lt; <var>n</var> <b>:</b> <var>i</var> <sup><var>n</var></sup> 〉 ;</p>
+<p class="noindent">The last one is the set of all powers for which the exponent exceeds the base, the first two are subsets thereof.</p>
+<p>In ALGOL 60, the declaration of a local variable includes the type of that variable, and I see no logical objection against adopting that convention: we could have written</p>
+<p>〈 <var>i</var> ∈ ℕ <b>:</b> <var>i</var> &lt; 10 <b>:</b> <var>i</var> <sup>2 </sup>〉&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;,</p>
+<p class="noindent">but we have never done so: I have always found it preferable to supply such information in the surrounding text.</p>
+<p class="noindent"><u>Remark</u> &nbsp;It took many years before I introduced the angle brackets 〈 〉 ; all that time I used the standard parentheses ( ) . The transition to angle brackets for scope delineation was a great improvement. (End of Remark).</p>
+<p>When a quantified operator is applied to the set</p>
+<p>〈 <var>i</var> <b>:</b> <var>r. i</var> <b>:</b> <var>t. i</var> 〉&nbsp;&nbsp; ,</p>
+<p class="noindent">we write it just after the opening angle bracket:</p>
+</div>
+<p class="noindent">〈∑ <var>i</var> <b>:</b> <var>r. i</var> <b>:</b> <var>t. i</var> 〉&nbsp; ,&nbsp;&nbsp; 〈∏ <var>i</var> <b>:</b> <var>r. i</var> <b>:</b> <var>t. i</var> 〉&nbsp; ,&nbsp;&nbsp; 〈∀ <var>i</var> <b>:</b> <var>r. i</var> <b>:</b> <var>t. i</var> 〉&nbsp; ,&nbsp;&nbsp; 〈∃ <var>i</var> <b>:</b> <var>r. i</var> <b>:</b> <var>t. i</var> 〉 ,</p>
+<div align="left">
+<p class="noindent">〈↑ <var>i</var> <b>:</b> <var>r. i</var> <b>:</b> <var>t. i</var> 〉&nbsp;&nbsp; and&nbsp;&nbsp; 〈↓ <var>i</var> <b>:</b> <var>r. i</var> <b>:</b> <var>t. i</var> 〉&nbsp; .</p>
+<p class="noindent">For the first two, the type of the term <var>t. i</var> must admit addition and multiplication, for the next two, universal and existential quantification respectively, the type of the term <var>t. i</var> had better be Boolean, while for the supremum and the infimum the surrounding text had better specify the partial order with respect to which these extremes have been defined.</p>
+<p>From a logical point of view, universal and existential quantification don’t need a variable range parameter since it can be absorbed in the term:</p>
+<p>〈∀ <var>i</var> <b>:</b> <var>r. i</var> <b>:</b> <var>t. i</var> 〉&nbsp;&nbsp;&nbsp; ≡&nbsp;&nbsp;&nbsp; 〈∀ <var>i</var> <b>:</b> true <b>:</b>&nbsp; <var>r. i</var>&nbsp; ⇒&nbsp; <var>t. i</var> 〉&nbsp;</p>
+<p>〈∃ <var>i</var> <b>:</b> <var>r . i</var> <b>:</b> <var>t. i</var> 〉&nbsp;&nbsp;&nbsp; ≡&nbsp;&nbsp;&nbsp; 〈∃ <var>i</var> <b>:</b> true <b>:</b>&nbsp; <var>r. i</var>&nbsp; ∧&nbsp; <var>t. i</var> 〉</p>
+<p class="noindent">But the range parameter allows more elegant formulae, such as the defining property of the supremum</p>
+<p>〈↑ <var>i</var> <b>:</b>&nbsp;<var>r. i</var> <b>:</b> <var>k. i</var> 〉&nbsp;⊑ <var>z</var>&nbsp;&nbsp; ≡&nbsp;&nbsp; 〈∀ <var>i</var> <b>:</b> <var>r. i</var> <b>:</b> <var>k. i</var>&nbsp; ⊑ <var>z</var> 〉</p>
+<p class="noindent">The explicit range parameter is also welcome from a practical point of view. During many manipulations, the range can remain constant, as is for instance illustrated by de Morgan’s Law</p>
+<p>¬〈∀ <var>i</var> <b>:</b> <var>r. i</var> <b>:</b> <var>t. i</var> 〉 &nbsp;&nbsp;&nbsp;&nbsp;≡&nbsp;&nbsp;&nbsp; 〈∃ <var>i</var> <b>:</b> <var>r. i</var> <b>:</b> ¬<var>t. i</var> 〉</p>
+<p class="noindent">and we shall show below the notational exploitation of such range constancy.</p>
+</div>
+<div align="center">
+<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+*&nbsp;</p>
+</div>
+<div align="left">
+<p class="noindent"><u>The proof format</u></p>
+<p>When, for transitive&nbsp; → , we conclude <var>A</var> → <var>C</var> from <var>A</var> → <var>B</var> and <var>B</var> → <var>C</var>&nbsp; , we wish for brevity’s sake to write down the intermediate result <var>B</var> only once. We therefore present the calculation&nbsp; in the following format</p>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="left" valign="bottom" width="15%"></td>
+<td align="center" valign="bottom" width="15%">A</td>
+<td align="left" valign="bottom"></td>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="15%">→</td>
+<td align="center" valign="bottom" width="15%"></td>
+<td align="left" valign="bottom">{hint why A → B}</td>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="15%"></td>
+<td align="center" valign="bottom" width="15%">B</td>
+<td align="left" valign="bottom"></td>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="15%">→</td>
+<td align="center" valign="bottom" width="15%"></td>
+<td align="left" valign="bottom">{hint why B → C}</td>
+</tr>
+<tr>
+<td align="left" valign="bottom" width="15%"></td>
+<td align="center" valign="bottom" width="15%">C</td>
+<td align="left" valign="bottom"></td>
+</tr>
+</table>
+<p class="noindent">We shall return to the role of the hints later; we now only report that it is absolutely essential that at least one line is available for each hint, so as to discourage economizing on them.</p>
+<p>&nbsp;&nbsp;&nbsp; Another, purely editorial way of reducing duplication is declaring something, once and for all, to hold for all intermediate results of a calculation rather then repeating it each time. We do this for the type specification of variables and the range of dummies. This is a special case of “embedding the calculation in a context”. To illustrate some of these matters, let me show a few ways of proving the following the following simple</p>
+<p class="noindent"><u>Theorem 0</u>.&nbsp;&nbsp; For associative&nbsp; •&nbsp; , we have for all&nbsp; <var>x</var>, <var>y</var>, <var>z</var></p>
+<p><var>x</var> • <var>y</var> = <var>y</var>&nbsp; ∧&nbsp; <var>y</var> • <var>z</var> = z&nbsp;&nbsp; ⇒&nbsp;&nbsp;&nbsp; <var>x</var> • <var>z</var> = <var>z</var></p>
+<p class="noindent"><u>Proof 0</u>.&nbsp;&nbsp;&nbsp; This proof uses Leibniz’s Principle in the form</p>
+<p><var>p</var> = <var>q</var>&nbsp;&nbsp; ∧&nbsp;&nbsp; <var>f. p</var>&nbsp;&nbsp;&nbsp; ⇒&nbsp;&nbsp;&nbsp; <var>f. q</var></p>
+<p class="noindent">and has the structure of a weakening chain of boolean expressions.</p>
+<p>&nbsp;&nbsp;&nbsp; We prove Theorem 0 by observing for any <var>x</var>, <var>y</var>, <var>z</var> and associative&nbsp; •</p>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td></td>
+<td><var>x</var> • <var>y</var>&nbsp; =&nbsp; <var>y</var>&nbsp;&nbsp; ∧&nbsp;&nbsp; <var>y</var> • <var>z</var>&nbsp; =&nbsp; <var>z</var></td>
+</tr>
+<tr>
+<td>≡&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ predicate calculus }</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp;<var>y</var> • <var>z</var>&nbsp; =&nbsp; <var>z</var>&nbsp;&nbsp; ∧&nbsp;&nbsp; <var>x</var> • <var>y</var>&nbsp; =&nbsp; <dfn><var>y</var></dfn>&nbsp;&nbsp; ∧&nbsp;&nbsp; <var>y</var> • <var>z</var>&nbsp;&nbsp; =&nbsp;&nbsp; <var>z</var></td>
+</tr>
+<tr>
+<td>⇒</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ Leibniz }</td>
+</tr>
+<tr>
+<td></td>
+<td><var>y</var> • <var>z</var>&nbsp; =&nbsp; <var>z</var>&nbsp;&nbsp; ∧&nbsp;&nbsp; (<var>x</var> • <var>y</var>) • <var>z</var>&nbsp;&nbsp; =&nbsp;&nbsp; <var>z</var></td>
+</tr>
+<tr>
+<td>≡</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ • associative }</td>
+</tr>
+<tr>
+<td></td>
+<td><var>y</var> • <var>z</var>&nbsp; =&nbsp; <var>z</var>&nbsp;&nbsp; ∧&nbsp;&nbsp; <var>x</var> • ( <var>y</var> • <dfn>z</dfn>)&nbsp;&nbsp; =&nbsp;&nbsp; <var>z</var></td>
+</tr>
+<tr>
+<td>⇒</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ Leibniz }</td>
+</tr>
+<tr>
+<td></td>
+<td><var>x</var> • <var>z</var>&nbsp; =&nbsp; <var>z</var></td>
+</tr>
+</table>
+</div>
+</div>
+<div id="frame" align="center">
+<p>(End of Proof 0).</p>
+</div>
+<div id="frame">
+<div align="left">
+<p class="noindent">Here the calculation is embedded in the context of • being associative, a proof shape that is suggested by the formulation of theorem 0.</p>
+<p class="noindent"><u>Proof 1</u>&nbsp;&nbsp; This proof uses Leibniz’s principle in the form</p>
+<p><var>p</var> = <var>q</var>&nbsp;&nbsp; ⇒&nbsp;&nbsp; <var>f. p</var> = <var>f. q</var></p>
+<p>We prove Theorem 0&nbsp; by observing for associative • and <var>x</var>, <var>y</var>, <var>z</var> satisfying the antecedent</p>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td></td>
+<td><var>x</var> • <var>z</var></td>
+</tr>
+<tr>
+<td>=&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;{ <var>y</var> • <var>z</var>&nbsp; =&nbsp; <var>z</var>&nbsp;&nbsp; from antecedent }</td>
+</tr>
+<tr>
+<td></td>
+<td><var>x</var> • (<var> y</var> • <var>z</var>)</td>
+</tr>
+<tr>
+<td>=</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;{ • associative}</td>
+</tr>
+<tr>
+<td></td>
+<td>(<var>x</var> • <var>y</var>) • <var>z</var>)</td>
+</tr>
+<tr>
+<td>=</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;{ <var>x</var> • <var>y</var> = <var>y</var>&nbsp; from antecedent }</td>
+</tr>
+<tr>
+<td></td>
+<td><var>y</var> • <var>z</var></td>
+</tr>
+<tr>
+<td>=</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;{ <var>y</var> • <var>z</var> = <var>z</var>&nbsp; from antecedent }</td>
+</tr>
+<tr>
+<td></td>
+<td><var>z</var></td>
+</tr>
+</table>
+</div>
+<div align="center">
+<p>(End of Proof 1)</p>
+</div>
+<div align="left">
+<p>In proof 1, we have been very —one could argue: too !— explicit in our hints: we could have started with</p>
+<p class="noindent">&nbsp;&nbsp;&nbsp;&nbsp; <var>x</var> • <var>z</var><br>
+=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; { antecedent }<br>
+&nbsp;&nbsp;&nbsp;&nbsp; <var>x</var> • ( <var>y</var> • <var>z </var>)</p>
+<p class="noindent">because the observed equality is obviously justified by&nbsp;&nbsp; <var>y</var> • <var>z</var> = <var>z</var>&nbsp;&nbsp; ,&nbsp;&nbsp;&nbsp; which fortunately is one of the conjuncts of the antecedent. But personally I am in favour of making the hints as clear and helpful as possible. And in the style of&nbsp;&nbsp; Proof 1 we can afford it, for we have embedded our calculation in a more elaborate context —viz. that of the antecedent— from which the hint selects a conjunct only when it is needed. This is more concise&nbsp; than the style of proof 0, in which conjuncts —e.g.&nbsp; <var>y</var> • <var>z</var> = <var>z</var>— are dragged along as long as they are needed. In the next example we’ll show another way of how “context” can be used to avoid repetition of the same subexpression.</p>
+<p>We recall the defining property of the supremum&nbsp; ↑&nbsp; with respect to the complete partial order ⊑:</p>
+<p>〈↑ <var>i</var> <b>:</b>&nbsp;<var>r. i</var> <b>:</b>&nbsp;<var>k. i</var> 〉⊑ <var>z</var>&nbsp;&nbsp; ≡&nbsp;&nbsp; 〈∀<var>i</var> <b>:</b>&nbsp;<var>r. i</var> <b>:</b>&nbsp;<var>k. i</var>&nbsp; ⊑ <var>z</var> 〉&nbsp;&nbsp;&nbsp; for all <var>z</var></p>
+<p class="noindent">Part of the Theorem of Knaster-Tarski states that with&nbsp; <var>h</var>&nbsp; defined by</p>
+<p><var>h</var> = 〈↑ <var>y</var> <b>:</b>&nbsp; <var>y</var>&nbsp;⊑ <var>f. y</var> <b>:</b> <var>y</var> 〉</p>
+<p class="noindent">we have</p>
+<p><var>h</var> ⊑ <var>f. h</var></p>
+<p class="noindent">if <var>f</var> is monotonic with respect to ⊑ ,&nbsp; i.e.,</p>
+<p><var>p</var> ⊑ <var>q</var>&nbsp;&nbsp;&nbsp;⇒&nbsp;&nbsp; <var>f. p</var> ⊑ <var>f. q</var>&nbsp;&nbsp;&nbsp; for all <var>p</var>, <var>q</var> .</p>
+<p class="noindent">(In another language: “<var>f</var>-application is ⊑- preserving”.)</p>
+<p class="noindent"><u>Proof&nbsp;&nbsp;</u> In this proof&nbsp;&nbsp; <var>y</var> ⊑ <var>f.y</var>&nbsp;&nbsp; is understood to be the range of the dummy <var>y</var>.</p>
+<p>To begin with we conclude from the definitions of ↑ and <var>h</var> that <var>h</var>’s defining property is that</p>
+<p class="noindent">(0)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>h</var> ⊑ <var>z&nbsp;&nbsp;&nbsp;&nbsp;</var>≡&nbsp;&nbsp;〈∀<var>y</var> <b>::</b> <var>y</var> ⊑ <var>z</var> 〉&nbsp;&nbsp; for all <var>z</var> .</p>
+<p>And now we observe</p>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td></td>
+<td><var>&nbsp;h</var> ⊑ <var>f. h</var></td>
+</tr>
+<tr>
+<td>≡&nbsp;&nbsp;&nbsp;</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ (0) with <var>z</var> <b>:=</b> <var>f. h</var> }</td>
+</tr>
+<tr>
+<td></td>
+<td>〈∀<var>y</var> <b>::</b> <var>y</var> ⊑ <var>f. h</var> 〉</td>
+</tr>
+<tr>
+<td>&amp;#x21D0</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ ⊑ transitive ; ∀ monotonic }</td>
+</tr>
+<tr>
+<td></td>
+<td>〈∀<var>y</var> <b>::</b> <var>y</var>&nbsp;⊑ <var>f.y</var> &nbsp;∧ <var>f.y</var>&nbsp; ⊑ <var>f. h</var> 〉</td>
+</tr>
+<tr>
+<td>≡</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{∀ distributes over ∧}</td>
+</tr>
+<tr>
+<td></td>
+<td>〈∀<var>y</var> <b>::</b> <var>y</var> ⊑ <var>f. y</var> 〉&nbsp;&nbsp; ∧&nbsp;&nbsp; 〈∀<var>y</var> <b>::</b> <var>f. y</var>&nbsp; ⊑ <var>f. h</var> 〉</td>
+</tr>
+<tr>
+<td>≡</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ range is <var>y</var> ⊑ <var>f.y</var>, predicate calculus }</td>
+</tr>
+<tr>
+<td></td>
+<td>〈∀<var>y</var> <b>::</b> <var>f. y</var> ⊑ <var>f. h</var> 〉</td>
+</tr>
+<tr>
+<td>&amp;#x21D0</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ <var>f</var> monotonic; ∀ monotonic }</td>
+</tr>
+<tr>
+<td></td>
+<td>〈∀<var>y</var> <b>::</b> <var>y</var> ⊑ <var>h</var> 〉</td>
+</tr>
+<tr>
+<td>≡</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ (0) with <var>z</var> <b>:=</b> <var>h</var> }</td>
+</tr>
+<tr>
+<td></td>
+<td><var>&nbsp;h</var> ⊑ <var>h</var></td>
+</tr>
+<tr>
+<td>≡</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ ⊑ reflexive }</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp;true</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="frame" align="center">
+<p>( End of Proof)</p>
+</div>
+<div id="frame">
+<div align="left">
+<p class="noindent"><u>Remark</u> As an aside I would like to point out that the second step, which strengthens</p>
+<p><var>y</var> ⊑ <var>f. h</var></p>
+<p class="noindent">to</p>
+<p><var>y</var>&nbsp; ⊑ <var>f. y</var>&nbsp; ∧&nbsp; <var>f. y</var>&nbsp; ⊑ <var>f. h</var></p>
+<p class="noindent">is absolutely standard. In the original relation the operands differ in two respects: <var>y</var> versus <var>h</var> and the number of <var>f</var>-applications, in the strengthened version each of the differences has been localized in one of the conjuncts, so that they can be dealt with separately. We could have tried the separation the other way round</p>
+<p><var>y</var>&nbsp; ⊑ <var>h</var>&nbsp; ∧&nbsp; <var>h</var>&nbsp; ⊑ <var>f. h</var></p>
+<p class="noindent">but as that choice reintroduces the original poof obligation it is not helpful.<br>
+(End of Remark)</p>
+</div>
+<div align="center">
+<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+*</p>
+</div>
+<div align="left">
+<p class="noindent"><u>The role of the hints</u></p>
+<p>With suitable formalization, the hints would fully define the manipulations, and we could omit all the intermediate results, as they would follow. Clearly we have not done so; we consider the intermediate results an essential ingredient of the proof since it is the “intermediate” result that indicates whether we are done or, if not, suggests what to do next.</p>
+<p>Our hints were intended to be helpful, and as time went by, we made up our mind how we wanted to help the reader. The most important property of the hint became that it restrict and delineate the search space where the justification should be found. So, if the hint is</p>
+<blockquote>
+<p class="noindent">{predicate calculus}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ,</p>
+</blockquote>
+<p class="noindent">then this means that the rules of the predicate calculus suffice. When anything beyond that is needed, it is something, a rule or a property , from the context in which the calculation is embedded; in that case the hint should identify that context element uniquely. For this purpose we commonly number formulae (like “(0)” in the last example).</p>
+<p class="noindent"><u>Remark&nbsp;</u> For the formula number’s place the left margin is to be preferred over the right margin, because then it is easier to maintain a small distance between the number and the formula it numbers. (A similar remark applies to page numbers in tables of contents.)<br>
+(End of Remark.)</p>
+<p>In the hints, in our last example, that referred to (0), we gave the instantiations —<span class="nowrap">“<var>z&nbsp;</var><b>:=&nbsp;</b><var>f. h</var>”</span> and “<var>z&nbsp;</var><b>:=&nbsp;</b><var>h</var>” respectively— though in a simple example like this it is perhaps a little bit overdone. As soon as the pattern matching might become a problem, however, the instantiation is really helpful and we therefore don’t omit it: our texts should not pose puzzles to the reader.</p>
+<p>To save space we sometimes combine two manipulations within a single step. We do not hesitate to do so in the case of independent commuting operations on disjoint subexpressions of the intermediate result. We never combine nested substitutions, for that would be asking for trouble. For such microscopic space savings, the general advice is “In dubio abstine.”; the space savings that can be obtained by proper proof structure —such as effective disentanglement and avoided case analyses— are greater and intellectually more satisfying.</p>
+</div>
+<div align="center">
+<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+*</p>
+</div>
+<div align="left">
+<p class="noindent"><u>Overloading and an unsolved dilemma</u></p>
+<p>Derivation distributes over addition, i.e.,</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-left: 2em; margin-top: 1em;">
+<tr>
+<td class="num"><var>d</var></td>
+<td rowspan="2">&nbsp;(<var>x+y</var>) &nbsp;= &nbsp;</td>
+<td class="num"><var>dx</var></td>
+<td rowspan="2">&nbsp; + &nbsp;</td>
+<td class="num"><var>dy</var></td>
+<td rowspan="2" valign="bottom">&nbsp; &nbsp; &nbsp; &nbsp; .</td>
+</tr>
+<tr>
+<td class="den"><var>dt</var></td>
+<td class="den"><var>dt</var></td>
+<td class="den"><var>dt</var></td>
+</tr>
+</table>
+<p class="noindent">Usually we don’t consider this an example of overloading, but if <var>x</var>+<var>y</var>&nbsp; stands for a speed and <var>t</var> is time, than the&nbsp; +&nbsp; at the right-hand side adds accelerations.&nbsp;&nbsp; Yet we don’t feel obliged to introduce two different + signs and to write something like</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-left: 2em; margin-top: 1em;">
+<tr>
+<td class="num"><var>d</var></td>
+<td rowspan="2">&nbsp;(<var>x +<sub><var>s</var></sub> y</var>) &nbsp;= &nbsp;</td>
+<td class="num"><var>dx</var></td>
+<td rowspan="2">&nbsp; +<sub><var>a</var></sub> &nbsp;</td>
+<td class="num"><var>dy</var></td>
+<td rowspan="2">&nbsp; &nbsp; &nbsp; &nbsp; ,</td>
+</tr>
+<tr>
+<td class="den"><var>dt</var></td>
+<td class="den"><var>dt</var></td>
+<td class="den"><var>dt</var></td>
+</tr>
+</table>
+<p class="noindent">primarily because the absence of a notational distinction between the two additions did not introduce any ambiguity.</p>
+<p>Let now <var>x</var> and <var>y</var> be two functions which, when applied to <var>t</var> yield two addable values. Then it is customary to define the function that is denoted by <var>x</var>+<var>y</var> by</p>
+<p>(<var>x</var>+<var>y</var>)<var>. t</var> &nbsp;= &nbsp;<var>x. t</var> + <var>y. t</var>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for all <var>t</var>,</p>
+<p class="noindent">Note that, formally, “<var>. t</var> ” now distributes (to the left) over +&nbsp; .&nbsp; (In our former example the distribution of <var>d</var>/<var>dt</var>&nbsp; was “to the right”, so we are still on reasonably familiar ground.)</p>
+<p>But now the question arises what meaning to ascribe to <var>x</var> = <var>y</var>&nbsp; . The traditional interpretation is that <var>x</var> = <var>y</var> is a boolean&nbsp; expression stating that <var>x</var> and <var>y</var> are the same function, i.e.,</p>
+<p><var>x</var> = <var>y</var>&nbsp;&nbsp; ≡&nbsp;&nbsp; 〈 ∀<var>t</var> <b>::</b> <var>x. t</var> = <var>y. t</var> 〉</p>
+<p class="noindent">(Here we have used ≡ for equality between boolean operands.) But in analogy to our previous example <var>x</var> = <var>y</var> could also be interpreted as a boolean function given by</p>
+<p class="noindent">(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<var>x</var> = <var>y</var>)<var>. t</var>&nbsp;&nbsp; ≡&nbsp;&nbsp; <var>x. t</var>&nbsp; =&nbsp; <var>y. t</var>&nbsp;&nbsp;&nbsp; for all <var>t</var>&nbsp; ,</p>
+<p class="noindent">i.e.,&nbsp; the boolean function that yields <u>true</u> wherever <var>x</var> and <var>y</var> coincide, and <u>false</u> everywhere else.</p>
+<p>&nbsp;&nbsp;&nbsp;In many of my writings I have chosen interpretation (1). In addition I have chosen to use a pair of square brackets to denote for a boolean function universal quantification over its domain:</p>
+<p class="noindent">(2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[<var>b</var>]&nbsp;&nbsp;&nbsp; ≡&nbsp;&nbsp;&nbsp; 〈 ∀<var>t</var>&nbsp; <b>::</b> <var>b. t</var> 〉</p>
+<p class="noindent">The great advantage of the square brackets is that one does not need to introduce a dummy argument. And now one proceeds</p>
+<p class="noindent"></p>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td></td>
+<td>( <var>x</var> and <var>y</var> are the same function )</td>
+</tr>
+<tr>
+<td>≡</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ definition of the functional equality }</td>
+</tr>
+<tr>
+<td></td>
+<td>〈 ∀<var>t</var>&nbsp; <b>::</b> <var>x. t</var> = <var>y. t</var> 〉</td>
+</tr>
+<tr>
+<td>≡</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ (1) }</td>
+</tr>
+<tr>
+<td></td>
+<td>〈 ∀<var>t</var>&nbsp; <b>::</b> (<var>x</var> = <var>y</var>)<var>. t</var> 〉</td>
+</tr>
+<tr>
+<td>≡</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ (2)&nbsp; with&nbsp; <var>b</var>&nbsp;<b>:=</b>&nbsp; <var>x</var> = <var>y</var> }</td>
+</tr>
+<tr>
+<td></td>
+<td>[<var>x</var> = <var>y</var> ]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;</td>
+</tr>
+</table>
+<p class="noindent">the annoying moral of the story is that to express what we know and appreciate as plain and honest-to-God equality may require an extra pair of square brackets. All this is not very satisfactory, but I don’t know enough of type theory to try to improve the scene.</p>
+</div>
+<div align="center">
+<p>Nuenen,&nbsp; 25 July 2000</p>
+</div>
+<div align="left">
+<p class="noindent">prof. dr. Edsger W. Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin<br>
+Austin, TX 78712–1188<br>
+USA<br></p>
+</div>
+<hr>
+<font size="-1">transcribed by Mario Béland and Hamilton Richards<br>
+edited by Corrado Cantelmi<br>
+revised <!-- #BeginDate format:En2 -->30-Jun-2013<!-- #EndDate --></font></div>
 </div>
   <script>
 $('.body').tweetSelection({

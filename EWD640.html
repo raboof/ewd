@@ -23,351 +23,344 @@
   </div>
   <h1>Finding the correctness proof of a concurrent program</h1>
   <div class='body'>
-        <hr />
-<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
-transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
-accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
-<hr />
-           <p class="noindent">
-                            
-<b>Finding the correctness proof of a concurrent program</b>.
-<p>(Those who have seen EWD622 will recognize the following as an improved
-treatment of one of the versions of the concurrent program developed in that
-report. The main improvement consists of the heuristics for finding the
-correctness proof: the heuristics effectively buffer the shock of invention
-which, in EWD622 - 11, was indicated by &ldquo;A bold guess is to interpret....&rdquo;.
-<p>For the benefit of those who have not seen EWD622, this note is written
-as a self-contained text that fully redescribes the problem. They have 
-furthermore the advantage that they won&rsquo;t be confused by changed notations and meanings
-of variables.)
-<p>In the following y denotes a vector of N components y[i] for
-0 &le; i &lt; N . with the identifier f we shall denote a vector-valued function
-of a vector-valued argument, and the algorithm concerned solves the equation
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-y = f(y)</td><td align=right>(1)
-</td>  </tr>  </table>
+<hr>
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. —HR</p>
+<hr>
+<p class="noindent"><b>Finding the correctness proof of a concurrent program</b>.</p>
+<p>(Those who have seen EWD622 will recognize the following as an improved treatment of one of the versions of the concurrent program developed in that report. The main improvement consists of the heuristics for finding the correctness proof: the heuristics effectively buffer the shock of invention which, in EWD622 - 11, was indicated by “A bold guess is to interpret....”.</p>
+<p>For the benefit of those who have not seen EWD622, this note is written as a self-contained text that fully redescribes the problem. They have furthermore the advantage that they won’t be confused by changed notations and meanings of variables.)</p>
+<p>In the following y denotes a vector of N components y[i] for 0 ≤ i &lt; N . with the identifier f we shall denote a vector-valued function of a vector-valued argument, and the algorithm concerned solves the equation</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">y = f(y)</td>
+<td align="right">(1)</td>
+</tr>
+</table>
 or, introducing f0, f1, f2,.... for the components of f
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-y[i] = fi(y) for 0 &le; i &lt; N .</td><td align=right>(2)
-</td>  </tr>  </table>
-<p>It is assumed that the initial value of y and the function f are
-such that the repeated assignments of the form
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-&lt;y[i]:= fi(y) &gt;</td><td align=right>(3)
-</td>  </tr>  </table>
-will lead in a finite number of steps to y being a solution of (1). In (3)
-we have used Lamport&rsquo;s notation of the angle brackets: they enclose &ldquo;atomic
-actions&rdquo; which can be implemented by ensuring between them mutual exclusion
-in time (when they are considered &ldquo;to take time&rdquo;).{In order to guarantee
-termination we must assume that the sequence of i-values for which the
-assignments (3) are carried out must be one of some sort of &ldquo;fair random,
-order&rdquo; in which, for instance, a finite upper bound is known to exist for
-the number of consecutive assignments &mdash;i.e. i-values&mdash; in which a given j
-(0 &le; j &lt; N) does not occur: in other words, we assume the absence of 
-individual starvation somehow guaranteed. (He who refuses to make that assumption
-can read the following as a proof of partial correctness.)
-                  
-<p>For the purpose of this note it suffices to know that functions f
-exist such that with a proper value of y equation (1) will be solved by a
-finite number of assignments (3). How for a given f and initial value y
-this property can be established is <b>not</b> the subject of this paper. (He who
-refuses to assume that the function f has that delightful property is free
-to do so: he can, again, read the following as a proof of partial correctness
-that states that <b>when</b> our concurrent program has terminated, (1) is 
-satisfied.)
-<p>Besides the global vector y there is a global boolean array h ,
-with elements h[i] for 0 &le; i &lt; N , all of which are true to start with.
-we now consider the following program of N-fold concurrency, in which each
-atomic action modifies at most one global array element. We give the program
-first and shall explain the notation afterwards.
-<p>The concurrent program we are considering consists of the following
-N components (0 &le; i &lt; N):
-<table> <tr> <td colspan = 5>
-comp.i:                                                               </td> </tr> <tr> <td>L0: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 4>
-       <b>do</b> &lt; (<u>E</u> j: h[j]) &gt; &rarr;                  </td> </tr> <tr> <td>L1:</td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
-                &lt; <b>if</b> y[i] = fi(y) &rarr; h[i]:= false &gt;  </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 2>
-                  &#x25af; y[i] &ne; fi(y) &rarr; y[i]:= fi(y) &gt; ; </td> </tr> <tr> <td>L2j:</td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                                (<u>A</u> j: &lt; h[j]:= true &gt; )  </td> </tr> <tr> <td></td> <td></td> <td colspan = 3>
-                <b>fi</b>                                             </td> </tr> <tr> <td></td> <td colspan = 4>
-       <b>od</b>                                                      </td> </tr>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">y[i] = fi(y) for 0 ≤ i &lt; N .</td>
+<td align="right">(2)</td>
+</tr>
 </table>
-
-In line L0 , (<u>E</u> j: h[j]) is an abbreviation for (<u>E</u> j: 0 &le; j &lt; N: h[j]) ;
-for the sake of brevity we shall use this abbreviation throughout this note.
-By writing &lt; (<u>E</u> j: h[j]) &gt; in the guard we have made the inspection whether
-a true h[j] can be found into an atomic action.
-The opening angle bracket &ldquo; &lt; &rdquo; in L1 has two corresponding closing
-brackets, corresponding to the two &ldquo;atomic alternatives&rdquo;; it means that in
-the same atomic action the guards are evaluated and either &ldquo;h[i]:= false&rdquo; or
-&ldquo;y[i]:= fi(y)&rdquo; is executed. In the latter case, N separate atomic actions
-follow, each setting an h[j] to true: in line L2j we have used the 
-abbreviation (<u>A</u> j: &lt; h[j]:= true &gt; ) for the program that performs the N atomic
-actions &lt; h[0]:= true &gt; through &lt; h[N-1]:= true &gt; in some order which we
-                   
-don&rsquo;t specify any further.
-Our target state is that y is a solution of (1), or, more explicitly
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(<u>A</u> j: y[j] = fj(y)) .</td><td align=right>(4)
-</td>  </tr>  </table>
-We first observe that (4) is an invariant of the repeatable statements: in
-the alternative constructs, always the first alternative will be chosen, leaving
-y , and hence (4) unaffected. We can even conclude a stronger invariant
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-<b>non</b> (<u>E</u> j: h[j]) <b>and</b> (<u>A</u> j: y[j] = fj(y))</td><td align=right>(5)
-</td>  </tr>  </table>
+<p>It is assumed that the initial value of y and the function f are such that the repeated assignments of the form</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">&lt;y[i]:= fi(y) &gt;</td>
+<td align="right">(3)</td>
+</tr>
+</table>
+will lead in a finite number of steps to y being a solution of (1). In (3) we have used Lamport’s notation of the angle brackets: they enclose “atomic actions” which can be implemented by ensuring between them mutual exclusion in time (when they are considered “to take time”).{In order to guarantee termination we must assume that the sequence of i-values for which the assignments (3) are carried out must be one of some sort of “fair random, order” in which, for instance, a finite upper bound is known to exist for the number of consecutive assignments —i.e. i-values— in which a given j (0 ≤ j &lt; N) does not occur: in other words, we assume the absence of individual starvation somehow guaranteed. (He who refuses to make that assumption can read the following as a proof of partial correctness.)
+<p>For the purpose of this note it suffices to know that functions f exist such that with a proper value of y equation (1) will be solved by a finite number of assignments (3). How for a given f and initial value y this property can be established is <b>not</b> the subject of this paper. (He who refuses to assume that the function f has that delightful property is free to do so: he can, again, read the following as a proof of partial correctness that states that <b>when</b> our concurrent program has terminated, (1) is satisfied.)</p>
+<p>Besides the global vector y there is a global boolean array h , with elements h[i] for 0 ≤ i &lt; N , all of which are true to start with. we now consider the following program of N-fold concurrency, in which each atomic action modifies at most one global array element. We give the program first and shall explain the notation afterwards.</p>
+<p>The concurrent program we are considering consists of the following N components (0 ≤ i &lt; N):</p>
+<table>
+<tr>
+<td colspan="5">comp.i:</td>
+</tr>
+<tr>
+<td>L0: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="4"><b>do</b> &lt; (<u>E</u> j: h[j]) &gt; →</td>
+</tr>
+<tr>
+<td>L1:</td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="3">&lt; <b>if</b> y[i] = fi(y) → h[i]:= false &gt;</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp;</td>
+<td colspan="2">▯ y[i] ≠ fi(y) → y[i]:= fi(y) &gt; ;</td>
+</tr>
+<tr>
+<td>L2j:</td>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>(<u>A</u> j: &lt; h[j]:= true &gt; )</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="3"><b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="4"><b>od</b></td>
+</tr>
+</table>
+In line L0 , (<u>E</u> j: h[j]) is an abbreviation for (<u>E</u> j: 0 ≤ j &lt; N: h[j]) ; for the sake of brevity we shall use this abbreviation throughout this note. By writing &lt; (<u>E</u> j: h[j]) &gt; in the guard we have made the inspection whether a true h[j] can be found into an atomic action. The opening angle bracket “ &lt; ” in L1 has two corresponding closing brackets, corresponding to the two “atomic alternatives”; it means that in the same atomic action the guards are evaluated and either “h[i]:= false” or “y[i]:= fi(y)” is executed. In the latter case, N separate atomic actions follow, each setting an h[j] to true: in line L2j we have used the abbreviation (<u>A</u> j: &lt; h[j]:= true &gt; ) for the program that performs the N atomic actions &lt; h[0]:= true &gt; through &lt; h[N-1]:= true &gt; in some order which we don’t specify any further. Our target state is that y is a solution of (1), or, more explicitly
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(<u>A</u> j: y[j] = fj(y)) .</td>
+<td align="right">(4)</td>
+</tr>
+</table>
+We first observe that (4) is an invariant of the repeatable statements: in the alternative constructs, always the first alternative will be chosen, leaving y , and hence (4) unaffected. We can even conclude a stronger invariant
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top"><b>non</b> (<u>E</u> j: h[j]) <b>and</b> (<u>A</u> j: y[j] = fj(y))</td>
+<td align="right">(5)</td>
+</tr>
+</table>
 or, equivalently
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(<u>A</u> j: <b>non</b> h[j]) <b>and</b> (<u>A</u> j: y[j] = fj(y))</td><td align=right>(5&rsquo;)
-</td>  </tr>  </table>
-for, when (5) holds, no assignment h[i]:= false can destroy the truth of
-(<u>A</u> j: <b>non</b> h[j]). When (4) holds, the assumption of fair random order implies
-that within a finite number of steps (5) will hold. But then the guards of
-the repetitive constructs are false, and all components will terminate nicely
-with (4) holding. The critical point is: can we guarantee that none of the
-components terminates too soon? In order to prove that termination implies
-that (4) holds, we have to prove the universal truth of
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(<u>E</u> j: h[j]) <b>or</b> (<u>A</u> j: y[j] = fj(y)) .</td><td align=right>(6)
-</td>  </tr>  </table>
-Relation (6) certainly holds when the N components are started because
-initially we start with all h[j] true. We are only left with the obligation 
-to prove the invariance of (6); the remaining part of this report is devoted
-to that proof, and to how it can be discovered. 
-<p>We get a hint of the kind of difficulties we may expect when trying to
-prove the invariance of (6) as soon as we realize that the first term is a
-compact notation for
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-h[0] <b>or</b> h[1] <b>or</b> h[2] <b>or</b> ... <b>or</b> h[N-1]</td><td align=right>
-</td>  </tr>  </table>
-which can become false when, as a result of &ldquo;h[i]:= false&rdquo; the <b>last</b> true
-h[j] disappears. That is ugly!
-<p>Proving a mathematical theorem is often only feasible by proving a
-stronger &mdash;but, somehow, more manageable&mdash; theorem instead. In direct analogy:
-instead of trying to prove the invariant truth of (6) we shall try to prove
-the invariant truth of a stronger assertion that we get by replacing the  
-                  
-conditions y[j] = fj(y) by stronger ones. Because under the universal truth
-of (Q <b>or</b> R) , the relation non R is stronger than Q , we can strengthen
-(6) into
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(<u>E</u> j= h[j]) <b>or</b> (<u>A</u> j: non Rj)</td><td align=right>(7)
-</td>  </tr>  </table>
-provided 
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(<u>A</u> j: y[j] = fj(y) <b>or</b> Rj)</td><td align=right>(8)
-</td>  </tr>  </table>
-holds universally. (Someone who sees these heuristics presented in this
-manner for the first time may experience this as juggling, but I am afraid that
-it is quite standard and that we had better get used to it.)
-<p>What have we gained by the introduction of the N predicates Rj?
-Well: the freedom to choose them! More precisely: the freedom to define them
-in such a way that we can prove the universal truth of (8) &mdash;which is 
-structurally quite pleasant&mdash; while the universal truth of (7) &mdash;which is 
-structurally equally &ldquo;ugly&rdquo; as (6)&mdash; follows more or less directly from the definition
-of the Rj&rsquo;s : that is the way in which we may hope that (7) is more 
-&ldquo;manageable&rdquo; than the original (6).
-<p>In order to find a proper definition of the Rj&rsquo;s , we analyse our 
-obligation to <b>prove</b> the invariance of (8).
-<p>If we only looked at the invariance of (8), one might think, that a
-definition of the Rj&rsquo;s in terms of y:
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-Rj = (y[j] &ne; fj(y))</td><td align=right>
-</td>  </tr>  </table>
-would be a sensible choice. A moment&rsquo;s reflection tells us that that definition
-does not help: it would make (8) universally true by definition, and the 
-right-hand terms of (6) and (7) would be identical, whereas (7) was intended to be
-stronger than (6).
-<p>For two reasons we are looking for a definition of the Rj&rsquo;s in which the
-y does not occur: firstly, it is then that we can expect the proof of the
-universal truth of (8) to amount to something &mdash;and, therefore, to contribute
-to the argument&mdash; , secondly, we would like to conclude the universal truth
-of (7) &mdash;which does not mention y at all&mdash; from the definition of the Rj&rsquo;s.
-In other words, we propose a <b>definition</b> of the Rj&rsquo;s which does not refer
-to y at all: only with such a definition the replacement of (6) by (7) and
-                 
-(8) localizes our dealing with y completely to the proof of the universal
-truth of (8).
-<p>Because we want to define the Rj&rsquo;s independently of y , because initially
-we cannot assume that for some j-value y[j] = fj(y) holds, and because (8)
-must hold initially, we must assume that initially
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(<u>A</u> j: Rj)</td><td align=right>(9)
-</td>  </tr>  </table>
-holds. Because, initially, all the h[j] are true, the initial truth of (9)
-is guaranteed if the Rj&rsquo;s are defined in such a way that we have
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(<u>E</u> j: <b>non</b> h[j]) <b>or</b> (<u>A</u> j: Rj) .</td><td align=right>(10)
-</td>  </tr>  </table>
-We observe, that (10) is again of the recognized ugly form we are trying to
-get rid of. We have some slack &mdash;that is what the Rj&rsquo;s are being introduced
-for&mdash; and this is the moment to decide to try to come away with a stronger
-&mdash;but what we have called: &rdquo;structurally more pleasant&ldquo; &mdash; relation such as
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(A j: <b>non</b> h[j] <b>or</b> Rj)</td><td align=right>(11)
-</td>  </tr>  </table>
-from which (10) immediately follows. We can already divulge that, indeed,
-(11) will be one of the defining equations for the Rj&rsquo;s .
-<p>From (11) it follows that the algorithm will start with all the Rj&rsquo;s
-true. From (8) it follows that the truth of Rj can be appreciated as &ldquo;the
-equation y[j] = fj(y) need not be satisfied&rdquo;, and from (7) it follows that
-in our final state we want to have all the Rj&rsquo;s equal to false.
-<p>Let us now look at the alternative construct
-<table> <tr> <td align=right>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;L1: </td> <td colspan = 3>
-      &lt;<b>if</b> y[i] = fi(y) &rarr; h[i]:= false &gt;            </td> </tr> <tr> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-          &#x25af; y[i] &ne; fi(y) &rarr; y[i]:= f(y) &gt;;          </td> </tr> <tr> <td align=right>L2j:</td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                                 (<u>A</u> j: &lt; h[j]:= true &gt;) </td> </tr> <tr> <td></td> <td></td> <td colspan = 2>
-          <b>fi</b>                                                  </td> </tr>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(<u>A</u> j: <b>non</b> h[j]) <b>and</b> (<u>A</u> j: y[j] = fj(y))</td>
+<td align="right">(5’)</td>
+</tr>
 </table>
-We observe that the first alternative sets h[i] false, and that the second
-one, as a whole, sets all h[j] true. As far as the universal truth of (11)
-is concerned, we therefore conclude that in the first alternative Ri is 
-allowed to, and hence <b>may</b> become false, but that in the second alternative as a
-whole, all Rj&rsquo;s <b>must</b> become true.
-                        
-<p>Let us now confront the two atomic alternatives with (8). Because, when
-the first alternative is selected, only y[i] = fi(y) has been observed, the
-universal truth of (8) is not destroyed by it, provided:
-<p>In the execution of the first atomic alternative
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-&lt; y[i] = fi(y) -. h[i]:= false &gt;</td><td align=right>
-</td></tr>
-<tr><td valign=top>  </td><td valign=top>
-<b>no</b> Rj for j &ne; i may change from true to false.</td><td align=right>(12)
-</td>  </tr>  </table>
-<p>Confronting the second atomic alternative
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-&lt;y[i] &ne; fi(y) &rarr; y[i]:= fi(y)&gt;</td><td align=right>
-</td>  </tr>  </table>
-<br>with (8), and observing that upon its completion <b>none</b> of the relations
-y[j] = fj(y) needs to hold, we conclude that the second atomic alternative
-itself must already cause a final state in which all the Rj&rsquo;s are true, in
-spite of the fact that the subsequent assignments h[j]:= true &mdash;which
-would each force an Rj to true on account of (11)&mdash; have not been executed
-yet. In short: in our definition for the Rj&rsquo;s we must include besides (11)
-another reason why an Rj should be defined to be true.
-<p>As it stands, the second atomic alternative only modifies y , but we:
-had decided that the definition of the Rj&rsquo;s would not be expressed in terms
-of y ! The only way in which we can formulate the additional reason for
-an Rj to be true is in terms of an <b>auxiliary</b> variable (to me introduced in
-a moment), whose value is changed in conjunction with the assignment to y[i] .
-It has to force each Rj to true until the subsequent assignment
-&lt; h[j]:= true &gt; does so via (11). Because the second atomic alternative is
-followed by N subsequent, separate atomic actions &lt; h[j]:= true &gt; &mdash;one
-for each value of j &mdash; it stands to reason that we introduce for comp.i
-an auxiliary local boolean array ri with elements ri[j] for 0 &le; j &lt; N .
-Their initial (and &ldquo;neutral&rdquo;) value is true. The second atomic alternative of
-L1 sets them all to false, the atomic statements L2j will reset them to true
-one at a time.
-<p>In the following annotated version of comp.i we have inserted local
-assertions between braces. In order to understand the local assertions about
-ri it suffices to remember that L1 is local to comp.i . The local assertion
-Ri in the second atomic alternative of L1 is justified by the guard
-                  
-y[i] &ne; fi(y) in conjunction with (8). We have further incorporated in our,
-annotation the consequence of (12) and the fact that the execution of a second
-alternative will never cause an Rj to become false: a true Ri can only
-become false by virtue of the execution of the first atomic alternative of
-L1 by comp.i itself! Hence, Ri is true all through the execution of the
-second alternative of comp.i .
-<br>comp.i:
-<table> <tr> <td>L0: </td> <td colspan = 4>
- <b>do</b> &lt; (<u>E</u> j: h[j]) &gt;&rarr; {(<u>A</u> j: ri[j])}                                </td> </tr> <tr> <td>L1: </td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 3>
-      &lt;<b>if</b> y[i] = fi(y) &rarr; h[i]:= false &gt; {(<u>A</u> j: ri[j])}                    </td> </tr> <tr> <td></td> <td></td> <td>&nbsp; &nbsp; </td> <td colspan = 2>
-        &#x25af; y[i] &ne; fi(y) &rarr;                                                            </td> </tr> <tr> <td></td> <td></td> <td></td> <td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-                {Ri} y[i]:= fi(y);                                                                 </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>
-                (<u>A</u> j: ri[j]:= false) &gt; {Ri <b>and</b> (<u>A</u> j: <b>non</b> ri[j])};   </td> </tr> <tr> <td></td> <td></td> <td></td> <td></td> <td>
-                (<u>A</u> j:{Ri <b>and</b> <b>non</b> ri[j]} &lt; h[j]:= true; ri[j]:= true &ne; ) </td> </tr> <tr> <td>L2j: </td> <td></td> <td></td> <td colspan = 2>
-        <b>fi</b> {(<u>A</u> j: ri[j])}                                                  .         </td> </tr> <tr> <td></td> <td colspan = 4>
- <b>od</b>                                                                                         </td> </tr> <tr> <td colspan = 5>
-                                                                                                   </td> </tr>
+for, when (5) holds, no assignment h[i]:= false can destroy the truth of (<u>A</u> j: <b>non</b> h[j]). When (4) holds, the assumption of fair random order implies that within a finite number of steps (5) will hold. But then the guards of the repetitive constructs are false, and all components will terminate nicely with (4) holding. The critical point is: can we guarantee that none of the components terminates too soon? In order to prove that termination implies that (4) holds, we have to prove the universal truth of
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(<u>E</u> j: h[j]) <b>or</b> (<u>A</u> j: y[j] = fj(y)) .</td>
+<td align="right">(6)</td>
+</tr>
 </table>
-<p>On account of (11) Rj will be true upon completion of L2j. But the
-second atomic alternative of L1 ,should already have made Rj true, and it
-should remain so until L2j is executed. The precondition of L2j, as given
-in the annotation, hence tells us the &rdquo;other reason besides
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(<u>A</u> j: <b>non</b> h[j] <b>or</b> Rj)</td><td align=right>(11)
-</td>  </tr>  </table>
-why an Rj should be defined to be true&ldquo;:
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(A i, j: <b>non</b> Ri <b>or</b> ri[j] <b>or</b> Rj) .</td><td align=right>(13)
-</td>  </tr>  </table>
-Because it is our aim to get eventually all the Rj&rsquo;s false, we <b>define</b>
-the Rj&rsquo;s as the <b>minimal</b> solution of (11) and (13), minimal in the sense
-of: as few Rj&rsquo;s true as possible.
-<p>A second look shows how the minimal solution is found. It is a sort of
-transitive closure: starting with the set of Rj&rsquo;s forced true by (11) &mdash;on
-account of falsity of <b>non</b> h[j]&mdash; , if necessary we extend this set &mdash;possibly
-in cascades&mdash; with the Rj&rsquo;s forced true by (13) &mdash;on account of falsity of 
-<b>non</b> Ri <b>or</b> ri[j]&mdash; .
-<p>For a value of i , for which
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(<u>A</u> j: ri[j])</td><td align=right>(14)
-</td>  </tr>  </table>
-                     
-holds, the truth of Ri forces no further true Rj&rsquo;s via (13); consequently,
-when such an Ri becomes false, no other Rj-values are then affected. This,
-and the fact that the first atomic alternative of L1 is executed under the
-truth of (14) tells us, that with our definition of the Rj&rsquo;s requirement
-(12) is, indeed, met. 
-<p>We have proved the universal truth of (8) by defining the Rj&rsquo;s as the
-minimal solution of (11) and (13). The universal truth of (7) , however, is
-now obvious. If the leFt-hand term of (7) is false, we have
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(<u>A</u> j:<b>non</b> h[j]),</td><td align=right>
-</td>  </tr>  </table>
-and (11) and (13) have_as minimal solution all Rj&rsquo;s false, i.e.
-<table width=100%>
-<tr><td valign=top width=10%>  </td><td valign=top>
-(<u>A</u> j: <b>non</b> Rj)</td><td align=right>,
-</td>  </tr>  </table>
+Relation (6) certainly holds when the N components are started because initially we start with all h[j] true. We are only left with the obligation to prove the invariance of (6); the remaining part of this report is devoted to that proof, and to how it can be discovered.
+<p>We get a hint of the kind of difficulties we may expect when trying to prove the invariance of (6) as soon as we realize that the first term is a compact notation for</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">h[0] <b>or</b> h[1] <b>or</b> h[2] <b>or</b> ... <b>or</b> h[N-1]</td>
+<td align="right"></td>
+</tr>
+</table>
+which can become false when, as a result of “h[i]:= false” the <b>last</b> true h[j] disappears. That is ugly!
+<p>Proving a mathematical theorem is often only feasible by proving a stronger —but, somehow, more manageable— theorem instead. In direct analogy: instead of trying to prove the invariant truth of (6) we shall try to prove the invariant truth of a stronger assertion that we get by replacing the conditions y[j] = fj(y) by stronger ones. Because under the universal truth of (Q <b>or</b> R) , the relation non R is stronger than Q , we can strengthen (6) into</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(<u>E</u> j= h[j]) <b>or</b> (<u>A</u> j: non Rj)</td>
+<td align="right">(7)</td>
+</tr>
+</table>
+provided
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(<u>A</u> j: y[j] = fj(y) <b>or</b> Rj)</td>
+<td align="right">(8)</td>
+</tr>
+</table>
+holds universally. (Someone who sees these heuristics presented in this manner for the first time may experience this as juggling, but I am afraid that it is quite standard and that we had better get used to it.)
+<p>What have we gained by the introduction of the N predicates Rj? Well: the freedom to choose them! More precisely: the freedom to define them in such a way that we can prove the universal truth of (8) —which is structurally quite pleasant— while the universal truth of (7) —which is structurally equally “ugly” as (6)— follows more or less directly from the definition of the Rj’s : that is the way in which we may hope that (7) is more “manageable” than the original (6).</p>
+<p>In order to find a proper definition of the Rj’s , we analyse our obligation to <b>prove</b> the invariance of (8).</p>
+<p>If we only looked at the invariance of (8), one might think, that a definition of the Rj’s in terms of y:</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">Rj = (y[j] ≠ fj(y))</td>
+<td align="right"></td>
+</tr>
+</table>
+would be a sensible choice. A moment’s reflection tells us that that definition does not help: it would make (8) universally true by definition, and the right-hand terms of (6) and (7) would be identical, whereas (7) was intended to be stronger than (6).
+<p>For two reasons we are looking for a definition of the Rj’s in which the y does not occur: firstly, it is then that we can expect the proof of the universal truth of (8) to amount to something —and, therefore, to contribute to the argument— , secondly, we would like to conclude the universal truth of (7) —which does not mention y at all— from the definition of the Rj’s. In other words, we propose a <b>definition</b> of the Rj’s which does not refer to y at all: only with such a definition the replacement of (6) by (7) and (8) localizes our dealing with y completely to the proof of the universal truth of (8).</p>
+<p>Because we want to define the Rj’s independently of y , because initially we cannot assume that for some j-value y[j] = fj(y) holds, and because (8) must hold initially, we must assume that initially</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(<u>A</u> j: Rj)</td>
+<td align="right">(9)</td>
+</tr>
+</table>
+holds. Because, initially, all the h[j] are true, the initial truth of (9) is guaranteed if the Rj’s are defined in such a way that we have
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(<u>E</u> j: <b>non</b> h[j]) <b>or</b> (<u>A</u> j: Rj) .</td>
+<td align="right">(10)</td>
+</tr>
+</table>
+We observe, that (10) is again of the recognized ugly form we are trying to get rid of. We have some slack —that is what the Rj’s are being introduced for— and this is the moment to decide to try to come away with a stronger —but what we have called: ”structurally more pleasant“ — relation such as
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(A j: <b>non</b> h[j] <b>or</b> Rj)</td>
+<td align="right">(11)</td>
+</tr>
+</table>
+from which (10) immediately follows. We can already divulge that, indeed, (11) will be one of the defining equations for the Rj’s .
+<p>From (11) it follows that the algorithm will start with all the Rj’s true. From (8) it follows that the truth of Rj can be appreciated as “the equation y[j] = fj(y) need not be satisfied”, and from (7) it follows that in our final state we want to have all the Rj’s equal to false.</p>
+<p>Let us now look at the alternative construct</p>
+<table>
+<tr>
+<td align="right">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;L1:</td>
+<td colspan="3">&lt;<b>if</b> y[i] = fi(y) → h[i]:= false &gt;</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2">▯ y[i] ≠ fi(y) → y[i]:= f(y) &gt;;</td>
+</tr>
+<tr>
+<td align="right">L2j:</td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>(<u>A</u> j: &lt; h[j]:= true &gt;)</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td colspan="2"><b>fi</b></td>
+</tr>
+</table>
+We observe that the first alternative sets h[i] false, and that the second one, as a whole, sets all h[j] true. As far as the universal truth of (11) is concerned, we therefore conclude that in the first alternative Ri is allowed to, and hence <b>may</b> become false, but that in the second alternative as a whole, all Rj’s <b>must</b> become true.
+<p>Let us now confront the two atomic alternatives with (8). Because, when the first alternative is selected, only y[i] = fi(y) has been observed, the universal truth of (8) is not destroyed by it, provided:</p>
+<p>In the execution of the first atomic alternative</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">&lt; y[i] = fi(y) -. h[i]:= false &gt;</td>
+<td align="right"></td>
+</tr>
+<tr>
+<td valign="top"></td>
+<td valign="top"><b>no</b> Rj for j ≠ i may change from true to false.</td>
+<td align="right">(12)</td>
+</tr>
+</table>
+<p>Confronting the second atomic alternative</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">&lt;y[i] ≠ fi(y) → y[i]:= fi(y)&gt;</td>
+<td align="right"></td>
+</tr>
+</table>
+<br>
+with (8), and observing that upon its completion <b>none</b> of the relations y[j] = fj(y) needs to hold, we conclude that the second atomic alternative itself must already cause a final state in which all the Rj’s are true, in spite of the fact that the subsequent assignments h[j]:= true —which would each force an Rj to true on account of (11)— have not been executed yet. In short: in our definition for the Rj’s we must include besides (11) another reason why an Rj should be defined to be true.
+<p>As it stands, the second atomic alternative only modifies y , but we: had decided that the definition of the Rj’s would not be expressed in terms of y ! The only way in which we can formulate the additional reason for an Rj to be true is in terms of an <b>auxiliary</b> variable (to me introduced in a moment), whose value is changed in conjunction with the assignment to y[i] . It has to force each Rj to true until the subsequent assignment &lt; h[j]:= true &gt; does so via (11). Because the second atomic alternative is followed by N subsequent, separate atomic actions &lt; h[j]:= true &gt; —one for each value of j — it stands to reason that we introduce for comp.i an auxiliary local boolean array ri with elements ri[j] for 0 ≤ j &lt; N . Their initial (and “neutral”) value is true. The second atomic alternative of L1 sets them all to false, the atomic statements L2j will reset them to true one at a time.</p>
+<p>In the following annotated version of comp.i we have inserted local assertions between braces. In order to understand the local assertions about ri it suffices to remember that L1 is local to comp.i . The local assertion Ri in the second atomic alternative of L1 is justified by the guard y[i] ≠ fi(y) in conjunction with (8). We have further incorporated in our, annotation the consequence of (12) and the fact that the execution of a second alternative will never cause an Rj to become false: a true Ri can only become false by virtue of the execution of the first atomic alternative of L1 by comp.i itself! Hence, Ri is true all through the execution of the second alternative of comp.i .<br>
+comp.i:</p>
+<table>
+<tr>
+<td>L0:</td>
+<td colspan="4"><b>do</b> &lt; (<u>E</u> j: h[j]) &gt;→ {(<u>A</u> j: ri[j])}</td>
+</tr>
+<tr>
+<td>L1:</td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="3">&lt;<b>if</b> y[i] = fi(y) → h[i]:= false &gt; {(<u>A</u> j: ri[j])}</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp;</td>
+<td colspan="2">▯ y[i] ≠ fi(y) →</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>{Ri} y[i]:= fi(y);</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>(<u>A</u> j: ri[j]:= false) &gt; {Ri <b>and</b> (<u>A</u> j: <b>non</b> ri[j])};</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>(<u>A</u> j:{Ri <b>and</b> <b>non</b> ri[j]} &lt; h[j]:= true; ri[j]:= true ≠ )</td>
+</tr>
+<tr>
+<td>L2j:</td>
+<td></td>
+<td></td>
+<td colspan="2"><b>fi</b> {(<u>A</u> j: ri[j])} .</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="4"><b>od</b></td>
+</tr>
+<tr>
+<td colspan="5"></td>
+</tr>
+</table>
+<p>On account of (11) Rj will be true upon completion of L2j. But the second atomic alternative of L1 ,should already have made Rj true, and it should remain so until L2j is executed. The precondition of L2j, as given in the annotation, hence tells us the ”other reason besides</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(<u>A</u> j: <b>non</b> h[j] <b>or</b> Rj)</td>
+<td align="right">(11)</td>
+</tr>
+</table>
+why an Rj should be defined to be true“:
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(A i, j: <b>non</b> Ri <b>or</b> ri[j] <b>or</b> Rj) .</td>
+<td align="right">(13)</td>
+</tr>
+</table>
+Because it is our aim to get eventually all the Rj’s false, we <b>define</b> the Rj’s as the <b>minimal</b> solution of (11) and (13), minimal in the sense of: as few Rj’s true as possible.
+<p>A second look shows how the minimal solution is found. It is a sort of transitive closure: starting with the set of Rj’s forced true by (11) —on account of falsity of <b>non</b> h[j]— , if necessary we extend this set —possibly in cascades— with the Rj’s forced true by (13) —on account of falsity of <b>non</b> Ri <b>or</b> ri[j]— .</p>
+<p>For a value of i , for which</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(<u>A</u> j: ri[j])</td>
+<td align="right">(14)</td>
+</tr>
+</table>
+holds, the truth of Ri forces no further true Rj’s via (13); consequently, when such an Ri becomes false, no other Rj-values are then affected. This, and the fact that the first atomic alternative of L1 is executed under the truth of (14) tells us, that with our definition of the Rj’s requirement (12) is, indeed, met.
+<p>We have proved the universal truth of (8) by defining the Rj’s as the minimal solution of (11) and (13). The universal truth of (7) , however, is now obvious. If the leFt-hand term of (7) is false, we have</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(<u>A</u> j:<b>non</b> h[j]),</td>
+<td align="right"></td>
+</tr>
+</table>
+and (11) and (13) have_as minimal solution all Rj’s false, i.e.
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td valign="top">(<u>A</u> j: <b>non</b> Rj)</td>
+<td align="right">,</td>
+</tr>
+</table>
 which is the second term of (7).
-<p class=noindent><b>Acknowledgements</b>. I would like to express my gratitude to both IFIP WG2.3 and
-&rdquo;The Tuesday Afternoon Club&ldquo;, where I had the opportunity to discuss this 
-problem. Those familiar with the long history that led to this note, however,
-know that in this case I am indebted to C.S.Scholten more than to anyone
-else.
-<p class=noindent><b>Reference   </b>
-<br>EWD622 &rdquo;On making solutions more and more fine-grained.&ldquo; by Edsger W.Dijkstra.
-<br><table width=100%><tr><td valign=top width=50%>
-<p class=noindent>Plataanstraat 5</td><td>prof.dr.Edsger W.Dijkstra
-</td></tr>
-<tr><td valign=top>
-5671 AL NUENEN</td><td>Burroughs Research Fellow
-</td></tr>
-<tr><td valign=top>
-The Netherlands</td><td>
-</td>  </tr>  </table>
-
-<hr />
-   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
-    Last revision
-    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
-      <!-- #BeginDate format:IS1 -->2015-01-14<!-- #EndDate -->
-    </csobj>
-  .</font></p>
-  <p>&nbsp;</p>
-</body></html></div>
+<p class="noindent"><b>Acknowledgements</b>. I would like to express my gratitude to both IFIP WG2.3 and ”The Tuesday Afternoon Club“, where I had the opportunity to discuss this problem. Those familiar with the long history that led to this note, however, know that in this case I am indebted to C.S.Scholten more than to anyone else.</p>
+<p class="noindent"><b>Reference</b><br>
+EWD622 ”On making solutions more and more fine-grained.“ by Edsger W.Dijkstra.<br></p>
+<table width="100%">
+<tr>
+<td valign="top" width="50%">
+<p class="noindent">Plataanstraat 5</p>
+</td>
+<td>prof.dr.Edsger W.Dijkstra</td>
+</tr>
+<tr>
+<td valign="top">5671 AL NUENEN</td>
+<td>Burroughs Research Fellow</td>
+</tr>
+<tr>
+<td valign="top">The Netherlands</td>
+<td></td>
+</tr>
+</table>
+<hr>
+<p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br>
+Last revision <!-- #BeginDate format:IS1 -->2015-01-14<!-- #EndDate -->
+ .</font></p>
+<p>&nbsp;</p>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

@@ -23,1403 +23,807 @@
   </div>
   <h1>Documentatie over communicatie apparatuur aan de EL X8</h1>
   <div class='body'>
-<p class="noindent">0. <U>Inleiding</U>
-</P>
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">Er
-  is voorzien in een maximum van 48 zg. Apparaten, genummerd van 0 t/m
-  47. <BR>Ze
-vallen uiteen in twee groepen: <BR>nr.
-0 t/m 31: de echte apparaten <BR>nr.
-32 t/m 47: de administratieve apparaten. <BR>De
-administratieve apparaten verrichten parallel aan de basismachine
-zekere handelingen (zoals &ldquo;tandenpoetsen&rdquo; en
-&ldquo;foutafhandeling&rdquo;); deze apparaten hebben een vast
-nummer, dat niet installatie-afhankelijk is. <BR>De
-echte apparaten in een specifieke installatie ontlenen hun nummer aan
-de plaats in de communicatiebekabeling; deze apparaatnummers zijn dus
-wel installatie-afhankelijk, kunnen zelfs gewijzigd moeten worden bij
-heropstelling. 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">1.
-<U>Communicatie
-opdrachten.</U> 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">Het
-opdrachtenrepertoire van de X8 heeft de mogelijkheid 1ste, (2de en
-3de) zg. IF-woord in A of S te lezen. Tot nu toe is alleen de layout
-van het 1ste IF-woord beslist:</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=19*>
-	<COL WIDTH=237*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%><BR>		</TD>
-		<TD WIDTH=93%>d26 = permanent 0 (
-		is tekenbit)		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%><BR>		</TD>
-		<TD WIDTH=93%>d25 = IF app. nr.
-		39		<br>
-		<br></TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%><BR>		</TD>
-		<TD WIDTH=93%>d18 = IF app. nr.
-		32		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%><BR>		</TD>
-		<TD WIDTH=93%>d17 = IF app. nr. 0		<br>
-	    <br></TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%><BR>		</TD>
-		<TD WIDTH=93%>d0 = IF app. nr. 17		</TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">Bij
-de laatste 26 toevoegingen betekent d = 1 : IF = <U>true</U>
-(IF = Ingreep Flip Flop).
-<BR>Het zetten van IF's
-door de basismachine geschiedt individueel door opdrachten:
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=19*>
-	<COL WIDTH=237*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%><BR>		</TD>
-		<TD WIDTH=93%>zet IF <U>true</U>		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%><BR>		</TD>
-		<TD WIDTH=93%>zet IF false		</TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">waarbij
-het apparaat wordt aangewezen door het adresgedeelte van de opdracht.
-<BR>N.B. Deze opdrachten
-zijn B-modificeerbaar. <BR>Voorts
-is aan elk apparaat toegevoegd een zg. LVIF (Luister Vergunning op de
-Ingreep Flip Flop), het opdrachten repertoire bevat de opdrachten:
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=19*>
-	<COL WIDTH=237*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%><BR>		</TD>
-		<TD WIDTH=93%>zet LVIF <U>true</U>		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%><BR>		</TD>
-		<TD WIDTH=93%>zet LVIF <U>false</U>		</TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">waarbij
-weer het apparaat wordt aangewezen door het adresgedeelte van de
-opdracht. Ook deze opdrachten zijn B-modificeerbaar.
-<BR>Tenslotte is aan elk
-apparaat toegevoegd een zg. AF (Actie Flip Flop); deze kan door de
-basismachine slechts in 1 richting gezet worden, nl.: 
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=19*>
-	<COL WIDTH=237*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%><BR>		</TD>
-		<TD WIDTH=93%>zet AF <U>true</U>		</TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">waarbij
-weer het apparaat wordt aangewezen door het adresgedeelte van de
-opdracht. Ook deze opdrachten zijn B-modificeerbaar.
-<BR>Tenslotte kent de
-basismachine: 
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=19*>
-	<COL WIDTH=237*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%><BR>		</TD>
-		<TD WIDTH=93%>zet IV <U>true</U>
-	    (maak horend)		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%><BR>		</TD>
-		<TD WIDTH=93%>zet IV <U>false</U>
-	    (maak doof)		</TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">(IV
-= Ingreep Vergunning). 
-</P>
-<P STYLE="margin-bottom: 0cm"><BR>
-  2.
-<U>Betekenis
-van IF, LVIF, IV en AF</U> 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">Als
-een IF <U>true</U>
-is, betekent dit, dat de
-basismachine op ten minste <U>1</U>
-terugmelding van het
-apparaat in kwestie nog niet heeft gereageerd. <BR>Een
-ingreep vindt plaats mits </P>
-<ol>
-  <li><SPAN LANG="nl-NL">IV =
-    </SPAN><SPAN LANG="nl-NL"><U>true</U></SPAN>
-    <SPAN LANG="nl-NL"><U>and</U></SPAN></li>
-  <li><SPAN LANG="nl-NL">Voor
-    tenminste 1 apparaat geldt &ldquo;LVIF </SPAN><SPAN LANG="nl-NL"><U>and</U></SPAN>
-    <SPAN LANG="nl-NL">IF&rdquo;.</SPAN>
-  </li>
-</ol>
-<P class="noindent" STYLE="margin-bottom: 0cm">Door het zetten van
-  de LVIF's kan de basismachine reguleren, van welke apparaten het
-  ingreepmechanisme al dan geen nota neemt. Door het zetten van IV kan
-  de basismachine (nl., door &ldquo;maak doof&rdquo;) tijdelijk
-  verhinderen door ingrepen onderbroken te worden. <BR>De
-  uitvoering van de ingreep bestaat uit de uitvoering van de opdracht
-  op adres 24 in plaats van de volgende opdracht. Op adres 24 moet een
-  niet stapelende subroutinesprong staan; zijn uitvoering is in twee
-opzichten bijzonder: </P>
-<ol>
-  <li>Het
-      ophogen van de opdrachtteller OT wordt onderdrukt (de opdracht is
-    immers niet onder kontrole van OT aangehaald).</li>
-  <li><SPAN LANG="nl-NL">De
-    basismachine wordt doof.</SPAN> </li>
-</ol>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-  subroutinesprong in 24 verwijst naar het begin van de ingreeproutine,
-  die begint met de status quo van het onderbroken programma te redden,
-  waarna onderzocht wordt, welke IF of IF's voor de ingreep
-  verantwoordelijk waren. Wat de IF is voor de basismachine is de AF
-  voor Charon. Zoals IF = <U>true</U>
-  betekent, dat er voor de
-  basismachine weer wat te doen is, zo betekent AF = <U>true</U>,
-  dat er voor het bijbehorende communicatie apparaat weer wat te doen
-  is, d.w.z. dat er tenminste 1 opdracht voor dit apparaat gegeven is.
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">  3.
-<U>Vaste
-toekenning van geheugenplaatsen aan apparaten</U> 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-AF meldt voor een apparaat aan Charon de <U>aanwezigheid</U>
-van tenminste 1
-startopdracht, de IF meldt omgekeerd aan de basismachine de
-<U>aanwezigheid</U>
-van tenminste 1
-terugmelding van dit apparaat. Nadere specificatie (aantal
-startopdrachten en welke, aantal terugmeldingen en welke, etc.) vindt
-plaats via het kerngeheugen, dat zowel voor de basismachine als voor
-Charon toegankelijk is (met prioriteit voor Charon).
-<BR>
-Voor deze
-communicatie zijn voor elk apparaat vier opeenvolgende
-geheugenplaatsen gereserveerd te beginnen bij: </P>
-<P STYLE="margin-bottom: 0cm">64
-+ 4 * apparaatnummer </P>
-<P class="noindent" STYLE="margin-bottom: 0cm">(Dit
-  loopt dus van 64 t/m 255). In het volgende zullen deze 4 woorden
-  worden aangeduid met AR0, AR1, AR2 en AR 3. <BR>De
-  9 meest significante bits enerzijds en de 18 minst significante bits
-  anderzijds worden vaak als onafhankelijke bestanddelen beschouwd; het
-  stuk d26 t/m d18 heet dan &ldquo; het tellingdeel&rdquo;, het stuk
-  van d17 t/m d0 heet dan &ldquo;het adresdeel&rdquo;.
-  <BR>Vooruitlopend geven
-  wij de algemene functie van de 4 apparaat woorden. 
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=76>
-	<COL WIDTH=1065>
-	<TR VALIGN=TOP>
-	  <TD WIDTH=113 align="left" valign="top" class="noindent">Opm 1.</TD>
-	  <TD class="noindent">Deze functies zijn
-			niet bij alle apparaten van toepassing; uitzonderingen zullen per
-	  apparaat vermeld worden. </TD>
-  </TR>
-	<TR VALIGN=TOP>
-	  <TD align="left" valign="top" class="noindent">Opm 2.</TD>
-	  <TD class="noindent">In dit
-			vooruitlopend overzicht geven wij geven wij slechts een eerste
-	  aanduiding van de betekenissen. </TD>
-  </TR>
-	<TR VALIGN=TOP>
-		<TD align="left" valign="top">AR0 :	  </TD>
-		<TD WIDTH=631 class="noindent">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			  <tr>
-			    <td width="9%">Tellingdeel</td>
-			    <td width="91%">:
-			werkruimte Charon, in het bijzonder gereserveerd voor OK-status. </td>
-		      </tr>
-			  <tr>
-			    <td>Adresdeel</td>
-			    <td>: label
-			van de heersende schakel.</td>
-		      </tr>
-		  </table></TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD align="left" valign="top">AR1 :	  </TD>
-		<TD WIDTH=631 class="noindent">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			  <tr>
-			    <td width="9%">Tellingdeel</td>
-			    <td width="91%">: IFT </td>
-		      </tr>
-			  <tr>
-			    <td valign="top">Adresdeel</td>
-			    <td>:
-			irrelevant, &ne; (wordt uit compalibiliteitsoverwegingen met de X2
-			door Charon niet gebruikt) </td>
-		      </tr>
-		  </table></TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD align="left" valign="top">AR2 :	  </TD>
-		<TD WIDTH=631 class="noindent">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			  <tr>
-			    <td width="9%">Tellingdeel</td>
-			    <td width="91%">: AFT </td>
-		      </tr>
-			  <tr>
-			    <td>Adresdeel</td>
-			    <td>: meestal
-			werkruimte voor Charon </td>
-		      </tr>
-		  </table></TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD align="left" valign="top">AR3 :	  </TD>
-		<TD WIDTH=631 class="noindent"><span class="noindent">Werkruimte</span> voor
-		Charon (vaak gereserveerd voor het zg. &ldquo;lopende codewoord&rdquo;).		</TD>
-	</TR>
-</TABLE>
-<P class="noindent">4. <U>Ketens
-van startopdrachten</U></P>
-<P class="noindent" STYLE="margin-bottom: 0cm"> 4.1. <U>Layout
-  van de startopdracht</U> 
-</P>
-<P class="noindent">Per
-apparaat kan men een keten van startopdrachten &ldquo;aanhangig
-maken&rdquo;. Elke startopdracht &ndash; omdat hij alleen in een
-keten voorkomt ook wel &ldquo;schakel&rdquo; genoemd &ndash; bestaat
-uit een aantal opeenvolgende geheugenplaatsen. Onder de &ldquo;label
-van een schakel&rdquo; verstaat men het adres v</span>an het tweede woord
-van deze schakel. <BR>
-De
-algemene layout van een startopdracht is: 
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=22*>
-	<COL WIDTH=234*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=13%>label [&ndash;1] :		</TD>
-		<TD WIDTH=87%>zg. slotwoord. V&oacute;&oacute;r
-			de feitelijke uitvoering van deze startopdracht, is de inhoud van
-			dit woord voor Charon irrelevant; na afloop van de uitvoering
-			heeft Charon verslaglegging gedaan over de afloop van de
-		startopdracht.		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=13%>label [0] :		</TD>
-		<TD WIDTH=87%><table width="100%" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
-		    <td width="14%">Tellingdeel</td>
-		    <td width="86%"> :
-		allemaal nullen </td>
-	      </tr>
-		  <tr>
-		    <td>Adresdeel</td>
-		    <td>: label
-			van de volgende schakel </td>
-	      </tr>
-		  </table></TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=13%>label [1] :		</TD>
-		<TD WIDTH=87%>Codewoorden ter
-		beschrijving van		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=13%>etc.		</TD>
-		<TD WIDTH=87%>de startopdracht;
-		de layout hiervan is apparaat afhankelijk.		</TD>
-	</TR>
-</TABLE>
-<P class="noindent">Een startopdracht
-wordt dus klaargemaakt in de vorm, die specifiek is voor het apparaat
-in kwestie. De startopdracht is niet positioneel gebonden aan het
-gebied van het kerngeheugen, waarop de feitelijke informatietransport
-betrekking heeft. Omdat voor de labels altijd 18 bits gereserveerd
-zijn is er geen hardware restrictie aan hun plaats opgelegd.
-</P>
-<P class="noindent">  4. 2. <U>Het
-aanhaken van een startopdracht</U> 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">In
-AFT (0 &le; AFT &le; 511) wordt ten behoeve van Charon het aantal
-schakels van de startketen genoteerd (inclusief de schakel, die door
-Charon in behandeling is). In de Actie Flip Flop AF wordt aangegeven,
-of ADT &gt; 0 is. <BR>Nadat
-de nieuwe schakel volledig is geprepareerd (met op het door zijn
-label aangewezen adres bv. + 0 wegens het ontbreken van een volgende
-schakel) moet deze worden aangehaakt. <BR>De
-aanhaakorganisatie moet in een zg. vulwijzer VW de label van de
-laatst aangehaakte schakel onthouden. Het aanhalingsprotocol is nu in
-volgorde: </P>
-<ol>
-  <li><SPAN class="noindent" LANG="nl-NL">1.</SPAN>
-    <SPAN LANG="nl-NL">Met
-      M[VW] := label nieuwe schakel wordt de nieuwe schakel aangehaakt.
-      (Als er geen &ldquo;laatste schakel&rdquo; (meer) is, moet dit worden
-    onderdrukt); verder wordt VW := label nieuwe schakel.</SPAN></li>
-  <li class="noindent">Met
-      een additieve uitopdracht (versie PLUSA of PLUSS) moet AFT met 1
-      verhoogd worden, waarbij de nieuwe waarde van AFT tevens in het
-    basismachineregister komt.</li>
-  <li><SPAN class="noindent" LANG="nl-NL">Indien
-    deze nieuwe AFT-waarde = 1 is moet de basismachine
-  </SPAN>
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="5%" valign="top">3.1 </td>
-        <td width="95%">het
-      adresdeel van AR0 door het nieuwe label vervangen (zonder het
-  tellingdeel te verstoren),</td>
-      </tr>
-      <tr>
-        <td class="noindent">3.2.</td>
-        <td><span class="noindent" lang="nl-NL">vervolgens
-    AF <U>true</U></span> <span class="noindent" lang="nl-NL">zetten. </span></td>
-      </tr>
-    </table>
-  </li>
-</ol>
-<P class="noindent" STYLE="margin-bottom: 0cm"><SPAN LANG="nl-NL"><U>Opm.</U></SPAN>
-  <SPAN LANG="nl-NL">Tijdens
-    de behandeling van de startopdracht wijst het adresdeel van AR0 naar
-    deze startopdracht. Als afsluiting laagt Charon AFT met 1 af. Is het
-    resultaat hiervan &gt; 0, dan vervangt Charon het adresdeel AR0 :=
-    adresdeel M[adresdeel AR0], d.w.z. gaat over op de volgende schakel.
-    Is het resultaat van de AFT aflaging = 0 (afgeleverd in de vorm van
-  negen nullen), dan wordt simultaan AF </SPAN><SPAN LANG="nl-NL"><U>false</U></SPAN>
-  <SPAN LANG="nl-NL">gezet
-    en de overgang op de volgende schakel wordt onderdrukt. Dit, plus het
-    feit dat bij niet lege startketen de AFT aflaging op voor de
-    basismachine oncontroleerbare ogenblikken kan plaatsvinden is de
-    achtergrond van voornoemde aanhaakriten, waar streng de hand gehouden
-  moet worden.</SPAN> 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">  4.
-3. <U>Het
-reageren op een terugmelding</U> 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">In
-IFT wordt ten behoeve van de basismachine genoteerd het aantal
-terugmeldingen van Charon, waarop de basismachine nog niet gereageerd
-heeft. Voltooiing van een terugmelding wordt door Charon afgesloten
-met de ophoging van IFT met 1 en het <U>true</U>
-zetten van IF.
-<BR>
-De basismachine moet,
-in het kader van de reactie op een terugmelding, IFT met 1 aflagen en
-zorgen dat IF &ndash; die de betekenis &ldquo;IFT&gt;0&rdquo; heeft &ndash;
-passend wordt achtergelaten. Omdat ook hier Charon op voor de
-basismachine oncontroleerbare ogenblikken de IFT-ophoging kan doen,
-is de IFT aflaging en de bbh IF aanpassing doen de basismachine aan
-een streng protocol onderwerpen. <BR>Dit
-luidt: </P>
-<ol>
-  <li><SPAN LANG="nl-NL">Zet IF
-    </SPAN><SPAN LANG="nl-NL"><U>False</U></SPAN></li>
-  <li><SPAN LANG="nl-NL">Laag
-    IFT met MINA, MINS ( of PLUSA of PLUSS) met 1 af.</SPAN><br>
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="7%" valign="top">2.<span class="noindent" style="margin-bottom: 0cm" lang="nl-NL">1.</span></td>
-        <td width="93%">Doordat
-      het adresdeel van AF1 &ne; nul is, wordt, als IFT algebra&iuml;sch
-  nul wordt, het tellingdeel van AR1 negen nullen.</td>
-      </tr>
-    </table>
-  </li>
-  <li><SPAN LANG="nl-NL">Als de
-      in het register aangetroffen nieuwe waarde van IFT &ne; 0 is, zet dan
-    IF </SPAN><SPAN LANG="nl-NL"><U>true</U></SPAN><SPAN LANG="nl-NL">.</SPAN>
-  </li>
-</ol>
-<P class="noindent" STYLE="margin-bottom: 0cm">Ook aan dit protocol
-  moet streng de hand gehouden worden. </P>
-<P class="noindent" STYLE="margin-bottom: 0cm">  5.
-<U>Het
-toetsenbord</U> 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">Het
-toetsenbord is een in voor apparaat, waarvan het nummer
-installatie-afhankelijk is. <BR>
-Het
-is een afwijkend apparaat in zoverre de operateur dit invoer apparaat
-bedienen kan, zonder dat de basismachine er een startopdracht voor
-heeft gegeven. <BR>Wanneer
-de basismachine bereid is een volgend karakter van het toetsenbord te
-accepteren dient van 
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=19*>
-	<COL WIDTH=237*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%>AR1 :		</TD>
-		<TD WIDTH=93%>het tellingdeel uit
-		negen nullen te bestaan,		het adresdeel &ne;
-		nul te zijn</TD>
-	</TR>
-</TABLE>
-<P class="noindent">AF dient <U>true</U>
-te zijn.
-</P>
-<P class="noindent"> De aanvangswaarde van
-AR0, AR2 en AR3 is irrelevant. </P>
-<P class="noindent"> Indrukken
-van een toets heeft tot gevolg </P>
-<ol>
-  <li><U>if</U>
-    AF <U>then</U>
-    AR0 := karakter <U>else</U>
-    AR3 := karakter;
-  </li>
-  <li>AF := <U>false</U>;
-  </li>
-  <li>IFT := IFT + 1 en
-    IF := <U>true</U>;
-  </li>
-</ol>
-<P class="noindent">Het protocol voor de
-  reactie op de ingreep van het toetsenbord is als volgt: </P>
-<PRE CLASS="western" STYLE="margin-bottom: 0.5cm">L0 : IF := <U>false</U>;
-          <SPAN LANG="nl-NL"> IFT := IFT - 1 annex </SPAN><SPAN LANG="nl-NL"><U>if</U></SPAN> <SPAN LANG="nl-NL">IFT &gt; 0 </SPAN><SPAN LANG="nl-NL"><U>then</U></SPAN>
-                  <SPAN LANG="nl-NL"><U>begin</U></SPAN> <SPAN LANG="nl-NL">AR0 := iets negatiefs: </SPAN><SPAN LANG="nl-NL"><U>goto</U></SPAN> <SPAN LANG="nl-NL">L0 </SPAN><SPAN LANG="nl-NL"><U>end</U></SPAN><SPAN LANG="nl-NL">;     </SPAN>
-           <SPAN LANG="nl-NL">A := AR0;</SPAN>
-           <SPAN LANG="nl-NL"><U>if</U></SPAN> <SPAN LANG="nl-NL">A &gt; 0 </SPAN><SPAN LANG="nl-NL"><U>then</U></SPAN> <SPAN LANG="nl-NL"><U>begin</U></SPAN> <SPAN LANG="nl-NL">AR0 := iets negatiefs; A moet nu als volgend</SPAN>
-                         <SPAN LANG="nl-NL">symbool geaccepteerd worden </SPAN><SPAN LANG="nl-NL"><U>end</U></SPAN><SPAN LANG="nl-NL">;</SPAN>
-                <SPAN LANG="nl-NL">AF := </SPAN><SPAN LANG="nl-NL"><U>true</U></SPAN><SPAN LANG="nl-NL">; </SPAN><SPAN LANG="nl-NL"><U>comment</U></SPAN> <SPAN LANG="nl-NL">nu kan het toetsenbord weer iets in AR0 zetten;</SPAN></PRE>
-<P class="noindent" STYLE="margin-bottom: 0cm">
-Onder &ldquo;accepteren
-van een symbool&rdquo; valt onder meer het uitprinten hiervan. Door
-pas daarna AF&nbsp;=&nbsp;<U>true</U>
-te zetten, kan men ervoor
-zorgen, dat de basismachine pas een volgend karakter accepteert,
-nadat het voorgaande netjes is verwerkt. Het toetsenbord plaatst de
-X8 voor een essenti&euml;le haastsituatie: de X8 moet dit karakter zo
-snel mogelijk verwerken, maar &ldquo;AF := <U>true</U>&rdquo; tot het bitter einde
-uitstellen. 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">  6.
-<U>Het
-teleprinterdrukwerk</U> 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-indeling voor AR0, AR1, AR2 en AR3 is normaal. Het tellingdeel van
-AR0 bevat de OK-status, het adresdeel van AR2 wordt niet gebruikt.
-Het lopend codewoord in AR3 is gesplitst in tellingdeel en adresdeel
-(zie onder). De startschakel bestaat uit 3 woorden, de eerste twee
-zijn normaal, de laatste, label [1], bevat het codewoord.
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm"> Een startschakel
-  geeft de mogelijkheid om de woorden uit N opeenvolgende adressen naar
-  het drukwerk van de teleprinter te sturen. Van elk woord bepalen de
-  laagste een actie van het drukwerk (Ik neem aan dat in elk van deze
-  woorden de 21 hoogste bits irrelevant zijn, ik zou ze altijd =0
-maken.) </P>
-<P class="noindent" STYLE="margin-bottom: 0cm">Het
-  codewoord bepaald lengt en ligging van de uit te voeren waardering,
-en wel </P>
-</P>
-<TABLE WIDTH=100% BORDER=0 align="left" CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=11*>
-	<COL WIDTH=245*>
-	<TR VALIGN=TOP>
-	  <TD WIDTH=6%>&nbsp;</TD>
-	  <TD WIDTH=25%>tellingdeel codewoord </TD>
-		<TD WIDTH=69%><table width="100%" border="0" cellspacing="0" cellpadding="0">
-	      <tr>
-		      <td width="36%" valign="top">=
-	  lengte van de rij, </td>
-		      <td width="64%"> (waarbij tellingdeel = 0 de lengte<br>
-		        =512
-			voorschrijft; in de lege<br>
-			startopdracht is dus niet
-			voorzien)</td>
-	        </tr>
-      </table></TD>
-	</TR>
-	<TR VALIGN=TOP>
-	  <TD>&nbsp;</TD>
-	  <TD>adresdeel codewoord</TD>
-	  <TD> = beginadres van de waardering &ndash;
-      1. </TD>
-  </TR>
-</TABLE>
-<p>&nbsp;</p>
-<P class="noindent">Als
-  de startopdacht door Charon geaccepteerd wordt, wordt het codewoord
-  uit de heersende schakel in het lopende codewoord (in AR3 dus)
-  overgenomen. <BR>
-  Per
-  woordverzending naar het drukwerk neemt Charon tweemaal contact met
-  het geheugen op. In het eerste geheugencontact met AR3 wordt het
-  tellingdeel (mod. 512) met 1 verlaagd en wordt het adresdeel ( modulo
-  2<SUP>18</SUP>)
-  met 1 verhoogd. Is het resulterend tellingdeel = 0, dan is het nu nog
-  volgend woordtransport het laatste van de startopdracht. In het
-  geheugencontact, volgend op dat met AR3 wordt het woord
-  getransporteerd, aangewezen door het zojuist in AR3 weggeschreven
-  adresdeel. Als &ndash; door storing &ndash; de startopdracht
-  voortijdig wordt afgebroken, bevindt zich in het tellingdeel van AR3
-  dus het resterende aantal te printen woorden, in het adresdeel het
-  adres van het laatste getransporteerde woord. <BR>
-  De
-  heersende OK-status van het drukwerk wordt onthouden in het
-  tellingdeel van AR0; na afloop van elke startopdracht wordt dit
-  tellingdeel overgenomen in het tellingdeel van het slotwoord (label
-  [&ndash;1]) van de schakel in voltooiing. Het adresdeel van het slotwoord
-is ongedefinieerd. </P>
-<P class="noindent">Bij
-  het drukwerk heeft de OK-indicatie slechts 2 mogelijke waarden: </P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=11*>
-	<COL WIDTH=245*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=4%>
-			<P><BR>
-			</P>
-		</TD>
-		<TD WIDTH=96%>
-			<P>000 000 000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OK</P>
-		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=4%>
-			<P><BR>
-			</P>
-		</TD>
-		<TD WIDTH=96%>
-			<P>111 111 111 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;niet
-			bedrijfsklaar (d.w.z. bv. niet aangesloten) 
-			</P>
-		</TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-status van het Charon programma voor het drukwerk kent dus twee
-toestanden, kortweg aangeduid met OK en <U>non</U>
-OK. <BR>Boven
-hebben we de normale afwerking van een startopdracht beschreven, als
-deze in de toestand OK geaccepteerd wordt. Een startopdracht, die in
-de toestand <U>non</U>
-OK geaccepteerd wordt,
-wordt op &eacute;&eacute;n uitzondering na, onmiddellijk symbolisch
-afgewerkt. (Onder terugmelding van de <U>non</U>
-OK status in het
-slotwoord). De ene uitzondering is de zg. HOK-opdracht (Herstel OK
-toestand), die normaal in de startketen kan worden opgenomen en
-gekarakteriseerd is door een codewoord bestaand uit louter nullen.
-(Mede tengevolge hiervan kan men <U>niet</U>
-in 1 startopdracht de
-inhoud van de woorden op adressen 1 t/m 512 naar het drukwerk sturen:
-deze zijn nl. als HOK-opdracht ge&iuml;nterpreteerd worden. De
-HOK-opdracht moet niet opgegeven worden als het apparaat al in de
-OK-toestand is. <BR>
-<u>NB</u>.
-Toetsenbord en teleprinterdrukwerk houden elk, onafhankelijk van
-elkaar, op mechanische wijze de heersende shift bij. Bij het drukwerk
-bepaalt de shift welke van de twee tekens bij een vijfbits
-drukcommando op papier verschijnt; bij het toetsenbord bepaalt de
-heersende shift welke helft van het toetsenbord geblokkeerd is. </P>
-<P class="noindent" STYLE="margin-bottom: 0cm">  6.1. <U>Hardware
-code teleprinter EL X8</U> 
-</P>
-<P STYLE="margin-bottom: 0cm">(Weggelaten
-zie origineel.) <BR><SPAN LANG="nl-NL">Bij
-zwart lint heeft X</SPAN> <SPAN LANG="nl-NL">als
-neveneffect het starten van een rood flikkerend attentiesignaal, dat
-alleen door de operateur kan worden afgezet.</SPAN> 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">7.
-<U>Het
-bandlezer</U> 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-betekenis van de centrale administratie AR0 t/m AR3 is normaal, als
-in 3 beschreven. <BR>
-De
-startschakel bestaat uit 3 opeenvolgende woorden: 
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=27*>
-	<COL WIDTH=229*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=15%>label [-1] :		</TD>
-		<TD WIDTH=85%><table width="100%" border="0" cellspacing="0" cellpadding="0">
-	      <tr>
-	        <td>slotwoord en wel: </td>
-	        </tr>
-        </table>
-		  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-		    <tr>
-		      <td width="14%">tellingdeel</td>
-		      <td width="10%">:</td>
-		      <td width="76%">Ok
-		indicatie </td>
-	        </tr>
-		    <tr>
-		      <td>adresdeel</td>
-		      <td>:</td>
-		      <td>undefined </td>
-	        </tr>
-        </table></TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=15%>label [0] :		</TD>
-		<TD WIDTH=85%><table width="100%" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
-		    <td width="14%">tellingdeel</td>
-		    <td width="10%">: </td>
-		    <td width="76%"> allemaal nullen </td>
-	      </tr>
-		  <tr>
-		    <td>adresdeel</td>
-		    <td>: </td>
-		    <td>label
-		van de volgende schakel </td>
-	      </tr>
-		  </table></TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=15%>label [+1] :		</TD>
-		<TD WIDTH=85%>enig codewoord en
-		wel
-		  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
-		    <td width="14%" valign="top">tellingdeel</td>
-		    <td width="3%" valign="top">:</td>
-		    <td width="83%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-		      <tr>
-		        <td width="8%">&nbsp;</td>
-		        <td width="92%">lengte
-			van de rij (waarbij tellingdeel =0<br>
-			de lengte =512 voorschrijft; in
-		de lege start-<br>
-		opdracht is dus niet voorzien)</td>
-	          </tr>
-	        </table></td>
-	      </tr>
-		  <tr>
-		    <td>adresdeel</td>
-		    <td>:</td>
-		    <td>beginadres van de woordenrij &ndash; 1. </td>
-	      </tr>
-	    </table></TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">Als
-de startopdracht door Charon geaccepteerd wordt, wordt het codewoord
-uit de heersende schakel in AR3 overgenomen. Per gelezen ponsing
-neemt Charon twee maal contact met het geheugen op. In het eerste
-geheugencontact met AR3 wordt het tellingdeel (mod. 512) met 1
-verlaagd en wordt het adresdeel ( mod. 2<SUP>18</SUP>)
-met 1 verhoogd. Is het resulterend tellingdeel = 0, dan is het nu nog
-volgend woordtransport het laatste van de startopdracht. In het
-geheugencontact, volgend op dat met AR3 wordt de gelezen ponsing, aan
-de meest significante zijde aangevuld met nullen, ingevuld op de
-geheugenplaats, die wordt aangewezen door het zojuist in AR3
-weggeschreven adresdeel. <BR>
-Wanneer
-de startopdracht voortijdig wordt afgebroken, bevindt zich in AR3 in
-het tellinggedeelte het ontbrekende aantal ponsingen, in het
-adresdeel het adres van het laatste gevulde woord. <BR>De
-heersende OK-status van de bandlezer wordt onthouden in het
-tellingdeel van AR0. Aan het einde van de verwerking van een
-startopdracht wordt de dan heersende OK-status gecopieerd in het
-tellingdeel van het slotwoord van de betrokken schakel.
-<BR>de OK-status kent
-drie waarden: 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">&nbsp;</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=11*>
-	<COL WIDTH=245*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%>
-			<P>&nbsp;</P>
-		</TD>
-		<TD WIDTH=20%><span class="noindent">000 000 000</span><span class="noindent"><br>
-	    111 111 111</span><span class="noindent"><br>
-	    111
-			111 110</span></TD>
-		<TD WIDTH=73%>OK<span class="noindent"> <BR>
-niet
-			bedrijfsklaar (d.w.z. bv. niet aangesloten <BR>
-einde band </span>	  </TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-laatste twee toestanden worden kortweg aangeduid met &ldquo;<U>non</U>
-OK&rdquo;. Als de
-bandlezer <U>non</U>
-OK is, worden alle
-volgende startopdrachten op &eacute;&eacute;n uitzondering na
-onmiddellijk symbolisch afgewerkt, onder terugmelding van de
-heersende <U>non</U>
-OK status in het
-slotwoord. De ene uitzondering is de zg. HOK-opdracht (Herstel OK
-toestand), die normaal in de starttreden kan worden opgenomen. Mede
-tengevolge hiervan kan men <U>niet</U>
-in een startopdracht 512
-ponsingen willen doen lezen, het opbergen te beginnen bij adres <U>1</U>.
-De HOK-opdracht moet <U>niet</U>
-opgegeven worden als de
-bandlezer al OK is. </P>
-<P class="noindent" STYLE="margin-bottom: 0cm"><SPAN LANG="nl-NL"><U>Opm.
-  1</U></SPAN> <SPAN LANG="nl-NL">De
-    symbolische afwerking verstoord AR3 niet, zodat het gegeven hoeveel
-    er nog gelezen is, voordat &ldquo;einde band&rdquo; het leesproces
-    afbrak, niet verloren gaat, voordat de volgende leesopdracht
-    effectief geaccepteerd wordt.</SPAN> <BR><SPAN LANG="nl-NL"><U>Opm.
-      2</U></SPAN> <SPAN LANG="nl-NL">De
-        bandlezer leest met een snelheid van 1000 ponsingen per seconde; het
-        leesproces belegt het geheugen dus voor &frac12; procent van de tijd.</SPAN>
-  <BR><SPAN LANG="nl-NL"><U>Opm.
-    3</U></SPAN> <SPAN LANG="nl-NL">De
-      bandlezer bevat een schakelaar voor verschillende bandbreedten Deze
-      bandbreedte wordt niet geacht bij te dragen tot de informatie,
-      programma-technisch is de heersende bandbreedte niet detecteerbaar.</SPAN>
-  <BR><SPAN LANG="nl-NL"><U>Opm.
-    4</U></SPAN> <SPAN LANG="nl-NL">De
-      bandlezer leest alle configuraties ongeinterpreteerd, ook &ldquo;blank
-tape&rdquo; en &ldquo;all holes&rdquo;.</SPAN> </P>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-  band passeert in volgorde: <BR><SPAN LANG="nl-NL">1.</SPAN>
-  <SPAN LANG="nl-NL">een
-  mechanische detector voor einde band,</SPAN> <BR><SPAN LANG="nl-NL">2.</SPAN>
-  <SPAN LANG="nl-NL">de
-  rem,</SPAN> <BR><SPAN LANG="nl-NL">3.</SPAN>
-  <SPAN LANG="nl-NL">het
-  leesstation,</SPAN> <BR><SPAN LANG="nl-NL">4.</SPAN>
-  <SPAN LANG="nl-NL">de
-  aandrijving.</SPAN> <BR>
-  De
-  uiteinden van de band kunnen daardoor niet gelezen worden.
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">De bandlezer is
-  uitgerust met een rode en een groene knop. Door op de rode knop te
-  drukken stopt men de bandlezer onmiddellijk en maakt men de detector
-  op einde band non-effectief. Door op de groene knop te drukken keert
-  de bandlezer in zijn normale toestand terug. Het indrukken van de
-  rode en groene knop dringt als zodanig niet tot de basismachine door:
-  als een startopdracht onder behandeling is (of komt) duurt het alleen
-  wat lang, voordat hij wordt afgehandeld. <BR>Wanneer
-  einde band gedetecteerd wordt, springt de bandlezer instantaan in de
-  toestand alsof op de rode knop gedrukt is, het indrukken van de
-  groene knop heeft slechts effect wanneer er een nog voldoende lange
-  band in de bandlezer ligt. <BR><SPAN LANG="nl-NL"><U>Opm.
-    5</U></SPAN> <SPAN LANG="nl-NL">Der
-      rode knop geeft de operateur de gelegenheid in noodsituaties de
-      bandlezer even te stoppen (knoop of krinkel of wat dan ook) zonder
-      dat dit tot de logica van het verwerkende programma doordringt. Zelfs
-      kan hij, als hij voldoende rap is, een aantal banden achter elkaar
-      als een band aan het verwerkende programma offreren.</SPAN>
-  <BR><SPAN LANG="nl-NL"><U>Opm.
-    6</U></SPAN> <SPAN LANG="nl-NL">Als
-      een band tot het einde gelezen is moeten er, voordat een volgende
-band over die bandlezer gelezen kan worden, twee dingen gebeurd zijn:</SPAN></P>
-<ol>
-  <li>de
-    basismachine moet een HOK-opdracht gegeven hebben.</li>
-  <li><SPAN LANG="nl-NL">de
-      operateur moet het inleggen van de volgende band hebben afgesloten
-    met het drukken op de groene knop.</SPAN> </li>
-</ol>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-  volgorde van deze twee acties doet niet ter zake.</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">  8.
-<U>Het
-bandponser</U> 
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-centrale administratie op de plaatsen AR0 t/m AR3, evenals de layout
-van de startschakel is bij de bandponser als bij het
-teleprinterdrukwerk, zie 6. (Teleprinter en bandponser worden nl.
-door precies hetzelfde Charonprogramma bediend.) Nu bepalen van elk
-woord de laagste 7 bits, wat er geponst wordt. (Ik neem aan, dat de
-resterende 20 bits irrelevant zijn, ik zou ze altijd =0 maken.)
-<BR>
-Ook de bandponser
-heeft een rode en een groene knop. het indrukken van de rode knop
-heeft tot gevolg, dat de bandponser instantaan stopt en dat de
-selectie voor bandeinde tijdelijk ineffectief is. Door het indrukken
-van de groene knop wordt dit weer ongedaan gemaakt.
-<BR>Als de detectie voor
-het bandeinde voor het eerst alarm geeft, is er nog minstens een paar
-meter band ter beschildering. In tegenstelling tot de bandlezer, die
-bij bandeinde instantaan stopt, maakt de bandponser de heersende
-startopdracht rustig af en gaat dan pas over in de toestand &ldquo;einde
-band&rdquo;, waarin de volgende startopdrachten (if any) symbolisch
-worden afgemaakt totaan de eerste HOK-opdracht. <BR>Deze
-HOK-opdracht brengt de bandponserij in de afsluittoestand. In de
-afsluittoestand worden ponsopdrachten weer normaal geaccepteerd, zij
-het dat aan noodkreten van de einde band detectie geen aandacht wordt
-geschonken. De afsluittoestand is ge&iuml;ntroduceerd om de
-programmeur de gelegenheid te geven eindindicaties op de band te
-ponsen; het is echter zijn verantwoordelijkheid om te zorgen, dat
-deze eindindicaties niet te lang zijn. <BR>Na
-de laatste ponsopdracht van de afsluiting geeft de programmeur een
-tweede HOK-opdracht, die dubbel gevolg heeft. Het Charonprogramma
-gaat weer in de normale OK-toestand over en de programmeur kan de
-startopdrachten voor de volgende band aanbieden. Een tweede effect
-van de tweede HOK-opdracht is dat de bandponser zelf in de toestand
-raakt, alsof de rode knop ingedrukt is, waarbij drukken op de groene
-knop slechts effect heeft nadat een nieuwe band is ingelegd.</P>
-<P class="noindent" STYLE="margin-bottom: 0cm"><SPAN LANG="nl-NL"><U>Opm.</U></SPAN>
-  <SPAN LANG="nl-NL">Met
-    het aanbieden van de startopdrachten voor de volgende band hoeft het
-    programma dus niet te wachten, totdat de operateur de band gewisseld
-  heeft.</SPAN> <BR>De
-  OK-status geeft vier waarden: 
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=11*>
-	<COL WIDTH=245*>
-	<TR VALIGN=TOP>
-	  <TD WIDTH=6%>&nbsp;</TD>
-	  <TD WIDTH=26%>000 000 000<BR>    		111 111 111<br>
-		  111
-		111 110<br>
-		111
-		111 101</TD>
-	  <TD WIDTH=68%> OK <BR>
-niet
-			bedrijfsklaar <BR>
-einde band <BR>
-afsluittoestand </TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">  9.
-<U>Regeldrukker</U>
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-centrale administratie (AR9t/m AR3) evenals de driewoords
-startschakel (label [-1] t/m label [+1]) hebben de normale functie.
-Het laatste woord van de startschakel is het codewoord, dat op nader
-te beschrijven wijze aangeeft, wat voor regel gedrukt moet worden.
-<BR>
-Ter specificatie van
-de startopdracht bouwt men in het geheugen op een aantal
-opeenvolgende adressen het zg. regelbeeld op. Plaats en lengte van
-het regelbeeld worden gegeven in het codewoord van de startschakel en
-wel 
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=26*>
-	<COL WIDTH=230*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=15%>codewoord:		</TD>
-		<TD WIDTH=12%>tellingdeel</TD>
-		<TD WIDTH=73%> :
-			aantal woorden dat het regelbeeld bestaat <br>
-		  (1 &le; dit aantal &le;
-	    36)		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=15%>&nbsp;</TD>
-		<TD WIDTH=12%>adresdeel</TD>
-		<TD WIDTH=73%> :
-		beginadres van het regelbeeld &ndash; <U>1</U>.		</TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">Charon
-zendt de woorden van het regelbeeld in volgorde van opklimmend adres
-naar de regeldrukker. In elk woord zijn vier zes-bits symbolen gepakt
-
-  <br>
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=13*>
-	<COL WIDTH=27*>
-	<COL WIDTH=216*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%>
-			<P>&nbsp;</P>
-		</TD>
-		<TD WIDTH=20%>d26.... d21		</TD>
-		<TD WIDTH=73%>1ste symbool		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%>
-			<P>&nbsp;</P>
-		</TD>
-		<TD WIDTH=20%>d19.... d14		</TD>
-		<TD WIDTH=73%>2de symbool		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%>
-			<P>&nbsp;</P>
-		</TD>
-		<TD WIDTH=20%>d12.... d7		</TD>
-		<TD WIDTH=73%>3de symbool		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=7%>
-			<P>&nbsp;</P>
-		</TD>
-		<TD WIDTH=20%>d5.... d0		</TD>
-		<TD WIDTH=73%>4de symbool		</TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-drie scheidingsbits d20, d13 en d6 moeten =0 zijn. <BR>
-De
-actie van de regeldrukker laat zich het best beschrijven in termen
-van zijn reactie op een van als boven gedefinieerde symbolenrij
-(waarvan de lengte altijd een viervoud is.) <BR>Het
-allereerste symbool van de rij wordt afwijkend ge&iuml;nterpreteerd
-en is de zg. sprong indicatie (zie onder); daarna specificeren de
-symbolen van de rij wat de regeldrukker op die regel moet drukken,
-positie per positie in de volgorde van links naar rechts. Het
-maximale aantal karakters per regel is 143. Als het regelbeeld in het
-geheugen korter is dan 36 woorden, laat de regeldrukker de
-ongespecificeerde posities aan het rechtereinde van de regel
-onbedrukt. De lengte van de symbolenrij die naar de regeldrukker
-gestuurd wordt is per definitie een viervoud; zonodig moet de
-programmeur de rij dus aanvullen met 1, 2 of 3 spaties.
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">De betekenis van de
-  sprong indicatie (opgevat als een getal van 0 t/m 63) is als volgt: <br>
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=36*>
-	<COL WIDTH=220*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=5%>0 		</TD>
-		<TD WIDTH=13%>t/m 31</TD>
-		<TD WIDTH=82%>voer het papier op
-			over het opgegeven aantal regels en druk vervolgens de regel af,
-		zoals door de rest van het regelbeeld is opgegeven.		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=5%>32 		</TD>
-		<TD WIDTH=13%>t/m 39</TD>
-		<TD WIDTH=82%>regelopvoer
-		gestuurd door een achtgats ponsbandje, druk dan.		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=5%>40		</TD>
-		<TD WIDTH=13%> t/m 63</TD>
-		<TD WIDTH=82%>komt niet voor		</TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">(In
-geval van formulieren van een vaste lengte kan men in de regeldrukker
-een cyclisch geplakt achtgats ponsbandje inleggen, dat met elke regel
-over een ponsing getransporteerd wordt. Dit bandje geeft 8 kanalen,
-genummerd van 0 t/m 7; de bandgestuurde regelopvoer vindt plaats,
-totdat in kanaal nr. &ldquo;sprong indicatie &ndash; 32&rdquo; een
-ponsing in het bandje gedetecteerd wordt. Bij koppeling aan een
-rekenautomaat is dit soort faciliteit overbodig, ik ben niet van plan
-hem te gebruiken.) </P>
-<P class="noindent" STYLE="margin-bottom: 0cm"> De
-  betekenis van de symbolen uit de rij na de sprong indicatie volgt uit
-  de volgende tabel. De symboolwaarde is opgevat als getal van 0 t/m
-  63. (wals EL X( van THE.) <BR>(tabel
-weggelaten, zie origineel document). </P>
-<P class="noindent" STYLE="margin-bottom: 0cm"><SPAN LANG="nl-NL"><U>Opm</U></SPAN><SPAN LANG="nl-NL">.
-    In de afdruk is de nul smaller dan de letter O.</SPAN>
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">De normale toestand
-is OK d.w.z. </P>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="19%" class="noindent">Tellingdeel
-  AR0</td>
-    <td width="81%" class="noindent">= 000 &nbsp;&nbsp;&nbsp;000&nbsp;&nbsp;&nbsp; 000</td>
-  </tr>
-  <tr>
-    <td class="noindent">slotwoord</td>
-    <td class="noindent">= +0 &nbsp;&nbsp;&nbsp;&nbsp;(d.w.z. allemaal nullen)</td>
-  </tr>
+<p class="noindent">0. <u>Inleiding</u></p>
+<p class="noindent" style="margin-bottom: 0cm">Er is voorzien in een maximum van 48 zg. Apparaten, genummerd van 0 t/m 47.<br>
+Ze vallen uiteen in twee groepen:<br>
+nr. 0 t/m 31: de echte apparaten<br>
+nr. 32 t/m 47: de administratieve apparaten.<br>
+De administratieve apparaten verrichten parallel aan de basismachine zekere handelingen (zoals “tandenpoetsen” en “foutafhandeling”); deze apparaten hebben een vast nummer, dat niet installatie-afhankelijk is.<br>
+De echte apparaten in een specifieke installatie ontlenen hun nummer aan de plaats in de communicatiebekabeling; deze apparaatnummers zijn dus wel installatie-afhankelijk, kunnen zelfs gewijzigd moeten worden bij heropstelling.</p>
+<p class="noindent" style="margin-bottom: 0cm">1. <u>Communicatie opdrachten.</u></p>
+<p class="noindent" style="margin-bottom: 0cm">Het opdrachtenrepertoire van de X8 heeft de mogelijkheid 1ste, (2de en 3de) zg. IF-woord in A of S te lezen. Tot nu toe is alleen de layout van het 1ste IF-woord beslist:</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="19*">
+<col width="237*">
+<tr valign="top">
+<td width="7%"><br></td>
+<td width="93%">d26 = permanent 0 ( is tekenbit)</td>
+</tr>
+<tr valign="top">
+<td width="7%"><br></td>
+<td width="93%">d25 = IF app. nr. 39<br>
+<br></td>
+</tr>
+<tr valign="top">
+<td width="7%"><br></td>
+<td width="93%">d18 = IF app. nr. 32</td>
+</tr>
+<tr valign="top">
+<td width="7%"><br></td>
+<td width="93%">d17 = IF app. nr. 0<br>
+<br></td>
+</tr>
+<tr valign="top">
+<td width="7%"><br></td>
+<td width="93%">d0 = IF app. nr. 17</td>
+</tr>
 </table>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-  regeldrukker bevat een detector &ldquo;paper low&rdquo;; als deze
-  signaleert, blijft de OK-toestand bestaan &ndash; regelprint
-  opdrachten worden dus normaal geaccepteerd &ndash; maar in de
-  startschakel verschijnt 
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=20*>
-	<COL WIDTH=236*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=8%><BR>		</TD>
-		<TD WIDTH=92%>slotwoord = +1 (d26
-		= &middot;&middot;&middot; = d1 = 0, d0 = 1) </TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">Geeft
-de programmeur nu &ndash; d.w.z. terwijl de toestand OK is &ndash;
-een HOK-opdracht &ndash; als steeds in de vorm van een codewoord
-gelijk aan louter nullen &ndash; dan gaat op de regeldrukker het
-lichtje &ldquo;Change Paper&rdquo; branden. De regeldrukker raakt
-daardoor in de toestand, alsof op de rode knop gedrukt is, drukken op
-de groene knop heeft slechts effect als &ldquo;paper low&rdquo; geen
-alarm geeft, d.w.z. als de operateur zonodig nieuw papier heeft
-ingedaan. </P>
-<P class="noindent" STYLE="margin-bottom: 0cm"> Als
-  de regeldrukker niet is aangesloten dan wordt: </P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=39*>
-	<COL WIDTH=217*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=19%>Tellingdeel AR0</TD>
-		<TD WIDTH=20%> = 111 111 111 		</TD>
-		<TD WIDTH=61%>niet
-		bedrijfsklaar</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=19%>slotwoord 		</TD>
-		<TD WIDTH=20%>= 111 111 111 ,		</TD>
-		<TD WIDTH=61%>gevolgd door een ongedefinieerd adresdeel</TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">Deze
-toestand geldt als <U>non</U>
-OK, en de volgende
-startopdrachten &ne; HOK worden symbolisch afgemaakt.
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm"> Drie andere oorzaken
-  kunnen de toestand <U>non</U>
-  OK tevoorschijn roepen.
-  Zij laten achter: 
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=37*>
-	<COL WIDTH=219*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=18%>tellingdeel AR0 </TD>
-		<TD WIDTH=5% align="center">= </TD>
-		<TD WIDTH=77%>111 111 110 en		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=18%>slotwoord</TD>
-		<TD WIDTH=5% align="center"> : </TD>
-		<TD WIDTH=77%>tellingdeel = 111
-		111 110		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=18%><BR>		</TD>
-		<TD WIDTH=5% align="center">&nbsp;</TD>
-		<TD WIDTH=77%>adresdeel: d<SUB>17</SUB>
-		  =  &middot;&middot;&middot;&middot;&middot; d<SUB>4</SUB>
-	    = 0		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	      <tr>
-	        <td>d3 = 1</td>
-	        <td> als &ldquo;Yoke
-		open&rdquo; </td>
-          </tr>
-	      <tr>
-	        <td>d2 = 1 </td>
-	        <td>als papier
-		gescheurd </td>
-          </tr>
-	      <tr>
-	        <td>d1 = 1 </td>
-	        <td>als
-		pariteitsfout in transmissie </td>
-          </tr>
-	      <tr>
-	        <td>d0 = 1 </td>
-	        <td>als tevens
-	    &ldquo;paper low&rdquo; </td>
-          </tr>
-      </table></TD>
-	</TR>
-</TABLE>
-<P class="noindent">Van de bits d3, d2 en
-d1 moet er minstens 1 gelijk zijn aan 1. De pariteits-foutsignalering
-d1 = 1 betreft de symbooltransmissie voor de regeldrukker: elk
-zesbits symbool wordt nl. voorzien van een pariteitsbit naar de
-regeldrukker gestuurd. Bij standaardwalsen, waar minder dan 64
-verschillende symbolen in de rij zijn toegestaan betekent d1 = 1
-&ldquo;pariteitsfout in transmissie of onbestaanbaar symbool&rdquo;.
-</P>
-<P class="noindent">Bij elke niet-lege
-combinatie wordt tevens in d0 = 1 paper low gemeld. In dat geval
-herstelt de eerste HOK-opdracht de OK-toestand, maar de indicatie
-paper low blijft hangen. Ee tweede HOK-opdracht vanuit de machine
-schakelt dan normaal het lichtje &ldquo;Change Paper&rdquo; aan.
-<BR><SPAN LANG="nl-NL"><U>Opm.
-1</U></SPAN> <SPAN LANG="nl-NL">Bij
-</SPAN><SPAN LANG="nl-NL"><U>non</U></SPAN>
-<SPAN LANG="nl-NL">OK
-door een van de drie genoemde oorzaken kan het reagerende programma
-d0 negeren. Blijkt &ldquo;paper low&rdquo; te heersen, dan merkt men
-dat wel bij de eerstvolgende startopdracht.</SPAN>
-<BR><SPAN LANG="nl-NL"><U>Opm.
-2</U></SPAN> <SPAN LANG="nl-NL">De
-voorstelling van zaken, alsof er aan de regeldrukker slechts een rode
-en een groene knop zitten, is wat simplistisch: er zitten er meer
-aan. Het effect is echter wel, dat na de HOK-opdracht na &ldquo;paper
-low&rdquo; de basismachine zonder meer de volgende startopdrachten al
-kan aanbieden, zij zullen pas verwerkt worden, nadat de operateur
-volgend de regels van de kunst nieuw papier heeft ingezet.</SPAN>
-<BR><SPAN LANG="nl-NL"><U>Opm.
-3</U></SPAN> <SPAN LANG="nl-NL">Als
-de regelprintopdracht voortijdig is afgebroken bevat het tellingdeel
-van AR3 zoals gebruikelijk het aantal resterende (d.w.z. niet
-getransporteerde) woorden en het adresdeel het adres van het laatst
-getransporteerde woord. Als de regelprintopdracht normaal is
-afgewerkt, bevat het tellingdeel 511 en het adresdeel het adres van
-&ldquo;het eerste niet getransporteerde woord&rdquo;.</SPAN>
-</P>
-<P class="noindent"> 10. <U>De
-trommel</U></P>
-<P class="noindent"><span class="noindent"> In
-  de ce</span>ntrale administratie hebben AR0, AR1 en AR2 de normale
-  betekenis. AR3 is ongebruikt. Een startopdracht is een schakel
-bestaande uit 5 opeenvolgende woorden. </P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=33*>
-	<COL WIDTH=223*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=13%>label [&ndash;1] :		</TD>
-		<TD WIDTH=87%><table width="100%" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
-		    <td width="17%">tellingdeel</td>
-		    <td width="83%"> : &nbsp;&nbsp;copie
-		van OK-status als in tellingdeel van AR0 </td>
-	      </tr>
-		  <tr>
-		    <td>adresdeel</td>
-		    <td>: &nbsp;&nbsp;nadere
-		specificatie slotwoord (zie onder) </td>
-	      </tr>
-		  </table></TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=13%>label [0] :		</TD>
-		<TD WIDTH=87%><table width="100%" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
-		    <td width="17%">tellingdeel</td>
-		    <td width="83%"> :&nbsp;&nbsp; 000
-		000 000 </td>
-	      </tr>
-		  <tr>
-		    <td>adresdeel</td>
-		    <td>:
-		&nbsp;&nbsp;labeladres volgende schakel. </td>
-	      </tr>
-		  </table></TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=13%>label [1] :		</TD>
-		<TD WIDTH=87%><table width="100%" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
-		    <td width="17%">d26 t/m
-		d19</td>
-		    <td width="83%"> : &nbsp;&nbsp;irrelevant, mits niet alle = 0. </td>
-	      </tr>
-		  <tr>
-		    <td>d18 t/m d0</td>
-		    <td>:
-		&nbsp;&nbsp;beginadres op trommel </td>
-	      </tr>
-		  </table></TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=13%>label [2] :		</TD>
-		<TD WIDTH=87%><table width="100%" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
-		    <td width="6%">d26</td>
-		    <td width="94%"> = &middot;&middot;&middot; =
-		d19 = 0 </td>
-	      </tr>
-		  <tr>
-		    <td>d18</td>
-		    <td> = 0
-		transportrichting van trommel naar kernen </td>
-	      </tr>
-		  <tr>
-		    <td>&nbsp;</td>
-		    <td>= 1
-		transportrichting van kernen naar trommel. </td>
-	      </tr>
-		  </table></TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=13%>label [3] :		</TD>
-		<TD WIDTH=87%><table width="100%" border="0" cellspacing="0" cellpadding="0">
-		  <tr>
-		    <td>d26
-		      = &middot;&middot;&middot; =
-	        d12 = 0 </td>
-	      </tr>
-		  <tr>
-		    <td>d11 t/m d0 : lengte
-	        ( dus &lt; 4096) </td>
-	      </tr>
-		  </table></TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">In
- tellingdeel van AR0 betekent: 
-  <br>
-</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=11*>
-	<COL WIDTH=245*>
-	<TR VALIGN=TOP>
-	  <TD WIDTH=6%><br></TD>
-		<TD WIDTH=24%>000 000 000<BR>    		111 111 111<br>
-		  111
-		111 110</TD>
-		<TD WIDTH=70%> OK <BR>
-niet
-			bedrijfsklaar <BR>
-iets mis </TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm">De
-laatste twee toestanden geven aanleiding tot symbolisch afwerken
-totaan de HOK-opdracht (Gekaraktiseerd door label[1] = + 0; label [2]
-en label [3] doen in de HOK-opdracht niet mee). </P>
-<P class="noindent" STYLE="margin-bottom: 0cm"> In
-  het slotwoord is </P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=30*>
-	<COL WIDTH=226*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=20%>d26 t/m d18		</TD>
-		<TD WIDTH=80%>: (tellingdeel) :
-		een copie van tellingdeel van AR3.		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=20%>d17 = &hellip; =
-		d14		</TD>
-		<TD WIDTH=80%>: altijd = 0		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=20%>d13 = 1		</TD>
-		<TD WIDTH=80%>als te laat
-		geaccepteerd geheugencontact		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=20%>d12 = 1		</TD>
-		<TD WIDTH=80%>als pariteitsfout.		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=20%>d11 t/m d0		</TD>
-		<TD WIDTH=80%>eindstand
-		aantallenteller (moet = 0 zijn).		</TD>
-	</TR>
-</TABLE>
-<P class="continue" STYLE="margin-bottom: 0cm">  d13
-= 1 of d12 = 1 impliceert OK-status: 111 111 110. 
-</P>
-<P class="continue" STYLE="margin-bottom: 0cm">&nbsp;</P>
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=0 CELLSPACING=0>
-	<COL WIDTH=23*>
-	<COL WIDTH=233*>
-	<TR VALIGN=TOP>
-		<TD WIDTH=12%>Ad d13:		</TD>
-		<TD WIDTH=88%>De trommel plaatst
-			het kerngeheugen voor een essenti&euml;le haastsituatie. Als deze
-			(door schromelijke overbelasting!) niet gehonoreerd zou kunnen
-		worden, wordt d13 = 1 gezet en het transport onderbroken.		</TD>
-	</TR>
-	<TR VALIGN=TOP>
-		<TD WIDTH=12%>Ad d12:		</TD>
-		<TD WIDTH=88%>De
-			trommeltransporten zijn aan de normale pariteitscontrole
-			onderworpen. Als bij een transport van kernen naar trommel een
-			woord met onjuiste pariteit in de kernen staat, zal de
-			transportopdracht alarm geven. Nogmaals proberen is dan
-		gegarandeerd zinloos.		</TD>
-	</TR>
-</TABLE>
-<P class="noindent" STYLE="margin-bottom: 0cm"><SPAN LANG="nl-NL"><U>Opm.
-1</U></SPAN> <SPAN LANG="nl-NL">In
-&ldquo;label [1]&rdquo; moet tenminste 1 van de bits =1 zijn om de
-opdracht van de HOK-opdracht te kunnen onderscheiden.</SPAN>
-<BR><SPAN LANG="nl-NL"><U>Opm.
-2</U></SPAN> <SPAN LANG="nl-NL">De
-ophoging van het lopend trommeladres geschiedt modulo 2 &uarr; 19 :
-het trommelgeheugen is dus cyclisch gerangschikt.</SPAN>
-<BR><SPAN LANG="nl-NL"><U>Opm.
-3</U></SPAN> <SPAN LANG="nl-NL">Bij
-een transport van trommel naar kernen, die er niet zijn, gaat
-informatie ongedetecteerd verloren; bij een transport uit kernen die
-er niet zin, slaat de pariteitscontrole alarm. Ook het lopend
-kernenadres telt rond ( modulo 2 &uarr; 18), maar erg interessant is
-dit niet.</SPAN> <BR><SPAN LANG="nl-NL"><U>Opm.
-4</U></SPAN> <SPAN LANG="nl-NL">In
-d 11 t/m d0 vindt men de eindstand van de teller, d.w.z. het aantal
-ongetransporteerde woorden. Bij fout geldt het mislukte woord als
-getransporteerd: als het laatste woord vindt men, dus d11 = &hellip;
-= d0 = 0.</SPAN> </P>
-<P class="noindent" STYLE="margin-bottom: 0cm">11. <U>De klok</U>
-</P>
-<P class="noindent" STYLE="margin-bottom: 0cm">De klok is
-  onveranderljk apparaat nr. 39. Hij werkt onafhankelijk van AF en
-heeft drie functies. </P>
+<p class="noindent" style="margin-bottom: 0cm">Bij de laatste 26 toevoegingen betekent d = 1 : IF = <u>true</u> (IF = Ingreep Flip Flop).<br>
+Het zetten van IF's door de basismachine geschiedt individueel door opdrachten:</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="19*">
+<col width="237*">
+<tr valign="top">
+<td width="7%"><br></td>
+<td width="93%">zet IF <u>true</u></td>
+</tr>
+<tr valign="top">
+<td width="7%"><br></td>
+<td width="93%">zet IF false</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">waarbij het apparaat wordt aangewezen door het adresgedeelte van de opdracht.<br>
+N.B. Deze opdrachten zijn B-modificeerbaar.<br>
+Voorts is aan elk apparaat toegevoegd een zg. LVIF (Luister Vergunning op de Ingreep Flip Flop), het opdrachten repertoire bevat de opdrachten:</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="19*">
+<col width="237*">
+<tr valign="top">
+<td width="7%"><br></td>
+<td width="93%">zet LVIF <u>true</u></td>
+</tr>
+<tr valign="top">
+<td width="7%"><br></td>
+<td width="93%">zet LVIF <u>false</u></td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">waarbij weer het apparaat wordt aangewezen door het adresgedeelte van de opdracht. Ook deze opdrachten zijn B-modificeerbaar.<br>
+Tenslotte is aan elk apparaat toegevoegd een zg. AF (Actie Flip Flop); deze kan door de basismachine slechts in 1 richting gezet worden, nl.:</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="19*">
+<col width="237*">
+<tr valign="top">
+<td width="7%"><br></td>
+<td width="93%">zet AF <u>true</u></td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">waarbij weer het apparaat wordt aangewezen door het adresgedeelte van de opdracht. Ook deze opdrachten zijn B-modificeerbaar.<br>
+Tenslotte kent de basismachine:</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="19*">
+<col width="237*">
+<tr valign="top">
+<td width="7%"><br></td>
+<td width="93%">zet IV <u>true</u> (maak horend)</td>
+</tr>
+<tr valign="top">
+<td width="7%"><br></td>
+<td width="93%">zet IV <u>false</u> (maak doof)</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">(IV = Ingreep Vergunning).</p>
+<p style="margin-bottom: 0cm"><br>
+2. <u>Betekenis van IF, LVIF, IV en AF</u></p>
+<p class="noindent" style="margin-bottom: 0cm">Als een IF <u>true</u> is, betekent dit, dat de basismachine op ten minste <u>1</u> terugmelding van het apparaat in kwestie nog niet heeft gereageerd.<br>
+Een ingreep vindt plaats mits</p>
+<ol>
+<li><span lang="nl-NL">IV =</span> <span lang="nl-NL"><u>true</u></span> <span lang="nl-NL"><u>and</u></span></li>
+<li><span lang="nl-NL">Voor tenminste 1 apparaat geldt “LVIF</span> <span lang="nl-NL"><u>and</u></span> <span lang="nl-NL">IF”.</span></li>
+</ol>
+<p class="noindent" style="margin-bottom: 0cm">Door het zetten van de LVIF's kan de basismachine reguleren, van welke apparaten het ingreepmechanisme al dan geen nota neemt. Door het zetten van IV kan de basismachine (nl., door “maak doof”) tijdelijk verhinderen door ingrepen onderbroken te worden.<br>
+De uitvoering van de ingreep bestaat uit de uitvoering van de opdracht op adres 24 in plaats van de volgende opdracht. Op adres 24 moet een niet stapelende subroutinesprong staan; zijn uitvoering is in twee opzichten bijzonder:</p>
+<ol>
+<li>Het ophogen van de opdrachtteller OT wordt onderdrukt (de opdracht is immers niet onder kontrole van OT aangehaald).</li>
+<li><span lang="nl-NL">De basismachine wordt doof.</span></li>
+</ol>
+<p class="noindent" style="margin-bottom: 0cm">De subroutinesprong in 24 verwijst naar het begin van de ingreeproutine, die begint met de status quo van het onderbroken programma te redden, waarna onderzocht wordt, welke IF of IF's voor de ingreep verantwoordelijk waren. Wat de IF is voor de basismachine is de AF voor Charon. Zoals IF = <u>true</u> betekent, dat er voor de basismachine weer wat te doen is, zo betekent AF = <u>true</u>, dat er voor het bijbehorende communicatie apparaat weer wat te doen is, d.w.z. dat er tenminste 1 opdracht voor dit apparaat gegeven is.</p>
+<p class="noindent" style="margin-bottom: 0cm">3. <u>Vaste toekenning van geheugenplaatsen aan apparaten</u></p>
+<p class="noindent" style="margin-bottom: 0cm">De AF meldt voor een apparaat aan Charon de <u>aanwezigheid</u> van tenminste 1 startopdracht, de IF meldt omgekeerd aan de basismachine de <u>aanwezigheid</u> van tenminste 1 terugmelding van dit apparaat. Nadere specificatie (aantal startopdrachten en welke, aantal terugmeldingen en welke, etc.) vindt plaats via het kerngeheugen, dat zowel voor de basismachine als voor Charon toegankelijk is (met prioriteit voor Charon).<br>
+Voor deze communicatie zijn voor elk apparaat vier opeenvolgende geheugenplaatsen gereserveerd te beginnen bij:</p>
+<p style="margin-bottom: 0cm">64 + 4 * apparaatnummer</p>
+<p class="noindent" style="margin-bottom: 0cm">(Dit loopt dus van 64 t/m 255). In het volgende zullen deze 4 woorden worden aangeduid met AR0, AR1, AR2 en AR 3.<br>
+De 9 meest significante bits enerzijds en de 18 minst significante bits anderzijds worden vaak als onafhankelijke bestanddelen beschouwd; het stuk d26 t/m d18 heet dan “ het tellingdeel”, het stuk van d17 t/m d0 heet dan “het adresdeel”.<br>
+Vooruitlopend geven wij de algemene functie van de 4 apparaat woorden.</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="76">
+<col width="1065">
+<tr valign="top">
+<td width="113" align="left" valign="top" class="noindent">Opm 1.</td>
+<td class="noindent">Deze functies zijn niet bij alle apparaten van toepassing; uitzonderingen zullen per apparaat vermeld worden.</td>
+</tr>
+<tr valign="top">
+<td align="left" valign="top" class="noindent">Opm 2.</td>
+<td class="noindent">In dit vooruitlopend overzicht geven wij geven wij slechts een eerste aanduiding van de betekenissen.</td>
+</tr>
+<tr valign="top">
+<td align="left" valign="top">AR0 :</td>
+<td width="631" class="noindent">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="8%" valign="top">11.1</td>
-    <td width="92%" valign="top" class="noindent"><span lang="nl-NL"><U>De
-  eigenlijke klok</U></span> <br>
-  Elke
-  10 insec wordt AR0 modulo 2 &uarr; 27 met 1 verhoogd. De cyclus van
-dit telproces is van de orde van grootte van twee weken. </td>
-  </tr>
-  <tr>
-    <td valign="top">11.2</td>
-    <td valign="top" class="noindent"><span lang="nl-NL"><U>De
-  kodewekker</U></span> <br>
-  <span lang="nl-NL">Elke
-      10 insec wordt het adresdeel van AR1 modulo 2 &uarr; 18 met 1
-      verminderd. Als hierdoor AR1 totaal = +0 wordt, wordt in het
-      tellingdeel van AR1 :000 000 001 gezet en IF wordt </span><span lang="nl-NL"><U>true</U></span><span lang="nl-NL">,
-        m.a.w. de ingreep van de kodewekker kan plaatsvinden. Wie deze
-        ingreep niet wil hebben, kan hem dus definitief onderdrukken door het
-        tellingdeel van AR1 meteen </span>&ne; <span lang="nl-NL">te
-maken. De maximale looptijd van de kodewekker is circa 40 minuten.</span></td>
-  </tr>
-  <tr>
-    <td valign="top">11.3</td>
-    <td valign="top"><p class="continue" style="margin-bottom: 0cm"><U>De
-      apparaatwekker</U> <br>
-      <span lang="nl-NL">Modulo
-        512 wordt elke 10 insec het tellingdeel van AR2 met 1 verminderd. Als
-        het resultaat in het tellingdeel = 0 wordt en het adresdeel van AR2 =
-        NR </span>&ne; <span lang="nl-NL">0
-          dan wordt:</span></p>
-      <ol>
-        <li><span class="noindent" style="margin-bottom: 0cm" lang="nl-NL">van het apparaat met apparaatnummer = NR de LVAF op </span><span lang="nl-NL"><U>true</U></span> <span lang="nl-NL">gezet,</span> </li>
-        <li>in AR2 wordt AR3 overgenomen. </li>
-      </ol>
-      <p class="noindent" style="margin-top: 0.18cm; margin-bottom: 0cm"> Men
-        initieert dit proces door eenmalig AR3 en AR2 met hetzelfde te
-        vullen. Men kan een aangewezen apparaat om de zoveel tijd ergens nota
-    van laten nemen, met maximum periode van circa vijf seconden. </p></td>
-  </tr>
+<tr>
+<td width="9%">Tellingdeel</td>
+<td width="91%">: werkruimte Charon, in het bijzonder gereserveerd voor OK-status.</td>
+</tr>
+<tr>
+<td>Adresdeel</td>
+<td>: label van de heersende schakel.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td align="left" valign="top">AR1 :</td>
+<td width="631" class="noindent">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="9%">Tellingdeel</td>
+<td width="91%">: IFT</td>
+</tr>
+<tr>
+<td valign="top">Adresdeel</td>
+<td>: irrelevant, ≠ (wordt uit compalibiliteitsoverwegingen met de X2 door Charon niet gebruikt)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td align="left" valign="top">AR2 :</td>
+<td width="631" class="noindent">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="9%">Tellingdeel</td>
+<td width="91%">: AFT</td>
+</tr>
+<tr>
+<td>Adresdeel</td>
+<td>: meestal werkruimte voor Charon</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td align="left" valign="top">AR3 :</td>
+<td width="631" class="noindent"><span class="noindent">Werkruimte</span> voor Charon (vaak gereserveerd voor het zg. “lopende codewoord”).</td>
+</tr>
+</table>
+<p class="noindent">4. <u>Ketens van startopdrachten</u></p>
+<p class="noindent" style="margin-bottom: 0cm">4.1. <u>Layout van de startopdracht</u></p>
+<p class="noindent">Per apparaat kan men een keten van startopdrachten “aanhangig maken”. Elke startopdracht – omdat hij alleen in een keten voorkomt ook wel “schakel” genoemd – bestaat uit een aantal opeenvolgende geheugenplaatsen. Onder de “label van een schakel” verstaat men het adres van het tweede woord van deze schakel.<br>
+De algemene layout van een startopdracht is:</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="22*">
+<col width="234*">
+<tr valign="top">
+<td width="13%">label [–1] :</td>
+<td width="87%">zg. slotwoord. Vóór de feitelijke uitvoering van deze startopdracht, is de inhoud van dit woord voor Charon irrelevant; na afloop van de uitvoering heeft Charon verslaglegging gedaan over de afloop van de startopdracht.</td>
+</tr>
+<tr valign="top">
+<td width="13%">label [0] :</td>
+<td width="87%">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="14%">Tellingdeel</td>
+<td width="86%">: allemaal nullen</td>
+</tr>
+<tr>
+<td>Adresdeel</td>
+<td>: label van de volgende schakel</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td width="13%">label [1] :</td>
+<td width="87%">Codewoorden ter beschrijving van</td>
+</tr>
+<tr valign="top">
+<td width="13%">etc.</td>
+<td width="87%">de startopdracht; de layout hiervan is apparaat afhankelijk.</td>
+</tr>
+</table>
+<p class="noindent">Een startopdracht wordt dus klaargemaakt in de vorm, die specifiek is voor het apparaat in kwestie. De startopdracht is niet positioneel gebonden aan het gebied van het kerngeheugen, waarop de feitelijke informatietransport betrekking heeft. Omdat voor de labels altijd 18 bits gereserveerd zijn is er geen hardware restrictie aan hun plaats opgelegd.</p>
+<p class="noindent">4. 2. <u>Het aanhaken van een startopdracht</u></p>
+<p class="noindent" style="margin-bottom: 0cm">In AFT (0 ≤ AFT ≤ 511) wordt ten behoeve van Charon het aantal schakels van de startketen genoteerd (inclusief de schakel, die door Charon in behandeling is). In de Actie Flip Flop AF wordt aangegeven, of ADT &gt; 0 is.<br>
+Nadat de nieuwe schakel volledig is geprepareerd (met op het door zijn label aangewezen adres bv. + 0 wegens het ontbreken van een volgende schakel) moet deze worden aangehaakt.<br>
+De aanhaakorganisatie moet in een zg. vulwijzer VW de label van de laatst aangehaakte schakel onthouden. Het aanhalingsprotocol is nu in volgorde:</p>
+<ol>
+<li><span class="noindent" lang="nl-NL">1.</span> <span lang="nl-NL">Met M[VW] := label nieuwe schakel wordt de nieuwe schakel aangehaakt. (Als er geen “laatste schakel” (meer) is, moet dit worden onderdrukt); verder wordt VW := label nieuwe schakel.</span></li>
+<li class="noindent">Met een additieve uitopdracht (versie PLUSA of PLUSS) moet AFT met 1 verhoogd worden, waarbij de nieuwe waarde van AFT tevens in het basismachineregister komt.</li>
+<li><span class="noindent" lang="nl-NL">Indien deze nieuwe AFT-waarde = 1 is moet de basismachine</span>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="5%" valign="top">3.1</td>
+<td width="95%">het adresdeel van AR0 door het nieuwe label vervangen (zonder het tellingdeel te verstoren),</td>
+</tr>
+<tr>
+<td class="noindent">3.2.</td>
+<td><span class="noindent" lang="nl-NL">vervolgens AF <u>true</u></span> <span class="noindent" lang="nl-NL">zetten.</span></td>
+</tr>
+</table>
+</li>
+</ol>
+<p class="noindent" style="margin-bottom: 0cm"><span lang="nl-NL"><u>Opm.</u></span> <span lang="nl-NL">Tijdens de behandeling van de startopdracht wijst het adresdeel van AR0 naar deze startopdracht. Als afsluiting laagt Charon AFT met 1 af. Is het resultaat hiervan &gt; 0, dan vervangt Charon het adresdeel AR0 := adresdeel M[adresdeel AR0], d.w.z. gaat over op de volgende schakel. Is het resultaat van de AFT aflaging = 0 (afgeleverd in de vorm van negen nullen), dan wordt simultaan AF</span> <span lang="nl-NL"><u>false</u></span> <span lang="nl-NL">gezet en de overgang op de volgende schakel wordt onderdrukt. Dit, plus het feit dat bij niet lege startketen de AFT aflaging op voor de basismachine oncontroleerbare ogenblikken kan plaatsvinden is de achtergrond van voornoemde aanhaakriten, waar streng de hand gehouden moet worden.</span></p>
+<p class="noindent" style="margin-bottom: 0cm">4. 3. <u>Het reageren op een terugmelding</u></p>
+<p class="noindent" style="margin-bottom: 0cm">In IFT wordt ten behoeve van de basismachine genoteerd het aantal terugmeldingen van Charon, waarop de basismachine nog niet gereageerd heeft. Voltooiing van een terugmelding wordt door Charon afgesloten met de ophoging van IFT met 1 en het <u>true</u> zetten van IF.<br>
+De basismachine moet, in het kader van de reactie op een terugmelding, IFT met 1 aflagen en zorgen dat IF – die de betekenis “IFT&gt;0” heeft – passend wordt achtergelaten. Omdat ook hier Charon op voor de basismachine oncontroleerbare ogenblikken de IFT-ophoging kan doen, is de IFT aflaging en de bbh IF aanpassing doen de basismachine aan een streng protocol onderwerpen.<br>
+Dit luidt:</p>
+<ol>
+<li><span lang="nl-NL">Zet IF</span> <span lang="nl-NL"><u>False</u></span></li>
+<li><span lang="nl-NL">Laag IFT met MINA, MINS ( of PLUSA of PLUSS) met 1 af.</span><br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="7%" valign="top">2.<span class="noindent" style="margin-bottom: 0cm" lang="nl-NL">1.</span></td>
+<td width="93%">Doordat het adresdeel van AF1 ≠ nul is, wordt, als IFT algebraïsch nul wordt, het tellingdeel van AR1 negen nullen.</td>
+</tr>
+</table>
+</li>
+<li><span lang="nl-NL">Als de in het register aangetroffen nieuwe waarde van IFT ≠ 0 is, zet dan IF</span> <span lang="nl-NL"><u>true</u></span><span lang="nl-NL">.</span></li>
+</ol>
+<p class="noindent" style="margin-bottom: 0cm">Ook aan dit protocol moet streng de hand gehouden worden.</p>
+<p class="noindent" style="margin-bottom: 0cm">5. <u>Het toetsenbord</u></p>
+<p class="noindent" style="margin-bottom: 0cm">Het toetsenbord is een in voor apparaat, waarvan het nummer installatie-afhankelijk is.<br>
+Het is een afwijkend apparaat in zoverre de operateur dit invoer apparaat bedienen kan, zonder dat de basismachine er een startopdracht voor heeft gegeven.<br>
+Wanneer de basismachine bereid is een volgend karakter van het toetsenbord te accepteren dient van</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="19*">
+<col width="237*">
+<tr valign="top">
+<td width="7%">AR1 :</td>
+<td width="93%">het tellingdeel uit negen nullen te bestaan, het adresdeel ≠ nul te zijn</td>
+</tr>
+</table>
+<p class="noindent">AF dient <u>true</u> te zijn.</p>
+<p class="noindent">De aanvangswaarde van AR0, AR2 en AR3 is irrelevant.</p>
+<p class="noindent">Indrukken van een toets heeft tot gevolg</p>
+<ol>
+<li><u>if</u> AF <u>then</u> AR0 := karakter <u>else</u> AR3 := karakter;</li>
+<li>AF := <u>false</u>;</li>
+<li>IFT := IFT + 1 en IF := <u>true</u>;</li>
+</ol>
+<p class="noindent">Het protocol voor de reactie op de ingreep van het toetsenbord is als volgt:</p>
+<pre class="western" style="margin-bottom: 0.5cm">
+L0 : IF := <u>false</u>;
+          <span lang="nl-NL"> IFT := IFT - 1 annex </span><span lang="nl-NL"><u>if</u></span> <span lang="nl-NL">IFT &gt; 0 </span><span lang="nl-NL"><u>then</u></span>
+                  <span lang="nl-NL"><u>begin</u></span> <span lang="nl-NL">AR0 := iets negatiefs: </span><span lang="nl-NL"><u>goto</u></span> <span lang="nl-NL">L0 </span><span lang="nl-NL"><u>end</u></span><span lang="nl-NL">;     </span>
+           <span lang="nl-NL">A := AR0;</span>
+           <span lang="nl-NL"><u>if</u></span> <span lang="nl-NL">A &gt; 0 </span><span lang="nl-NL"><u>then</u></span> <span lang="nl-NL"><u>begin</u></span> <span lang="nl-NL">AR0 := iets negatiefs; A moet nu als volgend</span>
+                         <span lang="nl-NL">symbool geaccepteerd worden </span><span lang="nl-NL"><u>end</u></span><span lang="nl-NL">;</span>
+                <span lang="nl-NL">AF := </span><span lang="nl-NL"><u>true</u></span><span lang="nl-NL">; </span><span lang="nl-NL"><u>comment</u></span> <span lang="nl-NL">nu kan het toetsenbord weer iets in AR0 zetten;</span>
+</pre>
+<p class="noindent" style="margin-bottom: 0cm">Onder “accepteren van een symbool” valt onder meer het uitprinten hiervan. Door pas daarna AF&nbsp;=&nbsp;<u>true</u> te zetten, kan men ervoor zorgen, dat de basismachine pas een volgend karakter accepteert, nadat het voorgaande netjes is verwerkt. Het toetsenbord plaatst de X8 voor een essentiële haastsituatie: de X8 moet dit karakter zo snel mogelijk verwerken, maar “AF := <u>true</u>” tot het bitter einde uitstellen.</p>
+<p class="noindent" style="margin-bottom: 0cm">6. <u>Het teleprinterdrukwerk</u></p>
+<p class="noindent" style="margin-bottom: 0cm">De indeling voor AR0, AR1, AR2 en AR3 is normaal. Het tellingdeel van AR0 bevat de OK-status, het adresdeel van AR2 wordt niet gebruikt. Het lopend codewoord in AR3 is gesplitst in tellingdeel en adresdeel (zie onder). De startschakel bestaat uit 3 woorden, de eerste twee zijn normaal, de laatste, label [1], bevat het codewoord.</p>
+<p class="noindent" style="margin-bottom: 0cm">Een startschakel geeft de mogelijkheid om de woorden uit N opeenvolgende adressen naar het drukwerk van de teleprinter te sturen. Van elk woord bepalen de laagste een actie van het drukwerk (Ik neem aan dat in elk van deze woorden de 21 hoogste bits irrelevant zijn, ik zou ze altijd =0 maken.)</p>
+<p class="noindent" style="margin-bottom: 0cm">Het codewoord bepaald lengt en ligging van de uit te voeren waardering, en wel</p>
+<table width="100%" border="0" align="left" cellpadding="0" cellspacing="0">
+<col width="11*">
+<col width="245*">
+<tr valign="top">
+<td width="6%">&nbsp;</td>
+<td width="25%">tellingdeel codewoord</td>
+<td width="69%">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="36%" valign="top">= lengte van de rij,</td>
+<td width="64%">(waarbij tellingdeel = 0 de lengte<br>
+=512 voorschrijft; in de lege<br>
+startopdracht is dus niet voorzien)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td>&nbsp;</td>
+<td>adresdeel codewoord</td>
+<td>= beginadres van de waardering – 1.</td>
+</tr>
+</table>
+<p>&nbsp;</p>
+<p class="noindent">Als de startopdacht door Charon geaccepteerd wordt, wordt het codewoord uit de heersende schakel in het lopende codewoord (in AR3 dus) overgenomen.<br>
+Per woordverzending naar het drukwerk neemt Charon tweemaal contact met het geheugen op. In het eerste geheugencontact met AR3 wordt het tellingdeel (mod. 512) met 1 verlaagd en wordt het adresdeel ( modulo 2<sup>18</sup>) met 1 verhoogd. Is het resulterend tellingdeel = 0, dan is het nu nog volgend woordtransport het laatste van de startopdracht. In het geheugencontact, volgend op dat met AR3 wordt het woord getransporteerd, aangewezen door het zojuist in AR3 weggeschreven adresdeel. Als – door storing – de startopdracht voortijdig wordt afgebroken, bevindt zich in het tellingdeel van AR3 dus het resterende aantal te printen woorden, in het adresdeel het adres van het laatste getransporteerde woord.<br>
+De heersende OK-status van het drukwerk wordt onthouden in het tellingdeel van AR0; na afloop van elke startopdracht wordt dit tellingdeel overgenomen in het tellingdeel van het slotwoord (label [–1]) van de schakel in voltooiing. Het adresdeel van het slotwoord is ongedefinieerd.</p>
+<p class="noindent">Bij het drukwerk heeft de OK-indicatie slechts 2 mogelijke waarden:</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="11*">
+<col width="245*">
+<tr valign="top">
+<td width="4%">
+<p><br></p>
+</td>
+<td width="96%">
+<p>000 000 000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OK</p>
+</td>
+</tr>
+<tr valign="top">
+<td width="4%">
+<p><br></p>
+</td>
+<td width="96%">
+<p>111 111 111 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;niet bedrijfsklaar (d.w.z. bv. niet aangesloten)</p>
+</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">De status van het Charon programma voor het drukwerk kent dus twee toestanden, kortweg aangeduid met OK en <u>non</u> OK.<br>
+Boven hebben we de normale afwerking van een startopdracht beschreven, als deze in de toestand OK geaccepteerd wordt. Een startopdracht, die in de toestand <u>non</u> OK geaccepteerd wordt, wordt op één uitzondering na, onmiddellijk symbolisch afgewerkt. (Onder terugmelding van de <u>non</u> OK status in het slotwoord). De ene uitzondering is de zg. HOK-opdracht (Herstel OK toestand), die normaal in de startketen kan worden opgenomen en gekarakteriseerd is door een codewoord bestaand uit louter nullen. (Mede tengevolge hiervan kan men <u>niet</u> in 1 startopdracht de inhoud van de woorden op adressen 1 t/m 512 naar het drukwerk sturen: deze zijn nl. als HOK-opdracht geïnterpreteerd worden. De HOK-opdracht moet niet opgegeven worden als het apparaat al in de OK-toestand is.<br>
+<u>NB</u>. Toetsenbord en teleprinterdrukwerk houden elk, onafhankelijk van elkaar, op mechanische wijze de heersende shift bij. Bij het drukwerk bepaalt de shift welke van de twee tekens bij een vijfbits drukcommando op papier verschijnt; bij het toetsenbord bepaalt de heersende shift welke helft van het toetsenbord geblokkeerd is.</p>
+<p class="noindent" style="margin-bottom: 0cm">6.1. <u>Hardware code teleprinter EL X8</u></p>
+<p style="margin-bottom: 0cm">(Weggelaten zie origineel.)<br>
+<span lang="nl-NL">Bij zwart lint heeft X</span> <span lang="nl-NL">als neveneffect het starten van een rood flikkerend attentiesignaal, dat alleen door de operateur kan worden afgezet.</span></p>
+<p class="noindent" style="margin-bottom: 0cm">7. <u>Het bandlezer</u></p>
+<p class="noindent" style="margin-bottom: 0cm">De betekenis van de centrale administratie AR0 t/m AR3 is normaal, als in 3 beschreven.<br>
+De startschakel bestaat uit 3 opeenvolgende woorden:</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="27*">
+<col width="229*">
+<tr valign="top">
+<td width="15%">label [-1] :</td>
+<td width="85%">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td>slotwoord en wel:</td>
+</tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="14%">tellingdeel</td>
+<td width="10%">:</td>
+<td width="76%">Ok indicatie</td>
+</tr>
+<tr>
+<td>adresdeel</td>
+<td>:</td>
+<td>undefined</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td width="15%">label [0] :</td>
+<td width="85%">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="14%">tellingdeel</td>
+<td width="10%">:</td>
+<td width="76%">allemaal nullen</td>
+</tr>
+<tr>
+<td>adresdeel</td>
+<td>:</td>
+<td>label van de volgende schakel</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td width="15%">label [+1] :</td>
+<td width="85%">enig codewoord en wel
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="14%" valign="top">tellingdeel</td>
+<td width="3%" valign="top">:</td>
+<td width="83%">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="8%">&nbsp;</td>
+<td width="92%">lengte van de rij (waarbij tellingdeel =0<br>
+de lengte =512 voorschrijft; in de lege start-<br>
+opdracht is dus niet voorzien)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>adresdeel</td>
+<td>:</td>
+<td>beginadres van de woordenrij – 1.</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">Als de startopdracht door Charon geaccepteerd wordt, wordt het codewoord uit de heersende schakel in AR3 overgenomen. Per gelezen ponsing neemt Charon twee maal contact met het geheugen op. In het eerste geheugencontact met AR3 wordt het tellingdeel (mod. 512) met 1 verlaagd en wordt het adresdeel ( mod. 2<sup>18</sup>) met 1 verhoogd. Is het resulterend tellingdeel = 0, dan is het nu nog volgend woordtransport het laatste van de startopdracht. In het geheugencontact, volgend op dat met AR3 wordt de gelezen ponsing, aan de meest significante zijde aangevuld met nullen, ingevuld op de geheugenplaats, die wordt aangewezen door het zojuist in AR3 weggeschreven adresdeel.<br>
+Wanneer de startopdracht voortijdig wordt afgebroken, bevindt zich in AR3 in het tellinggedeelte het ontbrekende aantal ponsingen, in het adresdeel het adres van het laatste gevulde woord.<br>
+De heersende OK-status van de bandlezer wordt onthouden in het tellingdeel van AR0. Aan het einde van de verwerking van een startopdracht wordt de dan heersende OK-status gecopieerd in het tellingdeel van het slotwoord van de betrokken schakel.<br>
+de OK-status kent drie waarden:</p>
+<p class="noindent" style="margin-bottom: 0cm">&nbsp;</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="11*">
+<col width="245*">
+<tr valign="top">
+<td width="7%">
+<p>&nbsp;</p>
+</td>
+<td width="20%"><span class="noindent">000 000 000</span><span class="noindent"><br>
+111 111 111</span><span class="noindent"><br>
+111 111 110</span></td>
+<td width="73%">OK <span class="noindent"><br>
+niet bedrijfsklaar (d.w.z. bv. niet aangesloten<br>
+einde band</span></td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">De laatste twee toestanden worden kortweg aangeduid met “<u>non</u> OK”. Als de bandlezer <u>non</u> OK is, worden alle volgende startopdrachten op één uitzondering na onmiddellijk symbolisch afgewerkt, onder terugmelding van de heersende <u>non</u> OK status in het slotwoord. De ene uitzondering is de zg. HOK-opdracht (Herstel OK toestand), die normaal in de starttreden kan worden opgenomen. Mede tengevolge hiervan kan men <u>niet</u> in een startopdracht 512 ponsingen willen doen lezen, het opbergen te beginnen bij adres <u>1</u>. De HOK-opdracht moet <u>niet</u> opgegeven worden als de bandlezer al OK is.</p>
+<p class="noindent" style="margin-bottom: 0cm"><span lang="nl-NL"><u>Opm. 1</u></span> <span lang="nl-NL">De symbolische afwerking verstoord AR3 niet, zodat het gegeven hoeveel er nog gelezen is, voordat “einde band” het leesproces afbrak, niet verloren gaat, voordat de volgende leesopdracht effectief geaccepteerd wordt.</span><br>
+<span lang="nl-NL"><u>Opm. 2</u></span> <span lang="nl-NL">De bandlezer leest met een snelheid van 1000 ponsingen per seconde; het leesproces belegt het geheugen dus voor ½ procent van de tijd.</span><br>
+<span lang="nl-NL"><u>Opm. 3</u></span> <span lang="nl-NL">De bandlezer bevat een schakelaar voor verschillende bandbreedten Deze bandbreedte wordt niet geacht bij te dragen tot de informatie, programma-technisch is de heersende bandbreedte niet detecteerbaar.</span><br>
+<span lang="nl-NL"><u>Opm. 4</u></span> <span lang="nl-NL">De bandlezer leest alle configuraties ongeinterpreteerd, ook “blank tape” en “all holes”.</span></p>
+<p class="noindent" style="margin-bottom: 0cm">De band passeert in volgorde:<br>
+<span lang="nl-NL">1.</span> <span lang="nl-NL">een mechanische detector voor einde band,</span><br>
+<span lang="nl-NL">2.</span> <span lang="nl-NL">de rem,</span><br>
+<span lang="nl-NL">3.</span> <span lang="nl-NL">het leesstation,</span><br>
+<span lang="nl-NL">4.</span> <span lang="nl-NL">de aandrijving.</span><br>
+De uiteinden van de band kunnen daardoor niet gelezen worden.</p>
+<p class="noindent" style="margin-bottom: 0cm">De bandlezer is uitgerust met een rode en een groene knop. Door op de rode knop te drukken stopt men de bandlezer onmiddellijk en maakt men de detector op einde band non-effectief. Door op de groene knop te drukken keert de bandlezer in zijn normale toestand terug. Het indrukken van de rode en groene knop dringt als zodanig niet tot de basismachine door: als een startopdracht onder behandeling is (of komt) duurt het alleen wat lang, voordat hij wordt afgehandeld.<br>
+Wanneer einde band gedetecteerd wordt, springt de bandlezer instantaan in de toestand alsof op de rode knop gedrukt is, het indrukken van de groene knop heeft slechts effect wanneer er een nog voldoende lange band in de bandlezer ligt.<br>
+<span lang="nl-NL"><u>Opm. 5</u></span> <span lang="nl-NL">Der rode knop geeft de operateur de gelegenheid in noodsituaties de bandlezer even te stoppen (knoop of krinkel of wat dan ook) zonder dat dit tot de logica van het verwerkende programma doordringt. Zelfs kan hij, als hij voldoende rap is, een aantal banden achter elkaar als een band aan het verwerkende programma offreren.</span><br>
+<span lang="nl-NL"><u>Opm. 6</u></span> <span lang="nl-NL">Als een band tot het einde gelezen is moeten er, voordat een volgende band over die bandlezer gelezen kan worden, twee dingen gebeurd zijn:</span></p>
+<ol>
+<li>de basismachine moet een HOK-opdracht gegeven hebben.</li>
+<li><span lang="nl-NL">de operateur moet het inleggen van de volgende band hebben afgesloten met het drukken op de groene knop.</span></li>
+</ol>
+<p class="noindent" style="margin-bottom: 0cm">De volgorde van deze twee acties doet niet ter zake.</p>
+<p class="noindent" style="margin-bottom: 0cm">8. <u>Het bandponser</u></p>
+<p class="noindent" style="margin-bottom: 0cm">De centrale administratie op de plaatsen AR0 t/m AR3, evenals de layout van de startschakel is bij de bandponser als bij het teleprinterdrukwerk, zie 6. (Teleprinter en bandponser worden nl. door precies hetzelfde Charonprogramma bediend.) Nu bepalen van elk woord de laagste 7 bits, wat er geponst wordt. (Ik neem aan, dat de resterende 20 bits irrelevant zijn, ik zou ze altijd =0 maken.)<br>
+Ook de bandponser heeft een rode en een groene knop. het indrukken van de rode knop heeft tot gevolg, dat de bandponser instantaan stopt en dat de selectie voor bandeinde tijdelijk ineffectief is. Door het indrukken van de groene knop wordt dit weer ongedaan gemaakt.<br>
+Als de detectie voor het bandeinde voor het eerst alarm geeft, is er nog minstens een paar meter band ter beschildering. In tegenstelling tot de bandlezer, die bij bandeinde instantaan stopt, maakt de bandponser de heersende startopdracht rustig af en gaat dan pas over in de toestand “einde band”, waarin de volgende startopdrachten (if any) symbolisch worden afgemaakt totaan de eerste HOK-opdracht.<br>
+Deze HOK-opdracht brengt de bandponserij in de afsluittoestand. In de afsluittoestand worden ponsopdrachten weer normaal geaccepteerd, zij het dat aan noodkreten van de einde band detectie geen aandacht wordt geschonken. De afsluittoestand is geïntroduceerd om de programmeur de gelegenheid te geven eindindicaties op de band te ponsen; het is echter zijn verantwoordelijkheid om te zorgen, dat deze eindindicaties niet te lang zijn.<br>
+Na de laatste ponsopdracht van de afsluiting geeft de programmeur een tweede HOK-opdracht, die dubbel gevolg heeft. Het Charonprogramma gaat weer in de normale OK-toestand over en de programmeur kan de startopdrachten voor de volgende band aanbieden. Een tweede effect van de tweede HOK-opdracht is dat de bandponser zelf in de toestand raakt, alsof de rode knop ingedrukt is, waarbij drukken op de groene knop slechts effect heeft nadat een nieuwe band is ingelegd.</p>
+<p class="noindent" style="margin-bottom: 0cm"><span lang="nl-NL"><u>Opm.</u></span> <span lang="nl-NL">Met het aanbieden van de startopdrachten voor de volgende band hoeft het programma dus niet te wachten, totdat de operateur de band gewisseld heeft.</span><br>
+De OK-status geeft vier waarden:</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="11*">
+<col width="245*">
+<tr valign="top">
+<td width="6%">&nbsp;</td>
+<td width="26%">000 000 000<br>
+111 111 111<br>
+111 111 110<br>
+111 111 101</td>
+<td width="68%">OK<br>
+niet bedrijfsklaar<br>
+einde band<br>
+afsluittoestand</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">9. <u>Regeldrukker</u></p>
+<p class="noindent" style="margin-bottom: 0cm">De centrale administratie (AR9t/m AR3) evenals de driewoords startschakel (label [-1] t/m label [+1]) hebben de normale functie. Het laatste woord van de startschakel is het codewoord, dat op nader te beschrijven wijze aangeeft, wat voor regel gedrukt moet worden.<br>
+Ter specificatie van de startopdracht bouwt men in het geheugen op een aantal opeenvolgende adressen het zg. regelbeeld op. Plaats en lengte van het regelbeeld worden gegeven in het codewoord van de startschakel en wel</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="26*">
+<col width="230*">
+<tr valign="top">
+<td width="15%">codewoord:</td>
+<td width="12%">tellingdeel</td>
+<td width="73%">: aantal woorden dat het regelbeeld bestaat<br>
+(1 ≤ dit aantal ≤ 36)</td>
+</tr>
+<tr valign="top">
+<td width="15%">&nbsp;</td>
+<td width="12%">adresdeel</td>
+<td width="73%">: beginadres van het regelbeeld – <u>1</u>.</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">Charon zendt de woorden van het regelbeeld in volgorde van opklimmend adres naar de regeldrukker. In elk woord zijn vier zes-bits symbolen gepakt<br></p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="13*">
+<col width="27*">
+<col width="216*">
+<tr valign="top">
+<td width="7%">
+<p>&nbsp;</p>
+</td>
+<td width="20%">d26.... d21</td>
+<td width="73%">1ste symbool</td>
+</tr>
+<tr valign="top">
+<td width="7%">
+<p>&nbsp;</p>
+</td>
+<td width="20%">d19.... d14</td>
+<td width="73%">2de symbool</td>
+</tr>
+<tr valign="top">
+<td width="7%">
+<p>&nbsp;</p>
+</td>
+<td width="20%">d12.... d7</td>
+<td width="73%">3de symbool</td>
+</tr>
+<tr valign="top">
+<td width="7%">
+<p>&nbsp;</p>
+</td>
+<td width="20%">d5.... d0</td>
+<td width="73%">4de symbool</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">De drie scheidingsbits d20, d13 en d6 moeten =0 zijn.<br>
+De actie van de regeldrukker laat zich het best beschrijven in termen van zijn reactie op een van als boven gedefinieerde symbolenrij (waarvan de lengte altijd een viervoud is.)<br>
+Het allereerste symbool van de rij wordt afwijkend geïnterpreteerd en is de zg. sprong indicatie (zie onder); daarna specificeren de symbolen van de rij wat de regeldrukker op die regel moet drukken, positie per positie in de volgorde van links naar rechts. Het maximale aantal karakters per regel is 143. Als het regelbeeld in het geheugen korter is dan 36 woorden, laat de regeldrukker de ongespecificeerde posities aan het rechtereinde van de regel onbedrukt. De lengte van de symbolenrij die naar de regeldrukker gestuurd wordt is per definitie een viervoud; zonodig moet de programmeur de rij dus aanvullen met 1, 2 of 3 spaties.</p>
+<p class="noindent" style="margin-bottom: 0cm">De betekenis van de sprong indicatie (opgevat als een getal van 0 t/m 63) is als volgt:<br></p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="36*">
+<col width="220*">
+<tr valign="top">
+<td width="5%">0</td>
+<td width="13%">t/m 31</td>
+<td width="82%">voer het papier op over het opgegeven aantal regels en druk vervolgens de regel af, zoals door de rest van het regelbeeld is opgegeven.</td>
+</tr>
+<tr valign="top">
+<td width="5%">32</td>
+<td width="13%">t/m 39</td>
+<td width="82%">regelopvoer gestuurd door een achtgats ponsbandje, druk dan.</td>
+</tr>
+<tr valign="top">
+<td width="5%">40</td>
+<td width="13%">t/m 63</td>
+<td width="82%">komt niet voor</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">(In geval van formulieren van een vaste lengte kan men in de regeldrukker een cyclisch geplakt achtgats ponsbandje inleggen, dat met elke regel over een ponsing getransporteerd wordt. Dit bandje geeft 8 kanalen, genummerd van 0 t/m 7; de bandgestuurde regelopvoer vindt plaats, totdat in kanaal nr. “sprong indicatie – 32” een ponsing in het bandje gedetecteerd wordt. Bij koppeling aan een rekenautomaat is dit soort faciliteit overbodig, ik ben niet van plan hem te gebruiken.)</p>
+<p class="noindent" style="margin-bottom: 0cm">De betekenis van de symbolen uit de rij na de sprong indicatie volgt uit de volgende tabel. De symboolwaarde is opgevat als getal van 0 t/m 63. (wals EL X( van THE.)<br>
+(tabel weggelaten, zie origineel document).</p>
+<p class="noindent" style="margin-bottom: 0cm"><span lang="nl-NL"><u>Opm</u></span><span lang="nl-NL">. In de afdruk is de nul smaller dan de letter O.</span></p>
+<p class="noindent" style="margin-bottom: 0cm">De normale toestand is OK d.w.z.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="19%" class="noindent">Tellingdeel AR0</td>
+<td width="81%" class="noindent">= 000 &nbsp;&nbsp;&nbsp;000&nbsp;&nbsp;&nbsp; 000</td>
+</tr>
+<tr>
+<td class="noindent">slotwoord</td>
+<td class="noindent">= +0 &nbsp;&nbsp;&nbsp;&nbsp;(d.w.z. allemaal nullen)</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">De regeldrukker bevat een detector “paper low”; als deze signaleert, blijft de OK-toestand bestaan – regelprint opdrachten worden dus normaal geaccepteerd – maar in de startschakel verschijnt</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="20*">
+<col width="236*">
+<tr valign="top">
+<td width="8%"><br></td>
+<td width="92%">slotwoord = +1 (d26 = ··· = d1 = 0, d0 = 1)</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">Geeft de programmeur nu – d.w.z. terwijl de toestand OK is – een HOK-opdracht – als steeds in de vorm van een codewoord gelijk aan louter nullen – dan gaat op de regeldrukker het lichtje “Change Paper” branden. De regeldrukker raakt daardoor in de toestand, alsof op de rode knop gedrukt is, drukken op de groene knop heeft slechts effect als “paper low” geen alarm geeft, d.w.z. als de operateur zonodig nieuw papier heeft ingedaan.</p>
+<p class="noindent" style="margin-bottom: 0cm">Als de regeldrukker niet is aangesloten dan wordt:</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="39*">
+<col width="217*">
+<tr valign="top">
+<td width="19%">Tellingdeel AR0</td>
+<td width="20%">= 111 111 111</td>
+<td width="61%">niet bedrijfsklaar</td>
+</tr>
+<tr valign="top">
+<td width="19%">slotwoord</td>
+<td width="20%">= 111 111 111 ,</td>
+<td width="61%">gevolgd door een ongedefinieerd adresdeel</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">Deze toestand geldt als <u>non</u> OK, en de volgende startopdrachten ≠ HOK worden symbolisch afgemaakt.</p>
+<p class="noindent" style="margin-bottom: 0cm">Drie andere oorzaken kunnen de toestand <u>non</u> OK tevoorschijn roepen. Zij laten achter:</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="37*">
+<col width="219*">
+<tr valign="top">
+<td width="18%">tellingdeel AR0</td>
+<td width="5%" align="center">=</td>
+<td width="77%">111 111 110 en</td>
+</tr>
+<tr valign="top">
+<td width="18%">slotwoord</td>
+<td width="5%" align="center">:</td>
+<td width="77%">tellingdeel = 111 111 110</td>
+</tr>
+<tr valign="top">
+<td width="18%"><br></td>
+<td width="5%" align="center">&nbsp;</td>
+<td width="77%">adresdeel: d<sub>17</sub> = ····· d<sub>4</sub> = 0
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td>d3 = 1</td>
+<td>als “Yoke open”</td>
+</tr>
+<tr>
+<td>d2 = 1</td>
+<td>als papier gescheurd</td>
+</tr>
+<tr>
+<td>d1 = 1</td>
+<td>als pariteitsfout in transmissie</td>
+</tr>
+<tr>
+<td>d0 = 1</td>
+<td>als tevens “paper low”</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<p class="noindent">Van de bits d3, d2 en d1 moet er minstens 1 gelijk zijn aan 1. De pariteits-foutsignalering d1 = 1 betreft de symbooltransmissie voor de regeldrukker: elk zesbits symbool wordt nl. voorzien van een pariteitsbit naar de regeldrukker gestuurd. Bij standaardwalsen, waar minder dan 64 verschillende symbolen in de rij zijn toegestaan betekent d1 = 1 “pariteitsfout in transmissie of onbestaanbaar symbool”.</p>
+<p class="noindent">Bij elke niet-lege combinatie wordt tevens in d0 = 1 paper low gemeld. In dat geval herstelt de eerste HOK-opdracht de OK-toestand, maar de indicatie paper low blijft hangen. Ee tweede HOK-opdracht vanuit de machine schakelt dan normaal het lichtje “Change Paper” aan.<br>
+<span lang="nl-NL"><u>Opm. 1</u></span> <span lang="nl-NL">Bij</span> <span lang="nl-NL"><u>non</u></span> <span lang="nl-NL">OK door een van de drie genoemde oorzaken kan het reagerende programma d0 negeren. Blijkt “paper low” te heersen, dan merkt men dat wel bij de eerstvolgende startopdracht.</span><br>
+<span lang="nl-NL"><u>Opm. 2</u></span> <span lang="nl-NL">De voorstelling van zaken, alsof er aan de regeldrukker slechts een rode en een groene knop zitten, is wat simplistisch: er zitten er meer aan. Het effect is echter wel, dat na de HOK-opdracht na “paper low” de basismachine zonder meer de volgende startopdrachten al kan aanbieden, zij zullen pas verwerkt worden, nadat de operateur volgend de regels van de kunst nieuw papier heeft ingezet.</span><br>
+<span lang="nl-NL"><u>Opm. 3</u></span> <span lang="nl-NL">Als de regelprintopdracht voortijdig is afgebroken bevat het tellingdeel van AR3 zoals gebruikelijk het aantal resterende (d.w.z. niet getransporteerde) woorden en het adresdeel het adres van het laatst getransporteerde woord. Als de regelprintopdracht normaal is afgewerkt, bevat het tellingdeel 511 en het adresdeel het adres van “het eerste niet getransporteerde woord”.</span></p>
+<p class="noindent">10. <u>De trommel</u></p>
+<p class="noindent"><span class="noindent">In de ce</span>ntrale administratie hebben AR0, AR1 en AR2 de normale betekenis. AR3 is ongebruikt. Een startopdracht is een schakel bestaande uit 5 opeenvolgende woorden.</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="33*">
+<col width="223*">
+<tr valign="top">
+<td width="13%">label [–1] :</td>
+<td width="87%">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="17%">tellingdeel</td>
+<td width="83%">: &nbsp;&nbsp;copie van OK-status als in tellingdeel van AR0</td>
+</tr>
+<tr>
+<td>adresdeel</td>
+<td>: &nbsp;&nbsp;nadere specificatie slotwoord (zie onder)</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td width="13%">label [0] :</td>
+<td width="87%">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="17%">tellingdeel</td>
+<td width="83%">:&nbsp;&nbsp; 000 000 000</td>
+</tr>
+<tr>
+<td>adresdeel</td>
+<td>: &nbsp;&nbsp;labeladres volgende schakel.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td width="13%">label [1] :</td>
+<td width="87%">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="17%">d26 t/m d19</td>
+<td width="83%">: &nbsp;&nbsp;irrelevant, mits niet alle = 0.</td>
+</tr>
+<tr>
+<td>d18 t/m d0</td>
+<td>: &nbsp;&nbsp;beginadres op trommel</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td width="13%">label [2] :</td>
+<td width="87%">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="6%">d26</td>
+<td width="94%">= ··· = d19 = 0</td>
+</tr>
+<tr>
+<td>d18</td>
+<td>= 0 transportrichting van trommel naar kernen</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= 1 transportrichting van kernen naar trommel.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr valign="top">
+<td width="13%">label [3] :</td>
+<td width="87%">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td>d26 = ··· = d12 = 0</td>
+</tr>
+<tr>
+<td>d11 t/m d0 : lengte ( dus &lt; 4096)</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">In tellingdeel van AR0 betekent:<br></p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="11*">
+<col width="245*">
+<tr valign="top">
+<td width="6%"><br></td>
+<td width="24%">000 000 000<br>
+111 111 111<br>
+111 111 110</td>
+<td width="70%">OK<br>
+niet bedrijfsklaar<br>
+iets mis</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm">De laatste twee toestanden geven aanleiding tot symbolisch afwerken totaan de HOK-opdracht (Gekaraktiseerd door label[1] = + 0; label [2] en label [3] doen in de HOK-opdracht niet mee).</p>
+<p class="noindent" style="margin-bottom: 0cm">In het slotwoord is</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="30*">
+<col width="226*">
+<tr valign="top">
+<td width="20%">d26 t/m d18</td>
+<td width="80%">: (tellingdeel) : een copie van tellingdeel van AR3.</td>
+</tr>
+<tr valign="top">
+<td width="20%">d17 = … = d14</td>
+<td width="80%">: altijd = 0</td>
+</tr>
+<tr valign="top">
+<td width="20%">d13 = 1</td>
+<td width="80%">als te laat geaccepteerd geheugencontact</td>
+</tr>
+<tr valign="top">
+<td width="20%">d12 = 1</td>
+<td width="80%">als pariteitsfout.</td>
+</tr>
+<tr valign="top">
+<td width="20%">d11 t/m d0</td>
+<td width="80%">eindstand aantallenteller (moet = 0 zijn).</td>
+</tr>
+</table>
+<p class="continue" style="margin-bottom: 0cm">d13 = 1 of d12 = 1 impliceert OK-status: 111 111 110.</p>
+<p class="continue" style="margin-bottom: 0cm">&nbsp;</p>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<col width="23*">
+<col width="233*">
+<tr valign="top">
+<td width="12%">Ad d13:</td>
+<td width="88%">De trommel plaatst het kerngeheugen voor een essentiële haastsituatie. Als deze (door schromelijke overbelasting!) niet gehonoreerd zou kunnen worden, wordt d13 = 1 gezet en het transport onderbroken.</td>
+</tr>
+<tr valign="top">
+<td width="12%">Ad d12:</td>
+<td width="88%">De trommeltransporten zijn aan de normale pariteitscontrole onderworpen. Als bij een transport van kernen naar trommel een woord met onjuiste pariteit in de kernen staat, zal de transportopdracht alarm geven. Nogmaals proberen is dan gegarandeerd zinloos.</td>
+</tr>
+</table>
+<p class="noindent" style="margin-bottom: 0cm"><span lang="nl-NL"><u>Opm. 1</u></span> <span lang="nl-NL">In “label [1]” moet tenminste 1 van de bits =1 zijn om de opdracht van de HOK-opdracht te kunnen onderscheiden.</span><br>
+<span lang="nl-NL"><u>Opm. 2</u></span> <span lang="nl-NL">De ophoging van het lopend trommeladres geschiedt modulo 2 ↑ 19 : het trommelgeheugen is dus cyclisch gerangschikt.</span><br>
+<span lang="nl-NL"><u>Opm. 3</u></span> <span lang="nl-NL">Bij een transport van trommel naar kernen, die er niet zijn, gaat informatie ongedetecteerd verloren; bij een transport uit kernen die er niet zin, slaat de pariteitscontrole alarm. Ook het lopend kernenadres telt rond ( modulo 2 ↑ 18), maar erg interessant is dit niet.</span><br>
+<span lang="nl-NL"><u>Opm. 4</u></span> <span lang="nl-NL">In d 11 t/m d0 vindt men de eindstand van de teller, d.w.z. het aantal ongetransporteerde woorden. Bij fout geldt het mislukte woord als getransporteerd: als het laatste woord vindt men, dus d11 = … = d0 = 0.</span></p>
+<p class="noindent" style="margin-bottom: 0cm">11. <u>De klok</u></p>
+<p class="noindent" style="margin-bottom: 0cm">De klok is onveranderljk apparaat nr. 39. Hij werkt onafhankelijk van AF en heeft drie functies.</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="8%" valign="top">11.1</td>
+<td width="92%" valign="top" class="noindent"><span lang="nl-NL"><u>De eigenlijke klok</u></span><br>
+Elke 10 insec wordt AR0 modulo 2 ↑ 27 met 1 verhoogd. De cyclus van dit telproces is van de orde van grootte van twee weken.</td>
+</tr>
+<tr>
+<td valign="top">11.2</td>
+<td valign="top" class="noindent"><span lang="nl-NL"><u>De kodewekker</u></span><br>
+<span lang="nl-NL">Elke 10 insec wordt het adresdeel van AR1 modulo 2 ↑ 18 met 1 verminderd. Als hierdoor AR1 totaal = +0 wordt, wordt in het tellingdeel van AR1 :000 000 001 gezet en IF wordt</span> <span lang="nl-NL"><u>true</u></span><span lang="nl-NL">, m.a.w. de ingreep van de kodewekker kan plaatsvinden. Wie deze ingreep niet wil hebben, kan hem dus definitief onderdrukken door het tellingdeel van AR1 meteen</span> ≠ <span lang="nl-NL">te maken. De maximale looptijd van de kodewekker is circa 40 minuten.</span></td>
+</tr>
+<tr>
+<td valign="top">11.3</td>
+<td valign="top">
+<p class="continue" style="margin-bottom: 0cm"><u>De apparaatwekker</u><br>
+<span lang="nl-NL">Modulo 512 wordt elke 10 insec het tellingdeel van AR2 met 1 verminderd. Als het resultaat in het tellingdeel = 0 wordt en het adresdeel van AR2 = NR</span> ≠ <span lang="nl-NL">0 dan wordt:</span></p>
+<ol>
+<li><span class="noindent" style="margin-bottom: 0cm" lang="nl-NL">van het apparaat met apparaatnummer = NR de LVAF op</span> <span lang="nl-NL"><u>true</u></span> <span lang="nl-NL">gezet,</span></li>
+<li>in AR2 wordt AR3 overgenomen.</li>
+</ol>
+<p class="noindent" style="margin-top: 0.18cm; margin-bottom: 0cm">Men initieert dit proces door eenmalig AR3 en AR2 met hetzelfde te vullen. Men kan een aangewezen apparaat om de zoveel tijd ergens nota van laten nemen, met maximum periode van circa vijf seconden.</p>
+</td>
+</tr>
 </table>
 <hr>
-<span class="smallFont">transcribed
-  by Martin van der Burgt</SPAN><br>
-revised <!-- #BeginDate format:IS1 -->2013-06-20<!-- #EndDate --></span>
-</BODY>
-</HTML></div>
+<span class="smallFont">transcribed by Martin van der Burgt</span><br>
+revised <!-- #BeginDate format:IS1 -->2013-06-20<!-- #EndDate -->
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

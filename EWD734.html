@@ -23,232 +23,271 @@
   </div>
   <h1>The superfluity of the general semaphore</h1>
   <div class='body'>
-        <hr />
-<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
-transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
-accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
-<hr />
-           <p class="noindent">
-                   
-<b>The superfluity of the general semaphore</b>.
-<p>Consider a set of sequential processes that are mutually synchronized
-by means of the operations V(s) and P(s) on a so-called &ldquo;general 
-semaphore&rdquo; s , that is a semaphore that can take on any nonnegative value. We
-shall show the derivation of a set of equivalent programs in which the 
-semaphores used are binary, i.e. restricted to the values 0 and 1 . This is
-done by replacing the operations P(s) and V(s) by the text fragments
-&ldquo;ps&rdquo; and &ldquo;vs&rdquo; respectively; they operate in a shared environment of integer
-variables and binary semaphores.
-<p>In the following the reader is assumed to be familiar with EWD703 &ldquo;A
-tutorial on the split binary semaphore.&rdquo;. The solution to the above problem
-can be viewed as a further demonstration of the applicability of the methods
-of EWD703, as their straightforward application leads to the following 
-solution.
-<p>The shared environment consists of
-<table width=100%><tr><td valign=top width=17%>
-<b>integer</b> bm</td><td>(initially = the number of processes, which is assumed to be &gt; 0)
-</td></tr>
-<tr><td valign=top>
-<b>integer</b> bt</td><td>(initially = 0)
-</td></tr>
-<tr><td valign=top>
-<b>integer</b> s</td><td>(initially = the initial value of the general semaphore to be
-simulated)
-</td></tr>
-<tr><td valign=top>
-<b>semaphore</b> m</td><td>(initially = 1)
-</td></tr>
-<tr><td valign=top>
-<b>semaphore</b> t</td><td>(initially = 0) .
-</td>  </tr>  </table>
-<p>The program fragments are
-<table width=100%><tr><td valign=top width=10%>
-ps:</td><td>P(m); bm:= bm - 1; bt:= bt + 1; Q;
-</td></tr>
-<tr><td valign=top>
-</td><td>P(t); bt:= bt - 1; s:= s - 1; bm:= bm + 1; Q
-</td></tr>
-<tr><td valign=top>
-vs:</td><td>P(m); s:= s + 1; Q
-</td>  </tr>  </table>
+<hr>
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. —HR</p>
+<hr>
+<p class="noindent"><b>The superfluity of the general semaphore</b>.</p>
+<p>Consider a set of sequential processes that are mutually synchronized by means of the operations V(s) and P(s) on a so-called “general semaphore” s , that is a semaphore that can take on any nonnegative value. We shall show the derivation of a set of equivalent programs in which the semaphores used are binary, i.e. restricted to the values 0 and 1 . This is done by replacing the operations P(s) and V(s) by the text fragments “ps” and “vs” respectively; they operate in a shared environment of integer variables and binary semaphores.</p>
+<p>In the following the reader is assumed to be familiar with EWD703 “A tutorial on the split binary semaphore.”. The solution to the above problem can be viewed as a further demonstration of the applicability of the methods of EWD703, as their straightforward application leads to the following solution.</p>
+<p>The shared environment consists of</p>
+<table width="100%">
+<tr>
+<td valign="top" width="17%"><b>integer</b> bm</td>
+<td>(initially = the number of processes, which is assumed to be &gt; 0)</td>
+</tr>
+<tr>
+<td valign="top"><b>integer</b> bt</td>
+<td>(initially = 0)</td>
+</tr>
+<tr>
+<td valign="top"><b>integer</b> s</td>
+<td>(initially = the initial value of the general semaphore to be simulated)</td>
+</tr>
+<tr>
+<td valign="top"><b>semaphore</b> m</td>
+<td>(initially = 1)</td>
+</tr>
+<tr>
+<td valign="top"><b>semaphore</b> t</td>
+<td>(initially = 0) .</td>
+</tr>
+</table>
+<p>The program fragments are</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%">ps:</td>
+<td>P(m); bm:= bm - 1; bt:= bt + 1; Q;</td>
+</tr>
+<tr>
+<td valign="top"></td>
+<td>P(t); bt:= bt - 1; s:= s - 1; bm:= bm + 1; Q</td>
+</tr>
+<tr>
+<td valign="top">vs:</td>
+<td>P(m); s:= s + 1; Q</td>
+</tr>
+</table>
 with Q being short for
-<table width=100%><tr><td valign=top width=10%>
-Q:</td><td><b>if</b> s &gt; 0 <b>and</b> bt &gt; 0 &rarr; V(t) &#x25af; bm &gt; 0 &rarr; V(m) <b>fi</b>.
-</td>  </tr>  </table>
-<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
-                   
-<p>Next we have to investigate whether the alternative construct Q ,
-with its guards as derived, can lead to abortion. On account of the invariant
-<table width=100%><tr><td valign=top width=10%>
-</td><td>bt + bm = number of processes (&gt; 0)
-</td>  </tr>  </table>
-the falsity of the second guard &mdash;i.e. bm = 0&mdash; implies
-<table width=100%><tr><td valign=top width=10%>
-</td><td>bt = number of processes (&gt; 0) ;
-</td>  </tr>  </table>
-if also the first guard is to be false we must, therefore, have s = 0 . In
-other words, all processes have performed the prefix of ps and the 
-&ldquo;semaphore&rdquo; s equals zero. In the original set of sequential processes this
-situation would correspond to deadlock. Under the assumption that the
-original set of sequential processes is free from the danger of deadlock,
-the danger of abortion in Q is absent.
-<p>Our next concern is the potential nondeterminacy of Q : when both
-guards are true, do we really not care which of the two alternatives is
-selected? I propose that we do care and wish to give absolute priority to
-the first alternative because not doing so would have two consequences, both
-of which I regard as unpleasant. Firstly it could delay processes in the
-middle of ps without any reason as far as the current value of s is 
-concerned, and from a strategic point of view that seems hardly attractive.
-Secondly, the absence of such an unnecessary delay has been shown to have a
-logical significance for the prevention of individual starvation when the
-P- and V-operations have been implemented weakly &mdash;i.e. in a way that does
-not exclude unbounded overtaking&mdash; . Hence I propose to strengthen the
-second guard of Q with the negation of the first:
-<table width=100%><tr><td valign=top width=10%>
-</td><td>(s = 0 <b>or</b> bt = 0) and bm &gt; 0 &rarr; V(m) .
-</td>  </tr>  </table>
-<p class=noindent><b>Note</b>. The only effect of this way of strengthening a guard is the reduction
-&mdash;in this case even the removal&mdash; of nondeterminacy; it does <b>not</b> introduce
-the danger of abortion. (End of Note.)
-<p>I furthermore assume that we are not interested in deadlock detection
-(by abortion or otherwise): if the danger of deadlock is present in the
-original set of sequential processes, we allow exactly the same form of deadlock
-                   
-     in our equivalent programs. That means dropping the term bm &gt; 0
-from the second guard. Thus our new (and last) Q becomes
-<table> <tr> <td>Q: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-       <b>if</b> s &gt; 0 <b>and</b> bt &gt; 0 &rarr; {s &gt; 0 <b>and</b> bt &gt; 0} V(t) </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
-        &#x25af; s = 0 <b>or</b> bt = 0 &rarr; {s = 0 <b>or</b> bt = 0} V(m)               </td> </tr> <tr> <td></td> <td colspan = 2>
-       <b>fi</b>                                                                           </td> </tr>
+<table width="100%">
+<tr>
+<td valign="top" width="10%">Q:</td>
+<td><b>if</b> s &gt; 0 <b>and</b> bt &gt; 0 → V(t) ▯ bm &gt; 0 → V(m) <b>fi</b>.</td>
+</tr>
 </table>
-<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p> 
-<p>The last phase of our development is one of (more or less) systematic
-optimization. with our final Q the value of bm is no longer relevant;
-hence the statements modifying its value can be removed, and so can bm 
-itself. Furthermore, by substituting Q we may be able to simplify its guards
-differently in the different substitutions. This can be done by associating
-an assertion with each component of the split binary semaphore. Such an
-assertion can be taken as postcondition of the corresponding P-operation,
-provided it is implied by the preconditions of all V-operations on that 
-component (and for the component initialized at 1 also by the initial state).
-In the following annotation we shall not repeat all the time the general 
-invariant s &ge; 0 <b>and</b> bt &ge; 0 .
-<p>Applying this process to vs we get (when using the precondition of
-V(m) from the above Q )
-<table> <tr> <td>vs: &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-      P(m) {s = 0 <b>or</b> bt = 0};                                   </td> </tr> <tr> <td></td> <td colspan = 2>
-      s :=  s  +  1   { s  =  l   <b>or</b>  bt  =  0} ;               </td> </tr> <tr> <td></td> <td colspan = 2>
-      <b>if</b> bt &gt; 0 &rarr; {s = 1 <b>and</b> bt &gt; 0} V(t)   . </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
-       &#x25af; bt = 0 &rarr; {s = 0 <b>or</b> bt = 0} V(m)            </td> </tr> <tr> <td></td> <td colspan = 2>
-      <b>fi</b>                                                        </td> </tr>
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</p>
+<p>Next we have to investigate whether the alternative construct Q , with its guards as derived, can lead to abortion. On account of the invariant</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>bt + bm = number of processes (&gt; 0)</td>
+</tr>
 </table>
-
-<p class=noindent><b>Note</b>. For the simplification of the guards we have used the general invariant
-s &ge; 0 . The precondition of V(m) has been weakened from bt = 0 to
-s = 0 <b>or</b> bt = 0 , i.e. the original one. (End of Note.)
-<p>Applying the same techniques to ps we get
-               
-<table> <tr> <td>ps: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </td> <td colspan = 2>
-       P(m) {s = 0 or bt = 0};                                                     </td> </tr> <tr> <td></td> <td colspan = 2>
-       bt:= bt + 1 {s = 0 <b>or</b> bt = 1};                                       </td> </tr> <tr> <td></td> <td colspan = 2>
-       <b>if</b> s &gt; 0 &rarr; { s &gt; 0 <b>and</b> bt = 1 } V(t)               </td> </tr> <tr> <td></td> <td>&nbsp; </td> <td>
-        &#x25af; s = 0 &rarr; { s = 0 <b>or</b> bt = 0} V(m)                       </td> </tr> <tr> <td></td> <td colspan = 2>
-       <b>fi</b>                                                                   </td> </tr> <tr> <td></td> <td colspan = 2>
-       P(t) {(s = 1 <b>and</b> bt &gt; 0) <b>or</b> (s &gt; 0 <b>and</b> bt = 1)}; </td> </tr> <tr> <td></td> <td colspan = 2>
-       bt:= bt - l; s:= s - 1 {s = 0 <b>or</b> bt = 0};                            </td> </tr> <tr> <td></td> <td colspan = 2>
-       V(m)                                                                        </td> </tr>
+the falsity of the second guard —i.e. bm = 0— implies
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>bt = number of processes (&gt; 0) ;</td>
+</tr>
 </table>
-
-<p class=noindent><b>Note</b>. For the postcondition of P(t) we have chosen <b>provisionally</b> the 
-disjunction of the preconditions of V(t) from vs and from ps , three lines
-higher. Since the second Q from ps now reduces to V(m) , we are done!
-(End of Note.)
-<p>We can further shorten the texts
-<table width=100%><tr><td valign=top width=10%>
-1)</td><td>by moving the initial increases of s and bt into the alternatives
-</td></tr>
-<tr><td valign=top>
-2)</td><td>by moving the three statements following the alternative construct in
-ps into both alternatives
-</td></tr>
-<tr><td valign=top>
-3)</td><td>by replacing in the first alternative of ps
-<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &ldquo;bt:= bt + 1; V(t); P(t); bt:= bt - 1&rdquo;
-<br>by a skip
-</td></tr>
-<tr><td valign=top>
-4)</td><td> by removing from the second alternative of ps the
-<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &ldquo;bt:= bt - 1; s:= s - 1&rdquo;
-<br>following the only P(t) left and inserting them in front of the only
-v(t) left
-</td></tr>
-<tr><td valign=top>
-5)</td><td>by replacing in the first alternative of vs
-<br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &ldquo;s:= s + 1; bt:= bt - 1; s:= s - 1&rdquo;
-<br>by &ldquo;bt:= bt - 1&rdquo;.
-</td>  </tr>  </table>
+if also the first guard is to be false we must, therefore, have s = 0 . In other words, all processes have performed the prefix of ps and the “semaphore” s equals zero. In the original set of sequential processes this situation would correspond to deadlock. Under the assumption that the original set of sequential processes is free from the danger of deadlock, the danger of abortion in Q is absent.
+<p>Our next concern is the potential nondeterminacy of Q : when both guards are true, do we really not care which of the two alternatives is selected? I propose that we do care and wish to give absolute priority to the first alternative because not doing so would have two consequences, both of which I regard as unpleasant. Firstly it could delay processes in the middle of ps without any reason as far as the current value of s is concerned, and from a strategic point of view that seems hardly attractive. Secondly, the absence of such an unnecessary delay has been shown to have a logical significance for the prevention of individual starvation when the P- and V-operations have been implemented weakly —i.e. in a way that does not exclude unbounded overtaking— . Hence I propose to strengthen the second guard of Q with the negation of the first:</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>(s = 0 <b>or</b> bt = 0) and bm &gt; 0 → V(m) .</td>
+</tr>
+</table>
+<p class="noindent"><b>Note</b>. The only effect of this way of strengthening a guard is the reduction —in this case even the removal— of nondeterminacy; it does <b>not</b> introduce the danger of abortion. (End of Note.)</p>
+<p>I furthermore assume that we are not interested in deadlock detection (by abortion or otherwise): if the danger of deadlock is present in the original set of sequential processes, we allow exactly the same form of deadlock in our equivalent programs. That means dropping the term bm &gt; 0 from the second guard. Thus our new (and last) Q becomes</p>
+<table>
+<tr>
+<td>Q: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2"><b>if</b> s &gt; 0 <b>and</b> bt &gt; 0 → {s &gt; 0 <b>and</b> bt &gt; 0} V(t)</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp;</td>
+<td>▯ s = 0 <b>or</b> bt = 0 → {s = 0 <b>or</b> bt = 0} V(m)</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>fi</b></td>
+</tr>
+</table>
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</p>
+<p>The last phase of our development is one of (more or less) systematic optimization. with our final Q the value of bm is no longer relevant; hence the statements modifying its value can be removed, and so can bm itself. Furthermore, by substituting Q we may be able to simplify its guards differently in the different substitutions. This can be done by associating an assertion with each component of the split binary semaphore. Such an assertion can be taken as postcondition of the corresponding P-operation, provided it is implied by the preconditions of all V-operations on that component (and for the component initialized at 1 also by the initial state). In the following annotation we shall not repeat all the time the general invariant s ≥ 0 <b>and</b> bt ≥ 0 .</p>
+<p>Applying this process to vs we get (when using the precondition of V(m) from the above Q )</p>
+<table>
+<tr>
+<td>vs: &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2">P(m) {s = 0 <b>or</b> bt = 0};</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2">s := s + 1 { s = l <b>or</b> bt = 0} ;</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>if</b> bt &gt; 0 → {s = 1 <b>and</b> bt &gt; 0} V(t) .</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp;</td>
+<td>▯ bt = 0 → {s = 0 <b>or</b> bt = 0} V(m)</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>fi</b></td>
+</tr>
+</table>
+<p class="noindent"><b>Note</b>. For the simplification of the guards we have used the general invariant s ≥ 0 . The precondition of V(m) has been weakened from bt = 0 to s = 0 <b>or</b> bt = 0 , i.e. the original one. (End of Note.)</p>
+<p>Applying the same techniques to ps we get</p>
+<table>
+<tr>
+<td>ps: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td colspan="2">P(m) {s = 0 or bt = 0};</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2">bt:= bt + 1 {s = 0 <b>or</b> bt = 1};</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>if</b> s &gt; 0 → { s &gt; 0 <b>and</b> bt = 1 } V(t)</td>
+</tr>
+<tr>
+<td></td>
+<td>&nbsp;</td>
+<td>▯ s = 0 → { s = 0 <b>or</b> bt = 0} V(m)</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2"><b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2">P(t) {(s = 1 <b>and</b> bt &gt; 0) <b>or</b> (s &gt; 0 <b>and</b> bt = 1)};</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2">bt:= bt - l; s:= s - 1 {s = 0 <b>or</b> bt = 0};</td>
+</tr>
+<tr>
+<td></td>
+<td colspan="2">V(m)</td>
+</tr>
+</table>
+<p class="noindent"><b>Note</b>. For the postcondition of P(t) we have chosen <b>provisionally</b> the disjunction of the preconditions of V(t) from vs and from ps , three lines higher. Since the second Q from ps now reduces to V(m) , we are done! (End of Note.)</p>
+<p>We can further shorten the texts</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%">1)</td>
+<td>by moving the initial increases of s and bt into the alternatives</td>
+</tr>
+<tr>
+<td valign="top">2)</td>
+<td>by moving the three statements following the alternative construct in ps into both alternatives</td>
+</tr>
+<tr>
+<td valign="top">3)</td>
+<td>by replacing in the first alternative of ps<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; “bt:= bt + 1; V(t); P(t); bt:= bt - 1”<br>
+by a skip</td>
+</tr>
+<tr>
+<td valign="top">4)</td>
+<td>by removing from the second alternative of ps the<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; “bt:= bt - 1; s:= s - 1”<br>
+following the only P(t) left and inserting them in front of the only v(t) left</td>
+</tr>
+<tr>
+<td valign="top">5)</td>
+<td>by replacing in the first alternative of vs<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; “s:= s + 1; bt:= bt - 1; s:= s - 1”<br>
+by “bt:= bt - 1”.</td>
+</tr>
+</table>
 The result of these five successive transformations is
-<table> <tr> <td>ps: &nbsp; &nbsp; </td> <td>
-    P(m);                                                                                </td> </tr> <tr> <td></td> <td>
-    <b>if</b> s &gt; 0 &rarr; s:= s - 1 &#x25af; s = 0 &rarr; bt:= bt + 1; V(m); P(t) <b>fi</b> </td> </tr> <tr> <td></td> <td>
-    V(m)                                                                                 </td> </tr>
+<table>
+<tr>
+<td>ps: &nbsp; &nbsp;</td>
+<td>P(m);</td>
+</tr>
+<tr>
+<td></td>
+<td><b>if</b> s &gt; 0 → s:= s - 1 ▯ s = 0 → bt:= bt + 1; V(m); P(t) <b>fi</b></td>
+</tr>
+<tr>
+<td></td>
+<td>V(m)</td>
+</tr>
 </table>
-              
-<table> <tr> <td>vs: &nbsp; &nbsp; &nbsp; </td> <td>
-    P(m);                                                                                         </td> </tr> <tr> <td></td> <td>
-    <b>if</b> bt &gt; 0 &rarr; bt:= bt - l; V(t) &#x25af; bt = 0 &rarr; s:= s + 1; V(m) <b>fi</b> </td> </tr>
+<table>
+<tr>
+<td>vs: &nbsp; &nbsp; &nbsp;</td>
+<td>P(m);</td>
+</tr>
+<tr>
+<td></td>
+<td><b>if</b> bt &gt; 0 → bt:= bt - l; V(t) ▯ bt = 0 → s:= s + 1; V(m) <b>fi</b></td>
+</tr>
 </table>
-
-<p>We can shorten our texts still further by first introducing a redundant
-variable k satisfying 
-<table width=100%><tr><td valign=top width=10%>
-</td><td>k = s - bt
-</td>  </tr>  </table>
-a relation that we can keep invariant by inserting into ps: k:= k - 1
-and into vs: k:= k + 1 . The values of the guards can then be derived from
-k , and after removal of the then redundant s and bt we get
-<table> <tr> <td>ps: &nbsp; &nbsp; &nbsp; &nbsp; </td> <td>
-      P(m); k:= k - 1;                                                           </td> </tr> <tr> <td></td> <td>
-      <b>if</b> k &ge; 0 &rarr; skip &#x25af; k < 0 &rarr; V(m); P(t) <b>fi</b>; </td> </tr> <tr> <td></td> <td>
-      V(m)                                                                       </td> </tr> <tr> <td>vs:</td> <td>
-      P(m); k:= k + 1;                                                           </td> </tr> <tr> <td></td> <td>
-      <b>if</b> k &lt; 0 &rarr; v(t)  &#x25af; k &gt; 0 &rarr; V(m) <b>fi</b>    </td> </tr>
+<p>We can shorten our texts still further by first introducing a redundant variable k satisfying</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>k = s - bt</td>
+</tr>
 </table>
-
-<p class=noindent><b>Acknowledgment</b>. The presentation of the last transformation is the result of
-a considerable improvement suggested by A.J.Martin. (End of Acknowledgment.)
-<p class=noindent><b>Concluding remarks</b>. Firstly I would like to stress that our discovery of
-the assertion to be associated with component t was just a stroke of luck.
-If the last Q of ps had not reduced to V(m) and the strongest 
-precondition for the remaining V(t) would have failed to imply the assumed 
-assertion for component t , we would have been in trouble; the assertion has then
-to be weakened. Apart from this piece of luck, that part of the derivation
-is entirely satisfactory.
-<p>I am less satisfied with the final transformations. They are trivial
-and easily performed with pencil and rubber or with chalk and eraser. They
-are, however, most laborious to record in written form. I leave to my reader
-the choice where to put the blame: on the whole approach that calls for the
-transformations or on the constraints of the written word. (End of Concluding
-Remarks.)
-<p class=noindent><table width=100%><tr><td valign=top width=50%>
-Plataanstraat 5</td><td>11 April 1980
-</td></tr>
-<tr><td valign=top>
-5671 AL NUENEN</td><td>prof.dr.Edsger W.Dijkstra
-</td></tr>
-<tr><td valign=top>
-The Netherlands</td><td>Burroughs Research Fellow
-</td>  </tr>  </table>
-
-<hr />
-   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
-    Last revision
-    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
-      <!-- #BeginDate format:IS1 -->2015-03-02<!-- #EndDate -->
-    </csobj>
-  .</font></p>
-  <p>&nbsp;</p>
-</body></html></div>
+a relation that we can keep invariant by inserting into ps: k:= k - 1 and into vs: k:= k + 1 . The values of the guards can then be derived from k , and after removal of the then redundant s and bt we get
+<table>
+<tr>
+<td>ps: &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>P(m); k:= k - 1;</td>
+</tr>
+<tr>
+<td></td>
+<td><b>if</b> k ≥ 0 → skip ▯ k &lt; 0 → V(m); P(t) <b>fi</b>;</td>
+</tr>
+<tr>
+<td></td>
+<td>V(m)</td>
+</tr>
+<tr>
+<td>vs:</td>
+<td>P(m); k:= k + 1;</td>
+</tr>
+<tr>
+<td></td>
+<td><b>if</b> k &lt; 0 → v(t) ▯ k &gt; 0 → V(m) <b>fi</b></td>
+</tr>
+</table>
+<p class="noindent"><b>Acknowledgment</b>. The presentation of the last transformation is the result of a considerable improvement suggested by A.J.Martin. (End of Acknowledgment.)</p>
+<p class="noindent"><b>Concluding remarks</b>. Firstly I would like to stress that our discovery of the assertion to be associated with component t was just a stroke of luck. If the last Q of ps had not reduced to V(m) and the strongest precondition for the remaining V(t) would have failed to imply the assumed assertion for component t , we would have been in trouble; the assertion has then to be weakened. Apart from this piece of luck, that part of the derivation is entirely satisfactory.</p>
+<p>I am less satisfied with the final transformations. They are trivial and easily performed with pencil and rubber or with chalk and eraser. They are, however, most laborious to record in written form. I leave to my reader the choice where to put the blame: on the whole approach that calls for the transformations or on the constraints of the written word. (End of Concluding Remarks.)</p>
+<p class="noindent"></p>
+<table width="100%">
+<tr>
+<td valign="top" width="50%">Plataanstraat 5</td>
+<td>11 April 1980</td>
+</tr>
+<tr>
+<td valign="top">5671 AL NUENEN</td>
+<td>prof.dr.Edsger W.Dijkstra</td>
+</tr>
+<tr>
+<td valign="top">The Netherlands</td>
+<td>Burroughs Research Fellow</td>
+</tr>
+</table>
+<hr>
+<p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br>
+Last revision <!-- #BeginDate format:IS1 -->2015-03-02<!-- #EndDate -->
+ .</font></p>
+<p>&nbsp;</p>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

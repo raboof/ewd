@@ -23,540 +23,851 @@
   </div>
   <h1>Description of the object program (a sequel to EWD102)</h1>
   <div class='body'>
-				<p><u>Description of the object program (a sequel to <a href="EWD102.html">EWD102</a>)</u></p>
-				<p>Obsolete are <a href="EWD101.html">EWD101</a>, page 5, top half of page 6, last paragraph of page 7 and first paragraph page 8. (Complex assignment.) From page 14, the lines SE7, SE8 and SE9 should be deleted.</p>
-				<p><br /><u>Exhaustive list of the formal locations</u></p>
-				<p>Formal locations occupy four consecutive words in the stack, designated by f[0], f[1], f[2] and f[3] (in order of increasing address). The word f[1] will contain the so-called parameter code, a characteristic bit pattern, specifying the nature of the actual parameter. Layout of the parameter code will be decided later.</p>
-				<table cellpadding="0" cellspacing="0" border="0">
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr style="margin-top: 3em;">
-						<td align="right" valign="top">1.&nbsp;</td>
-						<td>
-							<table cellpadding="0" cellspacing="1" border="0">
-								<tr><td colspan="4"><u>A real constant</u></td></tr>
-								<tr><td>f[0]</td><td> &nbsp; &nbsp; </td><td colspan="2">F = MS[2]</td></tr>
-								<tr><td>f[1]</td><td></td><td colspan="2">parameter code</td></tr>
-								<tr><td>f[2]</td><td></td><td rowspan="2" style="border: 1px solid; border-left: 0;">&nbsp;</td><td>&nbsp;constant value in</td></tr>
-								<tr><td>f[3]</td><td></td><td>&nbsp;floating point representation.</td></tr>
-							</table>
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">2.&nbsp;</td>
-						<td>
-							<u>An integer constant</u><br />
-							f[0] &nbsp; &nbsp; G = MS[3]<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; unused<br />
-							f[3] &nbsp; &nbsp; integer value.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">3.&nbsp;</td>
-						<td>
-							<u>A real in the stack  (&lt; 32K)</u><br />
-							f[0] &nbsp; &nbsp; F = M[a]<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; M[a] = F<br />
-							f[3] &nbsp; &nbsp; unused.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">4.&nbsp;</td>
-						<td>
-							<u>An integer in the stack (&lt; 32K)</u><br />
-							f[0] &nbsp; &nbsp; G = M[a]<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; M[a] = G<br />
-							f[3] &nbsp; &nbsp; unused.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">5.&nbsp;</td>
-						<td>
-							<u>Pro forma</u>: A real in the stack above 32K<br />
-							f[0] &nbsp; &nbsp; SE36 &nbsp; High stack real<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; &nbsp; &nbsp; a<br />
-							f[3] &nbsp; &nbsp; unused.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">6.&nbsp;</td>
-						<td>
-							<u>Pro forma</u>: An integer in the stack above 32K<br />
-							f[0] &nbsp; &nbsp; SE37 &nbsp; High stack integer<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp;  &nbsp; &nbsp; a<br />
-							f[3] &nbsp; &nbsp; unused.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">7.&nbsp;</td>
-						<td>
-							<u>An integer array</u><br />
-							f[0] &nbsp; &nbsp; array word<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; SE38 &nbsp; Left subscripted integer<br />
-							f[3] &nbsp; &nbsp; SE39 &nbsp; Right subscripted integer.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">8.&nbsp;</td>
-						<td>
-							<u>A real array</u><br />
-							f[0] &nbsp; &nbsp; array word<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; SE40 &nbsp; Left subscripted real<br />
-							f[3] &nbsp; &nbsp; SE42 &nbsp; Right subscripted real.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">9.&nbsp;</td>
-						<td>
-							<u>A complete array</u><br />
-							f[0] &nbsp; &nbsp; array word<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; SE42 &nbsp; Left subscripted complex<br />
-							f[3] &nbsp; &nbsp; SE43 &nbsp; Right subscripted complex.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">10.&nbsp;</td>
-						<td>
-							<u>A procedure or switch</u><br />
-							f[0] &nbsp; &nbsp; unused<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; invariant starting address<br />
-							f[3] &nbsp; &nbsp; context D.<br />
-							<br />
-							Layout 10 will be used when the actual parameter is a procedure identifier. The parameter code distinguishes between non-type, integer, real, complex, boolean or switch (=&nbsp;label procedure).
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">11.&nbsp;</td>
-						<td>
-							<u>An arithmetic procedure as expression</u><br />
-							f[0] &nbsp; &nbsp; SE44 &nbsp; Arithmetic procedure as expression<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; invariant starting address<br />
-							f[3] &nbsp; &nbsp; context D.<br />
-							<br />
-							The above formal location contents are never generated directly; it is created by SE20 (Check formal arithmetic) and SE30 (Check formal complex) when the actual parameter is a procedure of arithmetic type. The parameter code will distinguish between arithmetic and complex.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">12.&nbsp;</td>
-						<td>
-							<u>A complex procedure as expression</u><br />
-							f[0] &nbsp; &nbsp; SE45 &nbsp; Complex procedure as expression<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; invariant starting address<br />
-							f[3] &nbsp; &nbsp; context D.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">13.&nbsp;</td>
-						<td>
-							<u>Non simple implicit subroutine</u><br />
-							f[0] &nbsp; &nbsp; SE46 &nbsp; Non simple implicit subroutine<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; invariant starting address<br />
-							f[3] &nbsp; &nbsp; context D.<br />
-							<br />
-							These formal locations are derived from actual parameters which are
-							<table cellpadding="0" cellspacing="0" border="0">
-								<tr><td align="right" valign="top">a)&nbsp;</td>
-										<td>a subscripted variable (integer, real boolean or complex)</td></tr>
-								<tr><td align="right" valign="top">b)&nbsp;</td>
-										<td>a arithmetic, complex or boolean expression, more trivial than a single identifier or constant</td></tr>
-								<tr><td align="right" valign="top">c)&nbsp;</td>
-										<td>a designational expression, more complicated than a simple label.</td></tr>
-							</table>
-							<br />
-							The parameter code will distinguish between these cases.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">14.&nbsp;</td>
-						<td>
-							<u>Simple implicit subroutine</u><br />
-							f[0] &nbsp; &nbsp; SE47<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; invariant starting address<br />
-							f[3] &nbsp; &nbsp; context D.<br />
-							<br />
-							Parameter code as above.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">15.&nbsp;</td>
-						<td>
-							<u>Label</u><br />
-							f[0] &nbsp; &nbsp; SE48  &nbsp; Actual label value<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; invariant target address<br />
-							f[3] &nbsp; &nbsp; target LRP.<br />
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">16.&nbsp;</td>
-						<td>
-							<u>A complex in the stack</u><br />
-							f[0] &nbsp; &nbsp; SE55 &nbsp; Stack complex<br />
-							f[1] &nbsp; &nbsp; parameter code<br />
-							f[2] &nbsp; &nbsp; &nbsp; &nbsp; a<br />
-							f[3] &nbsp; &nbsp; unused.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-					<tr>
-						<td align="right" valign="top">17.&nbsp;</td>
-						<td>
-							<u>A complex array in arithmetic specification</u><br />
-							When formal locations of type 9 are met by the system entry SE22 &ldquo;Check formal arithmetic array&rdquo; the right hand value is destroyed giving:<br />
-							 &nbsp; &nbsp; &nbsp; &nbsp; f[0] &nbsp; &nbsp; array word<br />
-							 &nbsp; &nbsp; &nbsp; &nbsp; f[1] &nbsp; &nbsp; parameter code<br />
-							 &nbsp; &nbsp; &nbsp; &nbsp; f[2] &nbsp; &nbsp; SE42 &nbsp; Left subscripted complex<br />
-							 &nbsp; &nbsp; &nbsp; &nbsp; f[3] &nbsp; &nbsp; SE56 &nbsp; Alarm arithmetic value of complex array.
-						</td>
-					</tr>
-
-					<tr><td>&nbsp;</td></tr>
-
-				</table>
-
-				<p><br /><u>Possible structures of left had values</u></p>
-				<p>(In pictures stack upside down.)</p>
-				<p><br /><u>Left hand value for an integer</u></p>
-					<table cellpadding="0" cellspacing="0" border="0" style="margin: 0.5em;">
-						<tr>
-							<td style="padding: 0 1em 0 1em;" valign="top">on address a &lt; 32K:<br />
-								<br />
-								<table cellpadding="0" cellspacing="0" border="0">
-									<tr><td align="right">M[B-1]:</td><td>&nbsp; &nbsp; &nbsp;</td><td>M[a] = G</td></tr>
-									<tr><td align="right">B &#x2192;:</td><td></td><td>........</td></tr>
-								</table>
-							</td>
-							<td style="padding: 0 1em 0 1em; border-left: 1px solid; border-right: 1px solid; " valign="top">on address a &#x2265; 32K:<br />
-								<br />
-								<table cellpadding="0" cellspacing="0" border="0">
-									<tr><td align="right">M[B-2]:</td><td>&nbsp; &nbsp; &nbsp;</td><td>&nbsp; &nbsp; a</td></tr>
-									<tr><td align="right">M[B-1]:</td><td></td><td>SE49</td></tr>
-									<tr><td align="right">B &#x2192;&nbsp;</td><td colspan="2">&nbsp;........</td></tr>
-								</table>
-							</td>
-							<td style="padding: 0 1em 0 1em;" valign="top">on array segment:<br />
-								<br />
-								 &nbsp;  &nbsp; invariant address<br />
-								<table cellpadding="0" cellspacing="0" border="0">
-									<tr><td align="right">M[B-1]:</td><td>&nbsp; &nbsp; &nbsp;</td><td>SE50</td></tr>
-									<tr><td align="right">B &#x2192;&nbsp;</td><td colspan="2">&nbsp;........</td></tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				<p>Remark. Number of words occupied by invariant address still undecided.<br />
-					&nbsp; &nbsp; SE49 &nbsp; &nbsp; Assign to high stacked integer<br />
-					&nbsp; &nbsp; SE50 &nbsp; &nbsp; Assign to integer on segment.</p>
-
-				<p><br /><u>Left hand value for a real</u></p>
-					<table cellpadding="0" cellspacing="0" border="0" style="margin: 0.5em;">
-						<tr>
-							<td style="padding: 0 1em 0 1em;" valign="top">on address a &lt; 32K:<br />
-								<br />
-								<table cellpadding="0" cellspacing="0" border="0">
-									<tr><td align="right">M[B-1]:</td><td>&nbsp; &nbsp; &nbsp;</td><td>M[a] = F</td></tr>
-									<tr><td align="right">B &#x2192;:</td><td></td><td>........</td></tr>
-								</table>
-							</td>
-							<td style="padding: 0 1em 0 1em; border-left: 1px solid; border-right: 1px solid; " valign="top">on address a &#x2265; 32K:<br />
-								<br />
-								<table cellpadding="0" cellspacing="0" border="0">
-									<tr><td align="right">M[B-2]:</td><td>&nbsp; &nbsp; &nbsp;</td><td>&nbsp; &nbsp; a</td></tr>
-									<tr><td align="right">M[B-1]:</td><td></td><td>SE51</td></tr>
-									<tr><td align="right">B &#x2192;&nbsp;</td><td colspan="2">&nbsp;........</td></tr>
-								</table>
-							</td>
-							<td style="padding: 0 1em 0 1em;" valign="top">on array segment:<br />
-								<br />
-								 &nbsp;  &nbsp; invariant address<br />
-								<table cellpadding="0" cellspacing="0" border="0">
-									<tr><td align="right">M[B-1]:</td><td>&nbsp; &nbsp; &nbsp;</td><td>SE52</td></tr>
-									<tr><td align="right">B &#x2192;&nbsp;</td><td colspan="2">&nbsp;........</td></tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				<p>&nbsp; &nbsp; SE51 &nbsp; &nbsp; Assign to high stacked real<br />
-					&nbsp; &nbsp; SE52 &nbsp; &nbsp; Assign to real on segment.</p>
-
-				<p><br /><u>Left hand value for a complex</u></p>
-					<table cellpadding="0" cellspacing="0" border="0" style="margin: 0.5em;">
-						<tr>
-							<td style="padding: 0 1em 0 1em;" valign="top">&nbsp; on address a:<br />
-								<table cellpadding="0" cellspacing="0" border="0">
-									<tr><td align="right">M[B-2]:</td><td>&nbsp; &nbsp; &nbsp;</td><td>&nbsp; a</td></tr>
-									<tr><td align="right">M[B-1]:</td><td></td><td>SE53</td></tr>
-									<tr><td align="right">B &#x2192;</td><td></td><td>......</td></tr>
-								</table>
-							</td>
-							<td style="padding: 0 1em 0 1em; border-left: 1px solid;" valign="top">on array segment:<br />
-								 &nbsp;  &nbsp; invariant address<br />
-								<table cellpadding="0" cellspacing="0" border="0">
-									<tr><td align="right">M[B-1]:</td><td>&nbsp; &nbsp; &nbsp;</td><td>SE54</td></tr>
-									<tr><td align="right">B &#x2192;&nbsp;</td><td colspan="2">&nbsp;.......</td></tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				<p>&nbsp; &nbsp; SE53 &nbsp; &nbsp; Assign to high stacked complex<br />
-					&nbsp; &nbsp; SE54 &nbsp; &nbsp; Assign to complex on segment.</p>
-
-
-
-
-
-				<p><br /><u>Creation of the left hand values described</u></p>
-				<p style="margin-left: 2em;"><u>Indexing a non formal array</u><br />
-					After the indexing routine has been called the object code continues with<br />
-					&nbsp; &nbsp; SE 38 &nbsp; &nbsp; Left subscripted integer &nbsp; &nbsp; &nbsp; or<br />
-					&nbsp; &nbsp; SE 40 &nbsp; &nbsp; Left subscripted real &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or<br />
-					&nbsp; &nbsp; SE 42 &nbsp; &nbsp; Left subscripted complex,<br />
-					depending on the type declaration of the array (which is known to the translator).<br />
-					<br />
-					Depending on the outcome of the indexing process, SE38 creates one of the three left hand values for an integer. The indexing process delivers location information only (i.e. physical or invariant address), but not the type of the array: this is known to the translator and brought to effect by calling the appropriate system entry. For the moment we assume that the indexing process leaves its outcome in some of the registers.<br />
-					<br />
-					<u>Indexing a formal array</u><br />
-					After the indexing routine has been called, the object code continues with<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DO(f[2])<br />
-					referring again to the formal location of the array offered.
-				</p>
-				<p><br /><u>Processing of the left hand values described</u></p>
-				<p>The processing of a left hand value may only be given in the object program when the right hand value offered is of the correct type.</p>
-				<p>The assignment itself will be commended by the instruction<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DO(MC[-1])<br />
-					and the stack will be shortened in accordance with the extent of the left hand value processed.</p>
-				<p>In the case of an integer assignment the integer value must be stored in G, the assignment itself will leave this value unchanged.</p>
-				<p>In the case of a real assignment the real value must be stored in F, where it must remain unchanged.</p>
-				<p>In the case of a complex assignment the real part of the complex value will stand in the F-register, the imaginary part in two universal locations of the program. The assignment will leave this complex value unchanged.</p>
-				<p><br /><u>Creation of the right hand values due to subscripting</u></p>
-				<p>In the case of a right hand value required from an arithmetic array the call of the indexing routine will be followed by SE39 or SE41, Right subscripted integer or real, respectively.<br />
-					It will deliver the value in the F-register.</p>
-				<p>When subscripting a complex array, the indexing call will be followed by<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; B + 2<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SE 43</p>
-				<p>The two places left blank will be filled by the imaginary part. The real part will be handed over in the F-register.</p>
-				<p><br /><u>The creation of a right hand value of a formal array</u></p>
-				<p>If the specification of the array is arithmetic,<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DC(f[3])<br />
-					referring to the formal locations, will put the value required in F.</p>
-				<p>If the specification of the array is complex, the indexing sequence will be followed by<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; F = 0<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MC[0] = F<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DO(f[3])</p>
-				<p>The zero placed on top of the stack will be overwritten by the imaginary part of the value delivered, when the actual array is indeed a complex one. The real part will be delivered in F.</p>
-				<p><br /><u>The universal locations FLV and FRV</u></p>
-				<p>Per program two universal locations FLV and FRV (Formal Left/Right hand Value) play a role in the information transmission from actual parameters, when the formal parameter has been specified arithmetic or complex.</p>
-				<p>These locations have standard values in order to speed up the transmission in the case of simple arithmetic actuals. The standard values are:<br />
-					&nbsp; &nbsp; &nbsp; FRV : &nbsp; &ldquo;U, S = 0&rdquo;<br />
-					or any faster skip instruction available, and<br />
-					&nbsp; &nbsp; &nbsp; FLV : &nbsp; SE57 &nbsp; &ldquo;Standard value for FLV&rdquo;.</p>
-				<p>The body of SE57 will be</p>
-				<table cellpadding="0" cellspacing="0" border="0" style="margin-left: 2em;">
-					<tr><td align="right">G&nbsp;</td><td>= MS[+2]&nbsp; &nbsp; &nbsp; </td><td>take instruction to be stacked</td></tr>
-					<tr><td align="right">S&nbsp;</td><td>= M[B-1]</td><td>save link</td></tr>
-					<tr><td align="right">M[B-1]&nbsp;</td><td>= G</td><td>stack left hand value</td></tr>
-					<tr><td align="right" colspan="2">GOTOR(S) <span class="nowrap">&#x21D2;&nbsp;</span></td><td>return.</td></tr>
-				</table>
-				<p>To get the left hand value of a formal parameter specified arithmetic or complex, the body will eventually invoke<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DOS(f[0])<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DO &nbsp;(FLV).</p>
-				<p>To get the right hand value of a formal parameter specified arithmetic the body will contain<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DOS(f[0])<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DO &nbsp;(FRV),<br />
-					which pair will put the value required in the F-register.</p>
-				<p><br /><u>The Universal location FCV</u></p>
-				<p>Per program there is a third universal location, called FCV (Formal Complex Value).</p>
-				<p>To get the right hand value of a parameter specified to be complex, the body will contain</p>
-				<table cellpadding="0" cellspacing="0" border="0" style="margin-left: 2em;">
-					<tr><td align="right">F =&nbsp;</td><td>0</td></tr>
-					<tr><td align="right">MC[0] =&nbsp;</td><td>F&nbsp; &nbsp; &nbsp; </td></tr>
-					<tr><td colspan="2">&nbsp; &nbsp; &nbsp; DOS(f[0])</td></tr>
-					<tr><td colspan="2">&nbsp; &nbsp; &nbsp; DO(FCV)</td></tr>
-				</table>
-				<p>After return the imaginary part of the value will be on top of the stack, the real part in the F-register.</p>
-				<p>Also FCV has a standard value, viz.<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FCV : &nbsp; DO(FRV).</p>
-				<p>All actual parameters of type arithmetic leave FCV unchanged. When the actual value is asked for by the above mechanism, it will ensure that the complex value will be properly delivered.</p>
-				<p><br /><u>Advanced use of the FRV, FLV and FCV</u></p>
-				<p>As long as actual parameters specify arithmetic quantities, FCV will keep its standard value, FCV will first be left out of discussion.</p>
-				<p>Implicit subroutines may end by changing FRV and FLV; if so, they will be filled by system entries which, upon execution return FRV and FLV to their standard values.</p>
-				<p><br /><u>The implicit subroutine, describing a subscripted variable</u></p>
-				<p>First we shall discuss the case of the non-formal array. After the call of the indexing routine, the result of this proves may be stored in the registers.</p>
-				<p>The idea is, that the choice of a left or right hand value will be postponed until return to the body has been completed. It will do so by filling in FLV and FRV in the appropriate way. At the same time, we can choose some other universal locations, the Universal Address UA to transmit the outcome of the indexing.</p>
-				<p>If the array has been declared integer, the implicit subroutine will fill</p>
-				<p class="noindent" style="margin-top: 0.5em;">
-					FLV with SE58 &ldquo;Formal Left Subscripted Integer&rdquo; and<br />
-					FRV with SE59 &ldquo;Formal Right Subscripted Integer&rdquo;</p>
-				<p>These system entries start by resetting FLV and FRV to their standard values, by picking up from the UA locations the quantities, as delivered by the indexing process and from then onwards they merge with SE38 and SE39 respectively.</p>
-				<p>If the array has been declared real, the implicit subroutine will fill</p>
-				<p class="noindent" style="margin-top: 0.5em;">
-					FLV with SE60 &ldquo;Formal Left Subscripted Real&rdquo; and<br />
-					FRV with SE61 &ldquo;Formal Right Subscripted Real&rdquo;</p>
-				<p class="noindent" style="margin-top: 0.5em;">
-					which, after the same introduction merge with SE40 and SE41 respectively.</p>
-				<p>If the array has been declared complex, the implicit subroutine will fill<br />
-					&nbsp; &nbsp; &nbsp; FLV with SE62 &ldquo;Formal Left Subscripted Complex&rdquo;<br />
-					&nbsp; &nbsp; &nbsp; FRV with SE64 &ldquo;Alarm complex value in arithmetic&rdquo;<br />
-					&nbsp; &nbsp; &nbsp; FCV with SE63 &ldquo;Formal Right Subscripted Complex&rdquo;<br />
-					SE62 and SE63 will reset all three to their standard values, will pick up the UA-contents and will merge with SE42 and SE43 respectively.</p>
-				<p>If the array is formal, from the three transmission mechanism one has to be chosen on account of the type of the actual array, as can be derived from its parameter code.</p>
-				<p>The above can be condensed as follows.<br />
-					After indexing a declared integer, real or complex array, there follows one of the following system entries.<br />
-					&nbsp; &nbsp; &nbsp; SE65 &ldquo;Transmit subscripted integer&rdquo;<br />
-					&nbsp; &nbsp; &nbsp; SE66 &ldquo;Transmit subscripted real&rdquo;<br />
-					&nbsp; &nbsp; &nbsp; SE67 &ldquo;Transmit subscripted complex&rdquo;.</p>
-				<p>They will save the outcome of the indexing process in the UA-locations and will FLV, FRV (and the last also FCV) in the appropriate way.</p>
-				<p>After indexing a formal array, S can be saved in a UA-location, the instruction<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; S = f[1].<br />
-					puts the parameter code of the array in the S-register and the following system entry<br />
-					&nbsp; &nbsp; &nbsp; SE68 &ldquo;Transmit subscripted formal&rdquo;<br />
-					will effectively select one of the previous three on account of the bit pattern in the S-register.</p>
-				<p>We code SE55 &ldquo;stack complex&rdquo;.</p>
-
-				<table cellpadding="1" cellspacing="0" border="0">
-					<tr><td>&nbsp;</td></tr>
-					<tr><td>SE55: &nbsp; &nbsp; &nbsp; &nbsp;</td><td align="right">FLV:=</td><td>&nbsp;&ldquo;SE 55.1&rdquo;</td><td>&nbsp;</td><td style="border-top: 1px solid; border-right: 1px solid;">&nbsp;</td><td></td></tr>
-					<tr><td></td><td align="right">FRV:=</td><td>&nbsp;&ldquo;SE64&rdquo;</td><td></td><td style="border-right: 1px solid;"></td><td>&nbsp; &nbsp; &nbsp; transports via F(G)</td></tr>
-					<tr><td></td><td align="right">FCV:=</td><td>&nbsp;&ldquo;SE 55.1&rdquo;</td><td></td><td style="border-bottom: 1px solid; border-right: 1px solid;"></td><td></td></tr>
-					<tr><td></td><td align="right">S =</td><td>&nbsp;MS[+2]</td><td></td><td></td><td>take address a in S</td></tr>
-					<tr><td></td><td align="right">GOTOR</td><td>&nbsp;(MC[-1]) &nbsp; <span class="nowrap">&#x21D2;</span></td></tr>
-
-					<tr><td><br />&nbsp;</td></tr>
-
-					<tr><td>SE55.1:</td><td align="right">FLV:=</td><td>&nbsp;&ldquo;SE 57&rdquo;</td><td>&nbsp;</td><td style="border-top: 1px solid; border-right: 1px solid;">&nbsp;</td><td rowspan="3">&nbsp; &nbsp; &nbsp; reset to standard<br />&nbsp; &nbsp; &nbsp; values via F(and G).</td></tr>
-					<tr><td></td><td align="right">FRV:=</td><td>&nbsp;&ldquo;U, S = 0&rdquo;</td><td></td><td style="border-right: 1px solid;"></td></tr>
-					<tr><td></td><td align="right">FCV:=</td><td>&nbsp;&ldquo;DO(FRV)&rdquo;</td><td></td><td style="border-bottom: 1px solid; border-right: 1px solid;"></td></tr>
-					<tr><td style="padding: 0.1em;"></td></tr>
-					<tr><td>&nbsp;</td><td align="right">F =</td><td>&nbsp;MS[0]</td><td>&nbsp;</td><td style="border-top: 1px solid; border-right: 1px solid;">&nbsp;</td><td rowspan="2">&nbsp; &nbsp; &nbsp; transportation im. part</td></tr>
-					<tr><td></td><td align="right">M[B-3] =</td><td>&nbsp;F</td><td></td><td style="border-bottom: 1px solid; border-right: 1px solid;"></td></tr>
-					<tr><td></td><td align="right">F =</td><td>&nbsp;MS[2]</td><td></td><td></td><td>real part</td></tr>
-					<tr><td></td><td align="right">GOTOR</td><td>&nbsp;(MC[-1]) &nbsp; <span class="nowrap">&#x21D2;</span></td></tr>
-
-					<tr><td><br />&nbsp;</td></tr>
-
-					<tr><td>SE55.2:</td><td align="right">FLV:=</td><td>&nbsp;&ldquo;SE 57&rdquo;</td><td>&nbsp;</td><td style="border-top: 1px solid; border-right: 1px solid;">&nbsp;</td><td rowspan="3">&nbsp; &nbsp; &nbsp; reset to standard<br />&nbsp; &nbsp; &nbsp; values via F(G)</td></tr>
-					<tr><td></td><td align="right">FRV:=</td><td>&nbsp;&ldquo;U, S = 0&rdquo;</td><td></td><td style="border-right: 1px solid;"></td></tr>
-					<tr><td></td><td align="right">FCV:=</td><td>&nbsp;&ldquo;DO(FRV)&rdquo;</td><td></td><td style="border-bottom: 1px solid; border-right: 1px solid;"></td></tr>
-					<tr><td style="padding: 0.1em;"></td></tr>
-					<tr><td>&nbsp;</td><td align="right">G =</td><td>&nbsp;M[B-1]</td><td>&nbsp;</td><td></td><td>save link</td></tr>
-					<tr><td></td><td align="right">M[B-1] =</td><td>&nbsp;S</td><td></td><td></td><td>store address a</td></tr>
-					<tr><td></td><td align="right">S =</td><td>&nbsp;&ldquo;SE53&rdquo;</td></tr>
-					<tr><td></td><td align="right">MC[0] =</td><td>&nbsp;S</td><td></td><td></td><td>complete left hand value</td></tr>
-					<tr><td></td><td align="right">GOTOR</td><td>&nbsp;(G) &nbsp; &nbsp; &nbsp; &nbsp; <span class="nowrap">&#x21D2;</span></td></tr>
-				</table>
-
-				<p style="margin-left: 2em;"><br />Cumulative list of system entries in EWD105<br />&nbsp;</p>
-				<table cellpadding="0" cellspacing="0" border="0" class="list">
-					<tr><td>SE 36 &nbsp; &nbsp; &nbsp; &nbsp;</td><td>High stack real</td></tr>
-					<tr><td>SE 37</td><td>High stack integer</td></tr>
-					<tr><td>SE 38</td><td>Left subscripted integer</td></tr>
-					<tr><td>SE 39</td><td>Right subscripted integer</td></tr>
-					<tr><td>SE 40</td><td>Left subscripted real</td></tr>
-					<tr><td>SE 41</td><td>Right subscripted real</td></tr>
-					<tr><td>SE 42</td><td>Left subscripted complex</td></tr>
-					<tr><td>SE 43</td><td>Right subscripted complex</td></tr>
-					<tr><td>SE 44</td><td>Arithmetic procedure as expression</td></tr>
-					<tr><td>SE 45</td><td>Complex procedure as expression</td></tr>
-					<tr><td>SE 46</td><td>Non simple implicit subroutine</td></tr>
-					<tr><td>SE 47</td><td>Simple implicit subroutine</td></tr>
-					<tr><td>SE 48</td><td>Actual label value</td></tr>
-					<tr><td>SE 49</td><td>Assign to high stacked integer</td></tr>
-					<tr><td>SE 50</td><td>Assign to integer on segment</td></tr>
-					<tr><td>SE 51</td><td>Assign to high stacked real</td></tr>
-					<tr><td>SE 52</td><td>Assign to real on segment</td></tr>
-					<tr><td>SE 53</td><td>Assign to stacked complex</td></tr>
-					<tr><td>SE 54</td><td>Assign to complex on segment</td></tr>
-					<tr><td>SE 55</td><td>Stack complex</td></tr>
-					<tr><td>SE 56</td><td>Alarm &ldquo;arithmetic value of complex array&rdquo;</td></tr>
-					<tr><td>SE 57</td><td>Standard Value for FLV</td></tr>
-					<tr><td>SE 58</td><td>Formal left subscripted integer</td></tr>
-					<tr><td>SE 59</td><td>Formal right subscripted integer</td></tr>
-					<tr><td>SE 60</td><td>Formal left subscripted real</td></tr>
-					<tr><td>SE 61</td><td>Formal right subscripted real</td></tr>
-					<tr><td>SE 62</td><td>Formal left subscripted complex</td></tr>
-					<tr><td>SE 63</td><td>Formal right subscripted complex</td></tr>
-					<tr><td>SE 64</td><td>Alarm &ldquo;complex value in arithmetic&rdquo;</td></tr>
-					<tr><td>SE 65</td><td>Transmit subscripted integer</td></tr>
-					<tr><td>SE 66</td><td>Transmit subscripted real</td></tr>
-					<tr><td>SE 67</td><td>Transmit subscripted complex</td></tr>
-					<tr><td>SE 68</td><td>Transmit subscripted formal.</td></tr>
-				</table>
-
-			</div>
-			<div>
-        <br/>
-      </div>
-		</div>
-		<hr />
-		<div id="footer">
-         transcribed by Corrado Cantelmi<br />
-          revised 
-          <!-- #BeginDate format:En2 -->14-Mar-2012<!-- #EndDate -->
-		</div>
-	</body>
-
-</html>
+<p><u>Description of the object program (a sequel to <a href="EWD102.html">EWD102</a>)</u></p>
+<p>Obsolete are <a href="EWD101.html">EWD101</a>, page 5, top half of page 6, last paragraph of page 7 and first paragraph page 8. (Complex assignment.) From page 14, the lines SE7, SE8 and SE9 should be deleted.</p>
+<p><br>
+<u>Exhaustive list of the formal locations</u></p>
+<p>Formal locations occupy four consecutive words in the stack, designated by f[0], f[1], f[2] and f[3] (in order of increasing address). The word f[1] will contain the so-called parameter code, a characteristic bit pattern, specifying the nature of the actual parameter. Layout of the parameter code will be decided later.</p>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr style="margin-top: 3em;">
+<td align="right" valign="top">1.&nbsp;</td>
+<td>
+<table cellpadding="0" cellspacing="1" border="0">
+<tr>
+<td colspan="4"><u>A real constant</u></td>
+</tr>
+<tr>
+<td>f[0]</td>
+<td>&nbsp; &nbsp;</td>
+<td colspan="2">F = MS[2]</td>
+</tr>
+<tr>
+<td>f[1]</td>
+<td></td>
+<td colspan="2">parameter code</td>
+</tr>
+<tr>
+<td>f[2]</td>
+<td></td>
+<td rowspan="2" style="border: 1px solid; border-left: 0;">&nbsp;</td>
+<td>&nbsp;constant value in</td>
+</tr>
+<tr>
+<td>f[3]</td>
+<td></td>
+<td>&nbsp;floating point representation.</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">2.&nbsp;</td>
+<td><u>An integer constant</u><br>
+f[0] &nbsp; &nbsp; G = MS[3]<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; unused<br>
+f[3] &nbsp; &nbsp; integer value.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">3.&nbsp;</td>
+<td><u>A real in the stack (&lt; 32K)</u><br>
+f[0] &nbsp; &nbsp; F = M[a]<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; M[a] = F<br>
+f[3] &nbsp; &nbsp; unused.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">4.&nbsp;</td>
+<td><u>An integer in the stack (&lt; 32K)</u><br>
+f[0] &nbsp; &nbsp; G = M[a]<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; M[a] = G<br>
+f[3] &nbsp; &nbsp; unused.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">5.&nbsp;</td>
+<td><u>Pro forma</u>: A real in the stack above 32K<br>
+f[0] &nbsp; &nbsp; SE36 &nbsp; High stack real<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; &nbsp; &nbsp; a<br>
+f[3] &nbsp; &nbsp; unused.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">6.&nbsp;</td>
+<td><u>Pro forma</u>: An integer in the stack above 32K<br>
+f[0] &nbsp; &nbsp; SE37 &nbsp; High stack integer<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; &nbsp; &nbsp; a<br>
+f[3] &nbsp; &nbsp; unused.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">7.&nbsp;</td>
+<td><u>An integer array</u><br>
+f[0] &nbsp; &nbsp; array word<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; SE38 &nbsp; Left subscripted integer<br>
+f[3] &nbsp; &nbsp; SE39 &nbsp; Right subscripted integer.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">8.&nbsp;</td>
+<td><u>A real array</u><br>
+f[0] &nbsp; &nbsp; array word<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; SE40 &nbsp; Left subscripted real<br>
+f[3] &nbsp; &nbsp; SE42 &nbsp; Right subscripted real.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">9.&nbsp;</td>
+<td><u>A complete array</u><br>
+f[0] &nbsp; &nbsp; array word<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; SE42 &nbsp; Left subscripted complex<br>
+f[3] &nbsp; &nbsp; SE43 &nbsp; Right subscripted complex.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">10.&nbsp;</td>
+<td><u>A procedure or switch</u><br>
+f[0] &nbsp; &nbsp; unused<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; invariant starting address<br>
+f[3] &nbsp; &nbsp; context D.<br>
+<br>
+Layout 10 will be used when the actual parameter is a procedure identifier. The parameter code distinguishes between non-type, integer, real, complex, boolean or switch (=&nbsp;label procedure).</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">11.&nbsp;</td>
+<td><u>An arithmetic procedure as expression</u><br>
+f[0] &nbsp; &nbsp; SE44 &nbsp; Arithmetic procedure as expression<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; invariant starting address<br>
+f[3] &nbsp; &nbsp; context D.<br>
+<br>
+The above formal location contents are never generated directly; it is created by SE20 (Check formal arithmetic) and SE30 (Check formal complex) when the actual parameter is a procedure of arithmetic type. The parameter code will distinguish between arithmetic and complex.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">12.&nbsp;</td>
+<td><u>A complex procedure as expression</u><br>
+f[0] &nbsp; &nbsp; SE45 &nbsp; Complex procedure as expression<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; invariant starting address<br>
+f[3] &nbsp; &nbsp; context D.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">13.&nbsp;</td>
+<td><u>Non simple implicit subroutine</u><br>
+f[0] &nbsp; &nbsp; SE46 &nbsp; Non simple implicit subroutine<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; invariant starting address<br>
+f[3] &nbsp; &nbsp; context D.<br>
+<br>
+These formal locations are derived from actual parameters which are
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="right" valign="top">a)&nbsp;</td>
+<td>a subscripted variable (integer, real boolean or complex)</td>
+</tr>
+<tr>
+<td align="right" valign="top">b)&nbsp;</td>
+<td>a arithmetic, complex or boolean expression, more trivial than a single identifier or constant</td>
+</tr>
+<tr>
+<td align="right" valign="top">c)&nbsp;</td>
+<td>a designational expression, more complicated than a simple label.</td>
+</tr>
+</table>
+<br>
+The parameter code will distinguish between these cases.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">14.&nbsp;</td>
+<td><u>Simple implicit subroutine</u><br>
+f[0] &nbsp; &nbsp; SE47<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; invariant starting address<br>
+f[3] &nbsp; &nbsp; context D.<br>
+<br>
+Parameter code as above.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">15.&nbsp;</td>
+<td><u>Label</u><br>
+f[0] &nbsp; &nbsp; SE48 &nbsp; Actual label value<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; invariant target address<br>
+f[3] &nbsp; &nbsp; target LRP.<br></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">16.&nbsp;</td>
+<td><u>A complex in the stack</u><br>
+f[0] &nbsp; &nbsp; SE55 &nbsp; Stack complex<br>
+f[1] &nbsp; &nbsp; parameter code<br>
+f[2] &nbsp; &nbsp; &nbsp; &nbsp; a<br>
+f[3] &nbsp; &nbsp; unused.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right" valign="top">17.&nbsp;</td>
+<td><u>A complex array in arithmetic specification</u><br>
+When formal locations of type 9 are met by the system entry SE22 “Check formal arithmetic array” the right hand value is destroyed giving:<br>
+&nbsp; &nbsp; &nbsp; &nbsp; f[0] &nbsp; &nbsp; array word<br>
+&nbsp; &nbsp; &nbsp; &nbsp; f[1] &nbsp; &nbsp; parameter code<br>
+&nbsp; &nbsp; &nbsp; &nbsp; f[2] &nbsp; &nbsp; SE42 &nbsp; Left subscripted complex<br>
+&nbsp; &nbsp; &nbsp; &nbsp; f[3] &nbsp; &nbsp; SE56 &nbsp; Alarm arithmetic value of complex array.</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+</tr>
+</table>
+<p><br>
+<u>Possible structures of left had values</u></p>
+<p>(In pictures stack upside down.)</p>
+<p><br>
+<u>Left hand value for an integer</u></p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin: 0.5em;">
+<tr>
+<td style="padding: 0 1em 0 1em;" valign="top">on address a &lt; 32K:<br>
+<br>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="right">M[B-1]:</td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>M[a] = G</td>
+</tr>
+<tr>
+<td align="right">B →:</td>
+<td></td>
+<td>........</td>
+</tr>
+</table>
+</td>
+<td style="padding: 0 1em 0 1em; border-left: 1px solid; border-right: 1px solid;" valign="top">on address a ≥ 32K:<br>
+<br>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="right">M[B-2]:</td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>&nbsp; &nbsp; a</td>
+</tr>
+<tr>
+<td align="right">M[B-1]:</td>
+<td></td>
+<td>SE49</td>
+</tr>
+<tr>
+<td align="right">B →&nbsp;</td>
+<td colspan="2">&nbsp;........</td>
+</tr>
+</table>
+</td>
+<td style="padding: 0 1em 0 1em;" valign="top">on array segment:<br>
+<br>
+&nbsp; &nbsp; invariant address<br>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="right">M[B-1]:</td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>SE50</td>
+</tr>
+<tr>
+<td align="right">B →&nbsp;</td>
+<td colspan="2">&nbsp;........</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<p>Remark. Number of words occupied by invariant address still undecided.<br>
+&nbsp; &nbsp; SE49 &nbsp; &nbsp; Assign to high stacked integer<br>
+&nbsp; &nbsp; SE50 &nbsp; &nbsp; Assign to integer on segment.</p>
+<p><br>
+<u>Left hand value for a real</u></p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin: 0.5em;">
+<tr>
+<td style="padding: 0 1em 0 1em;" valign="top">on address a &lt; 32K:<br>
+<br>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="right">M[B-1]:</td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>M[a] = F</td>
+</tr>
+<tr>
+<td align="right">B →:</td>
+<td></td>
+<td>........</td>
+</tr>
+</table>
+</td>
+<td style="padding: 0 1em 0 1em; border-left: 1px solid; border-right: 1px solid;" valign="top">on address a ≥ 32K:<br>
+<br>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="right">M[B-2]:</td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>&nbsp; &nbsp; a</td>
+</tr>
+<tr>
+<td align="right">M[B-1]:</td>
+<td></td>
+<td>SE51</td>
+</tr>
+<tr>
+<td align="right">B →&nbsp;</td>
+<td colspan="2">&nbsp;........</td>
+</tr>
+</table>
+</td>
+<td style="padding: 0 1em 0 1em;" valign="top">on array segment:<br>
+<br>
+&nbsp; &nbsp; invariant address<br>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="right">M[B-1]:</td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>SE52</td>
+</tr>
+<tr>
+<td align="right">B →&nbsp;</td>
+<td colspan="2">&nbsp;........</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<p>&nbsp; &nbsp; SE51 &nbsp; &nbsp; Assign to high stacked real<br>
+&nbsp; &nbsp; SE52 &nbsp; &nbsp; Assign to real on segment.</p>
+<p><br>
+<u>Left hand value for a complex</u></p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin: 0.5em;">
+<tr>
+<td style="padding: 0 1em 0 1em;" valign="top">&nbsp; on address a:<br>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="right">M[B-2]:</td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>&nbsp; a</td>
+</tr>
+<tr>
+<td align="right">M[B-1]:</td>
+<td></td>
+<td>SE53</td>
+</tr>
+<tr>
+<td align="right">B →</td>
+<td></td>
+<td>......</td>
+</tr>
+</table>
+</td>
+<td style="padding: 0 1em 0 1em; border-left: 1px solid;" valign="top">on array segment:<br>
+&nbsp; &nbsp; invariant address<br>
+<table cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="right">M[B-1]:</td>
+<td>&nbsp; &nbsp; &nbsp;</td>
+<td>SE54</td>
+</tr>
+<tr>
+<td align="right">B →&nbsp;</td>
+<td colspan="2">&nbsp;.......</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<p>&nbsp; &nbsp; SE53 &nbsp; &nbsp; Assign to high stacked complex<br>
+&nbsp; &nbsp; SE54 &nbsp; &nbsp; Assign to complex on segment.</p>
+<p><br>
+<u>Creation of the left hand values described</u></p>
+<p style="margin-left: 2em;"><u>Indexing a non formal array</u><br>
+After the indexing routine has been called the object code continues with<br>
+&nbsp; &nbsp; SE 38 &nbsp; &nbsp; Left subscripted integer &nbsp; &nbsp; &nbsp; or<br>
+&nbsp; &nbsp; SE 40 &nbsp; &nbsp; Left subscripted real &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; or<br>
+&nbsp; &nbsp; SE 42 &nbsp; &nbsp; Left subscripted complex,<br>
+depending on the type declaration of the array (which is known to the translator).<br>
+<br>
+Depending on the outcome of the indexing process, SE38 creates one of the three left hand values for an integer. The indexing process delivers location information only (i.e. physical or invariant address), but not the type of the array: this is known to the translator and brought to effect by calling the appropriate system entry. For the moment we assume that the indexing process leaves its outcome in some of the registers.<br>
+<br>
+<u>Indexing a formal array</u><br>
+After the indexing routine has been called, the object code continues with<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DO(f[2])<br>
+referring again to the formal location of the array offered.</p>
+<p><br>
+<u>Processing of the left hand values described</u></p>
+<p>The processing of a left hand value may only be given in the object program when the right hand value offered is of the correct type.</p>
+<p>The assignment itself will be commended by the instruction<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DO(MC[-1])<br>
+and the stack will be shortened in accordance with the extent of the left hand value processed.</p>
+<p>In the case of an integer assignment the integer value must be stored in G, the assignment itself will leave this value unchanged.</p>
+<p>In the case of a real assignment the real value must be stored in F, where it must remain unchanged.</p>
+<p>In the case of a complex assignment the real part of the complex value will stand in the F-register, the imaginary part in two universal locations of the program. The assignment will leave this complex value unchanged.</p>
+<p><br>
+<u>Creation of the right hand values due to subscripting</u></p>
+<p>In the case of a right hand value required from an arithmetic array the call of the indexing routine will be followed by SE39 or SE41, Right subscripted integer or real, respectively.<br>
+It will deliver the value in the F-register.</p>
+<p>When subscripting a complex array, the indexing call will be followed by<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; B + 2<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; SE 43</p>
+<p>The two places left blank will be filled by the imaginary part. The real part will be handed over in the F-register.</p>
+<p><br>
+<u>The creation of a right hand value of a formal array</u></p>
+<p>If the specification of the array is arithmetic,<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DC(f[3])<br>
+referring to the formal locations, will put the value required in F.</p>
+<p>If the specification of the array is complex, the indexing sequence will be followed by<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; F = 0<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MC[0] = F<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DO(f[3])</p>
+<p>The zero placed on top of the stack will be overwritten by the imaginary part of the value delivered, when the actual array is indeed a complex one. The real part will be delivered in F.</p>
+<p><br>
+<u>The universal locations FLV and FRV</u></p>
+<p>Per program two universal locations FLV and FRV (Formal Left/Right hand Value) play a role in the information transmission from actual parameters, when the formal parameter has been specified arithmetic or complex.</p>
+<p>These locations have standard values in order to speed up the transmission in the case of simple arithmetic actuals. The standard values are:<br>
+&nbsp; &nbsp; &nbsp; FRV : &nbsp; “U, S = 0”<br>
+or any faster skip instruction available, and<br>
+&nbsp; &nbsp; &nbsp; FLV : &nbsp; SE57 &nbsp; “Standard value for FLV”.</p>
+<p>The body of SE57 will be</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-left: 2em;">
+<tr>
+<td align="right">G&nbsp;</td>
+<td>= MS[+2]&nbsp; &nbsp; &nbsp;</td>
+<td>take instruction to be stacked</td>
+</tr>
+<tr>
+<td align="right">S&nbsp;</td>
+<td>= M[B-1]</td>
+<td>save link</td>
+</tr>
+<tr>
+<td align="right">M[B-1]&nbsp;</td>
+<td>= G</td>
+<td>stack left hand value</td>
+</tr>
+<tr>
+<td align="right" colspan="2">GOTOR(S) <span class="nowrap">⇒&nbsp;</span></td>
+<td>return.</td>
+</tr>
+</table>
+<p>To get the left hand value of a formal parameter specified arithmetic or complex, the body will eventually invoke<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DOS(f[0])<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DO &nbsp;(FLV).</p>
+<p>To get the right hand value of a formal parameter specified arithmetic the body will contain<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DOS(f[0])<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; DO &nbsp;(FRV),<br>
+which pair will put the value required in the F-register.</p>
+<p><br>
+<u>The Universal location FCV</u></p>
+<p>Per program there is a third universal location, called FCV (Formal Complex Value).</p>
+<p>To get the right hand value of a parameter specified to be complex, the body will contain</p>
+<table cellpadding="0" cellspacing="0" border="0" style="margin-left: 2em;">
+<tr>
+<td align="right">F =&nbsp;</td>
+<td>0</td>
+</tr>
+<tr>
+<td align="right">MC[0] =&nbsp;</td>
+<td>F&nbsp; &nbsp; &nbsp;</td>
+</tr>
+<tr>
+<td colspan="2">&nbsp; &nbsp; &nbsp; DOS(f[0])</td>
+</tr>
+<tr>
+<td colspan="2">&nbsp; &nbsp; &nbsp; DO(FCV)</td>
+</tr>
+</table>
+<p>After return the imaginary part of the value will be on top of the stack, the real part in the F-register.</p>
+<p>Also FCV has a standard value, viz.<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; FCV : &nbsp; DO(FRV).</p>
+<p>All actual parameters of type arithmetic leave FCV unchanged. When the actual value is asked for by the above mechanism, it will ensure that the complex value will be properly delivered.</p>
+<p><br>
+<u>Advanced use of the FRV, FLV and FCV</u></p>
+<p>As long as actual parameters specify arithmetic quantities, FCV will keep its standard value, FCV will first be left out of discussion.</p>
+<p>Implicit subroutines may end by changing FRV and FLV; if so, they will be filled by system entries which, upon execution return FRV and FLV to their standard values.</p>
+<p><br>
+<u>The implicit subroutine, describing a subscripted variable</u></p>
+<p>First we shall discuss the case of the non-formal array. After the call of the indexing routine, the result of this proves may be stored in the registers.</p>
+<p>The idea is, that the choice of a left or right hand value will be postponed until return to the body has been completed. It will do so by filling in FLV and FRV in the appropriate way. At the same time, we can choose some other universal locations, the Universal Address UA to transmit the outcome of the indexing.</p>
+<p>If the array has been declared integer, the implicit subroutine will fill</p>
+<p class="noindent" style="margin-top: 0.5em;">FLV with SE58 “Formal Left Subscripted Integer” and<br>
+FRV with SE59 “Formal Right Subscripted Integer”</p>
+<p>These system entries start by resetting FLV and FRV to their standard values, by picking up from the UA locations the quantities, as delivered by the indexing process and from then onwards they merge with SE38 and SE39 respectively.</p>
+<p>If the array has been declared real, the implicit subroutine will fill</p>
+<p class="noindent" style="margin-top: 0.5em;">FLV with SE60 “Formal Left Subscripted Real” and<br>
+FRV with SE61 “Formal Right Subscripted Real”</p>
+<p class="noindent" style="margin-top: 0.5em;">which, after the same introduction merge with SE40 and SE41 respectively.</p>
+<p>If the array has been declared complex, the implicit subroutine will fill<br>
+&nbsp; &nbsp; &nbsp; FLV with SE62 “Formal Left Subscripted Complex”<br>
+&nbsp; &nbsp; &nbsp; FRV with SE64 “Alarm complex value in arithmetic”<br>
+&nbsp; &nbsp; &nbsp; FCV with SE63 “Formal Right Subscripted Complex”<br>
+SE62 and SE63 will reset all three to their standard values, will pick up the UA-contents and will merge with SE42 and SE43 respectively.</p>
+<p>If the array is formal, from the three transmission mechanism one has to be chosen on account of the type of the actual array, as can be derived from its parameter code.</p>
+<p>The above can be condensed as follows.<br>
+After indexing a declared integer, real or complex array, there follows one of the following system entries.<br>
+&nbsp; &nbsp; &nbsp; SE65 “Transmit subscripted integer”<br>
+&nbsp; &nbsp; &nbsp; SE66 “Transmit subscripted real”<br>
+&nbsp; &nbsp; &nbsp; SE67 “Transmit subscripted complex”.</p>
+<p>They will save the outcome of the indexing process in the UA-locations and will FLV, FRV (and the last also FCV) in the appropriate way.</p>
+<p>After indexing a formal array, S can be saved in a UA-location, the instruction<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; S = f[1].<br>
+puts the parameter code of the array in the S-register and the following system entry<br>
+&nbsp; &nbsp; &nbsp; SE68 “Transmit subscripted formal”<br>
+will effectively select one of the previous three on account of the bit pattern in the S-register.</p>
+<p>We code SE55 “stack complex”.</p>
+<table cellpadding="1" cellspacing="0" border="0">
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>SE55: &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td align="right">FLV:=</td>
+<td>&nbsp;“SE 55.1”</td>
+<td>&nbsp;</td>
+<td style="border-top: 1px solid; border-right: 1px solid;">&nbsp;</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td align="right">FRV:=</td>
+<td>&nbsp;“SE64”</td>
+<td></td>
+<td style="border-right: 1px solid;"></td>
+<td>&nbsp; &nbsp; &nbsp; transports via F(G)</td>
+</tr>
+<tr>
+<td></td>
+<td align="right">FCV:=</td>
+<td>&nbsp;“SE 55.1”</td>
+<td></td>
+<td style="border-bottom: 1px solid; border-right: 1px solid;"></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td align="right">S =</td>
+<td>&nbsp;MS[+2]</td>
+<td></td>
+<td></td>
+<td>take address a in S</td>
+</tr>
+<tr>
+<td></td>
+<td align="right">GOTOR</td>
+<td>&nbsp;(MC[-1]) &nbsp; <span class="nowrap">⇒</span></td>
+</tr>
+<tr>
+<td><br>
+&nbsp;</td>
+</tr>
+<tr>
+<td>SE55.1:</td>
+<td align="right">FLV:=</td>
+<td>&nbsp;“SE 57”</td>
+<td>&nbsp;</td>
+<td style="border-top: 1px solid; border-right: 1px solid;">&nbsp;</td>
+<td rowspan="3">&nbsp; &nbsp; &nbsp; reset to standard<br>
+&nbsp; &nbsp; &nbsp; values via F(and G).</td>
+</tr>
+<tr>
+<td></td>
+<td align="right">FRV:=</td>
+<td>&nbsp;“U, S = 0”</td>
+<td></td>
+<td style="border-right: 1px solid;"></td>
+</tr>
+<tr>
+<td></td>
+<td align="right">FCV:=</td>
+<td>&nbsp;“DO(FRV)”</td>
+<td></td>
+<td style="border-bottom: 1px solid; border-right: 1px solid;"></td>
+</tr>
+<tr>
+<td style="padding: 0.1em;"></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="right">F =</td>
+<td>&nbsp;MS[0]</td>
+<td>&nbsp;</td>
+<td style="border-top: 1px solid; border-right: 1px solid;">&nbsp;</td>
+<td rowspan="2">&nbsp; &nbsp; &nbsp; transportation im. part</td>
+</tr>
+<tr>
+<td></td>
+<td align="right">M[B-3] =</td>
+<td>&nbsp;F</td>
+<td></td>
+<td style="border-bottom: 1px solid; border-right: 1px solid;"></td>
+</tr>
+<tr>
+<td></td>
+<td align="right">F =</td>
+<td>&nbsp;MS[2]</td>
+<td></td>
+<td></td>
+<td>real part</td>
+</tr>
+<tr>
+<td></td>
+<td align="right">GOTOR</td>
+<td>&nbsp;(MC[-1]) &nbsp; <span class="nowrap">⇒</span></td>
+</tr>
+<tr>
+<td><br>
+&nbsp;</td>
+</tr>
+<tr>
+<td>SE55.2:</td>
+<td align="right">FLV:=</td>
+<td>&nbsp;“SE 57”</td>
+<td>&nbsp;</td>
+<td style="border-top: 1px solid; border-right: 1px solid;">&nbsp;</td>
+<td rowspan="3">&nbsp; &nbsp; &nbsp; reset to standard<br>
+&nbsp; &nbsp; &nbsp; values via F(G)</td>
+</tr>
+<tr>
+<td></td>
+<td align="right">FRV:=</td>
+<td>&nbsp;“U, S = 0”</td>
+<td></td>
+<td style="border-right: 1px solid;"></td>
+</tr>
+<tr>
+<td></td>
+<td align="right">FCV:=</td>
+<td>&nbsp;“DO(FRV)”</td>
+<td></td>
+<td style="border-bottom: 1px solid; border-right: 1px solid;"></td>
+</tr>
+<tr>
+<td style="padding: 0.1em;"></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="right">G =</td>
+<td>&nbsp;M[B-1]</td>
+<td>&nbsp;</td>
+<td></td>
+<td>save link</td>
+</tr>
+<tr>
+<td></td>
+<td align="right">M[B-1] =</td>
+<td>&nbsp;S</td>
+<td></td>
+<td></td>
+<td>store address a</td>
+</tr>
+<tr>
+<td></td>
+<td align="right">S =</td>
+<td>&nbsp;“SE53”</td>
+</tr>
+<tr>
+<td></td>
+<td align="right">MC[0] =</td>
+<td>&nbsp;S</td>
+<td></td>
+<td></td>
+<td>complete left hand value</td>
+</tr>
+<tr>
+<td></td>
+<td align="right">GOTOR</td>
+<td>&nbsp;(G) &nbsp; &nbsp; &nbsp; &nbsp; <span class="nowrap">⇒</span></td>
+</tr>
+</table>
+<p style="margin-left: 2em;"><br>
+Cumulative list of system entries in EWD105<br>
+&nbsp;</p>
+<table cellpadding="0" cellspacing="0" border="0" class="list">
+<tr>
+<td>SE 36 &nbsp; &nbsp; &nbsp; &nbsp;</td>
+<td>High stack real</td>
+</tr>
+<tr>
+<td>SE 37</td>
+<td>High stack integer</td>
+</tr>
+<tr>
+<td>SE 38</td>
+<td>Left subscripted integer</td>
+</tr>
+<tr>
+<td>SE 39</td>
+<td>Right subscripted integer</td>
+</tr>
+<tr>
+<td>SE 40</td>
+<td>Left subscripted real</td>
+</tr>
+<tr>
+<td>SE 41</td>
+<td>Right subscripted real</td>
+</tr>
+<tr>
+<td>SE 42</td>
+<td>Left subscripted complex</td>
+</tr>
+<tr>
+<td>SE 43</td>
+<td>Right subscripted complex</td>
+</tr>
+<tr>
+<td>SE 44</td>
+<td>Arithmetic procedure as expression</td>
+</tr>
+<tr>
+<td>SE 45</td>
+<td>Complex procedure as expression</td>
+</tr>
+<tr>
+<td>SE 46</td>
+<td>Non simple implicit subroutine</td>
+</tr>
+<tr>
+<td>SE 47</td>
+<td>Simple implicit subroutine</td>
+</tr>
+<tr>
+<td>SE 48</td>
+<td>Actual label value</td>
+</tr>
+<tr>
+<td>SE 49</td>
+<td>Assign to high stacked integer</td>
+</tr>
+<tr>
+<td>SE 50</td>
+<td>Assign to integer on segment</td>
+</tr>
+<tr>
+<td>SE 51</td>
+<td>Assign to high stacked real</td>
+</tr>
+<tr>
+<td>SE 52</td>
+<td>Assign to real on segment</td>
+</tr>
+<tr>
+<td>SE 53</td>
+<td>Assign to stacked complex</td>
+</tr>
+<tr>
+<td>SE 54</td>
+<td>Assign to complex on segment</td>
+</tr>
+<tr>
+<td>SE 55</td>
+<td>Stack complex</td>
+</tr>
+<tr>
+<td>SE 56</td>
+<td>Alarm “arithmetic value of complex array”</td>
+</tr>
+<tr>
+<td>SE 57</td>
+<td>Standard Value for FLV</td>
+</tr>
+<tr>
+<td>SE 58</td>
+<td>Formal left subscripted integer</td>
+</tr>
+<tr>
+<td>SE 59</td>
+<td>Formal right subscripted integer</td>
+</tr>
+<tr>
+<td>SE 60</td>
+<td>Formal left subscripted real</td>
+</tr>
+<tr>
+<td>SE 61</td>
+<td>Formal right subscripted real</td>
+</tr>
+<tr>
+<td>SE 62</td>
+<td>Formal left subscripted complex</td>
+</tr>
+<tr>
+<td>SE 63</td>
+<td>Formal right subscripted complex</td>
+</tr>
+<tr>
+<td>SE 64</td>
+<td>Alarm “complex value in arithmetic”</td>
+</tr>
+<tr>
+<td>SE 65</td>
+<td>Transmit subscripted integer</td>
+</tr>
+<tr>
+<td>SE 66</td>
+<td>Transmit subscripted real</td>
+</tr>
+<tr>
+<td>SE 67</td>
+<td>Transmit subscripted complex</td>
+</tr>
+<tr>
+<td>SE 68</td>
+<td>Transmit subscripted formal.</td>
+</tr>
+</table>
+<div><br></div>
+<hr>
+<div id="footer">transcribed by Corrado Cantelmi<br>
+revised <!-- #BeginDate format:En2 -->14-Mar-2012<!-- #EndDate --></div>
 </div>
   <script>
 $('.body').tweetSelection({

@@ -23,173 +23,156 @@
   </div>
   <h1>A prime is in at most 1 way the sum of 2 squares</h1>
   <div class='body'>
-				<p>In <a href="https://www.cs.utexas.edu/~EWD/ewd11xx/EWD1154.PDF" title="Link to the PDF version of EWD1154">EWD1154</a> we dealt with D. Zagier&rsquo;s proof that a prime of the form 4<var>k</var>+1 is the sum of 2 squares. For such a prime, this &ldquo;square decomposition&rdquo; is, in fact, unique. Here we show this by proving that an odd number is not prime if it is the sum of 2 different pairs of squares. Proving than a number is not prime will be done by rewriting that number as the product of 2 plurals. (A &ldquo;plural&rdquo; is a natural number&nbsp;&#x2265;&nbsp;2.)</p>
-				<p class="noindent"><u>Remark</u> &nbsp; The definition of primality that we use &#x2014;and which I often found to be the nicest one&#x2014; is</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td width="48" height="24" class="spac">&nbsp;</td>
-						<td width="393"> prime.<var>n</var> &nbsp;&#x2261;&#x3008;<span class="unicode">&#x2200;</span><var>x</var>,<var>y</var>: <var>x</var> &#x2265; 2 <span class="unicode">&#x2227;</span> <var>y </var>&#x2265; 2: <var>x</var>&#x2219;<var>y</var> &#x2260; <var>n</var>&#x3009; &nbsp; ;</td>
-					</tr>
-				</table>
-				<p class="noindent">the existential quantification expressing non-primality is demonstrated by constructing a witness. (End of Remark.)</p>
-				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
-				<p>There are two distinct aspects to this problem. There is the algebraic aspect of expressing the sum of 2 squares as the product of 2 plurals, and there is the notational question of how to express that a number admits 2 <em>different</em> square decompositions.</p>
-				<p>Let us look at the algebraic aspect first. The simplest formula I know that equates the sum of 2 squares to a product</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">(0)</td>
-						<td>(<var>a</var> + <var>b</var>) + (<var>a</var> &ndash; <var>b</var>) = 2(<var>a</var> + <var>b</var>) &nbsp; &nbsp; &nbsp; .</td>
-					</tr>
-				</table>
-
-				<p class="noindent"><u>Remark</u> &nbsp; This formula is of independent interest in the context of square decompositions: regardless of primality it establishes for any <var>n</var> a one-to-one correspondence between the square decompositions of <var>n</var> and those of 2<var>n</var>. (End of Remark.)</p>
-				<p>We cannot use (0) &ldquo;as is&rdquo;, for we have to write odd numbers as the sum of 2 squares. So we generalize the left-hand side to (<var>a</var> + <var>b</var>) + (<var>c </var>&ndash; <var>d</var>), but restrict ourselves to the situation with</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">(1)</td>
-						<td><var>a</var><var>b</var> = <var>c</var><var>d</var> &nbsp; &nbsp; &nbsp; ,</td>
-					</tr>
-				</table>
-
-				<p class="noindent">so that we inherit from (0) that the 2 cross-products cancel:</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">(2)</td>
-						<td><var>a</var><var>b</var> = <var>c</var><var>d</var> &nbsp; <span class="unicode">&#x21D2;</span> &nbsp; (<var>a</var> + <var>b</var>) + (<var>c</var> &ndash; <var>d</var>) = <var>a</var> + <var>b</var> + <var>c</var> + <var>d</var> &nbsp; &nbsp; &nbsp; .</td>
-					</tr>
-				</table>
-
-				<p class="noindent">Note that the right-hand side of the consequent is an even function of the variables. So much for the algebraic aspect.</p>
-				<p>We now turn to the question of how to express that an odd <var>n</var> admits 2 different square decompositions. Here the problem is that <var>x</var>+<var>y</var> and <var>y</var>+<var>x</var> count as the same square decompositions. We can, however, exploit that <var>n</var> is odd; hence, when <var>n</var> is written as sum of 2 squares, the one square is odd and the other square is even. Consequently, if odd <var>n</var> admits 2 different square decompositions, we can choose <em>positive</em> <var>a</var>, <var>b</var>, <var>c</var>, <var>d</var> such that</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">(3)</td>
-						<td>(<var>a</var> + <var>b</var>) + (<var>c</var> &ndash; <var>d</var>) = <var>n</var> &nbsp; <span class="unicode">&#x2227;</span></td>
-					</tr>
-					<tr>
-						<td class="spac"></td>
-						<td>(<var>a</var> &#x2212; <var>b</var>) + (<var>c</var> + <var>d</var>) = <var>n</var> &nbsp; &nbsp; &nbsp; &nbsp; .</td>
-					</tr>
-				</table>
-
-				<p class="noindent">Here <var>a</var> is the average of the numbers of the one parity, and <var>c</var> the average of those of the other parity; because we are considering different square decompositions of <var>n</var>, also <var>b</var> and <var>d</var> can be chosen positive.</p>
-				<p>Eliminating after this choice <var>n</var> from (3) by equating the left-hand sides, we deduce after simplification <var>a</var><var>b</var> = <var>c</var><var>d</var>, i.e. (1), and then, combining (1), (2), and (3)</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">(4)</td>
-						<td><var>n</var> = <var>a</var> + <var>b</var> + <var>c</var> + <var>d</var> &nbsp; &nbsp; &nbsp; ,</td>
-					</tr>
-				</table>
-
-				<p class="noindent">thus reducing our proof obligation to showing that, thanks to (1), the right-hand side of (4) can be factorized as the product of two plurals.</p>
-				<p>We meet this last proof obligation in a totally classic manner: we exploit (1), i.e. <var>a</var><var>b</var> = <var>c</var><var>d</var>, by solving the equation</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">(5)</td>
-						<td><var>a</var>,<var>b</var>,<var>c</var>,<var>d</var> &nbsp; : &nbsp; <var>a</var><var>b</var> = <var>c</var><var>d</var>&nbsp; &nbsp; &nbsp; ,</td>
-					</tr>
-				</table>
-
-				<p class="noindent">then substitute the general solution into the right-hand side of (4) and look what we can do with the resulting expression.</p>
-				<p>Multiplication being symmetric and associative, we have for any <var>q</var>,<var>r</var>,<var>s</var>,<var>t</var></p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">&nbsp;</td>
-						<td>(<var>q</var><var>r</var>)  (<var>s</var><var>t</var>) =  (<var>q</var><var>s</var>)  (<var>r</var><var>t</var>)</td>
-					</tr>
-				</table>
-
-				<p class="noindent">and hence, (5) is solved by</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">(6)</td>
-						<td><var>a</var> = <var>q</var><var>r</var></td><td class="spac">&nbsp;</td><td>(<i>i</i>)</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><var>b</var> = <var>s</var><var>t</var></td><td>&nbsp;</td><td>(<i>ii</i>)</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><var>c</var> = <var>q</var><var>s</var></td><td>&nbsp;</td><td>(<i>iii</i>)</td>
-					</tr>
-					<tr>
-						<td></td>
-						<td><var>d</var> = <var>r</var><var>t</var></td><td>&nbsp;</td><td>(<i>iv</i>) &nbsp; ,</td>
-					</tr>
-				</table>
-
-				<p class="noindent">but this observation only tells us that (6) is a particular solution of equation (5), and we need the latter&rsquo;s general solution. We shall now show that (6) is also the general solution of (5) by showing that for <em>any</em> solution of (5), there exist natural <var>q</var>, <var>r</var>, <var>s</var>, <var>t</var> satisfying (6). We show the existence by constructing a witness:</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">&nbsp;</td>
-						<td><var>q</var> := <var>a</var> <b>gcd</b> <var>c</var> &nbsp; </td>
-					</tr>
-					<tr>
-						<td align="right">;&nbsp;&nbsp;</td>
-						<td><var>r</var> := <var>a / q</var> &nbsp; {(6) <i>i</i>}</td>
-					</tr>
-					<tr>
-						<td align="right">;&nbsp;&nbsp;</td>
-						<td><var>s</var> := <var>c / q</var> &nbsp; {(6) <i>iii</i>}</td>
-					</tr>
-					<tr>
-						<td align="right">;&nbsp;&nbsp;</td>
-						<td><var>t</var> := <var>b / s</var> &nbsp; (or <var>t</var> := <var>d / r</var>) &nbsp; {(6) <i>ii</i> and (6) <i>iv</i>}</td>
-					</tr>
-				</table>
-
-				<p class="noindent">Because <var>q</var> is a divisor of <var>a</var> and <var>c</var>, <var>q</var>, <var>r</var>, and <var>s</var> are integer; moreover, since <var>q</var> is the <em>greatest</em> common divisor of <var>a</var> and <var>c</var>,</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">(7)</td>
-						<td><var>r</var> <b>gcd</b> <var>s</var> = 1 &nbsp; &nbsp; &nbsp; .</td>
-					</tr>
-				</table>
-
-				<p class="noindent">With (<i>i</i>) and (<i>iii</i>) satisfied, we deduce from (1) &#x2014;and <var>q</var>&#x2260;0&#x2014;</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">&nbsp;</td>
-						<td><var>r</var><var>b</var> = <var>s</var><var>d</var></td>
-					</tr>
-				</table>
-
-				<p class="noindent">from which we conclude, in view of (7), that <var>r</var> divides <var>d</var> and that <var>s</var> divides <var>b</var>, and in general &#x2014;<var>r</var>&#x2260;0 and <var>s</var>&#x2260;0&#x2014; <var>b/s</var>=<var>d/r</var>. So either assignment to <var>t</var> does the job.</p>
-				<p>And now we are essentially done, for<br />
-					<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; <var>a</var> + <var>b</var> + <var>c</var> + <var>d</var><br />
-					= &nbsp; &nbsp; &nbsp; &nbsp; {(6)}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; (<var>q</var><var>r</var>) + (<var>s</var><var>t</var>) + (<var>q</var><var>s</var>) + (<var>r</var><var>t</var>)<br />
-					= &nbsp; &nbsp; &nbsp; &nbsp; {algebra}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; (<var>q</var> + <var>t</var>)  (<var>r</var> + <var>s</var>)
-				</p>
-
-				<p class="noindent">and the parameters <var>q</var>, <var>r</var>, <var>s</var>, <var>t</var> differing from 0, the factors are plurals.</p>
-				<p>For devastating comments on an earlier version &#x2014;gross omissions and major rabbits&#x2014; I am indebted to the ETAC, to Wim H. Hesselink and Rutger M. Dijkstra. Lex Bijlsma was so kind to retrieve that &#x2014;apart from less fortunate notation&#x2014; my proof, originally conceived between Amarillo and Abilene, had also been designed by Euler.</p>
-				<p>The above argument is reported because it provides a striking example of a proof in which the algebra is totally trivial, while all subtlety has been invested in the decision what to name.</p>
-				<p align="right" style="margin-right: 8em;">Austin, 19 August 1993</p>
-				<p class="noindent">
-					prof.dr. Edsger W.Dijkstra<br />
-					Department of Computer Sciences<br />
-					The University of Texas at Austin<br />
-					Austin, TX 78712-1188<br />
-					USA<br />
-				</p>
-			</div>
-			<div>
-        <br/>
-      </div>
-		</div>
-		<hr />
-		<div id="footer">
-         transcribed by Corrado Cantelmi<br />
-          revised 
-          <!-- #BeginDate format:En2 -->24-Dec-2011<!-- #EndDate -->
-		</div>
-	</body>
-
-</html>
+<p>In <a href="https://www.cs.utexas.edu/~EWD/ewd11xx/EWD1154.PDF" title="Link to the PDF version of EWD1154">EWD1154</a> we dealt with D. Zagier’s proof that a prime of the form 4<var>k</var>+1 is the sum of 2 squares. For such a prime, this “square decomposition” is, in fact, unique. Here we show this by proving that an odd number is not prime if it is the sum of 2 different pairs of squares. Proving than a number is not prime will be done by rewriting that number as the product of 2 plurals. (A “plural” is a natural number&nbsp;≥&nbsp;2.)</p>
+<p class="noindent"><u>Remark</u> &nbsp; The definition of primality that we use —and which I often found to be the nicest one— is</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td width="48" height="24" class="spac">&nbsp;</td>
+<td width="393">prime.<var>n</var> &nbsp;≡〈<span class="unicode">∀</span><var>x</var>,<var>y</var>: <var>x</var> ≥ 2 <span class="unicode">∧</span> <var>y</var> ≥ 2: <var>x</var>∙<var>y</var> ≠ <var>n</var>〉 &nbsp; ;</td>
+</tr>
+</table>
+<p class="noindent">the existential quantification expressing non-primality is demonstrated by constructing a witness. (End of Remark.)</p>
+<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p>There are two distinct aspects to this problem. There is the algebraic aspect of expressing the sum of 2 squares as the product of 2 plurals, and there is the notational question of how to express that a number admits 2 <em>different</em> square decompositions.</p>
+<p>Let us look at the algebraic aspect first. The simplest formula I know that equates the sum of 2 squares to a product</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">(0)</td>
+<td>(<var>a</var> + <var>b</var>) + (<var>a</var> – <var>b</var>) = 2(<var>a</var> + <var>b</var>) &nbsp; &nbsp; &nbsp; .</td>
+</tr>
+</table>
+<p class="noindent"><u>Remark</u> &nbsp; This formula is of independent interest in the context of square decompositions: regardless of primality it establishes for any <var>n</var> a one-to-one correspondence between the square decompositions of <var>n</var> and those of 2<var>n</var>. (End of Remark.)</p>
+<p>We cannot use (0) “as is”, for we have to write odd numbers as the sum of 2 squares. So we generalize the left-hand side to (<var>a</var> + <var>b</var>) + (<var>c</var> – <var>d</var>), but restrict ourselves to the situation with</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">(1)</td>
+<td><var>a</var><var>b</var> = <var>c</var><var>d</var> &nbsp; &nbsp; &nbsp; ,</td>
+</tr>
+</table>
+<p class="noindent">so that we inherit from (0) that the 2 cross-products cancel:</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">(2)</td>
+<td><var>a</var><var>b</var> = <var>c</var><var>d</var> &nbsp; <span class="unicode">⇒</span> &nbsp; (<var>a</var> + <var>b</var>) + (<var>c</var> – <var>d</var>) = <var>a</var> + <var>b</var> + <var>c</var> + <var>d</var> &nbsp; &nbsp; &nbsp; .</td>
+</tr>
+</table>
+<p class="noindent">Note that the right-hand side of the consequent is an even function of the variables. So much for the algebraic aspect.</p>
+<p>We now turn to the question of how to express that an odd <var>n</var> admits 2 different square decompositions. Here the problem is that <var>x</var>+<var>y</var> and <var>y</var>+<var>x</var> count as the same square decompositions. We can, however, exploit that <var>n</var> is odd; hence, when <var>n</var> is written as sum of 2 squares, the one square is odd and the other square is even. Consequently, if odd <var>n</var> admits 2 different square decompositions, we can choose <em>positive</em> <var>a</var>, <var>b</var>, <var>c</var>, <var>d</var> such that</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">(3)</td>
+<td>(<var>a</var> + <var>b</var>) + (<var>c</var> – <var>d</var>) = <var>n</var> &nbsp; <span class="unicode">∧</span></td>
+</tr>
+<tr>
+<td class="spac"></td>
+<td>(<var>a</var> − <var>b</var>) + (<var>c</var> + <var>d</var>) = <var>n</var> &nbsp; &nbsp; &nbsp; &nbsp; .</td>
+</tr>
+</table>
+<p class="noindent">Here <var>a</var> is the average of the numbers of the one parity, and <var>c</var> the average of those of the other parity; because we are considering different square decompositions of <var>n</var>, also <var>b</var> and <var>d</var> can be chosen positive.</p>
+<p>Eliminating after this choice <var>n</var> from (3) by equating the left-hand sides, we deduce after simplification <var>a</var><var>b</var> = <var>c</var><var>d</var>, i.e. (1), and then, combining (1), (2), and (3)</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">(4)</td>
+<td><var>n</var> = <var>a</var> + <var>b</var> + <var>c</var> + <var>d</var> &nbsp; &nbsp; &nbsp; ,</td>
+</tr>
+</table>
+<p class="noindent">thus reducing our proof obligation to showing that, thanks to (1), the right-hand side of (4) can be factorized as the product of two plurals.</p>
+<p>We meet this last proof obligation in a totally classic manner: we exploit (1), i.e. <var>a</var><var>b</var> = <var>c</var><var>d</var>, by solving the equation</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">(5)</td>
+<td><var>a</var>,<var>b</var>,<var>c</var>,<var>d</var> &nbsp; : &nbsp; <var>a</var><var>b</var> = <var>c</var><var>d</var>&nbsp; &nbsp; &nbsp; ,</td>
+</tr>
+</table>
+<p class="noindent">then substitute the general solution into the right-hand side of (4) and look what we can do with the resulting expression.</p>
+<p>Multiplication being symmetric and associative, we have for any <var>q</var>,<var>r</var>,<var>s</var>,<var>t</var></p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">&nbsp;</td>
+<td>(<var>q</var><var>r</var>) (<var>s</var><var>t</var>) = (<var>q</var><var>s</var>) (<var>r</var><var>t</var>)</td>
+</tr>
+</table>
+<p class="noindent">and hence, (5) is solved by</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">(6)</td>
+<td><var>a</var> = <var>q</var><var>r</var></td>
+<td class="spac">&nbsp;</td>
+<td>(<i>i</i>)</td>
+</tr>
+<tr>
+<td></td>
+<td><var>b</var> = <var>s</var><var>t</var></td>
+<td>&nbsp;</td>
+<td>(<i>ii</i>)</td>
+</tr>
+<tr>
+<td></td>
+<td><var>c</var> = <var>q</var><var>s</var></td>
+<td>&nbsp;</td>
+<td>(<i>iii</i>)</td>
+</tr>
+<tr>
+<td></td>
+<td><var>d</var> = <var>r</var><var>t</var></td>
+<td>&nbsp;</td>
+<td>(<i>iv</i>) &nbsp; ,</td>
+</tr>
+</table>
+<p class="noindent">but this observation only tells us that (6) is a particular solution of equation (5), and we need the latter’s general solution. We shall now show that (6) is also the general solution of (5) by showing that for <em>any</em> solution of (5), there exist natural <var>q</var>, <var>r</var>, <var>s</var>, <var>t</var> satisfying (6). We show the existence by constructing a witness:</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">&nbsp;</td>
+<td><var>q</var> := <var>a</var> <b>gcd</b> <var>c</var> &nbsp;</td>
+</tr>
+<tr>
+<td align="right">;&nbsp;&nbsp;</td>
+<td><var>r</var> := <var>a / q</var> &nbsp; {(6) <i>i</i>}</td>
+</tr>
+<tr>
+<td align="right">;&nbsp;&nbsp;</td>
+<td><var>s</var> := <var>c / q</var> &nbsp; {(6) <i>iii</i>}</td>
+</tr>
+<tr>
+<td align="right">;&nbsp;&nbsp;</td>
+<td><var>t</var> := <var>b / s</var> &nbsp; (or <var>t</var> := <var>d / r</var>) &nbsp; {(6) <i>ii</i> and (6) <i>iv</i>}</td>
+</tr>
+</table>
+<p class="noindent">Because <var>q</var> is a divisor of <var>a</var> and <var>c</var>, <var>q</var>, <var>r</var>, and <var>s</var> are integer; moreover, since <var>q</var> is the <em>greatest</em> common divisor of <var>a</var> and <var>c</var>,</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">(7)</td>
+<td><var>r</var> <b>gcd</b> <var>s</var> = 1 &nbsp; &nbsp; &nbsp; .</td>
+</tr>
+</table>
+<p class="noindent">With (<i>i</i>) and (<i>iii</i>) satisfied, we deduce from (1) —and <var>q</var>≠0—</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">&nbsp;</td>
+<td><var>r</var><var>b</var> = <var>s</var><var>d</var></td>
+</tr>
+</table>
+<p class="noindent">from which we conclude, in view of (7), that <var>r</var> divides <var>d</var> and that <var>s</var> divides <var>b</var>, and in general —<var>r</var>≠0 and <var>s</var>≠0— <var>b/s</var>=<var>d/r</var>. So either assignment to <var>t</var> does the job.</p>
+<p>And now we are essentially done, for<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; <var>a</var> + <var>b</var> + <var>c</var> + <var>d</var><br>
+= &nbsp; &nbsp; &nbsp; &nbsp; {(6)}<br>
+&nbsp; &nbsp; &nbsp; &nbsp; (<var>q</var><var>r</var>) + (<var>s</var><var>t</var>) + (<var>q</var><var>s</var>) + (<var>r</var><var>t</var>)<br>
+= &nbsp; &nbsp; &nbsp; &nbsp; {algebra}<br>
+&nbsp; &nbsp; &nbsp; &nbsp; (<var>q</var> + <var>t</var>) (<var>r</var> + <var>s</var>)</p>
+<p class="noindent">and the parameters <var>q</var>, <var>r</var>, <var>s</var>, <var>t</var> differing from 0, the factors are plurals.</p>
+<p>For devastating comments on an earlier version —gross omissions and major rabbits— I am indebted to the ETAC, to Wim H. Hesselink and Rutger M. Dijkstra. Lex Bijlsma was so kind to retrieve that —apart from less fortunate notation— my proof, originally conceived between Amarillo and Abilene, had also been designed by Euler.</p>
+<p>The above argument is reported because it provides a striking example of a proof in which the algebra is totally trivial, while all subtlety has been invested in the decision what to name.</p>
+<p align="right" style="margin-right: 8em;">Austin, 19 August 1993</p>
+<p class="noindent">prof.dr. Edsger W.Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin<br>
+Austin, TX 78712-1188<br>
+USA<br></p>
+<div><br></div>
+<hr>
+<div id="footer">transcribed by Corrado Cantelmi<br>
+revised <!-- #BeginDate format:En2 -->24-Dec-2011<!-- #EndDate --></div>
 </div>
   <script>
 $('.body').tweetSelection({

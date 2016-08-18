@@ -23,64 +23,39 @@
   </div>
   <h1>Stationary behaviour of some ternary networks</h1>
   <div class='body'>
-<p>
-We consider a graph of N vertices in which each vertex has a multiplicity three, i.e. in which three edges meet at each vertex. Because the number of edges equals 3N/2, we conclude that N must be even.
-<p>
-Each edge connects two different vertices -- i.e. no "auto-cycles"--; the graph is partially directed, more precisely: each vertex has an outgoing edge, an undirected edge, and an ingoing edge. (Such graphs exist for all even N &#x2265; 4.)
-<p>
-In the initial situation, 3N numbers -- which can be assumed to be all different from each other -- are placed in the vertices, three at each vertex. A move consists of sending <u>for</u> <u>each</u> <u>vertex</u>:
-<p>
-1) its maximum value to the neighbour vertex at the other end of its outgoing edge,<br>
+<p>We consider a graph of N vertices in which each vertex has a multiplicity three, i.e. in which three edges meet at each vertex. Because the number of edges equals 3N/2, we conclude that N must be even.</p>
+<p>Each edge connects two different vertices -- i.e. no "auto-cycles"--; the graph is partially directed, more precisely: each vertex has an outgoing edge, an undirected edge, and an ingoing edge. (Such graphs exist for all even N ≥ 4.)</p>
+<p>In the initial situation, 3N numbers -- which can be assumed to be all different from each other -- are placed in the vertices, three at each vertex. A move consists of sending <u>for</u> <u>each</u> <u>vertex</u>:</p>
+<p>1) its maximum value to the neighbour vertex at the other end of its outgoing edge,<br>
 2) its medium value to the neighbour vertex at the other end of its undirected edge,<br>
 3) its minimum value to the neighbour vertex at the other end of its ingoing edge,<br>
 4) and of accepting three new values from its neighbours.<br>
-(We can also view a move as 3N/2 simultaneous swaps of values at the end of each edge.)
-<p>
-After the move, again three values are places at each vertex, and, therefore, a next move is possible. We are interested in the periodic travelling patterns as will occur in infinite sequences of moves.
-<p>
-Suppose that, before distributing the 3N values among the vertices, we had painted the N largest values red, the N smallest values blue, and the N remaining values in between white; then we are interested in final patterns in which at each vertex a red, a white, and a blue value can be found. Note that such a distribution of colours is stable: in each move two white values will be swapped along each undirected edge, and along each directed edge a red and a blue value will be swapped -- the red one will go in the direction of the arrow, the blue one will travel in the opposite direction -- ; after the move, again all three colours will be present in each vertex.
-<p>
-<div align="right">
-			<a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD624.PDF">EWD624</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD624.PDF">1</a></div>
-<p>
-We furthermore require that the period of the stationary behaviour is exactly N moves. Below we shall give constructions of such networks for each N &#x2265; 4 with the property that the desired stationary behaviour as described above will be established after a finite number of moves, <u>independently</u> of the initial distribution of the 3N values. The cases N = 4Z and N = 4Z + 2 are treated separately.
-<p>
-<u>N = 4Z</u> .
-<p>
-The directed edges form a single directed cycle; the 2Z undirected edges connect the pairs of in this directed cycle diametrically opposite vertices. (If the vertices are numbered from 0 through N-1 , then a directed edge goes from vertex nr.i to vertex nr.(i+1)<u>mod</u> N , and undirected edge connects vertex nr.i and vertex nr.(i+2Z)<u>mod</u> N .)
-<p>
-<u>Proof of stabilization</u>. Let k be the maximum value, such that the k largest values are all placed in different vertices; initially we have 1 &#x2264; k &#x2264; N . We shall first show that within a finite number of moves, k = N by showing that, if k < N , within a finite number of moves k will be increased by at least 1 . In each move the k largest values will each be moved to the next vertex in the cycle:  as long as k does not increase, the definition of k implies that the k+1st largest must share a vertex with exactly one of the k largest ones. It is, therefore, the medium value in that vertex and will be sent away along the undirected edge: relative to the rotating pattern of the k largest ones, it advances in the cycle over 2Z-1 places. Because gcd(4Z, 2Z-1) = 1, the k+1st largest value, while oscillating along an undirected edge, must find itself within at most N-1 moves in a vertex that is not also occupied by one of the k largest values: that is the moment that k is increased by at least one. Hence, eventually each vertex will have exactly one red value.
-<p>
-For reasons of symmetry, eventually each vertex will also have exactly one blue value. But when both red and blue values are evenly distributed among the vertices, so will the white ones be. Hence the stable state will have been reached. The period of the cyclic behaviour obviously equals N. (End of proof of stabilization.)
-<p>
-<div align="right">
-			<a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD624.PDF">EWD624</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD624.PDF">2</a></div>
-<p>
-<u>N = 4Z + 2</u> .
-<p>
-Here the directed edges of the graph form two cycles of length 2Z+1 each. The 2Z+1 undirected edges each connect one vertex of the one cycle with one vertex of the other cycle. (Note that the way in which each vertex of the one cycle is paired with exactly one vertex of the other cycle, is arbitrary.)
-<p>
-<u>Proof of stabilization</u>. Let k be defined as in the previous proof and assume k < N . The k largest values are in general divided over the two cycles; in each they form a pattern that will rotate and will return to its original position in 2Z+1 moves. Within at most N-1 moves, however, k will have been increased. Consider again the k+1st largest one. As long as it shares a vertex with one of the k largest ones, it will oscillate along an undirected edge. During two moves it returns to a vertex of a cycle in which in the meantime the subset of the k largest values has moved over 2 places. Because gcd(2Z+1, 2) = 1, from one of the cycles at most 2Z double moves, or in toto N-1 single moves are possible, and it must find itself in a vertex that is not also occupied by one of the k largest ones. Eventually, each vertex will have exactly one red value, etc.. The period is the smallest common multiple of 2Z+1 -- the period of the red and the blue values -- and 2 -- the period of the white ones --; because 2Z+1 is odd, the total period = N. (End of proof of stabilization.)
-<p>
-The above problem and solution emerged during my "Tuesday afternoon discussion" of May 17, 1977, with Feijen, Prins, Peeters, Martin, and Bulterman. It was Feijen who posed the problem as a generalization of the binary network -- without undirected edges -- that I had shown in my lectures that morning. The solution has been recorded because we liked the argument, in spite of the fact that it is far from giving sharp upper bound on the number of moves needed.
-<p>
-<table width="80%" cellspacing=0 cellpadding=0 border=0>
+(We can also view a move as 3N/2 simultaneous swaps of values at the end of each edge.)</p>
+<p>After the move, again three values are places at each vertex, and, therefore, a next move is possible. We are interested in the periodic travelling patterns as will occur in infinite sequences of moves.</p>
+<p>Suppose that, before distributing the 3N values among the vertices, we had painted the N largest values red, the N smallest values blue, and the N remaining values in between white; then we are interested in final patterns in which at each vertex a red, a white, and a blue value can be found. Note that such a distribution of colours is stable: in each move two white values will be swapped along each undirected edge, and along each directed edge a red and a blue value will be swapped -- the red one will go in the direction of the arrow, the blue one will travel in the opposite direction -- ; after the move, again all three colours will be present in each vertex.</p>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD624.PDF">EWD624</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD624.PDF">1</a></div>
+<p>We furthermore require that the period of the stationary behaviour is exactly N moves. Below we shall give constructions of such networks for each N ≥ 4 with the property that the desired stationary behaviour as described above will be established after a finite number of moves, <u>independently</u> of the initial distribution of the 3N values. The cases N = 4Z and N = 4Z + 2 are treated separately.</p>
+<p><u>N = 4Z</u> .</p>
+<p>The directed edges form a single directed cycle; the 2Z undirected edges connect the pairs of in this directed cycle diametrically opposite vertices. (If the vertices are numbered from 0 through N-1 , then a directed edge goes from vertex nr.i to vertex nr.(i+1)<u>mod</u> N , and undirected edge connects vertex nr.i and vertex nr.(i+2Z)<u>mod</u> N .)</p>
+<p><u>Proof of stabilization</u>. Let k be the maximum value, such that the k largest values are all placed in different vertices; initially we have 1 ≤ k ≤ N . We shall first show that within a finite number of moves, k = N by showing that, if k &lt; N , within a finite number of moves k will be increased by at least 1 . In each move the k largest values will each be moved to the next vertex in the cycle: as long as k does not increase, the definition of k implies that the k+1st largest must share a vertex with exactly one of the k largest ones. It is, therefore, the medium value in that vertex and will be sent away along the undirected edge: relative to the rotating pattern of the k largest ones, it advances in the cycle over 2Z-1 places. Because gcd(4Z, 2Z-1) = 1, the k+1st largest value, while oscillating along an undirected edge, must find itself within at most N-1 moves in a vertex that is not also occupied by one of the k largest values: that is the moment that k is increased by at least one. Hence, eventually each vertex will have exactly one red value.</p>
+<p>For reasons of symmetry, eventually each vertex will also have exactly one blue value. But when both red and blue values are evenly distributed among the vertices, so will the white ones be. Hence the stable state will have been reached. The period of the cyclic behaviour obviously equals N. (End of proof of stabilization.)</p>
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD624.PDF">EWD624</a> - <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD624.PDF">2</a></div>
+<p><u>N = 4Z + 2</u> .</p>
+<p>Here the directed edges of the graph form two cycles of length 2Z+1 each. The 2Z+1 undirected edges each connect one vertex of the one cycle with one vertex of the other cycle. (Note that the way in which each vertex of the one cycle is paired with exactly one vertex of the other cycle, is arbitrary.)</p>
+<p><u>Proof of stabilization</u>. Let k be defined as in the previous proof and assume k &lt; N . The k largest values are in general divided over the two cycles; in each they form a pattern that will rotate and will return to its original position in 2Z+1 moves. Within at most N-1 moves, however, k will have been increased. Consider again the k+1st largest one. As long as it shares a vertex with one of the k largest ones, it will oscillate along an undirected edge. During two moves it returns to a vertex of a cycle in which in the meantime the subset of the k largest values has moved over 2 places. Because gcd(2Z+1, 2) = 1, from one of the cycles at most 2Z double moves, or in toto N-1 single moves are possible, and it must find itself in a vertex that is not also occupied by one of the k largest ones. Eventually, each vertex will have exactly one red value, etc.. The period is the smallest common multiple of 2Z+1 -- the period of the red and the blue values -- and 2 -- the period of the white ones --; because 2Z+1 is odd, the total period = N. (End of proof of stabilization.)</p>
+<p>The above problem and solution emerged during my "Tuesday afternoon discussion" of May 17, 1977, with Feijen, Prins, Peeters, Martin, and Bulterman. It was Feijen who posed the problem as a generalization of the binary network -- without undirected edges -- that I had shown in my lectures that morning. The solution has been recorded because we liked the argument, in spite of the fact that it is far from giving sharp upper bound on the number of moves needed.</p>
+<table width="80%" cellspacing="0" cellpadding="0" border="0">
 <tr>
 <td width="50%">Plataanstraat 5<br>
 5671 AL NEUNEN<br>
-The Netherlands
-</td>
+The Netherlands</td>
 <td valign="top">prof. dr. Edsger W. Dijkstra<br>
-Burroughs Research Fellow
-</td>
+Burroughs Research Fellow</td>
 </tr>
 </table>
 <hr>
 Transcribed by <a href="http://www.thejackol.com/">Mikhail Esteves</a>.
-		<p>Last revised on <csobj format="MedDate" h="16" region="15" t="DateTime" w="95">Fri, 1 Aug 2003</csobj>.
-
-	</body></html>
-
+<p>Last revised on Fri, 1 Aug 2003.</p>
 </div>
   <script>
 $('.body').tweetSelection({

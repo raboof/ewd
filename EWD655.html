@@ -23,67 +23,60 @@
   </div>
   <h1>On notation</h1>
   <div class='body'>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To be good a notation should satisfy at least three requirements: it should be unambiguous, it should be short, and it should be geared to our manipulative needs. Obvious as these requirements are, they are violated by wide-spread notational habits.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A rich deposit of poor notations is provided by the way in which telephone numbers are pronounced. In many countries telephone numbers are pronounced in pairs of digits: &quot;83 18 27&quot; becomes &quot;eighty-three, eighteen, twenty-seven&quot;. Before we had a six-digit telephone number, we had &quot;18 27&quot;, which, when pronounced according to this convention, cannot be distinguished from &quot;18 20 07&quot;. In the Netherlands it is not uncommon to parse five-digit telephone numbers differently: &quot;12 3 48&quot; becomes &quot;twelve, three, forty-eight&quot; which is then audibly undistinguishable from &quot;12 03 48&quot;. (In French it is even worse, because &quot;72&quot; is pronounced as &quot;sixty-twelve&quot; which makes it hard to distinguish between &quot;11 60 12&quot; and &quot;11 72&quot;. As in French, &quot;80&quot; is pronounced as &quot;four-twenty&quot; and &quot;91&quot; as &quot;four-twenty-eleven&quot; the possibilities for ambiguity are in French still much richer.)</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;But apart from the ambiguity, the Dutch pronunciation is definitely not geared to our manipulative needs: telephone numbers are sequences of digits to be dialed in the order from left to right, but in Dutch --as with the old four-and-twenty blackbirds-- two-digit numbers are pronounced from right to left, so &quot;83 18 27&quot; becomes &quot;three-and-eighty, eighteen, seven-and-twenty&quot;. These three inversions certainly don't facilitate dialing. (for me the only way out was to train myself to pronounce --in whatever language I am speaking-- telephone numbers as what they are, viz. sequences of digits, and I know my current telephone number as &quot;eight, three, one, eight, two, seven&quot;.)</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The most common way of sinning against shortness is repetition. Although the notation of music has a perfect way of indicating that, say, 16 bars have to be played twice, another music printing convention is that the printed text of a piece of music should end at the bottom of a page, an aesthetic conven- tion which is sometimes met by &quot;padding out&quot; and printing the 16 bars twice. As a young boy trying to learn to play the piano I was always very annoyed when I discovered that a music printer had played that trick upon me: with my untrained memory it was at that stage a laborious process to verify that the two printed sequences of 16 bars were, indeed equal, a process that needed the forefingers of both hands for pointing at the bars to be compared.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shortness is a virtue because lack of brevity can be harmful in many ways. Repetition forces the reader --see above-- to verify that long sequences of symbols are indeed identical; the repetitive style makes mathematical texts insipid, gives the writing of them the flavour of manual labour, and, when adopted, has a deteriorating influence on the quality of people's handwriting. (People write as well as they think necessary, and the redundancy of repetitive texts invites sloppiness.) Worse of all: it hides structure.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We have seen how in music printing the available structure &quot;those 16 bars have to be played twice&quot; can be hidden by printing them twice, but that was only a simple example of structure hiding. In a puzzle book I found the following problem: &quot;Given twelve coins and the knowledge that one of them is false and of incorrect weight, determine the identity of the false coin and whether it is too heavy or too light by using a simple scale not more than three times.&quot; In the upside-down part of the book that contains the solutions, the solution of this puzzle occupies three pages of fine print. The author starts by numbering the coins from 1 through 12. Then he describes the first weighing as (1 2 3 4) against (5 6 7 8). For each of the three possible outcomes he describes the second weighing, each of which has again three possible outcomes. For these nine possible outcomes of the second weighing he prescribes a third weighing: only 24 of the 27 outcomes can occur and each of them miraculously identifies the false coin and establishes whether it is too heavy or too light. (Even the structure of the tree has been hidden by traversing it &quot;depth first&quot;.) The structure of the solution was completely buried under the poor notation. Here is my effort.</p>
-						<blockquote>
-							<p>Let us represent each coin by &quot;0&quot;, &quot;&plusmn;&quot;, &quot;+&quot;, or &quot;-&quot;, depending on our knowledge about it, according to the following table:<br>
-								0 = true<br>
-								&plusmn; = possibly false<br>
-								+ = possibly too heavy<br>
-								&#150; = possibly too light</p>
-							<p>We are asked to solve the problem --i.e. identify the false coin and determine whether it is too heavy or too light-- using the scale at most three times, for a set &quot;&plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn;&quot;.</p>
-							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using the scale once, we can solve the problem for the sets:<br>
-								1a) &quot;+ + x&quot; and &quot;&#150; &#150; x&quot; (where &quot;x&quot; stands for &quot;0&quot;, &quot;+&quot;, or &quot;&#150;&quot;) by comparing the first two: if the scale tips, we know which of the two is the false one, otherwise it is the third, and in all cases we know whether the false one is too heavy or too light<br>
-								1b) &quot;&plusmn;, 0&quot; by comparing (&plusmn;) with (0): the scale will tip and hence we know whether the false one is too heavy or too light.</p>
-							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using the scale twice we can solve the problem for the sets:<br>
-								2a) &quot;+ + + + &#150; &#150; &#150; &#150;&quot; by comparing (+ + &#150;) with (+ + &#150;): if the scale tips we have case 1a in the form &quot;+ + &#150;&quot; with the &quot;+ +&quot; from the heavy and the &quot;&#150;&quot; from the light side, otherwise the remaining two &quot;&#150; &#150;&quot; provide case 1a in the form &quot;&#150; &#150; 0&quot;<br>
-								2b) &quot;&plusmn; &plusmn; &plusmn; &plusmn; 0&quot; by comparing (&plusmn; &plusmn;) with (&plusmn; 0): if the scale tips, the three suspects give case 1a --either in the form &quot;+ + &#150;&quot; or in the form &quot;&#150; &#150; +&quot;-- , otherwise the remaining suspect is false and we have case 1b.</p>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using the scale three times we can solve the problem for the set &quot;&plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn;&quot; by comparing (&plusmn; &plusmn; &plusmn; &plusmn;) with (&plusmn; &plusmn; &plusmn; &plusmn;): if the scale tips we have case 2a, otherwise case 2b.</blockquote>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Several remarks should be made. In spite of my objection to repetitions I have represented sets of coins by enumeration. I could do so because the sets are small. Another possibility would have been to characterize a set by the numbers of coins from the respective categories &quot;true&quot;, &quot;possibly false&quot;, &quot;possibly too heavy&quot;, and &quot;possibly too light&quot;. If I were to describe what can be done by using the scale four times, I would probably prefer a character- ization (1, 40, 0, 1) over &quot;0 &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; &plusmn; -&quot;.
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I think the introduction of &quot;x&quot; in case 1a justified: this abbreviation costs less than it saves. It could be objected that my description does not do justice to the symmetry between &quot;+&quot; and &quot;&#150;&quot;. In case 1a I have not introduced &quot;y&quot; to stand for &quot;+&quot; or &quot;&#150;&quot; (and &quot;&#x1EF9;&quot; to stand for the other!) . I could then have characterized case 1a as &quot;y&nbsp;y&nbsp;x&quot;. I haven't done so, because the introduction of the abbreviation would have cost more than it would have saved. Please note that the price for not introducing y and &#x1EF9; is paid:<br>
-							in case 2a) where I am overspecific: comparing (&#150; &#150; +) with (&#150; &#150; +) would also have been right, (this is now left to the intelligence of the reader); in case 2b) where I have to enumerate the two forms &quot;+ + &#150;&quot; and &quot;&#150; &#150; +&quot;. The symmetry between &quot;+&quot; and &quot;&#150;&quot; is exploited, however, by never separating explicitly, when the scale tips, the case that the one side goes down from the case that the other does so: in case 2a) we refer to &quot;the heavy side&quot; and &quot;the light side&quot;, which, of course, should suffice because the starting situation of that weighing experiment was symmetrical.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The main gain from this descriptive technique is that it provides a catalogue of the possible situations with still 1, 2, or 3 weighings to go. If we were to extend the problem to, say, 36 coins and four usages of the scale, a description of the solution in our style would be one paragraph longer, in the style of the author of the puzzle book it would require nine pages of fine print.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(In the above remarks I have confined myself to the descriptive technique for the solution in the puzzle book. An alternative would have been to characterize all sets for which the problem can be solved by using the scale <i>n</i> times, by giving explicitly the general strategy for the first weighing of a sequence of at most <i>n</i> usages of the scale, and proving the adequacy of that strategy by induction over <i>n</i>. But then we would have taken the problem to a next level of sophistication that is beyond the scope of the puzzle book. Try to solve this more general problem: you will discover that its solution can be described clearly in about the same space as I needed for the problem of the 12 coins!)</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Just for the record: the description of the solution given above is the result of my second effort. polished twice.)</p>
-					</div>
-					<div class=Section1 align="right">
-						<p>(To be continued)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-					</div>
-					<div align="left">
-						<table width="400" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td valign="top" width="50%">Plataanstraat 5<br>
-									5671 AL NUENEN<br>
-									The Netherlands</td>
-								<td valign="top">prof.dr.Edsger W.Dijkstra<br>
-									Burroughs Research Fellow</td>
-							</tr>
-						</table>
-						<p></p>
-					</div>
-					<div align="left">
-						<p><u></u></p>
-					</div>
-					<hr>
-					<font size="-1">transcribed by Nippun Goel<br>
-						revised <csobj format="MedDate" h="12" region="15" t="DateTime" w="102">Tue, 21 Dec 2004</csobj></font>
-					<p></p>
-				</td>
-				<td width="1" height="2615"><spacer type="block" width="1" height="2615"></td>
-			</tr>
-			<tr height="1" cntrlrow>
-				<td width="465" height="1"><spacer type="block" width="465" height="1"></td>
-				<td width="1" height="1"></td>
-			</tr>
-		</table>
-		<p></p>
-	</body>
-
-</html></div>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To be good a notation should satisfy at least three requirements: it should be unambiguous, it should be short, and it should be geared to our manipulative needs. Obvious as these requirements are, they are violated by wide-spread notational habits.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A rich deposit of poor notations is provided by the way in which telephone numbers are pronounced. In many countries telephone numbers are pronounced in pairs of digits: "83 18 27" becomes "eighty-three, eighteen, twenty-seven". Before we had a six-digit telephone number, we had "18 27", which, when pronounced according to this convention, cannot be distinguished from "18 20 07". In the Netherlands it is not uncommon to parse five-digit telephone numbers differently: "12 3 48" becomes "twelve, three, forty-eight" which is then audibly undistinguishable from "12 03 48". (In French it is even worse, because "72" is pronounced as "sixty-twelve" which makes it hard to distinguish between "11 60 12" and "11 72". As in French, "80" is pronounced as "four-twenty" and "91" as "four-twenty-eleven" the possibilities for ambiguity are in French still much richer.)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;But apart from the ambiguity, the Dutch pronunciation is definitely not geared to our manipulative needs: telephone numbers are sequences of digits to be dialed in the order from left to right, but in Dutch --as with the old four-and-twenty blackbirds-- two-digit numbers are pronounced from right to left, so "83 18 27" becomes "three-and-eighty, eighteen, seven-and-twenty". These three inversions certainly don't facilitate dialing. (for me the only way out was to train myself to pronounce --in whatever language I am speaking-- telephone numbers as what they are, viz. sequences of digits, and I know my current telephone number as "eight, three, one, eight, two, seven".)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The most common way of sinning against shortness is repetition. Although the notation of music has a perfect way of indicating that, say, 16 bars have to be played twice, another music printing convention is that the printed text of a piece of music should end at the bottom of a page, an aesthetic conven- tion which is sometimes met by "padding out" and printing the 16 bars twice. As a young boy trying to learn to play the piano I was always very annoyed when I discovered that a music printer had played that trick upon me: with my untrained memory it was at that stage a laborious process to verify that the two printed sequences of 16 bars were, indeed equal, a process that needed the forefingers of both hands for pointing at the bars to be compared.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Shortness is a virtue because lack of brevity can be harmful in many ways. Repetition forces the reader --see above-- to verify that long sequences of symbols are indeed identical; the repetitive style makes mathematical texts insipid, gives the writing of them the flavour of manual labour, and, when adopted, has a deteriorating influence on the quality of people's handwriting. (People write as well as they think necessary, and the redundancy of repetitive texts invites sloppiness.) Worse of all: it hides structure.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We have seen how in music printing the available structure "those 16 bars have to be played twice" can be hidden by printing them twice, but that was only a simple example of structure hiding. In a puzzle book I found the following problem: "Given twelve coins and the knowledge that one of them is false and of incorrect weight, determine the identity of the false coin and whether it is too heavy or too light by using a simple scale not more than three times." In the upside-down part of the book that contains the solutions, the solution of this puzzle occupies three pages of fine print. The author starts by numbering the coins from 1 through 12. Then he describes the first weighing as (1 2 3 4) against (5 6 7 8). For each of the three possible outcomes he describes the second weighing, each of which has again three possible outcomes. For these nine possible outcomes of the second weighing he prescribes a third weighing: only 24 of the 27 outcomes can occur and each of them miraculously identifies the false coin and establishes whether it is too heavy or too light. (Even the structure of the tree has been hidden by traversing it "depth first".) The structure of the solution was completely buried under the poor notation. Here is my effort.</p>
+<blockquote>
+<p>Let us represent each coin by "0", "±", "+", or "-", depending on our knowledge about it, according to the following table:<br>
+0 = true<br>
+± = possibly false<br>
++ = possibly too heavy<br>
+– = possibly too light</p>
+<p>We are asked to solve the problem --i.e. identify the false coin and determine whether it is too heavy or too light-- using the scale at most three times, for a set "± ± ± ± ± ± ± ± ± ± ± ±".</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using the scale once, we can solve the problem for the sets:<br>
+1a) "+ + x" and "– – x" (where "x" stands for "0", "+", or "–") by comparing the first two: if the scale tips, we know which of the two is the false one, otherwise it is the third, and in all cases we know whether the false one is too heavy or too light<br>
+1b) "±, 0" by comparing (±) with (0): the scale will tip and hence we know whether the false one is too heavy or too light.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using the scale twice we can solve the problem for the sets:<br>
+2a) "+ + + + – – – –" by comparing (+ + –) with (+ + –): if the scale tips we have case 1a in the form "+ + –" with the "+ +" from the heavy and the "–" from the light side, otherwise the remaining two "– –" provide case 1a in the form "– – 0"<br>
+2b) "± ± ± ± 0" by comparing (± ±) with (± 0): if the scale tips, the three suspects give case 1a --either in the form "+ + –" or in the form "– – +"-- , otherwise the remaining suspect is false and we have case 1b.</p>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Using the scale three times we can solve the problem for the set "± ± ± ± ± ± ± ± ± ± ± ±" by comparing (± ± ± ±) with (± ± ± ±): if the scale tips we have case 2a, otherwise case 2b.</blockquote>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Several remarks should be made. In spite of my objection to repetitions I have represented sets of coins by enumeration. I could do so because the sets are small. Another possibility would have been to characterize a set by the numbers of coins from the respective categories "true", "possibly false", "possibly too heavy", and "possibly too light". If I were to describe what can be done by using the scale four times, I would probably prefer a character- ization (1, 40, 0, 1) over "0 ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± ± -".
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I think the introduction of "x" in case 1a justified: this abbreviation costs less than it saves. It could be objected that my description does not do justice to the symmetry between "+" and "–". In case 1a I have not introduced "y" to stand for "+" or "–" (and "ỹ" to stand for the other!) . I could then have characterized case 1a as "y&nbsp;y&nbsp;x". I haven't done so, because the introduction of the abbreviation would have cost more than it would have saved. Please note that the price for not introducing y and ỹ is paid:<br>
+in case 2a) where I am overspecific: comparing (– – +) with (– – +) would also have been right, (this is now left to the intelligence of the reader); in case 2b) where I have to enumerate the two forms "+ + –" and "– – +". The symmetry between "+" and "–" is exploited, however, by never separating explicitly, when the scale tips, the case that the one side goes down from the case that the other does so: in case 2a) we refer to "the heavy side" and "the light side", which, of course, should suffice because the starting situation of that weighing experiment was symmetrical.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The main gain from this descriptive technique is that it provides a catalogue of the possible situations with still 1, 2, or 3 weighings to go. If we were to extend the problem to, say, 36 coins and four usages of the scale, a description of the solution in our style would be one paragraph longer, in the style of the author of the puzzle book it would require nine pages of fine print.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(In the above remarks I have confined myself to the descriptive technique for the solution in the puzzle book. An alternative would have been to characterize all sets for which the problem can be solved by using the scale <i>n</i> times, by giving explicitly the general strategy for the first weighing of a sequence of at most <i>n</i> usages of the scale, and proving the adequacy of that strategy by induction over <i>n</i>. But then we would have taken the problem to a next level of sophistication that is beyond the scope of the puzzle book. Try to solve this more general problem: you will discover that its solution can be described clearly in about the same space as I needed for the problem of the 12 coins!)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Just for the record: the description of the solution given above is the result of my second effort. polished twice.)</p>
+<div class="Section1" align="right">
+<p>(To be continued)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+</div>
+<div align="left">
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top" width="50%">Plataanstraat 5<br>
+5671 AL NUENEN<br>
+The Netherlands</td>
+<td valign="top">prof.dr.Edsger W.Dijkstra<br>
+Burroughs Research Fellow</td>
+</tr>
+</table>
+</div>
+<div align="left"></div>
+<hr>
+<font size="-1">transcribed by Nippun Goel<br>
+revised Tue, 21 Dec 2004</font>
+<table>
+<tr>
+<td width="1" height="2615"><spacer type="block" width="1" height="2615"></td>
+</tr>
+<tr height="1" cntrlrow="">
+<td width="465" height="1"><spacer type="block" width="465" height="1"></td>
+<td width="1" height="1"></td>
+</tr>
+</table>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

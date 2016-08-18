@@ -23,138 +23,118 @@
   </div>
   <h1>Recording the structure of trees in their leaves</h1>
   <div class='body'>
-        <hr />
-<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing 
-transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its 
-accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. &mdash;HR</p>
-<hr />
-           <p class="noindent">
-<p><b>Recording the structure of trees in their leaves</b>. 
-<p>The following results are by no means new. I found 
-the result for the binary tree in the late fifties; the 
-result for the general tree &mdash;or something very similar 
-to it&mdash; was discovered in the late sixties by C.S. Scholten
-and, if I remember correctly, by D.T. Ross as well. 
-The reasons for writing this short note are twofold. 
-Firstly, with a renewed interest in trees I realized
-that I had never seen the results properly recorded
-&mdash; they may be somewhere in Knuth's encyclopedia!&mdash;;
-secondly, thanks to a recent remark by C.S. Scholten 
-I now understand them much better than before.
-<p>Offspring of the results are the following theorems. 
-<p class="noindent"><b>Theorem</b> 1. Consider for positive integer n the values 
-R(n) given by 
-<table width=100%><tr><td valign=top width=10%>
-</td><td>r(1) = 1
-</td></tr><tr><td valign=top>
-</td><td>r(n) = the sum of all products r(i) * r(j), such
-that i + j = n with 0 &lt; i, j &lt; n.
-</td>  </tr>  </table>
-Then r(n) &lt; 4<sup>n</sup>. (Note that r(n) equals the number 
-of rooted trees with n leaves such that each internal 
-node has exactly two outgoing arrows).
-<p class="noindent"><b>Theorem</b> 2. Consider for positive integer n the values 
-R(n) given by 
-<table width=100%><tr><td valign=top width=10%>
-</td><td>r(1) = 1
-</td></tr><tr><td valign=top>
-</td><td>r(n) = the sum of all products r(i) * ... * r(j), such
-that i + ... + j = n with 0 &lt; i, ..., j &lt; n.
-</td>  </tr>  </table>
-Then r(n) &lt; 6<sup>n</sup>. (Note that r(n) equals the number 
-of rooted trees with n leaves such that each internal 
-node has atleast two outgoing arrows). 
-<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>*</p>  
-<p>For a tree that is not a leaf so-called "traversal 
-order" of its leaves is recursively defined as the traversal 
-orders of the leaves of its subtrees dealt with in the order 
-of those subtrees, e.g. 
-<br>
-<IMG SRC="EWD736IM1.png" NAME="circle" BORDER=0> 
-<p>We shall characterize the structure of the trees by 
-attaching to each leaf a label from a finite alphabet 
-and listing those labels in traverse or order. The stated 
-theorems follow from the fact that &mdash;as we shall show&mdash; 
-for binary and the general rooted tree labels 
-from a four-character alphabet in a six-character 
-alphabet respectively suffice. 
-<p>The labels serve two purposes. Firstly, they have to 
-define which nodes &mdash;leaves to start with&mdash; are "sons" 
-of the same "father". Secondly, because only labels 
-of leaves have been given, the label of a father will 
-be defined by the labels of its sons. (Regretfully 
-enough, we cannot avoid also attaching an irrelevant 
-label to the root of the tree.) 
-<p>Each internal node has one so-called "first son" 
-and so-called "last son"; it may have "middle sons". 
-(In our example: 0,1,3, and A are first sons;
-2,5,7, and B are middle sons; 4,8,10, and C are
-last sons.) In order that the labels determine which 
-nodes &mdash;leaves to start with&mdash; are sons of the same 
-father, we shall attach distinct labels to first sons, 
-to middle sons, and to last sons. Because the middle 
-son may be missing, the labels of the first and last 
-sons of a father must determine the father's label. 
-<p>With x possibilities for a first son's label and y 
-possibilities for a last sons label, and an arbitrary 
-label for the father, we conclude the requirement 
-<table width=100%><tr><td valign=top width=10%>
-</td><td>x * y &ge; size of the alphabet.
-</td><td align=right>(1)
-</td>  </tr>  </table>
-For the binary tree &mdash;no middle sons&mdash; the distinction 
-between first and last sons requires 
-<table width=100%><tr><td valign=top width=10%>
-</td><td>size of the alphabet &ge; x + y
-</td><td align=right>(2)
-</td>  </tr>  </table>
-Relations (1) and (2) can be solved for size = 4.
-<br>For the general tree, in which we attach to each 
-middle son the same label, we have instead of (2)
-<table width=100%><tr><td valign=top width=10%>
-</td><td>size of the alphabet &ge; x + 1 + y
-</td><td align=right>(3)
-</td>  </tr>  </table>
-Relations (1) and (3) can be solved for size = 6. 
-<p>The following codings show that these alphabet 
-sizes indeed suffice. 
-<p>For the binary tree we represent each label 
-by the pair (b,c) with 0 &le; b,c &le; 1. A father 
-with label (b,c) has
-<table width=100%><tr><td valign=top width=10%>
-</td><td>a first son with label (0,b)
-</td></tr><tr><td valign=top>
-</td><td>a last son label (1,c)
-</td>  </tr>  </table>
+<hr>
+<p class="noindent">NOTE: This transcription was contributed by Martin P.M. van der Burgt, who has devised a process for producing transcripts automatically. Although its markup is incomplete, we believe it serves a useful purpose by virtue of its searchability and its accessibility to text-reading software. It will be replaced by a fully marked-up version when time permits. —HR</p>
+<hr>
+<p class="noindent"></p>
+<p><b>Recording the structure of trees in their leaves</b>.</p>
+<p>The following results are by no means new. I found the result for the binary tree in the late fifties; the result for the general tree —or something very similar to it— was discovered in the late sixties by C.S. Scholten and, if I remember correctly, by D.T. Ross as well. The reasons for writing this short note are twofold. Firstly, with a renewed interest in trees I realized that I had never seen the results properly recorded — they may be somewhere in Knuth's encyclopedia!—; secondly, thanks to a recent remark by C.S. Scholten I now understand them much better than before.</p>
+<p>Offspring of the results are the following theorems.</p>
+<p class="noindent"><b>Theorem</b> 1. Consider for positive integer n the values R(n) given by</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>r(1) = 1</td>
+</tr>
+<tr>
+<td valign="top"></td>
+<td>r(n) = the sum of all products r(i) * r(j), such that i + j = n with 0 &lt; i, j &lt; n.</td>
+</tr>
+</table>
+Then r(n) &lt; 4<sup>n</sup>. (Note that r(n) equals the number of rooted trees with n leaves such that each internal node has exactly two outgoing arrows).
+<p class="noindent"><b>Theorem</b> 2. Consider for positive integer n the values R(n) given by</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>r(1) = 1</td>
+</tr>
+<tr>
+<td valign="top"></td>
+<td>r(n) = the sum of all products r(i) * ... * r(j), such that i + ... + j = n with 0 &lt; i, ..., j &lt; n.</td>
+</tr>
+</table>
+Then r(n) &lt; 6<sup>n</sup>. (Note that r(n) equals the number of rooted trees with n leaves such that each internal node has atleast two outgoing arrows).
+<p align="center" class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</p>
+<p>For a tree that is not a leaf so-called "traversal order" of its leaves is recursively defined as the traversal orders of the leaves of its subtrees dealt with in the order of those subtrees, e.g.<br>
+<img src="EWD736IM1.png" name="circle" border="0" id="circle"></p>
+<p>We shall characterize the structure of the trees by attaching to each leaf a label from a finite alphabet and listing those labels in traverse or order. The stated theorems follow from the fact that —as we shall show— for binary and the general rooted tree labels from a four-character alphabet in a six-character alphabet respectively suffice.</p>
+<p>The labels serve two purposes. Firstly, they have to define which nodes —leaves to start with— are "sons" of the same "father". Secondly, because only labels of leaves have been given, the label of a father will be defined by the labels of its sons. (Regretfully enough, we cannot avoid also attaching an irrelevant label to the root of the tree.)</p>
+<p>Each internal node has one so-called "first son" and so-called "last son"; it may have "middle sons". (In our example: 0,1,3, and A are first sons; 2,5,7, and B are middle sons; 4,8,10, and C are last sons.) In order that the labels determine which nodes —leaves to start with— are sons of the same father, we shall attach distinct labels to first sons, to middle sons, and to last sons. Because the middle son may be missing, the labels of the first and last sons of a father must determine the father's label.</p>
+<p>With x possibilities for a first son's label and y possibilities for a last sons label, and an arbitrary label for the father, we conclude the requirement</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>x * y ≥ size of the alphabet.</td>
+<td align="right">(1)</td>
+</tr>
+</table>
+For the binary tree —no middle sons— the distinction between first and last sons requires
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>size of the alphabet ≥ x + y</td>
+<td align="right">(2)</td>
+</tr>
+</table>
+Relations (1) and (2) can be solved for size = 4.<br>
+For the general tree, in which we attach to each middle son the same label, we have instead of (2)
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>size of the alphabet ≥ x + 1 + y</td>
+<td align="right">(3)</td>
+</tr>
+</table>
+Relations (1) and (3) can be solved for size = 6.
+<p>The following codings show that these alphabet sizes indeed suffice.</p>
+<p>For the binary tree we represent each label by the pair (b,c) with 0 ≤ b,c ≤ 1. A father with label (b,c) has</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>a first son with label (0,b)</td>
+</tr>
+<tr>
+<td valign="top"></td>
+<td>a last son label (1,c)</td>
+</tr>
+</table>
 i.e. distinct labels that satisfy stated inequalities.
-<p>For the general tree we represent each label by 
-the pair (b,c) with 0 &le; b &le; 1 and 0 &le; c &le; 2. A 
-father with label (b,c) has:
-<table width=100%><tr><td valign=top width=10%>
-</td><td>a first son with label (0,b)
-</td></tr><tr><td valign=top>
-</td><td>zero or more middle sons with label (0,2)
-</td></tr><tr><td valign=top>
-</td><td>a last son with label (1,c),
-</td>  </tr>  </table>
-i.e. distinct labels that satisfy stated inequalities. 
-<p><table width=100%><tr><td valign=top width=50%>
-Plataanstraat 5</td><td>21 April 1980
-</td></tr><tr><td valign=top>
-5671 AL NUENEN</td><td>prof.dr.Edsger W.Dijkstra
-</td></tr><tr><td valign=top>
-The Netherlands</td><td>Burroughs Research Fellow
-</td>  </tr>  </table>
- 
- <hr />
-   <p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br />
-    Last revision
-    <csobj format="MedDate" h="13" region="15" t="DateTime" w="90">
-      <!&mdash; #BeginDate format:IS1 &mdash;>2015-03-05<!&mdash; #EndDate &mdash;>
-    </csobj>
-  .</font></p>
-  <p>&nbsp;</p>
-</body></html></div>
+<p>For the general tree we represent each label by the pair (b,c) with 0 ≤ b ≤ 1 and 0 ≤ c ≤ 2. A father with label (b,c) has:</p>
+<table width="100%">
+<tr>
+<td valign="top" width="10%"></td>
+<td>a first son with label (0,b)</td>
+</tr>
+<tr>
+<td valign="top"></td>
+<td>zero or more middle sons with label (0,2)</td>
+</tr>
+<tr>
+<td valign="top"></td>
+<td>a last son with label (1,c),</td>
+</tr>
+</table>
+i.e. distinct labels that satisfy stated inequalities.
+<table width="100%">
+<tr>
+<td valign="top" width="50%">Plataanstraat 5</td>
+<td>21 April 1980</td>
+</tr>
+<tr>
+<td valign="top">5671 AL NUENEN</td>
+<td>prof.dr.Edsger W.Dijkstra</td>
+</tr>
+<tr>
+<td valign="top">The Netherlands</td>
+<td>Burroughs Research Fellow</td>
+</tr>
+</table>
+<hr>
+<p class="noindent"><font size="-1">Transcribed by Martin P.M. van der Burgt<br>
+Last revision 2015-03-05 .</font></p>
+<p>&nbsp;</p>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

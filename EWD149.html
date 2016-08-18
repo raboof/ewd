@@ -23,1104 +23,712 @@
   </div>
   <h1>Documentatie over de communicatie apparatuur aan de EL X8. (Vervanging van EWD140)</h1>
   <div class='body'>
-<P class="noindent">0. <U>Inleiding</U></P>
-<P class=ind >Er is voorzien in een maximum van 48 zg. Apparaten, genummerd van 0 t/m 47.</P>
-<P class=noindent >Ze vallen uiteen in twee groepen:</P>
+<p class="noindent">0. <u>Inleiding</u></p>
+<p class="ind">Er is voorzien in een maximum van 48 zg. Apparaten, genummerd van 0 t/m 47.</p>
+<p class="noindent">Ze vallen uiteen in twee groepen:</p>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="8%">&nbsp;</td>
-    <td width="22%"><span class="ind">nr.0 t/m 31:</span></td>
-    <td width="70%"><span class="ind">de echte apparaten</span></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><span class="ind">nr.32 t/m 47:</span></td>
-    <td><span class="ind">de administratieve apparaten.</span></td>
-  </tr>
+<tr>
+<td width="8%">&nbsp;</td>
+<td width="22%"><span class="ind">nr.0 t/m 31:</span></td>
+<td width="70%"><span class="ind">de echte apparaten</span></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td><span class="ind">nr.32 t/m 47:</span></td>
+<td><span class="ind">de administratieve apparaten.</span></td>
+</tr>
 </table>
-<P class=noindent >De administratieve apparaten verrichten parallel aan de basismachine
-  zekere handelingen (zoals &ldquo;tandenpoetsen&rdquo; en
-  &ldquo;foutafhandeling&rdquo;); deze apparaten hebben een vast
-  nummer, dat niet installatie-afhankelijk is.
-  De echte apparaten in een specifieke installatie ontlenen hun nummer aan
-  de plaats in de communicatiebekabeling; deze apparaatnummers zijn dus
-  wel installatie-afhankelijk, kunnen zelfs gewijzigd moeten worden bij
-  heropstelling.</P>
-<P class="noindent"><u>1. Communicatie opdrachten.</U></P>
-<P class=ind>Met elk apparaat zijn drie flipflops geassocieerd.</P>
+<p class="noindent">De administratieve apparaten verrichten parallel aan de basismachine zekere handelingen (zoals “tandenpoetsen” en “foutafhandeling”); deze apparaten hebben een vast nummer, dat niet installatie-afhankelijk is. De echte apparaten in een specifieke installatie ontlenen hun nummer aan de plaats in de communicatiebekabeling; deze apparaatnummers zijn dus wel installatie-afhankelijk, kunnen zelfs gewijzigd moeten worden bij heropstelling.</p>
+<p class="noindent"><u>1. Communicatie opdrachten.</u></p>
+<p class="ind">Met elk apparaat zijn drie flipflops geassocieerd.</p>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><span class="ind">AF</span></td>
-    <td><span class="ind">( = actie Flipflop)</span></td>
-  </tr>
-  <tr>
-    <td><span class="ind">IF</span></td>
-    <td><span class="ind">( = Ingreep Flipflop)</span></td>
-  </tr>
-  <tr>
-    <td><span class="ind">LVIF</span></td>
-    <td><span class="ind">(= Luistervergunning Ingreep Flipflop).</span></td>
-  </tr>
+<tr>
+<td><span class="ind">AF</span></td>
+<td><span class="ind">( = actie Flipflop)</span></td>
+</tr>
+<tr>
+<td><span class="ind">IF</span></td>
+<td><span class="ind">( = Ingreep Flipflop)</span></td>
+</tr>
+<tr>
+<td><span class="ind">LVIF</span></td>
+<td><span class="ind">(= Luistervergunning Ingreep Flipflop).</span></td>
+</tr>
 </table>
-<P class=ind>Zij worden beschouwd als booleans; als hun waarde op bits wordt
-  afgebeeld, dan wordt <U>true</U> door 1 en <U>false</U> door 0 gerepresenteerd, zodat de logische vermenigvuldiging de
-<U>and</U>-functie oplevert.</P>
-<P class="noindent"><U>1.1. Woordsgewijze uitleesopdrachten.</U></p>
-<P class=ind>Het opdrachtenrepertoire van de X8 bevat de mogelijkheid het 1ste (2de of 3de) IF- of LVIF-woord uit te lezen.
-Tot nu toe is alleen de layout van de 1ste woorden beslist, dwz. de wijze, waarop de bitposities in dit woord aan de apparaten 
-zijn toegevoegd:</p>
+<p class="ind">Zij worden beschouwd als booleans; als hun waarde op bits wordt afgebeeld, dan wordt <u>true</u> door 1 en <u>false</u> door 0 gerepresenteerd, zodat de logische vermenigvuldiging de <u>and</u>-functie oplevert.</p>
+<p class="noindent"><u>1.1. Woordsgewijze uitleesopdrachten.</u></p>
+<p class="ind">Het opdrachtenrepertoire van de X8 bevat de mogelijkheid het 1ste (2de of 3de) IF- of LVIF-woord uit te lezen. Tot nu toe is alleen de layout van de 1ste woorden beslist, dwz. de wijze, waarop de bitposities in dit woord aan de apparaten zijn toegevoegd:</p>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><span class="ind">d26</span></td>
-    <td><span class="ind">= permanent 0 (dit is het tekenbit)</span></td>
-  </tr>
-  <tr>
-    <td><span class="ind">d25</span></td>
-    <td><span class="ind">= toegevoegd aan apparaat nr. 39</span></td>
-  </tr>
-  <tr>
-    <td>&nbsp;&nbsp;&nbsp;:</td>
-    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;:</td>
-  </tr>
-  <tr>
-    <td><span class="ind">d18</span></td>
-    <td><span class="ind">= toegevoegd aan apparaat nr. 32</span></td>
-  </tr>
-  <tr>
-    <td><span class="ind">d17</span></td>
-    <td><span class="ind">= toegevoegd aan apparaat nr. &nbsp;&nbsp;0</span></td>
-  </tr>
-  <tr>
-    <td>&nbsp;&nbsp;&nbsp;:</td>
-    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
-  </tr>
-  <tr>
-    <td><span class="ind">d0</span></td>
-    <td><span class="ind"> = toegevoegd aan apparaat nr. 17</span></td>
-  </tr>
+<tr>
+<td><span class="ind">d26</span></td>
+<td><span class="ind">= permanent 0 (dit is het tekenbit)</span></td>
+</tr>
+<tr>
+<td><span class="ind">d25</span></td>
+<td><span class="ind">= toegevoegd aan apparaat nr. 39</span></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;:</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;:</td>
+</tr>
+<tr>
+<td><span class="ind">d18</span></td>
+<td><span class="ind">= toegevoegd aan apparaat nr. 32</span></td>
+</tr>
+<tr>
+<td><span class="ind">d17</span></td>
+<td><span class="ind">= toegevoegd aan apparaat nr. &nbsp;&nbsp;0</span></td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;:</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</td>
+</tr>
+<tr>
+<td><span class="ind">d0</span></td>
+<td><span class="ind">= toegevoegd aan apparaat nr. 17</span></td>
+</tr>
 </table>
-<P class=ind>Bij de woordsgewijze uitleesopdrachten specificeerd men</p>
-<P class=noindent>1) welk register in de uitlezing betrokken is; hier heeft men de keus tussen de registers A en S </p>
-<P class=noindent>2) welk type flipflops uitegelezen moeten worden; hier heeft men de keus tussen de IF's en de LVIF's </p>
-<P class=noindent>3) de keus tussen "schoon in" en "logische vermenigvuldiging"; in het geval
-  "schoon in" geldt het flipflopwoord zelf als het resultaat, dat bij <u>non</u>-U in het 
-  geselecteerde register verschijnt, in het geval van "logische vermenigvuldiging"  
-  geldt het logische product van het flipflopwoord en de oorspronkelijke inhoud 
-  van het geselecteerde register als het resultaat dat bij <u>non</u>-U in het geselecteerde
-  register verschijnt  </p>
-<P class=noindent>4) 1ste, 2de of 3de flipflopwoord. </p>
-<P class=ind>De layout van deze opdrachten is als volgt:
-<table> 
-<tr><td>d26 t/m d21</td><td> = 110 110</td>
-  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-  <td>A-register</td></tr>  
-<tr><td>&nbsp; </td><td> = 111 110</td>
-  <td>&nbsp;</td>
-  <td>S-register</td></tr>  
-<tr><td>d14 t/m d9</td><td> = 111 101</td>
-  <td>&nbsp;</td>
-  <td>IF</td></tr>  
-<tr><td>&nbsp; </td><td> = 111 110</td>
-  <td>&nbsp;</td>
-  <td>LVIF</td></tr>  
-<tr><td>d8 t/m d6</td><td> = 000</td>
-  <td>&nbsp;</td>
-  <td>schoon in</td></tr>  
-<tr><td>&nbsp; </td><td> = 001</td>
-  <td>&nbsp;</td>
-  <td>logische vermenigvuldiging</td></tr>  
-<tr><td>d5 t/m d0</td><td> = 000 000</td>
-  <td>&nbsp;</td>
-  <td>1ste flipflopwoord</td></tr>  
-<tr><td>&nbsp; </td><td> = 000 001</td>
-  <td>&nbsp;</td>
-  <td>2de flipflopwoord</td></tr>  
-<tr><td>&nbsp; </td><td> = 000 010</td>
-  <td>&nbsp;</td>
-  <td>3de flipflopwoord</td></tr>  
+<p class="ind">Bij de woordsgewijze uitleesopdrachten specificeerd men</p>
+<p class="noindent">1) welk register in de uitlezing betrokken is; hier heeft men de keus tussen de registers A en S</p>
+<p class="noindent">2) welk type flipflops uitegelezen moeten worden; hier heeft men de keus tussen de IF's en de LVIF's</p>
+<p class="noindent">3) de keus tussen "schoon in" en "logische vermenigvuldiging"; in het geval "schoon in" geldt het flipflopwoord zelf als het resultaat, dat bij <u>non</u>-U in het geselecteerde register verschijnt, in het geval van "logische vermenigvuldiging" geldt het logische product van het flipflopwoord en de oorspronkelijke inhoud van het geselecteerde register als het resultaat dat bij <u>non</u>-U in het geselecteerde register verschijnt</p>
+<p class="noindent">4) 1ste, 2de of 3de flipflopwoord.</p>
+<p class="ind">De layout van deze opdrachten is als volgt:</p>
+<table>
+<tr>
+<td>d26 t/m d21</td>
+<td>= 110 110</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td>A-register</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= 111 110</td>
+<td>&nbsp;</td>
+<td>S-register</td>
+</tr>
+<tr>
+<td>d14 t/m d9</td>
+<td>= 111 101</td>
+<td>&nbsp;</td>
+<td>IF</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= 111 110</td>
+<td>&nbsp;</td>
+<td>LVIF</td>
+</tr>
+<tr>
+<td>d8 t/m d6</td>
+<td>= 000</td>
+<td>&nbsp;</td>
+<td>schoon in</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= 001</td>
+<td>&nbsp;</td>
+<td>logische vermenigvuldiging</td>
+</tr>
+<tr>
+<td>d5 t/m d0</td>
+<td>= 000 000</td>
+<td>&nbsp;</td>
+<td>1ste flipflopwoord</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= 000 001</td>
+<td>&nbsp;</td>
+<td>2de flipflopwoord</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= 000 010</td>
+<td>&nbsp;</td>
+<td>3de flipflopwoord</td>
+</tr>
 </table>
-<p class="noindent">Van de adresvarianten is alleen de B-modificatie toegestaan, PZE en UYN werken 
-normaal. <U>NB.</u> De AF's zijn niet uitleesbaar.   </p>
-<P class="noindent"><u>1.2. Bitsgewijze zetopdrachten </u> </p>
-<P class=ind>De flipflops kunnen individueel gezet worden. Hierbij specificeert men</p>
-<P class=noindent>1) of de nieuwe waarde <u>true</u> of <u>false</u> (1 of 0) moet zijn  </p>
-<P class=noindent>2) op welk type flipflop de opdracht betrekking heeft; hier heeft men de keuze 
-  tussen AF, IF en LVIF </p>
-<P class=noindent>3) het apparaatnummer (dwz. het nummer van het apparaat, waarmee deze flipflop 
-  geassocieerd is.) </p> 
-<P class=ind>De layout van deze opdrachten is: 
-<table> 
-<tr><td width="112">d26 t/m d21</td><td width="89"> = 110 110</td>
-  <td width="63">&nbsp;</td>
-  <td width="319">zet flipflop <u>false</u> (=0)</td></tr>  
-<tr><td>&nbsp; </td><td> = 111 110</td>
-  <td>&nbsp;</td>
-  <td>zet flipflop <u>true</u> (=1)</td></tr>  
-<tr><td>d14 t/m d9</td><td> = 111 000</td>
-  <td>&nbsp;</td>
-  <td>AF</td></tr>  
-<tr><td>&nbsp; </td><td> = 111 001</td>
-  <td>&nbsp;</td>
-  <td>IF</td></tr>  
-<tr><td>&nbsp; </td><td> = 111 010</td>
-  <td>&nbsp;</td>
-  <td>LVIF</td></tr>  
-<tr><td>d8 t/m d6</td><td> = 000</td>
-  <td>&nbsp;</td>
-  <td>&nbsp; </td></tr>  
-<tr><td>&nbsp; </td><td> = 001</td>
-  <td>&nbsp;</td>
-  <td>logische vermenigvuldiging</td></tr>  
-<tr><td valign="top">d5 t/m d0</td><td valign="top"> = 000 000</td>
-  <td valign="top">&nbsp;</td>
-  <td valign="top">binaire representatie van het apparaatnummer</td></tr>  
+<p class="noindent">Van de adresvarianten is alleen de B-modificatie toegestaan, PZE en UYN werken normaal. <u>NB.</u> De AF's zijn niet uitleesbaar.</p>
+<p class="noindent"><u>1.2. Bitsgewijze zetopdrachten</u></p>
+<p class="ind">De flipflops kunnen individueel gezet worden. Hierbij specificeert men</p>
+<p class="noindent">1) of de nieuwe waarde <u>true</u> of <u>false</u> (1 of 0) moet zijn</p>
+<p class="noindent">2) op welk type flipflop de opdracht betrekking heeft; hier heeft men de keuze tussen AF, IF en LVIF</p>
+<p class="noindent">3) het apparaatnummer (dwz. het nummer van het apparaat, waarmee deze flipflop geassocieerd is.)</p>
+<p class="ind">De layout van deze opdrachten is:</p>
+<table>
+<tr>
+<td width="112">d26 t/m d21</td>
+<td width="89">= 110 110</td>
+<td width="63">&nbsp;</td>
+<td width="319">zet flipflop <u>false</u> (=0)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= 111 110</td>
+<td>&nbsp;</td>
+<td>zet flipflop <u>true</u> (=1)</td>
+</tr>
+<tr>
+<td>d14 t/m d9</td>
+<td>= 111 000</td>
+<td>&nbsp;</td>
+<td>AF</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= 111 001</td>
+<td>&nbsp;</td>
+<td>IF</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= 111 010</td>
+<td>&nbsp;</td>
+<td>LVIF</td>
+</tr>
+<tr>
+<td>d8 t/m d6</td>
+<td>= 000</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= 001</td>
+<td>&nbsp;</td>
+<td>logische vermenigvuldiging</td>
+</tr>
+<tr>
+<td valign="top">d5 t/m d0</td>
+<td valign="top">= 000 000</td>
+<td valign="top">&nbsp;</td>
+<td valign="top">binaire representatie van het apparaatnummer</td>
+</tr>
 </table>
-<P class=ind>Van de adresvarianten is alleen B toegestaan, van de conditievolging alleen
-Y en N; U, P, Z, E zijn verboden. </p>
-<P class=ind>De flipflop IV (Ingreep Vergunning, zie onder) kan gezet worden door de
-opdrachten "maak doof" resp. "maak horend", met de coderingen:
-<table> 
-<tr><td width="106">d26 t/m d21</td><td width="157"> = 110 110</td>
-  <td width="74">&nbsp;</td>
-  <td width="246">IV:= <u>false</u> (=0, maak doof)</td></tr>  
-<tr><td>&nbsp; </td><td> = 111 110</td>
-  <td>&nbsp;</td>
-  <td>IV:= <u>true</u> (=1, maak horend)</td></tr>  
-<tr><td>d14 t/m d12</td><td> = 110</td>
-  <td>  
-  <td>&nbsp; </tr>  
-<tr><td>d11 t/m d0</td><td> = 000 000 000 000</td>
-  <td>  
-  <td>&nbsp; </tr>  
-</table> 
-Hierbij zijn Y en N de enige toegelaten varianten.</p>
-<P class="noindent"><u>2. Betekenis van IF, LVIF, IV en AF. </u> </p>
-<P class=ind>De IF van een apparaat fungeert ten opzichte van de basismachine als een 
-soort attentiesignaal; wij zullen later zien onder welke omstandigheden de 
-voltooiing van een zg. startopdracht voor een communicatieapparaat de assignment 
-"IF := <u>true</u> (vanzelfsprekend is hier de met het apparaat geassocieerde IF bedoeld) 
-als neveneffect heeft. </p> 
-<P class=ind>De primaire reactie van de basismachine op zo'n attentiesignaal is de zg.
-ingreep, die plaats vindt als:</p>
-<P class=noindent>1) IV (dwz. machine horend) <u>and</u> </p>
-<P class=noindent>2) voor ten minste 1 apparaat geldt "LVIF <u>and</u> IF".   </p>
-<P class=ind>Door het zetten van de LVIF's kan de basismachine reguleren, van welke
-apparaten het ingreepmechanisme al dan geen nota neemt; door het zetten van IV (bv. 
-maak doof) kan de basismachine het optreden van een ingreep generaal verhinderen.</p>
-<P class=noindent>Opm. Wanneer de opdracht (hetzij maak horend, hetzij een herstellende sprong) 
-  de overgang van doof naar horend bewerkstelligt, zal onmiddelijk na deze opdracht
-  nog geen ingreep optreden, ook al geldt allang voor een of meer appaarten 
-  "LVIF <u>and</u> IF". Na een effectief horend makende opdracht wordt dus gegarandeerd 
-  de volgende opdracht nog aansluitend uitgevoerd, voordat de eerste ingreep kan 
-  optreden. Daarentegen is elke overgang van horend naar doof ten aanzien van de 
-  ingreeponderdrukking onmiddelijk effectief. </p> 
-<P class=ind>De uitvoering van de ingreep bestaat hieruit, dat</p>
-<P class=noindent>1) in plaats van de volgende opdracht de opdracht op adres 24 wordt uitgevoerd 
-  als operand van een DO-opdracht (dwz. de ophoging van OT wordt onderdrukt, omdat 
-  deze opdracht immers niet onder controle van OT is aangehaald) </p>
-<P class=noindent>2) aan het einde van de ingreep wordt de machine doof gemaakt. </p>
-<P class=ind>Het normale gebruik is, dat de uiteindelijke ingreepopdracht een normale
-(dwz. niet stapelende) subroutinesprong is. In de link, die daarbij wordt weggeschreven, 
-wordt dus nog IV = <u>true</u> genoteerd; het adres in deze link wijst naar 
-de opdracht uit het onderbroken programma, die net niet meer aan de beurt kwam.</p> 
-<P class=ind>Opm. De doofmaking als onderdeel van de ingreep vindt plaats aan het einde;
-zou de uiteindelijke ingreepopdracht (onwaarschijnlijkerwijze) een opdracht blijken te zijn, die de machine horend maakt, 
-dan worden er aan het einde van 
-de ingreep twee tegenstrijdige bevelen gegeven ten aanzien van de zetting van IV; 
-de uiteindelijke waarde van IV moet dan ook als onbepaald beschouwd worden.</p>
-<P class=ind>In het begin van het ingreepprogramma kan de basismachine &mdash;zie 1.1&mdash; door inspectie van het logische product van IF&mdash; en LVIF-woord onderzoeken, welke IF&rsquo;s voor deze ingreep verantwoordelijk kunnen zijn geweest.</p> 
-<P class=ind>Wat de IF's zijn voor de basismachine, zijn de AF's voor Charon: wanneer
-Charon voor een apparaat geen startopdracht (zie onder) onder behandeling heeft, 
-legt Charon "AF = <u>true</u>" uit als de aanwezigheid van tenminste n nieuwe startopdracht 
-voor dit apparaat.</p> 
-<P class="noindent"><u>3. Vaste toekenning van geheugenplaatsen aan apparaten.</u></p>
-<P class=ind>De AF fungeert als attentiesignaal vanuit de basismachine ten behoeve van
-een apparaat, de IF fungeert als attentiesignaal vanuit Charon ten behoeve van 
-de basismachine. De feitelijke informatieuitwisseling tussen basismachine en Charon 
-vindt plaats via het kerngeheugen, dat zowel voor de basismachine als voor Charon 
-toegankelijk is (met prioriteit voor Charon).</p> 
-<P class=ind>Voor dit doel zijn voor elk apparaat vier opeenvolgende geheugenadressen gereserveerd,
-te beginnen bij adres 
+<p class="ind">Van de adresvarianten is alleen B toegestaan, van de conditievolging alleen Y en N; U, P, Z, E zijn verboden.</p>
+<p class="ind">De flipflop IV (Ingreep Vergunning, zie onder) kan gezet worden door de opdrachten "maak doof" resp. "maak horend", met de coderingen:</p>
+<table>
+<tr>
+<td width="106">d26 t/m d21</td>
+<td width="157">= 110 110</td>
+<td width="74">&nbsp;</td>
+<td width="246">IV:= <u>false</u> (=0, maak doof)</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>= 111 110</td>
+<td>&nbsp;</td>
+<td>IV:= <u>true</u> (=1, maak horend)</td>
+</tr>
+<tr>
+<td>d14 t/m d12</td>
+<td>= 110</td>
+<td></td>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td>d11 t/m d0</td>
+<td>= 000 000 000 000</td>
+<td></td>
+<td>&nbsp;</td>
+</tr>
+</table>
+Hierbij zijn Y en N de enige toegelaten varianten.
+<p class="noindent"><u>2. Betekenis van IF, LVIF, IV en AF.</u></p>
+<p class="ind">De IF van een apparaat fungeert ten opzichte van de basismachine als een soort attentiesignaal; wij zullen later zien onder welke omstandigheden de voltooiing van een zg. startopdracht voor een communicatieapparaat de assignment "IF := <u>true</u> (vanzelfsprekend is hier de met het apparaat geassocieerde IF bedoeld) als neveneffect heeft.</p>
+<p class="ind">De primaire reactie van de basismachine op zo'n attentiesignaal is de zg. ingreep, die plaats vindt als:</p>
+<p class="noindent">1) IV (dwz. machine horend) <u>and</u></p>
+<p class="noindent">2) voor ten minste 1 apparaat geldt "LVIF <u>and</u> IF".</p>
+<p class="ind">Door het zetten van de LVIF's kan de basismachine reguleren, van welke apparaten het ingreepmechanisme al dan geen nota neemt; door het zetten van IV (bv. maak doof) kan de basismachine het optreden van een ingreep generaal verhinderen.</p>
+<p class="noindent">Opm. Wanneer de opdracht (hetzij maak horend, hetzij een herstellende sprong) de overgang van doof naar horend bewerkstelligt, zal onmiddelijk na deze opdracht nog geen ingreep optreden, ook al geldt allang voor een of meer appaarten "LVIF <u>and</u> IF". Na een effectief horend makende opdracht wordt dus gegarandeerd de volgende opdracht nog aansluitend uitgevoerd, voordat de eerste ingreep kan optreden. Daarentegen is elke overgang van horend naar doof ten aanzien van de ingreeponderdrukking onmiddelijk effectief.</p>
+<p class="ind">De uitvoering van de ingreep bestaat hieruit, dat</p>
+<p class="noindent">1) in plaats van de volgende opdracht de opdracht op adres 24 wordt uitgevoerd als operand van een DO-opdracht (dwz. de ophoging van OT wordt onderdrukt, omdat deze opdracht immers niet onder controle van OT is aangehaald)</p>
+<p class="noindent">2) aan het einde van de ingreep wordt de machine doof gemaakt.</p>
+<p class="ind">Het normale gebruik is, dat de uiteindelijke ingreepopdracht een normale (dwz. niet stapelende) subroutinesprong is. In de link, die daarbij wordt weggeschreven, wordt dus nog IV = <u>true</u> genoteerd; het adres in deze link wijst naar de opdracht uit het onderbroken programma, die net niet meer aan de beurt kwam.</p>
+<p class="ind">Opm. De doofmaking als onderdeel van de ingreep vindt plaats aan het einde; zou de uiteindelijke ingreepopdracht (onwaarschijnlijkerwijze) een opdracht blijken te zijn, die de machine horend maakt, dan worden er aan het einde van de ingreep twee tegenstrijdige bevelen gegeven ten aanzien van de zetting van IV; de uiteindelijke waarde van IV moet dan ook als onbepaald beschouwd worden.</p>
+<p class="ind">In het begin van het ingreepprogramma kan de basismachine —zie 1.1— door inspectie van het logische product van IF— en LVIF-woord onderzoeken, welke IF’s voor deze ingreep verantwoordelijk kunnen zijn geweest.</p>
+<p class="ind">Wat de IF's zijn voor de basismachine, zijn de AF's voor Charon: wanneer Charon voor een apparaat geen startopdracht (zie onder) onder behandeling heeft, legt Charon "AF = <u>true</u>" uit als de aanwezigheid van tenminste n nieuwe startopdracht voor dit apparaat.</p>
+<p class="noindent"><u>3. Vaste toekenning van geheugenplaatsen aan apparaten.</u></p>
+<p class="ind">De AF fungeert als attentiesignaal vanuit de basismachine ten behoeve van een apparaat, de IF fungeert als attentiesignaal vanuit Charon ten behoeve van de basismachine. De feitelijke informatieuitwisseling tussen basismachine en Charon vindt plaats via het kerngeheugen, dat zowel voor de basismachine als voor Charon toegankelijk is (met prioriteit voor Charon).</p>
+<p class="ind">Voor dit doel zijn voor elk apparaat vier opeenvolgende geheugenadressen gereserveerd, te beginnen bij adres</p>
 <div style=" text-indent: 4cm; margin-bottom: 0cm;">64 + 4 * apparaatnummer.</div>
-(Dit loopt dus van adres 64 t/m adres 255.) In het volgende zullen deze vier 
-woorden worden aangeduid met AR0, AR1, AR2 en AR3. </p> 
-<p class=ind >In het volgende zullen van een woord de 9 meest significante bits enerzijds 
-en de 18 minst significante bits anderzijds vaak als onafhankelijke bestanddelen 
-beschouwd worden; het stuk d26 t/m d18 heet dan "het tellingdeel", het stuk 
-van d17 t/m d0 heet dan "het adresdeel". Als wij spreken over de numerieke waarden 
-van deze delen, dan bedoelen we de non-negatieve getallen met deze 9, resp. 18 
-bits als binaire representatie. </p>
-<p class=ind >Vooruitlopend geven wij de algemene functie van de vier woorden, zij het, 
-dat we slechts een eerste aanduiding van de betekenis kunnen geven.</p>
-<p class=noindent >Opm. Deze betekenissen zijn niet bij alle apparaten van toepassing; uitzonderingen 
-  zullen bij de apparaatsgewijze behandeling vermeld worden.</p>
-<p class="noindent"><table>
-<tr><td width="36" valign="top">AR0:</td>
-  <td width="21" valign="top">&nbsp;</td>
-  <td width="88" valign="top">tellingdeel</td>
-  <td width="20" valign="top">:</td>
-  <td width="414" valign="top">werkruimte Charon, in het bijzonder gereserveerd voor de OK-status</td></tr>
-<tr><td valign="top">&nbsp; </td>
-  <td valign="top">&nbsp;</td>
-  <td valign="top">adresdeel:</td>
-  <td valign="top">&nbsp;</td>
-  <td valign="top">label van de heersende schakel</td></tr>
-<tr><td valign="top">AR1:</td>
-  <td valign="top">&nbsp;</td>
-  <td valign="top">tellingdeel</td>
-  <td valign="top">:</td>
-  <td valign="top"><u>if</u> IFT < 0 <U>then</u> IFT + 512 <u>else</u> IFT</td></tr>
-<tr><td valign="top">&nbsp; </td>
-  <td valign="top">&nbsp;</td>
-  <td valign="top">adresdeel</td>
-  <td valign="top">:</td>
-  <td valign="top">irrelevant, mits &ne; 0 (wordt uit compalibiliteitsoverwegingen met de X2 door Charon niet gebruikt)</td></tr>
-<tr><td valign="top">AR2:</td>
-  <td valign="top">&nbsp;</td>
-  <td valign="top">tellingdeel</td>
-  <td valign="top">:</td>
-  <td valign="top">=AFT</td></tr>
-<tr><td valign="top">&nbsp; </td>
-  <td valign="top">&nbsp;</td>
-  <td valign="top">adresdeel</td>
-  <td valign="top">:</td>
-  <td valign="top">meestal werkruimte voor Charon</td></tr>
-<tr><td valign="top">AR3:</td>
-  <td valign="top">&nbsp;</td>
-  <td colspan="3" valign="top">Werkruimte voor Charon (vaak gereserveerd voor het zg. "lopende codewoord")</td>
-  </tr>
-</table></p>
+(Dit loopt dus van adres 64 t/m adres 255.) In het volgende zullen deze vier woorden worden aangeduid met AR0, AR1, AR2 en AR3.
+<p class="ind">In het volgende zullen van een woord de 9 meest significante bits enerzijds en de 18 minst significante bits anderzijds vaak als onafhankelijke bestanddelen beschouwd worden; het stuk d26 t/m d18 heet dan "het tellingdeel", het stuk van d17 t/m d0 heet dan "het adresdeel". Als wij spreken over de numerieke waarden van deze delen, dan bedoelen we de non-negatieve getallen met deze 9, resp. 18 bits als binaire representatie.</p>
+<p class="ind">Vooruitlopend geven wij de algemene functie van de vier woorden, zij het, dat we slechts een eerste aanduiding van de betekenis kunnen geven.</p>
+<p class="noindent">Opm. Deze betekenissen zijn niet bij alle apparaten van toepassing; uitzonderingen zullen bij de apparaatsgewijze behandeling vermeld worden.</p>
+<p class="noindent"></p>
+<table>
+<tr>
+<td width="36" valign="top">AR0:</td>
+<td width="21" valign="top">&nbsp;</td>
+<td width="88" valign="top">tellingdeel</td>
+<td width="20" valign="top">:</td>
+<td width="414" valign="top">werkruimte Charon, in het bijzonder gereserveerd voor de OK-status</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;</td>
+<td valign="top">&nbsp;</td>
+<td valign="top">adresdeel:</td>
+<td valign="top">&nbsp;</td>
+<td valign="top">label van de heersende schakel</td>
+</tr>
+<tr>
+<td valign="top">AR1:</td>
+<td valign="top">&nbsp;</td>
+<td valign="top">tellingdeel</td>
+<td valign="top">:</td>
+<td valign="top"><u>if</u> IFT &lt; 0 <u>then</u> IFT + 512 <u>else</u> IFT</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;</td>
+<td valign="top">&nbsp;</td>
+<td valign="top">adresdeel</td>
+<td valign="top">:</td>
+<td valign="top">irrelevant, mits ≠ 0 (wordt uit compalibiliteitsoverwegingen met de X2 door Charon niet gebruikt)</td>
+</tr>
+<tr>
+<td valign="top">AR2:</td>
+<td valign="top">&nbsp;</td>
+<td valign="top">tellingdeel</td>
+<td valign="top">:</td>
+<td valign="top">=AFT</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;</td>
+<td valign="top">&nbsp;</td>
+<td valign="top">adresdeel</td>
+<td valign="top">:</td>
+<td valign="top">meestal werkruimte voor Charon</td>
+</tr>
+<tr>
+<td valign="top">AR3:</td>
+<td valign="top">&nbsp;</td>
+<td colspan="3" valign="top">Werkruimte voor Charon (vaak gereserveerd voor het zg. "lopende codewoord")</td>
+</tr>
+</table>
 <p class="noindent"><u>4. Ketens van startopdrachten</u></p>
 <p class="noindent"><u>4.1. Layout van de startopdracht.</u></p>
-<p class=ind >Per apparaat kan men een keten van startopdrachten "aanhangig maken". 
-Elke startopdracht omdat ze geketend kunnen worden ook wel "schakel" genoemd 
-beslaat een aantal opeenvolgende geheugenplaatsen. Onder de "label van een schakel" 
-verstaat men het adres van het tweede woord van deze schakel. </p>
-<p class=ind >De algemene layout van een startopdracht begint als volgt: </p>
+<p class="ind">Per apparaat kan men een keten van startopdrachten "aanhangig maken". Elke startopdracht omdat ze geketend kunnen worden ook wel "schakel" genoemd beslaat een aantal opeenvolgende geheugenplaatsen. Onder de "label van een schakel" verstaat men het adres van het tweede woord van deze schakel.</p>
+<p class="ind">De algemene layout van een startopdracht begint als volgt:</p>
 <table>
-<tr><td width="86" valign="top">label[-1]:</td>
-  <td width="12" valign="top">&nbsp;</td>
-  <td colspan="3" valign="top">Slotwoord. Vr de feitelijke uitvoering van deze startopdracht, is de 
-    inhoud van dit woord voor Charon irrelevant; na afloop van de uitvoering 
-    heeft Charon in dit woord verslaglegging gedaan over de afloop 
-    van de startopdracht.</td>
-  </tr> 
 <tr>
-  <td valign="top">label[ 0]:</td>
-  <td valign="top">&nbsp;</td>
-  <td colspan="3" valign="top">bij de laatste schakel van een keten voor Charon irrelevant;</td>
-  </tr>
-<tr><td valign="top">&nbsp; </td>
-  <td valign="top">&nbsp;</td>
-  <td colspan="3" valign="top">bij een schakel, die niet de laatste van de keten is, eist Charon</td>
-  </tr>                                                                    
-<tr><td valign="top">&nbsp; </td>
-  <td valign="top">&nbsp;</td>
-  <td width="41" valign="top">&nbsp;</td>
-  <td width="87" valign="top"> tellingdeel</td>
-  <td width="537" valign="top">: allemaal nullen</td>
-</tr>
-<tr><td valign="top">&nbsp; </td>
-  <td valign="top">&nbsp;</td>
-  <td valign="top">&nbsp;</td>
-  <td valign="top"> adresdeel</td>
-  <td valign="top">: label van de volgende schakel.</td>
+<td width="86" valign="top">label[-1]:</td>
+<td width="12" valign="top">&nbsp;</td>
+<td colspan="3" valign="top">Slotwoord. Vr de feitelijke uitvoering van deze startopdracht, is de inhoud van dit woord voor Charon irrelevant; na afloop van de uitvoering heeft Charon in dit woord verslaglegging gedaan over de afloop van de startopdracht.</td>
 </tr>
 <tr>
-  <td valign="top">label[ 1]:</td>
-  <td valign="top">&nbsp;</td>
-  <td colspan="3" valign="top">1ste van een rij van 1 of meer codewoorden ter beschrijving van de
-    startopdracht; aantal en layout hiervan is apparaat-afhankelijk</td>
-  </tr>
-</table></p>
-<p class=ind >De basismachine moet de startopdracht klaarmaken in een vorm, die specifiek 
-is voor het apparaat in kwestie. De startopdracht is niet positioneel gebonden 
-aan het apparaat, noch aan het gebied van het kerngeheugen, waarop de feitelijke 
-informatietransport betrekking zal hebben. Omdat voor de labels altijd 18 bits 
-gereserveerd zijn, is er geen hardware restrictie aan hun plaats opgelegd. </p>
+<td valign="top">label[ 0]:</td>
+<td valign="top">&nbsp;</td>
+<td colspan="3" valign="top">bij de laatste schakel van een keten voor Charon irrelevant;</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;</td>
+<td valign="top">&nbsp;</td>
+<td colspan="3" valign="top">bij een schakel, die niet de laatste van de keten is, eist Charon</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;</td>
+<td valign="top">&nbsp;</td>
+<td width="41" valign="top">&nbsp;</td>
+<td width="87" valign="top">tellingdeel</td>
+<td width="537" valign="top">: allemaal nullen</td>
+</tr>
+<tr>
+<td valign="top">&nbsp;</td>
+<td valign="top">&nbsp;</td>
+<td valign="top">&nbsp;</td>
+<td valign="top">adresdeel</td>
+<td valign="top">: label van de volgende schakel.</td>
+</tr>
+<tr>
+<td valign="top">label[ 1]:</td>
+<td valign="top">&nbsp;</td>
+<td colspan="3" valign="top">1ste van een rij van 1 of meer codewoorden ter beschrijving van de startopdracht; aantal en layout hiervan is apparaat-afhankelijk</td>
+</tr>
+</table>
+<p class="ind">De basismachine moet de startopdracht klaarmaken in een vorm, die specifiek is voor het apparaat in kwestie. De startopdracht is niet positioneel gebonden aan het apparaat, noch aan het gebied van het kerngeheugen, waarop de feitelijke informatietransport betrekking zal hebben. Omdat voor de labels altijd 18 bits gereserveerd zijn, is er geen hardware restrictie aan hun plaats opgelegd.</p>
 <p class="noindent"><u>4.2. Het aanbieden van startopdrachten.</u></p>
-<p class=ind>Deze sectie behandelt hoe in het algemeen startopdrachten moeten worden 
-aangeboden; de opstelling van de startopdracht zelf &mdash;in het bijzonder van de 
-codewoorden&mdash; wordt uitgesteld tot de apparaatgewijze gehandeling. Omdat de 
-regels, die bij het aanbod in acht genomen moeten worden, uiteindelijk hun 
-oorsprong vinden in het gedrag van Charon, zullen wij eerst beschrijven hoe Charon 
-overgaat tot het accepteren van een nieuwe startopdracht. </p>
-<p class="noindent"><u>4.2.1. Charongedrag ten aanzien van AF en AFT.</u></p> 
-<p class=ind>In het volgende zullen wij de activiteiten van Charon kortheidshalve beschrijven 
-alsof Charon niets anders te doen heeft dan het verzorgen van een enkel 
-apparaat: het feit dat Charon meer apparaten kan verzorgen betekent dat de hieronder 
-te beschrijven Charon-reacties niet instantaan hoeven plaats te vinden, nl. niet 
-wanneer Charon net even met iets anders nuttigs bezig is. Met "rust" van Charon  
-wordt hieronder bedoeld "rust ten aanzien van dit apparaat". </p>
-<p class=ind>Als Charon geen startopdrachten onder behandeling heeft, zal hij rusten, zolang AF <u>false</u> is. </p>
-<p class=ind>Zodra AF <u>true</u> is, zal Charon dan een startopdracht in behandeing nemen, en 
-wel degene, waarnaar verwezen wordt door het adresdeel van AR0: label van heersende schakel. </p>
-<p class=ind>Aan het eind van de behandeling van de startopdracht zal Charon als 
-ondeelbare handeling 
-<div style=" text-indent: 4cm; margin-bottom: 0cm;">AFT := AFT - 1 (mod 512); <u>if</u> AFT = 0 <u>then</u> AF := <u>false</u></div> 
-uitvoeren. De ondeelbaarheid van de aftrekking wordt gegarandeerd, doordat Charon
-de terugschrijf-halve-cyclus van het kerngeheugen gebruikt om de nieuwe waarde
-van AFT in het adresdeel van AR2 terug te schrijven en doordat het kerngeheugen
-slechts per hele cyclus aan de verschillende processen gegund wordt. Verder wordt  
-als onderdeel van de AFT-behandeling de assignment "AF := <u>false</u>" uitgevoerd, als 
-AFT de waarde = 0 gekregen heeft; anders blijft AF onaangetast. 
-</p>
-<p class=ind>Als de nieuwe waarde van AFT &ne; 0 was &mdash;en AF dus onbeinvoed is gebleven&mdash; zal Charon
-<div style=" text-indent: 4cm; margin-bottom: 0cm;">adresdeel AR0 := M[ adresdeel AR0]</div> 
-uitvoeren, dwz. de label van de volgende schakel tot "label van heersende schakel"
-bevorderen.
-</p><p class=ind>Daarna (zie IFT-behandeling, later) wordt de behandeling van de startopdracht
-voltooid, deze voltooing aan de basismachine teruggemeld en tenslotte gaat Charon 
-over in de uitgangstoestand van deze sectie "geen startopdracht onder behandeling". 
-De vorige is nl. voltooid en de volgende is nog niet in behandeling genomen. 
-</p><p class="noindent"><u>4.2.2. Een enkele schakel voor een passief apparaat.</u> 
-</p><p class=ind>Bij het simpelste gebruik van Charon biedt de basismachine slechts de volgende
-schakel aan, nadat de basismachine (via IFT en IF, zie later) van de voltooiing 
-van de vorige schakel heeft kennisgenomen en Charon dus (ten aanzien van dit apparaat) in  
-rust is. 
-</p><p class=ind>In de aangeboden schakel is de inhoud van "label[0]"label van de volgende 
-schakel- omdat er geen volgende schakel is, irrelevant. </p><p class=ind>De basismachine moet er voor zorgen, dat in het adresdeel van AR0 de label
-van de aangeboden schakel staat &mdash;om Charon in staat te stellen de schakel te vinden&mdash;, 
-moet er voor zorgen, dat AFT = 1 &mdash;om te zorgen, dat Charon na afloop AFT = 0 
-maakt en in de rusttestand overgaat&mdash; en tenslotte moet de basismachine AF op <u>true</u> zetten, opdat Charon metterdaad aan de startopdracht begint. 
-</p><p class="noindent">Opm. De heersende label in het adresdeel van AR0 wordt hierbij niet verstoord; als 
-alle aan te bieden startopdrachten op dezelfde plaats staan, hoeft het tellingdeel 
-van AR0 van te voren slechts n keer ingevuld te worden. 
-</p><p class="noindent"><u>4.2.3. Een keten voor een passief apparaat.</u> 
-</p><p class=ind>Wil men in plaats van een enkele schakel (zie vorige sectie) een keten van
-schakels aan een op dat moment passief apparaat aanbieden, dan moet de basismachine 
-er voor zorgen, dat het adresdeel van AR0 de label van de eerste schakel bevat, 
-dat de volgende schakels netjes aan hun voorganger gehaakt zijn, dat AFT gelijk is  
-aan het aantal schakels &mdash;om er voor te zorgen, dat Charon de keten netjes afwerkt 
-en dan ophoudt&mdash; en tenslotte zet men AF op <u>true</u> opdat Charon metterdaad aan de 
-keten begint. 
-</p><p class="noindent">Opm. In dit geval blijft het adresdeel van AR0, de label van de heersende schakel<span class="ind">&mdash;</span> niet ongewijzigd. </p><p class="noindent"><u>4.2.4. Het aanhaken van een schakel aan een mogelijk nog actief apparaat.</u> 
-</p><p class=ind>Wij zullen nu een methode behandelen om een schakel aan te haken aan een keten
-die mogelijkerwijs nog niet is afgewerkt. Omdat Charon ook op de AFT, de AF 
-en de AR0 zou kunnen opereren, moet dit wel met enige voorzorgen geschieden. 
-</p><p class=ind>We nemen aan dat een zogenaamde vulwijzer "VW" de label van de laatst aangehaakte schakel bevat. 
-Als de nieuwe label volledig is geprepareerd &mdash;label[0] is daarin
-irrelevant&mdash; vervolgt de basismachine 
-<p class=noindent>1) met "M[VW] := label nieuwe schakel" wordt de nieuwe schakel aan de keten  
-  gehaakt (het ingevulde woord bevat in het tellingdeel louter nullen); 
-<p class=noindent>2) met "VW" := label nieuwe schakel" wordt de vulwijzer up to date gemaakt. 
-<p class=noindent>3) met een additieve uitopdracht in de versie "PLUS" wordt AFT met 1 opgehoogd,
-  zodat de hierbij gevormde nieuwe waarde van AFT tevens in een register van de 
-  basismachine verschijnt en geinspecteerd kan worden. Voor de ophoging gebruikt
-  de basismachine een additieve uitopdracht, omdat zodoende gegarandeerd wordt, dat 
-  de ophoging van de basismachine en een mogelijke aflaging door Charon niet met 
-  elkaar op oncontroleerbare (in elk geval ongewenste) wijze met elkaar kunnen 
-  interfereren. 
-<p class=noindent>4) indien de door de PLUS-opdracht in het register van de basismachine opgevangen 
-  nieuwe AFT-waarde = 1 is, dan was de oude AFT-waarde dus = 0 en heeft Charon dus 
-  besloten uit deze keten geen nieuwe startopdracht meer aan te halen; de handeling 
-  onder 1) genoemd heeft geen effect gehad en Charon heeft AF op <u>false</u> gezet. In dit 
-  geval vervolgt de basismachine aldus:
-
+<p class="ind">Deze sectie behandelt hoe in het algemeen startopdrachten moeten worden aangeboden; de opstelling van de startopdracht zelf —in het bijzonder van de codewoorden— wordt uitgesteld tot de apparaatgewijze gehandeling. Omdat de regels, die bij het aanbod in acht genomen moeten worden, uiteindelijk hun oorsprong vinden in het gedrag van Charon, zullen wij eerst beschrijven hoe Charon overgaat tot het accepteren van een nieuwe startopdracht.</p>
+<p class="noindent"><u>4.2.1. Charongedrag ten aanzien van AF en AFT.</u></p>
+<p class="ind">In het volgende zullen wij de activiteiten van Charon kortheidshalve beschrijven alsof Charon niets anders te doen heeft dan het verzorgen van een enkel apparaat: het feit dat Charon meer apparaten kan verzorgen betekent dat de hieronder te beschrijven Charon-reacties niet instantaan hoeven plaats te vinden, nl. niet wanneer Charon net even met iets anders nuttigs bezig is. Met "rust" van Charon wordt hieronder bedoeld "rust ten aanzien van dit apparaat".</p>
+<p class="ind">Als Charon geen startopdrachten onder behandeling heeft, zal hij rusten, zolang AF <u>false</u> is.</p>
+<p class="ind">Zodra AF <u>true</u> is, zal Charon dan een startopdracht in behandeing nemen, en wel degene, waarnaar verwezen wordt door het adresdeel van AR0: label van heersende schakel.</p>
+<p class="ind">Aan het eind van de behandeling van de startopdracht zal Charon als ondeelbare handeling</p>
+<div style=" text-indent: 4cm; margin-bottom: 0cm;">AFT := AFT - 1 (mod 512); <u>if</u> AFT = 0 <u>then</u> AF := <u>false</u></div>
+uitvoeren. De ondeelbaarheid van de aftrekking wordt gegarandeerd, doordat Charon de terugschrijf-halve-cyclus van het kerngeheugen gebruikt om de nieuwe waarde van AFT in het adresdeel van AR2 terug te schrijven en doordat het kerngeheugen slechts per hele cyclus aan de verschillende processen gegund wordt. Verder wordt als onderdeel van de AFT-behandeling de assignment "AF := <u>false</u>" uitgevoerd, als AFT de waarde = 0 gekregen heeft; anders blijft AF onaangetast.
+<p class="ind">Als de nieuwe waarde van AFT ≠ 0 was —en AF dus onbeinvoed is gebleven— zal Charon</p>
+<div style=" text-indent: 4cm; margin-bottom: 0cm;">adresdeel AR0 := M[ adresdeel AR0]</div>
+uitvoeren, dwz. de label van de volgende schakel tot "label van heersende schakel" bevorderen.
+<p class="ind">Daarna (zie IFT-behandeling, later) wordt de behandeling van de startopdracht voltooid, deze voltooing aan de basismachine teruggemeld en tenslotte gaat Charon over in de uitgangstoestand van deze sectie "geen startopdracht onder behandeling". De vorige is nl. voltooid en de volgende is nog niet in behandeling genomen.</p>
+<p class="noindent"><u>4.2.2. Een enkele schakel voor een passief apparaat.</u></p>
+<p class="ind">Bij het simpelste gebruik van Charon biedt de basismachine slechts de volgende schakel aan, nadat de basismachine (via IFT en IF, zie later) van de voltooiing van de vorige schakel heeft kennisgenomen en Charon dus (ten aanzien van dit apparaat) in rust is.</p>
+<p class="ind">In de aangeboden schakel is de inhoud van "label[0]"label van de volgende schakel- omdat er geen volgende schakel is, irrelevant.</p>
+<p class="ind">De basismachine moet er voor zorgen, dat in het adresdeel van AR0 de label van de aangeboden schakel staat —om Charon in staat te stellen de schakel te vinden—, moet er voor zorgen, dat AFT = 1 —om te zorgen, dat Charon na afloop AFT = 0 maakt en in de rusttestand overgaat— en tenslotte moet de basismachine AF op <u>true</u> zetten, opdat Charon metterdaad aan de startopdracht begint.</p>
+<p class="noindent">Opm. De heersende label in het adresdeel van AR0 wordt hierbij niet verstoord; als alle aan te bieden startopdrachten op dezelfde plaats staan, hoeft het tellingdeel van AR0 van te voren slechts n keer ingevuld te worden.</p>
+<p class="noindent"><u>4.2.3. Een keten voor een passief apparaat.</u></p>
+<p class="ind">Wil men in plaats van een enkele schakel (zie vorige sectie) een keten van schakels aan een op dat moment passief apparaat aanbieden, dan moet de basismachine er voor zorgen, dat het adresdeel van AR0 de label van de eerste schakel bevat, dat de volgende schakels netjes aan hun voorganger gehaakt zijn, dat AFT gelijk is aan het aantal schakels —om er voor te zorgen, dat Charon de keten netjes afwerkt en dan ophoudt— en tenslotte zet men AF op <u>true</u> opdat Charon metterdaad aan de keten begint.</p>
+<p class="noindent">Opm. In dit geval blijft het adresdeel van AR0, de label van de heersende schakel<span class="ind">—</span> niet ongewijzigd.</p>
+<p class="noindent"><u>4.2.4. Het aanhaken van een schakel aan een mogelijk nog actief apparaat.</u></p>
+<p class="ind">Wij zullen nu een methode behandelen om een schakel aan te haken aan een keten die mogelijkerwijs nog niet is afgewerkt. Omdat Charon ook op de AFT, de AF en de AR0 zou kunnen opereren, moet dit wel met enige voorzorgen geschieden.</p>
+<p class="ind">We nemen aan dat een zogenaamde vulwijzer "VW" de label van de laatst aangehaakte schakel bevat. Als de nieuwe label volledig is geprepareerd —label[0] is daarin irrelevant— vervolgt de basismachine</p>
+<p class="noindent">1) met "M[VW] := label nieuwe schakel" wordt de nieuwe schakel aan de keten gehaakt (het ingevulde woord bevat in het tellingdeel louter nullen);</p>
+<p class="noindent">2) met "VW" := label nieuwe schakel" wordt de vulwijzer up to date gemaakt.</p>
+<p class="noindent">3) met een additieve uitopdracht in de versie "PLUS" wordt AFT met 1 opgehoogd, zodat de hierbij gevormde nieuwe waarde van AFT tevens in een register van de basismachine verschijnt en geinspecteerd kan worden. Voor de ophoging gebruikt de basismachine een additieve uitopdracht, omdat zodoende gegarandeerd wordt, dat de ophoging van de basismachine en een mogelijke aflaging door Charon niet met elkaar op oncontroleerbare (in elk geval ongewenste) wijze met elkaar kunnen interfereren.</p>
+<p class="noindent">4) indien de door de PLUS-opdracht in het register van de basismachine opgevangen nieuwe AFT-waarde = 1 is, dan was de oude AFT-waarde dus = 0 en heeft Charon dus besloten uit deze keten geen nieuwe startopdracht meer aan te halen; de handeling onder 1) genoemd heeft geen effect gehad en Charon heeft AF op <u>false</u> gezet. In dit geval vervolgt de basismachine aldus:</p>
 <table>
-  <tr><td width="62" align="right" valign="top">4.1.)</td>
-    <td width="14" valign="top" style="text-indent: 0cm; margin-bottom: 0cm">&nbsp;</td>
-    <td width="511" valign="top" style="text-indent: 0cm; margin-bottom: 0cm">
-in het adresdeel van AR0 wordt de label van de nieuwe schakel ingevuld 
-zonder het tellingdeel van AR0 te verstoren. We zijn in de toestand, dat 
-Charon besloten heeft, de keten met rust te laten, wat betekent, 
-dat Charon het adresdeel van AR0 verder wel met rust zal laten, maar het 
-tellingdeel van AR0 mogelijkerwijs nog niet. Het invullen van de label  
-van de nieuwe schakel in het adresdeel van AR0 zonder het bijbehorende
-tellingdeel te verstoren kan de basismachine verrichten met een additieve uit-opdracht 
-bij AR0 op te tellen. 
-  </td></tr>
-<tr><td align="right" valign="top">4.2.)</td>
-  <td valign="top" style="text-indent: 0cm; margin-bottom: 0cm">&nbsp;</td>
-  <td valign="top" style="text-indent: 0cm; margin-bottom: 0cm">
-AF := <u>true</u> . NB . De assignment "AF := <u>true</u>" mag alleen uitgevoerd worden  
-in dit geval, waarin we dus hebben vastgesteld, dat Charon "AF := <u>false</u>"  
-had uitgevoerd. Wie redeneert "We hebben iets nieuws aangeboden, dus 
-AF mag in elk gevalop <u>true</u> gezet worden." vergist zich, 
-want Charon zou denieuwe startopdracht tegen deze tijd al 
-voltooid kunnen hebben en terecht al AF op <u>false</u> gezet kunnen hebben. 
-  </td></tr>
-</table><p class="noindent">Opm. Het is niet aantrekkelijk om te proberen, de activiteit ten aanzien van een 
-keten tijdelijk stil te leggen, door (wat de basismachine wel kan) AF := <u>false</u> te 
-zetten. Charon's beslissing om op grond van AF = <u>true</u> een nieuwe startopdracht  
-aan te halen laat opzichzelf geen sporen in het kerngeheugen achter. Zo de basismachine 
-er achter kan komen welke startopdracht nog wel aangehaald is en welke 
-gegarandeerd niet meer aangehaald zal worden, dan zal dat niet zonder real-time 
-overwegingen kunnen. 
-</p><p class="noindent">Opm. Handeling 1) dient achterwege te blijven als er nog geen laatst aangehaakte
-schakel is (aan het begin bv.) of als de geheugenruimte, destijds door de laatst
-aangehaakte schakel ingenomen, inmiddels een heel andere bestemming heeft gekregen (zie 4.3.1). 
-</p><p class="noindent"><u>4.3. De terugmeldingen van voltooiingen.</u>
-</p><p class=ind>Als 0 &#8804; tellingdeel AR1 &#8804; 255, dan wordt het tellingdeel van AR1 
-geinterpreteerd als IFT; als 256 &#8804; tellingdeel AR1 &#8804; 511, dan wordt het tellingdeel van AR1  
-geinterpreteerd als IFT + 512. Het waardebereik van IFT is dus -256  &#8804; IFT  &#8804; 255. 
-IFT  &#8805; 0 is gekarakteriseerd door d26=0. 
-</p><p class="noindent"><u>4.3.1. Het gedrag van Charon ten aanzien van IFT en IF.</u>
-</p><p class=ind>Charon beeindigt de behandeling van een startopdracht met in een 
-ondeelbare handeling 
-<div style=" text-indent: 4cm; margin-bottom: 0cm;">IFT := iFT + 1 (mod 512); <u>if</u> IFT > 0 <u>then</u> IF := <u>true</u></div> 
+<tr>
+<td width="62" align="right" valign="top">4.1.)</td>
+<td width="14" valign="top" style="text-indent: 0cm; margin-bottom: 0cm">&nbsp;</td>
+<td width="511" valign="top" style="text-indent: 0cm; margin-bottom: 0cm">in het adresdeel van AR0 wordt de label van de nieuwe schakel ingevuld zonder het tellingdeel van AR0 te verstoren. We zijn in de toestand, dat Charon besloten heeft, de keten met rust te laten, wat betekent, dat Charon het adresdeel van AR0 verder wel met rust zal laten, maar het tellingdeel van AR0 mogelijkerwijs nog niet. Het invullen van de label van de nieuwe schakel in het adresdeel van AR0 zonder het bijbehorende tellingdeel te verstoren kan de basismachine verrichten met een additieve uit-opdracht bij AR0 op te tellen.</td>
+</tr>
+<tr>
+<td align="right" valign="top">4.2.)</td>
+<td valign="top" style="text-indent: 0cm; margin-bottom: 0cm">&nbsp;</td>
+<td valign="top" style="text-indent: 0cm; margin-bottom: 0cm">AF := <u>true</u> . NB . De assignment "AF := <u>true</u>" mag alleen uitgevoerd worden in dit geval, waarin we dus hebben vastgesteld, dat Charon "AF := <u>false</u>" had uitgevoerd. Wie redeneert "We hebben iets nieuws aangeboden, dus AF mag in elk gevalop <u>true</u> gezet worden." vergist zich, want Charon zou denieuwe startopdracht tegen deze tijd al voltooid kunnen hebben en terecht al AF op <u>false</u> gezet kunnen hebben.</td>
+</tr>
+</table>
+<p class="noindent">Opm. Het is niet aantrekkelijk om te proberen, de activiteit ten aanzien van een keten tijdelijk stil te leggen, door (wat de basismachine wel kan) AF := <u>false</u> te zetten. Charon's beslissing om op grond van AF = <u>true</u> een nieuwe startopdracht aan te halen laat opzichzelf geen sporen in het kerngeheugen achter. Zo de basismachine er achter kan komen welke startopdracht nog wel aangehaald is en welke gegarandeerd niet meer aangehaald zal worden, dan zal dat niet zonder real-time overwegingen kunnen.</p>
+<p class="noindent">Opm. Handeling 1) dient achterwege te blijven als er nog geen laatst aangehaakte schakel is (aan het begin bv.) of als de geheugenruimte, destijds door de laatst aangehaakte schakel ingenomen, inmiddels een heel andere bestemming heeft gekregen (zie 4.3.1).</p>
+<p class="noindent"><u>4.3. De terugmeldingen van voltooiingen.</u></p>
+<p class="ind">Als 0 ≤ tellingdeel AR1 ≤ 255, dan wordt het tellingdeel van AR1 geinterpreteerd als IFT; als 256 ≤ tellingdeel AR1 ≤ 511, dan wordt het tellingdeel van AR1 geinterpreteerd als IFT + 512. Het waardebereik van IFT is dus -256 ≤ IFT ≤ 255. IFT ≥ 0 is gekarakteriseerd door d26=0.</p>
+<p class="noindent"><u>4.3.1. Het gedrag van Charon ten aanzien van IFT en IF.</u></p>
+<p class="ind">Charon beeindigt de behandeling van een startopdracht met in een ondeelbare handeling</p>
+<div style=" text-indent: 4cm; margin-bottom: 0cm;">IFT := iFT + 1 (mod 512); <u>if</u> IFT &gt; 0 <u>then</u> IF := <u>true</u></div>
 uit te voeren.
-</p><p class=ind>De ondeelbaarheid van de additie wordt weer gerealiseerd door in de
-terugschrijf-halvecyclus de opgehoogde waarde van IFT terug te schrijven. 
-</p><p class=ind>Charon verricht deze handeling, nadat AFT is afgelaagd, de label van de
-heersende schakel eventueel is opgestapt en slotwoord en OK-status (zie onder)  
-zijn ingevuld. De IFT-ophoging is de signalering, dat Charon de afgewerkte 
-schakel niet meer zal raadplegen; de basismachine mag hierna de door de afgewerkte
-schakel belegde geheugenplaatsen dus een andere bestemming geven. 
-</p><p class="noindent"><u>4.3.2. IFT-aflaging door de basismachine.</u>
-</p><p class=ind>Tegenover de IFT-ophoging door Charon moeten IFT-aflagingen van de
-basismachine staan. Door deze met behulp van een additieve uitopdracht uit te voeren, 
-verzekert men, dat deze aflagingen niet interfereren met de eventuele ophogingen 
-door Charon. Doordat het adresdeel van AR1 &ne; 0 is, bereikt men, dat IFT = 0 
-door deze additieve uitopdracht inderdaad correct met een tellingdeel uit 
-louter nullen wordt afgeleverd. 
-</p><p class=ind>Het gedrag van Charon is er op gericht om "IF" de betekenis te geven
-"IFT > 0": als IF deze betekenis heeft, blijft hij bij Charon-verhogingen 
-van IFT (aangenomen, dat de capaciteit van IFT niet overschreden wordt) 
-gehandhaafd. Als de basismachine IFT gewijzigd heeft en men stelt er prijs op, 
-dat daarna IF weer "IFT > 0" zal betekenen, dan kan de basismachine als volgt 
-te werk gaan:
-</p>
-<p class=noindent>" IF := <u>false</u>; 
-  <br><u>if</u> IFT > 0 <u>then</u> IF := <u>true</u>" 
-</p>
-<p class=ind>De analyse "IFT > 0" kan worden uitgevoerd door te testen, of van AR1
-d26 = 0 en het tellingdeel &ne; 0 is. Nauwkeurige analyse leert, dat er geen bezwaar 
-tegen zou zijn, wanneer voor deze test het tellingdeel van AR1 tweemaal uit het 
-geheugen geselecteerd zou worden, ook al zou Charon onderhand IFT ophogen. 
-(De veronderstelling, dat de basismachine na "IF := <u>false</u>" IFT ongemoeid laat, 
-is essentieel; het protocol, zoals in EWD140 gegeven is fout, wanneer IFT ook 
-negatieve waarden mag aannemen!) 
-</p><p class=ind>Wanneer men begint met IFT = 0 en als onderdeel van het kennisnemen van
-een voltooing van een startopdracht IFT met 1 aflaagt, dan heeft IFT de betekenis 
-van het aantal reeds voltooide schakels, waarvan de basismachine nog geen 
-kennis heeft genomen. Door IFT een negatieve voorgift te geven, kan men desgewenst 
-bereiken, dat IF pas <u>true</u> gezet wordt (en de ingreep tengevolge hiervan
-dus pas optreedt) na voltooing van de zoveelste startopdracht uit de keten. 
-In al deze gevallen mogen we veilig aannemen, dat het beperkte bereik van de 
-AFT en de IFT nimmer een beperking zal zijn. 
-</p><p class="noindent"><u>5. Het toetsenbord.</u>
-</p><p class=ind>Het toetsenbord is een invoerapparaat, waarvan het nummer
-installatie-afhankelijk is.
-</p><p class=ind>Het is een ernstig afwijkend apparaat: het verricht zijn activiteit nl. niet
-op commando van de door de basismachine gegeven startopdrachten, maar doordat de 
-operateur een toets aanslat. Charon maakt bij het toetsenbord geen gebruik van AR2. 
-</p><p class=ind>Als de operateur een toets aanslaat, verricht Charon:
-</p>
-<p class=noindent><u>if</u> AF <u>and</u> LVAF <u>then</u> AR0 := karakter <u>else</u> AR3 := karakter;  AF := <u>false</u>; 
-  <br>IFT := IFT + 1 (mod 512); <u>if</u> 0 < IFT <u>then</u> IF := <u>true</u>
-</p>
-<p class=ind>(LVAF is een interne boolean van Charon, die in dit geval permanent = <u>true</u>
-geacht wordt te zijn; zie verder "Het tandenpoetsen.".) 
-</p><p class=ind>Door aanvankelijk IFT (= tellingdeel AR1) = 0 te maken en (in overeenstemming
-met de normale betekenis) IF = <u>false</u> te zetten en LVIF = <u>true</u>, bereikt men 
-dat de basismachine via het ingreepmechanisme van het indrukken van een toets 
-op de hoogte wordt gesteld, zodra de basismachine horend is. Door bovendien 
-AF = <u>true</u> te  zetten, verzorgt men, dat het eerste karakter in AR0 komt en eventueel
-volgende karakters (met overschrijving van de vorige) in AR3 terechtkomen. 
-</p><p class=ind>(Het vullen van AR3 geschiedt, wanneer de basismachine niet tijdig op de 
-ingreep na het vorige karakter gereageerd heeft; in het onwaarschijnlijkegeval,
-dat Charon nog geen kans heeft gezien, om het vorige karakter in het geheugen te 
-plaatsen, hebben de te snel op elkaar volgende aanslagen het effect, dat Charon 
-als bovenbeschreven n karakter in het geheugen plaatst, maar nu  
-een zg. non-valide met een getalwaarde groter dan 31.) 
-</p><p class=ind>L. Zwanenburg heeft een programma gemaakt, waarin de tijd in alternerende
-perioden verdeeld wordt; 
-<br>periode a): verwerking van een enkel of verwerping van een of meer karakters, 
-afgesloten door de indicatie, dat nu de volgende aanslag mag plaatsvinden; 
-<br>periode b): de tijd, waarin een aanslag mag plaatsvinden, afgesloten door de 
-reactie op de ingreep; 
-<br>en wel zodanig, dat in de periode a) slechts dan een karakter wordt verwerkt, als 
-in de voorgaande periode a) geen en in de daaropvolgende periode b) precies 
-n aanslag heeft plaatsgevonden. 
-</p><p class=ind>Bij de reactie op de ingreep van het toetsenbord gaat de machine dan als volgt te werk
-<p class=noindent> <font face="courier">
-  L0: IF := <u>false</u>; IFT := IFT - 1; <u>if</u> IFT &ne; 0 <u>then</u>
-</font><br>
-<font face="courier" style="margin-bottom: 0cm"><span style=" text-indent: 2cm; margin-bottom: 0cm;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> AR0 := iets negatiefs; <u>goto</u> L0 <u>end</u>;</span></font><br>
-<font face="courier" style="margin-bottom: 0cm"><span style=" text-indent: 1cm; margin-bottom: 0cm;">&nbsp;&nbsp;&nbsp;&nbsp;A := AR0; if A > 0 <u>then</u></span></font><br>
+<p class="ind">De ondeelbaarheid van de additie wordt weer gerealiseerd door in de terugschrijf-halvecyclus de opgehoogde waarde van IFT terug te schrijven.</p>
+<p class="ind">Charon verricht deze handeling, nadat AFT is afgelaagd, de label van de heersende schakel eventueel is opgestapt en slotwoord en OK-status (zie onder) zijn ingevuld. De IFT-ophoging is de signalering, dat Charon de afgewerkte schakel niet meer zal raadplegen; de basismachine mag hierna de door de afgewerkte schakel belegde geheugenplaatsen dus een andere bestemming geven.</p>
+<p class="noindent"><u>4.3.2. IFT-aflaging door de basismachine.</u></p>
+<p class="ind">Tegenover de IFT-ophoging door Charon moeten IFT-aflagingen van de basismachine staan. Door deze met behulp van een additieve uitopdracht uit te voeren, verzekert men, dat deze aflagingen niet interfereren met de eventuele ophogingen door Charon. Doordat het adresdeel van AR1 ≠ 0 is, bereikt men, dat IFT = 0 door deze additieve uitopdracht inderdaad correct met een tellingdeel uit louter nullen wordt afgeleverd.</p>
+<p class="ind">Het gedrag van Charon is er op gericht om "IF" de betekenis te geven "IFT &gt; 0": als IF deze betekenis heeft, blijft hij bij Charon-verhogingen van IFT (aangenomen, dat de capaciteit van IFT niet overschreden wordt) gehandhaafd. Als de basismachine IFT gewijzigd heeft en men stelt er prijs op, dat daarna IF weer "IFT &gt; 0" zal betekenen, dan kan de basismachine als volgt te werk gaan:</p>
+<p class="noindent">" IF := <u>false</u>;<br>
+<u>if</u> IFT &gt; 0 <u>then</u> IF := <u>true</u>"</p>
+<p class="ind">De analyse "IFT &gt; 0" kan worden uitgevoerd door te testen, of van AR1 d26 = 0 en het tellingdeel ≠ 0 is. Nauwkeurige analyse leert, dat er geen bezwaar tegen zou zijn, wanneer voor deze test het tellingdeel van AR1 tweemaal uit het geheugen geselecteerd zou worden, ook al zou Charon onderhand IFT ophogen. (De veronderstelling, dat de basismachine na "IF := <u>false</u>" IFT ongemoeid laat, is essentieel; het protocol, zoals in EWD140 gegeven is fout, wanneer IFT ook negatieve waarden mag aannemen!)</p>
+<p class="ind">Wanneer men begint met IFT = 0 en als onderdeel van het kennisnemen van een voltooing van een startopdracht IFT met 1 aflaagt, dan heeft IFT de betekenis van het aantal reeds voltooide schakels, waarvan de basismachine nog geen kennis heeft genomen. Door IFT een negatieve voorgift te geven, kan men desgewenst bereiken, dat IF pas <u>true</u> gezet wordt (en de ingreep tengevolge hiervan dus pas optreedt) na voltooing van de zoveelste startopdracht uit de keten. In al deze gevallen mogen we veilig aannemen, dat het beperkte bereik van de AFT en de IFT nimmer een beperking zal zijn.</p>
+<p class="noindent"><u>5. Het toetsenbord.</u></p>
+<p class="ind">Het toetsenbord is een invoerapparaat, waarvan het nummer installatie-afhankelijk is.</p>
+<p class="ind">Het is een ernstig afwijkend apparaat: het verricht zijn activiteit nl. niet op commando van de door de basismachine gegeven startopdrachten, maar doordat de operateur een toets aanslat. Charon maakt bij het toetsenbord geen gebruik van AR2.</p>
+<p class="ind">Als de operateur een toets aanslaat, verricht Charon:</p>
+<p class="noindent"><u>if</u> AF <u>and</u> LVAF <u>then</u> AR0 := karakter <u>else</u> AR3 := karakter; AF := <u>false</u>;<br>
+IFT := IFT + 1 (mod 512); <u>if</u> 0 &lt; IFT <u>then</u> IF := <u>true</u></p>
+<p class="ind">(LVAF is een interne boolean van Charon, die in dit geval permanent = <u>true</u> geacht wordt te zijn; zie verder "Het tandenpoetsen.".)</p>
+<p class="ind">Door aanvankelijk IFT (= tellingdeel AR1) = 0 te maken en (in overeenstemming met de normale betekenis) IF = <u>false</u> te zetten en LVIF = <u>true</u>, bereikt men dat de basismachine via het ingreepmechanisme van het indrukken van een toets op de hoogte wordt gesteld, zodra de basismachine horend is. Door bovendien AF = <u>true</u> te zetten, verzorgt men, dat het eerste karakter in AR0 komt en eventueel volgende karakters (met overschrijving van de vorige) in AR3 terechtkomen.</p>
+<p class="ind">(Het vullen van AR3 geschiedt, wanneer de basismachine niet tijdig op de ingreep na het vorige karakter gereageerd heeft; in het onwaarschijnlijkegeval, dat Charon nog geen kans heeft gezien, om het vorige karakter in het geheugen te plaatsen, hebben de te snel op elkaar volgende aanslagen het effect, dat Charon als bovenbeschreven n karakter in het geheugen plaatst, maar nu een zg. non-valide met een getalwaarde groter dan 31.)</p>
+<p class="ind">L. Zwanenburg heeft een programma gemaakt, waarin de tijd in alternerende perioden verdeeld wordt;<br>
+periode a): verwerking van een enkel of verwerping van een of meer karakters, afgesloten door de indicatie, dat nu de volgende aanslag mag plaatsvinden;<br>
+periode b): de tijd, waarin een aanslag mag plaatsvinden, afgesloten door de reactie op de ingreep;<br>
+en wel zodanig, dat in de periode a) slechts dan een karakter wordt verwerkt, als in de voorgaande periode a) geen en in de daaropvolgende periode b) precies n aanslag heeft plaatsgevonden.</p>
+<p class="ind">Bij de reactie op de ingreep van het toetsenbord gaat de machine dan als volgt te werk</p>
+<p class="noindent"><font face="courier">L0: IF := <u>false</u>; IFT := IFT - 1; <u>if</u> IFT ≠ 0 <u>then</u></font><br>
+<font face="courier" style="margin-bottom: 0cm"><span style=" text-indent: 2cm; margin-bottom: 0cm;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> AR0 := iets negatiefs; <u>goto</u> L0 <u>end</u>;</span></font><br>
+<font face="courier" style="margin-bottom: 0cm"><span style=" text-indent: 1cm; margin-bottom: 0cm;">&nbsp;&nbsp;&nbsp;&nbsp;A := AR0; if A &gt; 0 <u>then</u></span></font><br>
 <font face="courier" style="margin-bottom: 0cm"><span style=" text-indent: 2cm; margin-bottom: 0cm;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></font><font face="courier">&nbsp;&nbsp;&nbsp;&nbsp;<u>begin</u> AR0 := iets negatiefs;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A is nu het volgende karakter, dat</font><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font face="courier"><span style=" text-indent: 3cm; margin-bottom: 0cm;">geaccepteerd wordt <u>end</u></span></font><br>
 <font face="courier"><span style=" text-indent: 4cm; margin-bottom: 0cm;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>else</u> er zijn karakters verworpen, wat</span></font><br>
 <font face="courier"><span style=" text-indent: 5cm; margin-bottom: 0cm;"><font face="courier"><span style=" text-indent: 4cm; margin-bottom: 0cm;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;desgewenst kan</span></font> worden aangegeven;</span></font><br>
-<font face="courier"><font face="courier" style="margin-bottom: 0cm"><span style=" text-indent: 1cm; margin-bottom: 0cm;">&nbsp;&nbsp;&nbsp;&nbsp;</span></font><font face="courier">AF  := <u>true</u>;<br>
-&nbsp;&nbsp;&nbsp;
-<u>comment</u> nu kan de operateur weer een karakter in<br>
-&nbsp;&nbsp;&nbsp;
-AR0 krijgen;</font></font><p class="noindent"><u>6. Het teleprinterdrukwerk.</u> 
-</p><p class=ind>De indeling voor AR0, AR1, AR2 en AR3 is normaal (zie 3.); het adresdeel van
-AR2 wordt niet gebruikt. Het lopend codewoord in AR3 is gesplitst in tellingdeel en adresdeel (zie onder). 
-</p><p class=ind>Een startschakel geeft de mogelijkheid om de woorden uit <var>N</var> opeenvolgende 
-adressen (1 &#8804; <var>N</var> &#8804; 512) in volgorde naar het drukwerk te sturen. Van elk woord 
-bepalen de laagste zes bits een actie van het drukwerk; de 21 hoogste bits van deze woorden zijn irrelevant.
-</p><p class=ind>De startschakel bestaat uit drie woorden; de eerste twee (label [-1] en label[0])
-zijn normaal (zie 4.1.), het derde woord (label[1]) bevat het zg. codewoord. 
-Het codewoord bepaalt lengte en ligging van de naar het drukwerk te zenden 
-woordenrij en wel: 
-</p><table width="100%">
-<tr><td width="207" valign="top" class="noindent">tellingdeel codewoord =</td>
-  <td width="519" align="left" valign="top" class="noindent">lengte van de rij, (waarbij tellingdeel = 0 de rijlengte =512 voorschrijft; zodat dus niet in de lege startopdracht is voorzien)</td></tr> 
+<font face="courier"><font face="courier" style="margin-bottom: 0cm"><span style=" text-indent: 1cm; margin-bottom: 0cm;">&nbsp;&nbsp;&nbsp;&nbsp;</span></font><font face="courier">AF := <u>true</u>;<br>
+&nbsp;&nbsp;&nbsp; <u>comment</u> nu kan de operateur weer een karakter in<br>
+&nbsp;&nbsp;&nbsp; AR0 krijgen;</font></font></p>
+<p class="noindent"><u>6. Het teleprinterdrukwerk.</u></p>
+<p class="ind">De indeling voor AR0, AR1, AR2 en AR3 is normaal (zie 3.); het adresdeel van AR2 wordt niet gebruikt. Het lopend codewoord in AR3 is gesplitst in tellingdeel en adresdeel (zie onder).</p>
+<p class="ind">Een startschakel geeft de mogelijkheid om de woorden uit <var>N</var> opeenvolgende adressen (1 ≤ <var>N</var> ≤ 512) in volgorde naar het drukwerk te sturen. Van elk woord bepalen de laagste zes bits een actie van het drukwerk; de 21 hoogste bits van deze woorden zijn irrelevant.</p>
+<p class="ind">De startschakel bestaat uit drie woorden; de eerste twee (label [-1] en label[0]) zijn normaal (zie 4.1.), het derde woord (label[1]) bevat het zg. codewoord. Het codewoord bepaalt lengte en ligging van de naar het drukwerk te zenden woordenrij en wel:</p>
+<table width="100%">
 <tr>
-  <td valign="top" class="noindent">adresdeel codewoord &nbsp;=</td><td valign="top" class="noindent">beginadres van de woordenrij  1.</td></tr>
+<td width="207" valign="top" class="noindent">tellingdeel codewoord =</td>
+<td width="519" align="left" valign="top" class="noindent">lengte van de rij, (waarbij tellingdeel = 0 de rijlengte =512 voorschrijft; zodat dus niet in de lege startopdracht is voorzien)</td>
+</tr>
+<tr>
+<td valign="top" class="noindent">adresdeel codewoord &nbsp;=</td>
+<td valign="top" class="noindent">beginadres van de woordenrij 1.</td>
+</tr>
 </table>
-<p class=ind>Als de startopdacht door Charon geaccepteerd wordt, wordt het codewoord 
-  uit de heersende schakel in het lopende codewoord (in AR3 dus) overgenomen. Per 
-  woordverzending naar het drukwerk neemt Charon tweemaal contact met het geheugen 
-  op. In het eerste geheugencontact met AR3 wordt het tellingdeel (mod. 512) met 1 
-  verlaagd en wordt het adresdeel ( modulo 2 &#8593; 18) met 1 verhoogd. Is het resulterend 
-  tellingdeel = 0, dan is het nu nog volgende woordtransport naar het drukwerk 
-  het laatste van de startopdracht. In het geheugencontact, volgend op dat met 
-  AR3 wordt het woord getransporteerd, aangewezen door het zojuist in AR3 weggeschreven 
-  adresdeel. De afsluitingsriten van de schakelbehandeling ( zoals AFT-aflaging
-  etc. en IFT-ophoging etc.) vinden in Charon plaats, zodra het laatste
-  woord naar het drukwerk is gezonden. Charon meldt de startopdracht dus als 
-  voltooid, terwijl het drukwerk nog 100 msec bezig is met het feitelijk drukken van 
-  het laatst aangeboden karakter. Daar de feitelijke woordtransporten naar het 
-  drukwerk steeds pas plaatsvinden, nadat Charon van de teleprinter het signaal 
-  ontvangen heeft, dat het volgende woord gestuurd mag worden, is een en ander 
-  (zoals te verwachten) geen beletsel om meteende volgende startopdracht aan te 
-  bieden, noch voor Charon, om deze alvast te accepteren. 
-</p><p class=ind>Daar de afwerking van de startopdracht afhankelijk is van de terugsignalering
-van het drukwerk naar Charon, zou een startopdracht nimmer eindigen, als deze 
-terugsignalering achterwege blijft, zoals dat het geval zou zijn, als het drukwerk 
-helemaal niet is aangesloten. Charon initieert om deze reden alleen het transport 
-van een woordrij, nadat hij (naar eer en geweten) geverifieerd heeft, dat het  
-drukwerk volgens de regels van de kunst is aangesloten en naar behoren  
-functioneert. 
-</p>
-<p class=ind>Een en ander wordt als volgt gerealiseerd. Het Charonprogramma, dat het
-drukwerk verzorgt, kent twee toestanden, genaamd "OK resp. "NBK" (Niet Bedrijfs 
-Klaar). Vlak voordat dit programma in de toestand van OK een nieuwe startopdracht 
-zal gaan aanhalen, test Charon, of het drukwerk goed is aangesloten; zo ja, dan 
-wordt de startopdracht als boven afgehandeld, zo nee, dan gaat het verzorgingsprogramma 
-prompt over in de toestand NBK, beschouwt deze opdracht als 
-afgehandeld en gaat over tot de afsluitingsriten. Als het verzorgingsprogramma 
-zich in het begin van het aanhalen van de volgende schakel al in de toestand
-NBK bevindt, dan worden alle startopdrachten zg. symbolisch afgewerkt &mdash;dwz.                                                                            
-Charon gaat meteen tot de afsluitingsriten over&mdash; met uitzondering van de zg. 
-HOK-opdracht (Herstel OK-toestand). De uitvoering van de HOK-opdracht bestaat 
-nl. daaruit, dat het verzorgingsprogramma van het drukwerk in de toestand OK 
-gebracht wordt. </p><p class=ind>De twee toestanden van het verzorgingsprogramma worden onderscheiden in het
-tellingdeel van AR0 en wel:
+<p class="ind">Als de startopdacht door Charon geaccepteerd wordt, wordt het codewoord uit de heersende schakel in het lopende codewoord (in AR3 dus) overgenomen. Per woordverzending naar het drukwerk neemt Charon tweemaal contact met het geheugen op. In het eerste geheugencontact met AR3 wordt het tellingdeel (mod. 512) met 1 verlaagd en wordt het adresdeel ( modulo 2 ↑ 18) met 1 verhoogd. Is het resulterend tellingdeel = 0, dan is het nu nog volgende woordtransport naar het drukwerk het laatste van de startopdracht. In het geheugencontact, volgend op dat met AR3 wordt het woord getransporteerd, aangewezen door het zojuist in AR3 weggeschreven adresdeel. De afsluitingsriten van de schakelbehandeling ( zoals AFT-aflaging etc. en IFT-ophoging etc.) vinden in Charon plaats, zodra het laatste woord naar het drukwerk is gezonden. Charon meldt de startopdracht dus als voltooid, terwijl het drukwerk nog 100 msec bezig is met het feitelijk drukken van het laatst aangeboden karakter. Daar de feitelijke woordtransporten naar het drukwerk steeds pas plaatsvinden, nadat Charon van de teleprinter het signaal ontvangen heeft, dat het volgende woord gestuurd mag worden, is een en ander (zoals te verwachten) geen beletsel om meteende volgende startopdracht aan te bieden, noch voor Charon, om deze alvast te accepteren.</p>
+<p class="ind">Daar de afwerking van de startopdracht afhankelijk is van de terugsignalering van het drukwerk naar Charon, zou een startopdracht nimmer eindigen, als deze terugsignalering achterwege blijft, zoals dat het geval zou zijn, als het drukwerk helemaal niet is aangesloten. Charon initieert om deze reden alleen het transport van een woordrij, nadat hij (naar eer en geweten) geverifieerd heeft, dat het drukwerk volgens de regels van de kunst is aangesloten en naar behoren functioneert.</p>
+<p class="ind">Een en ander wordt als volgt gerealiseerd. Het Charonprogramma, dat het drukwerk verzorgt, kent twee toestanden, genaamd "OK resp. "NBK" (Niet Bedrijfs Klaar). Vlak voordat dit programma in de toestand van OK een nieuwe startopdracht zal gaan aanhalen, test Charon, of het drukwerk goed is aangesloten; zo ja, dan wordt de startopdracht als boven afgehandeld, zo nee, dan gaat het verzorgingsprogramma prompt over in de toestand NBK, beschouwt deze opdracht als afgehandeld en gaat over tot de afsluitingsriten. Als het verzorgingsprogramma zich in het begin van het aanhalen van de volgende schakel al in de toestand NBK bevindt, dan worden alle startopdrachten zg. symbolisch afgewerkt —dwz. Charon gaat meteen tot de afsluitingsriten over— met uitzondering van de zg. HOK-opdracht (Herstel OK-toestand). De uitvoering van de HOK-opdracht bestaat nl. daaruit, dat het verzorgingsprogramma van het drukwerk in de toestand OK gebracht wordt.</p>
+<p class="ind">De twee toestanden van het verzorgingsprogramma worden onderscheiden in het tellingdeel van AR0 en wel:</p>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="25%"><span class="ind">tellingdeel AR0</span></td>
-    <td width="27%"><span class="ind">= 000 000 000</span></td>
-    <td width="48%"><span class="ind">betekent OK</span></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td><span style=" text-indent: 2.7cm; margin-bottom: 0cm;">= 111 111 111</span></td>
-    <td><span style=" text-indent: 2.7cm; margin-bottom: 0cm;">betekent NBK.</span></td>
-  </tr>
+<tr>
+<td width="25%"><span class="ind">tellingdeel AR0</span></td>
+<td width="27%"><span class="ind">= 000 000 000</span></td>
+<td width="48%"><span class="ind">betekent OK</span></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td><span style=" text-indent: 2.7cm; margin-bottom: 0cm;">= 111 111 111</span></td>
+<td><span style=" text-indent: 2.7cm; margin-bottom: 0cm;">betekent NBK.</span></td>
+</tr>
 </table>
-<p class=ind>De afsluitriten van een startopdracht omvatten tevens het invullen van het
-  zg. slotwoord (in label[-1]); in het tellingdeel van het slotwoord van de 
-  schakel in voltooing vult Charon een copie van het tellingdeel van AR0 in; de waarde, 
-  die aan het adresdeel van het slotwoord wordt toegekend is ongedefinieerd.                                  
-</p><p class=ind>De HOK-opdracht wordt gecodeerd door een codewoord (label[1]), bestaande uit
-louter nullen. De uitgevoerde HOK-opdracht krijgt in zijn schakel een slotwoord, 
-bestaande uit louter nullen. 
-</p>
-<p class="noindent">Opm 1. Het codewoord = + 0 wordt <u>altijd</u> als een HOK-opdracht en nimmer als  
-transportopdracht uitgelegd. Hierdoor is het niet mogelijk om in n
-startopdracht een woordenrij van 512 woorden te transporteren, te beginnen op adres 1. 
-</p><p class="noindent">Opm 2. De HOK-opdracht mag gegeven worden, terwijl het verzorgingsprogramma zich
-reeds in de toestand OK bevindt; hij heeft dan geen effect. Het aanhaken van 
-dergelijke "overbodige" HOK-opdrachten aan nog actieve ketens moet in het algemeen 
-niet gestimuleerd worden: in het algemeen (dwz. bij ingewikkeldere apparaten) kan 
-nl. de OK-toestand bij de uitvoering van de nog voorafgaande schakels verlaten 
-worden en de oorspronkelijk overbodige HOK-opdracht zou dan plotseling wel effect 
-krijgen, en waarschijnlijk een ongewenst effect! 
-</p><p class="noindent">Opm 3. Het codewoord van de startschakel, waaraan het verzorgingsprogramma in
-de OK-toestand zou willen beginnen, maar wat niet doorgaat, omdat het drukwerk 
-zich niet bevredigend aan Charon voordoet, zodat de overgang naar NBK 
-plaatsvindt, wordt <u>niet</u> geraadpleegd. Als dit een HOK-opdracht was, raakt het 
-verzorgingsprogramma dus toch in de NBK-toestand en deze HOK-opdracht krijgt dan 
-<u>niet</u> het slotwoord = +0. 
-</p><p class="noindent"><u>6.1. Controlelichten op het teleprinterdrukwerk.</u> 
-</p>
-<p class="noindent"><u>6.1.1. Rode en groene knop.</u> </p>
-<p class=ind>De besturing van het teleprinterdrukwerk kent twee toestanden, genaamd
-  "rood" respectievelijk "groen". De heersende toestand wordt aangegeven door het 
-  branden van een rood, resp. groen controlelichtje. Verder bevinden zich 
-  bij de teleprinter een rode en een groene knop; door een van deze beide in te  
-  drukken kan men de teleprinter in de overeenkomstige toestand brengen. 
-</p>
-<p class=ind>Boven hebben wij de teleprinter beschreven in de groene toestand.
-In de rode toestand zendt de teleprinter geen synchronisatiesignalen naar Charon. 
-Zodoende kan men door op de rode knop te drukken het teleprinterdrukwerk even 
-stilleggen &mdash;bv. om het papier te verschikken&mdash; en daarna, door het drukken op de 
-groene knop het teleprinterdrukwerk weer vrijgeven en wel zonder dat deze ingreep 
-tot Charon (en dus evenmin tot de basismachine) is doorgedrongen. (Het drukwerk 
-heeft zich even gedragen als een heel langzaam apparaat, maar "real time"  
-overwegingen spelen geen rol in de logica van het samenspel tussen basismachine en 
-Charon, noch tussen Charon en de randapparatuur.) 
-</p>
-<p class=ind>Zodra Charon metterdaad wacht op een dergelijke synchronisatiesignalering,
-die voorlopig achterwege blijft, omdat het apparaat zich in de rode toestand
-bevindt, wordt de operateur hierop attent gemaakt, doordat het bijbehorende rode 
-lampje gaat flikkeren. 
-</p><p class="noindent"><u>6.1.2. Het papiercontact.</u></p>
-<p>Als in het teleprinterdrukwerk het papier dreigt op te raken, wordt dit
-  mechanisch gedetecteerd. Dit heeft tot gevolg, dat bij einde van het papier
-  <br>1) een speciaal waarschuwingslichtje op de teleprinter geat branden
-  <br>2) de besturing van het teleprinterdrukwerk overgaat in de rode toestand.
-</p>
+<p class="ind">De afsluitriten van een startopdracht omvatten tevens het invullen van het zg. slotwoord (in label[-1]); in het tellingdeel van het slotwoord van de schakel in voltooing vult Charon een copie van het tellingdeel van AR0 in; de waarde, die aan het adresdeel van het slotwoord wordt toegekend is ongedefinieerd.</p>
+<p class="ind">De HOK-opdracht wordt gecodeerd door een codewoord (label[1]), bestaande uit louter nullen. De uitgevoerde HOK-opdracht krijgt in zijn schakel een slotwoord, bestaande uit louter nullen.</p>
+<p class="noindent">Opm 1. Het codewoord = + 0 wordt <u>altijd</u> als een HOK-opdracht en nimmer als transportopdracht uitgelegd. Hierdoor is het niet mogelijk om in n startopdracht een woordenrij van 512 woorden te transporteren, te beginnen op adres 1.</p>
+<p class="noindent">Opm 2. De HOK-opdracht mag gegeven worden, terwijl het verzorgingsprogramma zich reeds in de toestand OK bevindt; hij heeft dan geen effect. Het aanhaken van dergelijke "overbodige" HOK-opdrachten aan nog actieve ketens moet in het algemeen niet gestimuleerd worden: in het algemeen (dwz. bij ingewikkeldere apparaten) kan nl. de OK-toestand bij de uitvoering van de nog voorafgaande schakels verlaten worden en de oorspronkelijk overbodige HOK-opdracht zou dan plotseling wel effect krijgen, en waarschijnlijk een ongewenst effect!</p>
+<p class="noindent">Opm 3. Het codewoord van de startschakel, waaraan het verzorgingsprogramma in de OK-toestand zou willen beginnen, maar wat niet doorgaat, omdat het drukwerk zich niet bevredigend aan Charon voordoet, zodat de overgang naar NBK plaatsvindt, wordt <u>niet</u> geraadpleegd. Als dit een HOK-opdracht was, raakt het verzorgingsprogramma dus toch in de NBK-toestand en deze HOK-opdracht krijgt dan <u>niet</u> het slotwoord = +0.</p>
+<p class="noindent"><u>6.1. Controlelichten op het teleprinterdrukwerk.</u></p>
+<p class="noindent"><u>6.1.1. Rode en groene knop.</u></p>
+<p class="ind">De besturing van het teleprinterdrukwerk kent twee toestanden, genaamd "rood" respectievelijk "groen". De heersende toestand wordt aangegeven door het branden van een rood, resp. groen controlelichtje. Verder bevinden zich bij de teleprinter een rode en een groene knop; door een van deze beide in te drukken kan men de teleprinter in de overeenkomstige toestand brengen.</p>
+<p class="ind">Boven hebben wij de teleprinter beschreven in de groene toestand. In de rode toestand zendt de teleprinter geen synchronisatiesignalen naar Charon. Zodoende kan men door op de rode knop te drukken het teleprinterdrukwerk even stilleggen —bv. om het papier te verschikken— en daarna, door het drukken op de groene knop het teleprinterdrukwerk weer vrijgeven en wel zonder dat deze ingreep tot Charon (en dus evenmin tot de basismachine) is doorgedrongen. (Het drukwerk heeft zich even gedragen als een heel langzaam apparaat, maar "real time" overwegingen spelen geen rol in de logica van het samenspel tussen basismachine en Charon, noch tussen Charon en de randapparatuur.)</p>
+<p class="ind">Zodra Charon metterdaad wacht op een dergelijke synchronisatiesignalering, die voorlopig achterwege blijft, omdat het apparaat zich in de rode toestand bevindt, wordt de operateur hierop attent gemaakt, doordat het bijbehorende rode lampje gaat flikkeren.</p>
+<p class="noindent"><u>6.1.2. Het papiercontact.</u></p>
+<p>Als in het teleprinterdrukwerk het papier dreigt op te raken, wordt dit mechanisch gedetecteerd. Dit heeft tot gevolg, dat bij einde van het papier<br>
+1) een speciaal waarschuwingslichtje op de teleprinter geat branden<br>
+2) de besturing van het teleprinterdrukwerk overgaat in de rode toestand.</p>
 <p class="noindent"><u>6.1.3. Het attentiesignaal.</u></p>
-<p>Als het ijzeren kruis is gedrukt en 100 msec later de lintkleur zwart is,
-  dan gaat een wit attentiesignaal flikkeren, dat door de opereteur kan worden
-  uitgezet. Door het ijzeren kruis nooit door een lintkleurverandering te laten
-  volgen, kan men er voor zorgen, dat het flikkerlicht alleen na een zwart ijzeren
-  kruis volgt.
-</p>
-<p class="noindent"><u>7. De bandlezer.</u>
-</p>
-<p class=ind>De betekenis van de centrale administratie AR0 t/m AR3 is normaal (zie 3.);
-de layout van de startschakel, die drie woorden omvat is als in 4.1 beschreven, 
-de betekenis van het codewoord in label[1] is:
-<p class=noindent>
+<p>Als het ijzeren kruis is gedrukt en 100 msec later de lintkleur zwart is, dan gaat een wit attentiesignaal flikkeren, dat door de opereteur kan worden uitgezet. Door het ijzeren kruis nooit door een lintkleurverandering te laten volgen, kan men er voor zorgen, dat het flikkerlicht alleen na een zwart ijzeren kruis volgt.</p>
+<p class="noindent"><u>7. De bandlezer.</u></p>
+<p class="ind">De betekenis van de centrale administratie AR0 t/m AR3 is normaal (zie 3.); de layout van de startschakel, die drie woorden omvat is als in 4.1 beschreven, de betekenis van het codewoord in label[1] is:</p>
+<p class="noindent"></p>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="10%"><span class="noindent">label[1]: </span></td>
-    <td width="90%"><span class="noindent">codewoord</span></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>als codewoord bestaat uit louter nullen, dan HOK-opdracht, anders</td>
-  </tr>
+<tr>
+<td width="10%"><span class="noindent">label[1]:</span></td>
+<td width="90%"><span class="noindent">codewoord</span></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>als codewoord bestaat uit louter nullen, dan HOK-opdracht, anders</td>
+</tr>
 </table>
-
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-      <td width="27%" align="right" valign="top">tellingdeel =&nbsp; </td>
-      <td width="73%" class="noindent">lengte van de rij (waarbij tellingdeel = 0<br>
-    </td>
-    </tr>
-    <tr>
-      <td align="right" valign="top">&nbsp;</td>
-      <td>de lengte = 512 voorschrijft)</td>
-    </tr>
-    <tr>
-      <td align="right" valign="top">adresdeel =&nbsp;</td>
-      <td><span style="text-indent: 2.7cm">beginadres van de woordenrij - 1</span></td>
-    </tr>
-  </table><p class=ind>Het Charonprogramma, dat de bandlezer verzorgt kent drie toestanden, genaamd
-OK, NBK (Niet Bedrijfs Klaar) en EB (Einde Band). De toestand van het verzorgingsprogramma 
-wordt ten bate van Charon in het tellingdeel van AR0 bijgehouden. Ten 
-bate van de basismachine, die na afloop van elke startopdracht moet kunnen vaststellen, 
-hoe deze is uitgevoerd, wordt in het tellingdeel van elk slotwoord de 
-op het moment van de invulling heersende toestand genoteerd. In beide tellingdelen 
-geldt de codering: 
-</p><table width="100%">
-<tr ><td width="150" align="right">000 000 000</td>
-  <td width="74" align="left">&nbsp;</td>
-  <td width="45" align="left">OK</td>
-  <td width="504">&nbsp;</td>
-</tr> 
-<tr><td align="right">111 111 111</td>
-  <td align="left">&nbsp;</td>
-  <td align="left">NBK</td>
-  <td>(Nist Bedrijfs Klaar)</td>
-</tr> 
-<tr><td align="right">111 111 110</td>
-  <td align="left">&nbsp;</td>
-  <td align="left">EB</td>
-  <td>(Einde Band)</td>
-</tr> 
-</table><p class=ind>De overgang naar de toestand NBK vindt (zie 6.) weer plaats, wanneer
-het verzorgingsprogramma, vlak voordat het in de toestand OK een startopdracht 
-zou aanhalen, de aanwezigheid van de correct aangesloten bandlezer niet 
-naar tevredenheid kan vaststellen. Van deze startopdracht wordt het codewoord 
-dan niet geraadplaagd en Charon gaat direct over tot de afsluitingsriten (met 
-vermelding van de inmiddels heersende NBK in het slotwoord). 
-</p><p class=ind>In de toestanden NBK en EB worden startopdrachten symbolisch afgewerkt, dwz.
-Charon kijkt, of het codewoord de HOK-opdracht is, zoja, dan gaat het verzorgingsprogramma 
-over in de toestand OK (met vermelding van een slotwoord = +0), zo nee, 
-dan wordt de opdracht meteen afgesloten met vermelding van de toestand 
-(NBK of EB) in het slotwoord. 
-</p>
-<p class=ind>Wanneer de OK-status geldt en de bandlezer lijkt zijn correcte aanwezigheid
-te bevestigen, dan wordt de nieuwe startopdracht normaal verwerkt. Is hij een 
-(overbodige) HOK-opdracht, dan wordt hij als zodanig uitgevoerd, anders wordt 
-het feitelijk bandlezen geinitieerd. Bij de acceptering van de startopdracht wordt
-het codewoord uit de heersende schakel in AR3 overgenomen. Per gelezen ponsing 
-neemt Charon tweemaal contact met het geheugen op. In het eerste geheugencontact 
-met AR3 (het zg. lopende codewoord) wordt het tellingdeel (mod 512) met 1 verlaagd 
-en het adresdeel (mod 2<sup>18</sup>) met 1 verhoogd. Is het resulterende tellingdeel 
-= 0, dan is het nu volgende woordtransport het laatste van de startopdracht. In 
-het geheugencontact, volgend op dat met AR3 wordt de gelezen ponsing, aan de meest 
-significante zijde aangevuld met nullen, ingevuld op de geheugenplaats, die wordt aangewezen door het zojuist in AR3 weggeschreven adresdeel. Tevens wordt 
-bij het lezen van elke ponsing geinspecteerd of de detectie van het einde van de 
-band alarm geeft, zo ja, dan gaat het verzorgingsprogramma tot de afsluitingsriten 
-van deze startopdracht over, na eerst de toestand EB heersend te hebben gemaakt. 
-</p>
-<p class="noindent">Opm. Er wordt dus altijd tenminste 1 ponsing ten gevolge van de geaccepteerde 
-transportopdracht gelezen. Na elke ponsing wordt eerst gevraagd naar het bandeinde
-zo nee, dan wordt pas getest, of de afsluiting tengevolge van tellingdeel = 0
-aan de beurt is. Als het slotwoord EB vermeldt, kan de startopdrecht dus
-wel volledig zijn uitgevoerd! Het symbolisch afwerken verstoort AR3 niet:
-wanneer de startopdracht op grond van Einde Band is beeindigd bevindt zich in
-het tellingdeel van AR3 het ontbrekende aantal ponsngen, in het adresdeel het
-adres van het laatst gevulde woord.
-</p>
-<p class=ind>De bandlezer leest met een snelheid van 1000 ponsingen per seconde; afgezien
-van initiering en afsluitriten belegt het leesproces het geheugen van de
-machine voor .625 procent van de tijd.
-</p>
-<p class=ind>De bandlezer kan ingesteld worden op het lezen van 5-, 7- of 8-gats band.
-Deze bandbreedte wordt niet geacht bij te dragen tot de informatie, programmatechnische
-is de heersende bandbreedte niet detecteerbaar. In het geheugen wordt
-een gat in een ponsing door een 1 en geen gat door een 0 voorgesteld; de individuele
-posities in een ponsing worden in volgorde op de minst significante bitposites
-van het woord afgebeeld, en wel zo, dat de sporen, toegevoegd aan d2 en d3 aan
-beide zijden van de 'sprocket holes" liggen. De bandlezer leest alle configuaties
-ongenterpreteerd, ook "blank tape" en "all holes.
-</p><p class="noindent">NB. In de bandlezer zitten buffers voor twee ponsingen. Dit heeft tot gevolg,
-dat na bandverwsselen de eerste twee ponsingen die tot Charon doordringen,
-de laatste twee van de vorige band zijn. Na aanzetten van de machine zijn de
-eerste twee gelezen ponsingen ongedefinieerd.
-</p><p class=ind>De band passeert in volgorde
-<br>1) een detector voor het einde van de band
-<br>2) de rem
-<br>3) het leesstation
-<br>4) de aandrijving.
-<br>De uiteinden van een band kunnen daardoor niet gelezen worden.
-</p><p class=ind>De bandlezer is eveneens uitgerust met een rode en een groene knop en bijbehorende 
-controlelichtjes; ook hier flikkert het rode licht als Charon metterdaad
-wacht op een achterwege blijvend synchronisatiesignaal van de bandlezer
-("een hangende startopdracht"). Wanneer Charon op grond van het tot hem 
-doorgedrongen signaal "Einde Band" een startopdracht afbreekt voert hij tevens de
-bandlezer in kwestie over in de rode toestand, het indrukken van de groene
-knop heeft slechts effect, wanneer er nog een voldoend lange band in de bandlezer
-ligt. Het indrukken van de rode en de groene knop dringt als zodanig niet tot
-de machine door, evenmin als het band verwisselen in een rode bandlezer.
-</p><p class=ind>Als er over een bandlezer een band tot en met het einde gelezen is, moeten
-er, voordat een volgende band over die bandlezer gelezen kan worden, twee dingen
-gebeurd zijn:
-<br>1) de basismachine moet een HOK-opdracht aan deze bandlezer hebben aangeboden
-<br>2) de operateur moet een nieuwe band hebben ingelegd en dit met het drukken op
-de groene knop daarna hebben bekrachtigd.
-<br>De volgorde van deze twee gebeurtenissen doet niet ter zake.
-<p class="noindent"><u>8. De bandponser.</u></p><p class=ind> 
-De centrale administratie op de plaatsen AR0 t/m AR3, evenals de layout
-van de startschakel zijn bij de bandponser even normaal als bij het teleprinter drukwerk 
-(zie 6). Teleprinterdrukwerk en bandponser worden nl. door identieke
-Charon-programma's verzorgd. Nu bepalen de laagste 7 bits van het woord, dat
-naar de ponser gestuurd wordt, wat er wordt geponst de overige 20 zijn irrelevant.
-De toevoeging van de bitposities in het woord aan de sporen op de band is
-als bij de bandlezer.
-</p><p class=ind> 
-Het Charonprogramma dat de bandponser verzorgt, kent vier toestanden,
-genaamd OK, NBK (Niet Bedrijfs Klaar) EB (Einde Band) en ASL (AfSLuitng). De
-toestand van het verzorgingsprogramma wordt ten bate van Charon in het tellingdeel
-van AR0 bijgehouden. Ten bate van de basismachine die na afloop van elke
-startopdracht moet kunnen vaststellen, hoe deze is uitgevoerd, wordt in het
-tellingdeel van elk slotwoord de op het moment van invulling heersende toestand
-genoteerd. In beide tellingdelen geldt de codering:
-</p><table width="484">
-<tr><td width="159" align="right">000 000 000</td>
-  <td width="60" align="right">&nbsp;</td>
-  <td width="249">OK</td></tr> 
-<tr><td align="right">111 111 111</td>
-  <td align="right">&nbsp;</td>
-  <td>NBK (Niet Bedrijfs Klaar)</td></tr> 
-<tr><td align="right">111 111 110</td>
-  <td align="right">&nbsp;</td>
-  <td>EB (Einde Band)</td></tr> 
-<tr><td align="right">111 111 101</td>
-  <td align="right">&nbsp;</td>
-  <td>ASL (AfSLuitng)</td></tr> 
-</table><p class=ind> 
-De overgang naar de toestand NOK vindt (zie 6) weer slechts plaats, wanneer
-het verzorgingsprogramma vlak voordat het in de toestand OK een startopdracht
-zou gaan aanhalen, de aanwezigheid van een correct aangesloten bandponser niet
-naar tevredenheid kan vaststellen. Van deze startopdracht wordt het codewoord
-niet geraadpleegd en Charon gaat direct over tot de afsluitingsriten (met vermelding
-van de inmiddels heersende NBK in het slotwoord).
-</p>
-<p class=ind> 
-De overgang naar de toestand EB vindt plaats, wanneer het verzorgingsprogramma
-in de OKtoestand aan een nieuwe startopdracht wil gaan beginnen, de bandponser
-zijn correcte aanwezigheid lijkt te bevestigen maar de detector op het einde van
-de band alarm geeft. Van deze startopdracht wordt het codewoord niet geraadpleegd
-en Charon gaat direct over tot de afsluitingsriten (met vermelding van
-de inmiddels heersende EB in het slotwoord).
-</p><p class=ind> 
-In de toestanden NBK en EB worden startopdrachten symbolisch afgewerkt,
-dwz. Charon kijkt, of het codewoord de HOK-opdracht is, zo nee, dan wordt de
-opdracht meteen afgesloten met vermelding van de heersende toestand (NBK of EB)
-in het slotwoord, zo ja, dan bewerkt de HOK-opdracht bij NBK de overgang naar
-OK (met slotwoord = + 0) en bij EB de overgang naar ASL (met vermelding van de
-inmiddels heersende ASL in het slotwoord).
-</p><p class=ind> 
-Niet symbolische afwerking treedt op, wanneer het verzorgingsprogramma
-in de toestand OK of ASL aan een nieuwe startopdracht wil beginnen. De enige
-verschillen tussen deze twee toestanden zijn
-
-</p>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td width="5%" valign="top"><span class="ind">1) </span></td>
-    <td width="95%"><span class="ind">de test van correct aangesloten zijn blijft bij ASL achterwege, de overgang
-  ASL &rarr; NBK komt dus niet voor</span></td>
-  </tr>
-  <tr>
-    <td valign="top"><span class="ind">2) </span></td>
-    <td><span class="ind">de test van alarm van de detector van het einde van de band blijft
-bij ASL achterwege, de overgang ASL &rarr; EB komt dus niet voor</span></td>
-  </tr>
-  <tr>
-    <td valign="top"><span class="ind">3) </span></td>
-    <td><span class="ind">bij ASL heeft de HOKopdracht het neveneffect, dat de bandponser in de rode
-  toestand komt en een lichtje "Band verwisselen" op de bandponser gaat branden.
-  Voor de verwerking van de feitelijke ponsopdracht (in toestand OK of ASL) verwijzen
-  we naar sectie 6, het teleprinterdrukwerk.</span></td>
-  </tr>
+<tr>
+<td width="27%" align="right" valign="top">tellingdeel =&nbsp;</td>
+<td width="73%" class="noindent">lengte van de rij (waarbij tellingdeel = 0<br></td>
+</tr>
+<tr>
+<td align="right" valign="top">&nbsp;</td>
+<td>de lengte = 512 voorschrijft)</td>
+</tr>
+<tr>
+<td align="right" valign="top">adresdeel =&nbsp;</td>
+<td><span style="text-indent: 2.7cm">beginadres van de woordenrij - 1</span></td>
+</tr>
 </table>
-<p class=ind> 
-  Als het einde van de band nadert, krijgt de laatst normaal verwerkte ponsopdracht 
-  nog de OKmelding in het slotwoord, van de eerste met de EB-melding is
-  niets meer geponst. Met een HOKopdracht krijgt de basismachine het Charonprogramma
-  in de afsluitingstoestand waarin alarm van de eindebanddetecte genegeerd
-  wordt. De programmeur heeft dan nog de gelegenheid (minstens anderhalve meter
-  band) om een speciale afsluitcombinatie op de band te ponsen (deze mag uit meer
-  dan een startschakel zijn opgebouwd). Een volgende HOKopdracht brengt het verzorgingsprogramma weer in de OKtoestand, (en wat de basismachne 
-  betreft kunnen de volgende startopdrachten alweer aangeboden worden), de bandponser
-  is echter nog rood, totdat de operateur een nieuwe rol heeft ingelegd 
-  (inclusief het resetten van het EB-contact) en op de
-  groene knop heeft gedrukt.
-</p><p class=ind> 
-Opm. In de rode toestand wordt alarm van de eindebanddetector niet aan Charon
-doorgegeven. Wanneer na de tweede HOKopdracht de basismachine alweer opdrachten
-voor de volgende band aanbiedt, kan als de operateur nog geen band verwisseld heeft
-het einde van de eerste band dus niet voor dat van de tweede aangezien worden.
-Het drukken op de groene knop heeft geen effect wanneer het lichtje "Band Verwisselen"
-nog brandt.
-</p><p class="noindent"><u>9. De klok.</u>
-</p><p class=ind> 
-De klok is onveranderlijk apparaat nr. 39. Hij werkt onafhankelijk van de
-AF en heeft drie functies.
-</p><p class="noindent"><u>9.1. De eigenlijke klok.</u>
-</p><p class=ind> 
-Elke 10 msec wordt AR0 (mod 2<sup>27</sup>) met 1 verhoogd. De cyclus van dit
-telproces is van de orde van grootte van twee weken.
-Gelijkzetten van de klok: tandenpoetsen (NLVAF <u>and</u> NLVCA), gelijkzetten, poetsen (NLVAF <u>and</u> LVCA)
-</p><p class="noindent"><u>9.2. De kookwekker.</u>
-</p><p class=ind> 
-Elke 10 msec wordt het adresdeel van AR1 (mod 2<sup>18</sup>) met 1 verminderd. Als
-AR1 hierdoor totaal = + 0 wordt  wordt het tellingdeel van AR1 =000 000 001
-gezet en IF:= <u>true</u>, maw. de ingreep van de kookwekker kan plaatsvinden. Wie deze
-ingreep niet wil hebben, kan hem dus definitief onderdrukken door het tellingdeel
-van AR1 meteen &ne; 0 te maken. De maximale looptijd van de kookwekker is
-circa 40 minuten.
-</p><p class="noindent"><u>9.3. De apparaatwekker.</u>
-</p><p class=ind> 
-Elke 10 msec wordt het tellingdeel van AR2 met 1 (mod 512) verminderd.
-Als het resulterende tellingdeel = 0 wordt en het adresdeel van AR2 = NR &ne; 0
-is, dan wordt
-<br>
-1) van het apparaat met apparaatnummer = NR de LVAF = <u>true</u> gezet
-<br>2) AR3 in AR2 overgenomen.
-</p><p class=ind> 
-Men initieert dit proces door eenmalig AR2 en AR3 met hetzelfde te vullen.
-Men kan met de apparaatwekker een aangewezen apparaat om de zoveel tijd ergens
-nota van laten nemen, met een maximum periode van circa vijf seconden, een faciliteit, 
-die in sommige on line toepassingen van interesse is. Door in AR2 bv.
-+ 0 in te vullen schakelt men de apparaatwekker uit.
-</p><p class="noindent"><u>10. Het aanschakelen van de machine.</u>
-</p><p class=ind> 
-Als de machine wordt aangezet, dan komt hij in de toestand, die ook te
-bereiken is door het indrukken van LS (Laatste Schakelaar) op het wegklapbare
-gedeelte van het bedieningspaneel. Dit heeft de volgende effecten:
-</p><p class=ind> 
-Alle randapparatuur komt in de rode toestand.
-</p><p class=ind> 
-Charon komt in zijn rusttoestand en doet niets.
-</p><p class=ind> 
-De basismachine komt in de zg. statische stop, dwz. doet ook niets en is
-zelfs voor het ingreepmechanisme niet ontvankelijk.
-</p><p class=ind> 
-De regulerende flipflops hebben na afloop de volgende waarden
-<br>IV = <u>true</u> (Ingreep Vergunning)
-<br>OV = <u>false</u> (Onderzoek Vergunning)
-<br>alle AF = <u>false</u>
-<br>alle IF = <u>false</u>
-<br>alle LVIF = <u>true</u>
-<br>alle LVAF = <u>true</u> (Luister Vergunning AF, interne Charon flipflops)
-<br>alle LVCA = <u>false</u> (Luister Vergunning Communicatie Aankondiging, eveneens interne
-flipflops van Charon)
-</p><p class=ind> 
-In deze installatietoestand (en alleen in deze installatietoestand) heeft
-het indrukken van hetzij IP (Initieel Programma) hetzij NB(Normaal Begin) effect. De bespreking
-van het effect van de toets NB wordt uitgesteld tot de behandeling van het
-tandenpoetsen.
-</p><p class="noindent"><u>10.1 Het Prille Begin.</u>
-</p><p class=ind> 
-Het indrukken ven de toets IP heeft tot effect. dat de basismachine overgaat
-in de dynamische stoptoestand, dwz. hij doet nog steeds niets maar is nu wel
-voor ingrepen ontvankelijk; daar (zie 10) alle IFs <u>false</u> zijn, treedt het ingreepmechanisme
-voorlopig niet in werking. In T wordt de waarde 2<sup>18</sup> - 1 gezet.
-</p><p class=ind> 
-Verder wordt Charon gestart in een speciaal programma &mdash;genaamd het prille
-begin&mdash; dat via een vaste, installatieafhankelijke bandlezer op een heel speciale
-manier band gaat lezen. <br>Op deze band komen woorden voor, als volgt gecodeerd in vier opeenvolgende
-heptades; de leesrichting is van boven naar beneden, de positie van de sprocket
-holes is door wat extra ruimte weergegeven. Weer stelt een gat een 1 voor.
+<p class="ind">Het Charonprogramma, dat de bandlezer verzorgt kent drie toestanden, genaamd OK, NBK (Niet Bedrijfs Klaar) en EB (Einde Band). De toestand van het verzorgingsprogramma wordt ten bate van Charon in het tellingdeel van AR0 bijgehouden. Ten bate van de basismachine, die na afloop van elke startopdracht moet kunnen vaststellen, hoe deze is uitgevoerd, wordt in het tellingdeel van elk slotwoord de op het moment van de invulling heersende toestand genoteerd. In beide tellingdelen geldt de codering:</p>
+<table width="100%">
+<tr>
+<td width="150" align="right">000 000 000</td>
+<td width="74" align="left">&nbsp;</td>
+<td width="45" align="left">OK</td>
+<td width="504">&nbsp;</td>
+</tr>
+<tr>
+<td align="right">111 111 111</td>
+<td align="left">&nbsp;</td>
+<td align="left">NBK</td>
+<td>(Nist Bedrijfs Klaar)</td>
+</tr>
+<tr>
+<td align="right">111 111 110</td>
+<td align="left">&nbsp;</td>
+<td align="left">EB</td>
+<td>(Einde Band)</td>
+</tr>
+</table>
+<p class="ind">De overgang naar de toestand NBK vindt (zie 6.) weer plaats, wanneer het verzorgingsprogramma, vlak voordat het in de toestand OK een startopdracht zou aanhalen, de aanwezigheid van de correct aangesloten bandlezer niet naar tevredenheid kan vaststellen. Van deze startopdracht wordt het codewoord dan niet geraadplaagd en Charon gaat direct over tot de afsluitingsriten (met vermelding van de inmiddels heersende NBK in het slotwoord).</p>
+<p class="ind">In de toestanden NBK en EB worden startopdrachten symbolisch afgewerkt, dwz. Charon kijkt, of het codewoord de HOK-opdracht is, zoja, dan gaat het verzorgingsprogramma over in de toestand OK (met vermelding van een slotwoord = +0), zo nee, dan wordt de opdracht meteen afgesloten met vermelding van de toestand (NBK of EB) in het slotwoord.</p>
+<p class="ind">Wanneer de OK-status geldt en de bandlezer lijkt zijn correcte aanwezigheid te bevestigen, dan wordt de nieuwe startopdracht normaal verwerkt. Is hij een (overbodige) HOK-opdracht, dan wordt hij als zodanig uitgevoerd, anders wordt het feitelijk bandlezen geinitieerd. Bij de acceptering van de startopdracht wordt het codewoord uit de heersende schakel in AR3 overgenomen. Per gelezen ponsing neemt Charon tweemaal contact met het geheugen op. In het eerste geheugencontact met AR3 (het zg. lopende codewoord) wordt het tellingdeel (mod 512) met 1 verlaagd en het adresdeel (mod 2<sup>18</sup>) met 1 verhoogd. Is het resulterende tellingdeel = 0, dan is het nu volgende woordtransport het laatste van de startopdracht. In het geheugencontact, volgend op dat met AR3 wordt de gelezen ponsing, aan de meest significante zijde aangevuld met nullen, ingevuld op de geheugenplaats, die wordt aangewezen door het zojuist in AR3 weggeschreven adresdeel. Tevens wordt bij het lezen van elke ponsing geinspecteerd of de detectie van het einde van de band alarm geeft, zo ja, dan gaat het verzorgingsprogramma tot de afsluitingsriten van deze startopdracht over, na eerst de toestand EB heersend te hebben gemaakt.</p>
+<p class="noindent">Opm. Er wordt dus altijd tenminste 1 ponsing ten gevolge van de geaccepteerde transportopdracht gelezen. Na elke ponsing wordt eerst gevraagd naar het bandeinde zo nee, dan wordt pas getest, of de afsluiting tengevolge van tellingdeel = 0 aan de beurt is. Als het slotwoord EB vermeldt, kan de startopdrecht dus wel volledig zijn uitgevoerd! Het symbolisch afwerken verstoort AR3 niet: wanneer de startopdracht op grond van Einde Band is beeindigd bevindt zich in het tellingdeel van AR3 het ontbrekende aantal ponsngen, in het adresdeel het adres van het laatst gevulde woord.</p>
+<p class="ind">De bandlezer leest met een snelheid van 1000 ponsingen per seconde; afgezien van initiering en afsluitriten belegt het leesproces het geheugen van de machine voor .625 procent van de tijd.</p>
+<p class="ind">De bandlezer kan ingesteld worden op het lezen van 5-, 7- of 8-gats band. Deze bandbreedte wordt niet geacht bij te dragen tot de informatie, programmatechnische is de heersende bandbreedte niet detecteerbaar. In het geheugen wordt een gat in een ponsing door een 1 en geen gat door een 0 voorgesteld; de individuele posities in een ponsing worden in volgorde op de minst significante bitposites van het woord afgebeeld, en wel zo, dat de sporen, toegevoegd aan d2 en d3 aan beide zijden van de 'sprocket holes" liggen. De bandlezer leest alle configuaties ongenterpreteerd, ook "blank tape" en "all holes.</p>
+<p class="noindent">NB. In de bandlezer zitten buffers voor twee ponsingen. Dit heeft tot gevolg, dat na bandverwsselen de eerste twee ponsingen die tot Charon doordringen, de laatste twee van de vorige band zijn. Na aanzetten van de machine zijn de eerste twee gelezen ponsingen ongedefinieerd.</p>
+<p class="ind">De band passeert in volgorde<br>
+1) een detector voor het einde van de band<br>
+2) de rem<br>
+3) het leesstation<br>
+4) de aandrijving.<br>
+De uiteinden van een band kunnen daardoor niet gelezen worden.</p>
+<p class="ind">De bandlezer is eveneens uitgerust met een rode en een groene knop en bijbehorende controlelichtjes; ook hier flikkert het rode licht als Charon metterdaad wacht op een achterwege blijvend synchronisatiesignaal van de bandlezer ("een hangende startopdracht"). Wanneer Charon op grond van het tot hem doorgedrongen signaal "Einde Band" een startopdracht afbreekt voert hij tevens de bandlezer in kwestie over in de rode toestand, het indrukken van de groene knop heeft slechts effect, wanneer er nog een voldoend lange band in de bandlezer ligt. Het indrukken van de rode en de groene knop dringt als zodanig niet tot de machine door, evenmin als het band verwisselen in een rode bandlezer.</p>
+<p class="ind">Als er over een bandlezer een band tot en met het einde gelezen is, moeten er, voordat een volgende band over die bandlezer gelezen kan worden, twee dingen gebeurd zijn:<br>
+1) de basismachine moet een HOK-opdracht aan deze bandlezer hebben aangeboden<br>
+2) de operateur moet een nieuwe band hebben ingelegd en dit met het drukken op de groene knop daarna hebben bekrachtigd.<br>
+De volgorde van deze twee gebeurtenissen doet niet ter zake.</p>
+<p class="noindent"><u>8. De bandponser.</u></p>
+<p class="ind">De centrale administratie op de plaatsen AR0 t/m AR3, evenals de layout van de startschakel zijn bij de bandponser even normaal als bij het teleprinter drukwerk (zie 6). Teleprinterdrukwerk en bandponser worden nl. door identieke Charon-programma's verzorgd. Nu bepalen de laagste 7 bits van het woord, dat naar de ponser gestuurd wordt, wat er wordt geponst de overige 20 zijn irrelevant. De toevoeging van de bitposities in het woord aan de sporen op de band is als bij de bandlezer.</p>
+<p class="ind">Het Charonprogramma dat de bandponser verzorgt, kent vier toestanden, genaamd OK, NBK (Niet Bedrijfs Klaar) EB (Einde Band) en ASL (AfSLuitng). De toestand van het verzorgingsprogramma wordt ten bate van Charon in het tellingdeel van AR0 bijgehouden. Ten bate van de basismachine die na afloop van elke startopdracht moet kunnen vaststellen, hoe deze is uitgevoerd, wordt in het tellingdeel van elk slotwoord de op het moment van invulling heersende toestand genoteerd. In beide tellingdelen geldt de codering:</p>
+<table width="484">
+<tr>
+<td width="159" align="right">000 000 000</td>
+<td width="60" align="right">&nbsp;</td>
+<td width="249">OK</td>
+</tr>
+<tr>
+<td align="right">111 111 111</td>
+<td align="right">&nbsp;</td>
+<td>NBK (Niet Bedrijfs Klaar)</td>
+</tr>
+<tr>
+<td align="right">111 111 110</td>
+<td align="right">&nbsp;</td>
+<td>EB (Einde Band)</td>
+</tr>
+<tr>
+<td align="right">111 111 101</td>
+<td align="right">&nbsp;</td>
+<td>ASL (AfSLuitng)</td>
+</tr>
+</table>
+<p class="ind">De overgang naar de toestand NOK vindt (zie 6) weer slechts plaats, wanneer het verzorgingsprogramma vlak voordat het in de toestand OK een startopdracht zou gaan aanhalen, de aanwezigheid van een correct aangesloten bandponser niet naar tevredenheid kan vaststellen. Van deze startopdracht wordt het codewoord niet geraadpleegd en Charon gaat direct over tot de afsluitingsriten (met vermelding van de inmiddels heersende NBK in het slotwoord).</p>
+<p class="ind">De overgang naar de toestand EB vindt plaats, wanneer het verzorgingsprogramma in de OKtoestand aan een nieuwe startopdracht wil gaan beginnen, de bandponser zijn correcte aanwezigheid lijkt te bevestigen maar de detector op het einde van de band alarm geeft. Van deze startopdracht wordt het codewoord niet geraadpleegd en Charon gaat direct over tot de afsluitingsriten (met vermelding van de inmiddels heersende EB in het slotwoord).</p>
+<p class="ind">In de toestanden NBK en EB worden startopdrachten symbolisch afgewerkt, dwz. Charon kijkt, of het codewoord de HOK-opdracht is, zo nee, dan wordt de opdracht meteen afgesloten met vermelding van de heersende toestand (NBK of EB) in het slotwoord, zo ja, dan bewerkt de HOK-opdracht bij NBK de overgang naar OK (met slotwoord = + 0) en bij EB de overgang naar ASL (met vermelding van de inmiddels heersende ASL in het slotwoord).</p>
+<p class="ind">Niet symbolische afwerking treedt op, wanneer het verzorgingsprogramma in de toestand OK of ASL aan een nieuwe startopdracht wil beginnen. De enige verschillen tussen deze twee toestanden zijn</p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="5%" valign="top"><span class="ind">1)</span></td>
+<td width="95%"><span class="ind">de test van correct aangesloten zijn blijft bij ASL achterwege, de overgang ASL → NBK komt dus niet voor</span></td>
+</tr>
+<tr>
+<td valign="top"><span class="ind">2)</span></td>
+<td><span class="ind">de test van alarm van de detector van het einde van de band blijft bij ASL achterwege, de overgang ASL → EB komt dus niet voor</span></td>
+</tr>
+<tr>
+<td valign="top"><span class="ind">3)</span></td>
+<td><span class="ind">bij ASL heeft de HOKopdracht het neveneffect, dat de bandponser in de rode toestand komt en een lichtje "Band verwisselen" op de bandponser gaat branden. Voor de verwerking van de feitelijke ponsopdracht (in toestand OK of ASL) verwijzen we naar sectie 6, het teleprinterdrukwerk.</span></td>
+</tr>
+</table>
+<p class="ind">Als het einde van de band nadert, krijgt de laatst normaal verwerkte ponsopdracht nog de OKmelding in het slotwoord, van de eerste met de EB-melding is niets meer geponst. Met een HOKopdracht krijgt de basismachine het Charonprogramma in de afsluitingstoestand waarin alarm van de eindebanddetecte genegeerd wordt. De programmeur heeft dan nog de gelegenheid (minstens anderhalve meter band) om een speciale afsluitcombinatie op de band te ponsen (deze mag uit meer dan een startschakel zijn opgebouwd). Een volgende HOKopdracht brengt het verzorgingsprogramma weer in de OKtoestand, (en wat de basismachne betreft kunnen de volgende startopdrachten alweer aangeboden worden), de bandponser is echter nog rood, totdat de operateur een nieuwe rol heeft ingelegd (inclusief het resetten van het EB-contact) en op de groene knop heeft gedrukt.</p>
+<p class="ind">Opm. In de rode toestand wordt alarm van de eindebanddetector niet aan Charon doorgegeven. Wanneer na de tweede HOKopdracht de basismachine alweer opdrachten voor de volgende band aanbiedt, kan als de operateur nog geen band verwisseld heeft het einde van de eerste band dus niet voor dat van de tweede aangezien worden. Het drukken op de groene knop heeft geen effect wanneer het lichtje "Band Verwisselen" nog brandt.</p>
+<p class="noindent"><u>9. De klok.</u></p>
+<p class="ind">De klok is onveranderlijk apparaat nr. 39. Hij werkt onafhankelijk van de AF en heeft drie functies.</p>
+<p class="noindent"><u>9.1. De eigenlijke klok.</u></p>
+<p class="ind">Elke 10 msec wordt AR0 (mod 2<sup>27</sup>) met 1 verhoogd. De cyclus van dit telproces is van de orde van grootte van twee weken. Gelijkzetten van de klok: tandenpoetsen (NLVAF <u>and</u> NLVCA), gelijkzetten, poetsen (NLVAF <u>and</u> LVCA)</p>
+<p class="noindent"><u>9.2. De kookwekker.</u></p>
+<p class="ind">Elke 10 msec wordt het adresdeel van AR1 (mod 2<sup>18</sup>) met 1 verminderd. Als AR1 hierdoor totaal = + 0 wordt wordt het tellingdeel van AR1 =000 000 001 gezet en IF:= <u>true</u>, maw. de ingreep van de kookwekker kan plaatsvinden. Wie deze ingreep niet wil hebben, kan hem dus definitief onderdrukken door het tellingdeel van AR1 meteen ≠ 0 te maken. De maximale looptijd van de kookwekker is circa 40 minuten.</p>
+<p class="noindent"><u>9.3. De apparaatwekker.</u></p>
+<p class="ind">Elke 10 msec wordt het tellingdeel van AR2 met 1 (mod 512) verminderd. Als het resulterende tellingdeel = 0 wordt en het adresdeel van AR2 = NR ≠ 0 is, dan wordt<br>
+1) van het apparaat met apparaatnummer = NR de LVAF = <u>true</u> gezet<br>
+2) AR3 in AR2 overgenomen.</p>
+<p class="ind">Men initieert dit proces door eenmalig AR2 en AR3 met hetzelfde te vullen. Men kan met de apparaatwekker een aangewezen apparaat om de zoveel tijd ergens nota van laten nemen, met een maximum periode van circa vijf seconden, een faciliteit, die in sommige on line toepassingen van interesse is. Door in AR2 bv. + 0 in te vullen schakelt men de apparaatwekker uit.</p>
+<p class="noindent"><u>10. Het aanschakelen van de machine.</u></p>
+<p class="ind">Als de machine wordt aangezet, dan komt hij in de toestand, die ook te bereiken is door het indrukken van LS (Laatste Schakelaar) op het wegklapbare gedeelte van het bedieningspaneel. Dit heeft de volgende effecten:</p>
+<p class="ind">Alle randapparatuur komt in de rode toestand.</p>
+<p class="ind">Charon komt in zijn rusttoestand en doet niets.</p>
+<p class="ind">De basismachine komt in de zg. statische stop, dwz. doet ook niets en is zelfs voor het ingreepmechanisme niet ontvankelijk.</p>
+<p class="ind">De regulerende flipflops hebben na afloop de volgende waarden<br>
+IV = <u>true</u> (Ingreep Vergunning)<br>
+OV = <u>false</u> (Onderzoek Vergunning)<br>
+alle AF = <u>false</u><br>
+alle IF = <u>false</u><br>
+alle LVIF = <u>true</u><br>
+alle LVAF = <u>true</u> (Luister Vergunning AF, interne Charon flipflops)<br>
+alle LVCA = <u>false</u> (Luister Vergunning Communicatie Aankondiging, eveneens interne flipflops van Charon)</p>
+<p class="ind">In deze installatietoestand (en alleen in deze installatietoestand) heeft het indrukken van hetzij IP (Initieel Programma) hetzij NB(Normaal Begin) effect. De bespreking van het effect van de toets NB wordt uitgesteld tot de behandeling van het tandenpoetsen.</p>
+<p class="noindent"><u>10.1 Het Prille Begin.</u></p>
+<p class="ind">Het indrukken ven de toets IP heeft tot effect. dat de basismachine overgaat in de dynamische stoptoestand, dwz. hij doet nog steeds niets maar is nu wel voor ingrepen ontvankelijk; daar (zie 10) alle IFs <u>false</u> zijn, treedt het ingreepmechanisme voorlopig niet in werking. In T wordt de waarde 2<sup>18</sup> - 1 gezet.</p>
+<p class="ind">Verder wordt Charon gestart in een speciaal programma —genaamd het prille begin— dat via een vaste, installatieafhankelijke bandlezer op een heel speciale manier band gaat lezen.<br>
+Op deze band komen woorden voor, als volgt gecodeerd in vier opeenvolgende heptades; de leesrichting is van boven naar beneden, de positie van de sprocket holes is door wat extra ruimte weergegeven. Weer stelt een gat een 1 voor.</p>
 <pre>
        1 d26 d25 d24    d23 d22 d21
      d20 d19 d18 d17    d16 d15 d14
      d13 d12 d11 d1O     d9  d8  d7
-      d6  d5  d4  d3     d2  d1  d0</pre>
-<p>Voor en achter aan de band kieze men een behoorlijk stuk blank.
-  Het leesprogramma skipt eventuele extra blanke heptades voor elk woord; het
-  eerste woord, dat van de band gelezen wordt, wordt genterpreteerd als codewoord,
-  zij het dat de opeenvolgende woordtransporten naar het geheugen nu niet
-  betrekking hebben op enkele heptades naar op hele woorden. Zodra deze startopdracht
-  is afgelopen keert het prille begin terug naar de toestand, waarin het
-  eerst volgende van de band gelezen woord weer als codewoord wordt genterpreteerd.
-  </p>
-</p>
-<p class=ind> 
-Het IP-lezen wordt door Charon beeindigd zodra hij een codewoord
-bestaande uit louter nullen zou vinden, dwz. op het goede moment de configuratie
+      d6  d5  d4  d3     d2  d1  d0
+</pre>
+<p>Voor en achter aan de band kieze men een behoorlijk stuk blank. Het leesprogramma skipt eventuele extra blanke heptades voor elk woord; het eerste woord, dat van de band gelezen wordt, wordt genterpreteerd als codewoord, zij het dat de opeenvolgende woordtransporten naar het geheugen nu niet betrekking hebben op enkele heptades naar op hele woorden. Zodra deze startopdracht is afgelopen keert het prille begin terug naar de toestand, waarin het eerst volgende van de band gelezen woord weer als codewoord wordt genterpreteerd.</p>
+<p class="ind">Het IP-lezen wordt door Charon beeindigd zodra hij een codewoord bestaande uit louter nullen zou vinden, dwz. op het goede moment de configuratie</p>
 <pre>
           1000 000
           0000 000
           0000 000
-          0000 000</pre>
-<p>Het beeindigen heeft voor Charon ten gevolge dat hij in de normale
-  rusttoestand ("niets te doen") overgaat(tijdens het IP-lezen was zijn toestand
-  nog wel een beetje bijzonder); de betrokken bandlezer stopt en blijft groen
-  met LVAF = <u>true</u> (poetsen is niet noodzakelijk). Tenslotte zet Charon
-  onafhankelijk van IFT van de bijbehorende bandlezer de IF = <u>true</u>. Tenzij SVA
-  (Stop Volgende Adres) in staat, vindt in de basismachine nu onmiddelijk
-  de normale ingreep plaats via M[24]. (Staat SVA wel in, dan blijft de
-  ngreep hangen met in de opdrachtteller allemaal enen (2&#8593;18 - 1), totdat de
-  machine wordt doorgestart.)
-</p>
-</p>
-<p class=ind> 
-NB. Aangezien het lezen van het prille begin aan geen enkele vorm van
-pariteitscontrole is onderworpen verdient het aanbeveling, met het prille
-begin niet al te veel meer dan nodig in te lezen.
-</p><p class="noindent"><u>10.2 De tandenpoetser.</u>
-</p><p class=ind> 
-De tandenpoetser is voor alle installaties apparaat nr. 38. Men start de
-tandenpoetser door (na aanbieding van een startopdracht) zijn AF op <u>true</u> te
-zetten, hij meldt voltooiing van zijn actie door zijn IF op <u>true</u> te zetten.
-Dit alles gaat buiten AFT en IFT om, die bij de tendenpoetser niet bestaan.
-(AR1, AR2 en AR3 worden niet gebruikt door het tandenpoetsprogramma).
-</p><p class=ind> 
-Startopdrachten voor de tandenpoetser kunnen niet geketend worden, men
-plaatst ze stuk voor stuk in AR0. De betekenis van de bits van AR0 is dan:
-</p><table width="100%">
+          0000 000
+</pre>
+<p>Het beeindigen heeft voor Charon ten gevolge dat hij in de normale rusttoestand ("niets te doen") overgaat(tijdens het IP-lezen was zijn toestand nog wel een beetje bijzonder); de betrokken bandlezer stopt en blijft groen met LVAF = <u>true</u> (poetsen is niet noodzakelijk). Tenslotte zet Charon onafhankelijk van IFT van de bijbehorende bandlezer de IF = <u>true</u>. Tenzij SVA (Stop Volgende Adres) in staat, vindt in de basismachine nu onmiddelijk de normale ingreep plaats via M[24]. (Staat SVA wel in, dan blijft de ngreep hangen met in de opdrachtteller allemaal enen (2↑18 - 1), totdat de machine wordt doorgestart.)</p>
+<p class="ind">NB. Aangezien het lezen van het prille begin aan geen enkele vorm van pariteitscontrole is onderworpen verdient het aanbeveling, met het prille begin niet al te veel meer dan nodig in te lezen.</p>
+<p class="noindent"><u>10.2 De tandenpoetser.</u></p>
+<p class="ind">De tandenpoetser is voor alle installaties apparaat nr. 38. Men start de tandenpoetser door (na aanbieding van een startopdracht) zijn AF op <u>true</u> te zetten, hij meldt voltooiing van zijn actie door zijn IF op <u>true</u> te zetten. Dit alles gaat buiten AFT en IFT om, die bij de tendenpoetser niet bestaan. (AR1, AR2 en AR3 worden niet gebruikt door het tandenpoetsprogramma).</p>
+<p class="ind">Startopdrachten voor de tandenpoetser kunnen niet geketend worden, men plaatst ze stuk voor stuk in AR0. De betekenis van de bits van AR0 is dan:</p>
+<table width="100%">
 <tr>
-  <td width="39">d26 </td>
-  <td width="125">t/m d20:</td>
-  <td width="36">&nbsp;</td>
-  <td width="160">alle = 0</td><td width="403">LVCA =: <u>false</u></td></tr>
+<td width="39">d26</td>
+<td width="125">t/m d20:</td>
+<td width="36">&nbsp;</td>
+<td width="160">alle = 0</td>
+<td width="403">LVCA =: <u>false</u></td>
+</tr>
 <tr>
-  <td>&nbsp;</td>
-  <td>&nbsp;      </td>
-  <td>niet</td>
-  <td> alle = 0</td><td>LVCA =: <u>true</u></td></tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>niet</td>
+<td>alle = 0</td>
+<td>LVCA =: <u>true</u></td>
+</tr>
 <tr>
-  <td>d19 </td>
-  <td>t/m d18:</td>
-  <td colspan="2">beide permanent = 0</td>
-  <td>&nbsp;</td></tr>
+<td>d19</td>
+<td>t/m d18:</td>
+<td colspan="2">beide permanent = 0</td>
+<td>&nbsp;</td>
+</tr>
 <tr>
-  <td>d17 </td>
-  <td>t/m d11:</td>
-  <td>&nbsp;</td>
-  <td>alle = 0</td><td>LVAF =: <u>false</u></td></tr>
+<td>d17</td>
+<td>t/m d11:</td>
+<td>&nbsp;</td>
+<td>alle = 0</td>
+<td>LVAF =: <u>false</u></td>
+</tr>
 <tr>
-  <td>&nbsp;</td>
-  <td>&nbsp;      </td>
-  <td>niet</td>
-  <td> alle = 0</td><td>LVAF =: <u>true</u></td></tr>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>niet</td>
+<td>alle = 0</td>
+<td>LVAF =: <u>true</u></td>
+</tr>
 <tr>
-  <td>d10 </td>
-  <td>t/m d6:</td>
-  <td colspan="2">irrelevant</td>
-  <td>&nbsp;</td></tr>
+<td>d10</td>
+<td>t/m d6:</td>
+<td colspan="2">irrelevant</td>
+<td>&nbsp;</td>
+</tr>
 <tr>
-  <td>d5 </td>
-  <td>t/m d0:</td>
-  <td colspan="3">nummer van het te poetsenapparaat.</td>
-  </tr>
-</table><p class=ind> 
-Het poetsen van een apparaat betekent
-<br>
-1) dat de electronische besturing van het apparaat in de thuisstand" wordt
-gebracht
-<br>2) dat de LVAF en de LVCA voor dit apparaat gezet worden volgens specificatie
-van de startopdracht.
-</p><p class=ind> 
-De LVAF's en LVCA's zijn interne flipflops van Charon en voor elk apparaat
-is er zo'n paar. De LVAF (Luister Vergunning AF) bestuurt of Charon een actie
-zal ondernemen op het <u>true</u> zijn van de bijbehorende AF; de LVCA (Luister Vergunnning
-Communicatie Aankondiging) bestuurt, of Charon een actie zal ondernemen op
-de aanwezigheid van de bijbehorende zg. Communicatie Aankondiging (een "synchronisatiesignalering"
-van het aparaat naar Charon).
-</p><p class=ind> 
-Voor de klok moet LVCA <u>true</u> zijn en is de LVAF irrelevant, voor het
-toetsenbord moeten LVCA en LVAF beide <u>true</u> zijn, voor de tandenpoetser moet
-LVAF <u>true</u> zijn (laat hem dus zo); voor "normale apparaten" (teleprinterdrukwerk, 
-bandponser bandlezer regeldrukker plotter, trommel) moet LVAF <u>true</u>
-en LVCA <u>false</u> zijn.
-</p><p class=ind> 
-NB. Het tandenpoetsen verzorgt geen initiering van de centrale administraties,
-dit moet dus rechtstreeks door de basismachine gedaan worden
-</p><p class="noindent"><u>11. De foutbehandeling.</u>
-</p><p class=ind> 
-De foutbehandeling is altijd apparaat nr. 37. De betekenis van de centrale
-administratie is
-</p><table width="80%">
-<tr><td>AR0:</td><td>basisadres centrale administratie eerste fout</td></tr>
-<tr><td>AR1</td><td>tellingdeel: IFT</td></tr>
-<tr><td>&nbsp;</td>
-  <td>adresdeel : ongelijk nul</td></tr>
-<tr><td>AR2</td><td>ongebruikt</td></tr>
-<tr><td>AR3:</td><td>basisadres centrale administratie volgende fout.</td></tr>
-</table><p class=ind> 
-Zodra in een van de Charonprogramma's een pariteitsfout wordt gesignaleerd
-bij het aanhalen van een woord uit het geheugen, dan wordt
-<br>
-1) het woord met de foute pariteit in het geheugen teruggeschreven, net zoals
-het daar werd aangetroffen
-<br>2) het heersende Charonprogramma, na LVCA:= LVAF:= <u>false</u> (zodat het tot nader
-order niet meer actief zal worden) onmiddellijk onderbroken
-<br>3) onder meegave van het adres van de AR0 behorende bij het onderbroken Charonverzorgingsprogramma
-wordt de foutbehandelng  onmiddellijk gestart door
-het <u>true</u> maken van de LVCA.
-</p><p class=ind> 
-Dit basisadres van de centrale administratie wordt door de foutbehandeling
-verwerkt als een karakter van het toetsenbord door het toetsenbordprogramma:</p>
-<p class=noindent><u>if</u> AF <u>and</u> LVAF <u>then</u> AR0:= basisadres <u>else</u> AR3 := basisadres; AF := <u>false</u>;<br>
-IFT:= IFT + 1 (mod 512); <u>if</u> 0 < IFT <u>then</u> IFT:= <u>true</u>
-</p>
-<p class=ind> 
-De reactie op de ingreep ven de foutbehandeling stelt de besismchine voor
-een essentiele haastsituatie; bij cumulatie van fouten raakt de basismachine het
-spoor bijster.
-</p><p class="noindent">
-Opmerking. Als er bij de tandenpoetser een pariteitsfout optreedt, is men
-op LS aangewezen om weer greep op de machine te krijgen!
-<br>- - - - - - - - - - - - - - - - - - - -- - - - - - - - - - -- - - - -   
-<br>
-Toevoeging en 10.2. Na aanzetten of LS kan men, behalve op IP ook drukken op NB
-Men forceert dan IF T := 2<sup>18</sup> - 1 van de tandenpoetser <u>true</u> en krijgt een ingreep via M[24].
-</P>
+<td>d5</td>
+<td>t/m d0:</td>
+<td colspan="3">nummer van het te poetsenapparaat.</td>
+</tr>
+</table>
+<p class="ind">Het poetsen van een apparaat betekent<br>
+1) dat de electronische besturing van het apparaat in de thuisstand" wordt gebracht<br>
+2) dat de LVAF en de LVCA voor dit apparaat gezet worden volgens specificatie van de startopdracht.</p>
+<p class="ind">De LVAF's en LVCA's zijn interne flipflops van Charon en voor elk apparaat is er zo'n paar. De LVAF (Luister Vergunning AF) bestuurt of Charon een actie zal ondernemen op het <u>true</u> zijn van de bijbehorende AF; de LVCA (Luister Vergunnning Communicatie Aankondiging) bestuurt, of Charon een actie zal ondernemen op de aanwezigheid van de bijbehorende zg. Communicatie Aankondiging (een "synchronisatiesignalering" van het aparaat naar Charon).</p>
+<p class="ind">Voor de klok moet LVCA <u>true</u> zijn en is de LVAF irrelevant, voor het toetsenbord moeten LVCA en LVAF beide <u>true</u> zijn, voor de tandenpoetser moet LVAF <u>true</u> zijn (laat hem dus zo); voor "normale apparaten" (teleprinterdrukwerk, bandponser bandlezer regeldrukker plotter, trommel) moet LVAF <u>true</u> en LVCA <u>false</u> zijn.</p>
+<p class="ind">NB. Het tandenpoetsen verzorgt geen initiering van de centrale administraties, dit moet dus rechtstreeks door de basismachine gedaan worden</p>
+<p class="noindent"><u>11. De foutbehandeling.</u></p>
+<p class="ind">De foutbehandeling is altijd apparaat nr. 37. De betekenis van de centrale administratie is</p>
+<table width="80%">
+<tr>
+<td>AR0:</td>
+<td>basisadres centrale administratie eerste fout</td>
+</tr>
+<tr>
+<td>AR1</td>
+<td>tellingdeel: IFT</td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>adresdeel : ongelijk nul</td>
+</tr>
+<tr>
+<td>AR2</td>
+<td>ongebruikt</td>
+</tr>
+<tr>
+<td>AR3:</td>
+<td>basisadres centrale administratie volgende fout.</td>
+</tr>
+</table>
+<p class="ind">Zodra in een van de Charonprogramma's een pariteitsfout wordt gesignaleerd bij het aanhalen van een woord uit het geheugen, dan wordt<br>
+1) het woord met de foute pariteit in het geheugen teruggeschreven, net zoals het daar werd aangetroffen<br>
+2) het heersende Charonprogramma, na LVCA:= LVAF:= <u>false</u> (zodat het tot nader order niet meer actief zal worden) onmiddellijk onderbroken<br>
+3) onder meegave van het adres van de AR0 behorende bij het onderbroken Charonverzorgingsprogramma wordt de foutbehandelng onmiddellijk gestart door het <u>true</u> maken van de LVCA.</p>
+<p class="ind">Dit basisadres van de centrale administratie wordt door de foutbehandeling verwerkt als een karakter van het toetsenbord door het toetsenbordprogramma:</p>
+<p class="noindent"><u>if</u> AF <u>and</u> LVAF <u>then</u> AR0:= basisadres <u>else</u> AR3 := basisadres; AF := <u>false</u>;<br>
+IFT:= IFT + 1 (mod 512); <u>if</u> 0 &lt; IFT <u>then</u> IFT:= <u>true</u></p>
+<p class="ind">De reactie op de ingreep ven de foutbehandeling stelt de besismchine voor een essentiele haastsituatie; bij cumulatie van fouten raakt de basismachine het spoor bijster.</p>
+<p class="noindent">Opmerking. Als er bij de tandenpoetser een pariteitsfout optreedt, is men op LS aangewezen om weer greep op de machine te krijgen!<br>
+- - - - - - - - - - - - - - - - - - - -- - - - - - - - - - -- - - - -<br>
+Toevoeging en 10.2. Na aanzetten of LS kan men, behalve op IP ook drukken op NB Men forceert dan IF T := 2<sup>18</sup> - 1 van de tandenpoetser <u>true</u> en krijgt een ingreep via M[24].</p>
 <hr>
-<P class="noindent">Transcribed
-by Martin van der Burgt</P>
-<P class="noindent" STYLE="margin-top: 0.18cm; margin-bottom: 0cm">Revised 
-  <!-- #BeginDate format:En2 -->16-Aug-2013<!-- #EndDate -->
-</P>
-<P STYLE="margin-top: 0.18cm; margin-bottom: 0cm">&nbsp;</P></BODY></HTML></div>
+<p class="noindent">Transcribed by Martin van der Burgt</p>
+<p class="noindent" style="margin-top: 0.18cm; margin-bottom: 0cm">Revised <!-- #BeginDate format:En2 -->16-Aug-2013<!-- #EndDate --></p>
+<p style="margin-top: 0.18cm; margin-bottom: 0cm">&nbsp;</p>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

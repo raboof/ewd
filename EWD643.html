@@ -23,73 +23,59 @@
   </div>
   <h1>A class of simple communication patterns (with C.S.Scholten)</h1>
   <div class='body'>
-				<p class="noindent" id="title"><b>A Class of Simple <br />
-			    Communication Patterns</b></p>
-				<p class="noindent" >Written in C<span class="smallCaps">onjunction with</span> C.S. S<span class="smallCaps">cholten</span></p>
-				<p>We consider a finite, undirected graph each node of which contains a process. Processes contained in nodes directly connected by an edge of the graph are called each other&rsquo;s neighbours.</p>
-				<p>An act of communication is only possible between two neighbours. At any moment in time each process is ready to communicate with precisely one of its neighbours; the act of communication between two neighbours can only take place when each of them is ready to communicate with the other, and, as soon as they are both ready to communicate with the other, the actual communication is assumed to take place within a bounded period of time.</p>
-				<p>For each node there exists an (otherwise arbitrary) cyclic order of its neighbours, and the act of communication with one of its neighbours causes the node to become ready to communicate with its next neighbour, where &ldquo;next&rdquo; is to be understood in terms of that cyclic order. It is this rigid rule of the locally cyclic communication patterns that justifies the word &ldquo;simple&rdquo; in the title of this note. For such systems we shall determine the conditions characterizing the absence of the dangers of deadlock or starvation.</p>
-				<p>We represent the state of each process by the presence of one arrow from its node towards (the node of) the neighbour it is ready to communicate with: hence each node has always one outgoing arrow along one of the edges of the original undirected graph. In this representation, the act of communication between two neighbours takes place when they point to each other; the act of communication causes a &ldquo;rotation&rdquo; of both outgoing arrows.  In this representation, the absence of deadlock is equivalent to the existence of at least one edge along which two arrows (in opposite directions) are present.</p>
-				<p>Let <var>c</var> be an arbitrary cycle of the undirected graph, in which  neither a node nor an edge occurs more than once. (Such cycles contain at least 3 different nodes.) On this cycle we choose an arbitrary direction, which gives each node a &ldquo;right-hand&rdquo; neighbour and a &ldquo;left-hand&rdquo; neighbour in the cycle. Because such cycles contain at least 3 nodes, these two neighbours are different. For the outgoing arrow of a node <var>x</var> of that cycle we define a &ldquo;signature with respect to <var>c</var>&rdquo;: if it points to a node that, in the cyclic order associated with <var>x</var>, lies in the range from (and excluding) the left-hand neighbour of <var>x</var> to (and including) the right-hand neighbour of <var>x</var> we call the arrow positive; otherwise we call the arrow negative.</p>
-				<p class="noindent"><b>Lemma 1</b>. &nbsp; <i>No act of communication changes the truth-value of the predicate: the outgoing arrows of the nodes of the cycle <var>c</var> have the same signature with respect to <var>c</var>.</i></p>
+<p class="noindent" id="title"><b>A Class of Simple<br>
+Communication Patterns</b></p>
+<p class="noindent">Written in C<span class="smallCaps">onjunction with</span> C.S. S<span class="smallCaps">cholten</span></p>
+<p>We consider a finite, undirected graph each node of which contains a process. Processes contained in nodes directly connected by an edge of the graph are called each other’s neighbours.</p>
+<p>An act of communication is only possible between two neighbours. At any moment in time each process is ready to communicate with precisely one of its neighbours; the act of communication between two neighbours can only take place when each of them is ready to communicate with the other, and, as soon as they are both ready to communicate with the other, the actual communication is assumed to take place within a bounded period of time.</p>
+<p>For each node there exists an (otherwise arbitrary) cyclic order of its neighbours, and the act of communication with one of its neighbours causes the node to become ready to communicate with its next neighbour, where “next” is to be understood in terms of that cyclic order. It is this rigid rule of the locally cyclic communication patterns that justifies the word “simple” in the title of this note. For such systems we shall determine the conditions characterizing the absence of the dangers of deadlock or starvation.</p>
+<p>We represent the state of each process by the presence of one arrow from its node towards (the node of) the neighbour it is ready to communicate with: hence each node has always one outgoing arrow along one of the edges of the original undirected graph. In this representation, the act of communication between two neighbours takes place when they point to each other; the act of communication causes a “rotation” of both outgoing arrows. In this representation, the absence of deadlock is equivalent to the existence of at least one edge along which two arrows (in opposite directions) are present.</p>
+<p>Let <var>c</var> be an arbitrary cycle of the undirected graph, in which neither a node nor an edge occurs more than once. (Such cycles contain at least 3 different nodes.) On this cycle we choose an arbitrary direction, which gives each node a “right-hand” neighbour and a “left-hand” neighbour in the cycle. Because such cycles contain at least 3 nodes, these two neighbours are different. For the outgoing arrow of a node <var>x</var> of that cycle we define a “signature with respect to <var>c</var>”: if it points to a node that, in the cyclic order associated with <var>x</var>, lies in the range from (and excluding) the left-hand neighbour of <var>x</var> to (and including) the right-hand neighbour of <var>x</var> we call the arrow positive; otherwise we call the arrow negative.</p>
+<p class="noindent"><b>Lemma 1</b>. &nbsp; <i>No act of communication changes the truth-value of the predicate: the outgoing arrows of the nodes of the cycle <var>c</var> have the same signature with respect to <var>c</var>.</i></p>
 <p class="noindent">P<span class="smallCaps">roof</span>. The value of the predicate can only change when the signature of the outgoing arrow of a node <var>c</var> is changed. This can only happen at an act of communication with either its left-hand, or its right-hand neighbour in the cycle <var>c</var>. This is only possible when two communicating neighbours on the cycle had outgoing arrows of different signature. The act changes the signature of both arrows, so their signatures remain different from each other. In short: if the predicate is <i>false</i> it remains <i>false</i> in spite of the possibility of changing signatures, if it is <i>true</i>, it remains <i>true</i> because none of the signatures can change. (End of proof.)</p>
-				<p class="noindent"><b>Lemma 2</b>. &nbsp; <i>The existence of a cycle <var>c</var> with outgoing arrows all of the same signature, causes local deadlock and, if the original graph is connected, total deadlock</i>.</p>
-				<p class="noindent">P<span class="smallCaps">roof</span>. None of the outgoing arrows of the nodes of <var>c</var> can have its signature changed, hence for each node of <var>c</var> the number of acts of communication it can perform is bounded (by a bound lower than the number of its neighbours). By induction the number of acts of communication of any node that is connected to <var>c</var> via a finite path, is bounded. (End of proof.)</p>
-				<p class="noindent"><b>Lemma 3</b>. &nbsp;<i> In the case of total deadlock there is at least one cycle with all its outgoing arrows of the same signature.</i></p>
-				<p class="noindent">P<span class="smallCaps">roof</span>. Total deadlock means that no process has its outgoing arrow &ldquo;matched&rdquo; by an arrow in the opposite direction. Starting at any node, the step that consists of going from that node to the node its outgoing arrow points to can be repeated indefinitely. On a finite graph we must visit a node visited before, and hence a cyclic path (of at least 3 nodes) must exist: but that is a cycle with all its outgoing arrows of the same signature. (End of proof.)</p>
-				<p>Combining lemmas 2 and 3 we conclude our main</p>
-				<p class="noindent"><b>Theorem</b>. &nbsp;<i> In the systems considered the absence/certainty of deadlock is equivalent to the absence/presence of at least one cycle of uniform signature</i>.</p>
-				<p class="noindent"><b>Lemma 4.</b> &nbsp; <i>A deadlock-free system remains deadlock-free when, at a moment that there are no arrows along a certain edge, that edge is removed, provided at both its ends the cyclic order of the remaining neighbours remains the same.</i></p>
-				<p class="noindent">P<span class="smallCaps">roof</span>. The removal of an edge does not create new cycles. Because at both ends the cyclic order of the remaining neighbours remains the same, the definition of the signature of arrows with respect to the remaining cycles is not changed. Hence the assumed absence of cycles with outgoing arrows of uniform signature therefore remains. (End of proof.)</p>
-				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
-				<p>Our lemmas and theorem remain valid in a more general setting. We have assumed that each process would be ready to communicate with its neighbours &ldquo;in some cyclic order&rdquo;. We have used that assumption only for two conclusions: </p>
-				<p class="noindent"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-				  <tr>
-				    <td width="3%" align="left" valign="top">(1)</td>
-				    <td width="4%" align="left" valign="top">&nbsp;</td>
-				    <td width="93%" align="left" valign="top">that contacts with left- and right-hand neighbours &#x2014;i.e. the pair of neighbours on a cyclic path through the node in question&#x2014; would alternate;</td>
-			      </tr>
-				  <tr>
-				    <td align="left" valign="top">(2)</td>
-				    <td align="left" valign="top">&nbsp;</td>
-				    <td align="left" valign="top">that each node will be ready to communicate with any of its neighbours within a bounded number of contacts.</td>
-			      </tr>
-			  </table></p>
-			  <p>When all local communication patterns satisfy properties (1) and (2), our conclusions remain valid provided we redefine the signature of an outgoing arrow of a node on a cycle <var>c</var> as follows: the arrow is positive if it points to the right-hand neighbour or will do so before pointing to the left-hand neighbour, the arrow is negative otherwise. These more general communication patterns are still &ldquo;simple&rdquo; in the sense that permanent nonactivity of a specific process will lead after a bounded number of communication acts to nonactivity of the whole network connected to it. Such networks are simple because the absence of the danger of deadlock implies then the absence of the danger of individual starvation.</p>
-				<p>For the sake of completeness we formulate</p>
-				<p class="noindent"><b>Lemma 5</b>. &nbsp; <i>Consider a deadlock-free network with &ldquo;a leaf&rdquo;, i.e. a node with only one neighbour. If the leaf, together with its outgoing arrow, is removed at a moment that its neighbour did not point to it, and the cyclic order of its neighbor&rsquo;s remaining neighbours remains the same, the resulting system is again deadlock-free.</i></p>
-				<p>Lemma 5 is a variation of Lemma 4, and we leave its proof to the reader.</p>
-				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
-				<p>The theorem described and proved in this note is a theorem of the type the need of which I discussed last month at lunch with C.A.R.Hoare, when we met in Newcastle-upon-Tyne. At the end of that discussion we agreed that the discovery of a class of such theorems might be a proper thesis topic. Is the moral of this note that that topic might be unsuitable, because too small?</p>
-				<p>The theorem given in this note and its proof have been inspired in particular by the self-stabilizing systems designed earlier by L. Lamport and C.S. Scholten, in which processes at the nodes of a tree were considered. A discussion with C.S. Scholten on the topic of <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD642.PDF" title="Link to the PDF version of EWD642">EWD642</a> (still in statu nascendi) was the incentive for its discovery.</p>
-				<p>&nbsp;</p>
-
-				<table width="100%" border="0" cellspacing="2" cellpadding="0">
-					<tr>
-						<td width="60%" valign="top">
-							Nuenen
-						</td>
-						<td valign="top">
-							<span class="smallCaps">prof.dr.</span>E<span class="smallCaps">dsger</span> W.D<span class="smallCaps">ijkstra</span><br />
-							Burroughs Research Fellow
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div>
-        <br/>
-      </div>
-		</div>
-		<hr />
-		<div id="footer">
-         transcribed by Corrado Cantelmi<br />
-         edited by H. Richards for consistency with the published version<br />
-          revised 
-          <!-- #BeginDate format:En2 -->23-Dec-2011<!-- #EndDate -->
-		</div>
-	</body>
-
-</html>
+<p class="noindent"><b>Lemma 2</b>. &nbsp; <i>The existence of a cycle <var>c</var> with outgoing arrows all of the same signature, causes local deadlock and, if the original graph is connected, total deadlock</i>.</p>
+<p class="noindent">P<span class="smallCaps">roof</span>. None of the outgoing arrows of the nodes of <var>c</var> can have its signature changed, hence for each node of <var>c</var> the number of acts of communication it can perform is bounded (by a bound lower than the number of its neighbours). By induction the number of acts of communication of any node that is connected to <var>c</var> via a finite path, is bounded. (End of proof.)</p>
+<p class="noindent"><b>Lemma 3</b>. &nbsp; <i>In the case of total deadlock there is at least one cycle with all its outgoing arrows of the same signature.</i></p>
+<p class="noindent">P<span class="smallCaps">roof</span>. Total deadlock means that no process has its outgoing arrow “matched” by an arrow in the opposite direction. Starting at any node, the step that consists of going from that node to the node its outgoing arrow points to can be repeated indefinitely. On a finite graph we must visit a node visited before, and hence a cyclic path (of at least 3 nodes) must exist: but that is a cycle with all its outgoing arrows of the same signature. (End of proof.)</p>
+<p>Combining lemmas 2 and 3 we conclude our main</p>
+<p class="noindent"><b>Theorem</b>. &nbsp; <i>In the systems considered the absence/certainty of deadlock is equivalent to the absence/presence of at least one cycle of uniform signature</i>.</p>
+<p class="noindent"><b>Lemma 4.</b> &nbsp; <i>A deadlock-free system remains deadlock-free when, at a moment that there are no arrows along a certain edge, that edge is removed, provided at both its ends the cyclic order of the remaining neighbours remains the same.</i></p>
+<p class="noindent">P<span class="smallCaps">roof</span>. The removal of an edge does not create new cycles. Because at both ends the cyclic order of the remaining neighbours remains the same, the definition of the signature of arrows with respect to the remaining cycles is not changed. Hence the assumed absence of cycles with outgoing arrows of uniform signature therefore remains. (End of proof.)</p>
+<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p>Our lemmas and theorem remain valid in a more general setting. We have assumed that each process would be ready to communicate with its neighbours “in some cyclic order”. We have used that assumption only for two conclusions:</p>
+<p class="noindent"></p>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td width="3%" align="left" valign="top">(1)</td>
+<td width="4%" align="left" valign="top">&nbsp;</td>
+<td width="93%" align="left" valign="top">that contacts with left- and right-hand neighbours —i.e. the pair of neighbours on a cyclic path through the node in question— would alternate;</td>
+</tr>
+<tr>
+<td align="left" valign="top">(2)</td>
+<td align="left" valign="top">&nbsp;</td>
+<td align="left" valign="top">that each node will be ready to communicate with any of its neighbours within a bounded number of contacts.</td>
+</tr>
+</table>
+<p>When all local communication patterns satisfy properties (1) and (2), our conclusions remain valid provided we redefine the signature of an outgoing arrow of a node on a cycle <var>c</var> as follows: the arrow is positive if it points to the right-hand neighbour or will do so before pointing to the left-hand neighbour, the arrow is negative otherwise. These more general communication patterns are still “simple” in the sense that permanent nonactivity of a specific process will lead after a bounded number of communication acts to nonactivity of the whole network connected to it. Such networks are simple because the absence of the danger of deadlock implies then the absence of the danger of individual starvation.</p>
+<p>For the sake of completeness we formulate</p>
+<p class="noindent"><b>Lemma 5</b>. &nbsp; <i>Consider a deadlock-free network with “a leaf”, i.e. a node with only one neighbour. If the leaf, together with its outgoing arrow, is removed at a moment that its neighbour did not point to it, and the cyclic order of its neighbor’s remaining neighbours remains the same, the resulting system is again deadlock-free.</i></p>
+<p>Lemma 5 is a variation of Lemma 4, and we leave its proof to the reader.</p>
+<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p>The theorem described and proved in this note is a theorem of the type the need of which I discussed last month at lunch with C.A.R.Hoare, when we met in Newcastle-upon-Tyne. At the end of that discussion we agreed that the discovery of a class of such theorems might be a proper thesis topic. Is the moral of this note that that topic might be unsuitable, because too small?</p>
+<p>The theorem given in this note and its proof have been inspired in particular by the self-stabilizing systems designed earlier by L. Lamport and C.S. Scholten, in which processes at the nodes of a tree were considered. A discussion with C.S. Scholten on the topic of <a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD642.PDF" title="Link to the PDF version of EWD642">EWD642</a> (still in statu nascendi) was the incentive for its discovery.</p>
+<p>&nbsp;</p>
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td width="60%" valign="top">Nuenen</td>
+<td valign="top"><span class="smallCaps">prof.dr.</span>E<span class="smallCaps">dsger</span> W.D<span class="smallCaps">ijkstra</span><br>
+Burroughs Research Fellow</td>
+</tr>
+</table>
+<div><br></div>
+<hr>
+<div id="footer">transcribed by Corrado Cantelmi<br>
+edited by H. Richards for consistency with the published version<br>
+revised <!-- #BeginDate format:En2 -->23-Dec-2011<!-- #EndDate --></div>
 </div>
   <script>
 $('.body').tweetSelection({

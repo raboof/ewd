@@ -23,93 +23,83 @@
   </div>
   <h1>E. W. Dijkstra Archive: A story that starts with a very good computer</h1>
   <div class='body'><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
 <html>
-
 <head>
-	<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
-	<title>E. W. Dijkstra Archive: A story that starts with a very good computer. (EWD 678)</title>
+<meta name="generator" content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<title>E. W. Dijkstra Archive: A story that starts with a very good computer. (EWD 678)</title>
 </head>
-
-	<body bgcolor="#ffffff">
-		<table width="473" border="0" cellspacing="0" cellpadding="0" cool gridx="16" gridy="16" height="2315" showgridx showgridy>
-			<tr height="2314">
-				<td content width="472" height="2314" valign="top" xpos="0" csheight="2314">
-					<div align="right">
-						<a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD678.PDF" target="_blank">EWD678</a></div>
-					<p> <u>A story that starts with a very good computer</u>.</p>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; Once upon a time, a long time ago, an organization decided to get a computation centre. The organization hired a manager to manage the computation centre, and he was a very competent manager, for he hired a very good computer to do the computing and a very good programmer to do the programming. The manager's high quality was shown by his choice of computer: knowing that in the work of his organization, sorting would play a very big role, he selected the one and only computer on the market that had a very fast, built-in sort instruction &#x2014;called &quot;SORT&quot;&#x2014; in its instruction code. The manager's high quality also manifested itself by the choice of the programmer, as will become clear in the sequel.</p>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; The machine was installed, and the main application program, in which the instruction SORT occurred 77 times, was written and proved to be correct. The programmer could do so because for each of the instructions of the order code &#x2014;SORT included&#x2014; the reference manual gave him the functional specifications on which to base his correctness proof. The main application program was put in operation and everybody in the whole organization was instantaneously happy... until, after the first month of operation, the electricity bill arrived! The bill was very high...</p>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; Suspicion, quite naturally, fell on the new computer and the manager inspected its power consumption more closely. He discovered that the SORT-instruction was the culprit, and asked his programmer, whether he could reduce the power consumption of his program. The programmer made a more detailed study of the power consumption of the SORT-instruction and discovered that it rose steeply &#x2014;more than quadratically, as a matter of fact&#x2014; with the length of the array to be sorted. And as almost all his 77 calls of the SORT-instruction were on rather long arrays, he understood the height of the bill immediately, and also realized his only hope for reducing the power consumption: shortening the length of the arrays supplied to the SORT-instruction.</p>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; He decided to replace all 77 occurrences of the SORT-instruction in his main application program by calls on a subroutine (still to be written) that he modestly called &quot;save0&quot;, and in order that the correctness proof of the main program would remain valid, he decided that the functional specifications of save0 would be identical to those of SORT.</p>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; He thought for a long time how to construct the body of save0. He then came up with the following idea. If the array consists of less than two elements, it is sorted by definition, and control can return immediately. Otherwise, by (if necessary, repeatedly) swapping two values when the larger was to the left of the smaller, he managed to rearrange and divide the array in such a way, that the largest element in the left-hand section did not exceed the smallest element in the right-hand section; thereafter he gave two SORT-instructions, one for each section.</p>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; The programmer was very pleased by what he had done: the correctness proof for the main application program remained automatically valid, his only additional proof obligation had been to prove the correctness of the body of save0 &#x2014;but he had already some experience in proving the correctness of programs using the SORT-instruction and that helped&#x2014;.</p>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; Also the manager was very pleased, for this minor program change &#x2014;it was hardly a &quot;change&quot;: it was almost only an addition&#x2014; indeed had cut the electricity bill by more than a factor two! But improvement, like all novelty, wears out, and after a few months the manager asked the programmer whether he could reduce the still high power consumption yet further. This time the programmer said instantaneously &quot;Oh, yes.&quot;, for now he knew the trick: he introduced a subroutine save1, the body of which was a copy of the body of save0, and thereafter replaced in the body of save0 the two occurrences of the SORT-instruction by calls on save1. The programmer was extremely pleased with himself, for this time he had reduced the power consumption by a further factor of two, but he had done so without any further proof obligations!</p>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; The manager was also pleased, but only for a month or two. When he asked his programmer again, whether he could reduce the power consumption still further, the programmer, again, said immediately &quot;Oh yes.&quot; but went to his desk to do some sensible coding. He could have repeated the trick by introducing a new subroutine save2, etc., but by now he knew that, a few months later, the manager would come again. Besides that, he did not like the prospect of filling more and more of the store with almost equal copies of the same subroutine. He decided to map the texts of save0, save1, save2 etc. on the same general text &#x2014;which he called saven&#x2014; at the expense of a global variable n &#x2014;initialized in the main program at zero&#x2014; the value of which should indicate whether a call on saven should act as save0, save1, save2 etc. The body of saven was derived from the ones of save0, save1, etc.: upon entry, n was increased by 1, just before return, n was decreased by 1, and the internal calls on the next save or on SORT were replaced by</p>
-					<p align=center></p>
-					<table width=470 cellpadding=0 cellspacing=0 border=0>
-						<tr>
-							<td width=50></td>
-							<td align=center><u>if</u> n &lt; N &#x2192; saven &#x2337; n = N &#x2192; SORT <u>fi</u></td>
-							<td align=right width=50>(1)</td>
-						</tr>
-					</table>
-					<p>and he satisfied his manager by setting the constant N&nbsp;=&nbsp;3. As he had foreseen, a month later he was asked to reduce the power consumption still further: he just increased N by 1.</p>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; Having thus mechanized the optimization process that reduced the power consumption, the programmer gladly increased N by 1, every time he was asked to reduce the power consumption, and that was about once a month.</p>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; After a year or so, the manager discovered that, lately, his programmer's optimizations had become less and less effective. As he was a very competent manager, he investigated the matter; in the course of his investigations he discovered that the SORT-instruction was hardly invoked at all! This discovery worried him, because for that SORT-instruction his organization paid a lot of money: for a much lower rental price the manufacturer offered a model without SORT-instruction, but otherwise identical. The manager went to the programmer, telling him his observation that the SORT-instruction was hardly exercised: could the programmer avoid its use completely? For then they could replace their expensive machine by a cheaper model!</p>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; This time, the programmer had to think again. Looking at (1) &#x2014;the only place left, where the SORT-instruction still occurred&#x2014; he realized that <u>if</u> n remained under an upper bound, he could choose N larger than that upper bound, with the result that the second alternative of (1) would never be selected! By inspecting his main application he could prove that N&nbsp;=&nbsp;25 would be large enough, and he replaced (1) by</p>
-					<p align=center></p>
-					<table width=470 cellpadding=0 cellspacing=0 border=0>
-						<tr>
-							<td width=50></td>
-							<td align=center><u>if</u> n &lt; 25 &#x2192; saven <u>fi</u></td>
-							<td align=right width=50>(2)</td>
-						</tr>
-					</table>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; Later he realized that, having proved that the guard would always be true, he could simplify the program still further by replacing (2) just by</p>
-					<p align=center></p>
-					<table width=470 cellpadding=0 cellspacing=0 border=0>
-						<tr>
-							<td width=50></td>
-							<td align=center>saven</td>
-							<td align=right width=50>(3)</td>
-						</tr>
-					</table>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; Now he was completely happy: with the last simplification the correctness of his program was no longer dependent on the exact value of the upper bound, but only on its existence. The machine was replaced by the simpler model and the manager, too, was happy ever after.</p>
-					<p align=center><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
-					<p>&nbsp; &nbsp; &nbsp; &nbsp; The above fairy tale &#x2014;like all fairy tales, for that matter&#x2014; has been written for educational purposes. It deserves to be remembered because it is a sobering thought that, upon investigation of his manager, a programmer engaged on optimization could have discovered all this &#x2014;with the exact nature of the proof obligation included!&#x2014; long before mathematicians called it Recursion.</p>
-					<p>&nbsp;</p>
-					<div align="left">
-						<table width="400" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td valign="top">Plataanstraat 5<br>
-									5671 AL &nbsp;NUENEN<br>
-									The Netherlands</td>
-								<td valign="top">prof.dr.Edsger W.Dijkstra<br>
-									BURROUGHS Research Fellow</td>
-							</tr>
-						</table>
-						<br>
-					</div>
-					<div align="left">
-						<p><u></u></p>
-					</div>
-					<hr>
-					<font size="-1">transcribed by Corrado Cantelmi<br>
-						revised <csobj format="MedDate" h="12" region="15" t="DateTime" w="103">Mon, 12 Sep 2005</csobj></font>
-					<p></p>
-				</td>
-				<td width="1" height="2314"><spacer type="block" width="1" height="2314"></td>
-			</tr>
-			<tr height="1" cntrlrow>
-				<td width="472" height="1"><spacer type="block" width="472" height="1"></td>
-				<td width="1" height="1"></td>
-			</tr>
-		</table>
-		<p></p>
-	</body>
+<body bgcolor="#FFFFFF">
+<table width="473" border="0" cellspacing="0" cellpadding="0" cool="" gridx="16" gridy="16" height="2315" showgridx showgridy>
+<tr height="2314">
+<td content="" width="472" height="2314" valign="top" xpos="0" csheight="2314">
+<div align="right"><a href="https://www.cs.utexas.edu/~EWD/ewd06xx/EWD678.PDF" target="_blank">EWD678</a></div>
+<p><u>A story that starts with a very good computer</u>.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Once upon a time, a long time ago, an organization decided to get a computation centre. The organization hired a manager to manage the computation centre, and he was a very competent manager, for he hired a very good computer to do the computing and a very good programmer to do the programming. The manager's high quality was shown by his choice of computer: knowing that in the work of his organization, sorting would play a very big role, he selected the one and only computer on the market that had a very fast, built-in sort instruction —called "SORT"— in its instruction code. The manager's high quality also manifested itself by the choice of the programmer, as will become clear in the sequel.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; The machine was installed, and the main application program, in which the instruction SORT occurred 77 times, was written and proved to be correct. The programmer could do so because for each of the instructions of the order code —SORT included— the reference manual gave him the functional specifications on which to base his correctness proof. The main application program was put in operation and everybody in the whole organization was instantaneously happy... until, after the first month of operation, the electricity bill arrived! The bill was very high...</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Suspicion, quite naturally, fell on the new computer and the manager inspected its power consumption more closely. He discovered that the SORT-instruction was the culprit, and asked his programmer, whether he could reduce the power consumption of his program. The programmer made a more detailed study of the power consumption of the SORT-instruction and discovered that it rose steeply —more than quadratically, as a matter of fact— with the length of the array to be sorted. And as almost all his 77 calls of the SORT-instruction were on rather long arrays, he understood the height of the bill immediately, and also realized his only hope for reducing the power consumption: shortening the length of the arrays supplied to the SORT-instruction.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; He decided to replace all 77 occurrences of the SORT-instruction in his main application program by calls on a subroutine (still to be written) that he modestly called "save0", and in order that the correctness proof of the main program would remain valid, he decided that the functional specifications of save0 would be identical to those of SORT.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; He thought for a long time how to construct the body of save0. He then came up with the following idea. If the array consists of less than two elements, it is sorted by definition, and control can return immediately. Otherwise, by (if necessary, repeatedly) swapping two values when the larger was to the left of the smaller, he managed to rearrange and divide the array in such a way, that the largest element in the left-hand section did not exceed the smallest element in the right-hand section; thereafter he gave two SORT-instructions, one for each section.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; The programmer was very pleased by what he had done: the correctness proof for the main application program remained automatically valid, his only additional proof obligation had been to prove the correctness of the body of save0 —but he had already some experience in proving the correctness of programs using the SORT-instruction and that helped—.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Also the manager was very pleased, for this minor program change —it was hardly a "change": it was almost only an addition— indeed had cut the electricity bill by more than a factor two! But improvement, like all novelty, wears out, and after a few months the manager asked the programmer whether he could reduce the still high power consumption yet further. This time the programmer said instantaneously "Oh, yes.", for now he knew the trick: he introduced a subroutine save1, the body of which was a copy of the body of save0, and thereafter replaced in the body of save0 the two occurrences of the SORT-instruction by calls on save1. The programmer was extremely pleased with himself, for this time he had reduced the power consumption by a further factor of two, but he had done so without any further proof obligations!</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; The manager was also pleased, but only for a month or two. When he asked his programmer again, whether he could reduce the power consumption still further, the programmer, again, said immediately "Oh yes." but went to his desk to do some sensible coding. He could have repeated the trick by introducing a new subroutine save2, etc., but by now he knew that, a few months later, the manager would come again. Besides that, he did not like the prospect of filling more and more of the store with almost equal copies of the same subroutine. He decided to map the texts of save0, save1, save2 etc. on the same general text —which he called saven— at the expense of a global variable n —initialized in the main program at zero— the value of which should indicate whether a call on saven should act as save0, save1, save2 etc. The body of saven was derived from the ones of save0, save1, etc.: upon entry, n was increased by 1, just before return, n was decreased by 1, and the internal calls on the next save or on SORT were replaced by</p>
+<p align="center"></p>
+<table width="470" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td width="50"></td>
+<td align="center"><u>if</u> n &lt; N → saven ⌷ n = N → SORT <u>fi</u></td>
+<td align="right" width="50">(1)</td>
+</tr>
+</table>
+<p>and he satisfied his manager by setting the constant N&nbsp;=&nbsp;3. As he had foreseen, a month later he was asked to reduce the power consumption still further: he just increased N by 1.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Having thus mechanized the optimization process that reduced the power consumption, the programmer gladly increased N by 1, every time he was asked to reduce the power consumption, and that was about once a month.</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; After a year or so, the manager discovered that, lately, his programmer's optimizations had become less and less effective. As he was a very competent manager, he investigated the matter; in the course of his investigations he discovered that the SORT-instruction was hardly invoked at all! This discovery worried him, because for that SORT-instruction his organization paid a lot of money: for a much lower rental price the manufacturer offered a model without SORT-instruction, but otherwise identical. The manager went to the programmer, telling him his observation that the SORT-instruction was hardly exercised: could the programmer avoid its use completely? For then they could replace their expensive machine by a cheaper model!</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; This time, the programmer had to think again. Looking at (1) —the only place left, where the SORT-instruction still occurred— he realized that <u>if</u> n remained under an upper bound, he could choose N larger than that upper bound, with the result that the second alternative of (1) would never be selected! By inspecting his main application he could prove that N&nbsp;=&nbsp;25 would be large enough, and he replaced (1) by</p>
+<p align="center"></p>
+<table width="470" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td width="50"></td>
+<td align="center"><u>if</u> n &lt; 25 → saven <u>fi</u></td>
+<td align="right" width="50">(2)</td>
+</tr>
+</table>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Later he realized that, having proved that the guard would always be true, he could simplify the program still further by replacing (2) just by</p>
+<p align="center"></p>
+<table width="470" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td width="50"></td>
+<td align="center">saven</td>
+<td align="right" width="50">(3)</td>
+</tr>
+</table>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; Now he was completely happy: with the last simplification the correctness of his program was no longer dependent on the exact value of the upper bound, but only on its existence. The machine was replaced by the simpler model and the manager, too, was happy ever after.</p>
+<p align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; The above fairy tale —like all fairy tales, for that matter— has been written for educational purposes. It deserves to be remembered because it is a sobering thought that, upon investigation of his manager, a programmer engaged on optimization could have discovered all this —with the exact nature of the proof obligation included!— long before mathematicians called it Recursion.</p>
+<p>&nbsp;</p>
+<div align="left">
+<table width="400" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top">Plataanstraat 5<br>
+5671 AL &nbsp;NUENEN<br>
+The Netherlands</td>
+<td valign="top">prof.dr.Edsger W.Dijkstra<br>
+BURROUGHS Research Fellow</td>
+</tr>
+</table>
+<br></div>
+<div align="left"></div>
+<hr>
+<font size="-1">transcribed by Corrado Cantelmi<br>
+revised Mon, 12 Sep 2005</font></td>
+<td width="1" height="2314"><spacer type="block" width="1" height="2314"></td>
+</tr>
+<tr height="1" cntrlrow="">
+<td width="472" height="1"><spacer type="block" width="472" height="1"></td>
+<td width="1" height="1"></td>
+</tr>
+</table>
+</body>
 </html>
-
 </div>
   <script>
 $('.body').tweetSelection({

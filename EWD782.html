@@ -23,92 +23,184 @@
   </div>
   <h1>A stupid notation</h1>
   <div class='body'>
-				<p>For a set of &nbsp;<var>n</var>&nbsp; elements, the number of different subsets of &nbsp;<var>k</var>&nbsp; elements <span class=inlineformula>(0 &#x2264; <var>k</var> &#x2264; <var>n</var>)</span> is <table class=numfor><tr><td class=numforcenter><table class=frac align=center><tr><td><var>n</var>!<br>&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;<br>
-				            <var>k</var>!(<var>n</var>-<var>k</var>)! 
-	              </table>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</td><td class=numforright>&nbsp;&nbsp;&nbsp;(0)</td></table>
-					<br>Mathematicians call each such subset "a combination of <var>k</var> out of <var>n</var>" and denote their number by
-			  <table class=numfor><tr><td class=numforcenter><table class=comb><tr><td class=bigmiddle>(<td class=bincoef>&nbsp;<var>n</var>&nbsp;<br>
-			    <var>k</var>
-			  <td class=bigmiddle>)</table> &nbsp; &nbsp; &nbsp; &nbsp; ,</td><td class=numforright>&nbsp;&nbsp;&nbsp;(1)</td></table>
-					<br>a formula of which they are not quite sure how to pronounce it; one sometimes hears "<var>n</var> above <var>k</var>". From (0) and (1) they then derive the theorem
-			  <table class=numfor><tr><td class=numforcenter><table class=comb><tr><td class=bigmiddle>(<td class=bincoef><var>n</var><br>&nbsp;<var>k</var>&nbsp;<td class=bigmiddle>)</table> = <table class=comb><tr><td class=bigmiddle>(<td class=bincoef><var>n</var><br>&nbsp;<var>n</var>-<var>k</var>&nbsp;<td class=bigmiddle>)</table></td><td class=numforright>&nbsp;&nbsp;&nbsp;(2)</td></table>
-				<p align=center><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup>
-				<p>For a set of <span class=inlineformula>&nbsp;<var>i</var>+<var>j</var>&nbsp;</span> elements <span class=inlineformula>(<var>i</var>&#x2265;0,</span> <span class=inlineformula><var>j</var>&#x2265;0),</span> the number of different ways it can be partitioned into two subsets of &nbsp;<var>i</var>&nbsp; and &nbsp;<var>j</var>&nbsp; elements respectively is
-			  <table class=numfor><tr><td class=numforcenter><table class=frac align=center><tr><td>(<var>i</var>+<var>j</var>)!<br>&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;<br>
-			              <var>i</var>!  <var>j</var>!
-			  </table></td><td class=numforright>&nbsp;&nbsp;&nbsp;(3)</td></table>
-				<p>&nbsp;<br>
-				  Let us call each such partitioning for short a "partitioning into <var>i</var> and <var>j</var>" and let us denote their number &mdash;in honour of Blaise Pascal&mdash; by 
-			  <table class=numfor><tr><td class=numforcenter><var>P</var>(<var>i</var>,<var>j</var>)</td><td class=numforright>&nbsp;&nbsp;&nbsp;(4)</td></table>
-					<br>which is, of course, a symmetric function of its arguments:
-					<table class=numfor><tr><td class=numforcenter><var>P</var>(<var>i</var>,<var>j</var>) = P(<var>j</var>,<var>i</var>)</td><td class=numforright>&nbsp;&nbsp;&nbsp;(5)</td></table>
-				<p align=center><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup>
-				<p>Notation (1) is bad in all respects I can think of. It is bad from (what computing scientists call) a lexical point of view: it does not fit on a line and &mdash;worse!&mdash; it usurps a parenthesis pair. Furthermore it has introduced such a novel arrangement of characters on paper that its pronunciation requires a completely new convention. (And these are objections I have learned not to think lightly of.)
-			  <p>It is also bad in that it destroys the symmetry: it represents a symmetric function of two arguments by an asymmetric function of their sum and one of the two arguments, thus forcing one to remember which is which. (This is no joke, for in older literature one can encounter instead of (1): <span class=inlineformula><var>C</var>
-			  <table class=supsub><tr><td><var>k</var><br>
-				      <var>n</var>
-			  </table>.)</span> Finally it raises the shallow (2) to the status of a "theorem"!
-				<p>It is furthermore profoundly bad in that it is specifically geared to expressing the number of different partitions into 2 subsets of given sizes, whereas nothing prevents us from generalizing and defining for instance
-					<table class=numfor><tr><td class=numforcenter><var>P</var>(<var>i</var>,<var>j</var>,<var>h</var>) =
-<table class=frac><tr><td>(<var>i</var>+<var>j</var>+<var>h</var>)!<br>&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;<br>
-  <var>i</var>!  <var>j</var>!  <var>h</var>!
-</table></td><td class=numforright>&nbsp;&nbsp;&nbsp;(6)</td></table>
-					<br>which is obviously as symmetric in all its arguments as it could be. It provides the means for a smooth formulation of
-					<table class=numfor><tr><td class=numforcenter><var>P</var>(<var>i</var>,<var>j</var>,<var>h</var>) = <var>P</var>(<var>i</var>,<var>j</var>)  <var>P</var>(<var>i</var>+<var>j</var>,<var>h</var>)</td><td class=numforright>&nbsp;&nbsp;&nbsp;(7)</td></table>
-					<br>which is a bit less insipid than the "theorem" (2).
-				<p align=center><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup>
-				<p>After the above one might think that the dead horse does not need any more flogging, but I think I must disagree, because notations can have a more sneaky influence on our thinking habits than we usually care to admit.
-				<p>Let us prove afresh that (3) gives the value of <span class=inlineformula><var>P</var>(<var>i</var>,<var>j</var>).</span> Consider the <span class=inlineformula>(<var>i</var>+<var>j</var>)!</span> permutations of the <span class=inlineformula><var>i</var>+<var>j</var></span> elements. With each permutation we associate a partitioning into &nbsp;<var>i</var>&nbsp; and <var>&nbsp;j</var>&nbsp; by separating the first &nbsp;<var>i</var>&nbsp; elements from the &nbsp;<var>j</var>&nbsp; remaining ones. Since <span class=inlineformula><var>i</var>!<var>j</var>!</span> distinct permutations thus lead to the same partitioning into &nbsp;<var>i</var>&nbsp; and &nbsp;<var>j</var>, <span class=inlineformula><var>P</var>(<var>i</var>,<var>j</var>)<var>i</var>!<var>j</var>!</span> = <span class=inlineformula>(<var>i</var>+<var>j</var>)!,</span> hence (3).
-			  <p>But this is <em>not</em> the proof of (0) that I was given a long time ago. That one went as follows. Let us choose &nbsp;<var>k</var>&nbsp; elements. For the first element we can choose among &nbsp;<var>n</var>&nbsp;, for the second one among <span class=inlineformula>(<var>n</var>-1),</span> and so on, until we choose the <var>k</var>th element among <span class=inlineformula>(<var>n</var>-<var>k</var>+1).</span> Since each combination of &nbsp;<var>k</var>&nbsp; elements can thus be chosen in <var>k</var>! different ways, we conclude 
-			  <table class=numfor><tr><td class=numforcenter><table class=comb><tr><td class=bigmiddle>(<td class=bincoef><var>n</var><br>&nbsp;<var>k</var>&nbsp;<td class=bigmiddle>)</table> = <table class=frac><tr><td><var>n</var>(<var>n</var>-1)...(<var>n</var>-<var>k</var>+1)<br>&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;&#x2013;<br>
-			              <var>k</var>(<var>k</var>-1)...1</table>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,</td></table>
-					<br>
-					which formula was subsequently "cleaned up" by multiplying numerator and denominator by <span class=inlineformula>(<var>n</var>-<var>k</var>)!.</span> Confronted with (4) as an alternative for (1), one of my colleagues &mdash;a statistician&mdash; defended (1) as being "closer to one's intuition"! I guess he was educated with the second proof.
-				    <p>Many mathematicians derive part of their self-esteem by feeling themselves the proud heirs of a long tradition of rational thinking; I am afraid they idealize their cultural ancestors.
-					<br><br><br>
-
-				<table width="100%" border="0" cellspacing="2" cellpadding="0" style="line-height: 1.3em;">
-					<tr>
-						<td valign="top" width="50%">
-							<p class="noindent">Plataanstraat 5<br>
-							5671 AL NUENEN<br>
-							The Netherlands
-					    </p></td>
-						<td valign="top">
-							<p class="noindent">8 March 1981<br>
-							prof. dr. Edsger W.Dijkstra<br>
-							Burroughs Research Fellow
-					    </p></td>
-					</tr>
-				</table>
-
-			<br>
-
-			<!-- end signatures -->
-			<hr>
-			<!-- name and date -->
-			<div id="footer">
-				<font size="-1">
-         transcribed by Corrado Cantelmi<br>
-					 revised 
-					 <!-- #BeginDate format:En2 -->20-Sep-2011<!-- #EndDate -->
-				</font>
-			</div>
-
-		</div>  <!-- "content" -->
-
-	</div>  <!-- "frame" -->
-
-
-
-
-
-
-
-</body>
-</html>
-
-
+<p>For a set of &nbsp;<var>n</var>&nbsp; elements, the number of different subsets of &nbsp;<var>k</var>&nbsp; elements <span class="inlineformula">(0 ≤ <var>k</var> ≤ <var>n</var>)</span> is</p>
+<table class="numfor">
+<tr>
+<td class="numforcenter">
+<table class="frac" align="center">
+<tr>
+<td><var>n</var>!<br>
+––––––––<br>
+<var>k</var>!(<var>n</var>-<var>k</var>)!</td>
+</tr>
+</table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.</td>
+<td class="numforright">&nbsp;&nbsp;&nbsp;(0)</td>
+</tr>
+</table>
+<br>
+Mathematicians call each such subset "a combination of <var>k</var> out of <var>n</var>" and denote their number by
+<table class="numfor">
+<tr>
+<td class="numforcenter">
+<table class="comb">
+<tr>
+<td class="bigmiddle">(</td>
+<td class="bincoef">&nbsp;<var>n</var>&nbsp;<br>
+<var>k</var></td>
+<td class="bigmiddle">)</td>
+</tr>
+</table>
+&nbsp; &nbsp; &nbsp; &nbsp; ,</td>
+<td class="numforright">&nbsp;&nbsp;&nbsp;(1)</td>
+</tr>
+</table>
+<br>
+a formula of which they are not quite sure how to pronounce it; one sometimes hears "<var>n</var> above <var>k</var>". From (0) and (1) they then derive the theorem
+<table class="numfor">
+<tr>
+<td class="numforcenter">
+<table class="comb">
+<tr>
+<td class="bigmiddle">(</td>
+<td class="bincoef"><var>n</var><br>
+&nbsp;<var>k</var>&nbsp;</td>
+<td class="bigmiddle">)</td>
+</tr>
+</table>
+=
+<table class="comb">
+<tr>
+<td class="bigmiddle">(</td>
+<td class="bincoef"><var>n</var><br>
+&nbsp;<var>n</var>-<var>k</var>&nbsp;</td>
+<td class="bigmiddle">)</td>
+</tr>
+</table>
+</td>
+<td class="numforright">&nbsp;&nbsp;&nbsp;(2)</td>
+</tr>
+</table>
+<p align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p>For a set of <span class="inlineformula">&nbsp;<var>i</var>+<var>j</var>&nbsp;</span> elements <span class="inlineformula">(<var>i</var>≥0,</span> <span class="inlineformula"><var>j</var>≥0),</span> the number of different ways it can be partitioned into two subsets of &nbsp;<var>i</var>&nbsp; and &nbsp;<var>j</var>&nbsp; elements respectively is</p>
+<table class="numfor">
+<tr>
+<td class="numforcenter">
+<table class="frac" align="center">
+<tr>
+<td>(<var>i</var>+<var>j</var>)!<br>
+–––––<br>
+<var>i</var>! <var>j</var>!</td>
+</tr>
+</table>
+</td>
+<td class="numforright">&nbsp;&nbsp;&nbsp;(3)</td>
+</tr>
+</table>
+<p>&nbsp;<br>
+Let us call each such partitioning for short a "partitioning into <var>i</var> and <var>j</var>" and let us denote their number —in honour of Blaise Pascal— by</p>
+<table class="numfor">
+<tr>
+<td class="numforcenter"><var>P</var>(<var>i</var>,<var>j</var>)</td>
+<td class="numforright">&nbsp;&nbsp;&nbsp;(4)</td>
+</tr>
+</table>
+<br>
+which is, of course, a symmetric function of its arguments:
+<table class="numfor">
+<tr>
+<td class="numforcenter"><var>P</var>(<var>i</var>,<var>j</var>) = P(<var>j</var>,<var>i</var>)</td>
+<td class="numforright">&nbsp;&nbsp;&nbsp;(5)</td>
+</tr>
+</table>
+<p align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p>Notation (1) is bad in all respects I can think of. It is bad from (what computing scientists call) a lexical point of view: it does not fit on a line and —worse!— it usurps a parenthesis pair. Furthermore it has introduced such a novel arrangement of characters on paper that its pronunciation requires a completely new convention. (And these are objections I have learned not to think lightly of.)</p>
+<p>It is also bad in that it destroys the symmetry: it represents a symmetric function of two arguments by an asymmetric function of their sum and one of the two arguments, thus forcing one to remember which is which. (This is no joke, for in older literature one can encounter instead of (1): <span class="inlineformula"><var>C</var></span></p>
+<table class="supsub">
+<tr>
+<td><var>k</var><br>
+<var>n</var></td>
+</tr>
+</table>
+<span class="inlineformula">.)</span> Finally it raises the shallow (2) to the status of a "theorem"!
+<p>It is furthermore profoundly bad in that it is specifically geared to expressing the number of different partitions into 2 subsets of given sizes, whereas nothing prevents us from generalizing and defining for instance</p>
+<table class="numfor">
+<tr>
+<td class="numforcenter"><var>P</var>(<var>i</var>,<var>j</var>,<var>h</var>) =
+<table class="frac">
+<tr>
+<td>(<var>i</var>+<var>j</var>+<var>h</var>)!<br>
+––––––––<br>
+<var>i</var>! <var>j</var>! <var>h</var>!</td>
+</tr>
+</table>
+</td>
+<td class="numforright">&nbsp;&nbsp;&nbsp;(6)</td>
+</tr>
+</table>
+<br>
+which is obviously as symmetric in all its arguments as it could be. It provides the means for a smooth formulation of
+<table class="numfor">
+<tr>
+<td class="numforcenter"><var>P</var>(<var>i</var>,<var>j</var>,<var>h</var>) = <var>P</var>(<var>i</var>,<var>j</var>) <var>P</var>(<var>i</var>+<var>j</var>,<var>h</var>)</td>
+<td class="numforright">&nbsp;&nbsp;&nbsp;(7)</td>
+</tr>
+</table>
+<br>
+which is a bit less insipid than the "theorem" (2).
+<p align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p>After the above one might think that the dead horse does not need any more flogging, but I think I must disagree, because notations can have a more sneaky influence on our thinking habits than we usually care to admit.</p>
+<p>Let us prove afresh that (3) gives the value of <span class="inlineformula"><var>P</var>(<var>i</var>,<var>j</var>).</span> Consider the <span class="inlineformula">(<var>i</var>+<var>j</var>)!</span> permutations of the <span class="inlineformula"><var>i</var>+<var>j</var></span> elements. With each permutation we associate a partitioning into &nbsp;<var>i</var>&nbsp; and <var>&nbsp;j</var>&nbsp; by separating the first &nbsp;<var>i</var>&nbsp; elements from the &nbsp;<var>j</var>&nbsp; remaining ones. Since <span class="inlineformula"><var>i</var>!<var>j</var>!</span> distinct permutations thus lead to the same partitioning into &nbsp;<var>i</var>&nbsp; and &nbsp;<var>j</var>, <span class="inlineformula"><var>P</var>(<var>i</var>,<var>j</var>)<var>i</var>!<var>j</var>!</span> = <span class="inlineformula">(<var>i</var>+<var>j</var>)!,</span> hence (3).</p>
+<p>But this is <em>not</em> the proof of (0) that I was given a long time ago. That one went as follows. Let us choose &nbsp;<var>k</var>&nbsp; elements. For the first element we can choose among &nbsp;<var>n</var>&nbsp;, for the second one among <span class="inlineformula">(<var>n</var>-1),</span> and so on, until we choose the <var>k</var>th element among <span class="inlineformula">(<var>n</var>-<var>k</var>+1).</span> Since each combination of &nbsp;<var>k</var>&nbsp; elements can thus be chosen in <var>k</var>! different ways, we conclude</p>
+<table class="numfor">
+<tr>
+<td class="numforcenter">
+<table class="comb">
+<tr>
+<td class="bigmiddle">(</td>
+<td class="bincoef"><var>n</var><br>
+&nbsp;<var>k</var>&nbsp;</td>
+<td class="bigmiddle">)</td>
+</tr>
+</table>
+=
+<table class="frac">
+<tr>
+<td><var>n</var>(<var>n</var>-1)...(<var>n</var>-<var>k</var>+1)<br>
+–––––––––––––––<br>
+<var>k</var>(<var>k</var>-1)...1</td>
+</tr>
+</table>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;,</td>
+</tr>
+</table>
+<br>
+which formula was subsequently "cleaned up" by multiplying numerator and denominator by <span class="inlineformula">(<var>n</var>-<var>k</var>)!.</span> Confronted with (4) as an alternative for (1), one of my colleagues —a statistician— defended (1) as being "closer to one's intuition"! I guess he was educated with the second proof.
+<p>Many mathematicians derive part of their self-esteem by feeling themselves the proud heirs of a long tradition of rational thinking; I am afraid they idealize their cultural ancestors.<br>
+<br>
+<br></p>
+<table width="100%" border="0" cellspacing="2" cellpadding="0" style="line-height: 1.3em;">
+<tr>
+<td valign="top" width="50%">
+<p class="noindent">Plataanstraat 5<br>
+5671 AL NUENEN<br>
+The Netherlands</p>
+</td>
+<td valign="top">
+<p class="noindent">8 March 1981<br>
+prof. dr. Edsger W.Dijkstra<br>
+Burroughs Research Fellow</p>
+</td>
+</tr>
+</table>
+<br>
+<!-- end signatures -->
+<hr>
+<!-- name and date -->
+<div id="footer"><font size="-1">transcribed by Corrado Cantelmi<br>
+revised <!-- #BeginDate format:En2 -->20-Sep-2011<!-- #EndDate --></font></div>
+<!-- "content" -->
+<!-- "frame" -->
 </div>
   <script>
 $('.body').tweetSelection({

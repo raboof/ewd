@@ -23,111 +23,100 @@
   </div>
   <h1>Self-stabilization in spite of distributed control</h1>
   <div class='body'><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-
 <html>
+<head>
+<meta name="generator" content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="generator" content="Adobe GoLive 6">
+<title>E.W.Dijkstra Archive: Self-stabilization in spite of distributed control (EWD 391)</title>
 
-	<head>
-		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1">
-		<meta name="generator" content="Adobe GoLive 6">
-		<title>E.W.Dijkstra Archive: Self-stabilization in spite of distributed control (EWD 391)</title>
-		<style type="text/css">
+<style type="text/css">
          p { text-indent: 2.0em; }
-        </style>
-	</head>
-
-	<body bgcolor="#ffffff">
-		<div align="right">
-			&nbsp;&nbsp;<a title="PDF scan of EWD 391" href="https://www.cs.utexas.edu/~EWD/ewd03xx/EWD391.PDF" target="_blank">EWD 391</a></div>
-		<div align="left">
-			<div>
-				<table border="0" cellspacing="2" cellpadding="0">
-					<tr>
-						<td>
-							<div align="center">
-								<u>Self-stabilization in spite of distributed control<br>
-									<br>
-								</u>by<br>
-								<br>
-								Edsger W. Dijkstra, BURROUGHS</div>
-						</td>
-					</tr>
-				</table>
-				<p></p>
-				<u>Abstract</u>: A system of finite state automata can be built in such a way that regardless their initial states, the total system will converge in a finite number of steps towards a synchronization regime.<br>
-				<p></p>
-				<u>Key words</u>: self-stabilization, distributed logic, mutual exclusion,<br>
-				synchronization, co-operation, concurrency.
-				<p></p>
-				CR Category: 4.32
-				<p></p>
-				<table width="90%" border="0" cellspacing="2" cellpadding="0">
-					<tr>
-						<td align="left" valign="top" width="23%">Author's address:</td>
-						<td align="left" valign="top">Burroughs,<br>
-							Plataanstraat 5<br>
-							NUENEN &#x2014; 4565<br>
-							the Netherlands</td>
-						<td align="left" valign="top">
-							<div align="right">
-								1st October 1973</div>
-						</td>
-					</tr>
-				</table>
-				<p></p>
-				<hr>
-				<br>
-				<u>Self-stabilization in spite of distributed control<br>
-				</u>
-				<p>A systematic way for finding the algorithm ensuring some desired form of co-operation between a set of loosely coupled sequential processes can in general terms be described as follows: the relation &#x0093;the system is in a legitimate state&#x0094; is kept invariant. As a consequence, each intended individual process step that could possibly cause violation of that invariant relation has to be preceded by a test that it won't do so, and depending on the outcome of that test the critical process step is either caused to take place or it &#x2014;and with it the process of which it is a part&#x2014; is delayed until a more favourable system state has been reached. With a suitable choice of the set of legitimate states one can indeed introduce the rule that a critical process step will be delayed only as long as its execution would lead to violation of the corresponding invariant relation.</p>
-				<p>The resulting design is readily implemented if the different sequential processes can be granted mutually exclusive access to a common store in which the current system state is recorded: then a relation between (the values of) the variables in that commonly accessible store is then the core of what we could call &#x0093;the centralized control&#x0094;.</p>
-				<p>A complication arises when there is no such commonly accessible store and &#147;the system state&#148; must be recorded in variables distributed over the various processes, and furthermore the communication facilities are limited in the sense that each process can only exchange information with &#147;its neighbors&#148;, a (possibly small) subset of the total set of processes. (We can view the processes as the nodes of a connected graph in which each of the (sparse) set of edges denotes the neighbor relation.) The complication is that a node's behaviour can only be influenced by that part of the total system state description that is available in that node: local actions taken on account of local information must accomplish a global objective. Such systems (with what is quite aptly called &#147;distributed control&#148;) have been designed, but all such designs I am familiar with are unstable in the sense that, when once in an illegitimate state, they could remain so forever. I call a system &#147;self-stabilizing&#148; when, regardless its initial state, it is guaranteed to arrive at a legitimate state in a finite number of steps. (Whether the property of self-stabilization is interesting either as a start procedure, or for the sake of system robustness or merely as an intriguing problem, is a question that falls out of the scope of this article.)</p>
-				<p>Unable to decide on theoretical grounds whether non-trivial self-stabilizing system with distributed control could exist at all, I decided to try to design one under the following constraints and objectives.</p>
-				<p>We consider a system built from <var>N</var>+1 finite state machines numbered from 0 through <var>N</var>. (The state space for the total system is then the Cartesian product of the <var>N</var>+1 individual state spaces of the respective machines.) The machines are arranged in a ring, i.e. for 0 &#x2264; <var>j</var> &lt; <var>N</var>, machine nr.<var>i</var> has machine nr.<var>i</var>+1 as its righthand neighbour, and machine nr.<var>N</var> has machine nr.0 as its righthand neighbour.</p>
-				<p>In the middle of the ring stands a demon, each time giving, in &#x0093;fair random order&#x0094; one of the machines the command &#x0093;to adjust itself&#x0094;. (In &#x0093;fair random order&#x0094; means that in each infinite sequence of successive commands issued by the demon, each machine has received the command to adjust itself infinitely often.) Upon &#x0093;adjustment&#x0094; a machine goes into a (new) state, which must be a function of its own (old) state and the current states of its (two) neighbours.</p>
-				<p>Furthermore, as a function of its own state (and possibly of the states of its neighbours) a machine may be &#x0093;privileged&#x0094;. The legitimate states are defined as those states in which exactly one machine is privileged and for which all possible successor states are legitimate as well; furthermore it is required that then the privilege will rotate around the ring.</p>
-				<b>Side remark</b>. I was hoping for an existence proof of self-stabilizing systems with distributed control: a ring is then one of the most natural, simple connection graphs. My choice of legitimate states, viz. requiring convergence towards a solution of the mutual exclusion problem is understandable for historical reasons [1], [2], [3], [4], it is also justified by its central position in the whole field of controlling co-operation between loosely coupled processes. Finally, the choice of the demon was suggested by a recent experience with a cyclic relaxation problem in which &#147;fair random relaxation&#148; would converge to a limit, while simultaneous relaxation could lead to oscillation (EWD386, unpublished). So much for the justification of the problem choice.				<p>Again I beg my intrigued readers to stop reading here and to try to solve the stated problem themselves, for only then they will (slowly!) build up some sympathy with my difficulties: the problem has been with me for many months, while I was oscillating between trying to find a solution and trying to prove the non-existence of a solution. And all the time I had no indication in which of the two directions to aim, nor of the simplicity or complexity of the argument &#x2014;if any!&#x2014; that would settle the question</p>
-			</div>
-			<div align="center">
-				*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
-				*</div>
-			<div>
-				<p>The crucial observation is that, in general, the problem cannot be solved if, in addition, we require our machines to be identical. For if the number of machines is non-prime, our starting situation can have a cyclic symmetry of degree <var>n</var> (2 &#x2264; <var>n</var> &#x2264; <var>N</var>/2) and if then the demon &#x2014;and he is free to do so!&#x2014; gives his first <var>n</var> commands equally spaced around the ring, the cyclic symmetry will not have been destroyed. If the demon continues with such fair (but nasty) behaviour, we shall never reach the state after which, forever, a single machine will be priviliged. Making not all machines identical can be accomplished in two extreme ways: either by making them all different or by making one exceptional. In view of our obligation to enforce asymmetry, one machine exceptional and all others mutually equal seems the most promising choice.</p>
-				<p>Secondly, it is not a priori excluded that the net effect of the command &#x0093;adjust yourself&#x0094; is nil, viz. that the new state of the machine to which the command was given equals its old state. In the legitimate state we have no particular desire to let the adjustment command have any effect when given to a machine far away from the privileged one. To simplify matters we can look for a solution in which the adjustment command has only effect when directed towards a machine that at that moment is privileged, and the result of whose adjustment will be that it loses its privilege. When now the function &#x0093;privileged&#x0094; is chosen such that at least one machine must be privileged, then &#x0093;dead ends&#x0094; are excluded a priori: the ring will remain alive, and we can concentrate on the requirement that the system converges to the state from where a single privilege will rotate past all machines.</p>
-				<p>Thirdly, we may feel tempted to introduce some sort of counters, but because we are confined to finite machines, true counters are excluded and the best we can hope for are counters counting modulo <var>K</var>, where <var>K</var> is some sufficiently large constant (certainly &gt;1). For two counter values modulo <var>K</var>, the maximum or minimum is not defined and we cannot hope to establish progress towards the legitimate state because some &#x0093;maximum counter value&#x0094; decreases. Well-defined are equality and a successor function that can be applied a limited number of times without leading to ambiguity. This suggests to define the function &#x0093;being privileged&#x0094; in terms of equality of states.</p>
-				<p>In terms of equality we can define a function &#x0093;being privileged&#x0094; such that at least one machine is privileged quite easily when bearing in mind that one machine &#x2014;let it be machine nr.0&#x2014; should be exceptional. Let for 1 &#x2264; <var>i</var> &#x2264; <var>N</var> machine nr.<var>i</var> be privileged when its state differs from that of machine nr.<var>i</var>-1, i.e. when <var>x</var>[<var>i</var>] &#x2260; <var>x</var>[<var>i</var>-1]. We choose this &#x2014;rather than the other way round&#x2014; because now non-privileged implies <var>x</var>[<var>i</var>]=<var>x</var>[<var>i</var>-1]$ and equality is transitive: in other words, when all machines except machine nr.0 are non-privileged, <var>x</var>[0]=<var>x</var>[<var>N</var>] and when we define this as the condition for machine nr.0 being privileged, our requirement of at least one machine being privileged is therefore met.</p>
-				<p>Further we had suggested that adjustment would cause the machine in question to lose its privilege. For the normal machines (1 &#x2264; <var>i</var> &#x2264; <var>N</var>) we have no freedom anymore: adjustment of machine nr.<var>i</var> means</p>
-				<p>&#x0093;<b>if</b> <var>x</var>[<var>i</var>] &#x2260; <var>x</var>[<var>i</var>-1] <b>then</b> <var>x</var>[<var>i</var>] :=<var>x</var>[<var>i</var>-1] <b>fi</b>&#x0094;</p>For the exceptional machine nr.0 I now suggest				<p>&#x0093;<b>if</b> <var>x</var>[0]=<var>x</var>[<var>N</var>] <b>then</b> <var>x</var>[0] := (<var>x</var>[0]+1) <b>mod</b> <var>K</var> <b>fi</b>&#x0094;</p>
-				and it is only here, where a new state has to be generated and that it becomes significant that we consider the machine states <var>x</var> as a counter modulo <var>K</var>.
-				<p>To start with we remark that when a machine &#x0093;fires&#x0094; &#x2014;if we may use that term for the non-nil adjustment that takes place when the demon gives the command to a privileged machine&#x2014; it loses its privilege, it may give the privilege to its righthand neighbour and to no one else. Because at least one machine must be privileged, firing of the only privileged machine will always give the only privilege to its righthand neighbour: once in a legitimate state the system will remain in a legitimate state and the privilege will rotate around the ring.</p>
-				<p>Furthermore, suppose that the exceptional machine is not privileged, i.e. <var>x</var>[0] &#x2260; <var>x</var>[<var>N</var>], then in a finite number of commands it will become privileged. For let <var>j</var> be the minimum value such that <var>x</var>[<var>j</var>] &#x2260; <var>x</var>[0]; because <var>j</var> is the minimum value, <var>x</var>[<var>j</var>-1]=<var>x</var>[0] and therefore <var>x</var>[<var>j</var>] &#x2260; <var>x</var>[<var>j</var>-1], i.e. machine nr.<var>j</var> is privileged. In a finite number of commands the demon will point to it, thus increasing <var>j</var> if <var>j</var>&lt;<var>N</var> or making <var>x</var>[<var>N</var>]=<var>x</var>[0] if <var>j</var>=<var>N</var>, i.e. making the exceptional machine privileged. So the exceptional machine will continue forever to get the opportunity to fire.</p>
-				<p>Let us now investigate what happens when we start the system in an arbitrary state. When the exceptional machine fires for the first time, we colour its new state blue and all other states white; from then onwards each state created by the exceptional machine or copied from a blue state by a normal machine will be blue as well. If <var>h</var> is the number of times the exceptional machine fires when <var>x</var>[<var>N</var>] is still white, then &#x2014;because <var>K</var>&gt;1&#x2014; <var>h</var> will satisfy <var>h</var> &#x2264; <var>N</var>: after the first firing, the copying process along the chain of normal machines can supply machine nr.<var>N</var> at most with another <var>N</var>-1 further white state, differing in succession.</p>
-				<p>Without loss of generality we could have chosen initially <var>x</var>[0]=<var>K</var>-1. If <var>k</var> &#x2265; N, then the first <var>N</var> firings of the exceptional machine have created the blue states from 0 through <var>N</var>-1, and scanning the blue states, starting at the exceptional machine and going to the right, we find a sequence of non-increasing blue <var>x</var>-values. At the next firing of the exceptional machine with <var>x</var>[0]=<var>N</var>-1, also <var>x</var>[<var>N</var>]=<var>N</var>-1 must hold. At that moment, however, <var>x</var>[<var>N</var>] must be blue as well and therefore <em>all</em> states must be =<var>N</var>-1, i.e. the system has arrived in one of its legitimate states. And this completes the proof for self-stabilization provided <var>K</var> &#x2265; <var>N</var> (and for smaller values of <var>K</var> counter examples kill the assumption of self-stabilization).</p>
-			</div>
-			<div align="center">
-				*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
-				*</div>
-			<div>
-				<p>So far, so good, but one may object that I have introduced a rather powerful demon that may be very awkward to implement. Can we eliminate that centralized agency, can we replace it by &#x0093;a distributed demon&#x0094;?</p>
-				<p>Each variable <var>x</var>[<var>i</var>] is only inspected and assigned to by machine nr.<var>i</var> and only inspected by its righthand neighbour. We assume each variable <var>x</var>[<var>i</var>] equipped with its own, private two-way switch, excluding simultaneous access by the two neighbours it connects. And for the machines we assume that they will adjust themselves with a finite speed and a finite frequency, instead of waiting for the demon's command. Does it work? Amazingly it does without any further refinements.</p>
-				<p>Two simultaneous adjustments of non-neighbouring machines have no mutual interference at all. An adjustment by the exceptional machine cannot suffer from simultaneous activity of its lefthand neighbour nr.<var>N</var>, because <var>x</var>[<var>N</var>] is inspected only once per adjustment. But adjustment of a normal machine nr.<var>i</var>, although possibly inspecting <var>x</var>[<var>i</var>-1] twice during a single adjustment, cannot suffer from its lefthand neighbour activity either: if <var>x</var>[<var>i</var>-1] changes its value between the two inspections, the first value differed from <var>x</var>[<var>i</var>]; if the second value differs from <var>x</var>[<var>i</var>] as well, the program behaves as if this value was also offered the first time, if the second value equals <var>x</var>[<var>i</var>], the assignment has no effect and it is as if the adjustment has not taken place at all!</p>
-				<b>Conclusion.</b> Self-stabilizing systems with distributed control do exist in the sense that local decisions force the system towards satisfying and then maintaining a global requirement. In particular, local mutual exclusion is a sufficient building block for eventually achieving mutual exclusion globally.<br>
-				<br>
-				<b>References.</b><br>
-				<br>
-				[1] Dijkstra, E.W. Solution of a problem in concurrent programming control. <i>Comm. ACM 8</i>, 9 (Sept.1965), 569<br>
-				<br>
-				[2] Knuth, D.E. Additional comments on a problem in concurrent programming control. <i>Comm. ACM 9</i>, 5 (May 1966), 321&#x2013;322<br>
-				<br>
-				[3] de Bruijn, N.G. Additional comments on a problem in concurrent programming control. <i>Comm. ACM 10</i>, 3 (March, 1967)<br>
-				<br>
-				[4] Eisenberg, M.A. and McGuire, M.R. Further comments on Dijkstra's concurrent control problem. <i>Comm. ACM 15</i>, 11 (Nov. 1972) 999</div>
-		</div>
-		<hr>
-		<font size="-1">transcribed by Xiaozhou (Steve) Li<br>
-			revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="92">Wed, 17 Jan 2007</csobj></font>
-	</body>
-
-</html></div>
+</style>
+</head>
+<body bgcolor="#FFFFFF">
+<div align="right">&nbsp;&nbsp;<a title="PDF scan of EWD 391" href="https://www.cs.utexas.edu/~EWD/ewd03xx/EWD391.PDF" target="_blank">EWD 391</a></div>
+<div align="left">
+<div>
+<table border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td>
+<div align="center"><u>Self-stabilization in spite of distributed control<br>
+<br></u> by<br>
+<br>
+Edsger W. Dijkstra, BURROUGHS</div>
+</td>
+</tr>
+</table>
+<u>Abstract</u>: A system of finite state automata can be built in such a way that regardless their initial states, the total system will converge in a finite number of steps towards a synchronization regime.<br>
+<u>Key words</u>: self-stabilization, distributed logic, mutual exclusion,<br>
+synchronization, co-operation, concurrency. CR Category: 4.32
+<table width="90%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="left" valign="top" width="23%">Author's address:</td>
+<td align="left" valign="top">Burroughs,<br>
+Plataanstraat 5<br>
+NUENEN — 4565<br>
+the Netherlands</td>
+<td align="left" valign="top">
+<div align="right">1st October 1973</div>
+</td>
+</tr>
+</table>
+<hr>
+<br>
+<u>Self-stabilization in spite of distributed control<br></u>
+<p>A systematic way for finding the algorithm ensuring some desired form of co-operation between a set of loosely coupled sequential processes can in general terms be described as follows: the relation “the system is in a legitimate state” is kept invariant. As a consequence, each intended individual process step that could possibly cause violation of that invariant relation has to be preceded by a test that it won't do so, and depending on the outcome of that test the critical process step is either caused to take place or it —and with it the process of which it is a part— is delayed until a more favourable system state has been reached. With a suitable choice of the set of legitimate states one can indeed introduce the rule that a critical process step will be delayed only as long as its execution would lead to violation of the corresponding invariant relation.</p>
+<p>The resulting design is readily implemented if the different sequential processes can be granted mutually exclusive access to a common store in which the current system state is recorded: then a relation between (the values of) the variables in that commonly accessible store is then the core of what we could call “the centralized control”.</p>
+<p>A complication arises when there is no such commonly accessible store and “the system state” must be recorded in variables distributed over the various processes, and furthermore the communication facilities are limited in the sense that each process can only exchange information with “its neighbors”, a (possibly small) subset of the total set of processes. (We can view the processes as the nodes of a connected graph in which each of the (sparse) set of edges denotes the neighbor relation.) The complication is that a node's behaviour can only be influenced by that part of the total system state description that is available in that node: local actions taken on account of local information must accomplish a global objective. Such systems (with what is quite aptly called “distributed control”) have been designed, but all such designs I am familiar with are unstable in the sense that, when once in an illegitimate state, they could remain so forever. I call a system “self-stabilizing” when, regardless its initial state, it is guaranteed to arrive at a legitimate state in a finite number of steps. (Whether the property of self-stabilization is interesting either as a start procedure, or for the sake of system robustness or merely as an intriguing problem, is a question that falls out of the scope of this article.)</p>
+<p>Unable to decide on theoretical grounds whether non-trivial self-stabilizing system with distributed control could exist at all, I decided to try to design one under the following constraints and objectives.</p>
+<p>We consider a system built from <var>N</var>+1 finite state machines numbered from 0 through <var>N</var>. (The state space for the total system is then the Cartesian product of the <var>N</var>+1 individual state spaces of the respective machines.) The machines are arranged in a ring, i.e. for 0 ≤ <var>j</var> &lt; <var>N</var>, machine nr.<var>i</var> has machine nr.<var>i</var>+1 as its righthand neighbour, and machine nr.<var>N</var> has machine nr.0 as its righthand neighbour.</p>
+<p>In the middle of the ring stands a demon, each time giving, in “fair random order” one of the machines the command “to adjust itself”. (In “fair random order” means that in each infinite sequence of successive commands issued by the demon, each machine has received the command to adjust itself infinitely often.) Upon “adjustment” a machine goes into a (new) state, which must be a function of its own (old) state and the current states of its (two) neighbours.</p>
+<p>Furthermore, as a function of its own state (and possibly of the states of its neighbours) a machine may be “privileged”. The legitimate states are defined as those states in which exactly one machine is privileged and for which all possible successor states are legitimate as well; furthermore it is required that then the privilege will rotate around the ring.</p>
+<b>Side remark</b>. I was hoping for an existence proof of self-stabilizing systems with distributed control: a ring is then one of the most natural, simple connection graphs. My choice of legitimate states, viz. requiring convergence towards a solution of the mutual exclusion problem is understandable for historical reasons [1], [2], [3], [4], it is also justified by its central position in the whole field of controlling co-operation between loosely coupled processes. Finally, the choice of the demon was suggested by a recent experience with a cyclic relaxation problem in which “fair random relaxation” would converge to a limit, while simultaneous relaxation could lead to oscillation (EWD386, unpublished). So much for the justification of the problem choice.
+<p>Again I beg my intrigued readers to stop reading here and to try to solve the stated problem themselves, for only then they will (slowly!) build up some sympathy with my difficulties: the problem has been with me for many months, while I was oscillating between trying to find a solution and trying to prove the non-existence of a solution. And all the time I had no indication in which of the two directions to aim, nor of the simplicity or complexity of the argument —if any!— that would settle the question</p>
+</div>
+<div align="center">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</div>
+<div>
+<p>The crucial observation is that, in general, the problem cannot be solved if, in addition, we require our machines to be identical. For if the number of machines is non-prime, our starting situation can have a cyclic symmetry of degree <var>n</var> (2 ≤ <var>n</var> ≤ <var>N</var>/2) and if then the demon —and he is free to do so!— gives his first <var>n</var> commands equally spaced around the ring, the cyclic symmetry will not have been destroyed. If the demon continues with such fair (but nasty) behaviour, we shall never reach the state after which, forever, a single machine will be priviliged. Making not all machines identical can be accomplished in two extreme ways: either by making them all different or by making one exceptional. In view of our obligation to enforce asymmetry, one machine exceptional and all others mutually equal seems the most promising choice.</p>
+<p>Secondly, it is not a priori excluded that the net effect of the command “adjust yourself” is nil, viz. that the new state of the machine to which the command was given equals its old state. In the legitimate state we have no particular desire to let the adjustment command have any effect when given to a machine far away from the privileged one. To simplify matters we can look for a solution in which the adjustment command has only effect when directed towards a machine that at that moment is privileged, and the result of whose adjustment will be that it loses its privilege. When now the function “privileged” is chosen such that at least one machine must be privileged, then “dead ends” are excluded a priori: the ring will remain alive, and we can concentrate on the requirement that the system converges to the state from where a single privilege will rotate past all machines.</p>
+<p>Thirdly, we may feel tempted to introduce some sort of counters, but because we are confined to finite machines, true counters are excluded and the best we can hope for are counters counting modulo <var>K</var>, where <var>K</var> is some sufficiently large constant (certainly &gt;1). For two counter values modulo <var>K</var>, the maximum or minimum is not defined and we cannot hope to establish progress towards the legitimate state because some “maximum counter value” decreases. Well-defined are equality and a successor function that can be applied a limited number of times without leading to ambiguity. This suggests to define the function “being privileged” in terms of equality of states.</p>
+<p>In terms of equality we can define a function “being privileged” such that at least one machine is privileged quite easily when bearing in mind that one machine —let it be machine nr.0— should be exceptional. Let for 1 ≤ <var>i</var> ≤ <var>N</var> machine nr.<var>i</var> be privileged when its state differs from that of machine nr.<var>i</var>-1, i.e. when <var>x</var>[<var>i</var>] ≠ <var>x</var>[<var>i</var>-1]. We choose this —rather than the other way round— because now non-privileged implies <var>x</var>[<var>i</var>]=<var>x</var>[<var>i</var>-1]$ and equality is transitive: in other words, when all machines except machine nr.0 are non-privileged, <var>x</var>[0]=<var>x</var>[<var>N</var>] and when we define this as the condition for machine nr.0 being privileged, our requirement of at least one machine being privileged is therefore met.</p>
+<p>Further we had suggested that adjustment would cause the machine in question to lose its privilege. For the normal machines (1 ≤ <var>i</var> ≤ <var>N</var>) we have no freedom anymore: adjustment of machine nr.<var>i</var> means</p>
+<p>“<b>if</b> <var>x</var>[<var>i</var>] ≠ <var>x</var>[<var>i</var>-1] <b>then</b> <var>x</var>[<var>i</var>] :=<var>x</var>[<var>i</var>-1] <b>fi</b>”</p>
+For the exceptional machine nr.0 I now suggest
+<p>“<b>if</b> <var>x</var>[0]=<var>x</var>[<var>N</var>] <b>then</b> <var>x</var>[0] := (<var>x</var>[0]+1) <b>mod</b> <var>K</var> <b>fi</b>”</p>
+and it is only here, where a new state has to be generated and that it becomes significant that we consider the machine states <var>x</var> as a counter modulo <var>K</var>.
+<p>To start with we remark that when a machine “fires” —if we may use that term for the non-nil adjustment that takes place when the demon gives the command to a privileged machine— it loses its privilege, it may give the privilege to its righthand neighbour and to no one else. Because at least one machine must be privileged, firing of the only privileged machine will always give the only privilege to its righthand neighbour: once in a legitimate state the system will remain in a legitimate state and the privilege will rotate around the ring.</p>
+<p>Furthermore, suppose that the exceptional machine is not privileged, i.e. <var>x</var>[0] ≠ <var>x</var>[<var>N</var>], then in a finite number of commands it will become privileged. For let <var>j</var> be the minimum value such that <var>x</var>[<var>j</var>] ≠ <var>x</var>[0]; because <var>j</var> is the minimum value, <var>x</var>[<var>j</var>-1]=<var>x</var>[0] and therefore <var>x</var>[<var>j</var>] ≠ <var>x</var>[<var>j</var>-1], i.e. machine nr.<var>j</var> is privileged. In a finite number of commands the demon will point to it, thus increasing <var>j</var> if <var>j</var>&lt;<var>N</var> or making <var>x</var>[<var>N</var>]=<var>x</var>[0] if <var>j</var>=<var>N</var>, i.e. making the exceptional machine privileged. So the exceptional machine will continue forever to get the opportunity to fire.</p>
+<p>Let us now investigate what happens when we start the system in an arbitrary state. When the exceptional machine fires for the first time, we colour its new state blue and all other states white; from then onwards each state created by the exceptional machine or copied from a blue state by a normal machine will be blue as well. If <var>h</var> is the number of times the exceptional machine fires when <var>x</var>[<var>N</var>] is still white, then —because <var>K</var>&gt;1— <var>h</var> will satisfy <var>h</var> ≤ <var>N</var>: after the first firing, the copying process along the chain of normal machines can supply machine nr.<var>N</var> at most with another <var>N</var>-1 further white state, differing in succession.</p>
+<p>Without loss of generality we could have chosen initially <var>x</var>[0]=<var>K</var>-1. If <var>k</var> ≥ N, then the first <var>N</var> firings of the exceptional machine have created the blue states from 0 through <var>N</var>-1, and scanning the blue states, starting at the exceptional machine and going to the right, we find a sequence of non-increasing blue <var>x</var>-values. At the next firing of the exceptional machine with <var>x</var>[0]=<var>N</var>-1, also <var>x</var>[<var>N</var>]=<var>N</var>-1 must hold. At that moment, however, <var>x</var>[<var>N</var>] must be blue as well and therefore <em>all</em> states must be =<var>N</var>-1, i.e. the system has arrived in one of its legitimate states. And this completes the proof for self-stabilization provided <var>K</var> ≥ <var>N</var> (and for smaller values of <var>K</var> counter examples kill the assumption of self-stabilization).</p>
+</div>
+<div align="center">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*<br>
+*</div>
+<div>
+<p>So far, so good, but one may object that I have introduced a rather powerful demon that may be very awkward to implement. Can we eliminate that centralized agency, can we replace it by “a distributed demon”?</p>
+<p>Each variable <var>x</var>[<var>i</var>] is only inspected and assigned to by machine nr.<var>i</var> and only inspected by its righthand neighbour. We assume each variable <var>x</var>[<var>i</var>] equipped with its own, private two-way switch, excluding simultaneous access by the two neighbours it connects. And for the machines we assume that they will adjust themselves with a finite speed and a finite frequency, instead of waiting for the demon's command. Does it work? Amazingly it does without any further refinements.</p>
+<p>Two simultaneous adjustments of non-neighbouring machines have no mutual interference at all. An adjustment by the exceptional machine cannot suffer from simultaneous activity of its lefthand neighbour nr.<var>N</var>, because <var>x</var>[<var>N</var>] is inspected only once per adjustment. But adjustment of a normal machine nr.<var>i</var>, although possibly inspecting <var>x</var>[<var>i</var>-1] twice during a single adjustment, cannot suffer from its lefthand neighbour activity either: if <var>x</var>[<var>i</var>-1] changes its value between the two inspections, the first value differed from <var>x</var>[<var>i</var>]; if the second value differs from <var>x</var>[<var>i</var>] as well, the program behaves as if this value was also offered the first time, if the second value equals <var>x</var>[<var>i</var>], the assignment has no effect and it is as if the adjustment has not taken place at all!</p>
+<b>Conclusion.</b> Self-stabilizing systems with distributed control do exist in the sense that local decisions force the system towards satisfying and then maintaining a global requirement. In particular, local mutual exclusion is a sufficient building block for eventually achieving mutual exclusion globally.<br>
+<br>
+<b>References.</b><br>
+<br>
+[1] Dijkstra, E.W. Solution of a problem in concurrent programming control. <i>Comm. ACM 8</i>, 9 (Sept.1965), 569<br>
+<br>
+[2] Knuth, D.E. Additional comments on a problem in concurrent programming control. <i>Comm. ACM 9</i>, 5 (May 1966), 321–322<br>
+<br>
+[3] de Bruijn, N.G. Additional comments on a problem in concurrent programming control. <i>Comm. ACM 10</i>, 3 (March, 1967)<br>
+<br>
+[4] Eisenberg, M.A. and McGuire, M.R. Further comments on Dijkstra's concurrent control problem. <i>Comm. ACM 15</i>, 11 (Nov. 1972) 999</div>
+</div>
+<hr>
+<font size="-1">transcribed by Xiaozhou (Steve) Li<br>
+revised Wed, 17 Jan 2007</font>
+</body>
+</html>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

@@ -23,57 +23,43 @@
   </div>
   <h1>A problem from Zhendong Patrick Su</h1>
   <div class='body'>
-				<p>The other week, my student Zhendong Patrick Su showed me the following problem.</p>
-				<p>Consider the following quadrilateral with a diagonal, in which the sizes of the angles are indicated in units of &#x03C0;/36</p>
-				<p class="noindent" align="center"><img src="EWD1188_fig1.png" alt="EDW1188 figure 1" title="EDW1188 figure 1" /></p>
-				<p class="noindent">We are asked to determine the angle marked below, and suggest that you think about the problem before turning the page.</p>
-				<p class="noindent" align="center"><img src="EWD1188_fig2.png" alt="EDW1188 figure 2" title="EDW1188 figure 2" /></p>
-				<p>One thing that strikes the reader is that one of the sides connects two equal angles (of 22 each), and the question is whether we can exploit that symmetry. The suggestion is to try to do that by introducing a symmetric trapezium (a quadrilateral with 1 pair of parallel sides)</p>
-				<p class="noindent" align="center"><img src="EWD1188_fig3.png" alt="EDW1188 figure 3" title="EDW1188 figure 3" /></p>
-				<p class="noindent">Filling in the angle sizes, we see that the figure is very special indeed: the figure has been partitioned into a symmetric trapezium and an isosceles triangle.</p>
-				<img src="EWD1188_fig4.png" alt="EDW1188 figure 4" title="EDW1188 figure 4" style="float: left; margin: 0 3em 0 3em;" />
-				<p class="noindent">The symmetry of the trapezium can be exploited by observing that as a result its 4 vertices lie on a circle; consequently the two marked angles are equal.</p>
-				<p style="clear: both;"></p>
-				<p class="noindent" align="center"><img src="EWD1188_fig5.png" alt="EDW1188 figure 5" title="EDW1188 figure 5" /></p>
-				<p>The isosceles triangle with top of size 22 is exploited by considering the circle through its other 2 vertices and with the top of size 22 as centre. Because of the angle marked 11, the 4th vertex lies on that circle (and because of the fact that the vertices of the angles of size 11 and 22, respectively, lie <em>at the same side</em> of the line connecting the other two vertices in the picture), we can thus mark a 3rd segment // and we have found 2 other isosceles triangles. Either of them suffices to conclude that the size of the marked angle, i.e. the requested answer, is 8 (36&#x2212;2*14 or 36&#x2212;2*3&#x2212;22).</p>
-				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
-				<p>I thought that the very first step was a rather big rabbit, but while I was writing this note, my wife Ria tried to solve this problem, and the partitioning into a symmetric trapezium and an isosceles triangle was the very first thing she did!</p>
-				<p>That I used the theorem &#x2014;proved in <a href="EWD1180.html">EWD1180</a>&#x2014; that a circle is the locus of points from which 2 given points are viewed under a constant angle, etc., is not surprising: it is a sophisticated packaging of the equal lines and the equal angles of the isosceles triangle.</p>
-				<p>I wrote this down for the sake of presentational experiment of not naming the components of the picture.</p>
-				<p style="margin-right: 2em;" align="right">Austin, 30 September 1994</p>
-
-				<p class="noindent">
-					prof.dr. Edsger W.Dijkstra<br />
-					Department of Computer Sciences<br />
-					The University of Texas at Austin<br />
-					Austin, TX 78712-1188<br />
-					USA
-				</p>
-				<hr />
-				<p class="noindent"><b>Supplement</b></p>
-				<p class="noindent"><u>An alternative solution to Zhendong Patrick Su&rsquo;s problem</u></p>
-				<p class="noindent">The solution proposed in EWD1188 exploits the symmetry induced by two specific angles of size 22.</p>
-				<p>The solution proposed here exploits the more direct symmetry with respect to the &ldquo;major diagonal&rdquo; bisecting one of these angles. This symmetry is completed by connecting the mirror image of the vertex with angle of size 21 to all vertices of the quadrilateral, as shown in the following picture:</p>
-				<p class="noindent" align="center"><img src="EWD1188_fig6.png" alt="EDW1188 figure 6" title="EDW1188 figure 6" /></p>
-				<p class="noindent">The resulting isosceles triangle with top angle marked 11 + 11 obviously has base angle 18 &#x2212; 11 = 17, as indicated. Since the angle marked 7 equals the angle marked 3 + 4, the four points highlighted by dots are on a circle. Hence the angle between the base of the isosceles triangle and the minor diagonal equals the angle marked 1. Therefore the angle marked ? has size 7 + 1 = 8.</p>
-				<p class="noindent"><i>Discussion.</i> Consider the generalization of this problem where the given values 11, 3, 4 are replaced by arbitrary values <var>&#x03B1;</var>, <var>&#x03B2;</var>, <var>&#x03B3;</var> respectively. The condition for the 4 dots being on a circle is <span class="nowrap">18 &#x2212; <var>&#x03B1;</var></span> = <span class="nowrap"><var>&#x03B2;</var> + <var>&#x03B3;</var></span>, i.e. <span class="nowrap"><var>&#x03B1;</var> + <var>&#x03B2;</var> + <var>&#x03B3;</var> = 18.</span> Clearly the unknown angle = <span class="nowrap">(<var>&#x03B3;</var> + <var>&#x03B2;</var>) + (<var>&#x03B3;</var> &#x2212; <var>&#x03B2;</var>)</span> = <span class="nowrap">2  <var>&#x03B3;</var>,</span> resulting in a triangle with angles <span class="nowrap">2  <var>&#x03B1;</var>,</span> <span class="nowrap">2  <var>&#x03B2;</var></span> and <span class="nowrap">2  <var>&#x03B3;</var>.</span> This generates a family of equivalent problems, even if we require that <span class="nowrap"><var>&#x03B3; </var>&#x2212; <var>&#x03B2;</var> = 1</span> as in the original problem statement.</p>
-				<p>In EWD1188, the existence of the isosceles triangle used in the derivation requires <span class="nowrap">2  <var>&#x03B1;</var></span> + <span class="nowrap">(<var>&#x03B2;</var> + <var>&#x03B3;</var>)</span> + <span class="nowrap">(<var>&#x03B2;</var> + <var>&#x03B3;</var>) = 36</span>, hence <span class="nowrap"><var>&#x03B1;</var> + <var>&#x03B2;</var> + <var>&#x03B3;</var></span> = 18 as before. The symmetry arguments based on the equality of two specific angles of the quadrilateral results in the extra condition <var>&#x03B1;</var> + <span class="nowrap">2  <var>&#x03B1;</var></span> + <var>&#x03B2;</var> = 36, i.e. <span class="nowrap">3  <var>&#x03B1;</var></span> + <var>&#x03B2;</var> = 36. If we also require <span class="nowrap"><var>&#x03B3;</var> &#x2212; <var>&#x03B2;</var></span> = 1, then the only possibility is <var>&#x03B1;</var>, <var>&#x03B2;</var>, <var>&#x03B3;</var> = 11, 3, 4.</p>
-				<p class="noindent">R. Boute, 1995/01/24</p>
-
-			</div>
-			<div>
-        <br/>
-      </div>
-		</div>
-		<hr />
-		<div id="footer">
-         transcribed by Corrado Cantelmi<br />
-          revised 
-          <!-- #BeginDate format:En2 -->24-Dec-2011<!-- #EndDate -->
-		</div>
-	</body>
-
-</html>
+<p>The other week, my student Zhendong Patrick Su showed me the following problem.</p>
+<p>Consider the following quadrilateral with a diagonal, in which the sizes of the angles are indicated in units of π/36</p>
+<p class="noindent" align="center"><img src="EWD1188_fig1.png" alt="EDW1188 figure 1" title="EDW1188 figure 1"></p>
+<p class="noindent">We are asked to determine the angle marked below, and suggest that you think about the problem before turning the page.</p>
+<p class="noindent" align="center"><img src="EWD1188_fig2.png" alt="EDW1188 figure 2" title="EDW1188 figure 2"></p>
+<p>One thing that strikes the reader is that one of the sides connects two equal angles (of 22 each), and the question is whether we can exploit that symmetry. The suggestion is to try to do that by introducing a symmetric trapezium (a quadrilateral with 1 pair of parallel sides)</p>
+<p class="noindent" align="center"><img src="EWD1188_fig3.png" alt="EDW1188 figure 3" title="EDW1188 figure 3"></p>
+<p class="noindent">Filling in the angle sizes, we see that the figure is very special indeed: the figure has been partitioned into a symmetric trapezium and an isosceles triangle.</p>
+<img src="EWD1188_fig4.png" alt="EDW1188 figure 4" title="EDW1188 figure 4" style="float: left; margin: 0 3em 0 3em;">
+<p class="noindent">The symmetry of the trapezium can be exploited by observing that as a result its 4 vertices lie on a circle; consequently the two marked angles are equal.</p>
+<p style="clear: both;"></p>
+<p class="noindent" align="center"><img src="EWD1188_fig5.png" alt="EDW1188 figure 5" title="EDW1188 figure 5"></p>
+<p>The isosceles triangle with top of size 22 is exploited by considering the circle through its other 2 vertices and with the top of size 22 as centre. Because of the angle marked 11, the 4th vertex lies on that circle (and because of the fact that the vertices of the angles of size 11 and 22, respectively, lie <em>at the same side</em> of the line connecting the other two vertices in the picture), we can thus mark a 3rd segment // and we have found 2 other isosceles triangles. Either of them suffices to conclude that the size of the marked angle, i.e. the requested answer, is 8 (36−2*14 or 36−2*3−22).</p>
+<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p>I thought that the very first step was a rather big rabbit, but while I was writing this note, my wife Ria tried to solve this problem, and the partitioning into a symmetric trapezium and an isosceles triangle was the very first thing she did!</p>
+<p>That I used the theorem —proved in <a href="EWD1180.html">EWD1180</a>— that a circle is the locus of points from which 2 given points are viewed under a constant angle, etc., is not surprising: it is a sophisticated packaging of the equal lines and the equal angles of the isosceles triangle.</p>
+<p>I wrote this down for the sake of presentational experiment of not naming the components of the picture.</p>
+<p style="margin-right: 2em;" align="right">Austin, 30 September 1994</p>
+<p class="noindent">prof.dr. Edsger W.Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin<br>
+Austin, TX 78712-1188<br>
+USA</p>
+<hr>
+<p class="noindent"><b>Supplement</b></p>
+<p class="noindent"><u>An alternative solution to Zhendong Patrick Su’s problem</u></p>
+<p class="noindent">The solution proposed in EWD1188 exploits the symmetry induced by two specific angles of size 22.</p>
+<p>The solution proposed here exploits the more direct symmetry with respect to the “major diagonal” bisecting one of these angles. This symmetry is completed by connecting the mirror image of the vertex with angle of size 21 to all vertices of the quadrilateral, as shown in the following picture:</p>
+<p class="noindent" align="center"><img src="EWD1188_fig6.png" alt="EDW1188 figure 6" title="EDW1188 figure 6"></p>
+<p class="noindent">The resulting isosceles triangle with top angle marked 11 + 11 obviously has base angle 18 − 11 = 17, as indicated. Since the angle marked 7 equals the angle marked 3 + 4, the four points highlighted by dots are on a circle. Hence the angle between the base of the isosceles triangle and the minor diagonal equals the angle marked 1. Therefore the angle marked ? has size 7 + 1 = 8.</p>
+<p class="noindent"><i>Discussion.</i> Consider the generalization of this problem where the given values 11, 3, 4 are replaced by arbitrary values <var>α</var>, <var>β</var>, <var>γ</var> respectively. The condition for the 4 dots being on a circle is <span class="nowrap">18 − <var>α</var></span> = <span class="nowrap"><var>β</var> + <var>γ</var></span>, i.e. <span class="nowrap"><var>α</var> + <var>β</var> + <var>γ</var> = 18.</span> Clearly the unknown angle = <span class="nowrap">(<var>γ</var> + <var>β</var>) + (<var>γ</var> − <var>β</var>)</span> = <span class="nowrap">2 <var>γ</var>,</span> resulting in a triangle with angles <span class="nowrap">2 <var>α</var>,</span> <span class="nowrap">2 <var>β</var></span> and <span class="nowrap">2 <var>γ</var>.</span> This generates a family of equivalent problems, even if we require that <span class="nowrap"><var>γ</var> − <var>β</var> = 1</span> as in the original problem statement.</p>
+<p>In EWD1188, the existence of the isosceles triangle used in the derivation requires <span class="nowrap">2 <var>α</var></span> + <span class="nowrap">(<var>β</var> + <var>γ</var>)</span> + <span class="nowrap">(<var>β</var> + <var>γ</var>) = 36</span>, hence <span class="nowrap"><var>α</var> + <var>β</var> + <var>γ</var></span> = 18 as before. The symmetry arguments based on the equality of two specific angles of the quadrilateral results in the extra condition <var>α</var> + <span class="nowrap">2 <var>α</var></span> + <var>β</var> = 36, i.e. <span class="nowrap">3 <var>α</var></span> + <var>β</var> = 36. If we also require <span class="nowrap"><var>γ</var> − <var>β</var></span> = 1, then the only possibility is <var>α</var>, <var>β</var>, <var>γ</var> = 11, 3, 4.</p>
+<p class="noindent">R. Boute, 1995/01/24</p>
+<div><br></div>
+<hr>
+<div id="footer">transcribed by Corrado Cantelmi<br>
+revised <!-- #BeginDate format:En2 -->24-Dec-2011<!-- #EndDate --></div>
 </div>
   <script>
 $('.body').tweetSelection({

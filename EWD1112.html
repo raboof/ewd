@@ -23,143 +23,98 @@
   </div>
   <h1>Why &quot;up to equivalence&quot;</h1>
   <div class='body'>
-					<p>Let <font size="+1">&#x2291;</font> be a preorder, i.e. a reflexive, transitive relation. Then relation <font size="+2">&#x22CD;</font>, given by</p>
-					<p><var>p </var><font size="+2">&#x22CD;</font><font size="+1"> </font><var>q</var>&nbsp; &nbsp;&#x2261;&nbsp; <var>p </var><font size="+1">&#x2291; </font><var>q</var> &nbsp;&#x2227; &nbsp;<var>q </var><font size="+1">&#x2291; </font><var>p</var>&nbsp;&nbsp;&nbsp; ,</p>
-					<p class="noindent">is reflexive, transitive and symmetric, i.e. it is an equivalence relation. In category theory, one encounters all the time conclusions valid &quot;up to equivalence&quot;, a caveat that acts as a reminder that <font size="+2">&#x22CD;</font> is weaker than =&nbsp;&nbsp; .&nbsp; It makes one wonder why &#x2291; is not strengthened into a partial order, i.e. is postulated to be anti-symmetric as well:</p>
-					<p><var>p</var> = <var>q</var>&nbsp; &#x21D0&nbsp; <var>p </var>&#x2291; <var>q&nbsp;</var> &#x2227;&nbsp; <var>q </var>&#x2291; <var>p</var> . </p>
-					<p class="noindent">The following consideration gives a possible explanation. </p>
-				</div>
-				<div align="center">
-					<p class="noindent" >*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
-						* </p>
-				</div>
-				<div>
-					<p >In the usual model of our predicate calculus, our atoms &#x2014;<var>P</var>, <var>Q</var>, <var>R</var>, say&#x2014; stand for boolean expressions in some variable, <var>x</var> say, and when we write</p>
-					<blockquote>
-						<p>[<var>P</var> &#x2261; <var>Q</var> &#x2227; <var>R </var>] &nbsp;&nbsp;&nbsp;&nbsp; , </p>
-					</blockquote>
-					<p class="noindent">the square brackets denote universal quantification over <var>x</var>.&nbsp; For the purpose of this discussion I shall tag the square brackets with the name of the variable(s) quantified over;&nbsp; the above is then rewritten as</p>
-					<blockquote>
-						<p>[<var>P</var> &#x2261; <var>Q</var> &#x2227; <var>R </var>]<sub><var>x</var></sub></p>
-					</blockquote>
-					<p class="noindent">Let now <var>x'</var> be a fresh variable of some non-empty type. Then, for instance,</p>
-					<p>[<var>P</var> &#x2261; <var>Q</var> &#x2227; <var>R </var>]<sub><var>x</var></sub>&nbsp; &#x2261;&nbsp; [<var>P</var> &#x2261; <var>Q</var> &#x2227; <var>R </var>]<sub><var>x</var>, <var>x'</var></sub></p>
-					<p class="noindent">since quantification over a fresh variable of a nonempty type is the identity operation. In other words, in the usual model of our predicate calculus we are free to view our atoms as expressions in a fresh variable as well, provided we reinterpret the square brackets accordingly. We try to capture this nice property by saying that our usual model of the predicate calculus is &quot;insensitive to Cartesian extension&quot;. </p>
-					<p>Let us now investigate to what extent the usual model of the relational calculus is sensitive to Cartesian extension. The relational calculus is predicate calculus enriched with a unary operator called &quot;transposition&quot; (<font size="+1"><b>~</b></font>), a binary operator called &quot;composition&quot; (<b><font size="+1">;</font></b>) and a constant (<b>J</b>) which&nbsp; is composition's identity element. In the usual model for the relational calculus, the atoms are viewed as boolean expressions of two variables of the same (nonempty, but I am not going to repeat that all the time) type; we shall begin by denoting them by <var>x</var> and <var>y</var> respectively. That transposition is an involution we can express by</p>
-					<blockquote>
-						<p>[<var>P</var>&nbsp; &#x2261;&nbsp; <font size="+1">~~</font><var>P </var>]<sub><var>x</var>, <var>y</var></sub>&nbsp; ; </p>
-					</blockquote>
-					<p class="noindent">if you think it helpful, you can view the underlying space as a Cartesian square. </p>
-					<p>The transposition <font size="+1">~</font> is in the model</p>
-					<blockquote>
-						<p>[~<var>P</var>&nbsp; &#x2261;&nbsp; (<var>x</var>,<var>y</var> := <var>y</var>,<var>x</var>).<var>P </var>]<sub><var>x</var>,<var>y</var></sub>&nbsp;&nbsp; , </p>
-					</blockquote>
-					<p class="noindent">and for this operation, the model is insensitive to Cartesian extension, since for fresh <var>x'</var>, <var>y'</var></p>
-					<blockquote>
-						<p>[(<var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var> := <var>y</var>,<var>y'</var>,<var>x</var>,<var>x' </var>).<var>P</var> &nbsp; &#x2261;&nbsp; (<var>x</var>,<var>y</var> := <var>y</var>,<var>x</var>).<var>P </var>]<sub><var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var>.</sub></p>
-					</blockquote>
-					<p>The composition&nbsp; <b>;</b>&nbsp; is in the model</p>
-					<blockquote>
-						<p>[<var>P </var><b>;</b><var>Q</var> &#x2261;&#x3008;&#x2203;<var>z</var> :: (<var>y</var>:=<var>z</var>).<var>P</var> &#x2227; (<var>x</var>:=<var>z</var>).<var>Q</var>&#x3009;]<sub><var>x</var>,<var>y&nbsp;&nbsp;&nbsp;&nbsp;</var></sub>, </p>
-					</blockquote>
-					<p class="noindent">and also for composition, the model is insensitive to Cartesian extension, since for fresh <var>x'</var>, <var>y'</var></p>
-					<p>[&#x3008;&#x2203;<var>z</var> :: (<var>y</var>:=<var>z</var>).<var>P</var> &#x2227; (<var>x</var>:=<var>z</var>).<var>Q</var>&#x3009;&nbsp; &#x2261;</p>
-					<p>&#x3008;&#x2203;<var>z</var>,<var>z'</var> :: (<var>y</var>,<var>y'</var>:=<var>z</var>,<var>z'</var>).<var>P</var> &#x2227; (<var>x</var>,<var>x'</var>:=<var>z</var>,<var>z'</var>).<var>Q</var>&#x3009;]<sub><var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var>.</sub> </p>
-					<p>Since &quot;<var>R</var> is transitive&quot; is formally expressed by</p>
-					<p>&nbsp;&nbsp;&nbsp; [<var>R </var><b>;</b><var>R</var> &nbsp;&#x21d2;&nbsp; <var>R </var>]</p>
-					<p class="noindent">the notion of transitivity is insensitive to Cartesian extension.</p>
-				</div>
-			
-				
-			
-			<div id="content" align="left">
-				<p>&nbsp;&nbsp;&nbsp; With the constant J, however, things are different. It is &quot;the diagonal&quot; <var>x</var>=<var>y</var> of the underlying Cartesian square; after extension with the fresh variables <var>x'</var>,<var>y'</var>, it is <var>x</var>=<var>y</var>&nbsp;&#x2227;&nbsp;<var>x'</var>=<var>y'</var>&nbsp; . For fresh variables <var>x'</var>,<var>y'</var> we observe</p>
-			</div>
-			<div id="content">
-				<div>
-					<p class="p0">[ J &#x21d2; <var>R </var>]<sub><var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var></sub></p>
-					<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ extended def. of J }</p>
-					<p class="p0">[<var>x</var>=<var>y</var> &#x2227; <var>x'</var>=<var>y'</var> &#x21d2; <var>R </var>]<sub><var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var></sub></p>
-					<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ pred. calc. }</p>
-					<p class="p0">[[<var>x</var>=<var>y</var> &#x21d2; <var>R</var> &#x2228; (<var>x'</var>&#x2260;<var>y' </var>)]<sub><var>x',y'</var></sub>]<sub><var>x</var>,<var>y</var></sub></p>
-					<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<var>x'</var>,<var>y'</var> are fresh}</p>
-					<p class="p0">[<var>x</var>=<var>y</var> &#x21d2; <var>R</var> &#x2228; [<var>x'</var>&#x2260;<var>y' </var>]<sub><var>x'</var>,<var>y'</var></sub>]<sub><var>x</var>,<var>y</var></sub></p>
-					<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<var>x'</var>,<var>y'</var> of nonempty type}</p>
-					<p class="p0">[<var>x</var>=<var>y</var> &#x21d2; <var>R </var>]<sub><var>x</var>,<var>y</var></sub></p>
-					<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ def of J }</p>
-					<p class="p0">[ J &#x21d2; <var>R </var>]<sub><var>x</var>,<var>y</var></sub></p>
-					<p>&nbsp;&nbsp;&nbsp; Since &quot;<var>R</var> is reflexive&quot; is formally expressed by [ J &#x21d2; <var>R </var>] &nbsp;&nbsp;&nbsp; , the above shows that also the notion of reflexivity, and hence the notion of a preorder, is insensitive to Cartesian extension.</p>
-				</div>
-				<div id="content" align="left">
-					<div align="left">
-						<p>&nbsp;&nbsp;&nbsp; The formal expression of &quot;<var>R</var> is antisymmetric&quot; is [<var>R</var> &#x2227; <font size="+1">~</font><var>R&nbsp;</var> &#x21d2;&nbsp; J ]. This, however, is not insensitive to Cartesian extension, as is shown by the following observation for fresh variables <var>x'</var>,<var>y'</var> (which we take from a <em>nontrivial</em> type, i.e. with at least 2 distinct values)</p>
-					</div>
-				</div>
-				<div id="content">
-					<div>
-						<p class="p0">[<var>R</var> &#x2227; <font size="+1">~</font><var>R</var> &#x21d2; J ]<sub><var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var></sub></p>
-						<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ extended def. of J }</p>
-						<p class="p0">[<var>R</var> &#x2227; <font size="+1">~</font><var>R</var> &#x21d2; <var>x</var>=<var>y</var> &#x2227; <var>x'</var>=<var>y' </var>]<sub><var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var></sub></p>
-						<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{pred. calc., <var>x'</var>,<var>y'</var> fresh}</p>
-						<p class="p0">[<var>R</var> &#x2227; <font size="+1">~</font><var>R</var> &#x21d2; <var>x</var>=<var>y </var>]<sub><var>x</var>,<var>y</var></sub> &#x2227; [<var>x'</var>=<var>y'</var>]<sub><var>x'</var>,<var>y'</var></sub></p>
-						<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{def. of J; fresh type nontrivial}</p>
-						<p class="p0">[<var>R</var> &#x2227; <font size="+1">~</font><var>R</var> &#x21d2; J ]<sub><var>x</var>,<var>y</var></sub> &#x2227; false</p>
-						<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{pred. calc.}</p>
-						<p class="p0">false &nbsp; ;</p>
-						<p class="noindent">in other words: Cartesian extension destroys antisymmetry and turns a partial order into a preorder.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Austin, 6 November 1991</p>
-						<p class="noindent">prof.dr Edsger W.Dijkstra</p>
-						<p class="continue">Department of Computer Sciences</p>
-						<p class="continue">The University of Texas at Austin</p>
-						<p class="continue">Austin, TX 78712 &#150; 1188</p>
-						<p class="continue">USA</p>
-						<hr>
-						<p class="noindent"><font size="-1">Transcribed by Guy Haworth.</font></p>
-						<p class="continue"><font size="-1">Last revised on <csobj format="MedDate" h="13" region="15" t="DateTime" w="83">Sun, 6 Jan 2008</csobj>.</font></p>
-						<p></p>
-					</div>
-				</div>
-			</div>
-		
-			
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-			
-				
-			
-		
-		
-			
-				
-			
-			
-			
-			
-			
-			
-			
-			
-		
-			
-		
-			
-				
-			
-	</body>
-
-</html>
+<p>Let <font size="+1">⊑</font> be a preorder, i.e. a reflexive, transitive relation. Then relation <font size="+2">⋍</font>, given by</p>
+<p><var>p</var> <font size="+2">⋍</font> <var>q</var>&nbsp; &nbsp;≡&nbsp; <var>p</var> <font size="+1">⊑</font> <var>q</var> &nbsp;∧ &nbsp;<var>q</var> <font size="+1">⊑</font> <var>p</var>&nbsp;&nbsp;&nbsp; ,</p>
+<p class="noindent">is reflexive, transitive and symmetric, i.e. it is an equivalence relation. In category theory, one encounters all the time conclusions valid "up to equivalence", a caveat that acts as a reminder that <font size="+2">⋍</font> is weaker than =&nbsp;&nbsp; .&nbsp; It makes one wonder why ⊑ is not strengthened into a partial order, i.e. is postulated to be anti-symmetric as well:</p>
+<p><var>p</var> = <var>q</var>&nbsp; &amp;#x21D0&nbsp; <var>p</var> ⊑ <var>q&nbsp;</var> ∧&nbsp; <var>q</var> ⊑ <var>p</var> .</p>
+<p class="noindent">The following consideration gives a possible explanation.</p>
+<div align="center">
+<p class="noindent">*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *<br>
+*</p>
+</div>
+<div>
+<p>In the usual model of our predicate calculus, our atoms —<var>P</var>, <var>Q</var>, <var>R</var>, say— stand for boolean expressions in some variable, <var>x</var> say, and when we write</p>
+<blockquote>
+<p>[<var>P</var> ≡ <var>Q</var> ∧ <var>R</var> ] &nbsp;&nbsp;&nbsp;&nbsp; ,</p>
+</blockquote>
+<p class="noindent">the square brackets denote universal quantification over <var>x</var>.&nbsp; For the purpose of this discussion I shall tag the square brackets with the name of the variable(s) quantified over;&nbsp; the above is then rewritten as</p>
+<blockquote>
+<p>[<var>P</var> ≡ <var>Q</var> ∧ <var>R</var> ]<sub><var>x</var></sub></p>
+</blockquote>
+<p class="noindent">Let now <var>x'</var> be a fresh variable of some non-empty type. Then, for instance,</p>
+<p>[<var>P</var> ≡ <var>Q</var> ∧ <var>R</var> ]<sub><var>x</var></sub>&nbsp; ≡&nbsp; [<var>P</var> ≡ <var>Q</var> ∧ <var>R</var> ]<sub><var>x</var>, <var>x'</var></sub></p>
+<p class="noindent">since quantification over a fresh variable of a nonempty type is the identity operation. In other words, in the usual model of our predicate calculus we are free to view our atoms as expressions in a fresh variable as well, provided we reinterpret the square brackets accordingly. We try to capture this nice property by saying that our usual model of the predicate calculus is "insensitive to Cartesian extension".</p>
+<p>Let us now investigate to what extent the usual model of the relational calculus is sensitive to Cartesian extension. The relational calculus is predicate calculus enriched with a unary operator called "transposition" (<font size="+1"><b>~</b></font>), a binary operator called "composition" (<b><font size="+1">;</font></b>) and a constant (<b>J</b>) which&nbsp; is composition's identity element. In the usual model for the relational calculus, the atoms are viewed as boolean expressions of two variables of the same (nonempty, but I am not going to repeat that all the time) type; we shall begin by denoting them by <var>x</var> and <var>y</var> respectively. That transposition is an involution we can express by</p>
+<blockquote>
+<p>[<var>P</var>&nbsp; ≡&nbsp; <font size="+1">~~</font><var>P</var> ]<sub><var>x</var>, <var>y</var></sub>&nbsp; ;</p>
+</blockquote>
+<p class="noindent">if you think it helpful, you can view the underlying space as a Cartesian square.</p>
+<p>The transposition <font size="+1">~</font> is in the model</p>
+<blockquote>
+<p>[~<var>P</var>&nbsp; ≡&nbsp; (<var>x</var>,<var>y</var> := <var>y</var>,<var>x</var>).<var>P</var> ]<sub><var>x</var>,<var>y</var></sub>&nbsp;&nbsp; ,</p>
+</blockquote>
+<p class="noindent">and for this operation, the model is insensitive to Cartesian extension, since for fresh <var>x'</var>, <var>y'</var></p>
+<blockquote>
+<p>[(<var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var> := <var>y</var>,<var>y'</var>,<var>x</var>,<var>x'</var> ).<var>P</var> &nbsp; ≡&nbsp; (<var>x</var>,<var>y</var> := <var>y</var>,<var>x</var>).<var>P</var> ]<sub><var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var>.</sub></p>
+</blockquote>
+<p>The composition&nbsp; <b>;</b>&nbsp; is in the model</p>
+<blockquote>
+<p>[<var>P</var> <b>;</b><var>Q</var> ≡〈∃<var>z</var> :: (<var>y</var>:=<var>z</var>).<var>P</var> ∧ (<var>x</var>:=<var>z</var>).<var>Q</var>〉]<sub><var>x</var>,<var>y&nbsp;&nbsp;&nbsp;&nbsp;</var></sub>,</p>
+</blockquote>
+<p class="noindent">and also for composition, the model is insensitive to Cartesian extension, since for fresh <var>x'</var>, <var>y'</var></p>
+<p>[〈∃<var>z</var> :: (<var>y</var>:=<var>z</var>).<var>P</var> ∧ (<var>x</var>:=<var>z</var>).<var>Q</var>〉&nbsp; ≡</p>
+<p>〈∃<var>z</var>,<var>z'</var> :: (<var>y</var>,<var>y'</var>:=<var>z</var>,<var>z'</var>).<var>P</var> ∧ (<var>x</var>,<var>x'</var>:=<var>z</var>,<var>z'</var>).<var>Q</var>〉]<sub><var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var>.</sub></p>
+<p>Since "<var>R</var> is transitive" is formally expressed by</p>
+<p>&nbsp;&nbsp;&nbsp; [<var>R</var> <b>;</b><var>R</var> &nbsp;⇒&nbsp; <var>R</var> ]</p>
+<p class="noindent">the notion of transitivity is insensitive to Cartesian extension.</p>
+</div>
+<div id="content" align="left">
+<p>&nbsp;&nbsp;&nbsp; With the constant J, however, things are different. It is "the diagonal" <var>x</var>=<var>y</var> of the underlying Cartesian square; after extension with the fresh variables <var>x'</var>,<var>y'</var>, it is <var>x</var>=<var>y</var>&nbsp;∧&nbsp;<var>x'</var>=<var>y'</var>&nbsp; . For fresh variables <var>x'</var>,<var>y'</var> we observe</p>
+</div>
+<div id="content">
+<div>
+<p class="p0">[ J ⇒ <var>R</var> ]<sub><var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var></sub></p>
+<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ extended def. of J }</p>
+<p class="p0">[<var>x</var>=<var>y</var> ∧ <var>x'</var>=<var>y'</var> ⇒ <var>R</var> ]<sub><var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var></sub></p>
+<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ pred. calc. }</p>
+<p class="p0">[[<var>x</var>=<var>y</var> ⇒ <var>R</var> ∨ (<var>x'</var>≠<var>y'</var> )]<sub><var>x',y'</var></sub>]<sub><var>x</var>,<var>y</var></sub></p>
+<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<var>x'</var>,<var>y'</var> are fresh}</p>
+<p class="p0">[<var>x</var>=<var>y</var> ⇒ <var>R</var> ∨ [<var>x'</var>≠<var>y'</var> ]<sub><var>x'</var>,<var>y'</var></sub>]<sub><var>x</var>,<var>y</var></sub></p>
+<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<var>x'</var>,<var>y'</var> of nonempty type}</p>
+<p class="p0">[<var>x</var>=<var>y</var> ⇒ <var>R</var> ]<sub><var>x</var>,<var>y</var></sub></p>
+<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ def of J }</p>
+<p class="p0">[ J ⇒ <var>R</var> ]<sub><var>x</var>,<var>y</var></sub></p>
+<p>&nbsp;&nbsp;&nbsp; Since "<var>R</var> is reflexive" is formally expressed by [ J ⇒ <var>R</var> ] &nbsp;&nbsp;&nbsp; , the above shows that also the notion of reflexivity, and hence the notion of a preorder, is insensitive to Cartesian extension.</p>
+</div>
+<div id="content" align="left">
+<div align="left">
+<p>&nbsp;&nbsp;&nbsp; The formal expression of "<var>R</var> is antisymmetric" is [<var>R</var> ∧ <font size="+1">~</font><var>R&nbsp;</var> ⇒&nbsp; J ]. This, however, is not insensitive to Cartesian extension, as is shown by the following observation for fresh variables <var>x'</var>,<var>y'</var> (which we take from a <em>nontrivial</em> type, i.e. with at least 2 distinct values)</p>
+</div>
+</div>
+<div id="content">
+<div>
+<p class="p0">[<var>R</var> ∧ <font size="+1">~</font><var>R</var> ⇒ J ]<sub><var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var></sub></p>
+<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ extended def. of J }</p>
+<p class="p0">[<var>R</var> ∧ <font size="+1">~</font><var>R</var> ⇒ <var>x</var>=<var>y</var> ∧ <var>x'</var>=<var>y'</var> ]<sub><var>x</var>,<var>x'</var>,<var>y</var>,<var>y'</var></sub></p>
+<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{pred. calc., <var>x'</var>,<var>y'</var> fresh}</p>
+<p class="p0">[<var>R</var> ∧ <font size="+1">~</font><var>R</var> ⇒ <var>x</var>=<var>y</var> ]<sub><var>x</var>,<var>y</var></sub> ∧ [<var>x'</var>=<var>y'</var>]<sub><var>x'</var>,<var>y'</var></sub></p>
+<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{def. of J; fresh type nontrivial}</p>
+<p class="p0">[<var>R</var> ∧ <font size="+1">~</font><var>R</var> ⇒ J ]<sub><var>x</var>,<var>y</var></sub> ∧ false</p>
+<p class="p1">=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{pred. calc.}</p>
+<p class="p0">false &nbsp; ;</p>
+<p class="noindent">in other words: Cartesian extension destroys antisymmetry and turns a partial order into a preorder.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Austin, 6 November 1991</p>
+<p class="noindent">prof.dr Edsger W.Dijkstra</p>
+<p class="continue">Department of Computer Sciences</p>
+<p class="continue">The University of Texas at Austin</p>
+<p class="continue">Austin, TX 78712 – 1188</p>
+<p class="continue">USA</p>
+<hr>
+<p class="noindent"><font size="-1">Transcribed by Guy Haworth.</font></p>
+<p class="continue"><font size="-1">Last revised on Sun, 6 Jan 2008.</font></p>
+</div>
+</div>
+</div>
 </div>
   <script>
 $('.body').tweetSelection({

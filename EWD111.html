@@ -23,63 +23,62 @@
   </div>
   <h1>Error checking</h1>
   <div class='body'>
-						<p>Voornamelijk is vandaag aandacht geschonken aan de wijze van terugmelding.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De vertaler nummert de niet-lege regels van de programmatext. Als bijproduct geeft hij via de output van een aantal labels het regelnummer van de regel, waarin ze voorkomen. Procedure declarations zijn ook mooi.<br>
-							Opm. 1 De vertaler zal hier identifiers in 1 alphabet uitprinten.<br>
-							Opm. 2. De output kan aangeven of het een label dan wel een procedure identifier is;<br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kan zelfs iets van de blokstructuur proberen aan te geven. Als de text zo slechts,<br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dat we een lower bound voor label aanzien, dan zal deze print wel wat cryptisch worden !</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Probleem: in de dynamische plaatsbepaling ontmoeten we ook MCP's. In het minimale geval zeggen we, dat elke bibliotheekprocedure op 1 regel staat. Een alternatief is, om elke MCP moedwillig in een aantal regels onder te verdelen; netjes is om bij de terugmelding ook de naam van de MCP te vermelden. (Dit kon er wel eens toe leiden, dat we elke MCP een naam geven.)</p>
-						<p><u>Statische checking.</u></p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De vertaling zal bestaan uit een aantal passes (eigenlijk hoop ik van niet te veel). We zullen proberen om bij de detectie van een fout althans de pass, waarin deze fout gedetecteerd wordt, af te maken met de bedoeling meer fouten van hetzelfde allooi te vinden. (Of dat altijd kan, is heel erg de vraag: is niet de executie &quot;de laatste pass&quot;?)</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wat betreft error checking zie ik maar 2 passes noodzakelijk optreden:<br>
-							1) analyse van delimiter structure en opbouw van de naamlijst<br>
-							2) type checking etc. dwz. alles, waarvoor je de declaratie gezien moet hebben.<br>
-							<br>
-							Opm. 3 Als ik in de pass, waarin de regelnummers uitgedeeld worden ook al check, zullen die foutmeldingen er wel doorheen komen; dit hindert niet.<br>
-							Opm. 4 Een voordeel van Cor's regelnummering is, dat deze uniek is, ook in die gevallen, waarin de systactische structuur macroscopisch niet klopt.!</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ik stel me voor, dat de vertaler in een left to right pass, waarin de regelscheidingen in de source text nog herkenbaar zijn, het uiteindelijke programma definitief over de segmenten verdeelt. Op dat moment kan de vertaler dus een lijst maken van invariante beginadressen (programma adressen), in de volgorde van opklimmend regelnummer.<br>
-							(Ik neem aan, dat voor de opeenvolgende programma segmenten opeenvolgende SV's gebruikt kunnen worden, zodat we die niet hoeven te ketenen.) Bij de dynamische plaatsmelding kan deze lijst geraadpleegd worden.</p>
-						<p>Statische errormelding zal bestaan uit:<br>
-							1) korte beschrijving van de gemaakte fout. (Omdat we een trommel en een high speed printer hebben, moeten we hiermee niet te karig zijn, dus niet &quot;fout 7&quot;)<br>
-							2) regelnummer.</p>
-						<p>Dynamische errormelding zal bestaan uit:<br>
-							1) korte beschrijving van de soort fout (zie boven)<br>
-							2) plaats.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ruwweg komt deze opgave op het volgende neer:<br>
-							je geeft een regelnummer (afgeleid uit een invariant adres). Via inspectie van de stapel vindt je de aard van het niveau (te weten binnenblok, parameter of fictitious block). Deze aard meldt je; als het een binnenblok is, ga je de dynamische ketting af, totdat je een fictitious block vindt (of de buitenkant). Dan heb je in de stapel een returnadres en vervolgens ga je dat analyseren. Aangezien parameters geen binnenblokken hebben zijn<br>
-							er dus drie mogelijkheden:<br>
-							1) parametersituatie<br>
-							2) block (dwz. buitenste of binnenblok van een procedure)<br>
-							3) fictitious block.</p>
-						<p>Opm. Als we het fictitious block gevonden hebben, staat in de stapel het invariante starting address van de procedure, die we wilden verlaten. Een lijstje is voldoende om de procedure identifier er bij te verschaffen.</p>
-						<p><u>Post mortem</u>.</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Als we ons op het standpunt stellen, dat een uniforme post mortem reactie (bv. altijd alles) irreeel is, dan laat zich dit als volgt sturen. Vooraan de band (programheading) is een entry, die de aard van de post mortem dump aangeeft. De hier mogelijke notities worden met 1 uitgebreid, die betekent &quot;als een dynamische fout optreedt, vraag dan via toetsenbord&quot;. Dit geeft alle mogelijke flexibiliteit zonder last als je er geen behoefte aan hebt. (Je kunt dit uitbreiden met bv. &quot;De lege post mortem notitie in de heading betekent niets&quot;.)</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verder hebben we te dumpen anoniemen, scalairen en arrays.<br>
-							ad1) de anoniemen zijn wat moeilijk, omdat we de interpretatie niet in de stapel vinden. De dumper kan integers uitprinten en zo mogelijk (tekenconsistentie) ten overvloede paren ook als drijvend getal. De interpretatie van deze rommel is in elk geval voorbehouden aan specialisten (men denke bv. aan de verwisseling van primaries !)</p>
-						<p>ad2) de scalairen hebben twee moeilijkheden<br>
-							&nbsp;&nbsp;&nbsp;2a) bij de scalairen van een expliciet programma moet je, als je enig fatsoen hebt, de indentifiers &#x2014;zij het dan gereduceerd tot een alphabet&#x2014; er bij fokken. Taakje voor de vertaler en de trommel!<br>
-							&nbsp;&nbsp;&nbsp;2b) bij de handgecodeerde MCP's heb je niet een twee drie een naamlijst. Het alternatief dat we voor de anonymen bedacht hebben, kon hier wel eens aangewezen zijn (format kan hier nl. wisselen.)</p>
-						<p>ad3) arrays kunnen zo groot zijn. Wat we met arrays in MCP's moeten doen is nog minder duidelijk, maar op dit ogenblik willen we daar niet te veel over denken.</p>
-						<p>Statische checks zullen omvatten: delimiter structure, identifier matching, correct gebruik (subscripts etc) en type checking. Identifier matching omvat een duidige correspondentie vaststellen tussen gebruik en declaratie, vangen van meervoudige declaratie in een blok, multipele formals, complete specificatie, controle van de value list et.</p>
-						<p>Dynamische checks omvatten: actual formal correspondence (inclusief tellen aantal parameters) array declaratie (lower bound niet groter dan de upper bound) subscript values within bounds, formal array's test op aantal subscripts, formal left hand side consistency by multiple assignment, complex ~real barrier, sqrt, ln, to the power<br>
-							integer division, input output control, integer overflow</p>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wat we niet checken is: delen door 0, feitelijke assignment in type procedure, undefined variable (grote voorkeur, althans in het begin, voor de uniforme reactie) niet eindigende recursie (maar die wordt via de stack control gevangen) en de blinde loop</p>
-					</div>
-					<div align="left"></div>
-					<hr>
-					<font size="-1">transcribed by Sam Samshuijzen<br>
-						revised <csobj format="MedDate" h="12" region="15" t="DateTime" w="98">Sun, 16 Jan 2005</csobj></font></td>
-				<td width="1" height="1642"><spacer type="block" width="1" height="1642"></td>
-			</tr>
-			<tr height="1" cntrlrow>
-				<td width="601" height="1"><spacer type="block" width="601" height="1"></td>
-				<td width="1" height="1"></td>
-			</tr>
-		</table>
-	</body>
-
-</html></div>
+<p>Voornamelijk is vandaag aandacht geschonken aan de wijze van terugmelding.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De vertaler nummert de niet-lege regels van de programmatext. Als bijproduct geeft hij via de output van een aantal labels het regelnummer van de regel, waarin ze voorkomen. Procedure declarations zijn ook mooi.<br>
+Opm. 1 De vertaler zal hier identifiers in 1 alphabet uitprinten.<br>
+Opm. 2. De output kan aangeven of het een label dan wel een procedure identifier is;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;kan zelfs iets van de blokstructuur proberen aan te geven. Als de text zo slechts,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dat we een lower bound voor label aanzien, dan zal deze print wel wat cryptisch worden !</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Probleem: in de dynamische plaatsbepaling ontmoeten we ook MCP's. In het minimale geval zeggen we, dat elke bibliotheekprocedure op 1 regel staat. Een alternatief is, om elke MCP moedwillig in een aantal regels onder te verdelen; netjes is om bij de terugmelding ook de naam van de MCP te vermelden. (Dit kon er wel eens toe leiden, dat we elke MCP een naam geven.)</p>
+<p><u>Statische checking.</u></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;De vertaling zal bestaan uit een aantal passes (eigenlijk hoop ik van niet te veel). We zullen proberen om bij de detectie van een fout althans de pass, waarin deze fout gedetecteerd wordt, af te maken met de bedoeling meer fouten van hetzelfde allooi te vinden. (Of dat altijd kan, is heel erg de vraag: is niet de executie "de laatste pass"?)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wat betreft error checking zie ik maar 2 passes noodzakelijk optreden:<br>
+1) analyse van delimiter structure en opbouw van de naamlijst<br>
+2) type checking etc. dwz. alles, waarvoor je de declaratie gezien moet hebben.<br>
+<br>
+Opm. 3 Als ik in de pass, waarin de regelnummers uitgedeeld worden ook al check, zullen die foutmeldingen er wel doorheen komen; dit hindert niet.<br>
+Opm. 4 Een voordeel van Cor's regelnummering is, dat deze uniek is, ook in die gevallen, waarin de systactische structuur macroscopisch niet klopt.!</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ik stel me voor, dat de vertaler in een left to right pass, waarin de regelscheidingen in de source text nog herkenbaar zijn, het uiteindelijke programma definitief over de segmenten verdeelt. Op dat moment kan de vertaler dus een lijst maken van invariante beginadressen (programma adressen), in de volgorde van opklimmend regelnummer.<br>
+(Ik neem aan, dat voor de opeenvolgende programma segmenten opeenvolgende SV's gebruikt kunnen worden, zodat we die niet hoeven te ketenen.) Bij de dynamische plaatsmelding kan deze lijst geraadpleegd worden.</p>
+<p>Statische errormelding zal bestaan uit:<br>
+1) korte beschrijving van de gemaakte fout. (Omdat we een trommel en een high speed printer hebben, moeten we hiermee niet te karig zijn, dus niet "fout 7")<br>
+2) regelnummer.</p>
+<p>Dynamische errormelding zal bestaan uit:<br>
+1) korte beschrijving van de soort fout (zie boven)<br>
+2) plaats.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ruwweg komt deze opgave op het volgende neer:<br>
+je geeft een regelnummer (afgeleid uit een invariant adres). Via inspectie van de stapel vindt je de aard van het niveau (te weten binnenblok, parameter of fictitious block). Deze aard meldt je; als het een binnenblok is, ga je de dynamische ketting af, totdat je een fictitious block vindt (of de buitenkant). Dan heb je in de stapel een returnadres en vervolgens ga je dat analyseren. Aangezien parameters geen binnenblokken hebben zijn<br>
+er dus drie mogelijkheden:<br>
+1) parametersituatie<br>
+2) block (dwz. buitenste of binnenblok van een procedure)<br>
+3) fictitious block.</p>
+<p>Opm. Als we het fictitious block gevonden hebben, staat in de stapel het invariante starting address van de procedure, die we wilden verlaten. Een lijstje is voldoende om de procedure identifier er bij te verschaffen.</p>
+<p><u>Post mortem</u>.</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Als we ons op het standpunt stellen, dat een uniforme post mortem reactie (bv. altijd alles) irreeel is, dan laat zich dit als volgt sturen. Vooraan de band (programheading) is een entry, die de aard van de post mortem dump aangeeft. De hier mogelijke notities worden met 1 uitgebreid, die betekent "als een dynamische fout optreedt, vraag dan via toetsenbord". Dit geeft alle mogelijke flexibiliteit zonder last als je er geen behoefte aan hebt. (Je kunt dit uitbreiden met bv. "De lege post mortem notitie in de heading betekent niets".)</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Verder hebben we te dumpen anoniemen, scalairen en arrays.<br>
+ad1) de anoniemen zijn wat moeilijk, omdat we de interpretatie niet in de stapel vinden. De dumper kan integers uitprinten en zo mogelijk (tekenconsistentie) ten overvloede paren ook als drijvend getal. De interpretatie van deze rommel is in elk geval voorbehouden aan specialisten (men denke bv. aan de verwisseling van primaries !)</p>
+<p>ad2) de scalairen hebben twee moeilijkheden<br>
+&nbsp;&nbsp;&nbsp;2a) bij de scalairen van een expliciet programma moet je, als je enig fatsoen hebt, de indentifiers —zij het dan gereduceerd tot een alphabet— er bij fokken. Taakje voor de vertaler en de trommel!<br>
+&nbsp;&nbsp;&nbsp;2b) bij de handgecodeerde MCP's heb je niet een twee drie een naamlijst. Het alternatief dat we voor de anonymen bedacht hebben, kon hier wel eens aangewezen zijn (format kan hier nl. wisselen.)</p>
+<p>ad3) arrays kunnen zo groot zijn. Wat we met arrays in MCP's moeten doen is nog minder duidelijk, maar op dit ogenblik willen we daar niet te veel over denken.</p>
+<p>Statische checks zullen omvatten: delimiter structure, identifier matching, correct gebruik (subscripts etc) en type checking. Identifier matching omvat een duidige correspondentie vaststellen tussen gebruik en declaratie, vangen van meervoudige declaratie in een blok, multipele formals, complete specificatie, controle van de value list et.</p>
+<p>Dynamische checks omvatten: actual formal correspondence (inclusief tellen aantal parameters) array declaratie (lower bound niet groter dan de upper bound) subscript values within bounds, formal array's test op aantal subscripts, formal left hand side consistency by multiple assignment, complex ~real barrier, sqrt, ln, to the power<br>
+integer division, input output control, integer overflow</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wat we niet checken is: delen door 0, feitelijke assignment in type procedure, undefined variable (grote voorkeur, althans in het begin, voor de uniforme reactie) niet eindigende recursie (maar die wordt via de stack control gevangen) en de blinde loop</p>
+<div align="left"></div>
+<hr>
+<font size="-1">transcribed by Sam Samshuijzen<br>
+revised Sun, 16 Jan 2005</font>
+<table>
+<tr>
+<td width="1" height="1642"><spacer type="block" width="1" height="1642"></td>
+</tr>
+<tr height="1" cntrlrow="">
+<td width="601" height="1"><spacer type="block" width="601" height="1"></td>
+<td width="1" height="1"></td>
+</tr>
+</table>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',

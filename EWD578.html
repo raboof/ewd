@@ -23,70 +23,85 @@
   </div>
   <h1>More about the function "fusc" (A sequel to EWD570)</h1>
   <div class='body'>
-				<p>&nbsp;</p>
-				<p class="noindent"><u>More about the function <var>fusc</var></u>. (A sequel to EWD570)</p>
-				<p>In <a href="EWD570.html" title="Link to the HTML version of EWD570">EWD570</a> I introduced the function <var>fusc</var>, given by</p>
-				<p class="noindent"><var>fusc</var>(1) = 1, &nbsp; &nbsp; &nbsp; <var>fusc</var>(2<var>n</var>) = <var>fusc</var>(<var>n</var>), &nbsp; &nbsp; &nbsp; <var>fusc</var>(2<var>n</var>+1) = <var>fusc</var>(<var>n</var>) + <var>fusc</var>(<var>n</var>+1) &nbsp; &nbsp; .</p>
-				<p class="noindent">Compatible with the second part of that definition we derive from the third part <span class="inlineformula">&nbsp;<var>fusc</var>(0) = 0&nbsp;.</span> I showed there the following iterative program for the computation of &nbsp;<var>fusc</var>(<var>N</var>)&nbsp; &#x2014;with <var>peven</var> and <var>podd</var> standing for "positive and even" and "positive and odd" respectively&#x2014;</p>
-				<p class="noindent" style="margin-left: 2em;"><var>n</var>, <var>a</var>, <var>b</var> := <var>N</var>, 1, 0;<br /><b>do</b> <var>peven</var>(<var>n</var>) &#x2192; <var>a</var>, <var>n</var> := <var>a</var> + <var>b</var>, <var>n</var> / 2<br />
-			  &nbsp;&nbsp;<span class="unicode">&#x25AF;</span> <var>podd</var>(<var>n</var>) &#x2192; <var>b</var>, <var>n</var> := <var>b</var> + <var>a</var>, (<var>n</var>-1) / 2<br /><b>od</b> {<var>fusc</var>(<var>N</var>) = <var>b</var>}<br /></p>
-				<p class="noindent">On my last trip through the USA, while lecturing to a Burroughs audience, my audience derived this program after it had decided &#x2014;after only a few very modest hints!&#x2014; that a good candidate for an invariant relation would be</p>
-				<p class="noindent">P: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <var>fusc</var>(<var>N</var>) = <var>a</var>*<var>fusc</var>(<var>n</var>) + <var>b</var>*<var>fusc</var>(<var>n</var>+1)</p>
-				<p>The audience arrived at this suggestion after a few simple considerations. The first observation was that</p>
-				<p><var>fusc</var>(<var>N</var>) = <var>fusc</var>(<var>n</var>)</p>
-				<p class="noindent">would be simple to initialize by means of <span class="inlineformula">&nbsp;<var>n</var>:= <var>N</var>&nbsp;.</span> They quickly saw that this was too simple, and considered</p>
-				<p><var>fusc</var>(<var>N</var>) = <var>a</var>*<var>fusc</var>(<var>n</var>)</p>
-				<p class="noindent">equally trivially initialized by <span class="inlineformula">&nbsp;<var>n</var>, <var>a</var> := <var>N</var>, 1&nbsp;;</span> it was then remarked that initialization would not be complicated by an additive term</p>
-				<p><var>fusc</var>(<var>N</var>) = <var>a</var>*<var>fusc</var>(<var>n</var>) + <var>b</var></p>
-				<p class="noindent">as that is initialized by <span class="inlineformula">&nbsp;<var>n</var>, <var>a</var>, <var>b</var> := <var>N</var>, 1, 0&nbsp;.</span> The observation that for <span class="inlineformula">&nbsp;<var>n</var> = 0&nbsp;</span> the first term would disappear but that <span class="inlineformula">&nbsp;<var>fusc</var>(<var>n</var>+1) = 1&nbsp;</span> would then hold suggested, together with the third part of the definition for &nbsp;<var>fusc</var>&nbsp; the fully blown-up &nbsp;P&nbsp; as given above. Separating the cases</p>
-				<table cellspacing="0" cellpadding="10" border="0"><tr><td valign="top"><var>n</var> = 2<var>k</var>:</td><td valign="top"><var>fusc</var>(<var>N</var>)</td><td>= <var>a</var>*<var>fusc</var>(<var>n</var>) + <var>b</var>*<var>fusc</var>(<var>n</var>+1)<br />= <var>a</var>*<var>fusc</var>(2<var>k</var>) + <var>b</var>*<var>fusc</var>(2<var>k</var>+1)<br />= (<var>a</var>+<var>b</var>)*<var>fusc</var>(<var>k</var>) + <var>b</var>*<var>fusc</var>(<var>k</var>+1)</td></tr><tr><td valign="top"><var>n</var> = 2<var>k</var>+1:</td><td valign="top"><var>fusc</var>(<var>N</var>)</td><td>= <var>a</var>*<var>fusc</var>(<var>n</var>) + <var>b</var>*<var>fusc</var>(<var>n</var>+1)<br />= <var>a</var>*<var>fusc</var>(2<var>k</var>+1) + <var>b</var>*<var>fusc</var>(2<var>k</var>+2)<br />= <var>a</var>*<var>fusc</var>(<var>k</var>) + (<var>a</var>+<var>b</var>)*<var>fusc</var>(<var>k</var>+1)</td></tr></table>
-				<p class="noindent">my audience quickly derived &#x2014;to its pleasant surprise!&#x2014; the iterative program given above.</p>
-				<p align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
-				<p>From the above program, two properties of the function <var>fusc</var> follow. The first one is that the value of the function <var>fusc</var> does not change if we invert in the binary representation of the argument all "internal" digits, i.e. all the binary digits between the most- and the least-significant ones. For instance <span class="inlineformula">&nbsp;<var>fusc</var>(19) = <var>fusc</var>(29)&nbsp;</span> because, in binary 19 and 29 are 10011 and 11101 respectively. This follows from the comparison of the <var>a</var>,<var>b</var>-pairs during those two computations. After the processing of the least significant digit of the arguments, both have <span class="inlineformula">&nbsp;<var>a</var>,<var>b</var> = 1,1&nbsp;</span>. As a result of the inverted internal digits, the one computation has the role of &nbsp;<var>a</var>&nbsp; and &nbsp;<var>b</var>&nbsp; interchanged with respect to the other computation. Because the sum of the two values is a symmetric function of its arguments and, as a result of the last &#x2014;i.e. most-significant&#x2014; &nbsp;1&nbsp; in the argument that sum of &nbsp;<var>a</var>&nbsp; and &nbsp;<var>b</var>&nbsp; is delivered (in &nbsp;<var>b</var>&nbsp;) as the final value, both computations deliver the same result.</p>
-				<p>The next property is more surprising. (At least, I think so.) Let us try to represent the pair &nbsp;<var>a</var>,<var>b</var>&nbsp; by the single value &nbsp;<var>m</var>&nbsp;, according to the convention</p>
-				<p align="center"><var>a</var> = <var>fusc</var>(<var>m</var>+1) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <var>b</var> = <var>fusc</var>(<var>m</var>)</p>
-				<p class="noindent">In the case of &nbsp;<var>peven</var>(<var>n</var>)&nbsp; the operation on &nbsp;<var>a</var>,<var>b</var>&nbsp; has the form <span class="inlineformula">&nbsp;<var>a</var>, <var>b</var> := <var>a</var>+<var>b</var>, <var>b</var>&nbsp;</span> or:<br />&nbsp;</p>
-				<table cellspacing="0" cellpadding="0" border="0"><tr><td valign="top" align="right">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <var>fusc</var>(<var>m</var>+1), <var>fusc</var>(<var>m</var>)</td><td>:= <var>fusc</var>(<var>m</var>+1)+<var>fusc</var>(<var>m</var>), <var>fusc</var>(<var>m</var>)<br />:= <var>fusc</var>(2<var>m</var>+1), <var>fusc</var>(2<var>m</var>)</td></tr></table>
-				<p class="noindent">an operation that translates into <span class="inlineformula">&nbsp;<var>m</var>:= 2<var>m</var>&nbsp;.</span> Similarly <span class="inlineformula">&nbsp;<var>a</var>, <var>b</var> := <var>a</var>, <var>a</var>+<var>b</var>&nbsp;</span> translates into <span class="inlineformula">&nbsp;<var>m</var>:= 2<var>m</var>+1&nbsp;.</span> Substituting all this in our iterative program we get</p>
-				<p class="noindent" style="margin-left: 2em;"><var>n</var>, <var>m</var> := <var>N</var>, 0;<br /><b>do</b> <var>peven</var>(<var>n</var>) &#x2192; <var>m</var>, <var>n</var> := 2*<var>m</var>, <var>n</var>/2<br />&nbsp;&nbsp;<span class="unicode">&#x25AF;</span> <var>podd</var>(<var>n</var>) &#x2192; <var>m</var>, <var>n</var> := 2*<var>m</var>+1, (<var>n</var>-1) /2<br /><b>od</b> {<var>fusc</var>(<var>N</var>) = <var>fusc</var>(<var>m</var>)}</p>
-				<p class="noindent">i.e. the <var>fusc</var>-value does not change if we write the binary digits of the argument in the reverse order. For example <span class="inlineformula">&nbsp;<var>fusc</var>(19) = <var>fusc</var>(25)&nbsp;</span> because 19 and 25 are in binary 10011 and 11001 respectively. I think this second property more surprising!</p>
-				<p align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
-				<p>In a way which does not admit generalization I discovered the equivalence</p>
-				<p align="center">2|<var>fusc</var>(<var>n</var>) &lt;=&gt; 3|<var>n</var></p>
-				<p class="noindent">i.e. &nbsp;<var>fusc</var>(<var>n</var>)&nbsp; is even iff &nbsp;<var>n</var>&nbsp; is a multiple of 3. Inspired by a recent exercise of Don Knuth I tried to characterize the arguments &nbsp;<var>n</var>&nbsp; such that <span class="inlineformula">3|<var>fusc</var>(<var>n</var>)&nbsp;.</span></p>
-				<p class="noindent">With braces used to denote zero or more instances of the enclosed, the vertical bar as the BNF "or", and the question mark "?" to denote either a &nbsp;0&nbsp; or a &nbsp;1&nbsp;, the syntactical representation for such an argument (in binary) is</p>
-				<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {0}1{?0{1}0|?1{0}1}?1{0}</p>
-				<p>I derived this by considering &#x2014;as a direct derivation of my program&#x2014; the finite state automaton that computes <span class="inlineformula">&nbsp;<var>fusc</var>(<var>N</var>)|<b>mod</b> 3&nbsp;.</span> It was the first time of my life that I did what others have done many times before, i.e. relating a finite state automaton to a grammar. The exercise is up till now only of modest interest; it taught me that division by a fixed factor and (simple!) syntactic analysis are processes that are very closely related to each other, and that insight I think somehow illuminating.</p>
-				<p align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
-				<p>Since the distribution of EW570 it has been discovered that more mathematicians have occupied themselves with the function &nbsp;<var>fusc</var>&nbsp; &#x2014;they only gave it a different name!&#x2014; a fact that is not surprising in view of its properties. J.J.Seidel and F.L.Bauer have independently pointed out to me that it is no. 56 in Sloane's <i>Dictionary of Integer Sequences</i>, that refers to an article by G.de Rham, <i>Elemente der Mathematik</i>, Vol.2 (1947) pg.95&nbsp;. It was fun!</p>
-				<p>&nbsp;</p>
-				<p>&nbsp;</p>
-
-			</div>
-			<div>
-
-				<table width="100%" border="0" cellspacing="2" cellpadding="0">
-					<tr>
-						<td width="60%">Plataanstraat 5<br />
-							NL-4565 NUENEN<br />
-							The Netherlands
-						</td>
-						<td>prof.dr. Edsger W. Dijkstra<br />
-							Burroughs Research Fellow
-						</td>
-					</tr>
-				</table>
-        <br/>
-      </div>
-		</div>
-		<hr />
-		<div id="footer">
-         transcribed by Corrado Cantelmi<br /> 
-         revised 16-Sep-2011
-		</div>
-	</body>
-
-</html>
+<p>&nbsp;</p>
+<p class="noindent"><u>More about the function <var>fusc</var></u>. (A sequel to EWD570)</p>
+<p>In <a href="EWD570.html" title="Link to the HTML version of EWD570">EWD570</a> I introduced the function <var>fusc</var>, given by</p>
+<p class="noindent"><var>fusc</var>(1) = 1, &nbsp; &nbsp; &nbsp; <var>fusc</var>(2<var>n</var>) = <var>fusc</var>(<var>n</var>), &nbsp; &nbsp; &nbsp; <var>fusc</var>(2<var>n</var>+1) = <var>fusc</var>(<var>n</var>) + <var>fusc</var>(<var>n</var>+1) &nbsp; &nbsp; .</p>
+<p class="noindent">Compatible with the second part of that definition we derive from the third part <span class="inlineformula">&nbsp;<var>fusc</var>(0) = 0&nbsp;.</span> I showed there the following iterative program for the computation of &nbsp;<var>fusc</var>(<var>N</var>)&nbsp; —with <var>peven</var> and <var>podd</var> standing for "positive and even" and "positive and odd" respectively—</p>
+<p class="noindent" style="margin-left: 2em;"><var>n</var>, <var>a</var>, <var>b</var> := <var>N</var>, 1, 0;<br>
+<b>do</b> <var>peven</var>(<var>n</var>) → <var>a</var>, <var>n</var> := <var>a</var> + <var>b</var>, <var>n</var> / 2<br>
+&nbsp;&nbsp;<span class="unicode">▯</span> <var>podd</var>(<var>n</var>) → <var>b</var>, <var>n</var> := <var>b</var> + <var>a</var>, (<var>n</var>-1) / 2<br>
+<b>od</b> {<var>fusc</var>(<var>N</var>) = <var>b</var>}<br></p>
+<p class="noindent">On my last trip through the USA, while lecturing to a Burroughs audience, my audience derived this program after it had decided —after only a few very modest hints!— that a good candidate for an invariant relation would be</p>
+<p class="noindent">P: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <var>fusc</var>(<var>N</var>) = <var>a</var>*<var>fusc</var>(<var>n</var>) + <var>b</var>*<var>fusc</var>(<var>n</var>+1)</p>
+<p>The audience arrived at this suggestion after a few simple considerations. The first observation was that</p>
+<p><var>fusc</var>(<var>N</var>) = <var>fusc</var>(<var>n</var>)</p>
+<p class="noindent">would be simple to initialize by means of <span class="inlineformula">&nbsp;<var>n</var>:= <var>N</var>&nbsp;.</span> They quickly saw that this was too simple, and considered</p>
+<p><var>fusc</var>(<var>N</var>) = <var>a</var>*<var>fusc</var>(<var>n</var>)</p>
+<p class="noindent">equally trivially initialized by <span class="inlineformula">&nbsp;<var>n</var>, <var>a</var> := <var>N</var>, 1&nbsp;;</span> it was then remarked that initialization would not be complicated by an additive term</p>
+<p><var>fusc</var>(<var>N</var>) = <var>a</var>*<var>fusc</var>(<var>n</var>) + <var>b</var></p>
+<p class="noindent">as that is initialized by <span class="inlineformula">&nbsp;<var>n</var>, <var>a</var>, <var>b</var> := <var>N</var>, 1, 0&nbsp;.</span> The observation that for <span class="inlineformula">&nbsp;<var>n</var> = 0&nbsp;</span> the first term would disappear but that <span class="inlineformula">&nbsp;<var>fusc</var>(<var>n</var>+1) = 1&nbsp;</span> would then hold suggested, together with the third part of the definition for &nbsp;<var>fusc</var>&nbsp; the fully blown-up &nbsp;P&nbsp; as given above. Separating the cases</p>
+<table cellspacing="0" cellpadding="10" border="0">
+<tr>
+<td valign="top"><var>n</var> = 2<var>k</var>:</td>
+<td valign="top"><var>fusc</var>(<var>N</var>)</td>
+<td>= <var>a</var>*<var>fusc</var>(<var>n</var>) + <var>b</var>*<var>fusc</var>(<var>n</var>+1)<br>
+= <var>a</var>*<var>fusc</var>(2<var>k</var>) + <var>b</var>*<var>fusc</var>(2<var>k</var>+1)<br>
+= (<var>a</var>+<var>b</var>)*<var>fusc</var>(<var>k</var>) + <var>b</var>*<var>fusc</var>(<var>k</var>+1)</td>
+</tr>
+<tr>
+<td valign="top"><var>n</var> = 2<var>k</var>+1:</td>
+<td valign="top"><var>fusc</var>(<var>N</var>)</td>
+<td>= <var>a</var>*<var>fusc</var>(<var>n</var>) + <var>b</var>*<var>fusc</var>(<var>n</var>+1)<br>
+= <var>a</var>*<var>fusc</var>(2<var>k</var>+1) + <var>b</var>*<var>fusc</var>(2<var>k</var>+2)<br>
+= <var>a</var>*<var>fusc</var>(<var>k</var>) + (<var>a</var>+<var>b</var>)*<var>fusc</var>(<var>k</var>+1)</td>
+</tr>
+</table>
+<p class="noindent">my audience quickly derived —to its pleasant surprise!— the iterative program given above.</p>
+<p align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p>From the above program, two properties of the function <var>fusc</var> follow. The first one is that the value of the function <var>fusc</var> does not change if we invert in the binary representation of the argument all "internal" digits, i.e. all the binary digits between the most- and the least-significant ones. For instance <span class="inlineformula">&nbsp;<var>fusc</var>(19) = <var>fusc</var>(29)&nbsp;</span> because, in binary 19 and 29 are 10011 and 11101 respectively. This follows from the comparison of the <var>a</var>,<var>b</var>-pairs during those two computations. After the processing of the least significant digit of the arguments, both have <span class="inlineformula">&nbsp;<var>a</var>,<var>b</var> = 1,1&nbsp;</span>. As a result of the inverted internal digits, the one computation has the role of &nbsp;<var>a</var>&nbsp; and &nbsp;<var>b</var>&nbsp; interchanged with respect to the other computation. Because the sum of the two values is a symmetric function of its arguments and, as a result of the last —i.e. most-significant— &nbsp;1&nbsp; in the argument that sum of &nbsp;<var>a</var>&nbsp; and &nbsp;<var>b</var>&nbsp; is delivered (in &nbsp;<var>b</var>&nbsp;) as the final value, both computations deliver the same result.</p>
+<p>The next property is more surprising. (At least, I think so.) Let us try to represent the pair &nbsp;<var>a</var>,<var>b</var>&nbsp; by the single value &nbsp;<var>m</var>&nbsp;, according to the convention</p>
+<p align="center"><var>a</var> = <var>fusc</var>(<var>m</var>+1) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <var>b</var> = <var>fusc</var>(<var>m</var>)</p>
+<p class="noindent">In the case of &nbsp;<var>peven</var>(<var>n</var>)&nbsp; the operation on &nbsp;<var>a</var>,<var>b</var>&nbsp; has the form <span class="inlineformula">&nbsp;<var>a</var>, <var>b</var> := <var>a</var>+<var>b</var>, <var>b</var>&nbsp;</span> or:<br>
+&nbsp;</p>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td valign="top" align="right">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <var>fusc</var>(<var>m</var>+1), <var>fusc</var>(<var>m</var>)</td>
+<td>:= <var>fusc</var>(<var>m</var>+1)+<var>fusc</var>(<var>m</var>), <var>fusc</var>(<var>m</var>)<br>
+:= <var>fusc</var>(2<var>m</var>+1), <var>fusc</var>(2<var>m</var>)</td>
+</tr>
+</table>
+<p class="noindent">an operation that translates into <span class="inlineformula">&nbsp;<var>m</var>:= 2<var>m</var>&nbsp;.</span> Similarly <span class="inlineformula">&nbsp;<var>a</var>, <var>b</var> := <var>a</var>, <var>a</var>+<var>b</var>&nbsp;</span> translates into <span class="inlineformula">&nbsp;<var>m</var>:= 2<var>m</var>+1&nbsp;.</span> Substituting all this in our iterative program we get</p>
+<p class="noindent" style="margin-left: 2em;"><var>n</var>, <var>m</var> := <var>N</var>, 0;<br>
+<b>do</b> <var>peven</var>(<var>n</var>) → <var>m</var>, <var>n</var> := 2*<var>m</var>, <var>n</var>/2<br>
+&nbsp;&nbsp;<span class="unicode">▯</span> <var>podd</var>(<var>n</var>) → <var>m</var>, <var>n</var> := 2*<var>m</var>+1, (<var>n</var>-1) /2<br>
+<b>od</b> {<var>fusc</var>(<var>N</var>) = <var>fusc</var>(<var>m</var>)}</p>
+<p class="noindent">i.e. the <var>fusc</var>-value does not change if we write the binary digits of the argument in the reverse order. For example <span class="inlineformula">&nbsp;<var>fusc</var>(19) = <var>fusc</var>(25)&nbsp;</span> because 19 and 25 are in binary 10011 and 11001 respectively. I think this second property more surprising!</p>
+<p align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p>In a way which does not admit generalization I discovered the equivalence</p>
+<p align="center">2|<var>fusc</var>(<var>n</var>) &lt;=&gt; 3|<var>n</var></p>
+<p class="noindent">i.e. &nbsp;<var>fusc</var>(<var>n</var>)&nbsp; is even iff &nbsp;<var>n</var>&nbsp; is a multiple of 3. Inspired by a recent exercise of Don Knuth I tried to characterize the arguments &nbsp;<var>n</var>&nbsp; such that <span class="inlineformula">3|<var>fusc</var>(<var>n</var>)&nbsp;.</span></p>
+<p class="noindent">With braces used to denote zero or more instances of the enclosed, the vertical bar as the BNF "or", and the question mark "?" to denote either a &nbsp;0&nbsp; or a &nbsp;1&nbsp;, the syntactical representation for such an argument (in binary) is</p>
+<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; {0}1{?0{1}0|?1{0}1}?1{0}</p>
+<p>I derived this by considering —as a direct derivation of my program— the finite state automaton that computes <span class="inlineformula">&nbsp;<var>fusc</var>(<var>N</var>)|<b>mod</b> 3&nbsp;.</span> It was the first time of my life that I did what others have done many times before, i.e. relating a finite state automaton to a grammar. The exercise is up till now only of modest interest; it taught me that division by a fixed factor and (simple!) syntactic analysis are processes that are very closely related to each other, and that insight I think somehow illuminating.</p>
+<p align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p>Since the distribution of EW570 it has been discovered that more mathematicians have occupied themselves with the function &nbsp;<var>fusc</var>&nbsp; —they only gave it a different name!— a fact that is not surprising in view of its properties. J.J.Seidel and F.L.Bauer have independently pointed out to me that it is no. 56 in Sloane's <i>Dictionary of Integer Sequences</i>, that refers to an article by G.de Rham, <i>Elemente der Mathematik</i>, Vol.2 (1947) pg.95&nbsp;. It was fun!</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div>
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td width="60%">Plataanstraat 5<br>
+NL-4565 NUENEN<br>
+The Netherlands</td>
+<td>prof.dr. Edsger W. Dijkstra<br>
+Burroughs Research Fellow</td>
+</tr>
+</table>
+<br></div>
+<hr>
+<div id="footer">transcribed by Corrado Cantelmi<br>
+revised 16-Sep-2011</div>
 </div>
   <script>
 $('.body').tweetSelection({

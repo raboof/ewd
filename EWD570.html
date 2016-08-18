@@ -23,43 +23,36 @@
   </div>
   <h1>An exercise for Dr.R.M.Burstall</h1>
   <div class='body'>
-				<p>Dear Rod,</p>
-				<p>because &#x2014;as you know&#x2014; we Dutch are a God-fearing nation, Ascension-day is here an official Holiday, and on official Holidays I don't work. Today I just fooled with figures.</p>
-				<p>In doing so I discovered a function of the natural numbers which has a nice recursive definition, viz.</p>
-				<p class="noindent" style="margin-left: 2em;"><var>fusc</var>(1) = 1<br />
-			  <var>fusc</var>(2<var>n</var>) = <var>fusc</var>(<var>n</var>)<br />
-			  <var>fusc</var>(2<var>n</var>+1) = <var>fusc</var>(<var>n</var>) + <var>fusc</var>(<var>n</var>+1)</p>
-				<p class="noindent">a definition which, as far as complexity is concerned, seems to lie between the Fibonacci series and the Pascal triangle.</p>
-				<p class="noindent">(The function <var>fusc</var> is of a mild interest on account of the following property: with <span class="inlineformula">&nbsp;<var>f</var>1 = <var>fusc</var>(<var>n</var>1)&nbsp;</span> and <span class="inlineformula">&nbsp;<var>f</var>2 = <var>fusc</var>(<var>n</var>2)&nbsp;</span> the following two statements hold:<br />
-				  "if there exists an &nbsp;<var>N</var>&nbsp; such that <span class="inlineformula">&nbsp;<var>n</var>1 + <var>n</var>2 = 2<sup><var>N</var></sup>&nbsp;,</span> then &nbsp;<var>f</var>1&nbsp; and &nbsp;<var>f</var>2&nbsp; are relatively prime" and "if &nbsp;<var>f</var>1&nbsp; and &nbsp;<var>f</var>2&nbsp; are relatively prime, then there exists an &nbsp;<var>n</var>1&nbsp;, an &nbsp;<var>n</var>2&nbsp;, and an &nbsp;<var>N</var>&nbsp;, such that <span class="inlineformula">&nbsp;<var>n</var>1 + <var>n</var>2 = 2<sup><var>N</var></sup>&nbsp;."</span> In the above recursive definition, this is no longer obvious, at least not to me; hence its name.)</p>
-				<p>Having seen your exercises concerning the derivation of an iterative program, starting with the recursive definition for the <var>n</var>-th number of the Fibonacci series, I was suddenly reminded of that exercise when I was considering an iterative program for the computation of &nbsp;<var>fusc</var>&nbsp;. It should be a rewarding exercise, as there exists a very nice iterative program:</p>
-				<p class="noindent" style="margin-left: 2em;"><var>n</var>, <var>a</var>, <var>b</var> := <var>N</var>, 1, 0;<br /><b>do</b> <var>n</var> &#x2260; 0 <b>and</b> <var>even</var>(<var>n</var>) &#x2192; <var>a</var>, <var>n</var>:= <var>a</var> + <var>b</var>, <var>n</var>/2<br />&nbsp;&nbsp;&#x25AF; <var>odd</var>(<var>n</var>) &#x2192; <var>b</var>, <var>n</var>:= <var>b</var> + <var>a</var>, (<var>n</var>-1)/2<br /><b>od</b> {<var>b</var> = <var>fusc</var>(<var>N</var>)}</p>
-				<p class="noindent">I wish you luck and enjoyment! &nbsp; &nbsp; &nbsp; &nbsp; Yours ever,<br />&nbsp;</p>
-			</div>
-			<div>
-
-				<table width="100%" border="0" cellspacing="2" cellpadding="0">
-					<tr>
-						<td width="60%">Plataanstraat 5<br />
-							NL-4565 NUENEN<br />
-							The Netherlands
-						</td>
-						<td>prof.dr. Edsger W. Dijkstra<br />
-							Burroughs Research Fellow
-						</td>
-					</tr>
-				</table>
-        <br/>
-      </div>
-		</div>
-		<hr />
-		<div id="footer">
-         transcribed by Corrado Cantelmi<br />
-          revised 16-Sep-2011
-		</div>
-	</body>
-
-</html>
+<p>Dear Rod,</p>
+<p>because —as you know— we Dutch are a God-fearing nation, Ascension-day is here an official Holiday, and on official Holidays I don't work. Today I just fooled with figures.</p>
+<p>In doing so I discovered a function of the natural numbers which has a nice recursive definition, viz.</p>
+<p class="noindent" style="margin-left: 2em;"><var>fusc</var>(1) = 1<br>
+<var>fusc</var>(2<var>n</var>) = <var>fusc</var>(<var>n</var>)<br>
+<var>fusc</var>(2<var>n</var>+1) = <var>fusc</var>(<var>n</var>) + <var>fusc</var>(<var>n</var>+1)</p>
+<p class="noindent">a definition which, as far as complexity is concerned, seems to lie between the Fibonacci series and the Pascal triangle.</p>
+<p class="noindent">(The function <var>fusc</var> is of a mild interest on account of the following property: with <span class="inlineformula">&nbsp;<var>f</var>1 = <var>fusc</var>(<var>n</var>1)&nbsp;</span> and <span class="inlineformula">&nbsp;<var>f</var>2 = <var>fusc</var>(<var>n</var>2)&nbsp;</span> the following two statements hold:<br>
+"if there exists an &nbsp;<var>N</var>&nbsp; such that <span class="inlineformula">&nbsp;<var>n</var>1 + <var>n</var>2 = 2<sup><var>N</var></sup>&nbsp;,</span> then &nbsp;<var>f</var>1&nbsp; and &nbsp;<var>f</var>2&nbsp; are relatively prime" and "if &nbsp;<var>f</var>1&nbsp; and &nbsp;<var>f</var>2&nbsp; are relatively prime, then there exists an &nbsp;<var>n</var>1&nbsp;, an &nbsp;<var>n</var>2&nbsp;, and an &nbsp;<var>N</var>&nbsp;, such that <span class="inlineformula">&nbsp;<var>n</var>1 + <var>n</var>2 = 2<sup><var>N</var></sup>&nbsp;."</span> In the above recursive definition, this is no longer obvious, at least not to me; hence its name.)</p>
+<p>Having seen your exercises concerning the derivation of an iterative program, starting with the recursive definition for the <var>n</var>-th number of the Fibonacci series, I was suddenly reminded of that exercise when I was considering an iterative program for the computation of &nbsp;<var>fusc</var>&nbsp;. It should be a rewarding exercise, as there exists a very nice iterative program:</p>
+<p class="noindent" style="margin-left: 2em;"><var>n</var>, <var>a</var>, <var>b</var> := <var>N</var>, 1, 0;<br>
+<b>do</b> <var>n</var> ≠ 0 <b>and</b> <var>even</var>(<var>n</var>) → <var>a</var>, <var>n</var>:= <var>a</var> + <var>b</var>, <var>n</var>/2<br>
+&nbsp;&nbsp;▯ <var>odd</var>(<var>n</var>) → <var>b</var>, <var>n</var>:= <var>b</var> + <var>a</var>, (<var>n</var>-1)/2<br>
+<b>od</b> {<var>b</var> = <var>fusc</var>(<var>N</var>)}</p>
+<p class="noindent">I wish you luck and enjoyment! &nbsp; &nbsp; &nbsp; &nbsp; Yours ever,<br>
+&nbsp;</p>
+<div>
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td width="60%">Plataanstraat 5<br>
+NL-4565 NUENEN<br>
+The Netherlands</td>
+<td>prof.dr. Edsger W. Dijkstra<br>
+Burroughs Research Fellow</td>
+</tr>
+</table>
+<br></div>
+<hr>
+<div id="footer">transcribed by Corrado Cantelmi<br>
+revised 16-Sep-2011</div>
 </div>
   <script>
 $('.body').tweetSelection({

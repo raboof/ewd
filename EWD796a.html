@@ -23,373 +23,326 @@
   </div>
   <h1>Smoothsort, an alternative for sorting in situ</h1>
   <div class='body'>
-				<div class="Part">
-					<u><font color="#000000">Smoothsort, </font>an alternative for sorting in situ</u>
-					<p></p>
-				</div>
-				<div class="Part" align="center">
-					<u>
-						<table width="30%" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td width="15%">by</td>
-								<td>Edsger W. Dijkstra</td>
-							</tr>
-							<tr>
-								<td width="15%"></td>
-								<td>
-									<div align="left">
-										Burroughs Corporation</div>
-								</td>
-							</tr>
-						</table>
-					</u></div>
-				<div class="Sect">
-					<u>Abstract</u>.
-					<p>Like Heapsort &#x2014;which inspired it&#x2014; smoothsort is an algorithm for sorting in situ. It is of order <i>N&#x2219;</i>log<i> N</i> in the worst case, but of order <i>N</i> in the best case, with a smooth transition between the two. (Hence its name.)</p>
-					Key Words and Phrases: sorting in situ, heapsort, sorting trees, sift, computational complexity.<br>
-					<br>
-					CR Categories: 5.25, 5.31<br>
-					<br>
-					Author&rsquo;s present address:<br>
-					Edsger W. Dijkstra, Burroughs, Plantaanstraat 5, 5671 AL Nuenen, the Netherlands
-					<p></p>
-					<hr>
-					<div class="Sect">
-						<u>Introduction</u>
-						<p>Heapsort <a title="Williams, 1964" href="#Ref0">[0]</a> <a title="Floyd, 1964" href="#Ref1">[1]</a> is an efficient algorithm for sorting <i>m</i>(<i>i</i> : 0 &#x2264; <i>i</i> &lt; <i>N</i>) in situ; some, however, consider it a disadvantage of heapsort that it absolutely fails to exploit the circumstances in which the sequence is initially nearly sorted. While sharing in general with heapsort its <i>N</i>&#x2219;log<i> N</i> characteristic, smoothsort does not share this disadvantage: for an initially (nearly) sorted sequence, smoothsort is of order <i>N</i> with a smooth transition between the two. Smoothsort can be viewed as a pure exchange sort that is of order <i>N</i>&#x2219;log<i> N</i> in the worst case. For brevity's sake we shall describe sorting the integer sequence <i>m</i>(<i>i</i> : 0 &#x2264; <i>i</i> &lt; <i>N</i>) in ascending order.</p>
-						<u>General outline of smoothsort</u>
-						<p>After a preparation in its first phase, smoothsort builds up the sorted sequence from right to left, i.e. it maintains between <i>q</i> and <i>m</i></p>
-						<a name="P0"></a>P0:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<u>A</u> <i>i, j </i>: 0<i> </i>&le; <i>i</i>&lt;<i>j </i>&and; <i>q</i> &le; <i>j</i>&lt; <i>N</i> : <i>m</i>(<i>i </i>) &le; <i>m</i>(<i>j </i>) &and; 1 &le; <i>q</i> &le; <i>N</i><br>
-						<br>
-						which is vacuously true for <i>q</i> = <i>N</i> and enjoys the useful property that P0&nbsp;&and;&nbsp;q&nbsp;=&nbsp;1 implies that the sequence <i>m</i> is in ascending order. (Since smoothsort modifies <i>m</i> only by swapping two of its elements, <i>m</i> obviously remains a permutation of the same bag of values.)
-						<p>The second relation, built up during smoothsort's first phase and maintained during its second phase, is</p>
-						<table width="100%" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td align="left" valign="top" width="6%"><a name="P1"></a>P1:</td>
-								<td>The unsorted prefix <i>m</i>(<i>i</i>: 0 &le; <i>i &lt; q</i>) is the postorder traversal of a tree in which no son exceeds its father.</td>
-							</tr>
-						</table>
-						<br>
-						Relation P1 ensures that the rightmost element of the unsorted prefix is its maximum element and that, therefore, <i>q</i> can be decreased by 1, without violating P0. In order to maintain P1, however, the decrease <i>q </i>:= <i>q</i> &minus;<sub> </sub>1 must, in general, be accompanied by a rebuilding of the tree. This clerical obligation has no analogue in heapsort, in which a similar tree is pruned by removing a leaf: in smoothsort the tree is pruned at its root and without precautions it would, in general, fall apart into a forest of subtrees. Smoothsort restores the tree by grafting each subtree of the forest on the root of the subtree to the right of it.
-						<p>Note that relation P1 has been inspired by the desire to leave the sequence <i>m</i> untouched when initially already in ascending order.</p>
-						<p>Once the shape of the tree for <i>q</i> = <i>N</i> has been chosen, the grafting procedure sketched above determines the shape of the tree for all smaller values of <i>q</i>. Our desire to construct an algorithm that would be of order <i>N</i> when <i>m</i> is initially (nearly) sorted forced us to derive the shape of the next tree from that of the preceding one. This recurrent computation, which heavily depends on the way in which shapes of trees are represented, is responsible for much of smoothsort's apparent complexity.</p>
-						<u>The presentation of smoothsort</u>
-						<p>In our presentation we shall follow the principle of postponing definitions until they are needed and &#x2014;as a special case&#x2014; not introducing variables until they are needed. The latter leads to so-called &quot;program projections&quot;. A program is projected on a subset of its variables by omitting the declarations of its other variables and all statements not assigning to any of the variables of the subset projected on; the remaining expressions may only depend on the variables of the subset. Each time we shall give the minimal extension of the subset projected on. In the new statements thereby introduced, the variables introduced earlier are constants.</p>
-						<p>This way of program presentation has the advantage of introducing one complication at a time. It has the disadvantage of hiding the heuristics that led to the algorithm to be presented; the general outline and later remarks have been included to overcome this disadvantage as much as possible. (I think that we shall have to learn to live with the fact that presenting the final design in the most disentangled way and giving the heuristics &#x2014;perhaps even in the form of a possible design history&#x2014; are not necessarily compatible goals.) Finally I beg the impatient reader to remember that a program projection &#x2014;though a legal program&#x2014; does not make sense in isolation: its sole purpose is to be extended to something meaningful.</p>
-						<p>When invariants are given, they precede the repetition of which they are the invariant.</p>
-						<u>The introduction of <i>q</i></u>
-						<p>Projected on the variable <i>q</i>, smoothsort is reduced to</p>
-						|[ <i>q </i>: int; <i>q </i>:= 1 {invariant: 1 &#x2264; <i>q</i> &#x2264; <i>N</i> }<br>
-						&nbsp;; <u>do</u> <i>q</i> &#x2260; <i>N</i> &#x2192; <i>q </i>:= <i>q</i> + 1; <u>od</u> {invariant: 1 &#x2264; <i>q</i> &#x2264; <i>N</i> }<br>
-						&nbsp;; <u>do</u> <i>q</i> &#x2260; <i>N</i> &#x2192; <i>q </i>:= <i>q</i> &#x2212; 1; <u>od<br>
-						</u>]|
-						<p>Variable <i>q</i> denotes the length of the unsorted prefix; the above projection shows that smoothsort as presented here is only defined for <i>N</i> &ge; 1.</p>
-						<u>The introduction of<i> r</i></u>
-						<p>Projected on the variables (<i>q</i>, <i>r</i>), smoothsort is reduced to</p>
-						|[ <i>q</i>, <i>r </i>: int; <i>q </i>:= 1; <i>r </i>:= 0 {invariant: <i>q </i>&#x2212;<i> r </i>= constant}<br>
-						&nbsp;; <u>do</u> <i>q</i> &#x2260; <i>N</i> &#x2192; <i>q </i>:= <i>q</i> + 1; <i>r </i>:= <i>r</i> + 1 <u>od</u> {invariant: <i>q </i>&#x2212;<i> r </i>= constant}<br>
-						&nbsp;; <u>do</u> <i>q</i> &#x2260; <i>N</i> &#x2192; <i>q </i>:= <i>q</i> &#x2212; 1; <i>r </i>:= <i>r</i> &#x2212; 1 <u>od<br>
-						</u>]|<br>
-						<br>
-						<u>Remark 0</u>. Variable <i>r</i> comes in handy in two ways. Firstly because <i>m</i>(<i>r</i>) is the rightmost element of the unsorted prefix, and secondly because replacing its initialization <i>r</i> := 0 by <i>r</i> := <i>X</i> will cause smoothsort to sort the sequence <i>m</i>(<i>i</i> : <i>X</i> &le;<sub> </sub><i>i </i>&lt; <i>X</i> + <i>N </i>). Smoothsort accommodates such a shift of origin a little bit more easily than heapsort.
-						<p></p>
-						<div class="Sect">
-							<u>The introduction of <i>p</i>, <i>b</i> and <i>c</i></u>
-							<p>Invariant P1 states that the unsorted prefix <i>m</i>(<i>i</i> : <i>X</i> &le; <i>i </i>&lt; <i>q</i>) is the postorder traversal of a tree, but does not define the tree. In this section we shall begin to define the tree for the unsorted prefix of length <i>q</i> and how the shape of that tree is recorded using the triple (<i>p</i>,<i>b</i>,<i>c</i>).</p>
-							<p>To this purpose we regard the unsorted prefix <i>m</i>(<i>i</i> : <i>X</i> &le; <i>i </i>&lt; <i>q</i>) as a so-called standard concatenation of so-called stretches.</p>
-							<p>A &quot;stretch'' is a subsequence of consecutive elements <i>m</i>(<i>i</i> : <i>h</i> &le; <i>i </i>&lt; <i>h</i>1) for some <i>h</i> &le; <i>h</i>1 (which we shall later identify with the postorder traversal of a binary subtree of the tree mentioned in P1. As we shall see later, it is desirable that the number of stretches that concatenated together constitute the unordered prefix is relatively small. Stretches, however, don't come in all possible lengths and when <i>q</i> is not a stretch length we need more stretches to cover <i>m</i>(<i>i</i>&nbsp;:&nbsp;0&nbsp;&le;&nbsp;<i>i&nbsp;</i>&lt;&nbsp;<i>q</i>). The available stretch lengths are the so-called Leonardo numbers</p>
-							<p>... 41&nbsp;&nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;15&nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;(&#x2212;1)<br>
-								<br>
-								given by LP<sub>0</sub> = LP<sub>1</sub> = 1 and LP<sub><i>n</i>+2</sub> = LP<sub><i>n</i>+1</sub> + LP<sub><i>n</i></sub> + 1. (The justification for this choice of available stretch lengths is better postponed.)</p>
-							<p>The &quot;standard concatenation'' of a sequence of length <i>q</i>1 consists of the longest stretch with the length &le;&nbsp;<i>q</i>1, followed by the standard concatenation of the remainder (when not empty).</p>
-							<u>Remark 1</u>. We leave it as an exercise for the reader to convince himself of the fact that the standard concatenation of a sequence of given length decomposes the sequence into the minimum number of stretches. (End of Remark 1.)
-							<p>For the sake of the recurrent stretch length computations, we introduce for each stretch length <i>b</i> its &quot;companion'' <i>c</i>, i.e. we maintain</p>
-							<p>(<u>E</u> <i>n</i>: <i>n</i> &#x2265; 0: <i>b</i> = LP<sub><i>n</i></sub> &#x2227; <i>c</i> = LP<sub><i>n</i>&#x2212;1</sub>)&nbsp;&nbsp;&nbsp;;<br>
-								<br>
-								here LP<sub>&#x2212;1</sub> is to be taken = &#x2212;1. This is achieved by modifying variables <i>b</i> and <i>c</i> using only &quot;up'' and &quot;down'', defined by<br>
-								<br>
-								up:&nbsp;&nbsp;&nbsp;<i>b</i>,<i>c</i> := <i>b</i> + <i>c</i> + 1, <i>b</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;down:&nbsp;&nbsp;&nbsp;<i>b</i>, <i>c</i> := <i>c</i>, <i>b</i> &#x2212; <i>c</i> &#x2212; 1&nbsp;&nbsp;&nbsp;&nbsp;.<br>
-							</p>
-							<p>The stretches forming a standard concatenation are given by the triple (<i>p</i>,<i>b</i>,<i>c</i>); more precisely, with a binary representation of <i>p</i></p>
-							<p>.....&nbsp;&nbsp;&nbsp;p<sub>5</sub> p<sub>4</sub> p<sub>3</sub> p<sub>2</sub> p<sub>1</sub> p<sub>0&nbsp;</sub>&nbsp;&nbsp;,<br>
-								<br>
-								the triple (<i>p</i>, <i>b</i>, <i>c</i>) defines the set of stretches <i>LP</i><sub><i>n</i>+<i>i</i></sub> for all <i>i</i> such that <i>p<sub>i</sub></i> = 1 and <i>n</i> defined by LP<i><sub>n&nbsp;</sub></i>=&nbsp;<i>b</i>&nbsp;&nbsp;&and;&nbsp;<sub>&nbsp;</sub>LP<sub><i>n&minus;</i>1</sub><i>&nbsp;</i>=<i>&nbsp;c&nbsp;&nbsp;. </i></p>
-							<div class="Part">
-								<div class="Sect">
-									<div class="Sect">
-										<div class="Sect">
-											<u>Note 0</u>. As a first result, the length of the standard concatenation given by the triple (<i>p</i>, <i>b</i>, <i>c</i>) can &#x2014;destructively&#x2014; be computed by
-											<blockquote>
-												<i>&nbsp;&nbsp;&nbsp;length</i> := 0<br>
-												;&nbsp;&nbsp;<u>do</u> <i>p </i>&gt; 0&#x2192;<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> &nbsp;&nbsp;<i>even</i>(<i>p</i>) &#x2192; <i>p</i> := <i>p</i>/2; up<br>
-												
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]&nbsp;&nbsp;<i>odd</i>(<i>p</i>) &#x2192; <i>length</i> := <i>length</i> + <i>b </i>; <i>p</i> := (<i>p</i> &minus;<sub> </sub>1)/2; up<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi</u><br>
-												<u>od</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(End of Note 0.)</blockquote>
-											<u>Note 1</u>. The representation is not unique: the operations &quot;<i>p</i> := 2*<i>p </i>; down<i>&quot;</i> leave the standard concatenation represented by the triple (<i>p</i>, <i>b</i>, <i>c</i>) unchanged. &nbsp;(End of Note 1.)
-											<p>The above coding of a standard concatenation is possible because, with the exception of stretch length 1, which may occur twice in a standard concatenation &#x2014;e.g. of length 2 or 7&#x2014; each stretch length occurs at most once, whereas for stretch length 1 we have LP<sub>1</sub> and LP<sub>0</sub> at our disposal. We adopt the additional convention of recording a single stretch of length 1 as LP<sub>1</sub>.</p>
-											<u>Note 2.</u> We leave it as an exercise for the reader to prove that, as a consequence of the stretch lengths being Leonardo numbers, in the binary representation of <i>p</i> only the two least significant 1's may be adjacent. This fact will be used in our next project. (End of Note 2.)
-											<p>We now extend the subset of variables projected on by adding the triple (<i>p</i>, <i>b</i>, <i>c</i>) satisfying the invariant</p>
-											<a name="P2"></a>P2: The length of the standard concatenation represented by the triple (<i>p</i>, <i>b</i>, <i>c</i>) equals <i>q.<br>
-												<br>
-											</i>|[ <i>q</i>,<i> r</i>,<i> p</i>,<i> b</i>,<i> c </i>:<i> </i>int;<i> q</i> :=<i> </i>1;<i> r </i>:= 0;<i> p</i>,<i> b</i>,<i> c</i> := 1, 1, 1&nbsp;&nbsp;{<sub> </sub>invariant: <a href="#P2">P2</a> }<sub><i><br>
-													&nbsp;&nbsp;</i></sub>; <u>do</u> <i>q</i> &#x2260; <i>N<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>&rarr;<sub> </sub><u>if</u> <i>p</i> <u>mod</u> 8 = 3<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; <i>p</i> := (<i>p</i> &#x2212;<sub> </sub>1)/2; up; <i>p</i> := (<i>p</i> &#x2212;<sub> </sub>1)/2; up; <i>p</i> := <i>p</i> +1&nbsp;&nbsp;{<i>b</i> &ge;<sub> </sub>3}<sub><br>
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sub>[] <i>p</i> <u>mod</u> 4 = 1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr;<sub> </sub>down;<i> p</i> := 2 * <i>p</i><br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>do</u> <i>b</i> &#x2260; 1 &rarr; <sub><i></i></sub>down; <i>p</i> := 2<i> </i>*<i> p</i> <u>od</u>; <i>p </i>:= <i>p</i> +1&nbsp;&nbsp;{<i>b</i> = 1}<sub><br>
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sub><u>fi</u>; <i>q</i> := <i>q</i> + 1; <i>r</i> :=<i> r</i> +1<br>
-											&nbsp;&nbsp;&nbsp;<u>od</u>&nbsp;&nbsp; {<sub> </sub>invariant: <a href="#P2">P2</a> }<br>
-											<sub><i>&nbsp;</i></sub>; <u>do</u> <i>q</i> &#x2260;1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr;<sub> </sub><i>q</i> := <i>q</i> &#x2212;<sub> </sub>1; <i>r </i>= <i>r</i> &#x2212;<sub> </sub>1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>b</i> = 1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr;<sub> </sub><i>p</i> := <i>p</i> &#x2212;<sub> </sub>1; <u>do</u> even(<i>p</i>) &rarr;<sub> </sub><i>p </i>:=<i> p</i>/2<i> ; </i>up<i> </i><u>od</u><i>&nbsp;&nbsp;</i>{ <i>p</i> <u>mod</u> 4 = 1}<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>b</i> &#x2265; 3<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr; <i>p </i>:= <i>p</i> &#x2212; 1; down; <i>p </i>:= 2*<i>p</i> + 1; down; <i>p </i>:= 2*<i>p</i> + 1&nbsp;&nbsp;{ <i>p</i> <u>mod</u> 8 = 3 }&nbsp;<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi<br>
-											</u>&nbsp;&nbsp;&nbsp;<u>od<br>
-											</u>]|<u><br>
-												<br>
-												Note 3</u>. For the (nonempty!) standard concatenation we have chosen in the above the &quot;normalized&quot; representation with odd(<i>p</i>). (End of Note 3.)<br>
-											<br>
-											<u>Note 4</u>. The assertations at the end of each alternative have been given in order to stress that &#x2014;as it should be!&#x2014; the one repeatable statement is the inverse of the other: assertions in the one reappear as guards in the other [<a href="#Ref2">2</a>]. (End of Note 4.)<br>
-											<br>
-											<u>Note 5</u>. The reader may wish to prove that <i>p</i>'s property as described in Note 2 is the invariant of both repetitions. (End of Note 5.)<br>
-											<br>
-											<u>Note 6</u>. The above projection is still of order <i>N</i>. The agrument is as follows. In the first repetition the number of &quot;down's&quot; is bounded by the number of &quot;up's&quot;, which is certainly less than 2<i>N</i>. The second repetition is merely the inverse of the first one and the conclusion follows. (End of Note 6.)
-											<p></p>
-											<p></p>
-											<u>The introduction of <i>m</i></u>
-											<p>At last the time has come to describe how stretches and the standard concatenation define which order relations between elements of <i>m</i> are maintained by smoothsort. We begin with the stretches, on which predicates &quot;trusty&quot; and &quot;dubious&quot; will be defined. In accordance with the interpetation of a stretch as the postorder traversal of a binary tree we shall refer to the rightmost element of a stretch as the &quot;root&quot; of that stretch.</p>
-											<p>Denoting a sequence of length LP<i><sub>n</sub></i> by &lt; <i>seq<sub>n</sub></i> &gt;, we parse for <i>n</i> &le;<sub> </sub>2<i> </i></p>
-											<p>&lt;&nbsp;<i>seq<sub>n</sub></i>&nbsp;&gt; &nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&lt;&nbsp;<i>seq<sub>n</sub></i><sub>&#x2212;1</sub>&nbsp;&gt;&lt;&nbsp;<i>seq<sub>n</sub></i><sub>&#x2212;2</sub><i>&nbsp;</i>&gt;&lt;&nbsp;<i>root</i>&nbsp;&gt;<i> </i></p>
-											where &lt; <i>root</i> &gt; stands for a singleton sequence. Stretch &lt;&nbsp;<i>seq<sub>n</sub></i>&nbsp;&gt; is dubious means that both &lt;&nbsp;<i>seq<sub>n</sub></i><sub>&#x2212;1</sub>&nbsp;&gt; and &lt;&nbsp;<i>seq<sub>n</sub></i><sub>&#x2212;2</sub><i>&nbsp;</i>&gt; are trusty. Stretch &lt;&nbsp;<i>seq<sub>n</sub></i>&nbsp;&gt; is trusty means that, in addition, the roots of &lt;&nbsp;<i>seq<sub>n</sub></i><sub>&#x2212;1</sub>&nbsp;&gt; and &lt;&nbsp;<i>seq<sub>n</sub></i><sub>&#x2212;2</sub>&nbsp;&gt; are at most the root of &lt;&nbsp;<i>seq<sub>n</sub></i>&nbsp;&gt;; a stretch of length 1 is by definition both dubious and trusty. As a consequence, the root of a trusty stretch is the maximum element of that stretch.
-											<p>When stretches thus parsed are viewed as postorder traversals of binary trees, trustiness means that no son exceeds its father. A dubious stretch is made into a trusty one by applying the operation &quot;sift&quot; &#x2014;a direct inheritance from heapsort&#x2014; to its root, where sift is defined as follows: sift applied to an element without larger sons is a skip, sift applied to an element <i>m</i>(<i>r</i>1) that is exceeded by its largest son <i>m</i>(<i>r</i>2) consists of a swap of these two values, followed by an application of sift to <i>m</i>(<i>r</i>2).</p>
-											<u>Remark 2</u>. We can now partly justify our choice of the Leonardo numbers as available stretch lengths, i.e. justify why we have not chosen (with the same recurrence relation)
-											<blockquote>
-												...&nbsp;&nbsp;&nbsp;33&nbsp;&nbsp;&nbsp;20&nbsp;&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;(0)&nbsp;&nbsp;&nbsp;.</blockquote>
-											The occurrence of length 2 would have required a sift able to deal with fathers having one or two sons, like the sift required in heapsort ; thanks to the Leonardo numbers a father has always two sons and, consequently, smoothsort's sift is simpler. End of Remark 2.)
-											<p>During the second repetition smoothsort maintains</p>
-											<table width="90%" border="0" cellspacing="2" cellpadding="0">
-												<tr>
-													<td valign="top" width="6%"><a name="P3"></a>P3:</td>
-													<td>The stretches of the standard concatenation of the unsorted prefix <i>m</i>(<i>i</i>&nbsp;:&nbsp;0&nbsp;&le;<sub>&nbsp;</sub><i>i&nbsp;</i>&lt;<i>&nbsp;q</i>) are all trusty.</td>
-												</tr>
-											</table>
-											<p>During the first one it maintains the weaker</p>
-											<table width="90%" border="0" cellspacing="2" cellpadding="0">
-												<tr>
-													<td valign="top" width="6%"><a name="P3'"></a>P3':</td>
-													<td>of the standard concatenation the unsorted prefix <i>m</i>(<i>i</i>&nbsp;:&nbsp;0&nbsp;&le;<sub>&nbsp;</sub><i>i&nbsp;&lt;&nbsp;q</i>) the rightmost stretch is dubious; its other stretches are all trusty.</td>
-												</tr>
-											</table>
-											<br>
-											<u>Remark 3</u>. The weaker P3' has been introduced for reasons of efficiency which cannot be explained now; see, however, <a href="#Remark4">Remark 4</a>. (End of Remark 3.)
-											<p>So much for the order relations captured by the stretches. In addition smoothsort maintains during the second repetition</p>
-											<table width="90%" border="0" cellspacing="2" cellpadding="0">
-												<tr>
-													<td valign="top" width="6%"><a name="P4"></a>P4:</td>
-													<td>The roots of the stretches of the standard concatenation of the unordered prefix <i>m</i>(<i>i</i>&nbsp;:&nbsp;0&nbsp;&le;<sub>&nbsp;</sub><i>i&nbsp;</i>&lt;<i>&nbsp;q</i>) are ascending from left to right.</td>
-												</tr>
-											</table>
-											<br>
-											a relation which is useful since P3 &and;<sub> </sub>P4 implies that <i>m</i>(<i>x</i>), the rightmost element of the prefix, is a maximum element of the prefix, and this is the circumstance under which <i>q</i> := <i>q</i> &#x2212;1 maintains <a href="#P0">P0</a>. During the first repetition smoothsort maintains the weaker<br>
-											<br>
-											<table width="90%" border="0" cellspacing="2" cellpadding="0">
-												<tr>
-													<td valign="top" width="6%"><a name="P4'"></a>P4':</td>
-													<td>the roots of the trusty stretches of the standard concatenation of the unordered prefix <i>m</i>(<i>i</i>&nbsp;:&nbsp;0&nbsp;&le;<sub>&nbsp;</sub><i>i&nbsp;</i>&lt;<i>&nbsp;q</i>) that are also stretches of the standard concatenation of length <i>N</i> are ascending from left to right.</td>
-												</tr>
-											</table>
-											<p></p>
-											<p>We now have to investigate<br>
-											</p>
-											<table width="100%" border="0" cellspacing="2" cellpadding="0">
-												<tr>
-													<td valign="top" width="6%">1)</td>
-													<td>what to add to the first repetition for the maintenance of <a href="#P3'">P3</a>' &and; <a href="#P4'">P4</a>'</td>
-												</tr>
-												<tr>
-													<td valign="top" width="6%">2)</td>
-													<td>what to insert between two repetitions in order to transform <a href="#P3'">P3'</a> &and; <a href="#P4'">P4'</a> into <a href="#P3">P3</a> &and; <a href="#P4">P4</a></td>
-												</tr>
-												<tr>
-													<td valign="top" width="6%">3)</td>
-													<td>what to add to the second repetition for the maintenance of <a href="#P3">P3</a> &and; <a href="#P4">P4</a></td>
-												</tr>
-											</table>
-											<br>
-											<u>Investigation 1</u>. In the case <i>p </i><u>mod</u><i> </i>8 = 3, the standard concatenation ends on a dubious stretch of length <i>b</i> which must be made trusty before it can be combined with the preceding stretch and the following element into a new dubious rightmost stretch. This can be achieved by applying sift to <i>m</i>(<i>r</i>)&nbsp;. Since no new trusty stretch is added to the standard concatenation, <a href="#P4'">P4'</a> is maintained without further measures.
-											<p>In the case <i>p </i><u>mod </u>4 = 1, the standard concatenation ends on a dubious stretch of length <i>b</i>, which in this step becomes the last but one stretch of the standard concatenation and, hence, must be made trusty. In the case <i>q</i> + <i>c </i>&lt; <i>N</i>, it suffices to apply sift to <i>m</i>(<i>r</i>) as before, since this stretch will later disappear from the standard concatenation. In the case <i>q</i> + <i>c</i> &ge;<sub> </sub><i>N</i>, however, just applying sift to <i>m</i>(<i>r</i> ) might violate <a href="#P4'">P4'</a> since this stretch of length <i>b</i> also occurs in the standard concatenation of length <i>N</i>. Making a dubious stretch trusty and including its root in the sequence of ascending roots is achieved by applying &quot;trinkle&quot; to <i>m</i>(<i>r</i>). (As we shall see later, trinkle is like sift, be it for a partly ternary tree.) (End of Investigation 1.)</p>
-											<u>Investigation 2</u>. The reader may prove that it suffices to apply trinkle to <i>m</i>(<i>r</i>) . (End of Investigation 2.)<br>
-											<br>
-											<u>Investigation 3</u>. In the case <i>b</i> = 1, the standard concatenation loses its last stretch, and <a href="#P3">P3</a> &and; <a href="#P4">P4</a> is maintained without further measures.
-											<p>In the case <i>b</i> &ge;<sub> </sub>3, the rightmost stretch of length <i>b</i> is replaced by two trusty ones; hence <a href="#P3">P3</a> is maintained. To restore <a href="#P4">P4</a> it would suffice to apply trinkle first to the root of the first new stretch and then to the root of the second new stretch, but this would fail to exploit the fact that the new stretches are already trusty to start with. This is exploited by applying &quot;semitrinkle&quot; in order to those roots. (End of Investigation 3.)</p>
-											<a name="Remark4"></a><u>Remark 4</u>. From a logical point of view it would be perfectly permissible to replace a call on trinkle by a call on sift, which would make the dubious stretch trusty, followed by a call on semitrinkle, which would include its root in the sequence of ascending roots. After this substitution, each iteration of the first repetition starts with a sift and the whole first repetition is followed by a sift. Since initially the last (and only) stretch is trusty, we can transform the program by removing all calls on sift and inserting a single call on sift at the end of the repeatable statement of the first repetition. This is essentially the program transformation that would be required if we wished to replace <a href="#P3'">P3'</a> by <a href="#P3">P3</a>. (The collection of trusty stretches being extended, <a href="#P4'">P4'</a> would require reformulation.)
-											<p>The version resulting from the above transformation is, however, rejected because a succession of sift and semitrinkle requires in general more comparisons and swaps than trinkle, as will become apparent later. This can be remedied by replacing the single call on sift by guarded calls on either sift or the combination in the form of trinkle (and removal of the calls on semitrinkle from the first repetition, which have now been catered for). <a href="#P3">P3</a> would still be valid, <a href="#P4'">P4'</a> would have to be changed. This version, however, is rejected since it would lead to a duplication of the evaluation of the guards <i>p&nbsp;</i><u>mod</u><i>&nbsp;</i>8&nbsp;=&nbsp;3, etc ... (End of Remark 4.)</p>
-											<p>In order to enable the reader to check the code in which calls on sift, trinkle, and semitrinkle have been inserted, we give their calling conventions. (These conventions are not to be regarded as a recommendation: they have been chosen because in this publication I did not want to make any assumptions about a parameter mechanism.)</p>
-											<p>Routine sift is applied to the root <i>m</i>(<i>r</i>1) of a stretch of length <i>b</i>1, of which <i>c</i>1 is the companion. Routine trinkle is applied to the root <i>m</i>(<i>r</i>1) of the last stretch of the standard concatenation represented by the triple (<i>a</i>, <i>b</i>, <i>c</i>): this representation need not be normalized. Routine semitrinkle is applied to the root <i>m</i>(<i>r</i>) of a stretch of length <i>c</i> which is preceded by the nonempty standard concatenation represented by the triple (<i>p</i>, <i>b</i>, <i>c</i>): again the representation is not necessarily normalized.</p>
-											<p>Note that &quot;<i>p</i> := (<i>p</i> &#x2212; 1)/2; <i>p</i> := (<i>p</i> &#x2212; 1)/2; <i>p</i> := <i>p</i> + 1&quot; has been simplified to &quot;<i>p</i> := (<i>p</i> + 1)/4&quot; and that &quot;<i>r</i> := <i>r </i>&#x2212; <i>b</i> + <i>c</i>; down; <i>r</i> := <i>r</i> + <i>c</i> decreases <i>r</i> by 1.<i> </i></p>
-											smoorthsort:<br>
-											|[ <i>q</i>, <i>r</i>, <i>p</i>, <i>b</i>, <i>c</i>, <i>r</i>1<i>,b</i>1<i>,c</i>1: int<br>
-											&nbsp;&nbsp;; <i>q</i> := 1; <i>r</i> := 0; <i>p</i>, <i>b</i>, c := 1, 1, 1&nbsp;&nbsp;&nbsp;{<sub> </sub>invariant P3' &and;<sub> </sub>P4' }<sub><br>
-												&nbsp;&nbsp;</sub>; <u>do</u> <i>q</i> &#x2260; <i>N</i><br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2192;&nbsp;&nbsp;<i>r</i>1 := <i>r<br>
-												&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>; <u>if</u> <i>p</i> <u>mod</u> 8 = 3<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sub>&rarr; &nbsp;</sub><i>b</i>1,<i>c</i>1 := <i>b</i>, <i>c </i>; sift; <i>p</i> := (<i>p</i> + 1)/4; up; up<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]&nbsp;&nbsp;<i>p</i> <u>mod</u> 4 = 1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2192;&nbsp;<u>if</u> <i>q</i> + <i>c </i>&lt; <i>N</i> &#x2192; <i>b</i>1<i>,c</i>1 := <i>b</i>, <i>c</i>; sift<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [] <i>q</i> + c &ge;<sub> </sub><i>N </i>&#x2192; trinkle<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi</u>; down; <i>p</i> := 2 * <i>p</i><br>
-											<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>; <u>do</u> <i>b</i> &#x2260;1 &#x2192; <sub><i></i></sub>down; <i>p</i> := 2 *<sub> </sub><i>p</i> <u>od</u>; <i>p</i> := <i>p</i> +<sub> </sub>1<br>
-											<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>&nbsp; <u>fi</u>; <i>q</i> := <i>q</i> +<sub> </sub>1; <i>r</i> := <i>r</i> +1<br>
-											<sub>&nbsp;&nbsp;</sub>&nbsp; <u>od</u> { P3' &and; P4' }; <i>r</i>1 := <i>r</i>; trinkle {<sub> </sub>invariant: P3 &and;<sub> </sub>P4 }<br>
-											&nbsp;&nbsp;; <u>do</u> <i>q </i>&#x2192; 1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2192;<sub> </sub><i>q</i> := <i>q</i> &minus;<sub> </sub>1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>b</i> =1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x2192;<sub> </sub><i>r</i> := <i>r</i> &minus;<sub> </sub>1; <i>p</i> := <i>p</i> &minus;<sub> </sub>1; <u>do</u> even(<i>p</i>) &rarr;<sub> </sub><i>p</i> := <i>p</i>/2; up <u>od</u><br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>b</i> &ge; 3<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sub>&rarr; </sub><i>p</i> := <i>p</i> &minus;<sub> </sub>1; <i>r </i>:=<i>r</i> &minus;<sub> </sub><i>b</i> + <i>c</i><br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>p</i> =0 &#x2192; skip &#x2337; <i>p</i> &gt; 0 &#x2192; semitrinkle <u>fi</u><br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; down ; <i>p</i> := 2*<i>p</i> + 1; <i>r</i> := <i>r</i> + <i>c </i>; semitrinkle<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; down ; <i>p</i> := 2*<i>p</i> + 1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi<br>
-											</u>&nbsp; <u>od<br>
-											</u>]|<br>
-											<br>
-											up1:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>b</i>1<i>,c</i>1 := <i>b</i>1+ <i>c</i>1+1<i>, b</i>1<br>
-											down1:&nbsp;&nbsp;&nbsp;<i>b</i>1<i>,c</i>1 := <i>c</i>1<i>,&nbsp;b</i>1 &minus;<sub> </sub><i>c1 </i>&minus;<sub> </sub>1<br>
-											<br>
-											sift:<br>
-											<u>do</u> b1 &le;<sub> </sub>3&#x2192;<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|[ <i>r</i>2: int; <i>r</i>2 := <i>r</i>1 &minus;<sub> </sub><i>b</i>1 + <i>c</i>1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>m</i>(<i>r</i>2) &ge; <i>m</i>(<i>r</i>1 &minus; 1) &#x2192; skip<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>m</i>(<i>r</i>2) &le; <i>m</i>(<i>r</i>1 &minus; 1) &#x2192; <i>r</i>2 := <i>r</i>1 &minus; 1; down1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi<br>
-											</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ; <u>if</u> <i>m</i>(<i>r</i>1) &le; <i>m</i>(<i>r</i>2) &#x2192; <i>b</i>1 := 1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>m</i>(<i>r</i>1) &lt; <i>m</i>(<i>r</i>2) &#x2192; <i>m</i> : swap(<i>r</i>1<i>,r</i>2); <i>r</i>1 := <i>r</i>2; down1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi<br>
-											</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]|<br>
-											<u>od<br>
-												<br>
-											</u>semitrinkle:<br>
-											&nbsp;&nbsp;&nbsp;<i>r</i>1 := <i>r</i> &minus; <i>c<br>
-												&nbsp;</i>; <u>if</u> <i>m</i>(<i>r</i>1) &le; <i>m</i>(<i>r</i>) &#x2192; skip<br>
-											&nbsp;&nbsp;&nbsp;[] <i>m</i>(<i>r</i>1) &gt; <i>m</i>(<i>r</i>) &#x2192; m : swap(<i>r</i>, <i>r</i>1); trinkle<br>
-											&nbsp;&nbsp;&nbsp;<u>fi</u>
-											<p>Trinkle is very similar to sift when we regard each stretch root as the stepson of the root of the stretch to its right. Applied to a root without larger sons, trinkle is a skip; otherwise the root is swapped with its largest son, etc. The trouble with the code is that all sorts of sons may be missing. In the following, trinkle is eventually reduced to a sift, viz. when the stepson relation is no longer of interest.</p>
-											trinkle:<br>
-											|[&nbsp;<i>p</i>1: int; <i>p</i>1,<i>b</i>1,<i>c</i>1 := <i>p</i>, <i>b</i>, c<br>
-											&nbsp;&nbsp;; <u>do</u> <i>p</i>1 &gt; 0&#x2192;<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|[&nbsp;&nbsp;<i>r</i>3: int; <u>do</u> even(<i>p</i>1) &#x2192; <i>p</i>1 := <i>p</i>1/2; up1 <u>od</u>; <i>r</i>3 := <i>r</i>1 &minus;<sub> </sub><i>b</i>1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>p</i>1=1 <u>cor</u> <i>m</i>(<i>r</i>3) &le;<sub> </sub><i>m</i>(<i>r</i>1) &#x2192; <i>p</i>1 := 0<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>p</i>1 &gt; 1 <u>cand</u> <i>m</i>(<i>r</i>3) &gt; <i>m</i>(<i>r</i>1)<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr;<sub> </sub><i>p</i>1:= <i>p</i>1 &minus;<sub> </sub>1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>b</i>1=1 &rarr; <i>m</i>:swap(<i>r</i>1<i>,r</i>3); <i>r</i>1 := <i>r</i>3<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>b</i>1 &#x2265; 3<i> </i>&rarr;<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|[ <i>r</i>2: int; <i>r</i>2 := <i>r</i>1 &minus;<sub> </sub><i>b</i>1+ <i>c</i>1<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>m</i>(<i>r</i>2) &ge;<sub> </sub><i>m</i>(<i>r</i>1 &minus;<sub> </sub>1) &rarr; skip<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>m</i>(<i>r</i>2) <sub>&le; </sub><i>m</i>(<i>r</i>1 &minus;<sub> </sub>1)<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr;<sub> </sub><i>r</i>2 := <i>r</i>1 &minus; 1; down1; <i>p</i>1 := 2 * <i>p</i>1;<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi</u><br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>m</i>(<i>r</i>3) &ge; <i>m</i>(<i>r</i>2)<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr;<sub> </sub><i>m</i>:swap(<i>r</i>1<i>,r</i>3); <i>r</i>1 := <i>r</i>3<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]&nbsp;<i>m</i>(<i>r</i>3) &le;<sub> </sub><i>m</i>(<i>r</i>2)<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sub>&rarr; </sub><i>m</i>:swap(<i>r</i>1<i>,r</i>2); <i>r</i>1 := <i>r</i>2; down1; <i>p</i>1 := 0<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi<br>
-											</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]|<br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>fi</u><br>
-											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]|<br>
-											&nbsp;&nbsp;&nbsp; <u>od<br>
-											</u>]| ; sift
-											<p>And this concludes the code, in which I have abstained from implementation dependent optimizations.</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<u>In retrospect</u>
-						<p>While heapsort prunes the tree leaf by leaf, smoothsort prunes the tree at the root, and immediately one of heapsort&rsquo;s charms is lost: while the tree in heapsort remains beautifully balanced, the tree in smoothsort can get very skew indeed. So why bother about smoothsort at all? Well, I wanted to design a sorting algorithm of order <i>N</i> in the best case, of order <i>N&#x2219;</i>log <i>N</i> in the worst case, and with a smooth transition between the two (hence its name).</p>
-						<p>This is also the answer to the question why I introduced <a href="#P4">P4</a>. By dropping <a href="#P4">P4</a> one can dispense with trinkle and the code becomes much simpler. The price to be paid is a search for the maximum stretch root in order to establish that <i>m</i>(<i>r</i>) is a maximum element of the unsorted prefix. Though such a simpler sorting algorithm is quite defensible, I rejected the option because it is never of order <i>N</i>.</p>
-						<p>One can also raise the question why I have not chosen as available stretch lengths: <i>...</i>&nbsp;63&nbsp;&nbsp;31&nbsp;&nbsp;15&nbsp;&nbsp;7&nbsp;&nbsp;3&nbsp;&nbsp;1, which seems attractive since each stretch can then be viewed as the postorder traversal of a balanced binary tree. In addition, the recurrence relation would be simpler. But I know why I chose the Leonardo numbers: with balanced binary trees the average number of stretches is 1<i>.</i>2559&nbsp;&nbsp;{= &#x00BC;(5+<i>&radic;</i>5)(<sup>2</sup>log(1+&radic;5)&minus;1)}<sub> </sub>times the average number of stretches with the Leonardo numbers. (I do not present this ratio as a compelling argument).</p>
-						<p>It is possible that others have thought of this algorithm, but have rejected it for valid reasons, as yet unknown to me. I could not find it in the literature and it is not mentioned in [<a href="#Ref3">3</a>], a recent article that compares five well-known sorting algorithms when fed with initially nearly sorted sequences. (That article compares Straight Insertion Sort, Shellsort, Straight Merge Sort, Quicksort, and Heapsort.) If it has not been discovered earlier, I would like to know the reason, because all its ingredients are well-known since the discovery of the heapsort in 1964.</p>
-						<p>Besides the possible interest in smoothsort I had another reason for developing it to the degree I did and for writing the above. (It took me three weeks, but I consider them well-spent.) The reason was that I knew beforehand that in trying to present smoothsort in a way as disentangled as possible I would encounter considerable difficulties. I hope they have been surmounted sufficiently well.</p>
-						<u>Acknowledgements</u>
-						<p>I am greatly indebted to C.S.Scholten and to all the members of the Tuesday Afternoon Club, with whom I had the privilege of discussing the algorithm, its coding, and its presentation. They have helped me clarifying my own thoughts and have suggested several significant simplifications. I am furthermore indebted to D.E.Knuth and W.M.Turski for their comments on the previous version of the text, and to the partcipants of the Marktoberdorf Summer School, 1981, on whom I could try out my presentation.</p>
-					</div>
-				</div>
-			</div>
-			<div id="content" align="left">
-				<div class="Sect" align="left">
-					<div class="Sect" align="left">
-						<u>References<br>
-							<br>
-						</u>
-						<table width="100%" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td valign="top" width="8%"><a name="Ref0"></a>[0]</td>
-								<td valign="top">Williams. J.W.J., Algorithm 232 HEAPSORT C.A.C.M, 7, 6 (June 1964), pp. 347&#x2212;348<br>
-									&nbsp;</td>
-							</tr>
-							<tr>
-								<td valign="top" width="8%"><a name="Ref1"></a>[1]</td>
-								<td valign="top">Floyd, Robert W., Algorithm 242 TREESORT 3 C.A.C.M., 7, 12 (Dec. 1964), p. 701<br>
-									&nbsp;</td>
-							</tr>
-							<tr>
-								<td valign="top" width="8%"><a name="Ref2"></a>[2]</td>
-								<td valign="top">Bauer, F.L. and Broy, M. (Ed.), Program Construcion, Lecture Notes in Computer Science 69, Berlin, Heidelberg, New York, Springer Verlag, 1979, pp. 54 &#x2212; 57<br>
-									&nbsp;</td>
-							</tr>
-							<tr>
-								<td valign="top" width="8%"><a name="Ref3"></a>[3]</td>
-								<td valign="top">Cook, Curtis R. and Kim, Do Jin, Best Sorting Algorithms for Nearly Sorted Lists, C.A.C.M., 23, 11 (Nov. 1980) pp. 620 &#x2212; 624</td>
-							</tr>
-						</table>
-						<br>
-						<br>
-						<table width="100%" align="center" border=0 cellspacing=0 cellpadding=2>
-							<tr height="16">
-								<td align="right" width="271" valign="top" height="16">
-									<div align="left">
-										Plataanstraat 5</div>
-								</td>
-								<td align="left" width="325" valign="top" height="16">16 August 1981</td>
-							</tr>
-							<tr>
-								<td align="right" width="271" valign="top" height="19">
-									<div align="left">
-										5671 AL NUENEN</div>
-								</td>
-								<td align="left" width="325" valign="top" height="19">prof.dr Edsger W. Dijkstra</td>
-							</tr>
-							<tr>
-								<td align="right" width="271" valign="middle" height="16">
-									<div align="left">
-										The Netherlands</div>
-								</td>
-								<td align="left" width="325" valign="middle" height="16">Burroughs Research Fellow</td>
-							</tr>
-						</table>
-						<br>
-					</div>
-				</div>
-			</div>
-			<div id="content">
-				<hr>
-				<div>
-					<font size="-1">transcribed by Frederik Hertzum<br>
-						
-					 revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="83">Sat, 28 Jul 2007</csobj></font></div>
-			</div>
-		
-		
-  </body>
-</html>
-</x-html>
-
+<div class="Part"><u><font color="#000000">Smoothsort,</font> an alternative for sorting in situ</u></div>
+<div class="Part" align="center">
+<table width="30%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td width="15%">by</td>
+<td>Edsger W. Dijkstra</td>
+</tr>
+<tr>
+<td width="15%"></td>
+<td>
+<div align="left">Burroughs Corporation</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="Sect"><u>Abstract</u>.
+<p>Like Heapsort —which inspired it— smoothsort is an algorithm for sorting in situ. It is of order <i>N∙</i>log <i>N</i> in the worst case, but of order <i>N</i> in the best case, with a smooth transition between the two. (Hence its name.)</p>
+Key Words and Phrases: sorting in situ, heapsort, sorting trees, sift, computational complexity.<br>
+<br>
+CR Categories: 5.25, 5.31<br>
+<br>
+Author’s present address:<br>
+Edsger W. Dijkstra, Burroughs, Plantaanstraat 5, 5671 AL Nuenen, the Netherlands
+<hr>
+<div class="Sect"><u>Introduction</u>
+<p>Heapsort <a title="Williams, 1964" href="#Ref0">[0]</a> <a title="Floyd, 1964" href="#Ref1">[1]</a> is an efficient algorithm for sorting <i>m</i>(<i>i</i> : 0 ≤ <i>i</i> &lt; <i>N</i>) in situ; some, however, consider it a disadvantage of heapsort that it absolutely fails to exploit the circumstances in which the sequence is initially nearly sorted. While sharing in general with heapsort its <i>N</i>∙log <i>N</i> characteristic, smoothsort does not share this disadvantage: for an initially (nearly) sorted sequence, smoothsort is of order <i>N</i> with a smooth transition between the two. Smoothsort can be viewed as a pure exchange sort that is of order <i>N</i>∙log <i>N</i> in the worst case. For brevity's sake we shall describe sorting the integer sequence <i>m</i>(<i>i</i> : 0 ≤ <i>i</i> &lt; <i>N</i>) in ascending order.</p>
+<u>General outline of smoothsort</u>
+<p>After a preparation in its first phase, smoothsort builds up the sorted sequence from right to left, i.e. it maintains between <i>q</i> and <i>m</i></p>
+<a name="P0"></a>P0:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<u>A</u> <i>i, j</i> : 0 ≤ <i>i</i>&lt;<i>j</i> ∧ <i>q</i> ≤ <i>j</i>&lt; <i>N</i> : <i>m</i>(<i>i</i> ) ≤ <i>m</i>(<i>j</i> ) ∧ 1 ≤ <i>q</i> ≤ <i>N</i><br>
+<br>
+which is vacuously true for <i>q</i> = <i>N</i> and enjoys the useful property that P0&nbsp;∧&nbsp;q&nbsp;=&nbsp;1 implies that the sequence <i>m</i> is in ascending order. (Since smoothsort modifies <i>m</i> only by swapping two of its elements, <i>m</i> obviously remains a permutation of the same bag of values.)
+<p>The second relation, built up during smoothsort's first phase and maintained during its second phase, is</p>
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="left" valign="top" width="6%"><a name="P1"></a>P1:</td>
+<td>The unsorted prefix <i>m</i>(<i>i</i>: 0 ≤ <i>i &lt; q</i>) is the postorder traversal of a tree in which no son exceeds its father.</td>
+</tr>
+</table>
+<br>
+Relation P1 ensures that the rightmost element of the unsorted prefix is its maximum element and that, therefore, <i>q</i> can be decreased by 1, without violating P0. In order to maintain P1, however, the decrease <i>q</i> := <i>q</i> − 1 must, in general, be accompanied by a rebuilding of the tree. This clerical obligation has no analogue in heapsort, in which a similar tree is pruned by removing a leaf: in smoothsort the tree is pruned at its root and without precautions it would, in general, fall apart into a forest of subtrees. Smoothsort restores the tree by grafting each subtree of the forest on the root of the subtree to the right of it.
+<p>Note that relation P1 has been inspired by the desire to leave the sequence <i>m</i> untouched when initially already in ascending order.</p>
+<p>Once the shape of the tree for <i>q</i> = <i>N</i> has been chosen, the grafting procedure sketched above determines the shape of the tree for all smaller values of <i>q</i>. Our desire to construct an algorithm that would be of order <i>N</i> when <i>m</i> is initially (nearly) sorted forced us to derive the shape of the next tree from that of the preceding one. This recurrent computation, which heavily depends on the way in which shapes of trees are represented, is responsible for much of smoothsort's apparent complexity.</p>
+<u>The presentation of smoothsort</u>
+<p>In our presentation we shall follow the principle of postponing definitions until they are needed and —as a special case— not introducing variables until they are needed. The latter leads to so-called "program projections". A program is projected on a subset of its variables by omitting the declarations of its other variables and all statements not assigning to any of the variables of the subset projected on; the remaining expressions may only depend on the variables of the subset. Each time we shall give the minimal extension of the subset projected on. In the new statements thereby introduced, the variables introduced earlier are constants.</p>
+<p>This way of program presentation has the advantage of introducing one complication at a time. It has the disadvantage of hiding the heuristics that led to the algorithm to be presented; the general outline and later remarks have been included to overcome this disadvantage as much as possible. (I think that we shall have to learn to live with the fact that presenting the final design in the most disentangled way and giving the heuristics —perhaps even in the form of a possible design history— are not necessarily compatible goals.) Finally I beg the impatient reader to remember that a program projection —though a legal program— does not make sense in isolation: its sole purpose is to be extended to something meaningful.</p>
+<p>When invariants are given, they precede the repetition of which they are the invariant.</p>
+<u>The introduction of <i>q</i></u>
+<p>Projected on the variable <i>q</i>, smoothsort is reduced to</p>
+|[ <i>q</i> : int; <i>q</i> := 1 {invariant: 1 ≤ <i>q</i> ≤ <i>N</i> }<br>
+&nbsp;; <u>do</u> <i>q</i> ≠ <i>N</i> → <i>q</i> := <i>q</i> + 1; <u>od</u> {invariant: 1 ≤ <i>q</i> ≤ <i>N</i> }<br>
+&nbsp;; <u>do</u> <i>q</i> ≠ <i>N</i> → <i>q</i> := <i>q</i> − 1; <u>od<br></u> ]|
+<p>Variable <i>q</i> denotes the length of the unsorted prefix; the above projection shows that smoothsort as presented here is only defined for <i>N</i> ≥ 1.</p>
+<u>The introduction of <i>r</i></u>
+<p>Projected on the variables (<i>q</i>, <i>r</i>), smoothsort is reduced to</p>
+|[ <i>q</i>, <i>r</i> : int; <i>q</i> := 1; <i>r</i> := 0 {invariant: <i>q</i> − <i>r</i> = constant}<br>
+&nbsp;; <u>do</u> <i>q</i> ≠ <i>N</i> → <i>q</i> := <i>q</i> + 1; <i>r</i> := <i>r</i> + 1 <u>od</u> {invariant: <i>q</i> − <i>r</i> = constant}<br>
+&nbsp;; <u>do</u> <i>q</i> ≠ <i>N</i> → <i>q</i> := <i>q</i> − 1; <i>r</i> := <i>r</i> − 1 <u>od<br></u> ]|<br>
+<br>
+<u>Remark 0</u>. Variable <i>r</i> comes in handy in two ways. Firstly because <i>m</i>(<i>r</i>) is the rightmost element of the unsorted prefix, and secondly because replacing its initialization <i>r</i> := 0 by <i>r</i> := <i>X</i> will cause smoothsort to sort the sequence <i>m</i>(<i>i</i> : <i>X</i> ≤ <i>i</i> &lt; <i>X</i> + <i>N</i> ). Smoothsort accommodates such a shift of origin a little bit more easily than heapsort.
+<div class="Sect"><u>The introduction of <i>p</i>, <i>b</i> and <i>c</i></u>
+<p>Invariant P1 states that the unsorted prefix <i>m</i>(<i>i</i> : <i>X</i> ≤ <i>i</i> &lt; <i>q</i>) is the postorder traversal of a tree, but does not define the tree. In this section we shall begin to define the tree for the unsorted prefix of length <i>q</i> and how the shape of that tree is recorded using the triple (<i>p</i>,<i>b</i>,<i>c</i>).</p>
+<p>To this purpose we regard the unsorted prefix <i>m</i>(<i>i</i> : <i>X</i> ≤ <i>i</i> &lt; <i>q</i>) as a so-called standard concatenation of so-called stretches.</p>
+<p>A "stretch'' is a subsequence of consecutive elements <i>m</i>(<i>i</i> : <i>h</i> ≤ <i>i</i> &lt; <i>h</i>1) for some <i>h</i> ≤ <i>h</i>1 (which we shall later identify with the postorder traversal of a binary subtree of the tree mentioned in P1. As we shall see later, it is desirable that the number of stretches that concatenated together constitute the unordered prefix is relatively small. Stretches, however, don't come in all possible lengths and when <i>q</i> is not a stretch length we need more stretches to cover <i>m</i>(<i>i</i>&nbsp;:&nbsp;0&nbsp;≤&nbsp;<i>i&nbsp;</i>&lt;&nbsp;<i>q</i>). The available stretch lengths are the so-called Leonardo numbers</p>
+<p>... 41&nbsp;&nbsp;&nbsp;25&nbsp;&nbsp;&nbsp;15&nbsp;&nbsp;&nbsp;9&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;(−1)<br>
+<br>
+given by LP<sub>0</sub> = LP<sub>1</sub> = 1 and LP<sub><i>n</i>+2</sub> = LP<sub><i>n</i>+1</sub> + LP<sub><i>n</i></sub> + 1. (The justification for this choice of available stretch lengths is better postponed.)</p>
+<p>The "standard concatenation'' of a sequence of length <i>q</i>1 consists of the longest stretch with the length ≤&nbsp;<i>q</i>1, followed by the standard concatenation of the remainder (when not empty).</p>
+<u>Remark 1</u>. We leave it as an exercise for the reader to convince himself of the fact that the standard concatenation of a sequence of given length decomposes the sequence into the minimum number of stretches. (End of Remark 1.)
+<p>For the sake of the recurrent stretch length computations, we introduce for each stretch length <i>b</i> its "companion'' <i>c</i>, i.e. we maintain</p>
+<p>(<u>E</u> <i>n</i>: <i>n</i> ≥ 0: <i>b</i> = LP<sub><i>n</i></sub> ∧ <i>c</i> = LP<sub><i>n</i>−1</sub>)&nbsp;&nbsp;&nbsp;;<br>
+<br>
+here LP<sub>−1</sub> is to be taken = −1. This is achieved by modifying variables <i>b</i> and <i>c</i> using only "up'' and "down'', defined by<br>
+<br>
+up:&nbsp;&nbsp;&nbsp;<i>b</i>,<i>c</i> := <i>b</i> + <i>c</i> + 1, <i>b</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;down:&nbsp;&nbsp;&nbsp;<i>b</i>, <i>c</i> := <i>c</i>, <i>b</i> − <i>c</i> − 1&nbsp;&nbsp;&nbsp;&nbsp;.<br></p>
+<p>The stretches forming a standard concatenation are given by the triple (<i>p</i>,<i>b</i>,<i>c</i>); more precisely, with a binary representation of <i>p</i></p>
+<p>.....&nbsp;&nbsp;&nbsp;p<sub>5</sub> p<sub>4</sub> p<sub>3</sub> p<sub>2</sub> p<sub>1</sub> p<sub>0&nbsp;</sub>&nbsp;&nbsp;,<br>
+<br>
+the triple (<i>p</i>, <i>b</i>, <i>c</i>) defines the set of stretches <i>LP</i><sub><i>n</i>+<i>i</i></sub> for all <i>i</i> such that <i>p<sub>i</sub></i> = 1 and <i>n</i> defined by LP<i><sub>n&nbsp;</sub></i>=&nbsp;<i>b</i>&nbsp;&nbsp;∧&nbsp;<sub>&nbsp;</sub>LP<sub><i>n−</i>1</sub><i>&nbsp;</i>=<i>&nbsp;c&nbsp;&nbsp;.</i></p>
+<div class="Part">
+<div class="Sect">
+<div class="Sect">
+<div class="Sect"><u>Note 0</u>. As a first result, the length of the standard concatenation given by the triple (<i>p</i>, <i>b</i>, <i>c</i>) can —destructively— be computed by
+<blockquote><i>&nbsp;&nbsp;&nbsp;length</i> := 0<br>
+;&nbsp;&nbsp;<u>do</u> <i>p</i> &gt; 0→<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> &nbsp;&nbsp;<i>even</i>(<i>p</i>) → <i>p</i> := <i>p</i>/2; up<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]&nbsp;&nbsp;<i>odd</i>(<i>p</i>) → <i>length</i> := <i>length</i> + <i>b</i> ; <i>p</i> := (<i>p</i> − 1)/2; up<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi</u><br>
+<u>od</u>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(End of Note 0.)</blockquote>
+<u>Note 1</u>. The representation is not unique: the operations "<i>p</i> := 2*<i>p</i> ; down<i>"</i> leave the standard concatenation represented by the triple (<i>p</i>, <i>b</i>, <i>c</i>) unchanged. &nbsp;(End of Note 1.)
+<p>The above coding of a standard concatenation is possible because, with the exception of stretch length 1, which may occur twice in a standard concatenation —e.g. of length 2 or 7— each stretch length occurs at most once, whereas for stretch length 1 we have LP<sub>1</sub> and LP<sub>0</sub> at our disposal. We adopt the additional convention of recording a single stretch of length 1 as LP<sub>1</sub>.</p>
+<u>Note 2.</u> We leave it as an exercise for the reader to prove that, as a consequence of the stretch lengths being Leonardo numbers, in the binary representation of <i>p</i> only the two least significant 1's may be adjacent. This fact will be used in our next project. (End of Note 2.)
+<p>We now extend the subset of variables projected on by adding the triple (<i>p</i>, <i>b</i>, <i>c</i>) satisfying the invariant</p>
+<a name="P2"></a>P2: The length of the standard concatenation represented by the triple (<i>p</i>, <i>b</i>, <i>c</i>) equals <i>q.<br>
+<br></i> |[ <i>q</i>, <i>r</i>, <i>p</i>, <i>b</i>, <i>c</i> : int; <i>q</i> := 1; <i>r</i> := 0; <i>p</i>, <i>b</i>, <i>c</i> := 1, 1, 1&nbsp;&nbsp;{ invariant: <a href="#P2">P2</a> }<sub><i><br>
+&nbsp;&nbsp;</i></sub>; <u>do</u> <i>q</i> ≠ <i>N<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>→ <u>if</u> <i>p</i> <u>mod</u> 8 = 3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <i>p</i> := (<i>p</i> − 1)/2; up; <i>p</i> := (<i>p</i> − 1)/2; up; <i>p</i> := <i>p</i> +1&nbsp;&nbsp;{<i>b</i> ≥ 3}<sub><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sub>[] <i>p</i> <u>mod</u> 4 = 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ down; <i>p</i> := 2 * <i>p</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>do</u> <i>b</i> ≠ 1 → down; <i>p</i> := 2 * <i>p</i> <u>od</u>; <i>p</i> := <i>p</i> +1&nbsp;&nbsp;{<i>b</i> = 1}<sub><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</sub><u>fi</u>; <i>q</i> := <i>q</i> + 1; <i>r</i> := <i>r</i> +1<br>
+&nbsp;&nbsp;&nbsp;<u>od</u>&nbsp;&nbsp; { invariant: <a href="#P2">P2</a> }<br>
+<sub><i>&nbsp;</i></sub>; <u>do</u> <i>q</i> ≠1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <i>q</i> := <i>q</i> − 1; <i>r</i> = <i>r</i> − 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>b</i> = 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <i>p</i> := <i>p</i> − 1; <u>do</u> even(<i>p</i>) → <i>p</i> := <i>p</i>/2 <i>;</i> up <u>od</u><i>&nbsp;&nbsp;</i>{ <i>p</i> <u>mod</u> 4 = 1}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>b</i> ≥ 3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <i>p</i> := <i>p</i> − 1; down; <i>p</i> := 2*<i>p</i> + 1; down; <i>p</i> := 2*<i>p</i> + 1&nbsp;&nbsp;{ <i>p</i> <u>mod</u> 8 = 3 }&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi<br></u> &nbsp;&nbsp;&nbsp;<u>od<br></u> ]|<u><br>
+<br>
+Note 3</u>. For the (nonempty!) standard concatenation we have chosen in the above the "normalized" representation with odd(<i>p</i>). (End of Note 3.)<br>
+<br>
+<u>Note 4</u>. The assertations at the end of each alternative have been given in order to stress that —as it should be!— the one repeatable statement is the inverse of the other: assertions in the one reappear as guards in the other [<a href="#Ref2">2</a>]. (End of Note 4.)<br>
+<br>
+<u>Note 5</u>. The reader may wish to prove that <i>p</i>'s property as described in Note 2 is the invariant of both repetitions. (End of Note 5.)<br>
+<br>
+<u>Note 6</u>. The above projection is still of order <i>N</i>. The agrument is as follows. In the first repetition the number of "down's" is bounded by the number of "up's", which is certainly less than 2<i>N</i>. The second repetition is merely the inverse of the first one and the conclusion follows. (End of Note 6.) <u>The introduction of <i>m</i></u>
+<p>At last the time has come to describe how stretches and the standard concatenation define which order relations between elements of <i>m</i> are maintained by smoothsort. We begin with the stretches, on which predicates "trusty" and "dubious" will be defined. In accordance with the interpetation of a stretch as the postorder traversal of a binary tree we shall refer to the rightmost element of a stretch as the "root" of that stretch.</p>
+<p>Denoting a sequence of length LP<i><sub>n</sub></i> by &lt; <i>seq<sub>n</sub></i> &gt;, we parse for <i>n</i> ≤ 2</p>
+<p>&lt;&nbsp;<i>seq<sub>n</sub></i>&nbsp;&gt; &nbsp;&nbsp;=&nbsp;&nbsp;&nbsp;&lt;&nbsp;<i>seq<sub>n</sub></i><sub>−1</sub>&nbsp;&gt;&lt;&nbsp;<i>seq<sub>n</sub></i><sub>−2</sub><i>&nbsp;</i>&gt;&lt;&nbsp;<i>root</i>&nbsp;&gt;</p>
+where &lt; <i>root</i> &gt; stands for a singleton sequence. Stretch &lt;&nbsp;<i>seq<sub>n</sub></i>&nbsp;&gt; is dubious means that both &lt;&nbsp;<i>seq<sub>n</sub></i><sub>−1</sub>&nbsp;&gt; and &lt;&nbsp;<i>seq<sub>n</sub></i><sub>−2</sub><i>&nbsp;</i>&gt; are trusty. Stretch &lt;&nbsp;<i>seq<sub>n</sub></i>&nbsp;&gt; is trusty means that, in addition, the roots of &lt;&nbsp;<i>seq<sub>n</sub></i><sub>−1</sub>&nbsp;&gt; and &lt;&nbsp;<i>seq<sub>n</sub></i><sub>−2</sub>&nbsp;&gt; are at most the root of &lt;&nbsp;<i>seq<sub>n</sub></i>&nbsp;&gt;; a stretch of length 1 is by definition both dubious and trusty. As a consequence, the root of a trusty stretch is the maximum element of that stretch.
+<p>When stretches thus parsed are viewed as postorder traversals of binary trees, trustiness means that no son exceeds its father. A dubious stretch is made into a trusty one by applying the operation "sift" —a direct inheritance from heapsort— to its root, where sift is defined as follows: sift applied to an element without larger sons is a skip, sift applied to an element <i>m</i>(<i>r</i>1) that is exceeded by its largest son <i>m</i>(<i>r</i>2) consists of a swap of these two values, followed by an application of sift to <i>m</i>(<i>r</i>2).</p>
+<u>Remark 2</u>. We can now partly justify our choice of the Leonardo numbers as available stretch lengths, i.e. justify why we have not chosen (with the same recurrence relation)
+<blockquote>...&nbsp;&nbsp;&nbsp;33&nbsp;&nbsp;&nbsp;20&nbsp;&nbsp;&nbsp;12&nbsp;&nbsp;&nbsp;7&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;(0)&nbsp;&nbsp;&nbsp;.</blockquote>
+The occurrence of length 2 would have required a sift able to deal with fathers having one or two sons, like the sift required in heapsort ; thanks to the Leonardo numbers a father has always two sons and, consequently, smoothsort's sift is simpler. End of Remark 2.)
+<p>During the second repetition smoothsort maintains</p>
+<table width="90%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top" width="6%"><a name="P3"></a>P3:</td>
+<td>The stretches of the standard concatenation of the unsorted prefix <i>m</i>(<i>i</i>&nbsp;:&nbsp;0&nbsp;≤<sub>&nbsp;</sub><i>i&nbsp;</i>&lt;<i>&nbsp;q</i>) are all trusty.</td>
+</tr>
+</table>
+<p>During the first one it maintains the weaker</p>
+<table width="90%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top" width="6%"><a name="P3'"></a>P3':</td>
+<td>of the standard concatenation the unsorted prefix <i>m</i>(<i>i</i>&nbsp;:&nbsp;0&nbsp;≤<sub>&nbsp;</sub><i>i&nbsp;&lt;&nbsp;q</i>) the rightmost stretch is dubious; its other stretches are all trusty.</td>
+</tr>
+</table>
+<br>
+<u>Remark 3</u>. The weaker P3' has been introduced for reasons of efficiency which cannot be explained now; see, however, <a href="#Remark4">Remark 4</a>. (End of Remark 3.)
+<p>So much for the order relations captured by the stretches. In addition smoothsort maintains during the second repetition</p>
+<table width="90%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top" width="6%"><a name="P4"></a>P4:</td>
+<td>The roots of the stretches of the standard concatenation of the unordered prefix <i>m</i>(<i>i</i>&nbsp;:&nbsp;0&nbsp;≤<sub>&nbsp;</sub><i>i&nbsp;</i>&lt;<i>&nbsp;q</i>) are ascending from left to right.</td>
+</tr>
+</table>
+<br>
+a relation which is useful since P3 ∧ P4 implies that <i>m</i>(<i>x</i>), the rightmost element of the prefix, is a maximum element of the prefix, and this is the circumstance under which <i>q</i> := <i>q</i> −1 maintains <a href="#P0">P0</a>. During the first repetition smoothsort maintains the weaker<br>
+<br>
+<table width="90%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top" width="6%"><a name="P4'"></a>P4':</td>
+<td>the roots of the trusty stretches of the standard concatenation of the unordered prefix <i>m</i>(<i>i</i>&nbsp;:&nbsp;0&nbsp;≤<sub>&nbsp;</sub><i>i&nbsp;</i>&lt;<i>&nbsp;q</i>) that are also stretches of the standard concatenation of length <i>N</i> are ascending from left to right.</td>
+</tr>
+</table>
+<p>We now have to investigate<br></p>
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top" width="6%">1)</td>
+<td>what to add to the first repetition for the maintenance of <a href="#P3'">P3</a>' ∧ <a href="#P4'">P4</a>'</td>
+</tr>
+<tr>
+<td valign="top" width="6%">2)</td>
+<td>what to insert between two repetitions in order to transform <a href="#P3'">P3'</a> ∧ <a href="#P4'">P4'</a> into <a href="#P3">P3</a> ∧ <a href="#P4">P4</a></td>
+</tr>
+<tr>
+<td valign="top" width="6%">3)</td>
+<td>what to add to the second repetition for the maintenance of <a href="#P3">P3</a> ∧ <a href="#P4">P4</a></td>
+</tr>
+</table>
+<br>
+<u>Investigation 1</u>. In the case <i>p</i> <u>mod</u> 8 = 3, the standard concatenation ends on a dubious stretch of length <i>b</i> which must be made trusty before it can be combined with the preceding stretch and the following element into a new dubious rightmost stretch. This can be achieved by applying sift to <i>m</i>(<i>r</i>)&nbsp;. Since no new trusty stretch is added to the standard concatenation, <a href="#P4'">P4'</a> is maintained without further measures.
+<p>In the case <i>p</i> <u>mod</u> 4 = 1, the standard concatenation ends on a dubious stretch of length <i>b</i>, which in this step becomes the last but one stretch of the standard concatenation and, hence, must be made trusty. In the case <i>q</i> + <i>c</i> &lt; <i>N</i>, it suffices to apply sift to <i>m</i>(<i>r</i>) as before, since this stretch will later disappear from the standard concatenation. In the case <i>q</i> + <i>c</i> ≥ <i>N</i>, however, just applying sift to <i>m</i>(<i>r</i> ) might violate <a href="#P4'">P4'</a> since this stretch of length <i>b</i> also occurs in the standard concatenation of length <i>N</i>. Making a dubious stretch trusty and including its root in the sequence of ascending roots is achieved by applying "trinkle" to <i>m</i>(<i>r</i>). (As we shall see later, trinkle is like sift, be it for a partly ternary tree.) (End of Investigation 1.)</p>
+<u>Investigation 2</u>. The reader may prove that it suffices to apply trinkle to <i>m</i>(<i>r</i>) . (End of Investigation 2.)<br>
+<br>
+<u>Investigation 3</u>. In the case <i>b</i> = 1, the standard concatenation loses its last stretch, and <a href="#P3">P3</a> ∧ <a href="#P4">P4</a> is maintained without further measures.
+<p>In the case <i>b</i> ≥ 3, the rightmost stretch of length <i>b</i> is replaced by two trusty ones; hence <a href="#P3">P3</a> is maintained. To restore <a href="#P4">P4</a> it would suffice to apply trinkle first to the root of the first new stretch and then to the root of the second new stretch, but this would fail to exploit the fact that the new stretches are already trusty to start with. This is exploited by applying "semitrinkle" in order to those roots. (End of Investigation 3.)</p>
+<a name="Remark4"></a><u>Remark 4</u>. From a logical point of view it would be perfectly permissible to replace a call on trinkle by a call on sift, which would make the dubious stretch trusty, followed by a call on semitrinkle, which would include its root in the sequence of ascending roots. After this substitution, each iteration of the first repetition starts with a sift and the whole first repetition is followed by a sift. Since initially the last (and only) stretch is trusty, we can transform the program by removing all calls on sift and inserting a single call on sift at the end of the repeatable statement of the first repetition. This is essentially the program transformation that would be required if we wished to replace <a href="#P3'">P3'</a> by <a href="#P3">P3</a>. (The collection of trusty stretches being extended, <a href="#P4'">P4'</a> would require reformulation.)
+<p>The version resulting from the above transformation is, however, rejected because a succession of sift and semitrinkle requires in general more comparisons and swaps than trinkle, as will become apparent later. This can be remedied by replacing the single call on sift by guarded calls on either sift or the combination in the form of trinkle (and removal of the calls on semitrinkle from the first repetition, which have now been catered for). <a href="#P3">P3</a> would still be valid, <a href="#P4'">P4'</a> would have to be changed. This version, however, is rejected since it would lead to a duplication of the evaluation of the guards <i>p&nbsp;</i><u>mod</u><i>&nbsp;</i>8&nbsp;=&nbsp;3, etc ... (End of Remark 4.)</p>
+<p>In order to enable the reader to check the code in which calls on sift, trinkle, and semitrinkle have been inserted, we give their calling conventions. (These conventions are not to be regarded as a recommendation: they have been chosen because in this publication I did not want to make any assumptions about a parameter mechanism.)</p>
+<p>Routine sift is applied to the root <i>m</i>(<i>r</i>1) of a stretch of length <i>b</i>1, of which <i>c</i>1 is the companion. Routine trinkle is applied to the root <i>m</i>(<i>r</i>1) of the last stretch of the standard concatenation represented by the triple (<i>a</i>, <i>b</i>, <i>c</i>): this representation need not be normalized. Routine semitrinkle is applied to the root <i>m</i>(<i>r</i>) of a stretch of length <i>c</i> which is preceded by the nonempty standard concatenation represented by the triple (<i>p</i>, <i>b</i>, <i>c</i>): again the representation is not necessarily normalized.</p>
+<p>Note that "<i>p</i> := (<i>p</i> − 1)/2; <i>p</i> := (<i>p</i> − 1)/2; <i>p</i> := <i>p</i> + 1" has been simplified to "<i>p</i> := (<i>p</i> + 1)/4" and that "<i>r</i> := <i>r</i> − <i>b</i> + <i>c</i>; down; <i>r</i> := <i>r</i> + <i>c</i> decreases <i>r</i> by 1.</p>
+smoorthsort:<br>
+|[ <i>q</i>, <i>r</i>, <i>p</i>, <i>b</i>, <i>c</i>, <i>r</i>1<i>,b</i>1<i>,c</i>1: int<br>
+&nbsp;&nbsp;; <i>q</i> := 1; <i>r</i> := 0; <i>p</i>, <i>b</i>, c := 1, 1, 1&nbsp;&nbsp;&nbsp;{ invariant P3' ∧ P4' }<sub><br>
+&nbsp;&nbsp;</sub>; <u>do</u> <i>q</i> ≠ <i>N</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→&nbsp;&nbsp;<i>r</i>1 := <i>r<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>; <u>if</u> <i>p</i> <u>mod</u> 8 = 3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sub>→ &nbsp;</sub><i>b</i>1,<i>c</i>1 := <i>b</i>, <i>c</i> ; sift; <i>p</i> := (<i>p</i> + 1)/4; up; up<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]&nbsp;&nbsp;<i>p</i> <u>mod</u> 4 = 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→&nbsp;<u>if</u> <i>q</i> + <i>c</i> &lt; <i>N</i> → <i>b</i>1<i>,c</i>1 := <i>b</i>, <i>c</i>; sift<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [] <i>q</i> + c ≥ <i>N</i> → trinkle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi</u>; down; <i>p</i> := 2 * <i>p</i><br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>; <u>do</u> <i>b</i> ≠1 → down; <i>p</i> := 2 * <i>p</i> <u>od</u>; <i>p</i> := <i>p</i> + 1<br>
+<i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>&nbsp; <u>fi</u>; <i>q</i> := <i>q</i> + 1; <i>r</i> := <i>r</i> +1<br>
+<sub>&nbsp;&nbsp;</sub>&nbsp; <u>od</u> { P3' ∧ P4' }; <i>r</i>1 := <i>r</i>; trinkle { invariant: P3 ∧ P4 }<br>
+&nbsp;&nbsp;; <u>do</u> <i>q</i> → 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <i>q</i> := <i>q</i> − 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>b</i> =1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <i>r</i> := <i>r</i> − 1; <i>p</i> := <i>p</i> − 1; <u>do</u> even(<i>p</i>) → <i>p</i> := <i>p</i>/2; up <u>od</u><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>b</i> ≥ 3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sub>→</sub> <i>p</i> := <i>p</i> − 1; <i>r</i> :=<i>r</i> − <i>b</i> + <i>c</i><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>p</i> =0 → skip ⌷ <i>p</i> &gt; 0 → semitrinkle <u>fi</u><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; down ; <i>p</i> := 2*<i>p</i> + 1; <i>r</i> := <i>r</i> + <i>c</i> ; semitrinkle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; down ; <i>p</i> := 2*<i>p</i> + 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi<br></u> &nbsp; <u>od<br></u> ]|<br>
+<br>
+up1:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>b</i>1<i>,c</i>1 := <i>b</i>1+ <i>c</i>1+1<i>, b</i>1<br>
+down1:&nbsp;&nbsp;&nbsp;<i>b</i>1<i>,c</i>1 := <i>c</i>1<i>,&nbsp;b</i>1 − <i>c1</i> − 1<br>
+<br>
+sift:<br>
+<u>do</u> b1 ≤ 3→<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|[ <i>r</i>2: int; <i>r</i>2 := <i>r</i>1 − <i>b</i>1 + <i>c</i>1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>m</i>(<i>r</i>2) ≥ <i>m</i>(<i>r</i>1 − 1) → skip<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>m</i>(<i>r</i>2) ≤ <i>m</i>(<i>r</i>1 − 1) → <i>r</i>2 := <i>r</i>1 − 1; down1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi<br></u> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ; <u>if</u> <i>m</i>(<i>r</i>1) ≤ <i>m</i>(<i>r</i>2) → <i>b</i>1 := 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>m</i>(<i>r</i>1) &lt; <i>m</i>(<i>r</i>2) → <i>m</i> : swap(<i>r</i>1<i>,r</i>2); <i>r</i>1 := <i>r</i>2; down1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi<br></u> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]|<br>
+<u>od<br>
+<br></u> semitrinkle:<br>
+&nbsp;&nbsp;&nbsp;<i>r</i>1 := <i>r</i> − <i>c<br>
+&nbsp;</i>; <u>if</u> <i>m</i>(<i>r</i>1) ≤ <i>m</i>(<i>r</i>) → skip<br>
+&nbsp;&nbsp;&nbsp;[] <i>m</i>(<i>r</i>1) &gt; <i>m</i>(<i>r</i>) → m : swap(<i>r</i>, <i>r</i>1); trinkle<br>
+&nbsp;&nbsp;&nbsp;<u>fi</u>
+<p>Trinkle is very similar to sift when we regard each stretch root as the stepson of the root of the stretch to its right. Applied to a root without larger sons, trinkle is a skip; otherwise the root is swapped with its largest son, etc. The trouble with the code is that all sorts of sons may be missing. In the following, trinkle is eventually reduced to a sift, viz. when the stepson relation is no longer of interest.</p>
+trinkle:<br>
+|[&nbsp;<i>p</i>1: int; <i>p</i>1,<i>b</i>1,<i>c</i>1 := <i>p</i>, <i>b</i>, c<br>
+&nbsp;&nbsp;; <u>do</u> <i>p</i>1 &gt; 0→<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|[&nbsp;&nbsp;<i>r</i>3: int; <u>do</u> even(<i>p</i>1) → <i>p</i>1 := <i>p</i>1/2; up1 <u>od</u>; <i>r</i>3 := <i>r</i>1 − <i>b</i>1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>p</i>1=1 <u>cor</u> <i>m</i>(<i>r</i>3) ≤ <i>m</i>(<i>r</i>1) → <i>p</i>1 := 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>p</i>1 &gt; 1 <u>cand</u> <i>m</i>(<i>r</i>3) &gt; <i>m</i>(<i>r</i>1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <i>p</i>1:= <i>p</i>1 − 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>b</i>1=1 → <i>m</i>:swap(<i>r</i>1<i>,r</i>3); <i>r</i>1 := <i>r</i>3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>b</i>1 ≥ 3 →<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|[ <i>r</i>2: int; <i>r</i>2 := <i>r</i>1 − <i>b</i>1+ <i>c</i>1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>m</i>(<i>r</i>2) ≥ <i>m</i>(<i>r</i>1 − 1) → skip<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[] <i>m</i>(<i>r</i>2) <sub>≤</sub> <i>m</i>(<i>r</i>1 − 1)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <i>r</i>2 := <i>r</i>1 − 1; down1; <i>p</i>1 := 2 * <i>p</i>1;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi</u><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;; <u>if</u> <i>m</i>(<i>r</i>3) ≥ <i>m</i>(<i>r</i>2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ <i>m</i>:swap(<i>r</i>1<i>,r</i>3); <i>r</i>1 := <i>r</i>3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[]&nbsp;<i>m</i>(<i>r</i>3) ≤ <i>m</i>(<i>r</i>2)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<sub>→</sub> <i>m</i>:swap(<i>r</i>1<i>,r</i>2); <i>r</i>1 := <i>r</i>2; down1; <i>p</i>1 := 0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi<br></u> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]|<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <u>fi</u><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;]|<br>
+&nbsp;&nbsp;&nbsp; <u>od<br></u> ]| ; sift
+<p>And this concludes the code, in which I have abstained from implementation dependent optimizations.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<u>In retrospect</u>
+<p>While heapsort prunes the tree leaf by leaf, smoothsort prunes the tree at the root, and immediately one of heapsort’s charms is lost: while the tree in heapsort remains beautifully balanced, the tree in smoothsort can get very skew indeed. So why bother about smoothsort at all? Well, I wanted to design a sorting algorithm of order <i>N</i> in the best case, of order <i>N∙</i>log <i>N</i> in the worst case, and with a smooth transition between the two (hence its name).</p>
+<p>This is also the answer to the question why I introduced <a href="#P4">P4</a>. By dropping <a href="#P4">P4</a> one can dispense with trinkle and the code becomes much simpler. The price to be paid is a search for the maximum stretch root in order to establish that <i>m</i>(<i>r</i>) is a maximum element of the unsorted prefix. Though such a simpler sorting algorithm is quite defensible, I rejected the option because it is never of order <i>N</i>.</p>
+<p>One can also raise the question why I have not chosen as available stretch lengths: <i>...</i>&nbsp;63&nbsp;&nbsp;31&nbsp;&nbsp;15&nbsp;&nbsp;7&nbsp;&nbsp;3&nbsp;&nbsp;1, which seems attractive since each stretch can then be viewed as the postorder traversal of a balanced binary tree. In addition, the recurrence relation would be simpler. But I know why I chose the Leonardo numbers: with balanced binary trees the average number of stretches is 1<i>.</i>2559&nbsp;&nbsp;{= ¼(5+<i>√</i>5)(<sup>2</sup>log(1+√5)−1)} times the average number of stretches with the Leonardo numbers. (I do not present this ratio as a compelling argument).</p>
+<p>It is possible that others have thought of this algorithm, but have rejected it for valid reasons, as yet unknown to me. I could not find it in the literature and it is not mentioned in [<a href="#Ref3">3</a>], a recent article that compares five well-known sorting algorithms when fed with initially nearly sorted sequences. (That article compares Straight Insertion Sort, Shellsort, Straight Merge Sort, Quicksort, and Heapsort.) If it has not been discovered earlier, I would like to know the reason, because all its ingredients are well-known since the discovery of the heapsort in 1964.</p>
+<p>Besides the possible interest in smoothsort I had another reason for developing it to the degree I did and for writing the above. (It took me three weeks, but I consider them well-spent.) The reason was that I knew beforehand that in trying to present smoothsort in a way as disentangled as possible I would encounter considerable difficulties. I hope they have been surmounted sufficiently well.</p>
+<u>Acknowledgements</u>
+<p>I am greatly indebted to C.S.Scholten and to all the members of the Tuesday Afternoon Club, with whom I had the privilege of discussing the algorithm, its coding, and its presentation. They have helped me clarifying my own thoughts and have suggested several significant simplifications. I am furthermore indebted to D.E.Knuth and W.M.Turski for their comments on the previous version of the text, and to the partcipants of the Marktoberdorf Summer School, 1981, on whom I could try out my presentation.</p>
+</div>
+</div>
+<div id="content" align="left">
+<div class="Sect" align="left">
+<div class="Sect" align="left"><u>References<br>
+<br></u>
+<table width="100%" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top" width="8%"><a name="Ref0"></a>[0]</td>
+<td valign="top">Williams. J.W.J., Algorithm 232 HEAPSORT C.A.C.M, 7, 6 (June 1964), pp. 347−348<br>
+&nbsp;</td>
+</tr>
+<tr>
+<td valign="top" width="8%"><a name="Ref1"></a>[1]</td>
+<td valign="top">Floyd, Robert W., Algorithm 242 TREESORT 3 C.A.C.M., 7, 12 (Dec. 1964), p. 701<br>
+&nbsp;</td>
+</tr>
+<tr>
+<td valign="top" width="8%"><a name="Ref2"></a>[2]</td>
+<td valign="top">Bauer, F.L. and Broy, M. (Ed.), Program Construcion, Lecture Notes in Computer Science 69, Berlin, Heidelberg, New York, Springer Verlag, 1979, pp. 54 − 57<br>
+&nbsp;</td>
+</tr>
+<tr>
+<td valign="top" width="8%"><a name="Ref3"></a>[3]</td>
+<td valign="top">Cook, Curtis R. and Kim, Do Jin, Best Sorting Algorithms for Nearly Sorted Lists, C.A.C.M., 23, 11 (Nov. 1980) pp. 620 − 624</td>
+</tr>
+</table>
+<br>
+<br>
+<table width="100%" align="center" border="0" cellspacing="0" cellpadding="2">
+<tr height="16">
+<td align="right" width="271" valign="top" height="16">
+<div align="left">Plataanstraat 5</div>
+</td>
+<td align="left" width="325" valign="top" height="16">16 August 1981</td>
+</tr>
+<tr>
+<td align="right" width="271" valign="top" height="19">
+<div align="left">5671 AL NUENEN</div>
+</td>
+<td align="left" width="325" valign="top" height="19">prof.dr Edsger W. Dijkstra</td>
+</tr>
+<tr>
+<td align="right" width="271" valign="middle" height="16">
+<div align="left">The Netherlands</div>
+</td>
+<td align="left" width="325" valign="middle" height="16">Burroughs Research Fellow</td>
+</tr>
+</table>
+<br></div>
+</div>
+</div>
+<div id="content">
+<hr>
+<div><font size="-1">transcribed by Frederik Hertzum<br>
+revised Sat, 28 Jul 2007</font></div>
+</div>
 </div>
   <script>
 $('.body').tweetSelection({

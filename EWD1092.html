@@ -23,117 +23,96 @@
   </div>
   <h1>Two ways of determining an expectation value</h1>
   <div class='body'>
-				<p>A <em>trial succeeds</em> with probability <var>p</var> and <em>fails</em> with probability <var>q</var>; <span class="nowrap"><var>p</var> + <var>q</var> = 1</span>, and we confine our attention to <span class="nowrap">0 &lt; <var>p</var> &lt; 1</span> (i.e. ignore the extreme cases in which a trial certainly succeeds or certainly fails).</p>
-				<p>An <em>experiment</em> is a sequence of trials up to and including the first trial that succeeds. The number of trials in an experiment is called the <em>length</em> of that experiment. We are asked to determine the <em>expectation value</em> of the experiment length, i.e. the average length, each length being weighted with the probability of the corresponding experiment.</p>
-
-				<p>In the following, <var>k</var> ranges over the positive integers. Since an experiment of length <var>k</var> consists of <span class="nowrap"><var>k</var>&ndash;1</span> failing trials, followed by 1 trial that succeeds, and the successive trials are independent, probability theory tells us that</p>
-				<table cellspacing="0" cellpadding="0" border="0">
-					<tr>
-						<td class="spac" valign="bottom">(0)</td>
-						<td>the probability of an experiment of length <var>k</var> equals <var>q</var><sup><var>k</var><span class="nowrap">&ndash;</span>1</sup><var>p</var>&nbsp;&nbsp;.</td>
-					</tr>
-				</table>
-
-				<p>Hence, the expectation value <var>x</var> we were asked to determine is given by</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
-					<tr>
-						<td class="spac" valign="bottom">(1)</td>
-						<td><var>x</var> = (<var>p</var> + 2<var>qp</var> + 3<var>q</var><var>p</var> + .... )</td>
-					</tr>
-				</table>
-				<p class="noindent">and we are left with the duty to sum this series. To this end we observe</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
-					<tr>
-						<td class="spac" valign="bottom"></td>
-						<td><var>x</var> =&nbsp;</td>
-						<td>(1 + 2</td>
-						<td><var>q</var> + 3<var>q</var> + .... ) <var>p</var></td>
-					</tr>
-					<tr>
-						<td class="spac" valign="bottom" align="right"><var>q</var></td>
-						<td><var>x</var> =</td>
-						<td align="right">(</td>
-						<td><var>q</var> + 2<var>q</var> + 3<var>q</var> + .... ) <var>p</var></td>
-					</tr>
-				</table>
-
-				<p class="noindent">and find by subtracting</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
-					<tr>
-						<td width="48" valign="bottom" class="spac">(2)</td>
-						<td width="300">(1<span class="nowrap">&ndash;</span><var>q</var>)<var>x</var> = (1 + <var>q</var> + <var>q</var> + .... ) <var>p</var> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .</td>
-					</tr>
-				</table>
-
-				<p>There are now three ways in which we can proceed.<br />
-					&#x2022; &nbsp; we know the sum of the geometric series, i.e. <span class="nowrap">(1+<var>q</var>+<var>q</var>+....) = 1/(1&ndash;<var>q</var>) &nbsp; &nbsp;.</span><br />
-					&#x2022; &nbsp; we don&rsquo;t know the above, and repeat the trick above, observing for <var>y</var> given by</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
-					<tr>
-						<td class="spac" valign="bottom"></td>
-						<td><var>y</var> =&nbsp;</td>
-						<td>(1 +&nbsp;</td>
-						<td><var>q</var> + <var>q</var> + .... )</td>
-					</tr>
-					<tr>
-						<td class="spac" valign="bottom" align="right"><var>q</var></td>
-						<td><var>y</var> =</td>
-						<td align="right">(</td>
-						<td><var>q</var> + <var>q</var> + <var>q</var> + .... )</td>
-					</tr>
-				</table>
-
-				<p class="noindent">by subtracting the two</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
-					<tr>
-						<td class="spac" valign="bottom"></td>
-						<td>(1<span class="nowrap">&ndash;</span><var>q</var>)<var>y</var> = 1</td>
-					</tr>
-				</table>
-
-				<p class="noindent">
-					&#x2022; &nbsp; we interpret the right-hand side of (2):</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
-					<tr>
-						<td class="spac" valign="bottom"></td>
-						<td><var>p</var> + <var>q</var><var>p</var> + <var>q</var><var>p</var> + ....</td>
-					</tr>
-				</table>
-
-				<p class="noindent">in view of (0) as the probability that an experiment terminates. Because 0&nbsp;&lt;&nbsp;<var>p</var>, i.e. <var>q</var>&nbsp;&lt;&nbsp;1, the probability of the experiment not terminating equals 0, hence the right-hand side of (2) equals 1.</p>
-				<p>Because of 1&ndash;<var>q</var> = <var>p</var>, we find in all three cases <var>x </var>= 1/<var>p</var>.</p>
-				<p>This result is so simple that there must be a simpler way to derive it. There is. The equation</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
-					<tr>
-						<td class="spac" valign="bottom"></td>
-						<td><var>x</var> = 1 + <var>q</var><var>x</var></td>
-					</tr>
-				</table>
-
-				<p class="noindent">follows because an experiment consists of 1 trial to begin with, followed with the probability <var>q</var> by a new experiment.</p>
-				<p>The moral of the story is that there are advantages in being a computing scientist, more precisely in remembering at the right moment that potentially infinite objects are most appropriately given recursive definitions. (Remember SASL&rsquo;s definition of an infinite sequence ONES of ones: ONES&nbsp;=&nbsp;1:&nbsp;ONES&nbsp;.)</p>
-				<p align="right" style="margin-right: 5em;">Austin, 4 February 1991</p>
-				<p class="noindent">
-					prof.dr. Edsger W.Dijkstra<br />
-					Department of Computer Sciences<br />
-					The University of Texas at Austin<br />
-					Austin, TX 78712-1188<br />
-					USA<br />
-				</p>
-			</div>
-			<div>
-        <br/>
-      </div>
-		</div>
-		<hr />
-		<div id="footer">
-         transcribed by Corrado Cantelmi<br />
-          revised 
-          <!-- #BeginDate format:En2 -->24-Dec-2011<!-- #EndDate -->
-		</div>
-	</body>
-
-</html>
+<p>A <em>trial succeeds</em> with probability <var>p</var> and <em>fails</em> with probability <var>q</var>; <span class="nowrap"><var>p</var> + <var>q</var> = 1</span>, and we confine our attention to <span class="nowrap">0 &lt; <var>p</var> &lt; 1</span> (i.e. ignore the extreme cases in which a trial certainly succeeds or certainly fails).</p>
+<p>An <em>experiment</em> is a sequence of trials up to and including the first trial that succeeds. The number of trials in an experiment is called the <em>length</em> of that experiment. We are asked to determine the <em>expectation value</em> of the experiment length, i.e. the average length, each length being weighted with the probability of the corresponding experiment.</p>
+<p>In the following, <var>k</var> ranges over the positive integers. Since an experiment of length <var>k</var> consists of <span class="nowrap"><var>k</var>–1</span> failing trials, followed by 1 trial that succeeds, and the successive trials are independent, probability theory tells us that</p>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr>
+<td class="spac" valign="bottom">(0)</td>
+<td>the probability of an experiment of length <var>k</var> equals <var>q</var><sup><var>k</var><span class="nowrap">–</span>1</sup><var>p</var>&nbsp;&nbsp;.</td>
+</tr>
+</table>
+<p>Hence, the expectation value <var>x</var> we were asked to determine is given by</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
+<tr>
+<td class="spac" valign="bottom">(1)</td>
+<td><var>x</var> = (<var>p</var> + 2<var>qp</var> + 3<var>q</var><var>p</var> + .... )</td>
+</tr>
+</table>
+<p class="noindent">and we are left with the duty to sum this series. To this end we observe</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
+<tr>
+<td class="spac" valign="bottom"></td>
+<td><var>x</var> =&nbsp;</td>
+<td>(1 + 2</td>
+<td><var>q</var> + 3<var>q</var> + .... ) <var>p</var></td>
+</tr>
+<tr>
+<td class="spac" valign="bottom" align="right"><var>q</var></td>
+<td><var>x</var> =</td>
+<td align="right">(</td>
+<td><var>q</var> + 2<var>q</var> + 3<var>q</var> + .... ) <var>p</var></td>
+</tr>
+</table>
+<p class="noindent">and find by subtracting</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
+<tr>
+<td width="48" valign="bottom" class="spac">(2)</td>
+<td width="300">(1<span class="nowrap">–</span><var>q</var>)<var>x</var> = (1 + <var>q</var> + <var>q</var> + .... ) <var>p</var> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; .</td>
+</tr>
+</table>
+<p>There are now three ways in which we can proceed.<br>
+• &nbsp; we know the sum of the geometric series, i.e. <span class="nowrap">(1+<var>q</var>+<var>q</var>+....) = 1/(1–<var>q</var>) &nbsp; &nbsp;.</span><br>
+• &nbsp; we don’t know the above, and repeat the trick above, observing for <var>y</var> given by</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
+<tr>
+<td class="spac" valign="bottom"></td>
+<td><var>y</var> =&nbsp;</td>
+<td>(1 +&nbsp;</td>
+<td><var>q</var> + <var>q</var> + .... )</td>
+</tr>
+<tr>
+<td class="spac" valign="bottom" align="right"><var>q</var></td>
+<td><var>y</var> =</td>
+<td align="right">(</td>
+<td><var>q</var> + <var>q</var> + <var>q</var> + .... )</td>
+</tr>
+</table>
+<p class="noindent">by subtracting the two</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
+<tr>
+<td class="spac" valign="bottom"></td>
+<td>(1<span class="nowrap">–</span><var>q</var>)<var>y</var> = 1</td>
+</tr>
+</table>
+<p class="noindent">• &nbsp; we interpret the right-hand side of (2):</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
+<tr>
+<td class="spac" valign="bottom"></td>
+<td><var>p</var> + <var>q</var><var>p</var> + <var>q</var><var>p</var> + ....</td>
+</tr>
+</table>
+<p class="noindent">in view of (0) as the probability that an experiment terminates. Because 0&nbsp;&lt;&nbsp;<var>p</var>, i.e. <var>q</var>&nbsp;&lt;&nbsp;1, the probability of the experiment not terminating equals 0, hence the right-hand side of (2) equals 1.</p>
+<p>Because of 1–<var>q</var> = <var>p</var>, we find in all three cases <var>x</var> = 1/<var>p</var>.</p>
+<p>This result is so simple that there must be a simpler way to derive it. There is. The equation</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 0.5em;">
+<tr>
+<td class="spac" valign="bottom"></td>
+<td><var>x</var> = 1 + <var>q</var><var>x</var></td>
+</tr>
+</table>
+<p class="noindent">follows because an experiment consists of 1 trial to begin with, followed with the probability <var>q</var> by a new experiment.</p>
+<p>The moral of the story is that there are advantages in being a computing scientist, more precisely in remembering at the right moment that potentially infinite objects are most appropriately given recursive definitions. (Remember SASL’s definition of an infinite sequence ONES of ones: ONES&nbsp;=&nbsp;1:&nbsp;ONES&nbsp;.)</p>
+<p align="right" style="margin-right: 5em;">Austin, 4 February 1991</p>
+<p class="noindent">prof.dr. Edsger W.Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin<br>
+Austin, TX 78712-1188<br>
+USA<br></p>
+<div><br></div>
+<hr>
+<div id="footer">transcribed by Corrado Cantelmi<br>
+revised <!-- #BeginDate format:En2 -->24-Dec-2011<!-- #EndDate --></div>
 </div>
   <script>
 $('.body').tweetSelection({

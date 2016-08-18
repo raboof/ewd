@@ -23,65 +23,33 @@
   </div>
   <h1>"Predicate Calculus and Program Semantics", fall 1989</h1>
   <div class='body'>
-				<div align="left">
-					<p class="noindent"><u>&quot;Predicate Calculus and Program Semantics&quot;, fall 1989</u></p>
-					<p>Our position is &#151;and has now been for a long time&#151; that it does not suffice for a programmer to deliver a program text with the message &quot;here is my program and I hope that people will like it,&quot; in very much the same way as a composer delivers his score with the message &quot;here is my symphony and I hope people will like it&quot;. There is more to programming.</p>
-					<p>It does not suffice either if a programmer just says &quot;here is my program and that is what it can do for you&quot; if the latter claim has no convincing support and is therefore no more than a hope.</p>
-					<p>It is our position that a solid product consists of a triple: a program, a functional specification, and a proof that the program meets the functional specification. Design disciplines for such triples exist, but are <em>not</em> the topic of this course. (In the case of imperative programs, it is the topic of one of my courses.) Such proofs are based on laws about the programming language in question. This course is about such laws in the special case of imperative programming; for the sake of clarity we shall confine ourselves to what seem about the simplest programming languages that are still interesting.</p>
-					<p>Using &quot;Hoare triples&quot; to pose them, examples of such laws would be answer to such questions as</p>
-					<p class="noindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is</p>
-					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<var>P </var>} <var>S</var> {<var>Q</var> &#x2227; <var>R </var>}</p>
-					<p>the same as</p>
-					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<var>P </var>} <var>S</var> {<var>Q </var>} &#x2227; {<var>P </var>} <var>S</var> {<var>R </var>} ?</p>
-					<p class="noindent">And, if so, does the same hold for conjunction's generalization the universal quantification, i.e. is &#151;with dummy <var>x</var> over some range&#151;</p>
-					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<var>P </var>} <var>S</var> {(&#x2200;<var>x</var>:: <var>Q</var>.<var>x</var>)}</p>
-					<p>the same as</p>
-					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&#x2200;<var>x</var>:: {<var>P </var>} <var>S</var> {<var>Q</var>.<var>x</var>}) ?</p>
-					<p class="noindent">Because, in reasoning about programs, we rely on such laws all the time, one of our purposes is to put them on a firm footing. (For instance, the laws that Hoare originally postulated as inference rules will either be subsumed in the predicate calculus, or appear as theorems in our theory.)</p>
-					<p>If past experience is any guidance, the theory and the way in which it is developed will be most unfamiliar to most of you. It has, however, a major advantage over all alternatives I am aware of: it is so simple that almost all of its proofs need not be &quot;discovered&quot; by a spark of genius or a flash of insight but can be designed quite systematically. All of this convenience could only be reached by adhering all through the theory to a strict calculational proof format, and a major secondary purpose of this course has become to familiarize the student with the benefits that can be derived from a proper formalization, rendered in a notation that is geared to our manipulative needs. Whenever possible I shall draw attention to the conceptual and notational choices that made these simplifications possible. The core challenge of computing science has been summarized as &quot;how not to make a mess of it&quot;; it could very well share this challenge with formal mathematics.</p>
-					<div align="right">
-						Austin, 4 September 1989.</div>
-					<div align="left">
-						<p class="noindent">prof. dr. Edsger W. Dijkstra<br>
-							Department of Computer Sciences<br>
-							The University of Texas at Austin<br>
-							Austin, TX 78712&#150;1188<br>
-							USA</p>
-						<p><u></u></p>
-					</div>
-					<hr>
-					<font size="-1">transcribed by Hasnain Mujtaba<br>
-						revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="93">Mon, 28 Jan 2008</csobj> </font>
-					<p></p>
-				</div>
-				<p></p>
-			
-			
-			
-			
-			
-		
-			
-		
-			
-				
-			
-			
-			
-			
-			
-		
-			
-		
-			
-				
-			
-	</body>
-
-</html>
-
-
-
+<div align="left">
+<p class="noindent"><u>"Predicate Calculus and Program Semantics", fall 1989</u></p>
+<p>Our position is —and has now been for a long time— that it does not suffice for a programmer to deliver a program text with the message "here is my program and I hope that people will like it," in very much the same way as a composer delivers his score with the message "here is my symphony and I hope people will like it". There is more to programming.</p>
+<p>It does not suffice either if a programmer just says "here is my program and that is what it can do for you" if the latter claim has no convincing support and is therefore no more than a hope.</p>
+<p>It is our position that a solid product consists of a triple: a program, a functional specification, and a proof that the program meets the functional specification. Design disciplines for such triples exist, but are <em>not</em> the topic of this course. (In the case of imperative programs, it is the topic of one of my courses.) Such proofs are based on laws about the programming language in question. This course is about such laws in the special case of imperative programming; for the sake of clarity we shall confine ourselves to what seem about the simplest programming languages that are still interesting.</p>
+<p>Using "Hoare triples" to pose them, examples of such laws would be answer to such questions as</p>
+<p class="noindent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<var>P</var> } <var>S</var> {<var>Q</var> ∧ <var>R</var> }</p>
+<p>the same as</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<var>P</var> } <var>S</var> {<var>Q</var> } ∧ {<var>P</var> } <var>S</var> {<var>R</var> } ?</p>
+<p class="noindent">And, if so, does the same hold for conjunction's generalization the universal quantification, i.e. is —with dummy <var>x</var> over some range—</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<var>P</var> } <var>S</var> {(∀<var>x</var>:: <var>Q</var>.<var>x</var>)}</p>
+<p>the same as</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(∀<var>x</var>:: {<var>P</var> } <var>S</var> {<var>Q</var>.<var>x</var>}) ?</p>
+<p class="noindent">Because, in reasoning about programs, we rely on such laws all the time, one of our purposes is to put them on a firm footing. (For instance, the laws that Hoare originally postulated as inference rules will either be subsumed in the predicate calculus, or appear as theorems in our theory.)</p>
+<p>If past experience is any guidance, the theory and the way in which it is developed will be most unfamiliar to most of you. It has, however, a major advantage over all alternatives I am aware of: it is so simple that almost all of its proofs need not be "discovered" by a spark of genius or a flash of insight but can be designed quite systematically. All of this convenience could only be reached by adhering all through the theory to a strict calculational proof format, and a major secondary purpose of this course has become to familiarize the student with the benefits that can be derived from a proper formalization, rendered in a notation that is geared to our manipulative needs. Whenever possible I shall draw attention to the conceptual and notational choices that made these simplifications possible. The core challenge of computing science has been summarized as "how not to make a mess of it"; it could very well share this challenge with formal mathematics.</p>
+<div align="right">Austin, 4 September 1989.</div>
+<div align="left">
+<p class="noindent">prof. dr. Edsger W. Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin<br>
+Austin, TX 78712–1188<br>
+USA</p>
+</div>
+<hr>
+<font size="-1">transcribed by Hasnain Mujtaba<br>
+revised Mon, 28 Jan 2008</font></div>
 </div>
   <script>
 $('.body').tweetSelection({

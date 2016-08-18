@@ -23,117 +23,89 @@
   </div>
   <h1>A prime is in at most 1 way the sum of 2 squares</h1>
   <div class='body'>
-				<p><a href="https://www.cs.utexas.edu/~EWD/ewd11xx/EWD1154.PDF" title="Link to the PDF version of EWD1154">EWD1154</a> dealt with D.Zagier&rsquo;s proof that a prime of the form 4<var>k</var>+1 is the sum of 2 squares. In fact, such a prime is in only 1 way the sum of 2 squares. In this note we show this by proving that if an odd <var>n</var> is the sum of 2 different pairs of squares, then that <var>n</var> is not prime.</p>
-				<p>Let an odd <var>n</var> be the sum of 2 squares; then the one square is odd, the other is even: the squares are of different parity. Let <var>n</var> be the sum of 2 squares in 2 ways; then there exist <em>positive</em> <var>a</var>, <var>b</var>, <var>c</var>, <var>d</var> such that</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">(0)</td>
-						<td>(<var>a</var> + <var>b</var>) + (<var>c</var> &ndash; <var>d</var>) = <var>n</var></td>
-					</tr>
-					<tr>
-						<td class="spac"></td>
-						<td>(<var>a</var> &ndash; <var>b</var>) + (<var>c</var> + <var>d</var>) = <var>n</var></td>
-					</tr>
-				</table>
-
-				<p class="noindent">(Here <var>a</var> is the average of the numbers of the one parity, <var>c</var> is the average of those of the other parity. Because we are considering distinct square decompositions, also <var>b</var> and <var>d</var> can be chosen positive.)</p>
-				<p>Eliminating <var>n</var> from (0) by equating the left-hand sides, we deduce after simplification</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">(1)</td>
-						<td><var>ab</var> = <var>cd</var> &nbsp; &nbsp; &nbsp; ,</td>
-					</tr>
-				</table>
-
-				<p class="noindent">from which we deduce the existence of <em>positive</em> <var>r</var>, <var>s</var>, <var>t</var>, <var>v</var> such that</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">(2)</td>
-						<td><var>a</var> = <var>s</var><var>v</var></td>
-					</tr>
-					<tr>
-						<td class="spac"></td>
-						<td><var>b</var> = <var>r</var><var>t</var></td>
-					</tr>
-					<tr>
-						<td class="spac"></td>
-						<td><var>c</var> = <var>s</var><var>t</var></td>
-					</tr>
-					<tr>
-						<td class="spac"></td>
-						<td><var>d</var> = <var>r</var><var>v</var></td>
-					</tr>
-				</table>
-
-				<p class="noindent">(Consider
-					&ldquo;<var>s</var> := <var>a</var> <b>gcd</b> <var>c</var>; &nbsp;
-					 <var>v</var> := <var>a/s</var>; &nbsp;
-					 <var>t</var> := <var>c/s</var>; &nbsp;
-					 <var>r</var> := <var>b/t</var>&rdquo;.)</p>
-
-				<p>Now we observe<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; <var>n</var><br />
-					= &nbsp; &nbsp; &nbsp; &nbsp; {(0)}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; (<var>a</var> + <var>b</var>) + (<var>c</var> &ndash; <var>d</var>)<br />
-					= &nbsp; &nbsp; &nbsp; &nbsp; {(1)}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; <var>a</var> + <var>b</var> + <var>c</var> + <var>d</var><br />
-					= &nbsp; &nbsp; &nbsp; &nbsp; {(2)}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; <var>s</var><var>v</var> + <var>r</var><var>t</var> + <var>s</var><var>t</var> + <var>r</var><var>v</var><br />
-					= &nbsp; &nbsp; &nbsp; &nbsp; {algebra}<br />
-					&nbsp; &nbsp; &nbsp; &nbsp; (<var>s</var> + <var>r</var>) &#x2219; (<var>t</var> + <var>v</var>)<br />
-				</p>
-				<p class="noindent">and because the 4 variables are positive, the two factors are each at least 2, and hence <var>n</var> is not a prime number.</p>
-				<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
-				<p>The above was written down in Abilene State Park. In contrast to the proof discussed in EWD1154, I designed this proof myself, but the title of this note does not mention &ldquo;derivation&rdquo; of the proof, since I did not &ldquo;derive&rdquo; it in any technical sense.</p>
-				<p>I have considered investigation of the situation <var>x</var>+<var>y</var>&nbsp;=&nbsp;<var>n</var> <span class="unicode">&#x2227;</span> <var>u</var>+<var>v</var>&nbsp;=&nbsp;<var>n</var> <span class="unicode">&#x2227;</span> prime.<var>n</var> with the aim of showing (<var>x</var>,<var>y</var>)&nbsp;=&nbsp;(<var>u</var>,<var>v</var>) <span class="unicode">&#x2228;</span> (<var>x</var>,<var>y</var>)&nbsp;=&nbsp;(<var>v</var>,<var>u</var>), but rejected that approach for the disjunction, and for the fact that I saw no way of using <var>n</var>&rsquo;s primality. So I did some shunting and set myself to show that <var>n</var> was composite by writing it as a product of 2 plurals. I knew my complex numbers, in particular, that the modulus of a product is the product of the moduli, and then discovered that there was no point in looking at (<var>x</var>+<var>yi</var>)(<var>u</var>+<var>vi</var>). Hence</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">(3)</td>
-						<td>(<var>sv</var> &ndash; <var>rt</var>) +
-								(<var>st</var> + <var>rv</var>) =
-								(<var>s</var> + <var>r</var>) 
-								(<var>t</var> + <var>v</var>)</td>
-					</tr>
-				</table>
-
-				<p class="noindent">&#x2014;the 2 expressions for the modulus of (<var>s</var> + <var>ri</var>)  (<var>t</var> + <var>vi</var>), which do equate a sum of squares to a product&#x2014; has to be used differently. The right-hand side being even in <var>r</var>, it also equals <span class="nowrap">(<var>sv</var> + <var>rt</var>)</span> + <span class="nowrap">(<var>st</var> &ndash; <var>rv</var>),</span> and now we see the <var>a</var>, <var>b</var>, <var>c</var>, <var>d</var> entering the picture. The introduction of <var>a</var>  <var>b</var> and <var>c</var> <var> d</var> circumvented the disjunctive complication of comparing unordered pairs.</p>
-				<p>I think I knew (3) outside the context of complex numbers as well; it is very common to separate in (<var>a </var> <var>b</var>) the squares from the cross product, as in</p>
-				<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
-					<tr>
-						<td class="spac">&nbsp;</td>
-						<td>(<var>a</var> + <var>b</var>) =
-								(<var>a</var> &ndash; <var>b</var>) + 4<var>ab</var></td>
-					</tr>
-					<tr>
-						<td class="spac">&nbsp;</td>
-						<td>(<var>a</var> + <var>b</var>) +
-								(<var>a</var> &ndash; <var>b</var>) = 2(<var>a</var> + <var>b</var>) &nbsp; &nbsp; &nbsp; .</td>
-					</tr>
-				</table>
-
-				<p>The proof reported provides a striking example of a proof in which the algebra is totally trivial while all subtlety has been invested in the decision what to name.</p>
-				<p align="right" style="margin-right: 8em;">Austin, 7 June 1993</p>
-				<p class="noindent">
-					prof.dr. Edsger W.Dijkstra<br />
-					Department of Computer Sciences<br />
-					The University of Texas at Austin<br />
-					Austin, TX 78712-1188<br />
-					USA<br />
-				</p>
-			</div>
-			<div>
-        <br/>
-      </div>
-		</div>
-		<hr />
-		<div id="footer">
-         transcribed by Corrado Cantelmi<br />
-          revised 
-          <!-- #BeginDate format:En2 -->24-Dec-2011<!-- #EndDate -->
-		</div>
-	</body>
-
-</html>
+<p><a href="https://www.cs.utexas.edu/~EWD/ewd11xx/EWD1154.PDF" title="Link to the PDF version of EWD1154">EWD1154</a> dealt with D.Zagier’s proof that a prime of the form 4<var>k</var>+1 is the sum of 2 squares. In fact, such a prime is in only 1 way the sum of 2 squares. In this note we show this by proving that if an odd <var>n</var> is the sum of 2 different pairs of squares, then that <var>n</var> is not prime.</p>
+<p>Let an odd <var>n</var> be the sum of 2 squares; then the one square is odd, the other is even: the squares are of different parity. Let <var>n</var> be the sum of 2 squares in 2 ways; then there exist <em>positive</em> <var>a</var>, <var>b</var>, <var>c</var>, <var>d</var> such that</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">(0)</td>
+<td>(<var>a</var> + <var>b</var>) + (<var>c</var> – <var>d</var>) = <var>n</var></td>
+</tr>
+<tr>
+<td class="spac"></td>
+<td>(<var>a</var> – <var>b</var>) + (<var>c</var> + <var>d</var>) = <var>n</var></td>
+</tr>
+</table>
+<p class="noindent">(Here <var>a</var> is the average of the numbers of the one parity, <var>c</var> is the average of those of the other parity. Because we are considering distinct square decompositions, also <var>b</var> and <var>d</var> can be chosen positive.)</p>
+<p>Eliminating <var>n</var> from (0) by equating the left-hand sides, we deduce after simplification</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">(1)</td>
+<td><var>ab</var> = <var>cd</var> &nbsp; &nbsp; &nbsp; ,</td>
+</tr>
+</table>
+<p class="noindent">from which we deduce the existence of <em>positive</em> <var>r</var>, <var>s</var>, <var>t</var>, <var>v</var> such that</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">(2)</td>
+<td><var>a</var> = <var>s</var><var>v</var></td>
+</tr>
+<tr>
+<td class="spac"></td>
+<td><var>b</var> = <var>r</var><var>t</var></td>
+</tr>
+<tr>
+<td class="spac"></td>
+<td><var>c</var> = <var>s</var><var>t</var></td>
+</tr>
+<tr>
+<td class="spac"></td>
+<td><var>d</var> = <var>r</var><var>v</var></td>
+</tr>
+</table>
+<p class="noindent">(Consider “<var>s</var> := <var>a</var> <b>gcd</b> <var>c</var>; &nbsp; <var>v</var> := <var>a/s</var>; &nbsp; <var>t</var> := <var>c/s</var>; &nbsp; <var>r</var> := <var>b/t</var>”.)</p>
+<p>Now we observe<br>
+&nbsp; &nbsp; &nbsp; &nbsp; <var>n</var><br>
+= &nbsp; &nbsp; &nbsp; &nbsp; {(0)}<br>
+&nbsp; &nbsp; &nbsp; &nbsp; (<var>a</var> + <var>b</var>) + (<var>c</var> – <var>d</var>)<br>
+= &nbsp; &nbsp; &nbsp; &nbsp; {(1)}<br>
+&nbsp; &nbsp; &nbsp; &nbsp; <var>a</var> + <var>b</var> + <var>c</var> + <var>d</var><br>
+= &nbsp; &nbsp; &nbsp; &nbsp; {(2)}<br>
+&nbsp; &nbsp; &nbsp; &nbsp; <var>s</var><var>v</var> + <var>r</var><var>t</var> + <var>s</var><var>t</var> + <var>r</var><var>v</var><br>
+= &nbsp; &nbsp; &nbsp; &nbsp; {algebra}<br>
+&nbsp; &nbsp; &nbsp; &nbsp; (<var>s</var> + <var>r</var>) ∙ (<var>t</var> + <var>v</var>)<br></p>
+<p class="noindent">and because the 4 variables are positive, the two factors are each at least 2, and hence <var>n</var> is not a prime number.</p>
+<p class="noindent" align="center"><sup>*</sup> &nbsp; &nbsp; &nbsp; &nbsp; <sub>*</sub> &nbsp; &nbsp; &nbsp; &nbsp; <sup>*</sup></p>
+<p>The above was written down in Abilene State Park. In contrast to the proof discussed in EWD1154, I designed this proof myself, but the title of this note does not mention “derivation” of the proof, since I did not “derive” it in any technical sense.</p>
+<p>I have considered investigation of the situation <var>x</var>+<var>y</var>&nbsp;=&nbsp;<var>n</var> <span class="unicode">∧</span> <var>u</var>+<var>v</var>&nbsp;=&nbsp;<var>n</var> <span class="unicode">∧</span> prime.<var>n</var> with the aim of showing (<var>x</var>,<var>y</var>)&nbsp;=&nbsp;(<var>u</var>,<var>v</var>) <span class="unicode">∨</span> (<var>x</var>,<var>y</var>)&nbsp;=&nbsp;(<var>v</var>,<var>u</var>), but rejected that approach for the disjunction, and for the fact that I saw no way of using <var>n</var>’s primality. So I did some shunting and set myself to show that <var>n</var> was composite by writing it as a product of 2 plurals. I knew my complex numbers, in particular, that the modulus of a product is the product of the moduli, and then discovered that there was no point in looking at (<var>x</var>+<var>yi</var>)(<var>u</var>+<var>vi</var>). Hence</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">(3)</td>
+<td>(<var>sv</var> – <var>rt</var>) + (<var>st</var> + <var>rv</var>) = (<var>s</var> + <var>r</var>) (<var>t</var> + <var>v</var>)</td>
+</tr>
+</table>
+<p class="noindent">—the 2 expressions for the modulus of (<var>s</var> + <var>ri</var>) (<var>t</var> + <var>vi</var>), which do equate a sum of squares to a product— has to be used differently. The right-hand side being even in <var>r</var>, it also equals <span class="nowrap">(<var>sv</var> + <var>rt</var>)</span> + <span class="nowrap">(<var>st</var> – <var>rv</var>),</span> and now we see the <var>a</var>, <var>b</var>, <var>c</var>, <var>d</var> entering the picture. The introduction of <var>a</var> <var>b</var> and <var>c</var> <var>d</var> circumvented the disjunctive complication of comparing unordered pairs.</p>
+<p>I think I knew (3) outside the context of complex numbers as well; it is very common to separate in (<var>a</var> <var>b</var>) the squares from the cross product, as in</p>
+<table cellspacing="0" cellpadding="0" border="0" style="margin-top: 2ex; margin-bottom: 1em;">
+<tr>
+<td class="spac">&nbsp;</td>
+<td>(<var>a</var> + <var>b</var>) = (<var>a</var> – <var>b</var>) + 4<var>ab</var></td>
+</tr>
+<tr>
+<td class="spac">&nbsp;</td>
+<td>(<var>a</var> + <var>b</var>) + (<var>a</var> – <var>b</var>) = 2(<var>a</var> + <var>b</var>) &nbsp; &nbsp; &nbsp; .</td>
+</tr>
+</table>
+<p>The proof reported provides a striking example of a proof in which the algebra is totally trivial while all subtlety has been invested in the decision what to name.</p>
+<p align="right" style="margin-right: 8em;">Austin, 7 June 1993</p>
+<p class="noindent">prof.dr. Edsger W.Dijkstra<br>
+Department of Computer Sciences<br>
+The University of Texas at Austin<br>
+Austin, TX 78712-1188<br>
+USA<br></p>
+<div><br></div>
+<hr>
+<div id="footer">transcribed by Corrado Cantelmi<br>
+revised <!-- #BeginDate format:En2 -->24-Dec-2011<!-- #EndDate --></div>
 </div>
   <script>
 $('.body').tweetSelection({

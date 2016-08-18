@@ -23,642 +23,454 @@
   </div>
   <h1>Guarded commands. non-determinacy and a calculus for the derivation of programs</h1>
   <div class='body'>
-<center>
-by Edsger W.Dijkstra *)
-</center>
-
+<center>by Edsger W.Dijkstra *)</center>
 <table>
-<tr><td>*) Author's address:</td><td>BURROUGHS</td></tr>
-<tr><td></td><td>Plataanstraat 5</td></tr>
-<tr><td></td><td>NUENEN &ndash; 4565</td></tr>
-<tr><td></td><td>The Netherlands.</td></tr>
+<tr>
+<td>*) Author's address:</td>
+<td>BURROUGHS</td>
+</tr>
+<tr>
+<td></td>
+<td>Plataanstraat 5</td>
+</tr>
+<tr>
+<td></td>
+<td>NUENEN – 4565</td>
+</tr>
+<tr>
+<td></td>
+<td>The Netherlands.</td>
+</tr>
 </table>
-
-<div><u>Abstract</u>. So-called &quot;guarded commands&quot; are introduced as a building block
-for alternative and repetitive constructs that allow non-deterministic
-program components for which at least the activity evoked, but possibly
-even the final state, is not necessarily uniquely determined by the initial
-state. For the formal derivation of programs expressed in terms of these
-constructs, a calculus will be shown.
-<br>
-			<br>
-		</div>
-
-<div><u>Keywords</u>. programming languages, sequencing primitives, program semantics, 
-programming language semantics, non-determinacy, case-construction. repetition, 
-termination, correctness proof, derivation of programs, programming
-methodology.
-</div>
-
-<div>
-			<br>
-			CR-category: 4.20, 4.22.</div>
-
-
-<div>
-			<br>
-			<u>Guarded commands, non-determinacy and a calculus for the derivation of
-programs</u>.</div>
-
-
+<div><u>Abstract</u>. So-called "guarded commands" are introduced as a building block for alternative and repetitive constructs that allow non-deterministic program components for which at least the activity evoked, but possibly even the final state, is not necessarily uniquely determined by the initial state. For the formal derivation of programs expressed in terms of these constructs, a calculus will be shown.<br>
+<br></div>
+<div><u>Keywords</u>. programming languages, sequencing primitives, program semantics, programming language semantics, non-determinacy, case-construction. repetition, termination, correctness proof, derivation of programs, programming methodology.</div>
+<div><br>
+CR-category: 4.20, 4.22.</div>
+<div><br>
+<u>Guarded commands, non-determinacy and a calculus for the derivation of programs</u>.</div>
 <p><u>1. Introduction</u>.</p>
-
-<p>In section 2, two statements, an alternative construct and a repetitive 
-construct will be introduced, together with an intuitive (mechanistic)
-definition of their semantics. The basic building block for both of them
-is the so-called &quot;guarded command&quot;, a statement list prefixed by a boolean
-expression: only when this boolean expression is initially true, is the
-statement list eligible for execution. The potential non-determinacy
-allows us to map otherwise (trivially) different programs on the same
-program text, a circumstance that seems largely responsible for the fact that
-now programs can be derived in a more systematic manner than before.
-</p>
-
-<p>In section 3, after a prelude defining the notation, a formal definition 
-of the semantics of the two constructs will be given, together with
-two theorems for each of the constructs (without proof).
-</p>
-
-<p>In section 4, it will be shown how upon the above a formal calculus
-for the derivation of programs can be founded. We would like to stress
-that we do not present &quot;an algorithm&quot; for the derivation of programs: we
-have used the term &quot;a calculus&quot; for a formal discipline --a set of rules--
-such that, if applied successfully<br>
-1 ) it will have derived a correct program<br> 
+<p>In section 2, two statements, an alternative construct and a repetitive construct will be introduced, together with an intuitive (mechanistic) definition of their semantics. The basic building block for both of them is the so-called "guarded command", a statement list prefixed by a boolean expression: only when this boolean expression is initially true, is the statement list eligible for execution. The potential non-determinacy allows us to map otherwise (trivially) different programs on the same program text, a circumstance that seems largely responsible for the fact that now programs can be derived in a more systematic manner than before.</p>
+<p>In section 3, after a prelude defining the notation, a formal definition of the semantics of the two constructs will be given, together with two theorems for each of the constructs (without proof).</p>
+<p>In section 4, it will be shown how upon the above a formal calculus for the derivation of programs can be founded. We would like to stress that we do not present "an algorithm" for the derivation of programs: we have used the term "a calculus" for a formal discipline --a set of rules-- such that, if applied successfully<br>
+1 ) it will have derived a correct program<br>
 2) it will tell us that we have reached such a goal.<br>
-(In choosing the term &quot;calculus&quot; we have been inspired by the &quot;integral
-calculus&quot; and the &quot;propositional calculus&quot; where we have a very similar situation.)
-</p>
-
+(In choosing the term "calculus" we have been inspired by the "integral calculus" and the "propositional calculus" where we have a very similar situation.)</p>
 <p><u>2. Two statements made from guarded commands</u>.</p>
-		<p>If the reader accepts &quot;other statements&quot; as indicating, say,
-assignment statements and procedure calls. we can give the relevant syntax
-in BNF [2]. In the following we have extended BNF with the convention that 
-the braces &quot;{...}&quot; should be read as:
-&quot;followed by zero or more instances of the enclosed&quot;.</p>
-		<blockquote>
-			<div>
-				<code>&#x3008; guarded command&#x3009; ::= &#x3008; guard&#x3009; &#x2192; &#x3008; guarded list&#x3009;<br>
-					&#x3008; guard&#x3009; ::= &#x3008; boolean expression&#x3009;<br>
-					&#x3008; guarded list&#x3009; ::= &#x3008; statement&#x3009; {; &#x3008; statement &#x3009;}<br>
-					&#x3008; guarded command set&#x3009; ::= &#x3008; guarded command&#x3009; {&#x25AF; &#x3008; guarded command &#x3009;}<br>
-					&#x3008; alternative construct&#x3009; ::= <u>if</u> &#x3008; guarded command set&#x3009; <u>fi</u><br>
-					&#x3008; repetitive construct &#x3009; ::= <u>do</u> &#x3008; guarded command set&#x3009; <u>od</u><br>
-					&#x3008; statement&#x3009; ::= &#x3008; alternative construct&#x3009; &#x2223; &#x3008; repetitive construct&#x3009;&#x2223;<br>
-					
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&quot;other statements&quot;&nbsp;&nbsp;.<br>
-				</code></div>
-		</blockquote>
-		<p>The semicolons in the guarded list have the usual meaning: when the
-guarded list is selected for execution its statements will be executed
-successively in the order from left to right; a guarded list will only be
-selected for execution in a state such that its guard is true. Note that
-a guarded command by itself is <u>not</u> a statement: it is component of a
-guarded command set from which statements can be constructed. If the
-guarded command set consists of more than one guarded command, they are
-mutually separated by the separator &quot;&#x25AF;&quot; ; our text is then an arbitrarily
-ordered enumeration of an unordered set. i.e. the order in which the guarded
-commands of a set appear in our text is semantically irrelevant.
-</p>
-		<p>Our syntax gives two ways for constructing a statement out of a
-guarded command set. The alternative construct is written by enclosing
-it by the special bracket pair: &quot;<code><u>if</u> ... <u>fi</u></code>&quot;. If in the initial state none
-of the guards is true, the program will abort, otherwise an arbitrary
-guarded list with a true guard will be selected for execution.
-</p>
-
-<p><u>Note</u>. If the empty guarded command set were allowed &quot;<code><u>if</u> <u>fi</u></code>&quot; would be semantically equivalent to &quot;<code>abort</code>&quot; . (End of note.)</p>
-		<p>An example &#151;illustrating the non-determinacy in a very modest fashion&#151; would be the program that for fixed <code>x</code> and <code>y</code> assigns to <code>m</code> the maximum value of <code>x</code> and <code>y</code> :</p>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code><u>if</u> x &#x2265; y &#x2192; m:= x<br>
-						
-					&nbsp;&#x25AF; y  &#x2264 x &#x2192; m:= y<br>
-						<u>fi</u></code></div>
-			</blockquote>
-		</blockquote>
-		<p>The repetitive construct is written down by enclosing a guarded
-command set by the special bracket pair &quot;<code><u>do</u> ... <u>od</u></code>&quot; . Here a state in which none of the guards is true will not lead to abortion but to proper termination; the complementary rule, however, is that it will only terminate in a state in which none of the guards is true: when initially or upon completed execution of a selected guarded list one or more guards are true, a new selection for execution of a guarded list with a true guard will take place. and so on. When the repetitive construct has terminated properly, we know that all its guards are false.</p>
-		<div><u>Note</u>. If the empty guarded command set were allowed &quot;<code><u>do</u>
-<u>od</u></code>&quot; would be semantically equivalent to &quot;<code>skip</code>&quot; . (End of note.)</div>
-		<p>An example &#151;showing the non-determinacy in somewhat greater glory&#151; is the program that assigns to the variables <code>q1</code>, <code>q2</code>, <code>q3</code> and <code>q4</code> a permutation of the values <code>Q1</code>, <code>Q2</code>, <code>Q3</code> and <code>Q4</code>, such that <code>q1 &#x2264; q2 &#x2264;  q3 &#x2264; q4 </code>. Using concurrent assignment statements for the sake of convenience, we can program</p>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>
-q1, q2, q3, q4 := Q1, Q2, Q3, Q4;<br>
-						<u>do</u> q1 > q2  &#x2192 q1, q2 := q2, q1<br>
-						&nbsp;</code>&#x25AF;<code>&nbsp;q2 &gt; q3 &#x2192; q2, q3 := q3, q2<br>
-						&nbsp;</code>&#x25AF;<code>&nbsp;q3 &gt; q4 &#x2192; q3, q4 := q4, q3<br>
-						<u>od</u> &nbsp;&nbsp;.
-</code></div>
-			</blockquote>
-		</blockquote>
-		<p>To conclude this section we give a program where not only the computation but also the final state is not necessarily uniquely determined. The program should determine <code>k</code> such that for fixed value <code>n (n &gt; 0)</code> and a fixed function <code>f(i)</code> defined for <code>0 &#x2264; i &lt; n</code> , <code>k</code> will eventually satisfy:</p>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>0 &#x2264; k < n <u>and</u> (&#X2200;i: 0 &#x2264; i < n: f(k) &#x2265 f(i))</code> &nbsp;&nbsp; .</div>
-			</blockquote>
-		</blockquote>
-		<div>
-			(Eventually <code>k</code> should be the place of a maximum.)</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>
-k:=0; j:=1;<br>
-						<u>do</u> j &#x2260; n &#x2192 <u>if</u> f(j) &#x2264; f(k) &#x2192; j:= j + 1<br>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x25AF; f(j) &#x2265; f(k) </code>&#x2192;<code> k:= j; j:= j + 1<br>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi</u><br>
-						<u>od</u></code></div>
-			</blockquote>
-		</blockquote>
-		<p>Only permissible final states are possible and each permissible final state is possible.</p>
-		<p><u>3. Formal definition of the semantics</u>.</p>
-
+<p>If the reader accepts "other statements" as indicating, say, assignment statements and procedure calls. we can give the relevant syntax in BNF [2]. In the following we have extended BNF with the convention that the braces "{...}" should be read as: "followed by zero or more instances of the enclosed".</p>
+<blockquote>
+<div><code>〈 guarded command〉 ::= 〈 guard〉 → 〈 guarded list〉<br>
+〈 guard〉 ::= 〈 boolean expression〉<br>
+〈 guarded list〉 ::= 〈 statement〉 {; 〈 statement 〉}<br>
+〈 guarded command set〉 ::= 〈 guarded command〉 {▯ 〈 guarded command 〉}<br>
+〈 alternative construct〉 ::= <u>if</u> 〈 guarded command set〉 <u>fi</u><br>
+〈 repetitive construct 〉 ::= <u>do</u> 〈 guarded command set〉 <u>od</u><br>
+〈 statement〉 ::= 〈 alternative construct〉 ∣ 〈 repetitive construct〉∣<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "other statements"&nbsp;&nbsp;.<br></code></div>
+</blockquote>
+<p>The semicolons in the guarded list have the usual meaning: when the guarded list is selected for execution its statements will be executed successively in the order from left to right; a guarded list will only be selected for execution in a state such that its guard is true. Note that a guarded command by itself is <u>not</u> a statement: it is component of a guarded command set from which statements can be constructed. If the guarded command set consists of more than one guarded command, they are mutually separated by the separator "▯" ; our text is then an arbitrarily ordered enumeration of an unordered set. i.e. the order in which the guarded commands of a set appear in our text is semantically irrelevant.</p>
+<p>Our syntax gives two ways for constructing a statement out of a guarded command set. The alternative construct is written by enclosing it by the special bracket pair: "<code><u>if</u> ... <u>fi</u></code>". If in the initial state none of the guards is true, the program will abort, otherwise an arbitrary guarded list with a true guard will be selected for execution.</p>
+<p><u>Note</u>. If the empty guarded command set were allowed "<code><u>if</u> <u>fi</u></code>" would be semantically equivalent to "<code>abort</code>" . (End of note.)</p>
+<p>An example —illustrating the non-determinacy in a very modest fashion— would be the program that for fixed <code>x</code> and <code>y</code> assigns to <code>m</code> the maximum value of <code>x</code> and <code>y</code> :</p>
+<blockquote>
+<blockquote>
+<div><code><u>if</u> x ≥ y → m:= x<br>
+&nbsp;▯ y &amp;#x2264 x → m:= y<br>
+<u>fi</u></code></div>
+</blockquote>
+</blockquote>
+<p>The repetitive construct is written down by enclosing a guarded command set by the special bracket pair "<code><u>do</u> ... <u>od</u></code>" . Here a state in which none of the guards is true will not lead to abortion but to proper termination; the complementary rule, however, is that it will only terminate in a state in which none of the guards is true: when initially or upon completed execution of a selected guarded list one or more guards are true, a new selection for execution of a guarded list with a true guard will take place. and so on. When the repetitive construct has terminated properly, we know that all its guards are false.</p>
+<div><u>Note</u>. If the empty guarded command set were allowed "<code><u>do</u> <u>od</u></code>" would be semantically equivalent to "<code>skip</code>" . (End of note.)</div>
+<p>An example —showing the non-determinacy in somewhat greater glory— is the program that assigns to the variables <code>q1</code>, <code>q2</code>, <code>q3</code> and <code>q4</code> a permutation of the values <code>Q1</code>, <code>Q2</code>, <code>Q3</code> and <code>Q4</code>, such that <code>q1 ≤ q2 ≤ q3 ≤ q4</code> . Using concurrent assignment statements for the sake of convenience, we can program</p>
+<blockquote>
+<blockquote>
+<div><code>q1, q2, q3, q4 := Q1, Q2, Q3, Q4;<br>
+<u>do</u> q1 &gt; q2 &amp;#x2192 q1, q2 := q2, q1<br>
+&nbsp;</code>▯<code>&nbsp;q2 &gt; q3 → q2, q3 := q3, q2<br>
+&nbsp;</code>▯<code>&nbsp;q3 &gt; q4 → q3, q4 := q4, q3<br>
+<u>od</u> &nbsp;&nbsp;.</code></div>
+</blockquote>
+</blockquote>
+<p>To conclude this section we give a program where not only the computation but also the final state is not necessarily uniquely determined. The program should determine <code>k</code> such that for fixed value <code>n (n &gt; 0)</code> and a fixed function <code>f(i)</code> defined for <code>0 ≤ i &lt; n</code> , <code>k</code> will eventually satisfy:</p>
+<blockquote>
+<blockquote>
+<div><code>0 ≤ k &lt; n <u>and</u> (∀i: 0 ≤ i &lt; n: f(k) &amp;#x2265 f(i))</code> &nbsp;&nbsp; .</div>
+</blockquote>
+</blockquote>
+<div>(Eventually <code>k</code> should be the place of a maximum.)</div>
+<blockquote>
+<blockquote>
+<div><code>k:=0; j:=1;<br>
+<u>do</u> j ≠ n &amp;#x2192 <u>if</u> f(j) ≤ f(k) → j:= j + 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▯ f(j) ≥ f(k)</code> → <code>k:= j; j:= j + 1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>fi</u><br>
+<u>od</u></code></div>
+</blockquote>
+</blockquote>
+<p>Only permissible final states are possible and each permissible final state is possible.</p>
+<p><u>3. Formal definition of the semantics</u>.</p>
 <p><u>3.1. Notational prelude</u>.</p>
-
-<p>In the following sections we shall use the symbols <code>P</code> , <code>Q</code> and <code>R</code> to denote (predicates defining) boolean functions defined on all points of the state space; alternatively we shall refer to them as &quot;conditions&quot;, satisfied by all states for which the boolean function is true. Two special predicates that we denote by the reserved names &quot;<code>T</code>&quot; and &quot;<code>F</code>&quot; play a special role: <code>T</code> denotes the condition that, by definition, is satisfied by all states, <code>F</code> denotes, by definition, the condition that is satisfied by no state at all.</p>
-
-<p>The way in which we use predicates (as a tool for defining sets of initial or final states) for the definition of the semantics of programming language constructs has been directly inspired by Hoare [1], the main difference being that we have tightened things up a bit: while Hoare introduces sufficient pre-conditions such that the mechanisms will not produce the wrong result (but may fail to terminate). we shall introduce necessary and sufficient &#151;i.e. so-called &quot;weakest&quot;&#151; pre-conditions such that the mechanisms are guaranteed to produce the right result.</p>
-
-<p>More specifically: we shall use the notation &quot;<code>wp(S, R)</code>&quot; , where <code>S</code> denotes a statement list and <code>R</code> some condition on the state of the system, to denote the weakest pre-condition for the initial state of the system such that activation of <code>S</code> is guaranteed to lead to a properly terminating activity leaving the system in a final state satisfying the post-condition <code>R</code> . Such a &quot;<code>wp</code>&quot; &#151;which is called a predicate transformer, because it associates a pre-condition to any post-condition R &#151; has, by definition, the following properties.</p>
-		<div>
-			1 ) For any <code>S</code> , we have for all states</div>
-		<blockquote>
-			<blockquote>
-				<code>wp(S, F) = F</code></blockquote>
-		</blockquote>
-		<div>(the so-called &quot;Law of the Excluded Miracle&quot;).<br>
-			<br>
-		</div>
-		<div>
-			2) For any <code>S</code> and any two post-conditions <code>P</code> and <code>Q</code>, such that for all states</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>P &#x21D2; Q</code></div>
-			</blockquote>
-		</blockquote>
-		<div>we have for all states</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>wp (S, P) &#x21D2; wp (S, Q) &nbsp;&nbsp;&nbsp;</code>.</div>
-			</blockquote>
-		</blockquote>
-		<div>
-			3) For any <code>S</code> and any two post-conditions <code>P</code> and <code>Q</code> we have for all states</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>(wp(S, P) <u>and</u> wp(S, Q)) = wp(S, P <u>and</u> Q)</code>&nbsp;&nbsp;.</div>
-			</blockquote>
-		</blockquote>
-		<div>
-			4) For any <code>S</code> and any two post-conditions <code>P</code> and <code>Q</code> we have for all states</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>(wp(S, P) <u>or</u> wp(S, Q)) &#x21D2; wp(S, P <u>or</u> Q)&nbsp;&nbsp;</code>.</div>
-			</blockquote>
-		</blockquote>
-		<p>Together with the rules of propositional calculus and the semantic definitions to be given below, the above four properties take over the role of the &quot;rules of inference&quot; as introduced by Hoare [1].</p>
-		<p>We take the position that we know the semantics of a mechanism <code>S</code> sufficiently well if we know its predicate transformer, i.e. can derive<code> wp (S, R)</code> for any post-condition <code>R</code> .</p>
-		<div><u>Note</u>. This position is taken in full acknowledgement of the fact that in
-the case of non-deterministic mechanisms, the knowledge of the predicate
-transformer does not give a complete description: for those initial states
-that do not necessarily lead to a properly terminating activity, the
-knowledge of the predicate transformer does not give us any information
-about the final states in which the system might find itself after proper
-termination. (End of note.)
+<p>In the following sections we shall use the symbols <code>P</code> , <code>Q</code> and <code>R</code> to denote (predicates defining) boolean functions defined on all points of the state space; alternatively we shall refer to them as "conditions", satisfied by all states for which the boolean function is true. Two special predicates that we denote by the reserved names "<code>T</code>" and "<code>F</code>" play a special role: <code>T</code> denotes the condition that, by definition, is satisfied by all states, <code>F</code> denotes, by definition, the condition that is satisfied by no state at all.</p>
+<p>The way in which we use predicates (as a tool for defining sets of initial or final states) for the definition of the semantics of programming language constructs has been directly inspired by Hoare [1], the main difference being that we have tightened things up a bit: while Hoare introduces sufficient pre-conditions such that the mechanisms will not produce the wrong result (but may fail to terminate). we shall introduce necessary and sufficient —i.e. so-called "weakest"— pre-conditions such that the mechanisms are guaranteed to produce the right result.</p>
+<p>More specifically: we shall use the notation "<code>wp(S, R)</code>" , where <code>S</code> denotes a statement list and <code>R</code> some condition on the state of the system, to denote the weakest pre-condition for the initial state of the system such that activation of <code>S</code> is guaranteed to lead to a properly terminating activity leaving the system in a final state satisfying the post-condition <code>R</code> . Such a "<code>wp</code>" —which is called a predicate transformer, because it associates a pre-condition to any post-condition R — has, by definition, the following properties.</p>
+<div>1 ) For any <code>S</code> , we have for all states</div>
+<blockquote>
+<blockquote><code>wp(S, F) = F</code></blockquote>
+</blockquote>
+<div>(the so-called "Law of the Excluded Miracle").<br>
+<br></div>
+<div>2) For any <code>S</code> and any two post-conditions <code>P</code> and <code>Q</code>, such that for all states</div>
+<blockquote>
+<blockquote>
+<div><code>P ⇒ Q</code></div>
+</blockquote>
+</blockquote>
+<div>we have for all states</div>
+<blockquote>
+<blockquote>
+<div><code>wp (S, P) ⇒ wp (S, Q) &nbsp;&nbsp;&nbsp;</code>.</div>
+</blockquote>
+</blockquote>
+<div>3) For any <code>S</code> and any two post-conditions <code>P</code> and <code>Q</code> we have for all states</div>
+<blockquote>
+<blockquote>
+<div><code>(wp(S, P) <u>and</u> wp(S, Q)) = wp(S, P <u>and</u> Q)</code>&nbsp;&nbsp;.</div>
+</blockquote>
+</blockquote>
+<div>4) For any <code>S</code> and any two post-conditions <code>P</code> and <code>Q</code> we have for all states</div>
+<blockquote>
+<blockquote>
+<div><code>(wp(S, P) <u>or</u> wp(S, Q)) ⇒ wp(S, P <u>or</u> Q)&nbsp;&nbsp;</code>.</div>
+</blockquote>
+</blockquote>
+<p>Together with the rules of propositional calculus and the semantic definitions to be given below, the above four properties take over the role of the "rules of inference" as introduced by Hoare [1].</p>
+<p>We take the position that we know the semantics of a mechanism <code>S</code> sufficiently well if we know its predicate transformer, i.e. can derive <code>wp (S, R)</code> for any post-condition <code>R</code> .</p>
+<div><u>Note</u>. This position is taken in full acknowledgement of the fact that in the case of non-deterministic mechanisms, the knowledge of the predicate transformer does not give a complete description: for those initial states that do not necessarily lead to a properly terminating activity, the knowledge of the predicate transformer does not give us any information about the final states in which the system might find itself after proper termination. (End of note.)<br>
+<br></div>
+<div><u>Example 1</u>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The semantics of the empty statement, denoted by "<code>skip</code>", are given by the definition that for any post-condition <code>R</code> , we have</div>
+<blockquote>
+<blockquote>
+<div><code>wp("skip", R) = R</code>&nbsp;&nbsp;.</div>
+</blockquote>
+</blockquote>
+<div><u>Example 2</u>.&nbsp;&nbsp;&nbsp;&nbsp;The semantics of the assignment statement "<code>x:= E</code>" are given by</div>
+<blockquote>
+<blockquote>
+<div><code>wp("x:= E", R) = R<sup>x</sup><sub>E</sub></code></div>
+</blockquote>
+</blockquote>
+<div>in which <code>R<sup>x</sup><sub>E</sub></code> denotes a copy of the predicate defining <code>R</code> in which each occurence of the variable "<code>x</code>" is replaced by "<code>(E)</code>".<br>
+<br></div>
+<div><u>Example 3</u>.&nbsp;&nbsp;&nbsp;&nbsp;The semantics of the semicolon "<code>;</code>" as concatenation operator are given by</div>
+<blockquote>
+<blockquote>
+<div><code>wp("S1; S2", R) = wp(S1, wp(S2, R))&nbsp;&nbsp;</code>.</div>
+</blockquote>
+</blockquote>
+<p><u>3.2. The alternative construct</u>.</p>
+<p>In order to define the semantics of the alternative construct we define two abbreviations.</p>
+<div>Let "<code>IF</code>" denote</div>
+<blockquote>
+<blockquote>
+<div><code><u>if</u> B<sub>1</sub> → SL<sub>1</sub> ▯ ... ▯ B<sub>n</sub> → SL<sub>n</sub> <u>fi</u></code> &nbsp;&nbsp; ;</div>
+</blockquote>
+</blockquote>
+<div>let "<code>BB</code>" denote</div>
+<blockquote>
+<blockquote>
+<div><code>(∃i: 1 ≤ i ≤ n: B<sub>i</sub>) &nbsp;&nbsp; ;</code></div>
+</blockquote>
+</blockquote>
+<div>then, by definition</div>
+<blockquote>
+<blockquote>
+<div><code>wp(IF, R) = (BB <u>and</u> (∀i: 1 ≤ i ≤ n: B<sub>i</sub> ⇒ wp(SL<sub>i</sub>, R))</code>&nbsp;&nbsp; .</div>
+</blockquote>
+</blockquote>
+<div>(The first term "<code>BB</code>" requires that the alternative construct as such will not lead to abortion on account of all guards false, the second term requires that each guarded list eligible for execution will lead to an acceptable final state.) From this definition we can derive —by simple substitutions—<br>
+<br></div>
+<div><u>Theorem 1</u>. From</div>
+<blockquote>
+<blockquote>
+<div><code>(∀i: 1 ≤ i ≤ n: (Q <u>and</u> B<sub>i</sub>) ⇒ wp(SL<sub>i</sub>, R))</code> for all states</div>
+</blockquote>
+</blockquote>
+<div>we can conclude that</div>
+<blockquote>
+<blockquote>
+<div><code>(Q <u>and</u> BB) ⇒ wp(IF, R)</code> holds for all states&nbsp;.</div>
+</blockquote>
+</blockquote>
+<p>Let "<code>t</code>" denote some integer function, defined on the state space, end let "<code>wdec(S, t)</code>" denote the weakest pre-condition such that activation of <code>S</code> is guaranteed to lead to a properly terminating activity leaving the system in a final state such that the value of <code>t</code> is decreased by at least 1 (compared to its initial value). In terms of "<code>wdec</code>" we can formulate the very similar</p>
+<div><u>Theorem 2</u>. From
+<blockquote>
+<blockquote>
+<div>
+<div><code>(∀i: 1 ≤ i ≤ n: (Q <u>and</u> B<sub>i</sub>) ⇒ wdec(SL<sub>i</sub>, t))&nbsp;&nbsp;</code> for all states</div>
+</div>
+</blockquote>
+</blockquote>
+<div>
+<div>we can conclude that</div>
+<blockquote>
+<blockquote>
+<div><code>(Q <u>and</u> BB) ⇒ wdec(IF, t)&nbsp;&nbsp;</code> holds for all states&nbsp;.</div>
+</blockquote>
+</blockquote>
+<div><u>Note</u> (which can be skipped at first reading). The relation between "<code>wp</code>" and "<code>wdec</code>" is as follows. For any point <code>X</code> in state space we can regard</div>
+<blockquote>
+<blockquote>
+<div><code>wp(S, t ≤ t<sub>0</sub>)</code></div>
+</blockquote>
+</blockquote>
+<div>as an equation with <code>t<sub>0</sub></code> as the unknown. Let its smallest solution for <code>t<sub>0</sub></code> be <code>tmin(X)</code>. (Here we have added the explicit dependence on the state <code>X</code>.) Then <code>tmin(X)</code> can be interpreted as the lowest upper bound for the final value of <code>t</code> if the mechanism <code>S</code> is activated with <code>X</code> as initial state. Then, by definition,</div>
+<blockquote>
+<blockquote>
+<div><code>wdec(S, t) = (tmin(X) ≤ t(X) - 1) = (tmin(X) &lt; t(X))</code> &nbsp;&nbsp; .</div>
+</blockquote>
+</blockquote>
+<div>
+<div>(End of note.)</div>
+<p><u>3.3. The repetitive construct</u>.</p>
+<p>As is to be expected, the definition of the repetitive construct</p>
+<blockquote>
+<blockquote>
+<div><code><u>do</u> B<sub>1</sub> → SL<sub>1</sub> ▯ ... ▯ B<sub>n</sub> → SL<sub>n</sub> <u>od</u> &nbsp;&nbsp; ;</code></div>
+</blockquote>
+</blockquote>
+<div>that we denote by "<code>DO</code>" , is more complicated.<br>
+Let</div>
+<blockquote>
+<blockquote>
+<div><code>H<sub>0</sub>(R) = (R <u>and</u> <u>non</u> BB)</code></div>
+</blockquote>
+</blockquote>
+<div>and for <code>k &gt; 0:</code> <code>H<sub>k</sub>(R) = (wp(IF, H<sub>k-1</sub>(R)) <u>or</u> H<sub>0</sub>(R))<br>
+<br></code></div>
+<div>(where "<code>IF</code>" denotes the <u>same</u> guarded command set enclosed by "<code><u>if</u> <u>fi</u></code>") then, by definition</div>
+<blockquote>
+<blockquote>
+<div><code>wp(DO, R) = (∃k: k ≥ 0: H<sub>k</sub>(R))</code>&nbsp;&nbsp; .</div>
+</blockquote>
+</blockquote>
+<div>(Intuitively, <code>H<sub>k</sub>(R)</code> can be interpreted as the weakest pre-condition guaranteeing proper termination after at most k selections of a guarded list, leaving the system in a final state satisfying R .) Via mathematical induction we can prove<br>
 <br>
-			<br>
-		</div>
-		<div><u>Example 1</u>.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The semantics of the empty statement, denoted by &quot;<code>skip</code>&quot;, are given by the definition that for any post-condition <code>R</code> , we have</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>wp(&quot;skip&quot;, R) = R</code>&nbsp;&nbsp;.</div>
-			</blockquote>
-		</blockquote>
-		<div><u>Example 2</u>.&nbsp;&nbsp;&nbsp;&nbsp;The semantics of the assignment statement &quot;<code>x:= E</code>&quot; are given by</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>wp(&quot;x:= E&quot;, R) = R<sup>x</sup><sub>E</sub></code></div>
-			</blockquote>
-		</blockquote>
-		<div>
-			in which <code>R<sup>x</sup><sub>E</sub></code> denotes a copy of the predicate defining <code>R</code> in which each occurence of the variable &quot;<code>x</code>&quot; is replaced by &quot;<code>(E)</code>&quot;.<br>
-			<br>
-		</div>
-		<div><u>Example 3</u>.&nbsp;&nbsp;&nbsp;&nbsp;The semantics of the semicolon &quot;<code>;</code>&quot; as concatenation operator are given by</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>wp(&quot;S1; S2&quot;, R) = wp(S1, wp(S2, R))&nbsp;&nbsp;</code>.</div>
-			</blockquote>
-		</blockquote>
-		<p><u>3.2. The alternative construct</u>.</p>
-		<p>In order to define the semantics of the alternative construct we
-define two abbreviations.</p>
-		<div>Let &quot;<code>IF</code>&quot; denote</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code><u>if</u> B<sub>1</sub> &#x2192; SL<sub>1</sub> &#x25AF; ... &#x25AF; B<sub>n</sub> &#x2192; SL<sub>n</sub> <u>fi</u></code> &nbsp;&nbsp; ;</div>
-			</blockquote>
-		</blockquote>
-		<div>
-			let &quot;<code>BB</code>&quot; denote</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code> (&#x2203;i: 1 &#x2264; i &#x2264; n: B<sub>i</sub>) &nbsp;&nbsp; ;</code></div>
-			</blockquote>
-		</blockquote>
-		<div>then, by definition</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>wp(IF, R) = (BB <u>and</u> 
-(&#x2200;i: 1 &#x2264; i &#x2264; n: B<sub>i</sub> &#x21D2; wp(SL<sub>i</sub>, R))</code>&nbsp;&nbsp; .</div>
-			</blockquote>
-		</blockquote>
-		<div>
-			(The first term &quot;<code>BB</code>&quot; requires that the alternative construct as such will not lead to abortion on account of all guards false, the second term requires that each guarded list eligible for execution will lead to an acceptable final state.) From this definition we can derive &#151;by simple substitutions&#151;<br>
-			<br>
-		</div>
-		<div><u>Theorem 1</u>. From</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>(&#x2200;i: 1 &#x2264; i &#x2264; n: (Q <u>and</u> B<sub>i</sub>) &#x21D2; wp(SL<sub>i</sub>, R))</code> for all states</div>
-			</blockquote>
-		</blockquote>
-		<div>we can conclude that</div>
-		<blockquote>
-			<blockquote>
-				<div>
-					<code>(Q <u>and</u> BB) &#x21D2; wp(IF, R)</code> holds for all states&nbsp;.</div>
-			</blockquote>
-		</blockquote>
-		<p>Let &quot;<code>t</code>&quot; denote some integer function, defined on the state space, end let &quot;<code>wdec(S, t)</code>&quot; denote the weakest pre-condition such that activation of <code>S</code> is guaranteed to lead to a properly terminating activity leaving the system in a final state such that the value of <code>t</code> is decreased by at least 1 (compared to its initial value). In terms of &quot;<code>wdec</code>&quot; we can formulate the very similar</p>
-		<div><u>Theorem 2</u>. From
-
-			<blockquote>
-				<blockquote>
-					<div>
-						<div>
-							<code>(&#x2200;i: 1 &#x2264; i &#x2264; n: (Q <u>and</u> B<sub>i</sub>) &#x21D2; wdec(SL<sub>i</sub>, t))&nbsp;&nbsp; </code>for all states</div>
-					
-				</blockquote>
-			</blockquote>
-			<div>
-				<div>
-					we can conclude that</div>
-				<blockquote>
-					<blockquote>
-						<div>
-							<code>(Q <u>and</u> BB) &#x21D2; wdec(IF, t)&nbsp;&nbsp; </code>holds for all states&nbsp;.</div>
-					</blockquote>
-				</blockquote>
-				<div>
-					<u>Note</u> (which can be skipped at first reading). The relation between &quot;<code>wp</code>&quot; and &quot;<code>wdec</code>&quot; is as follows. For any point <code>X</code> in state space we can regard</div>
-				<blockquote>
-					<blockquote>
-						<div>
-							<code>wp(S, t &#x2264; t<sub>0</sub>)</code></div>
-					</blockquote>
-				</blockquote>
-				<div>
-					as an equation with <code>t<sub>0</sub></code> as the unknown. Let its smallest solution for <code>t<sub>0</sub></code> be<code> tmin(X)</code>. (Here we have added the explicit dependence on the state <code>X</code>.) Then <code>tmin(X)</code> can be interpreted as the lowest upper bound for the final value of <code>t</code> if the mechanism <code>S</code> is activated with <code>X</code> as initial state. Then, by definition,</div>
-				<blockquote>
-					<blockquote>
-						<div>
-							<code>wdec(S, t) = (tmin(X) &#x2264; t(X) - 1) = (tmin(X) &lt; t(X))</code> &nbsp;&nbsp; .</div>
-					</blockquote>
-				</blockquote>
-				<div>
-					<div>
-						(End of note.)</div>
-					<p><u>3.3. The repetitive construct</u>.</p>
-					<p>As is to be expected, the definition of the repetitive construct</p>
-					<blockquote>
-						<blockquote>
-							<div>
-								<code><u>do</u> B<sub>1</sub> &#x2192; SL<sub>1</sub> &#x25AF; ... &#x25AF; B<sub>n</sub> &#x2192; SL<sub>n</sub> <u>od</u> &nbsp;&nbsp; ;</code></div>
-						</blockquote>
-					</blockquote>
-					<div>
-						that we denote by &quot;<code>DO</code>&quot; , is more complicated.<br>
-						Let</div>
-					<blockquote>
-						<blockquote>
-							<div>
-								<code>H<sub>0</sub>(R) = (R <u>and</u> <u>non</u> BB)</code></div>
-						</blockquote>
-					</blockquote>
-					<div>
-						and for <code>k &gt; 0:</code> <code>H<sub>k</sub>(R) = (wp(IF, H<sub>k-1</sub>(R)) <u>or</u> H<sub>0</sub>(R))<br>
-							<br>
-						</code></div>
-					<div>
-						(where &quot;<code>IF</code>&quot; denotes the <u>same</u> guarded command set enclosed by &quot;<code><u>if</u> <u>fi</u></code>&quot;) then, by definition</div>
-					<blockquote>
-						<blockquote>
-							<div>
-								<code>wp(DO, R) = (&#x2203;k: k &#x2265; 0: H<sub>k</sub>(R))</code>&nbsp;&nbsp; .</div>
-						</blockquote>
-					</blockquote>
-					<div>
-						(Intuitively, <code>H<sub>k</sub>(R)</code> can be interpreted as the weakest pre-condition guaranteeing proper termination after at most k selections of a guarded list, leaving the system in a final state satisfying R .) Via mathematical induction we can prove<br>
-						<br>
-						<br>
-					</div>
-					<div><u>Theorem 3</u>.&nbsp;&nbsp;&nbsp;&nbsp;From</div>
-					<blockquote>
-						<blockquote>
-							<div>
-								<code>(P <u>and</u> BB) &#x21D2; (wp(IF, P) <u>and</u> wdec(IF, t))</code> for all states</div>
-						</blockquote>
-					</blockquote>
-					<div>
-						and &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>(BB <u>and</u> P) &#x21D2; (t &#x2265; 0)</code> for all states<br>
-						<br>
-					</div>
-					<div>we can conclude that we have for all states</div>
-					<blockquote>
-						<blockquote>
-							<div>
-								<code>P &#x21D2; wp(DO, P <u>and</u> <u>non</u> BB)</code>&nbsp;&nbsp; .</div>
-						</blockquote>
-					</blockquote>
-					<div>Note that the antecedent of Theorem 3 is of the form of the consequents of Theorems 1 and 2.</div>
-					<p>Because <code>T</code> is the condition by definition satisfied by all states, <code>wp(S, T)</code> is the weakest pre-condition guaranteeing proper termination for <code>S</code>. This allows us to formulate an alternative theorem about the repetitive construct, viz.</p>
-					<div><u>Theorem 4</u>. &nbsp;&nbsp;&nbsp;From</div>
-					<blockquote>
-						<blockquote>
-							<div>
-								<code>(P <u>and</u> BB) &#x21D2; (wp(IF, P)&nbsp;&nbsp;</code> for all states</div>
-						</blockquote>
-					</blockquote>
-					<div>we can conclude that we have for all states</div>
-					<blockquote>
-						<blockquote>
-							<div>
-								<code>(P <u>and</u> wp(DO, T)) &#x21D2; wp(DO, P <u>and</u> <u>non</u> BB)&nbsp;</code>&nbsp; .</div>
-						</blockquote>
-					</blockquote>
-					<div>
-						In connection with the above theorems &quot;<code>P</code>&quot; is called &quot;the invariant relation&quot; and &quot;<code>t</code>&quot; is called &quot;the variant function&quot;.<br>
-						<br>
-						<br>
-						<p><u>4. Formal derivation of programs</u>.</p>
-						<p>The formal requirement of our program performing &quot;<code>m:= max(x, y)</code>&quot; &#151;see above&#151; is that for fixed <code>x</code> and <code>y</code> it establishes the relation</p>
-<div>
-							<code>R: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(m = x <u>or</u> m = y) <u>and</u> m &#x2265; x <u>and</u> m &#x2265; y</code> &nbsp;&nbsp;.</div>
-						<p>Now the Axiom of Assignment tells us that &quot;<code>m:= x</code>&quot; is the standard way of establishing the truth of &quot;<code>m = x</code>&quot; for fixed <code>x</code>, which is a way of establishing the truth of the first term of <code>R</code>. Will &quot;<code>m:= x</code>&quot; do the job? In order to investigate this, we derive and simplify</p>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>wp(&quot;m:= x&quot;, R) = (x = x <u>or</u> x = y) <u>and</u> x&#x2265;x <u>and</u> x&#x2265;y<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= &nbsp;x&#x2265;y&nbsp;</code>&nbsp;.</div>
-							</blockquote>
-						</blockquote>
-						<div>Taking this weakest pre-condition as its guard, Theorem 1 tells us that</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code><u>if</u> x &#x2265; y &#x2192; m:= x <u>fi</u></code></div>
-							</blockquote>
-						</blockquote>
-						<div>
-							will produce the correct result if it terminates succesfully. The disadvantage of this program is that <code>BB &#x2260; T</code>, i.e. it might lead to abortion; weakening <code>BB</code> means looking for alternatives which might introduce new guards. The obvious alternative is the assignment &quot;<code>m:= y</code>&quot; with the guard</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>wp(&quot;m:=y&quot;, R) = y &#x2265; x &nbsp;</code>&nbsp; ;</div>
-							</blockquote>
-						</blockquote>
-						<div>thus we are led to our program</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code><u>if</u> x &#x2265; y &#x2192; m:= x<br>
-										
-									
-&nbsp;&#x25AF; y &#x2265 x &#x2192; m:= y<br>
-										<u>fi</u></code></div>
-							</blockquote>
-						</blockquote>
-						<div>
-							and by this time <code>BE = T</code> and therefore we have solved the problem. (In the mean time we have proved that the maximum of two values is always defined, viz. that <code>R</code> considered as equation for <code>m</code> has always a solution.)</div>
-						<p>As an example of the deriviation of a repetitive construct we shall derive a program for the greatest common divisor of two positive numbers, i.e. for fixed, positive <code>X</code> and <code>Y</code> we have to establish the final relation</p>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>x = gcd(X, Y)</code>&nbsp;&nbsp;.</div>
-							</blockquote>
-						</blockquote>
-						<p>The formal machinery only gets in motion, once we have chosen our invariant relation and our variant function. The program then gets the structure</p>
-						<blockquote>
-							<blockquote>
-								<div>
-									establish the relation <code>P</code> to be kept invariant&quot;;<br>
-									<u><code>do</code></u> &quot;decrease <code>t</code> as long as possible under invariance of <code>P</code>&quot;<code> <u>od</u></code>&nbsp;&nbsp; .</div>
-							</blockquote>
-						</blockquote>
+<br></div>
+<div><u>Theorem 3</u>.&nbsp;&nbsp;&nbsp;&nbsp;From</div>
+<blockquote>
+<blockquote>
+<div><code>(P <u>and</u> BB) ⇒ (wp(IF, P) <u>and</u> wdec(IF, t))</code> for all states</div>
+</blockquote>
+</blockquote>
+<div>and &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>(BB <u>and</u> P) ⇒ (t ≥ 0)</code> for all states<br>
+<br></div>
+<div>we can conclude that we have for all states</div>
+<blockquote>
+<blockquote>
+<div><code>P ⇒ wp(DO, P <u>and</u> <u>non</u> BB)</code>&nbsp;&nbsp; .</div>
+</blockquote>
+</blockquote>
+<div>Note that the antecedent of Theorem 3 is of the form of the consequents of Theorems 1 and 2.</div>
+<p>Because <code>T</code> is the condition by definition satisfied by all states, <code>wp(S, T)</code> is the weakest pre-condition guaranteeing proper termination for <code>S</code>. This allows us to formulate an alternative theorem about the repetitive construct, viz.</p>
+<div><u>Theorem 4</u>. &nbsp;&nbsp;&nbsp;From</div>
+<blockquote>
+<blockquote>
+<div><code>(P <u>and</u> BB) ⇒ (wp(IF, P)&nbsp;&nbsp;</code> for all states</div>
+</blockquote>
+</blockquote>
+<div>we can conclude that we have for all states</div>
+<blockquote>
+<blockquote>
+<div><code>(P <u>and</u> wp(DO, T)) ⇒ wp(DO, P <u>and</u> <u>non</u> BB)&nbsp;</code>&nbsp; .</div>
+</blockquote>
+</blockquote>
+<div>In connection with the above theorems "<code>P</code>" is called "the invariant relation" and "<code>t</code>" is called "the variant function".<br>
+<br>
+<br>
+<p><u>4. Formal derivation of programs</u>.</p>
+<p>The formal requirement of our program performing "<code>m:= max(x, y)</code>" —see above— is that for fixed <code>x</code> and <code>y</code> it establishes the relation</p>
+<div><code>R: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(m = x <u>or</u> m = y) <u>and</u> m ≥ x <u>and</u> m ≥ y</code> &nbsp;&nbsp;.</div>
+<p>Now the Axiom of Assignment tells us that "<code>m:= x</code>" is the standard way of establishing the truth of "<code>m = x</code>" for fixed <code>x</code>, which is a way of establishing the truth of the first term of <code>R</code>. Will "<code>m:= x</code>" do the job? In order to investigate this, we derive and simplify</p>
+<blockquote>
+<blockquote>
+<div><code>wp("m:= x", R) = (x = x <u>or</u> x = y) <u>and</u> x≥x <u>and</u> x≥y<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= &nbsp;x≥y&nbsp;</code>&nbsp;.</div>
+</blockquote>
+</blockquote>
+<div>Taking this weakest pre-condition as its guard, Theorem 1 tells us that</div>
+<blockquote>
+<blockquote>
+<div><code><u>if</u> x ≥ y → m:= x <u>fi</u></code></div>
+</blockquote>
+</blockquote>
+<div>will produce the correct result if it terminates succesfully. The disadvantage of this program is that <code>BB ≠ T</code>, i.e. it might lead to abortion; weakening <code>BB</code> means looking for alternatives which might introduce new guards. The obvious alternative is the assignment "<code>m:= y</code>" with the guard</div>
+<blockquote>
+<blockquote>
+<div><code>wp("m:=y", R) = y ≥ x &nbsp;</code>&nbsp; ;</div>
+</blockquote>
+</blockquote>
+<div>thus we are led to our program</div>
+<blockquote>
+<blockquote>
+<div><code><u>if</u> x ≥ y → m:= x<br>
+&nbsp;▯ y &amp;#x2265 x → m:= y<br>
+<u>fi</u></code></div>
+</blockquote>
+</blockquote>
+<div>and by this time <code>BE = T</code> and therefore we have solved the problem. (In the mean time we have proved that the maximum of two values is always defined, viz. that <code>R</code> considered as equation for <code>m</code> has always a solution.)</div>
+<p>As an example of the deriviation of a repetitive construct we shall derive a program for the greatest common divisor of two positive numbers, i.e. for fixed, positive <code>X</code> and <code>Y</code> we have to establish the final relation</p>
+<blockquote>
+<blockquote>
+<div><code>x = gcd(X, Y)</code>&nbsp;&nbsp;.</div>
+</blockquote>
+</blockquote>
+<p>The formal machinery only gets in motion, once we have chosen our invariant relation and our variant function. The program then gets the structure</p>
+<blockquote>
+<blockquote>
+<div>establish the relation <code>P</code> to be kept invariant";<br>
+<u><code>do</code></u> "decrease <code>t</code> as long as possible under invariance of <code>P</code>" <code><u>od</u></code>&nbsp;&nbsp; .</div>
+</blockquote>
+</blockquote>
 <p>Suppose that we choose for the invariant relation</p>
-<div>
-							<code>P: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gcd(X, Y) = gcd(x, y) <u>and</u> x &gt; 0 <u>and</u> y &gt; 0<br>
-								<br>
-							</code></div>
-						<div>a relation that has the advantage of being easily established by</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>x:= X; y:= Y&nbsp;</code>&nbsp; .</div>
-							</blockquote>
-						</blockquote>
-						<p>The most general &quot;something&quot; to be done under invariance of <code>p</code> is of the form</p>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>x, y: = E1, E2</code></div>
-							</blockquote>
-						</blockquote>
-						<div>
-							and we are interested in a guard <code>B</code> such that</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>(P <u>and</u> B) </code>&#x21d2;<code> wp(&quot;x, y := E1, E2&quot;, P)<br>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= (gcd(X, Y) = gcd(E1, E2) <u>and</u> E1 &gt; 0 <u>and</u> E2 &gt; 0)&nbsp;</code>&nbsp;.</div>
-							</blockquote>
-						</blockquote>
-						<p>Because the guard must be a computable boolean expression and should not contain the computation of<code> gcd(X, Y)</code> &#151;for that was the whole problem:&#151; we must see to it that the expressions <code>E1</code> and <code>E2</code> are so chosen, that the first term</p>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>gcd(X, Y) = gcd(E1, E2)</code></div>
-							</blockquote>
-						</blockquote>
-						<div>
-							is implied by <code>P</code> , which is true if</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>gcd(x, y) = gcd(E1, E2).</code></div>
-							</blockquote>
-						</blockquote>
-						<div>
-							In other words we are invited to massage the value pair<code> (x, y)</code> in such a fashion that their <code>gcd</code> is not changed. Because &#151;and this is the place where to mobilize our mathematical knowledge about the gcd-function&#151;</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>gcd(x, y) = gcd(x &#150; y, y)</code></div>
-							</blockquote>
-						</blockquote>
-						<div>a possible guarded list would be</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>x:= x &#150; y&nbsp;&nbsp; .</code></div>
-							</blockquote>
-						</blockquote>
-						<div>Deriving</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>wp(&quot;x:= x &#150; y&quot;, R) = (gcd(X, Y)<br>
-										                   = gcd(x &#150; y, y) <u>and</u> x &#150; y &gt; 0 <u>and</u> y &gt; 0)</code></div>
-							</blockquote>
-						</blockquote>
-						<div>
-							and omitting all terms of the conjunction implied by <code>p</code> we find the guard</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>x&gt;y</code></div>
-							</blockquote>
-						</blockquote>
-						<div>
-							as far as the invariance of <code>p</code> is concerned. Besides that we must require guaranteed decrease of the variant function t. Let us investigate the consequences of the choice</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>t = x + y &nbsp;&nbsp;&nbsp;&nbsp;</code> .</div>
-							</blockquote>
-						</blockquote>
-						<div>From</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>wp(&quot;x:= x &#150; y&quot;, t &#x2264; t<sub>0</sub>) :=<br>
-										wp(&quot;x:= x &#150; y&quot;, x + y &#x2264; t<sub>0</sub>) := (x &#x2264; t<sub>0</sub>)</code></div>
-							</blockquote>
-						</blockquote>
-						<div>we conclude that</div>
-						<blockquote>
-							<div>
-								<code>tmin := X&nbsp;&nbsp;</code>&nbsp;&nbsp; ;</div>
-						</blockquote>
-						<div>therefore</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>wdec(&quot;x:= x &#150; y&quot;, t) = (x &lt; x + y) = (y &gt; 0)&nbsp;&nbsp;</code> .</div>
-							</blockquote>
-						</blockquote>
-						<p>The requirement of monotonic decrease of <code>t</code> imposes no further restriction of the guard because<code> wdec(&quot;x:= x &#150; y&quot;, t)</code> is fully implied by <code>p</code> and we come at our first effort</p>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>x:= X; y:= Y;<br>
-										<u>do</u> x &gt; y &#x2192; x:= x &#150; y <u>od</u> &nbsp;&nbsp;</code> .</div>
-							</blockquote>
-						</blockquote>
-						<p>Alas, this single guard is insufficient: from <code>p <u>and</u> <u>non</u> BB</code> we are not allowed to conclude <code>x = gcd(X, V)</code>. In a completely analogous manner, the alternative <code>y:= y &#150; x</code> will require as its guard<code> y &gt; x </code>and our next effort is</p>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>x:= X; y:= Y;<br>
-										<u>do</u> x &gt; y &#x2192; x:= x &#150; y<br>
-										&nbsp;&#x25AF; y &gt; x &#x2192; y:= y &#150; x<br>
-										<u>od</u> </code>&nbsp;&nbsp; .</div>
-							</blockquote>
-						</blockquote>
-						<p>Now the job is done, because with this last program <code><u>non</u> BB = (x = y)</code> and<code> (P <u>and</u> x = y) </code>&#x21d2;<code> (x = gcd(X, Y))</code> because<code> gcd(x, x) := x</code> &nbsp; .</p>
-						<div><u>Note</u>. The choice of<code> t = x +2y</code> and the knowledge of the fact that the <code>gcd</code> is a symmetric function could have led to the program</div>
-						<blockquote>
-							<blockquote>
-								<div>
-									<code>x:= X; y:= Y;<br>
-										<u>do</u> x &gt; y &#x2192; x:= x &#150; y<br>
-										&nbsp;&#x25AF; y &gt; x &#x2192; x, y:= y, x<br>
-										<u>od</u> &nbsp;&nbsp;</code> .</div>
-							</blockquote>
-						</blockquote>
-						<div>
-							The swap &quot;<code>x, y := y, x</code>&quot; can never destroy <code>P</code> : the guard of the last guarded list is fully caused by the requirement that <code>t</code> is effectively decreased.</div>
-						<p>In both cases the final game has been to find a large enough set of such guarded lists that <code>BB</code>, the disjunction of their guards, was sufficiently weak: in the case of the alternative construct the purpose is avoiding abortion, in the case of the repetitive construct the goal is getting <code>BB</code> weak enough such that <code>P <u>and</u> <u>not</u> BB</code> is strong enough to imply the desired post-condition <code>R</code> &nbsp;.</p>
-					<p><u>5. Concluding remarks</u>.</p>
-					<p>The research, the outcome of which is reported in this article, was triggered by the observation that Euclid's Algorithm could also be regarded as synchronizing the two cyclic processes &quot;<code><u>do</u> x:= x &#150; y <u>od</u></code>&quot; and &quot;<code><u>do</u> y:= y &#150; x <u>od</u></code>&quot; in such a way that the relation <code>x &gt; 0 <u>and</u> y &gt; 0</code> would be kept invariantly true. It was only after this observation that we saw that the formal techniques we had already developed for the derivation of the synchronizing conditions that ensure the harmonious co-operation of (cyclic) sequential processes, such as can be identified in the total activity of operating systems, could be transferred lock, stock and barrel to the development of sequential programs as shown in this article. The main difference is that while for sequential programs the situation &quot;all guards false&quot; is a desirable goal &#151;for it means termination of a repetitive construct&#151; , one tries to avoid it in operating systems &#151;for there it means deadlock.</p>
-					<p>The second reason to pursue these investigations was my personal desire to get a better appreciation &#151;among other things in order to be able to evaluate how realistic some claims towards &quot;automatic programming&quot; were&#151; which part of the programming activity can be regarded as formal routine and which. part of it seems to require &quot;invention&quot;. While the design of an alternative construct now seems to be a reasonably straightforward activity, that of a repetitive construct requires what I regard as &quot;the invention&quot; of an invariant relation and a variant function. For me, the main value of the calculus shown in section 4 is that it has strengthened my skepticism about some of the claims or goals of &quot;automatic programming&quot;; me presenting this calculus should not be interpreted as me suggesting that all programs should be developed that way: it just gives us another handle.</p>
-					<p>The calculus does, however, explain my preference for the axiomatic definition of programming language semantics via predicate transformers above other definition techniques: the definition via predicate transformers seems to lend itself most readily to being forged into a tool for the goal-directed activity of program composition.</p>
-					<p>Finally I would like to say a word or two about the role of the potential non-determinacy. I quote in this connection C.A.R.Hoare: &quot;A system which permits user programs to become non-deterministic presents dreadful problems to the maintenance engineer: it is not a &quot;facility&quot; to be lightly granted.&quot; (This is particularly true in the absence of self-checking hardware.) I myself had to overcome a considerable mental resistance before I found myself willing to consider non-deterministic programs seriously. It is, however, fair to say that I could not have discovered the calculus shown before having taken that hurdle and I leave it to the environment whether the non-determinacy is eventually resolved by human intervention or mechanically, in a reproducible manner or not. (It is only in an environment in which all programs should be deterministic, where non-reproducible behaviour is interpreted as machine malfunctioning: I can easily think of an environment in which non-reproducible user program behaviour is quite naturally and almost always correctly taken as an indication that the user in question has written a non-deterministic program!)</p>
-					<p><u>Acknowledqements</u>.</p>
-					<p>In the first place my acknowledgements are due to the members of the IFIP Working Group W.G.2.3 on &quot;Programming Methodology&quot;: it was, as a matter of fact, during the Blanchland meeting of this Working Group in October 1973 that the guarded commands were both born and shown to the public. In connection with this effort its members R.M.Burstall, C.A.R. Hoare, J.J.Horning, J.C.Reynolds, D.T.Ross, G.Seegm&uuml;ller, N.Wirth and M. Woodger deserve my special thanks. Besides them, W.H.J.Feijen, D.E.Knuth, M.Rem and C.S.Scholten have been directly helpful in one way or another. I should also thank the various audiences &#151;in Albuquerque (courtesy NSF), in San Diego and Luxembourg (courtesy Burroughs Corporation)&#151; that have played their role of critical sounding board beyond what one is entitled to hope.<br>
-							<br>
-						</p>
-<div>
-							[1] Hoare, C.A.R., An Axiomatic Basis for Computer Programming, <i>Comm.ACM 12</i> (Oct. 1969). 576 - 583.<br>
-							<br>
-						</div>
-<div>
-							[2] Naur. Peter, (Ed.) Report on the Algorithmic Language ALGOL 60, <i>Comm.ACM 3</i> (May 1960) 299 - 314<br>
-							<br>
-							<br>
-							<br>
-						</div>
-					<table width="100%">
-						<tr>
-							<td>26th June 1974<br>
-								NEUNEN</td>
-							<td valign="top" width="40%">prof.dr.Edsger W.Dijkstra<br>Burroughs Research Fellow</td>
-						</tr>
-					</table>
-					<br>
-					<hr>
-					<font size="-1"><br>
-						Transcription by Moti Ben-Ari.<br>
-						Revised <csobj format="MedDate" h="13" region="15" t="DateTime" w="95">Sun, 19 Nov 2006</csobj>.</font></div>
-				</div>
-		
-		
-			
-		
-		
-			
-		
-		
-			
-			
-			
-		
-		
-			
-				
-</body>
-</html>
-
-
-
+<div><code>P: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gcd(X, Y) = gcd(x, y) <u>and</u> x &gt; 0 <u>and</u> y &gt; 0<br>
+<br></code></div>
+<div>a relation that has the advantage of being easily established by</div>
+<blockquote>
+<blockquote>
+<div><code>x:= X; y:= Y&nbsp;</code>&nbsp; .</div>
+</blockquote>
+</blockquote>
+<p>The most general "something" to be done under invariance of <code>p</code> is of the form</p>
+<blockquote>
+<blockquote>
+<div><code>x, y: = E1, E2</code></div>
+</blockquote>
+</blockquote>
+<div>and we are interested in a guard <code>B</code> such that</div>
+<blockquote>
+<blockquote>
+<div><code>(P <u>and</u> B)</code> ⇒ <code>wp("x, y := E1, E2", P)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= (gcd(X, Y) = gcd(E1, E2) <u>and</u> E1 &gt; 0 <u>and</u> E2 &gt; 0)&nbsp;</code>&nbsp;.</div>
+</blockquote>
+</blockquote>
+<p>Because the guard must be a computable boolean expression and should not contain the computation of <code>gcd(X, Y)</code> —for that was the whole problem:— we must see to it that the expressions <code>E1</code> and <code>E2</code> are so chosen, that the first term</p>
+<blockquote>
+<blockquote>
+<div><code>gcd(X, Y) = gcd(E1, E2)</code></div>
+</blockquote>
+</blockquote>
+<div>is implied by <code>P</code> , which is true if</div>
+<blockquote>
+<blockquote>
+<div><code>gcd(x, y) = gcd(E1, E2).</code></div>
+</blockquote>
+</blockquote>
+<div>In other words we are invited to massage the value pair <code>(x, y)</code> in such a fashion that their <code>gcd</code> is not changed. Because —and this is the place where to mobilize our mathematical knowledge about the gcd-function—</div>
+<blockquote>
+<blockquote>
+<div><code>gcd(x, y) = gcd(x – y, y)</code></div>
+</blockquote>
+</blockquote>
+<div>a possible guarded list would be</div>
+<blockquote>
+<blockquote>
+<div><code>x:= x – y&nbsp;&nbsp; .</code></div>
+</blockquote>
+</blockquote>
+<div>Deriving</div>
+<blockquote>
+<blockquote>
+<div><code>wp("x:= x – y", R) = (gcd(X, Y)<br>
+= gcd(x – y, y) <u>and</u> x – y &gt; 0 <u>and</u> y &gt; 0)</code></div>
+</blockquote>
+</blockquote>
+<div>and omitting all terms of the conjunction implied by <code>p</code> we find the guard</div>
+<blockquote>
+<blockquote>
+<div><code>x&gt;y</code></div>
+</blockquote>
+</blockquote>
+<div>as far as the invariance of <code>p</code> is concerned. Besides that we must require guaranteed decrease of the variant function t. Let us investigate the consequences of the choice</div>
+<blockquote>
+<blockquote>
+<div><code>t = x + y &nbsp;&nbsp;&nbsp;&nbsp;</code> .</div>
+</blockquote>
+</blockquote>
+<div>From</div>
+<blockquote>
+<blockquote>
+<div><code>wp("x:= x – y", t ≤ t<sub>0</sub>) :=<br>
+wp("x:= x – y", x + y ≤ t<sub>0</sub>) := (x ≤ t<sub>0</sub>)</code></div>
+</blockquote>
+</blockquote>
+<div>we conclude that</div>
+<blockquote>
+<div><code>tmin := X&nbsp;&nbsp;</code>&nbsp;&nbsp; ;</div>
+</blockquote>
+<div>therefore</div>
+<blockquote>
+<blockquote>
+<div><code>wdec("x:= x – y", t) = (x &lt; x + y) = (y &gt; 0)&nbsp;&nbsp;</code> .</div>
+</blockquote>
+</blockquote>
+<p>The requirement of monotonic decrease of <code>t</code> imposes no further restriction of the guard because <code>wdec("x:= x – y", t)</code> is fully implied by <code>p</code> and we come at our first effort</p>
+<blockquote>
+<blockquote>
+<div><code>x:= X; y:= Y;<br>
+<u>do</u> x &gt; y → x:= x – y <u>od</u> &nbsp;&nbsp;</code> .</div>
+</blockquote>
+</blockquote>
+<p>Alas, this single guard is insufficient: from <code>p <u>and</u> <u>non</u> BB</code> we are not allowed to conclude <code>x = gcd(X, V)</code>. In a completely analogous manner, the alternative <code>y:= y – x</code> will require as its guard <code>y &gt; x</code> and our next effort is</p>
+<blockquote>
+<blockquote>
+<div><code>x:= X; y:= Y;<br>
+<u>do</u> x &gt; y → x:= x – y<br>
+&nbsp;▯ y &gt; x → y:= y – x<br>
+<u>od</u></code> &nbsp;&nbsp; .</div>
+</blockquote>
+</blockquote>
+<p>Now the job is done, because with this last program <code><u>non</u> BB = (x = y)</code> and <code>(P <u>and</u> x = y)</code> ⇒ <code>(x = gcd(X, Y))</code> because <code>gcd(x, x) := x</code> &nbsp; .</p>
+<div><u>Note</u>. The choice of <code>t = x +2y</code> and the knowledge of the fact that the <code>gcd</code> is a symmetric function could have led to the program</div>
+<blockquote>
+<blockquote>
+<div><code>x:= X; y:= Y;<br>
+<u>do</u> x &gt; y → x:= x – y<br>
+&nbsp;▯ y &gt; x → x, y:= y, x<br>
+<u>od</u> &nbsp;&nbsp;</code> .</div>
+</blockquote>
+</blockquote>
+<div>The swap "<code>x, y := y, x</code>" can never destroy <code>P</code> : the guard of the last guarded list is fully caused by the requirement that <code>t</code> is effectively decreased.</div>
+<p>In both cases the final game has been to find a large enough set of such guarded lists that <code>BB</code>, the disjunction of their guards, was sufficiently weak: in the case of the alternative construct the purpose is avoiding abortion, in the case of the repetitive construct the goal is getting <code>BB</code> weak enough such that <code>P <u>and</u> <u>not</u> BB</code> is strong enough to imply the desired post-condition <code>R</code> &nbsp;.</p>
+<p><u>5. Concluding remarks</u>.</p>
+<p>The research, the outcome of which is reported in this article, was triggered by the observation that Euclid's Algorithm could also be regarded as synchronizing the two cyclic processes "<code><u>do</u> x:= x – y <u>od</u></code>" and "<code><u>do</u> y:= y – x <u>od</u></code>" in such a way that the relation <code>x &gt; 0 <u>and</u> y &gt; 0</code> would be kept invariantly true. It was only after this observation that we saw that the formal techniques we had already developed for the derivation of the synchronizing conditions that ensure the harmonious co-operation of (cyclic) sequential processes, such as can be identified in the total activity of operating systems, could be transferred lock, stock and barrel to the development of sequential programs as shown in this article. The main difference is that while for sequential programs the situation "all guards false" is a desirable goal —for it means termination of a repetitive construct— , one tries to avoid it in operating systems —for there it means deadlock.</p>
+<p>The second reason to pursue these investigations was my personal desire to get a better appreciation —among other things in order to be able to evaluate how realistic some claims towards "automatic programming" were— which part of the programming activity can be regarded as formal routine and which. part of it seems to require "invention". While the design of an alternative construct now seems to be a reasonably straightforward activity, that of a repetitive construct requires what I regard as "the invention" of an invariant relation and a variant function. For me, the main value of the calculus shown in section 4 is that it has strengthened my skepticism about some of the claims or goals of "automatic programming"; me presenting this calculus should not be interpreted as me suggesting that all programs should be developed that way: it just gives us another handle.</p>
+<p>The calculus does, however, explain my preference for the axiomatic definition of programming language semantics via predicate transformers above other definition techniques: the definition via predicate transformers seems to lend itself most readily to being forged into a tool for the goal-directed activity of program composition.</p>
+<p>Finally I would like to say a word or two about the role of the potential non-determinacy. I quote in this connection C.A.R.Hoare: "A system which permits user programs to become non-deterministic presents dreadful problems to the maintenance engineer: it is not a "facility" to be lightly granted." (This is particularly true in the absence of self-checking hardware.) I myself had to overcome a considerable mental resistance before I found myself willing to consider non-deterministic programs seriously. It is, however, fair to say that I could not have discovered the calculus shown before having taken that hurdle and I leave it to the environment whether the non-determinacy is eventually resolved by human intervention or mechanically, in a reproducible manner or not. (It is only in an environment in which all programs should be deterministic, where non-reproducible behaviour is interpreted as machine malfunctioning: I can easily think of an environment in which non-reproducible user program behaviour is quite naturally and almost always correctly taken as an indication that the user in question has written a non-deterministic program!)</p>
+<p><u>Acknowledqements</u>.</p>
+<p>In the first place my acknowledgements are due to the members of the IFIP Working Group W.G.2.3 on "Programming Methodology": it was, as a matter of fact, during the Blanchland meeting of this Working Group in October 1973 that the guarded commands were both born and shown to the public. In connection with this effort its members R.M.Burstall, C.A.R. Hoare, J.J.Horning, J.C.Reynolds, D.T.Ross, G.Seegmüller, N.Wirth and M. Woodger deserve my special thanks. Besides them, W.H.J.Feijen, D.E.Knuth, M.Rem and C.S.Scholten have been directly helpful in one way or another. I should also thank the various audiences —in Albuquerque (courtesy NSF), in San Diego and Luxembourg (courtesy Burroughs Corporation)— that have played their role of critical sounding board beyond what one is entitled to hope.<br>
+<br></p>
+<div>[1] Hoare, C.A.R., An Axiomatic Basis for Computer Programming, <i>Comm.ACM 12</i> (Oct. 1969). 576 - 583.<br>
+<br></div>
+<div>[2] Naur. Peter, (Ed.) Report on the Algorithmic Language ALGOL 60, <i>Comm.ACM 3</i> (May 1960) 299 - 314<br>
+<br>
+<br>
+<br></div>
+<table width="100%">
+<tr>
+<td>26th June 1974<br>
+NEUNEN</td>
+<td valign="top" width="40%">prof.dr.Edsger W.Dijkstra<br>
+Burroughs Research Fellow</td>
+</tr>
+</table>
+<br>
+<hr>
+<font size="-1"><br>
+Transcription by Moti Ben-Ari.<br>
+Revised Sun, 19 Nov 2006.</font></div>
+</div>
+</div>
+</div>
 </div>
   <script>
 $('.body').tweetSelection({

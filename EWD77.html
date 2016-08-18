@@ -23,170 +23,168 @@
   </div>
   <h1>Het controlerende communicatieapparaat</h1>
   <div class='body'>
-						<p>Het volgende is een studie over het bespelen van een controlerend communicatieapparaat dat bediend wordt via een beperkt startmagazijn. Ala dit startmagazijn bv. 4 startopdrachten kan bevatten, dan hebben X8 en communicatieapparaat toegang tot<br>
-							&quot;<tt><u>array</u> startopdracht,slotwoord [0:3]</tt>&quot;; in de praktijk zullen deze twee array's in het geheugen dooreen gevlochten staan, maar dat doet nu niet ter zake.</p>
-						<p>Het autonoom transport leest de startopdracht en vult het slotwoord ; omdat het lezen-gehoorzamen- van de startopdracht als primair ervaren wordt, noemen wij de wijzer, onder controle waarvan dit gebeurt, de &quot;<tt><u>integer</u> leegwijzer</tt>&quot;.</p>
-						<p>Twee seinpalen, AFT en IFT regelen de synchronisatie: AFT is het aantal startopdrachten in voorraad, IFT het aantal &quot;terugmeldingen&quot;, waarvan de X8 nog geen nota genomen heeft.</p>
-						<p>In dit geval kan de handeling van het autonoom transport in eerste aanleg beschreven worden door zoiets als:</p>
-						<p><tt>&quot;L: P(AFT);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;leegwijzer:= REM(leegwijzer +1,4);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;gehoorzaam(startopdracht[leegwijzer]);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;meld terug in (slotwoord[leegwijzer]);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;V(IFT);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> L</tt>&quot;</p>
-						<p>Met &quot;zoiets als&quot; wordt bedoeld</p>
-						<table width="523" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td valign="top">a)&nbsp;&nbsp;</td>
-								<td valign="top">dat het hier irrelevant is, of leegwijzer voor of na gebruik wordt opgehoogd; in deze beschrijving hebben we &quot;voor&quot; gekozen.</td>
-							</tr>
-							<tr>
-								<td valign="top">b)</td>
-								<td valign="top"> - dat hier over de non-OK-toestand nog niet gesproken is; we beperken ons voorlopig tot het geval, dat het allemaal goed is gegaan.</td>
-							</tr>
-						</table>
-						<p>In het volgende wil ik de consequenties nagaan van het feit, dat, voorzover de X8 betreft, de &quot;<tt>V(IFT)</tt>&quot; een dubbele betekenis kan hebben. Dit immers meldt een gebeuren, dat in twee richtingen betekenis heeft. Enerzijds is het gericht op het verleden, en wordt hier dus gemeld, hoe iets dat vroeger gestart is, is afgelopen, anderzijds heeft het betekenis gericht op de toekomst, omdat er nu, desgewenst, weer plaats in het startmagazijn vrijkomt. Tengevolge hiervan kan het zijn, dat er nu twee processen voortgang kunnen vinden, nl. het proces, voor welks voortzetting de voltooiing der autonome handeling essentieel is en het proces, dat graag van het apparaat gebruik zou willen maken.</p>
-						<p>We voeren hiertoe een derde, geprogrammeerde seinpaal in nl. SRT = startruimtetelling. SRT geeft aan het aantal startopdrachten, waarvoor in het startmagazijn ruimte is.</p>
-						<p>Het startmagazijn wordt nu bespeeld door twee onderling asynchrone processen, viz. Starter en Controleur. De zojuist ingevoerde seinpaal dient voor de onderlinge synchronisatie van deze twee ; deze twee processen hebben, zoals wij straks zullen zien, nog wel meer verknopingen.</p>
-						<p>De Controleur raadpleegt het slotwoord onder controle van een <tt>&quot;<u>integer</u> controlewijzer&quot; </tt>in ruwste vorm:</p>
-						<p><tt>&quot;Controleur: P(IFT);<br>
-								&nbsp;&nbsp;&nbsp;controlewijzer:= REM(controlewijzer + 1,4):<br>
-								&nbsp;&nbsp;&nbsp;<u>if</u> slotwoord[controlewijzer] </tt>&#x2260;<tt> correct <u>then</u> actie fout <u>else</u> actie goed;<br>
-								&nbsp;&nbsp;&nbsp;V(SRT); <u>goto</u> Controleur&quot;</tt></p>
-						<p>Over <tt>&quot;actie goed&quot;</tt> en <tt>&quot;actie fout&quot;</tt> straks meer.</p>
-						<p>De Starter neemt met het startmagazijn contact op onder controle van een vulwijzer, altijd via de sequens:</p>
-						<p><tt>&quot;.....; P(SRT);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vulwijzer:= REM (vulwijzer + 1,4);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;startopdracht[vulwijzer]:= volgende startopdracht;<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(AFT); .....&quot;</tt></p>
-						<p>Ook over <tt>&quot;volgende startopdracht&quot;</tt> straks meer ; deze moet er nl. zijn.</p>
-						<p>De geprogrammeerde seinpaal SRT is ingevoerd om controle op de voltooide operatie en aanbieden van de volgende, waarvan nu immers ruimte in het startmagazijn is, in de tijd te kunnen splitsen.</p>
-						<p>Nu moeten wij in de organisatie verdisconteren:</p>
-						<table width="518" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td align="left" valign="top">a)&nbsp;&nbsp;</td>
-								<td align="left" valign="top">dat het gegeven van een startmagazijn van 4 startopdrachten een physisch gegeven is, maar dat deze omvang niets met de logische eenheden te maken heeft, &quot;logische eenheden&quot; ten aanzien van controle (en overdoen) of van interesse in voltooiing.<br>
-									&nbsp;</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top">b)&nbsp;&nbsp;</td>
-								<td align="left" valign="top">dat activiteiten van Starter en Controleur op elkaar afgestemd dienen te worden: de ene zal dingen in gang zetten, de ander zal van de voltooiing kennis nemen. De laatste dient dan te weten van de voltooiing <u>waarvan</u> hij kennis neemt, waar dit goed voor was en welke consequenties hieraan verbonden dienen te worden.</td>
-							</tr>
-						</table>
-						<p>Wij kunnen deze beide dingen bereiken, door een (eventueel groter) magazijn in te voeren, waartoe zowel Starter als Controleur toegang hebben. De elementen van dit magazijn &#x2014;laten we het even actiemagazijn noemen&#x2014; bevatten:</p>
-						<table width="492" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td align="left" valign="top">a) </td>
-								<td align="left" valign="top">ten bate van de Starter startopdrachten<br>
-									&nbsp;</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top">b) </td>
-								<td align="left" valign="top">ten bate van de Controleur nadere specificaties van de handelingen &quot;<tt>actie goed</tt>&quot; resp.&quot;<tt>actie fout</tt>&quot; na voltooiing van de in dit element gegeven startopdracht.</td>
-							</tr>
-						</table>
-						<p>Beide processen zullen dit actiemagazijn aftasten via een cyclisch werkende leegwijzer. Voeren wij de twee gebruikelijke seinpalen voor dit actiemagazijn in, via &quot;<tt>actiemagazijn vol</tt>&quot; en &quot;<tt>actiemagazijn leeg</tt>&quot; , dan wordt in dit algemene schema de Starter</p>
-						<p><tt>&quot;Starter: P(SRT, actiemagazijn vol);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;starterleegwijzer:= REM(starterleegwijzer + 1,<i>N</i>);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;vulwijzer:= REM(vulwijzer + 1,4);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;startopdracht[vulwijzer]:= actiemagazijn[starterleegwijzer];<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;V(AFT); <u>goto</u> Starter&quot;</tt></p>
-						<table width="486" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td align="left" valign="top">opm.&nbsp; </td>
-								<td align="left" valign="top">Met &quot;<tt>actiemagazijn[ ]</tt>&quot; wordt hier het startopdrachtgedeelte van een element bedoeld ; N = omvang van achtiemagazijn.</td>
-							</tr>
-						</table>
-						<p>De Controleur begint met</p>
-						<p><tt>&quot;Controleur: P(IFT);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;controleurleegwijzer:= REM(controleurleegwijzer + 1,N);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;controlewijzer:= etc....&quot;</tt></p>
-						<p>&quot;<tt>actie goed</tt>&quot; wordt nu iets, dat het controleurgedeelte van &quot;<tt>actiemagazijn [controleurleegwijzer]</tt>&quot; verwerkt.<br>
-							Hieronder kan vallen:</p>
-						<table width="457" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td align="left" valign="top">a)&nbsp;&nbsp; </td>
-								<td align="left" valign="top">een aantal malen <tt>V(actiemagazijn leeg</tt>)</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top">b)</td>
-								<td align="left" valign="top">de V-operatie op een in het actiemagazijn opgegeven seinpaal.</td>
-							</tr>
-						</table>
-						<p>Het gecontroleerd transport kan nl. een reeks afsluiten ; hierdoor komt een aantal plaatsen in het actiemagazijn vrij ; verder kan bij een bepaald programma hierop hebben staan wachten.</p>
-						<p>Een programma, dat een serie elementen van het actiemagazijn wil opgeven, moet de mogelijkheid hebben, deze serie &quot;ongespatieerd&quot; door ander aanbod te kunnen opgeven. Dit kan met een binaire seinpaal AV (aanbod vrij):</p>
-						<p><tt>&quot;P(AV);<br>
-								L: P(actiemagazijn leeg);<br>
-								&nbsp;&nbsp;&nbsp;vulwijzer:= REM(vulwijzer + 1,<i>N</i>);<br>
-								&nbsp;&nbsp;&nbsp;actiemagazijn[vulwijzer]:= volgend element;<br>
-								&nbsp;&nbsp;&nbsp;V(actiemagazijn vol);<br>
-								&nbsp;&nbsp;&nbsp;<u>if</u> B <u>then</u> <u>goto</u> L;<br>
-								&nbsp;&nbsp;&nbsp;V(AV)&quot;</tt></p>
-						<p><u>Opm</u>. De elementen bevatten, hoeveel plaatsen in het actiemagazijn vrijgegeven zullen worden na controle. Het is wel vaak niet meer dan <i>N</i> niet vrijgevende elementen in successie aan te bieden. De veilige manier om dit te garanderen is om bij laatst aangeboden element alle elementen, die tussen P(AV) en V(AV) zijn aangeboden, vrij te doen geven. Als je niet oppast, zou het actiemagazijn &quot;combinatorisch&quot; dicht kunnen groeien!</p>
-						<p>Als het aantal elementen van het actiemagazijn, dat &quot;per keer&quot; gevuld wordt een redelijke bovengrens heeft, dan lenen deze programma's zich tot een vereenvoudiging, die nog wel illustratief is. Je kunt dan zeggen: kom, wees niet kinderachtig, stel in het actiemagazijn ruimte ter beschikking in wat grotere porties ; we noemen deze porties nu &quot;transportschema's&quot;: een transportschema neemt de rol van een &quot;aantal bij elkaar behorende elementen uit het actiemagazijn&quot; over.</p>
-						<p>Het actiemagazijn wordt nu vervangen door een &quot;transportschemabuffer&quot; ; de seinpalen &quot;actiemagazijn leeg, resp. -vol&quot; vervallen en worden vervangen door &quot;transportschemabuffer leeg, resp. vol&quot; .</p>
-						<p>Het laatste programma wordt nu:</p>
-						<p><tt>&quot;P(AV, transportschemabuffer leeg);<br>
-								&nbsp;&nbsp;vulwijzer:= REM(vulwijzer +1,N1);<br>
-								&nbsp;&nbsp;transportschema[vulwijzer]:= .....;<br>
-								&nbsp;&nbsp;V(AV,transportschemabuffer vol)&quot;</tt></p>
-						<p>De Controleur bevat dan als onderdeel van &quot;<tt>actie goed</tt>&quot; de operatie &quot;<tt>V(transportschemabuffer leeg)</tt>&quot;, de Starter krijgt de volgende constructie:</p>
-						<p><tt>Starter: P(transportschemabuffer vol);<br>
-								&nbsp;&nbsp;&nbsp;starterleegwijzer:= REM(starterleegwijzer +1,<i>N</i>1) ;<br>
-								L: P(SRT);<br>
-								&nbsp;&nbsp;&nbsp;vulwijzer:= REM(vulwijzer +1,4);<br>
-								&nbsp;&nbsp;&nbsp;startopdracht[vulwijzer]:= .....;<br>
-								&nbsp;&nbsp;&nbsp;V(AFT): <u>if</u> transportschema nog niet leeg <u>then</u> <u>goto</u> L;<br>
-								&nbsp;&nbsp;&nbsp;<u>goto</u> Starter&quot;</tt></p>
-						<p>Hiermee zijn enige &quot;hoogfrequente&quot; seinpalen geruild tegen evenveel &quot;laagfrequente&quot;: ten koste van wat bufferruimte hebben wat werk uitgespaard. Het <u>aantal</u> onderling asynchrone processen is <u>niet</u> geslonken!</p>
-						<p></p>
-						<p><u>De trommel</u></p>
-						<p>Voor de trommel hadden we een iets afwijkend schema bedacht, dat tot op heden &#x2014;12 februari 1964&#x2014; nog niet verworpen is. Hierbij komt nl. nog de complicatie, dat een programma zelf geen &quot;<tt>transportschema</tt>&quot; opstelt; het kan slechts zijn behoefte uiten. Welke transport of transporten dit impliceert, hangt af van de momentane geheugenbezetting. M.a.w.: de &quot;<tt>vertaling</tt>&quot; van behoefte naar transportschema is een handeling, en het moment, waarop deze handeling plaats zal vinden moet gekozen worden. Wij hebben ons op het standpunt gesteld dat het gewenst is, deze handeling zo laat mogelijk te laten plaats vinden: het verlaten van behoefte in transportschema kan dan nl. van de meest recente gegevens uitgaan. Dit wordt &quot;<tt>tegengewerkt</tt>&quot; door het streven, de trommeltransport, als dit de bottleneck wordt, zo min mogelijk ledigheid te gunnen. D.w.z. de bufferingsmogelijkheden zijn hier niet bedoeld om grote asynchroniteit op te kunnen vangen, integendeel: tussen het uiten van behoefte en bevrediging daarvan zal het programma in kwestie als regel helemaal niet door kunnen werken! We hebben dus meer te maken met wat inmiddels een &quot;morele haastsituatie&quot; is gedoopt: buffering van startopdrachten is slechts een middel, om de morele haastsituatie te mitigeren.</p>
-						<p>Op deze gronden kwamen we tot de volgende constructie. We hebben een transportschemabuffer, dat cyclisch wordt afgewerkt. Over het aantal transportschema's, dat in deze buffer kan, zullen we het later hebben.</p>
-						<p>Elk programma communiceert met de trommeltransport via een zg. &quot;<tt>behoeftetoonbank</tt>&quot;; hier is gedacht aan een toonbank met de capaciteit van 1 behoefte.</p>
-						<p>Het aanbod van een behoefte vindt plaats via</p>
-						<p><tt>&quot;.....P(behoeftetoonbank leeg);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aanbod behoefte;<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(behoeftetoonbank vol);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(zekere seinpaal).....&quot;</tt></p>
-						<p>Over de &quot;<tt>zekere seinpaal</tt>&quot; zullen we het straks nog wat uitgebreider hebben.</p>
-						<p>Het vertalen van behoefte vindt plaats gesynchroniseerd ten opzichte van het vullen van het physisch startmagazijn van de trommel, nl:</p>
-						<p><tt>VERZORGER: P(toonbank vol, transportschemabuffer leeg);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vertaal behoefte in transportschema;<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L: P(SRT);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zet volgende startopdracht trommel;<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(AFT);<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> heersend transportschema nog niet leeg <u>then</u> <u>goto</u> L;<br>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> VERZORGER...&quot;</tt></p>
-						<p>De controleur bevat als onderdeel van &quot;<tt>actie goed</tt>&quot; na controle van een heel transportschema</p>
-						<p><tt>&quot;V(transportschemabuffer leeg, zekere seinpaal)&quot;.</tt></p>
-						<p>Voor de &quot;<tt>zekere seinpaal</tt>&quot; kan men kiezen:</p>
-						<table width="471" border="0" cellspacing="2" cellpadding="0">
-							<tr>
-								<td align="left" valign="top">a)&nbsp;&nbsp;</td>
-								<td align="left" valign="top">elk programma zijn eigen seinpaal ; deze moet dan (als onderdeel van de behoefte) in het transportschema worden opgenomen.</td>
-							</tr>
-							<tr>
-								<td align="left" valign="top">b)</td>
-								<td align="left" valign="top">anderzijds weet men, dat van deze seinpalen er maar een paar tegelijkertijd actueel kunnen zijn (ik geloof 1 meer dan er transportschema's in de transportschemabuffer kunnen). Men kan dit <i>N</i>-tal cyclisch afwerken bij het toonbank vullen en bij het vrijgeven door de controleur. Dit is een klein detail, dat niet belangrijk is.</td>
-							</tr>
-						</table>
-						<p>Uit de tekst van de VERZORGER blijkt, dat als elk transportschema minstens 1 transport vergt, het zinloos is, om meer dan vijf transportschema's te kunnen bufferen. Twee is een absoluut minimum: als je maar 1 transportschema hebt, is bij overgang van het ene transportschema naar het volgende de trommeltransport beslist even ledig. Gezien de tijd van transporten (tientallen millisecunden) dachten we niet, dat een transportschemabuffer van meer dan twee erg verdedigbaar is.</p>
-					</div>
-					<hr>
-					<font size="-1">transcribed by Sam Samshuijzen<br>
-						revised <csobj format="MedDate" h="12" region="15" t="DateTime" w="101">Mon, 10 Jan 2005</csobj></font></td>
-				<td width="1" height="3691"><spacer type="block" width="1" height="3691"></td>
-			</tr>
-			<tr height="1" cntrlrow>
-				<td width="1" height="1"><spacer type="block" width="1" height="1"></td>
-				<td width="607" height="1"><spacer type="block" width="607" height="1"></td>
-				<td width="1" height="1"></td>
-			</tr>
-		</table>
-	</body>
-
-</html></div>
+<p>Het volgende is een studie over het bespelen van een controlerend communicatieapparaat dat bediend wordt via een beperkt startmagazijn. Ala dit startmagazijn bv. 4 startopdrachten kan bevatten, dan hebben X8 en communicatieapparaat toegang tot<br>
+"<tt><u>array</u> startopdracht,slotwoord [0:3]</tt>"; in de praktijk zullen deze twee array's in het geheugen dooreen gevlochten staan, maar dat doet nu niet ter zake.</p>
+<p>Het autonoom transport leest de startopdracht en vult het slotwoord ; omdat het lezen-gehoorzamen- van de startopdracht als primair ervaren wordt, noemen wij de wijzer, onder controle waarvan dit gebeurt, de "<tt><u>integer</u> leegwijzer</tt>".</p>
+<p>Twee seinpalen, AFT en IFT regelen de synchronisatie: AFT is het aantal startopdrachten in voorraad, IFT het aantal "terugmeldingen", waarvan de X8 nog geen nota genomen heeft.</p>
+<p>In dit geval kan de handeling van het autonoom transport in eerste aanleg beschreven worden door zoiets als:</p>
+<p><tt>"L: P(AFT);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;leegwijzer:= REM(leegwijzer +1,4);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gehoorzaam(startopdracht[leegwijzer]);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;meld terug in (slotwoord[leegwijzer]);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;V(IFT);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> L</tt>"</p>
+<p>Met "zoiets als" wordt bedoeld</p>
+<table width="523" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td valign="top">a)&nbsp;&nbsp;</td>
+<td valign="top">dat het hier irrelevant is, of leegwijzer voor of na gebruik wordt opgehoogd; in deze beschrijving hebben we "voor" gekozen.</td>
+</tr>
+<tr>
+<td valign="top">b)</td>
+<td valign="top">- dat hier over de non-OK-toestand nog niet gesproken is; we beperken ons voorlopig tot het geval, dat het allemaal goed is gegaan.</td>
+</tr>
+</table>
+<p>In het volgende wil ik de consequenties nagaan van het feit, dat, voorzover de X8 betreft, de "<tt>V(IFT)</tt>" een dubbele betekenis kan hebben. Dit immers meldt een gebeuren, dat in twee richtingen betekenis heeft. Enerzijds is het gericht op het verleden, en wordt hier dus gemeld, hoe iets dat vroeger gestart is, is afgelopen, anderzijds heeft het betekenis gericht op de toekomst, omdat er nu, desgewenst, weer plaats in het startmagazijn vrijkomt. Tengevolge hiervan kan het zijn, dat er nu twee processen voortgang kunnen vinden, nl. het proces, voor welks voortzetting de voltooiing der autonome handeling essentieel is en het proces, dat graag van het apparaat gebruik zou willen maken.</p>
+<p>We voeren hiertoe een derde, geprogrammeerde seinpaal in nl. SRT = startruimtetelling. SRT geeft aan het aantal startopdrachten, waarvoor in het startmagazijn ruimte is.</p>
+<p>Het startmagazijn wordt nu bespeeld door twee onderling asynchrone processen, viz. Starter en Controleur. De zojuist ingevoerde seinpaal dient voor de onderlinge synchronisatie van deze twee ; deze twee processen hebben, zoals wij straks zullen zien, nog wel meer verknopingen.</p>
+<p>De Controleur raadpleegt het slotwoord onder controle van een <tt>"<u>integer</u> controlewijzer"</tt> in ruwste vorm:</p>
+<p><tt>"Controleur: P(IFT);<br>
+&nbsp;&nbsp;&nbsp;controlewijzer:= REM(controlewijzer + 1,4):<br>
+&nbsp;&nbsp;&nbsp;<u>if</u> slotwoord[controlewijzer]</tt> ≠ <tt>correct <u>then</u> actie fout <u>else</u> actie goed;<br>
+&nbsp;&nbsp;&nbsp;V(SRT); <u>goto</u> Controleur"</tt></p>
+<p>Over <tt>"actie goed"</tt> en <tt>"actie fout"</tt> straks meer.</p>
+<p>De Starter neemt met het startmagazijn contact op onder controle van een vulwijzer, altijd via de sequens:</p>
+<p><tt>".....; P(SRT);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vulwijzer:= REM (vulwijzer + 1,4);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;startopdracht[vulwijzer]:= volgende startopdracht;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(AFT); ....."</tt></p>
+<p>Ook over <tt>"volgende startopdracht"</tt> straks meer ; deze moet er nl. zijn.</p>
+<p>De geprogrammeerde seinpaal SRT is ingevoerd om controle op de voltooide operatie en aanbieden van de volgende, waarvan nu immers ruimte in het startmagazijn is, in de tijd te kunnen splitsen.</p>
+<p>Nu moeten wij in de organisatie verdisconteren:</p>
+<table width="518" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="left" valign="top">a)&nbsp;&nbsp;</td>
+<td align="left" valign="top">dat het gegeven van een startmagazijn van 4 startopdrachten een physisch gegeven is, maar dat deze omvang niets met de logische eenheden te maken heeft, "logische eenheden" ten aanzien van controle (en overdoen) of van interesse in voltooiing.<br>
+&nbsp;</td>
+</tr>
+<tr>
+<td align="left" valign="top">b)&nbsp;&nbsp;</td>
+<td align="left" valign="top">dat activiteiten van Starter en Controleur op elkaar afgestemd dienen te worden: de ene zal dingen in gang zetten, de ander zal van de voltooiing kennis nemen. De laatste dient dan te weten van de voltooiing <u>waarvan</u> hij kennis neemt, waar dit goed voor was en welke consequenties hieraan verbonden dienen te worden.</td>
+</tr>
+</table>
+<p>Wij kunnen deze beide dingen bereiken, door een (eventueel groter) magazijn in te voeren, waartoe zowel Starter als Controleur toegang hebben. De elementen van dit magazijn —laten we het even actiemagazijn noemen— bevatten:</p>
+<table width="492" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="left" valign="top">a)</td>
+<td align="left" valign="top">ten bate van de Starter startopdrachten<br>
+&nbsp;</td>
+</tr>
+<tr>
+<td align="left" valign="top">b)</td>
+<td align="left" valign="top">ten bate van de Controleur nadere specificaties van de handelingen "<tt>actie goed</tt>" resp."<tt>actie fout</tt>" na voltooiing van de in dit element gegeven startopdracht.</td>
+</tr>
+</table>
+<p>Beide processen zullen dit actiemagazijn aftasten via een cyclisch werkende leegwijzer. Voeren wij de twee gebruikelijke seinpalen voor dit actiemagazijn in, via "<tt>actiemagazijn vol</tt>" en "<tt>actiemagazijn leeg</tt>" , dan wordt in dit algemene schema de Starter</p>
+<p><tt>"Starter: P(SRT, actiemagazijn vol);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;starterleegwijzer:= REM(starterleegwijzer + 1,<i>N</i>);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vulwijzer:= REM(vulwijzer + 1,4);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;startopdracht[vulwijzer]:= actiemagazijn[starterleegwijzer];<br>
+&nbsp;&nbsp;&nbsp;&nbsp;V(AFT); <u>goto</u> Starter"</tt></p>
+<table width="486" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="left" valign="top">opm.&nbsp;</td>
+<td align="left" valign="top">Met "<tt>actiemagazijn[ ]</tt>" wordt hier het startopdrachtgedeelte van een element bedoeld ; N = omvang van achtiemagazijn.</td>
+</tr>
+</table>
+<p>De Controleur begint met</p>
+<p><tt>"Controleur: P(IFT);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;controleurleegwijzer:= REM(controleurleegwijzer + 1,N);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;controlewijzer:= etc...."</tt></p>
+<p>"<tt>actie goed</tt>" wordt nu iets, dat het controleurgedeelte van "<tt>actiemagazijn [controleurleegwijzer]</tt>" verwerkt.<br>
+Hieronder kan vallen:</p>
+<table width="457" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="left" valign="top">a)&nbsp;&nbsp;</td>
+<td align="left" valign="top">een aantal malen <tt>V(actiemagazijn leeg</tt>)</td>
+</tr>
+<tr>
+<td align="left" valign="top">b)</td>
+<td align="left" valign="top">de V-operatie op een in het actiemagazijn opgegeven seinpaal.</td>
+</tr>
+</table>
+<p>Het gecontroleerd transport kan nl. een reeks afsluiten ; hierdoor komt een aantal plaatsen in het actiemagazijn vrij ; verder kan bij een bepaald programma hierop hebben staan wachten.</p>
+<p>Een programma, dat een serie elementen van het actiemagazijn wil opgeven, moet de mogelijkheid hebben, deze serie "ongespatieerd" door ander aanbod te kunnen opgeven. Dit kan met een binaire seinpaal AV (aanbod vrij):</p>
+<p><tt>"P(AV);<br>
+L: P(actiemagazijn leeg);<br>
+&nbsp;&nbsp;&nbsp;vulwijzer:= REM(vulwijzer + 1,<i>N</i>);<br>
+&nbsp;&nbsp;&nbsp;actiemagazijn[vulwijzer]:= volgend element;<br>
+&nbsp;&nbsp;&nbsp;V(actiemagazijn vol);<br>
+&nbsp;&nbsp;&nbsp;<u>if</u> B <u>then</u> <u>goto</u> L;<br>
+&nbsp;&nbsp;&nbsp;V(AV)"</tt></p>
+<p><u>Opm</u>. De elementen bevatten, hoeveel plaatsen in het actiemagazijn vrijgegeven zullen worden na controle. Het is wel vaak niet meer dan <i>N</i> niet vrijgevende elementen in successie aan te bieden. De veilige manier om dit te garanderen is om bij laatst aangeboden element alle elementen, die tussen P(AV) en V(AV) zijn aangeboden, vrij te doen geven. Als je niet oppast, zou het actiemagazijn "combinatorisch" dicht kunnen groeien!</p>
+<p>Als het aantal elementen van het actiemagazijn, dat "per keer" gevuld wordt een redelijke bovengrens heeft, dan lenen deze programma's zich tot een vereenvoudiging, die nog wel illustratief is. Je kunt dan zeggen: kom, wees niet kinderachtig, stel in het actiemagazijn ruimte ter beschikking in wat grotere porties ; we noemen deze porties nu "transportschema's": een transportschema neemt de rol van een "aantal bij elkaar behorende elementen uit het actiemagazijn" over.</p>
+<p>Het actiemagazijn wordt nu vervangen door een "transportschemabuffer" ; de seinpalen "actiemagazijn leeg, resp. -vol" vervallen en worden vervangen door "transportschemabuffer leeg, resp. vol" .</p>
+<p>Het laatste programma wordt nu:</p>
+<p><tt>"P(AV, transportschemabuffer leeg);<br>
+&nbsp;&nbsp;vulwijzer:= REM(vulwijzer +1,N1);<br>
+&nbsp;&nbsp;transportschema[vulwijzer]:= .....;<br>
+&nbsp;&nbsp;V(AV,transportschemabuffer vol)"</tt></p>
+<p>De Controleur bevat dan als onderdeel van "<tt>actie goed</tt>" de operatie "<tt>V(transportschemabuffer leeg)</tt>", de Starter krijgt de volgende constructie:</p>
+<p><tt>Starter: P(transportschemabuffer vol);<br>
+&nbsp;&nbsp;&nbsp;starterleegwijzer:= REM(starterleegwijzer +1,<i>N</i>1) ;<br>
+L: P(SRT);<br>
+&nbsp;&nbsp;&nbsp;vulwijzer:= REM(vulwijzer +1,4);<br>
+&nbsp;&nbsp;&nbsp;startopdracht[vulwijzer]:= .....;<br>
+&nbsp;&nbsp;&nbsp;V(AFT): <u>if</u> transportschema nog niet leeg <u>then</u> <u>goto</u> L;<br>
+&nbsp;&nbsp;&nbsp;<u>goto</u> Starter"</tt></p>
+<p>Hiermee zijn enige "hoogfrequente" seinpalen geruild tegen evenveel "laagfrequente": ten koste van wat bufferruimte hebben wat werk uitgespaard. Het <u>aantal</u> onderling asynchrone processen is <u>niet</u> geslonken!</p>
+<p><u>De trommel</u></p>
+<p>Voor de trommel hadden we een iets afwijkend schema bedacht, dat tot op heden —12 februari 1964— nog niet verworpen is. Hierbij komt nl. nog de complicatie, dat een programma zelf geen "<tt>transportschema</tt>" opstelt; het kan slechts zijn behoefte uiten. Welke transport of transporten dit impliceert, hangt af van de momentane geheugenbezetting. M.a.w.: de "<tt>vertaling</tt>" van behoefte naar transportschema is een handeling, en het moment, waarop deze handeling plaats zal vinden moet gekozen worden. Wij hebben ons op het standpunt gesteld dat het gewenst is, deze handeling zo laat mogelijk te laten plaats vinden: het verlaten van behoefte in transportschema kan dan nl. van de meest recente gegevens uitgaan. Dit wordt "<tt>tegengewerkt</tt>" door het streven, de trommeltransport, als dit de bottleneck wordt, zo min mogelijk ledigheid te gunnen. D.w.z. de bufferingsmogelijkheden zijn hier niet bedoeld om grote asynchroniteit op te kunnen vangen, integendeel: tussen het uiten van behoefte en bevrediging daarvan zal het programma in kwestie als regel helemaal niet door kunnen werken! We hebben dus meer te maken met wat inmiddels een "morele haastsituatie" is gedoopt: buffering van startopdrachten is slechts een middel, om de morele haastsituatie te mitigeren.</p>
+<p>Op deze gronden kwamen we tot de volgende constructie. We hebben een transportschemabuffer, dat cyclisch wordt afgewerkt. Over het aantal transportschema's, dat in deze buffer kan, zullen we het later hebben.</p>
+<p>Elk programma communiceert met de trommeltransport via een zg. "<tt>behoeftetoonbank</tt>"; hier is gedacht aan een toonbank met de capaciteit van 1 behoefte.</p>
+<p>Het aanbod van een behoefte vindt plaats via</p>
+<p><tt>".....P(behoeftetoonbank leeg);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aanbod behoefte;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(behoeftetoonbank vol);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P(zekere seinpaal)....."</tt></p>
+<p>Over de "<tt>zekere seinpaal</tt>" zullen we het straks nog wat uitgebreider hebben.</p>
+<p>Het vertalen van behoefte vindt plaats gesynchroniseerd ten opzichte van het vullen van het physisch startmagazijn van de trommel, nl:</p>
+<p><tt>VERZORGER: P(toonbank vol, transportschemabuffer leeg);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vertaal behoefte in transportschema;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;L: P(SRT);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zet volgende startopdracht trommel;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;V(AFT);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>if</u> heersend transportschema nog niet leeg <u>then</u> <u>goto</u> L;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>goto</u> VERZORGER..."</tt></p>
+<p>De controleur bevat als onderdeel van "<tt>actie goed</tt>" na controle van een heel transportschema</p>
+<p><tt>"V(transportschemabuffer leeg, zekere seinpaal)".</tt></p>
+<p>Voor de "<tt>zekere seinpaal</tt>" kan men kiezen:</p>
+<table width="471" border="0" cellspacing="2" cellpadding="0">
+<tr>
+<td align="left" valign="top">a)&nbsp;&nbsp;</td>
+<td align="left" valign="top">elk programma zijn eigen seinpaal ; deze moet dan (als onderdeel van de behoefte) in het transportschema worden opgenomen.</td>
+</tr>
+<tr>
+<td align="left" valign="top">b)</td>
+<td align="left" valign="top">anderzijds weet men, dat van deze seinpalen er maar een paar tegelijkertijd actueel kunnen zijn (ik geloof 1 meer dan er transportschema's in de transportschemabuffer kunnen). Men kan dit <i>N</i>-tal cyclisch afwerken bij het toonbank vullen en bij het vrijgeven door de controleur. Dit is een klein detail, dat niet belangrijk is.</td>
+</tr>
+</table>
+<p>Uit de tekst van de VERZORGER blijkt, dat als elk transportschema minstens 1 transport vergt, het zinloos is, om meer dan vijf transportschema's te kunnen bufferen. Twee is een absoluut minimum: als je maar 1 transportschema hebt, is bij overgang van het ene transportschema naar het volgende de trommeltransport beslist even ledig. Gezien de tijd van transporten (tientallen millisecunden) dachten we niet, dat een transportschemabuffer van meer dan twee erg verdedigbaar is.</p>
+<hr>
+<font size="-1">transcribed by Sam Samshuijzen<br>
+revised Mon, 10 Jan 2005</font>
+<table>
+<tr>
+<td width="1" height="3691"><spacer type="block" width="1" height="3691"></td>
+</tr>
+<tr height="1" cntrlrow="">
+<td width="1" height="1"><spacer type="block" width="1" height="1"></td>
+<td width="607" height="1"><spacer type="block" width="607" height="1"></td>
+<td width="1" height="1"></td>
+</tr>
+</table>
+</div>
   <script>
 $('.body').tweetSelection({
   ellipsis: '...',
