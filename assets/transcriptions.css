@@ -25,4 +25,5 @@ a.tweet-selection:hover {
   display: block;
   float: right;
   margin-right: 200px;
+  margin: 10px;
 }
