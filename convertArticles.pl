@@ -45,6 +45,14 @@ sub parse {
   return \%result;
 }
 
+sub original {
+  if (shift =~ /EWD(\d\d)(.*)\.html/) {
+    return "<a class='original' href='https://www.cs.utexas.edu/~EWD/ewd$1xx/EWD$1$2.PDF'><img src='assets/original.png' alt='Show original manuscript'></a>";
+  } else {
+    return '';
+  }
+}
+
 sub convertArticle {
   my ($filename_in, $filename_out) = @_;
   open ARTICLE, "iconv -c --from UTF-8 --to UTF-8 \"$filename_in\"|";;
@@ -52,6 +60,8 @@ sub convertArticle {
   my $article = <ARTICLE>;
 
   my $parsed = parse($article);
+
+  my $original = original($filename_out);
 
   open OUT, ">$filename_out";
   binmode(OUT, ":utf8");
@@ -80,6 +90,7 @@ sub convertArticle {
     </div>
   </div>
   <h1>$parsed->{'title'}</h1>
+  $original
   <div class='body'>$parsed->{'body'}</div>
   <script>
 \$('.body').tweetSelection({
