@@ -22,6 +22,7 @@
     </div>
   </div>
   <h1>On-the-fly garbage collection: an exercise in cooperation</h1>
+  <a class='original' href='https://www.cs.utexas.edu/~EWD/ewd52xx/EWD520.PDF'><img src='assets/original.png' alt='Show original manuscript'></a>
   <div class='body'>
 <p class="noindent"><u>Introduction</u>.</p>
 <p>In any large-scale computer installation today, a considerable amount of time of the (general purpose) processor is spent on “operating the system”. With the emerging advent of multiprocessor installations the question arises to what extent such “housekeeping activities” can be carried out concurrently with the computation(s) proper. Because the more intimate the interference, the harder the organization of the cooperation between the concurrent processes, the problem of garbage collection was selected as one of the most challenging —and, hopefully, most instructive!— problems. (Our exercise has not only been very instructive, but at times even humiliating, as we have fallen into nearly every logical trap that we could possibly fall into.) In our treatment we have tried to blend a condensed design history —in order not to hide the heuristics completely— with a rather detailed justification of our final solution. Whether the following solution, which is the result of many iterations, is of any economic significance, is a question beyond the scope of this paper.</p>

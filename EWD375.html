@@ -22,6 +22,7 @@
     </div>
   </div>
   <h1>A non algebraic example of a constructive correctness proof</h1>
+  <a class='original' href='https://www.cs.utexas.edu/~EWD/ewd37xx/EWD375.PDF'><img src='assets/original.png' alt='Show original manuscript'></a>
   <div class='body'>
 <p>We consider a text built from five types of characters, viz. digits, operators, “(”, “)” and “;”. The text can be read from left to right by means of the primitive <code>move</code> which assigns to the variable named “<var>x</var>” the next character of the text. Initially the value of <var>x</var> is undefined, after the first execution of <code>move</code>, <var>x</var> equals the left-most character of the text. The text has infinite length and it is required to write a recognizer called “<code>sent</code>” that has to establish whether the text starts with a &lt; <var>sent</var> &gt; , given by the following syntax.</p>
 <table width="100%" border="0" align="right" cellpadding="0" cellspacing="0">

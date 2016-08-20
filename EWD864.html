@@ -22,6 +22,7 @@
     </div>
   </div>
   <h1>The distributed snapshot of Chandy/Lamport/Misra</h1>
+  <a class='original' href='https://www.cs.utexas.edu/~EWD/ewd86xx/EWD864.PDF'><img src='assets/original.png' alt='Show original manuscript'></a>
   <div class='body'>
 <p>[The algorithm dealt with in this note was shown to me on 1 July 1983 by K. Mani Chandy and Jayadev Misra —both of the University of Texas at Austin— who gave considerable credit to Leslie Lamport —of SRI International—. The next 8 weeks or so I was otherwise engaged, then the last 2 sessions of the Tuesday Afternoon Club were devoted to it. The first session was devoted to a reconstruction of the problem and of its solution and to a summary of our proof obligations; in the second session we devised the correctness proof given below. If I failed to do justice to the algorithm, I offer my apologies to its authors.]</p>
 <p>We consider a finite network of sequential machines, strongly connected by uni-directional, first-in-first-out message buffers, and such that its activity can be described as a succession of atomic actions. Each atomic action takes place in one machine, may comprise the reception of one message from one of the machine's input buffers and may comprise the sending of at most one message per output buffer. Necessary initial conditions for an atomic action to take place are (i) that the machine in question is in an appropriate state, and (ii) that the buffer in question is not empty if the atomic action includes receipt of a message.</p>

@@ -20,3 +20,9 @@ p.noindent {
 a.tweet-selection:hover {
   text-decoration: none;
 }
+
+.original {
+  display: block;
+  float: right;
+  margin-right: 200px;
+}

@@ -22,6 +22,7 @@
     </div>
   </div>
   <h1>Parallellism in multi-record transactions</h1>
+  <a class='original' href='https://www.cs.utexas.edu/~EWD/ewd33xx/EWD338.PDF'><img src='assets/original.png' alt='Show original manuscript'></a>
   <div class='body'>
 <p>by E.W.Dijkstra and E.S.Scholten</p>
 <p>We consider a data base comprising a great number of individual records and transactions to be carried out on this data base. Each transaction is a finite computation, involving a number of these records: the computation to be carried out and even the identity of the records involved— will in general be dependent on the initial state of the data base when the transaction is initiated. When the data base grows, the following conflict emerges: on the one hand one may expect the number of transactions to be carried out to grow as well, on the other hand the growing data base will make individual record selection a more and more painful process, slowing down the individual transaction executions. Comes the moment that the stream of transactions, carried out one after the other, no longer fits in real time. To solve this real time problem we must be willing to carry out a number of transactions in parallel. This paper is devoted to the logical problems that then emerge.</p>

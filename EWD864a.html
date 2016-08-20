@@ -22,6 +22,7 @@
     </div>
   </div>
   <h1>The Distributed Snapshot of K. M. Chandy and L. Lamport</h1>
+  <a class='original' href='https://www.cs.utexas.edu/~EWD/ewd86xx/EWD864a.PDF'><img src='assets/original.png' alt='Show original manuscript'></a>
   <div class='body'>
 <p>We consider a distributed system of the form of a strongly connected, finite, directed graph, of which each vertex is a machine and each edge a uni-directional first-in-first-out buffer of sufficient capacity. (Strongly connected means that there is a directed path from any vertex to any vertex.)</p>
 <p>A distributed computation consists of a succession of so-called “atomic actions”; each atomic action is performed by one of the machines: it changes the state of that machine, accepts at most one message per input buffer of that machine, and sends at most one message per output buffer of that machine. The buffers have no clairvoyance, i.e. a message can only be accepted after it has been sent.</p>

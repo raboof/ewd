@@ -22,6 +22,7 @@
     </div>
   </div>
   <h1>Making a fair roulette from a possibly biased coin</h1>
+  <a class='original' href='https://www.cs.utexas.edu/~EWD/ewd10xx/EWD1071.PDF'><img src='assets/original.png' alt='Show original manuscript'></a>
   <div class='body'>
 <p>We are given a possibly biased coin, that is, a coin that, when flipped, shows head or tail with the probabilities <var>p</var> and <var>q</var> respectively, with <var>p</var>+<var>q</var> = 1 but not necessarily <var>p</var>=<var>q</var>. We don't know the values of <var>p</var> and <var>q</var>, we only know that the coin remains “the same”, i.e., that <var>p</var> and <var>q</var> are constant in time. The problem is to design an experiment with 37 different outcomes of equal probability.</p>
 <p>In a variable <var>A</var> of type “sequence of 37 faces”, we record 37 flippings of the coin; if all the faces in <var>A</var> are the same, we start afresh, otherwise we accept the value of <var>A</var>. This first stage of the design is inspired by (i) the consideration that the experiment has to fail (to terminate) if the coin is so extremely biased that one of the faces <em>never</em> shows up, and (ii) the fact that (Fermat) <span class="inlineformula">2<sup>37</sup>-2</span> is a multiple of 37.</p>
